@@ -79,55 +79,12 @@ body {
 					history.go(-1);
 				});
 			 
-			 $( "button:contains('책갈피')" ).on("click" , function() {
-					self.location = "/bookmark/addBookmark?recipeNo=${recipe.recipeNo}"
-				});
 		});
 		
 		 
 		
 	</script>
 	
-	<script>
-	let commentInput=document.getElementsByClassName("main_comment_text")[0];
-	let submitBtn=document.getElementsByClassName("main_comment_submit")[0];
-	
-	function submit(){
-		const box=document.getElementsByClassName("main-icon-like-text-write_comment")[0]
-		
-		const comments=document.createElement("div")
-		const userName=document.createElement("span")
-		const mainText=document.createElement("p")
-		
-		comments.classList.add('main-icon-like-text-write_commentbox')
-		userName.classList.add("userName");
-		mainText.classList.add("main-icon-like-text-write-subtext");
-		
-		mainIcon.setAttribute("src","../images/heart.png")
-		
-		userName.innerHTML=" yeda"
-		mainText.innerText=commentInput.value;
-		
-		comments.appendChild(userName);
-		comments.appendChild(mainText);
-		
-		box.appendChild(comments);
-	}
-	
-	submitBtn.addEventListener("click",(event)=>{
-		submit()
-		commentInput.value="";
-		
-	});
-	
-	commentInput.addEventListener('keydown',(event)=>{
-	if(event.code==='Enter'){
-		submit()
-		commentInput.value="";
-	}	
-	})
-	
-	</script>
 </head>
 
 <body>
@@ -175,6 +132,24 @@ body {
 		
 		<hr/>
 		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>재료명</strong></div>
+			<c:set var="i" value="0" />
+			<c:forEach var="ingredient" items="${ingredient}">
+			<div class="col-xs-8 col-md-4">${ingredient.ingredientName}</div>
+		</c:forEach>
+		</div>
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>재료양</strong></div>
+			<c:set var="i" value="0" />
+			<c:forEach var="ingredient" items="${ingredient}">
+			<div class="col-xs-8 col-md-4">${ingredient.ingredientAmount}</div>
+		</c:forEach>
+		</div>
+		<hr/>
+
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>테마</strong></div>
 			<div class="col-xs-8 col-md-4">${recipe.recipeTheme}</div>

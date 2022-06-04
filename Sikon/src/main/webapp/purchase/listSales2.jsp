@@ -66,7 +66,7 @@ table {
 		function fncGetList(currentPage) {
 			console.log(currentPage);
 			$("#currentPage").val(currentPage)
-			$("form").attr("method" , "POST").attr("action" , "/purchase/listSales").submit();
+			$("#divyform").attr("method" , "POST").attr("action" , "/purchase/listSales").submit();
 		}
 		
 		
@@ -88,9 +88,10 @@ table {
 				var message2 = $(this).attr("value2");
 				console.log(message2);
 				
-				self.location ="/purchase/updateTranCode?tranNo="+message1+"&tranCode="+message2;
+				self.location ="/purchase/updatedivyStatus?tranNo="+message1+"&divyStatus="+message2;
 			});
-			///*
+
+			
 			$( "td.user" ).on("click" , function() {
 				console.log('유저정보');
 				var message = $(this).attr("value");
@@ -103,52 +104,13 @@ table {
 			$( "td.divy" ).css("color" , "#ffb6c1");
 			$( "td.user" ).css("color" , "#708090");
 			
-			/*
-			$( "td.prodNum" ).on("click" , function() {
-		         console.log($(this).attr("value1"));
-		         
-		         var prodNo =$(this).attr("value1");
-		         $.ajax( 
-		               {
-		                  url : "/product/json/getProduct/"+prodNo ,
-		                  method : "GET" ,
-		                  dataType : "json" ,
-		                  headers : {
-		                     "Accept" : "application/json",
-		                     "Content-Type" : "application/json"
-		                  },
-		                  success : function(JSONData , status) {
-		                	  
-		                     var displayValue = "<table class='display' width='500' height='180'>"
-				            					  +"<tr>"
-				             					  +"<td>&emsp;"
-				             					  +"<img src='/images/uploadFiles/"+JSONData.fileName+"' width='125' height='125' />"
-				                                  +"</td>"
-				                                  +"<td>"
-				                                  +"<h5>&emsp;"
-				                                  +"상품번호	: "+JSONData.prodNo+"<br/><br/>&emsp;"
-				                                  +"상품명	: "+JSONData.prodName+"<br/><br/>&emsp;"
-				                                  +"상세정보	: "+JSONData.prodDetail+"<br/><br/>&emsp;"
-				                                  +"제조일자 	: "+JSONData.manuDate
-				                                  +"</h5>"
-				                                  +"</td>"
-				                                  +"</tr>"	                                          
-				                                  +"</table>";
-		                                          
-		                     //Debug...                           
-		                     //alert(displayValue);
-		                     $("table.display").remove();
-		                     $( "#"+prodNo+"" ).html(displayValue);
-		                  }
-		            });
-	  			 });
-				//*/
+			
 			
 				
-				$('#myTabs a').click(function (e) {
-				  e.preventDefault()
-				  $(this).tab('show')
-				})
+			$('#myTabs a').click(function (e) {
+			  e.preventDefault()
+			  $(this).tab('show')
+			})
 				
 				
 				
@@ -190,6 +152,7 @@ table {
 		    <div role="tabpanel" class="tab-pane active" id="home">
 
 			    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
+			    <br>
 			    <div class="row">
 			    
 				    <div class="col-md-6 text-left">
@@ -199,7 +162,7 @@ table {
 				    </div>
 				  </div>  
 				     <div class="row">
-					    <form class="form-inline" name="detailForm"> 
+					    <form class="form-inline" name="divyform"> 
 						 <div class="col-md-6 text-left"> 
 						  <div class="form-group" align="left">
 								<select name="orderCondition" class="form-control" style="width:125px">
@@ -239,20 +202,20 @@ table {
 				  <c:set var="i" value="0" />
 				  <c:forEach var="purchase" items="${list}">
 					<c:set var="i" value="${ i+1 }" />
-					<c:if test="${!purchase.tranCode.equals('000')}">
+					<c:if test="${!purchase.divyStatus.equals('000')}">
 					<tr>
 					  <td align="center">${ i }</td>
 					  <td align="center">${purchase.tranNo}</td>
 					  <td align="center" class="prodNum" value1="${purchase.purchaseProd.prodNo }" value2="${param.menu}" >
 						${purchase.purchaseProd.prodNo }
-					  	<i class="glyphicon glyphicon-ok" id= "${purchase.purchaseProd.prodNo}"></i>
+					  	
 					  	<input type="hidden" value="${purchase.purchaseProd.prodNo}">
 					 	 </td>
 					  <c:choose>
-						<c:when test="${purchase.tranCode.equals('001')}">
+						<c:when test="${purchase.divyStatus.equals('001')}">
 							<td align="center">현재 <b>구매완료</b> 상태입니다.</td>
 						</c:when>
-						<c:when test="${purchase.tranCode.equals('002')}">
+						<c:when test="${purchase.divyStatus.equals('002')}">
 							<td align="center">현재 <b>배송중</b> 상태입니다.</td>
 						</c:when>
 						<c:otherwise>
@@ -261,14 +224,14 @@ table {
 					  </c:choose>
 					  
 					  <c:choose>
-							<c:when test="${purchase.tranCode.equals('001') }">
-								<td align="center" class="divy" value1="${purchase.tranNo }" value2="${purchase.tranCode}">배송하기</td>			
+							<c:when test="${purchase.divyStatus.equals('001') }">
+								<td align="center" class="divy" value1="${purchase.tranNo }" value2="${purchase.divyStatus}">배송하기</td>			
 							</c:when>
-							<c:when test="${purchase.tranCode.equals('002') }">
+							<c:when test="${purchase.divyStatus.equals('002') }">
 								
 								<td align="center" style="color:#87cefa"> 배송중</td>
 							</c:when>
-							<c:when test="${purchase.tranCode.equals('003') }">
+							<c:when test="${purchase.divyStatus.equals('003') }">
 								
 								<td align="center"> 배송완료</td>
 							</c:when>
@@ -299,7 +262,7 @@ table {
 				    </div>
 				  </div>  
 				     <div class="row">
-					    <form class="form-inline" name="detailForm"> 
+					    <form class="form-inline" name="cancelform"> 
 						 <div class="col-md-6 text-left"> 
 						  <div class="form-group" align="left">
 								<select name="orderCondition" class="form-control" style="width:125px">
@@ -339,7 +302,7 @@ table {
 				  <c:set var="i" value="0" />
 				  <c:forEach var="purchase" items="${list}">
 					<c:set var="i" value="${ i+1 }" />
-					<c:if test="${purchase.tranCode.equals('000')}">
+					<c:if test="${purchase.divyStatus.equals('000')}">
 					<tr>
 					  <td align="center">${ i }</td>
 					  <td align="center">${purchase.tranNo}</td>

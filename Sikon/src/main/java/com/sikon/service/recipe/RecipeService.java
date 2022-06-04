@@ -14,7 +14,9 @@ public interface RecipeService {
 	public void addRecipe(Recipe recipe,Map ingredient) throws Exception;
 
 	//레시피 상세 조회
-	public List getRecipe(int recipeNo) throws Exception;
+	public Recipe getRecipe(int recipeNo) throws Exception;
+	
+	public List getIngredient(int recipeNo) throws Exception;
 	
 //	public Ingredient getIngredient(int recipeNo) throws Exception;
 		

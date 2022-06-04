@@ -130,6 +130,7 @@ div.image{
 			
 				<div class="row">
 					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo }"/>
+					<input type="hidden" name="cookRegdate" id="cookRegdate" value="${cook.cookRegdate }"/>
 				</div>
 				
 				<hr/>
@@ -140,6 +141,7 @@ div.image{
 					
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
 					<div>${cook.cookBrief }</div>
+					
 					<input type="hidden" name="detail" value="${cook.cookBrief }"/>
 					<input type="hidden" name="cookName" value="${cook.cookName}"/>
 				</div>
@@ -150,8 +152,8 @@ div.image{
 				
 				
 				<div class="row">
-					<div><h6><del>${cook.cookPrice } 원</del></h6></div>
-					<div><h5><strong>모집인원${cook.cookRecruit}&emsp;명</strong></h5></div>
+					<div><h6>${cook.cookPrice } 원</h6></div>
+					<div><h5><strong>모집인원${cook.cookRecruit}명</strong></h5></div>
 				</div>
 				
 				<br/>
@@ -163,16 +165,22 @@ div.image{
 				
 				<br/><br/>
 				
+				
+			
+				
 				<div class="row">
-					------------------<br/>
-					 배송비 : 3000원<br/>
-					------------------					
+				<div><h5><strong>모집기간 : ${cook.aplstarTime}&emsp;~&emsp;${cook.aplendTime}</strong></h5></div>				
 				</div>
 				
+				<div class="row">
+				<div><h5><strong>수업시간 : ${cook.startTime}&emsp;~&emsp;${cook.endTime}</strong></h5></div>				
+				</div>
 				<hr/> 
 				
+		
 				
-				<div class="row">
+				
+				<div class="form-group">
 			  		<div class="text-center">	
 			  				<button type="button" class="btn btn-default btn-lg" id="wish">장바구니</button>&emsp;
 			  				<button type="button" class="btn btn-warning btn-lg" id="buy" >구매하기</button>
@@ -185,10 +193,40 @@ div.image{
 				
 		 	</div>
 		 	
-		 	<div class="col-xs-2 col-md-2">
-		 	</div>
+		 	
+		 	
+		 	
+		 	<div class="row">
+		    <label for="cookTheme" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스테마</label>
+		    <div class="col-sm-4">
+		     <h5><strong>${cook.cookTheme}</strong></h5>
+		    </div>
+		  </div>
+		  
+		   	<div class="row">
+		    <label for="cookTheme" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스장소</label>
+		    <div class="col-sm-2">
+		     <h5><strong>${cook.cookLocation}</strong></h5>
+		    </div>
+		  </div>
+		  
+		    <div class="row">
+		    <label for="cookRegdate" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스등록날짜</label>
+		    <div class="col-sm-2">
+		     <h5><strong>${cook.cookRegdate}</strong></h5>
+		    </div>
+		  </div>
+		   <div class="row">
+		 	와
+		 
 		 	
 		 	</div>
+		  
+	
+		 	
+		 	</div>
+		 	
+	
 		 	
 		 	<hr/>
 		 	

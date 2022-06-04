@@ -99,27 +99,26 @@ public class PurchaseController {
 		
 		User user = userService.getUser(userId);
 		Product product = productService.getProduct(prodNo);
-		//Purchase purchase = new Purchase();
 		
 		System.out.println("usedPoint: "+purchase.getUsedPoint());
+		System.out.println("earnPoint: "+purchase.getEarnPoint());
 		
-		int price = product.getProdDisPrice();
-		System.out.println(price);
-		
-		double point = (int)(price*0.05);
-		
-		System.out.println("earnPoint: "+point);
-		//System.out.println("earnPoint: "+Math.round(point));
-		
-		//purchase.setEarnPoint(point);
 		purchase.setBuyer(user);
 		purchase.setPurchaseProd(product);
 		purchase.setDivyStatus("001");
 		
+		//===================================
+		purchase.setPaymentOpt("KA");
+		purchase.setSerialNo("202206041234");
+		
+		
+		//===================================
+		
+		
 		int quantity = purchase.getPurchaseQuantity();
 		
 		System.out.println(purchase);
-		//purchaseService.addPurchase(purchase);
+		purchaseService.addPurchase(purchase);
 		
 		
 		System.out.println(quantity);
@@ -256,7 +255,7 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
-	
+	//*/	
 	@RequestMapping(value="listPurchase" )
 	public ModelAndView listPurchase( @ModelAttribute("search") Search search ,  HttpServletRequest request) throws Exception{
 		
@@ -320,6 +319,6 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
-	//*/
+
 	
 }

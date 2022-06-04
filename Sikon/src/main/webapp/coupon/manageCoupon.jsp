@@ -40,9 +40,18 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  body {
-            padding-top : 50px;
-      }
+		body{
+			padding-top : 50px;
+			font-family: 'Nanum Myeongjo', serif;
+		}
+			
+		h1.text-center {
+			font-family: 'Nanum Myeongjo', serif;
+		}
+	
+		div.form-group{
+			font-family: 'Nanum Myeongjo', serif;
+		}
       		
 		.tabTitle li {
 		  list-style: none;
@@ -55,15 +64,13 @@
 		}
 		
 		.tabTitle li.on {
-		  background-color: #ffb715;
+		  background-color: #FAEBD7;
 		  font-weight: bold;
 		}
 		
 		.tabContent {
 		  clear: both;
 		  border: 1px solid #dedede;
-		  height: 130px;
-		  background-color: #cecece;
 		}
 		
 		.tabContent div {
@@ -74,6 +81,14 @@
 		.tabContent div.on {
 		  display: block;
 		}
+		
+		.buttonDiv{
+        	display:flex;
+        	flex-direction: row-reverse;        	
+        }
+        .buttonDiv button{
+        	margin-right:10px;
+        }
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -122,10 +137,22 @@
 		 $(function() {
 				
 				$("button.delete").on("click" , function() {
-							
-					self.location = "/coupon/deleteCoupon?couponNo="+$("input[name='couponNo']").val();
+					
+					var checkCount = $("input[name='couponCheck']:checked").length;
+				    var array = new Array();
+					$("input[name='couponCheck']:checked").each(function() {
+						array.push($(this).attr('id'));
+				    });
+					
+					//Debug..
+					if(checkCount != 0) {
+						alert("쿠폰을 삭제하시겠습니까?")
+						self.location = "/coupon/deleteCoupon?checkCount="+checkCount+"&checkList="+array;
+					} else {
+						alert("선택된 쿠폰이 없습니다.")						
+					}
 				});
-		});
+			});
 	
 		 
 		 $(function() {
@@ -145,8 +172,13 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
+	<div class="container">
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
+	<div class="page-header text-info">
+		<h3>쿠폰관리</h3>
+	</div>
+	
 	<div class="tab">
 	
     <ul class="tabTitle">
@@ -160,12 +192,14 @@
       	    
 	    <input type="hidden" id="issueStatus" name="issueStatus" value="사용가능"/>
 	    
-		 <p class="text-primary">
-		  		전체  ${couponPage.totalCount } 건수, 현재 ${couponPage.currentPage}  페이지
+		 <p class="text-primary" align="left">
+		 <br>
+		 &nbsp;&nbsp;	전체  ${couponPage.totalCount } 건수, 현재 ${couponPage.currentPage}  페이지
 		 </p>
-			 
-		 <button type="button" class="btn btn-primary" id="addCoupon">생 &nbsp;성</button>
 		
+		<button type="button" class="btn btn-primary delete" style="float: right;  margin-right: 10px;" >삭&nbsp;제</button>
+		<button type="button" class="btn btn-primary" id="addCoupon" style="float: right; margin-right: 10px;">생 &nbsp;성</button>
+				
       <table class="table table-hover table-striped" >
       
         <thead>
@@ -184,12 +218,11 @@
 		  <c:forEach var="coupon" items="${couponList}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
-			  <td align="left"><input type="checkbox" name="couponNo" id="couponNo" value = "${coupon.couponNo}" ></td>
-			  <td align="center">${coupon.couponNo}</td> 
+			  <td align="left"><input type="checkbox" name="couponCheck" id="${coupon.couponNo}"></td>
+			  <td align="left">${coupon.couponNo}</td> 
 			  <td align="left">${coupon.couponName}</td>
 			  <td align="left">${coupon.discountRate}</td>
 			  <td align="left">${coupon.discountValue}</td>
-			  <td align="left"><button type="button" class="btn btn-primary delete">삭제</button></td>
 			</tr>
           </c:forEach>
         
@@ -204,7 +237,7 @@
       <div>
         
 	 	<p class="text-primary">
-			전체  ${issuePage.totalCount } 건수, 현재 ${issuePage.currentPage}  페이지
+		&nbsp;&nbsp;	전체  ${issuePage.totalCount } 건수, 현재 ${issuePage.currentPage}  페이지
 		</p>
 		
 		<input type="hidden" id="currentPage" name="currentPage" value=""/>
@@ -253,7 +286,8 @@
         </tbody>
       
       </table>
- 
+ </div>
+ 	<!--  화면구성 div End /////////////////////////////////////-->
 		<jsp:include page="../common/pageNavigator_coupon.jsp"/>
 	
       </div>
