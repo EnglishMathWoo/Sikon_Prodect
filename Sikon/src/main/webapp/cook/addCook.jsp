@@ -4,30 +4,40 @@
 <head>
 <title>쿠킹클래스등록</title>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
 
-
-<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-
-
-<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
-<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
-
-<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
 
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
+<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
+
+
+
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
+
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+    
+    
 <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
     <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -42,6 +52,66 @@
         }
     </style>
 	<script type="text/javascript">
+	
+	$(function() {
+	     $('#summernote').summernote({
+	             height: 300,                 // set editor height
+	             minHeight: null,             // set minimum height of editor
+	             maxHeight: null,             // set maximum height of editor
+	             focus: true,                  // set focus to editable area after initializing summernote
+	             callbacks: {	//이미지 첨부하는 부분
+   	               onImageUpload : function(files) {
+   	                    uploadSummernoteImageFile(files[0],this);
+   	                },
+   	                onPaste: function (e) {
+   						var clipboardData = e.originalEvent.clipboardData;
+   						if (clipboardData && clipboardData.items && clipboardData.items.length) {
+   							var item = clipboardData.items[0];
+   							if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+   								e.preventDefault();
+   							}
+   						}
+   					}
+   	  	  
+   	            }
+	     
+	     });
+
+	 }); 
+	
+	
+	 function uploadSummernoteImageFile(file, editor) {
+			data = new FormData();
+			data.append("file", file);
+			
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "/cook/json/uploadSummernoteImageFile",
+				contentType : false,
+				processData : false,
+				success : function(data) {
+					console.log(data.url);
+	            	//항상 업로드된 파일의 url이 있어야 한다.
+					$(editor).summernote('insertImage', data.url);
+				}
+			});
+		}
+	 
+
+	 $( document ).ready(function() {
+			$( "#register" ).on("click" , function() {
+				//var pushData = {
+				//		"noticeTitle" : $("input[name='noticeTitle']").val(),
+				//		"noticeContent" :$('#summernote').val() };
+									
+				var pushData = $("input[name='cookTitle']").val();
+				console.log(pushData);
+				commentInsert(pushData);
+				
+				//$("form").attr("method", "POST").attr("action", "/notice/addNotice").submit();
+			});
+		});	
 
 
 
@@ -286,6 +356,14 @@
 		    
 		    </div>
 		  </div>
+		  
+		<input type="text" class="form-control" id="cookTitle" name="cookTitle" placeholder="제목을 입력해주세요.">
+	    
+	    <br>
+	    
+	    <div class="container">
+ 		 <textarea class="summernote" id ="summernote" name="cookContent"></textarea>    
+		</div>
 		  
 		  
 		  

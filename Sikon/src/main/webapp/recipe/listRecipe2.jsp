@@ -70,32 +70,6 @@ div.thumbnail {
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
 }
-
-
-
-</style>
-<style>
-.ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase;}
-.ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
-.ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
-.ref-sort li:last-child{margin:0; padding:0;}
-.ref-sort li:last-child::after{display:none;}
-.ref-sort li a{}
-
-/* References */
-.ref-sort li a{color:inherit;}
-.ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
-
-.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
-.sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
-.sectiontitle .heading{margin:0; padding:0; line-height:1;}
-
-	.sectiontitle{max-width:none; margin-bottom:50px;}
-
-	.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -308,21 +282,12 @@ div.thumbnail {
     <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
     </div>
     <hr/>
-    <br/><br/>
-      <nav class="ref-sort" >
-      <ul>
-        <li class="current" ><a href="#">한식</a></li>
-        <li><a href="#">중식</a></li>
-        <li><a href="#">양식</a></li>
-        <li><a href="#">일식</a></li>
-        <li><a href="#">간식</a></li>
-      </ul>
-    </nav>
+      <p class="nospace">테마버튼</p>
     
     </section>
 <!-- ################################################################################################ -->
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
-		<!-- 
+		<!--  
 		<div class="row">
 
 
@@ -377,56 +342,11 @@ div.thumbnail {
 
 
 		</div>
-	-->
 </div>
+	
 		
 <div class="container">
-	<section class="hoc container clear"> 
-    <!-- ################################################################################################ -->
-    <div class="sectiontitle">
-      <h6 class="heading">Pellentesque consectetuer</h6>
-      <p>Felis vitae sapien gravida interdum curabitur eu quam nec est</p>
-    </div>
-    <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
-        <div class="excerpt">
-          <time datetime="2045-04-03T08:15+00:00"><i class="far fa-calendar-alt"></i> 03<sup>rd</sup> April 2045 @ 15:00pm</time>
-          <h6 class="heading">Aliquam volutpat donec posuere</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
-          <p>Ornare dolor phasellus ornare dui vel euismod ultrices orci libero pulvinar justo quis condimentum quam.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
-        </div>
-      </article>
-      <article class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
-        <div class="excerpt">
-          <time datetime="2045-04-02T08:15+00:00"><i class="far fa-calendar-alt"></i> 02<sup>nd</sup> April 2045 @ 15:00pm</time>
-          <h6 class="heading">Nisl id ligula pellentesque</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
-          <p>Felis nunc interdum vitae pretium ac bibendum vel velit phasellus commodo nullam vitae quam cras auctor.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
-        </div>
-      </article>
-      <article class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
-        <div class="excerpt">
-          <time datetime="2045-04-01T08:15+00:00"><i class="far fa-calendar-alt"></i> 01<sup>st</sup> April 2045 @ 15:00pm</time>
-          <h6 class="heading">Commodo metus proin blandit</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
-          <p>Quam molestie luctus vehicula orci massa interdum justo nec rutrum risus augue ut nisl suspendisse elit.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
-        </div>
-      </article>
-    </div>
-    <!-- ################################################################################################ -->
-  </section>
+	
 <div class="row">
 	<c:set var="i" value="0" />
 
@@ -449,6 +369,8 @@ div.thumbnail {
     </div>
   </div>		
     </c:forEach>
+    
+    
     
   </div>
 		

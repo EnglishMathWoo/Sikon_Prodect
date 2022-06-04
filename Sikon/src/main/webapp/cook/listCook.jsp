@@ -237,12 +237,12 @@ div.thumbnail {
 					                
 					                		if(JSONData.list[i].cancel == '0'){
 				                				
-				                					image = "<img src='/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image'>";
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image'>";
 				                				
 					                			
 					                		}else if(JSONData.list[i].cancel == '1'){
 					                			
-				                					image = "<img src='/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image_none'>";
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image_none'>";
 				                				
 					                		}
 					                		
@@ -398,14 +398,14 @@ div.thumbnail {
     
     	<c:when test="${(cook.cookFilename).contains('/')}">
     		<c:forEach var="name" items="${(cook.cookFilename).split('/')[0]}">
-		<img class="image" src="/images/uploadFiles/${name}" width="200" height="200" ><br/>
+		<img class="image" src="/resources/images/uploadFiles/${name}" width="200" height="200" ><br/>
 			</c:forEach>
 		
       </c:when>
 		
 		<c:otherwise>
 		
-		<img class="image" src="/images/uploadFiles/${cook.cookFilename}" width="200" height="200"><br/>
+		<img class="image" src="/resources/images/uploadFiles/${cook.cookFilename}" width="200" height="200"><br/>
 		</c:otherwise>
 		</c:choose>
 		
@@ -461,13 +461,13 @@ div.thumbnail {
     
     	<c:when test="${(cook.cookFilename).contains('/')}">
     		<c:forEach var="name" items="${(cook.cookFilename).split('/')[0]}">
-		<img src="/images/uploadFiles/${name}" width="200" height="200"><br/>
+		<img src="/resources/images/uploadFiles/${name}" width="200" height="200"><br/>
 			</c:forEach>
 		
       </c:when>                                                                                                                           
 		
 		<c:otherwise>
-		<img src="/images/uploadFiles/${cook.cookFilename}" width="200" height="200"><br/>
+		<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="200" height="200"><br/>
 		</c:otherwise>
 		</c:choose>
       <div class="caption">
