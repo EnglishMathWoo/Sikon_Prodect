@@ -72,11 +72,15 @@
 			
 			$("button.delete").on("click" , function() {
 				
-				 var noticeNo = $(this).val();
-						
+				var checkCount = $("input[name='noticeCheck']:checked").length;
+			    var array = new Array();
+				$("input[name='noticeCheck']:checked").each(function() {
+					array.push($(this).attr('id'));
+			    });
+				
 				//Debug..
-				console.log(noticeNo);
-				self.location = "/notice/deleteNotice?noticeNo="+noticeNo;
+				alert("게시물을 삭제하시겠습니까?")
+				self.location = "/notice/deleteNotice?checkCount="+checkCount+"&checkList="+array;
 			});
 		});
 	
@@ -173,12 +177,11 @@
 		<c:set var="i" value="${ i+1 }" />
 		<tr class="ct_list_pop">
 			<c:if test = "${menu == 'manage'}">
-				<td align="left"><input type="checkbox"></td>
+				<td align="left"><input type="checkbox" name="noticeCheck" id="${notice.noticeNo}"/></td>
 				<td align="left"> ${notice.noticeNo}</td>
 				<td></td>
 				<td align="left" name="manageNoticeTitle" id="manageNoticeTitle">
 				${notice.noticeTitle}
-				<input type="hidden" id="noticeNo" name="noticeNo" value="${notice.noticeNo}"/>
 				</td>
 				<td></td>
 				<td align="left"> ${notice.noticeDate} </td>
