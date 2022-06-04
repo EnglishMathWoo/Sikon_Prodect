@@ -1,6 +1,8 @@
 package com.sikon.service.user.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +34,8 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	///Method
-	public void addUser(User user) throws Exception {
-		sqlSession.insert("UserMapper.addUser", user);
-	}
-	public void addCareer(Career career) throws Exception {
-		sqlSession.insert("CareerMapper.addCareer", career);
-	}
-	public void addLicense(License license) throws Exception {
-		sqlSession.insert("LicenseMapper.addlicense", license);
+	public void addUser(Map map) throws Exception {
+		sqlSession.insert("UserMapper.addUser", map);
 	}
 	
 	public User getUser(String userId) throws Exception {
@@ -50,8 +46,19 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectOne("UserMapper.findUserId", userNickname);
 	}
 	
-	public void updateUser(User user) throws Exception {
+	public void updateUser(User user, Map license, Map career) throws Exception {
+	//	Career career = new Career();
+	//	License license = new License();
 		sqlSession.update("UserMapper.updateUser", user);
+		sqlSession.update("LicenseMapper.updateLicense", license.get("list"));
+		sqlSession.update("CareerMapper.updateCareer", career.get("list"));
+		
+		
+	//	Map map = new HashMap();
+//		map.put("license", license);
+//		map.put("career", career);
+//		map.put("user", user);
+		
 	}
 
 	public List<User> getUserList(Search search) throws Exception {

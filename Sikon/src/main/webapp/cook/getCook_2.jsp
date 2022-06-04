@@ -77,10 +77,11 @@ div.image{
 			 var quantity = $('#quantity').val();
 			 self.location = "/apply/addApply?menu=${param.menu}&cookNo=${cook.cookNo}"
 		});
-		 $( "button.btn-warning" ).on("click" , function() {
-			 var quantity = $('#quantity').val();
-			 self.location = "/purchase/addPurchase?prodNo=${product.prodNo}&quantity="+quantity;
-		});
+		 
+//		 $( "button.btn-warning" ).on("click" , function() {
+//			 var quantity = $('#quantity').val();
+//			 self.location = "/purchase/addPurchase?prodNo=${cook.prodNo}&quantity="+quantity;
+//		});
 		 
 		 $( "button.btn-primary" ).on("click" , function() {
 			 var cookNo = $('#cookNo').val();
@@ -98,7 +99,7 @@ div.image{
 	 
 	 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "button.btn.btn-warning" ).on("click" , function() {
+			$( "#wish" ).on("click" , function() {
 				console.log('장바구니');
 				fncAddWish();
 			});
@@ -122,7 +123,7 @@ div.image{
 		<div class="row">
 	
 				<div class="col-xs-6 col-md-6 text-center image">				
-						<c:forEach var="name" items="${product.prodThumbnail.split('&')[0]}">
+						<c:forEach var="name" items="${cook.cookFilename.split('/')[0]}">
 								<img src="/resources/images/uploadFiles/${name}" width="400" height="400"/>
 						</c:forEach>
 				</div>	
@@ -131,23 +132,19 @@ div.image{
 				<div class="col-xs-4 col-md-4">
 			
 				<div class="row">
-					<input type="hidden" name="prodNo" id="prodNo" value="${product.prodNo }"/>
+					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo }"/>
 				</div>
 				
 				<hr/>
 				
 				<div class="row">
 				
-					<div class="text-right">
-						<a id="kakao-link-btn" href="javascript:kakaoShare()">
-					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
-					    </a>
-					</div>
+				
 					
-					<div><h4><strong>${product.prodName}</strong></h4></div><br>
-					<div>${product.prodDetail }</div>
-					<input type="hidden" name="detail" value="${product.prodDetail }"/>
-					<input type="hidden" name="prodName" value="${product.prodName}"/>
+					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
+					<div>${cook.cookBrief }</div>
+					<input type="hidden" name="detail" value="${cook.cookBrief }"/>
+					<input type="hidden" name="cookName" value="${cook.cookName}"/>
 				</div>
 				
 				<br/><br/>
@@ -156,15 +153,15 @@ div.image{
 				
 				
 				<div class="row">
-					<div><h6><del>${product.prodPrice } 원</del></h6></div>
-					<div><h5><strong>${product.prodDisPrice } 원</strong></h5></div>
+					<div><h6><del>${cook.cookPrice } 원</del></h6></div>
+					<div><h5><strong>모집인원${cook.cookRecruit}&emsp;명</strong></h5></div>
 				</div>
 				
 				<br/>
 				
 				<div class="row">
-					구매수량: &emsp;
-				      <input type="number" min="0" id="quantity" name="quantity" value="1" style="width:40px"/> 개
+					신청인원: &emsp;
+				      <input type="number" min="0" id="cookStatus" name="cookStatus" value="1" style="width:40px"/> 명
 				</div>
 				
 				<br/><br/>
@@ -180,7 +177,7 @@ div.image{
 				
 				<div class="row">
 			  		<div class="text-center">	
-			  				<button type="button" class="btn btn-default btn-lg" id="cancel">장바구니</button>&emsp;
+			  				<button type="button" class="btn btn-default btn-lg" id="wish">장바구니</button>&emsp;
 			  				<button type="button" class="btn btn-warning btn-lg" id="buy" >구매하기</button>
 			  				<c:if test="${menu == 'manage' }">
 			  				&emsp;<button type="button" class="btn btn-primary btn-lg" id="buy" >수정하기</button>
