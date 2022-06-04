@@ -40,9 +40,20 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  body {
+	
+	 body {
+			font-family: 'Nanum Myeongjo', serif;
             padding-top : 50px;
         }
+        	
+		h1.text-center {
+			font-family: 'Nanum Myeongjo', serif;
+		}
+		
+		div.form-group{
+			font-family: 'Nanum Myeongjo', serif;
+		}
+	 
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
