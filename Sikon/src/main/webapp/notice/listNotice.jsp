@@ -38,8 +38,26 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	  body {
+			font-family: 'Nanum Myeongjo', serif;
             padding-top : 50px;
         }
+        	
+		h1.text-center {
+			font-family: 'Nanum Myeongjo', serif;
+		}
+		
+		div.form-group{
+			font-family: 'Nanum Myeongjo', serif;
+		}
+				  
+        .buttonDiv{
+        	display:flex;
+        	flex-direction: row-reverse;        	
+        }
+        .buttonDiv button{
+        	margin-right:10px;
+        }
+        
     </style>
     
     
@@ -133,21 +151,18 @@
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row">
-	    
-		    <div class="col-md-6 text-left">
-		    <form class="form-inline" name="detailForm">
+	    	<form class="form-inline" name="detailForm">
 		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    		&nbsp;&nbsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
 		    <c:if test = "${menu == 'manage'}">
-				<button type="button" class="btn btn-primary" id="addNotice">등&nbsp;록</button>
-				<td></td>
-				<td align="left"><button type="button" class="btn btn-primary delete" value="${notice.noticeNo}" >삭&nbsp;제</button></td>
-				<td></td>
-			</td>
-			</c:if>
-		    </div>
 		    
+		    <div class="buttonDiv">
+		    <button type="button" class="btn btn-primary delete" value="${notice.noticeNo}" >삭&nbsp;제</button>
+			<button type="button" class="btn btn-primary" id="addNotice">등&nbsp;록</button>
+			</div>
+			</c:if>
+			
 		</div>
 		
 		
@@ -182,6 +197,7 @@
 				<td></td>
 				<td align="left" name="manageNoticeTitle" id="manageNoticeTitle">
 				${notice.noticeTitle}
+				<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
 				</td>
 				<td></td>
 				<td align="left"> ${notice.noticeDate} </td>
@@ -189,7 +205,8 @@
 			<c:if test = "${menu == 'search'}">
 				<td align="left"> ${notice.noticeNo}</td>
 				<td></td>
-				<td align="left" name="searchNoticeTitle" id="searchNoticeTitle">${notice.noticeTitle}
+				<td align="left" name="searchNoticeTitle" id="searchNoticeTitle">
+				${notice.noticeTitle}
 				<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
 				</td>
 				<td></td>
@@ -212,7 +229,7 @@
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->
 
-</form>	
+	</form>
 </body>
 
 </html>

@@ -127,10 +127,7 @@
 			        	alert("성공!!");
 			        	
 			        	$("form").attr("method", "POST").attr("action", "/notice/addNotice").submit();
-			          
-			                //$('[name=content]').val('');
-			           		//$('.myEditor').summernote('reset');
-			                
+			          			               	                
 			           		//소켓
 			           		//if(readWriter != writer){
 			           		if(socket){
@@ -142,7 +139,27 @@
 			        	//}
 			        }
 			    
-			    })
+			    });
+			    
+			  //알람
+			  //if(readWriter != writer){
+					$.ajax({
+				        url : '/board/insertAlarm',
+				        type : 'post',
+				        data : {'toId': writer , 'fromId': readWriter , 'bno':bno,'title':readTitle, 'categori': "reply",'bgno':bgno },
+				        dataType : "json", 
+				        success : function(alarm){
+				         		alret("알람입력성공");
+				              if(alarm == 1){
+				            	  alert("알람입력성공")
+				              }else{
+				            	  alert("알람입력실패")
+				              }
+				        }
+				    
+				    });
+			  //}
+				//알람끝
 		 };
 	 
 		 
