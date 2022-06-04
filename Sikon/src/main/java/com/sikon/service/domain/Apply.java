@@ -3,6 +3,7 @@ package com.sikon.service.domain;
 import java.sql.Date;
 
 public class Apply {
+	//·¹¾²°í
 
 	private int applyNo;
 	private Cook classCook; //cook °´Ã¼
