@@ -49,6 +49,16 @@ body{
 			
 			 
 		});
+		 
+		 $(function() {
+				var point = $( "#price" ).val();
+				console.log("point: "+point);
+				
+				var earnpoint = Math.round(point*0.05);
+				console.log("earnpoint: "+earnpoint);
+				$( "#earnPoint" ).val(earnpoint);
+			});	
+			
 		
 	</script>
 	
@@ -104,30 +114,31 @@ body{
 
 		</div>
 		</div>
-		  
+		  <br>
 		 <div class="row">
 	  		<div class="col-xs-4 col-md-4"><strong>상품명</strong></div>
 			<div class="col-xs-8 col-md-8">${purchase.purchaseProd.prodName}</div>
 		</div>
-		
+			  		<hr/>
 		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>결제금액</strong></div>
-	  		<hr/>
+	  		<div class="col-xs-4 col-md-4"><strong>결제금액</strong></div><br>
 			<div class="col-xs-8 col-md-8">상품가격: ${purchase.purchaseProd.prodDisPrice} 원</div>
 			<div class="col-xs-8 col-md-8">+ 배송비: ${purchase.divyFee} 원</div>
 		</div>
-		
+			  		<hr/>
 		<div class="row">
 	  		<div class="col-xs-4 col-md-4"><strong>구매수량</strong></div>
 			<div class="col-xs-8 col-md-8">${purchase.purchaseQuantity} 개</div>
 		</div>
-		
+			  		<hr/>
 		<div class="row">
 	  		<div class="col-xs-4 col-md-4"><strong>적립 포인트</strong></div>
-			<div class="col-xs-8 col-md-8">+ ${purchase.purchaseProd.prodDisPrice * 0.05} P</div>
+			<div class="col-xs-8 col-md-8">+
+		      <input type="text" id="earnPoint" name="earnPoint" value=""  style="border:none;width:50px">P
+		      <input type="hidden" id="price" value="${purchase.purchaseProd.prodDisPrice}"></div>
 		</div>
 		  
-
+	  
 		 <hr/>
 		  <h4 align="center">배송정보</h4>
 		  <hr/>
