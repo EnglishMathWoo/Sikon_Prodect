@@ -42,15 +42,15 @@ public class RecipeDaoImpl implements RecipeDao {
 		sqlSession.insert("RecipeMapper.addIngredient",ingredient.get("list"));
 	}
 
-	public List getRecipe(int recipeNo) throws Exception {
+	public Recipe getRecipe(int recipeNo) throws Exception {
 		System.out.println("recipeNo=" + recipeNo);
-		return sqlSession.selectList("RecipeMapper.getRecipe", recipeNo);
+		return sqlSession.selectOne("RecipeMapper.getRecipe", recipeNo);
 	}
 	
-//	public Ingredient getIngredient(int recipeNo) throws Exception {
-//		System.out.println("recipeNo=" + recipeNo);
-//		return sqlSession.selectOne("RecipeMapper.getIngredient", recipeNo);
-//	} 
+	public List getIngredient(int recipeNo) throws Exception {
+		System.out.println("recipeNo=" + recipeNo);
+		return sqlSession.selectList("RecipeMapper.getIngredient", recipeNo);
+	} 
 
 	public List<Recipe> getRecipeList(Search search) throws Exception {
 		System.out.println("search=" + search);
