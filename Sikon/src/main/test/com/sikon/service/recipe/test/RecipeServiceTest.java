@@ -18,6 +18,7 @@ import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
 import com.sikon.service.recipe.RecipeService;
 
+//Å×½ºÆ®
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/*.xml" })
 public class RecipeServiceTest {
