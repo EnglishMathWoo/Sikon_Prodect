@@ -51,7 +51,14 @@
 	 </insert>
 	 
 	 
-	 <select id="getRecipe" parameterType="int"  resultType="java.util.HashMap">
+	 <select id="getRecipe" parameterType="int"  resultMap="recipeSelectMap">
+		SELECT *
+		FROM recipe 
+		WHERE
+		recipe_no= #{recipeNo}
+	</select>
+	
+	 <select id="getIngredient" parameterType="int"  resultMap="ingredientSelectMap">
 		SELECT r.*, i.*
 		FROM recipe r, ingredient i
 		WHERE
