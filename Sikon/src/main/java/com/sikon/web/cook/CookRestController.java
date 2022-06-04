@@ -119,19 +119,7 @@ public class CookRestController {
 		 return  map;
 	
 	}
-	@RequestMapping( value="json/getCook/{cookNo}", method=RequestMethod.GET )
-	public Cook getCook( @PathVariable int cookNo ) throws Exception{
-		
-		
-		
-		
-		return cookService.getCook(cookNo);
-		
-	}
 	
-	
-	
-	///Method
 	@PostMapping(value="/json/uploadSummernoteImageFile", produces = "application/json")
 	@ResponseBody
 	public Map uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
@@ -165,7 +153,15 @@ public class CookRestController {
 		
 		return map;
 	}
-	
+	@RequestMapping( value="json/getCook/{cookNo}", method=RequestMethod.GET )
+	public Cook getCook( @PathVariable int cookNo ) throws Exception{
+		
+		
+		
+		
+		return cookService.getCook(cookNo);
+		
+	}
 	@RequestMapping( value="json/updateCook", method=RequestMethod.POST )
 	public Cook updateCook(  @RequestBody Cook cook 
 			, Model model, HttpSession session,

@@ -141,6 +141,7 @@ div.image{
 					
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
 					<div>${cook.cookBrief }</div>
+					
 					<input type="hidden" name="detail" value="${cook.cookBrief }"/>
 					<input type="hidden" name="cookName" value="${cook.cookName}"/>
 				</div>
@@ -215,8 +216,17 @@ div.image{
 		     <h5><strong>${cook.cookRegdate}</strong></h5>
 		    </div>
 		  </div>
+		   <div class="row">
+		 	¿Í
+		 
 		 	
 		 	</div>
+		  
+	
+		 	
+		 	</div>
+		 	
+	
 		 	
 		 	<hr/>
 		 	
