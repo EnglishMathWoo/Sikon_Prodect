@@ -50,16 +50,16 @@
 
 
 	<!-- 회원가입 -->
-	<insert  id="addUser"		parameterType="user" >
-		 INSERT
-		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , role , user_phone , holdpoint , mentor_apply , user_regdate , quit_date , quit_status ) 
-		 VALUES	 ( #{userId} , #{userName} , #{password} , #{userBirth}, #{userNickname}, #{userImage}, #{addr}, 'user', #{phone}, 
-						#{holdpoint:NUMERIC}, #{mentorApply}, SYSDATE , #{quitDate:DATE} , #{quitStatus} )
-	<!-- INTO career( career_no , company , career_experience , start_date , end_date )
-		 VALUES ( seq_career_career_no.nextval , #{company} , #{careerExperience} , #{startDate:DATE} , #{endDate:DATE} )
-		 INTO license( license_no , license_name , license_institution , license_date )
-		 VALUES ( seq_license_license_no.nextval , #{licenseName} , #{licenseInstitution} , #{licenseDate:DATE})
-  	-->	
+	<insert  id="addUser"		parameterType="java.util.map" >
+		 INSERT ALL
+		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , user_phone , holdpoint , mentor_apply , user_regdate , quit_date , quit_status ) 
+		 VALUES	 ( #{user.userId} , #{user.userName} , #{user.password} , #{user.userBirth}, #{user.userNickname}, #{user.userImage}, #{user.addr}, #{user.phone}, 
+						#{user.holdpoint:NUMERIC}, #{user.mentorApply}, SYSDATE , #{user.quitDate:DATE} , #{user.quitStatus} )
+		 INTO career( career_no , company , career_experience , start_date , end_date , user_id )
+		 VALUES ( seq_career_career_no.nextval , #{career.company} , #{career.careerExperience} , #{career.startDate:DATE} , #{career.endDate:DATE} , #{career.userId} )
+		 INTO license( license_no , license_name , license_institution , license_date , user_id )
+		 VALUES ( seq_license_license_no.nextval , #{license.licenseName} , #{license.licenseInstitution} , #{license.licenseDate:DATE} , #{license.userId})
+  		 SELECT * FROM DUAL
 	</insert>
 
 
@@ -68,8 +68,7 @@
 
 	<!-- 회원상세조회 -->
 	<select  id="getUser"		parameterType="string"	resultMap="userSelectMap">
-		 SELECT
-		 user_id , user_name ,password, user_nickname , user_phone , user_birth ,  user_addr , user_image , role , mentor_apply , quit_status , quit_date , user_regdate 		
+		 SELECT *
 		 FROM users 
 		 WHERE user_id = #{value}
         </select>
@@ -80,8 +79,9 @@
 		SELECT user_id
 		FROM users
 		WHERE user_nickname = #{userNickname}
-		     AND user_birth = #{userBirth}
-		     AND user_phone = #{phone}
+	<!--  	     AND user_birth = #{userBirth}
+		    		 AND user_phone = #{phone}
+	-->
 	</select>
 
 
@@ -99,9 +99,9 @@
 			user_birth	= #{userBirth} ,
 			user_addr 	= #{addr} ,
 			user_phone	= #{phone} ,
+			user_image	= #{userImage} ,
 			mentor_apply	= #{mentorApply}
-
-
+		
 	   	</set>
 	   	WHERE user_id = #{userId}
 	</update>
@@ -142,7 +142,7 @@
 		UPDATE users
 		<set>
 			quit_status	= #{quitStatus} ,
-			quit_date	= SYSDATE ,
+			quit_date	= SYSDATE 
 
 		</set>
 		WHERE user_id = #{userId}
