@@ -31,7 +31,24 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
  		body {
+			font-family: 'Nanum Myeongjo', serif;
             padding-top : 50px;
+        }
+        	
+		h1.text-center {
+			font-family: 'Nanum Myeongjo', serif;
+		}
+		
+		div.form-group{
+			font-family: 'Nanum Myeongjo', serif;
+		}
+				  
+        .buttonDiv{
+        	display:flex;
+        	flex-direction: row-reverse;        	
+        }
+        .buttonDiv button{
+        	margin-right:10px;
         }
      </style>
 

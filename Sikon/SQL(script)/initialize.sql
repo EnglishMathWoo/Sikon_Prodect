@@ -22,7 +22,6 @@ DROP SEQUENCE seq_notice_notice_no;
 DROP SEQUENCE seq_bookmark_no;
 DROP SEQUENCE seq_ingredient_no;
 DROP SEQUENCE seq_recipe_no;
-DROP SEQUENCE seq_img_no;
 DROP SEQUENCE seq_review_no;
 DROP SEQUENCE seq_license_license_no;
 DROP SEQUENCE seq_career_career_no;
@@ -41,7 +40,6 @@ CREATE  SEQUENCE  seq_recipe_no	 INCREMENT  BY  1  START  WITH  10000;
 CREATE  SEQUENCE  seq_ingredient_no	 INCREMENT  BY  1  START  WITH  10000;
 CREATE  SEQUENCE  seq_bookmark_no	 INCREMENT  BY  1  START  WITH  10000;
 CREATE  SEQUENCE  seq_review_no	 INCREMENT  BY  1  START  WITH  10000;
-CREATE  SEQUENCE  seq_img_no	 INCREMENT  BY  1  START  WITH  10000;
 CREATE SEQUENCE seq_license_license_no INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_career_career_no INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_product_prod_no 	INCREMENT BY 1 START WITH 10000;
@@ -197,21 +195,22 @@ CREATE TABLE cart (
 CREATE TABLE cook ( 
 	cook_no 			 			NUMBER 		 		NOT NULL,
 	cook_name 			 	VARCHAR2(100)  	NOT NULL,
-	cook_filename VARCHAR2(200),
+	cook_filename                                      VARCHAR2(200),
 	cook_brief 		 		VARCHAR2(200),
 	cook_difficuty			   		     VARCHAR2(20)                   NOT NULL,
 	cook_price 				 NUMBER(10)  NOT NULL,	
 	cook_theme 			 	VARCHAR2(20) NOT NULL,	
 	apl_startime     				 VARCHAR2(200) NOT NULL,	
 	apl_endtime         			 VARCHAR2(200) NOT NULL,	
-	cook_recruit         			 NUMBER    not null,
 	start_time         			 VARCHAR2(200) NOT NULL,	
-	end_time         			 VARCHAR2(200) NOT NULL,		
+	end_time         			 VARCHAR2(200) NOT NULL,
+	cook_recruit                               NUMBER 		 		NOT NULL,		
 	cook_location         			 VARCHAR2(200)    not null,
 	cook_regdate         			 DATE    not null,	
 	cook_video         			VARCHAR2(200)  ,
 	cook_stock         			 NUMBER    not null,
 	heart_hit 					 NUMBER    default 0  not null,
+	cook_content 		                   CLOB 		NOT NULL, 
 	PRIMARY KEY(cook_no)
 );
 
@@ -304,8 +303,8 @@ INTO cart( cart_no , prod_no, user_id, quantity)
 VALUES (seq_cart_cart_no.NEXTVAL , 10000, 'mentor@naver.com', 5);
 
 INSERT
-INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit  )
-VALUES (seq_cook_cook_no.nextval, '예다의 계란 후라이 쿠킹클래스', 'yyy.jpg', '진짜 쉬워요', '초급', 14000, '한식', SYSDATE, SYSDATE, 5, SYSDATE, SYSDATE, '강남구 비트캠프', SYSDATE, 'aaa.jpg', 20, 0);
+INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content  )
+VALUES (seq_cook_cook_no.nextval, '예다의 계란 후라이 쿠킹클래스', 'yyy.jpg', '진짜 쉬워요', '초급', 14000, '한식', SYSDATE, SYSDATE, 5, SYSDATE, SYSDATE, '강남구 비트캠프', SYSDATE, 'aaa.jpg', 20, 0, '후라이content' );
 
 INSERT 
 INTO apply(apply_no, cook_no, applier_id, payment_option, apply_status, cook_status, check_date)

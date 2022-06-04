@@ -119,16 +119,18 @@ public class CouponController {
 	}
 	
 	@RequestMapping( value="/deleteCoupon", method=RequestMethod.GET)
-	public String updatePurchaseView(@RequestParam("couponNo") int couponNo) throws Exception{
+	public String updatePurchaseView( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
 
 		System.out.println("/coupon/deleteCoupon : GET");
 		
 		//Business Logic
-		couponService.deleteCoupon(couponNo);
-
+		for(int i=0; i<checkCount; i++) {
+			couponService.deleteCoupon(checkList[i]);
+		}		
+		
 		return "forward:/coupon/manageCoupon";
 	}
-	
+		
 	@RequestMapping(value="/issueCoupon", method=RequestMethod.GET)
 	public String issueCouponView(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 				

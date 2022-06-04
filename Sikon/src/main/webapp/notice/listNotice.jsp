@@ -49,15 +49,7 @@
 		div.form-group{
 			font-family: 'Nanum Myeongjo', serif;
 		}
-				  
-        .buttonDiv{
-        	display:flex;
-        	flex-direction: row-reverse;        	
-        }
-        .buttonDiv button{
-        	margin-right:10px;
-        }
-        
+		              
     </style>
     
     
@@ -96,9 +88,12 @@
 					array.push($(this).attr('id'));
 			    });
 				
-				//Debug..
-				alert("게시물을 삭제하시겠습니까?")
-				self.location = "/notice/deleteNotice?checkCount="+checkCount+"&checkList="+array;
+				if(checkCount != 0) {
+					alert("게시물을 삭제하시겠습니까?")
+					self.location = "/notice/deleteNotice?checkCount="+checkCount+"&checkList="+array;
+				} else {
+					alert("선택된 게시물이 없습니다.")	
+				}
 			});
 		});
 	
@@ -155,12 +150,9 @@
 		    	<p class="text-primary">
 		    		&nbsp;&nbsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
-		    <c:if test = "${menu == 'manage'}">
-		    
-		    <div class="buttonDiv">
-		    <button type="button" class="btn btn-primary delete" value="${notice.noticeNo}" >삭&nbsp;제</button>
-			<button type="button" class="btn btn-primary" id="addNotice">등&nbsp;록</button>
-			</div>
+			<c:if test = "${menu == 'manage'}">
+		    	<button type="button" class="btn btn-primary delete" value="${notice.noticeNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
+				<button type="button" class="btn btn-primary" id="addNotice" style="float: right;  margin-right: 10px;">등&nbsp;록</button>
 			</c:if>
 			
 		</div>
