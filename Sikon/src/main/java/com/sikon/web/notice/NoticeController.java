@@ -141,12 +141,14 @@ public class NoticeController {
 	}
 	
 	@RequestMapping( value="/deleteNotice", method=RequestMethod.GET)
-	public String deleteNotice( @RequestParam("noticeNo") int noticeNo ) throws Exception{
+	public String deleteNotice( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
 
 		System.out.println("/notice/deleteNotice : GET");
 		
 		//Business Logic
-		noticeService.deleteNotice(noticeNo);
+		for(int i=0; i<checkCount; i++) {
+			noticeService.deleteNotice(checkList[i]);
+		}		
 
 		return "forward:/notice/listNotice?menu=manage";
 	}
