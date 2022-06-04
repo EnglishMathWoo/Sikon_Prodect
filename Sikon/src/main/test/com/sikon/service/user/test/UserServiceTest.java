@@ -100,12 +100,12 @@ public class UserServiceTest {
 //		list2.add(license2);
 
 		Map map=new HashMap();
-		map.put("user", user);
+//		map.put("user", user);
 		map.put("list", list);
 //		map.put("list2", list2);
 		
 		
-		userService.addUser(map);
+		userService.addUser(user, map);
 
 		
 		user = userService.getUser("test@naver.com");

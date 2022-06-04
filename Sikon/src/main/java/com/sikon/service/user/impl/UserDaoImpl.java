@@ -34,8 +34,10 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	///Method
-	public void addUser(Map map) throws Exception {
-		sqlSession.insert("UserMapper.addUser", map);
+	public void addUser(User user, Map map) throws Exception {
+		sqlSession.insert("UserMapper.addUser", user);
+		sqlSession.insert("UserMapper.addLicense", map);
+		sqlSession.insert("UserMapper.addCareer", map);
 	}
 	
 	public User getUser(String userId) throws Exception {

@@ -34,9 +34,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	///Method
-	public void addUser(Map map) throws Exception {
+	public void addUser(User user, Map map) throws Exception {
 		System.out.println("map="+map);
-		userDao.addUser(map);
+		userDao.addUser(user, map);
 	}
 
 	public User getUser(String userId) throws Exception {

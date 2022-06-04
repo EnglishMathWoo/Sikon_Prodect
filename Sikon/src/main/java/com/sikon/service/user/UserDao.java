@@ -13,7 +13,7 @@ import com.sikon.service.domain.User;
 public interface UserDao {
 	
 	// INSERT
-	public void addUser(Map map) throws Exception ;
+	public void addUser(User user, Map map) throws Exception ;
 	
 
 	// SELECT ONE

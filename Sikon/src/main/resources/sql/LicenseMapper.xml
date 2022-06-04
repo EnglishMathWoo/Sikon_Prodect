@@ -17,12 +17,13 @@
 
 
 	<!-- 자격증 추가 -->
+	<!-- 
 	<insert  id="addLicense"		parameterType="license" >
 	INSERT
 	INTO license( license_name , license_institution , license_date )
 	VALUES ( #{licenseName} , #{licenseInstitution} , #{licenseDate:DATE})
 	</insert>
-
+ 	-->
 
 
 	<!-- 자격증 수정 -->

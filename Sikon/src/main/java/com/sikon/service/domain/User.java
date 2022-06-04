@@ -104,7 +104,7 @@ public class User {
 		this.quitStatus = quitStatus;
 	}
 
-	///Method 
+
 	public String getUserId() {
 		return userId;
 	}

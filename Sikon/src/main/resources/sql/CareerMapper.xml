@@ -18,12 +18,12 @@
 
 	
 	<!-- 경력사항 추가 -->
-	<insert  id="addCareer"		parameterType="career" >
+<!--  	<insert  id="addCareer"		parameterType="career" >
 	INSERT
 	INTO career( company , career_experience , start_date , end_date )
 	VALUES ( #{company} , #{careerExperience} , #{startDate:DATE} , #{endDate:DATE} )
 	</insert>
-
+-->
 
 
 	<!-- 경력사항 수정 -->

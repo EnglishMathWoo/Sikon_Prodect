@@ -13,7 +13,7 @@ import com.sikon.service.domain.User;
 public interface UserService {
 	
 	// 회원가입
-	public void addUser(Map map) throws Exception;
+	public void addUser(User user, Map map) throws Exception;
 
 	// 내정보확인 / 로그인
 	public User getUser(String userId) throws Exception;
