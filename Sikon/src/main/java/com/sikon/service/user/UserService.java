@@ -1,11 +1,8 @@
 package com.sikon.service.user;
 
-import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.Career;
-import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 
 

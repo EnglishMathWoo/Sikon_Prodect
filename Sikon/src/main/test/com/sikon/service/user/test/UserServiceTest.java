@@ -61,7 +61,7 @@ public class UserServiceTest {
 		user.setUserNickname("testddd");
 		user.setUserImage("11.jpg");
 		user.setAddr("경기도");
-		user.setRole("user");
+	//	user.setRole("user");
 		user.setPhone("01033334444");
 		user.setHoldpoint(1);
 		user.setMentorApply("Y");
@@ -79,19 +79,21 @@ public class UserServiceTest {
 		career2.setEndDate("2017-10-23");
 		career2.setUserId("test@naver.com");
 	
+		license.setLicenseNo(10015);
 		license.setLicenseName("1종보통");
 		license.setLicenseInstitution("강남구청");
 		license.setLicenseDate("2019-10-23");
 		license.setUserId("test@naver.com");
 		
+		license2.setLicenseNo(10016);
 		license2.setLicenseName("4종보통");
 		license2.setLicenseInstitution("중남구청");
 		license2.setLicenseDate("2019-10-23");
 		license2.setUserId("test@naver.com");
 		
 		List list = new ArrayList();
-		list.add(career);
-		list.add(career2);
+//		list.add(career);
+//		list.add(career2);
 		list.add(license);
 		list.add(license2);
 		
@@ -103,16 +105,16 @@ public class UserServiceTest {
 //		map.put("user", user);
 		map.put("list", list);
 //		map.put("list2", list2);
-		
+		System.out.println("map="+map);
 		
 		userService.addUser(user, map);
 
 		
-		user = userService.getUser("test@naver.com");
+//		user = userService.getUser("test@naver.com");
 	
 		
 		//==> console 확인
-		System.out.println(map);
+		System.out.println("map="+map);
 		
 		//==> API 확인
 //		Assert.assertEquals("testUserId", user.getUserId());

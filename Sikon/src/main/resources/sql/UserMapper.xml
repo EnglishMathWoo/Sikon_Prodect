@@ -51,10 +51,10 @@
 
 	<!-- 회원가입 -->
 	<insert  id="addUser"		parameterType="user" >
-		 INSERT ALL
+		 INSERT
 		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , user_phone , holdpoint , mentor_apply , user_regdate , quit_date , quit_status ) 
-		 VALUES	 ( #{user.userId} , #{user.userName} , #{user.password} , #{user.userBirth}, #{user.userNickname}, #{user.userImage}, #{user.addr}, #{user.phone}, 
-						#{user.holdpoint:NUMERIC}, #{user.mentorApply}, SYSDATE , #{user.quitDate:DATE} , #{user.quitStatus} )
+		 VALUES	 ( #{userId} , #{userName} , #{password} , #{userBirth}, #{userNickname}, #{userImage}, #{addr}, #{phone}, 
+						#{holdpoint:NUMERIC}, #{mentorApply}, SYSDATE , #{quitDate:DATE} , #{quitStatus} )
 <!--  	 INTO career( career_no , company , career_experience , start_date , end_date , user_id )
 		 VALUES ( seq_career_career_no.nextval , #{career.company} , #{career.careerExperience} , #{career.startDate:DATE} , #{career.endDate:DATE} , #{career.userId} )
 		 INTO license( license_no , license_name , license_institution , license_date , user_id )
@@ -63,19 +63,23 @@
  -->
 	</insert>
 
-	<insert id="addLicense" 	parameterType="map" >
-		 INSERT
-		 INTO license( license_no , license_name , license_institution , license_date , user_id )
-		 VALUES ( seq_license_license_no.nextval , #{license.licenseName} , #{license.licenseInstitution} , #{license.licenseDate:DATE} , #{license.userId})
-		 
+	<insert id="addLicense" 	parameterType="java.util.List" >
+	 	 INSERT INTO license ( licenseNo , licenseName , licenseInstitution , licenseDate:DATE , userId)
+		 VALUES 
+		 <foreach collection="list" item="item" index="index">
+		 ( #{item.licenseNo} , #{item.licenseName} , #{item.licenseInstitution} , #{item.licenseDate:DATE} , #{item.userId})
+		
+	 </foreach>
 	</insert>
 
+<!-- 
 	<insert id="addCareer" 	parameterType="map" >
 		 INTO career( career_no , company , career_experience , start_date , end_date , user_id )
 		 VALUES ( seq_career_career_no.nextval , #{career.company} , #{career.careerExperience} , #{career.startDate:DATE} , #{career.endDate:DATE} , #{career.userId} )
 
 	</insert>
-
+-->
+ 
 	<!-- 회원상세조회 -->
 	<select  id="getUser"		parameterType="string"	resultMap="userSelectMap">
 		 SELECT *
