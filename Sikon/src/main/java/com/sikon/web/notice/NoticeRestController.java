@@ -116,4 +116,16 @@ public class NoticeRestController {
 		return map;
 	}
 	
+//	@PostMapping(value="/json/insertAlarm", produces = "application/json")
+//	@ResponseBody
+//	public  int insertAlram (String toId , String fromId , String bno , String title , String categori,String bgno) throws Exception{
+//		
+//		System.out.println("¾Ë¶÷insert"+categori+"//"+fromId+toId+bno+categori+title);
+//		int alram = 1;
+//		
+//		service.insertAlram(toId, fromId, bno, title, categori,bgno);
+//		
+//		return alram;
+//	}
+	
 }
