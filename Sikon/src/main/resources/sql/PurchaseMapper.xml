@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PurchaseMapper">
+ 	
+ 	
+	<resultMap id="purchaseSelectMap" type="purchase">
+		<result property="tranNo" 					column="tran_no" 				jdbcType="NUMERIC"/>
+  		<result property="purchaseProd.prodNo" 		column="prod_no" 				jdbcType="NUMERIC"/>
+  		<result property="buyer.userId" 			column="user_id"				jdbcType="VARCHAR"/>
+  		<result property="serialNo" 				column="serial_no" 				jdbcType="VARCHAR"/>
+  		<result property="receiverName"				column="receiver_name" 			jdbcType="VARCHAR"/>
+  		<result property="receiverPhone" 			column="receiver_phone" 		jdbcType="VARCHAR"/>
+  		<result property="purchaseQuantity" 		column="quantity" 				jdbcType="NUMERIC"/>
+  		<result property="divyAddr" 				column="divy_addr" 				jdbcType="VARCHAR"/>
+  		<result property="divyMessage" 				column="divy_message" 			jdbcType="VARCHAR"/>
+  		<result property="receiverEmail" 			column="receiver_email" 		jdbcType="VARCHAR"/>
+  		<result property="usedCoupon" 				column="used_coupon" 			jdbcType="VARCHAR"/>
+  		<result property="usedPoint" 				column="used_point" 			jdbcType="NUMERIC"/>  		 
+  		<result property="earnPoint" 				column="earn_point"				jdbcType="NUMERIC"/>
+  		<result property="orderDate" 				column="orderdate" 				jdbcType="DATE"/>
+  		<result property="PaymentOpt" 				column="payment_opt" 			jdbcType="VARCHAR"/>
+  		<result property="divyStatus" 				column="divy_status" 			jdbcType="VARCHAR"/>
+  		<result property="invoiceNum" 				column="invoice_num" 			jdbcType="VARCHAR"/>
+  		<result property="divyFee" 					column="divy_fee" 				jdbcType="NUMERIC"/>
+		
+	</resultMap>
+	
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addPurchase"		parameterType="purchase" >
+	 	INSERT
+		INTO purchase( tran_no , prod_no, user_id, serial_no, receiver_name, receiver_phone, receiver_email, quantity, divy_addr, divy_message, used_coupon, used_point, earn_point, orderdate, payment_opt, divy_status, invoice_num, divy_fee) 
+		VALUES (seq_purchase_tran_no.NEXTVAL , 
+				#{purchaseProd.prodNo}, 
+				#{buyer.userId}, 
+				#{serialNo}, 
+				#{receiverName}, 
+				#{receiverPhone}, 
+				#{receiverEmail}, 
+				#{purchaseQuantity}, 
+				#{divyAddr}, 
+				#{divyMessage}, 				
+				#{usedCoupon}, 
+				#{usedPoint}, 
+				#{earnPoint}, 
+				SYSDATE, 
+				#{PaymentOpt}, 
+				#{divyStatus}, 
+				#{invoiceNum}, 
+				#{divyFee})
+	 </insert>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getPurchase"	parameterType="int"	resultMap="purchaseSelectMap">
+		SELECT * 
+		FROM purchase
+		WHERE tran_no = #{value}
+	 </select>
+	 
+	 
+	 
+	 <!-- SQL : UPDATE -->
+	 <update	id="updatePurchase"	parameterType="purchase" >
+	   	UPDATE purchase
+	   	<set>
+	   		receiver_name = #{receiverName}, 
+			receiver_phone = #{receiverPhone}, 
+			receiver_email = #{receiverEmail}, 
+			divy_addr = #{divyAddr}, 
+			divy_message =  #{divyMessage}
+	   	</set>
+	   	WHERE tran_no = #{tranNo}
+	 </update>
+	 
+	 
+	 
+	 
+	 <!-- SQL : UPDATE TranCode -->
+	 <update	id="updateDivyStatus"	parameterType="purchase" >
+	   	UPDATE purchase
+	   	<set>
+	   		divy_status = #{divyStatus},
+	   		invoice_num = #{invoiceNum}
+	   	</set>
+	   		WHERE tran_no = #{tranNo}
+	 </update>
+	 
+	 
+	  <!-- SQL : UPDATE Stock -->
+	 <update	id="updateStock"	parameterType="map" >
+	   		UPDATE product
+	   	<set>
+	   		prod_stock = prod_stock - #{purchaseQuantity}
+	   	</set>
+	   		WHERE prod_no= #{prodNo}
+	 </update>	
+	 
+	  <!-- SQL : UPDATE cancelOrder -->
+	 <update	id="cancelOrder"	parameterType="map" >
+	   	UPDATE product
+	   	<set>
+	   		prod_stock = prod_stock + #{purchaseQuantity}
+	   	</set>
+	   		WHERE prod_no= #{prodNo}
+	 </update>	 
+		 
+		 
+		 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getPurchaseList"  parameterType="map"	resultMap="purchaseSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT p.prod_name, t.* 
+											FROM product p, purchase t
+												<where>
+													p.prod_no=t.prod_no(+)
+													<choose>
+														<when test="buyerId == 'admin'">
+															AND t.tran_no IS NOT NULL
+														</when>
+														<otherwise>
+															AND t.user_id=#{buyerId}
+														</otherwise>
+													</choose>
+													</where>
+											ORDER BY t.tran_no ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 	
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT p.prod_name, t.* 
+											FROM product p, purchase t
+												<where>
+													p.prod_no=t.prod_no(+)
+													<choose>
+														<when test="buyerId == 'admin'">
+															AND t.tran_no IS NOT NULL
+														</when>
+														<otherwise>
+															AND t.user_id=#{buyerId}
+														</otherwise>
+													</choose>
+													</where>
+											ORDER BY t.tran_no ) countTable						
+	 </select>
+	 
+	 <!-- ////////////////////////////////////////////////////////////////////////////// -->
+	 
+	 <!-- SQL : SELECT LIST -->
+	<select  id="getSalesList"  parameterType="search"	resultMap="purchaseSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT p.prod_name, t.* 
+										FROM product p, purchase t
+										WHERE p.prod_no=t.prod_no(+) 
+											AND t.tran_no IS NOT NULL 
+										<if test="orderCondition == null">
+											ORDER BY t.tran_no DESC 
+										</if>
+										<if test="orderCondition != null">
+											<choose>
+												<when test="orderCondition == 0">
+													ORDER BY t.tran_no DESC 
+												</when>
+												<when test="orderCondition == 5">
+													AND NVL(t.divy_status,'000')='001' 
+													ORDER BY t.tran_no DESC 
+												</when>
+												<when test="orderCondition == 6">
+													AND NVL(t.divy_status,'000')='002' 
+													ORDER BY t.tran_no DESC 
+												</when>
+												<otherwise>
+													AND NVL(t.divy_status,'000')='003' 
+													 ORDER BY t.tran_no DESC 
+												</otherwise>
+											</choose>
+										</if>
+									) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 	
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount2"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(							SELECT p.prod_name, t.* 
+										FROM product p, purchase t
+										WHERE p.prod_no=t.prod_no(+) 
+											AND t.tran_no IS NOT NULL 
+										<if test="orderCondition == null">
+											ORDER BY t.tran_no DESC 
+										</if>
+										<if test="orderCondition != null">
+											<choose>
+												<when test="orderCondition == 0">
+													ORDER BY t.tran_no DESC 
+												</when>
+												<when test="orderCondition == 5">
+													AND NVL(t.divy_status,'000')='001' 
+													ORDER BY t.tran_no DESC 
+												</when>
+												<when test="orderCondition == 6">
+													AND NVL(t.divy_status,'000')='002' 
+													ORDER BY t.tran_no DESC 
+												</when>
+												<otherwise>
+													AND NVL(t.divy_status,'000')='003' 
+													 ORDER BY t.tran_no DESC 
+												</otherwise>
+											</choose>
+										</if>
+										
+											 ) countTable						
+	 </select>
+	 
+</mapper>

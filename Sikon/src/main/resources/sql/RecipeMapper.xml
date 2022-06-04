@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RecipeMapper">
+ 	
+ 	
+	<resultMap id="recipeSelectMap" type="recipe">
+		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
+		<result property="writer.userNickname" 				column="writer_nickname" 					jdbcType="VARCHAR" />
+		<result property="recipeName"			column="recipe_name" 		jdbcType="VARCHAR" />
+		<result property="recipeDetail" 	column="recipe_detail" 		jdbcType="VARCHAR" />
+		<result property="recipeImg" 			column="recipe_img" 		jdbcType="VARCHAR" />
+		<result property="recipeVideo" 			column="recipe_video" 		jdbcType="VARCHAR" />
+		<result property="recipeDifficulty" 				column="recipe_difficulty" 					jdbcType="VARCHAR" />
+		<result property="recipeTheme"      column="recipe_theme"           jdbcType="VARCHAR"/>
+		<result property="cookingTime"      column="cooking_time"           jdbcType="NUMERIC"/>
+		<result property="recipeOrder"      column="recipe_order"            jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="recipeRegDate" 				column="recipe_regdate" 					jdbcType="DATE" />
+		<result property="reviewNum"      column="review_num"           jdbcType="NUMERIC"/>
+	</resultMap>
+	
+		<resultMap id="ingredientSelectMap" type="ingredient">
+			<result property="ingredientNo" 			column="ingredient_no" 			jdbcType="NUMERIC"/>
+			<result property="ingredientName"			column="ingredient_name" 		jdbcType="VARCHAR" />
+			<result property="ingredientAmount"			column="ingredient_amount" 		jdbcType="VARCHAR" />
+			<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
+	
+		</resultMap>
+		<resultMap id="getselectmap" type="ingredient">
+		</resultMap>
+	
+	<!-- SQL : INSERT -->
+	 <insert 	id="addRecipe"		parameterType="recipe" >
+	 	INSERT
+		INTO recipe VALUES	 (	seq_recipe_no.nextval ,#{writer.userNickname} , #{recipeName}, #{recipeDetail},#{recipeImg},#{recipeVideo},#{recipeDifficulty},#{recipeTheme},#{cookingTime},#{recipeOrder},SYSDATE,0)
+	 	
+	 </insert>
+	 
+	  <insert id="addIngredient" parameterType="java.util.Map">
+	  	insert 
+        into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
+        select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
+        from(
+        <foreach collection="list" item="item" separator="UNION ALL ">
+        SELECT #{item.ingredientName} AS ingredientName , #{item.ingredientAmount} AS ingredientAmount FROM DUAL
+        </foreach>
+        ) A
+	 </insert>
+	 
+	 
+	 <select id="getRecipe" parameterType="int"  resultType="java.util.HashMap">
+		SELECT r.*, i.*
+		FROM recipe r, ingredient i
+		WHERE
+		r.recipe_no=i.recipe_no
+		AND r.recipe_no= #{recipeNo}
+	</select>
+	
+	 
+	 <!-- SQL : UPDATE -->
+	<update id="updateRecipe" parameterType="recipe">
+		update recipe
+		<set>
+		recipe_name 	= #{recipeName} ,
+			recipe_detail	= #{recipeDetail},
+			recipe_img				=	#{recipeImg},
+			recipe_video				=	#{recipeVideo},
+			recipe_difficulty=#{recipeDifficulty},
+			cooking_time=#{cookingTime},
+			recipe_order=#{recipeOrder} ,
+			recipe_theme=#{recipeTheme} 
+		</set>
+		WHERE recipe_no = #{recipeNo}
+	</update>
+	 
+		<update id="updateIngredient" parameterType="java.util.HashMap">
+		update ingredient
+		set
+		ingredient_name=
+		case ingredient_no
+        <foreach collection="list" item="item" separator=" " >
+		when  #{item.ingredientNo} then #{item.ingredientName}
+        </foreach>
+        else ingredient_name end
+        ,
+        ingredient_amount=
+        case ingredient_no
+        <foreach collection="list" item="item" separator=" " >
+        when #{item.ingredientNo} then #{item.ingredientAmount}
+        </foreach>
+        else ingredient_amount end
+        where recipe_no=#{recipeNo}
+	 </update>
+	 
+	 
+	<!-- SQL : SELECT LIST -->
+	<select  id="getRecipeList"  parameterType="search"	resultMap="recipeSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT *
+											FROM recipe
+											<if test="searchCondition != null">
+											<choose>
+													<when test="searchCondition == 0 and searchKeyword !='' ">
+										 				where recipe_NO LIKE '%'||#{searchKeyword}||'%'
+													</when>
+													<when test="searchCondition == 1 and searchKeyword !='' ">
+										 				 where recipe_Name LIKE '%'||#{searchKeyword}||'%'
+													</when>
+													<otherwise>
+													  where recipe_NO LIKE '%'|| ''||'%'
+													</otherwise>
+													</choose>
+											</if>
+											
+													
+											<if test="orderCondition != null">
+											
+											<choose>
+													<when test="orderCondition == 0  ">
+										 				ORDER BY review_num ASC
+													</when>
+													<when test="orderCondition == 1 ">
+										 				ORDER BY recipe_difficulty DESC
+													</when>
+													<when test="orderCondition == 2  ">
+										 				ORDER BY cooking_time DESC
+													</when>
+													<otherwise>
+														order by recipe_no
+													</otherwise>
+													</choose>
+													</if>
+
+
+ ) inner_table
+											
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	
+	<!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT recipe_no 
+						FROM recipe
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			recipe_no LIKE '%'||#{searchKeyword}||'%'
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 		recipe_name LIKE '%'||#{searchKeyword}||'%'
+								</if>
+								
+							</where>
+							
+						</if>  
+						
+						<if test="orderCondition != null">
+											<choose>
+													<when test="orderCondition == 0  ">
+										 				ORDER BY review_num ASC
+													</when>
+													<when test="orderCondition == 1 ">
+										 				ORDER BY recipe_difficulty DESC
+													</when>
+													<when test="orderCondition == 2  ">
+										 				ORDER BY cooking_time DESC
+													</when>
+													<otherwise>
+														order by recipe_no
+													</otherwise>
+													</choose>
+													</if>
+													) countTable						
+	 </select>
+	 
+	 
+	 <!-- SQL : 마이페이지(내가 쓴 레시피) LIST -->
+	 <select  id="getMyRecipeList"  parameterType="search"	resultMap="recipeSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT *
+											FROM recipe
+											WHERE writer_nickname=#{writerNickname}
+											<if test="searchCondition != null">
+											<choose>
+													<when test="searchCondition == 0 and searchKeyword !='' ">
+										 				and recipe_NO LIKE '%'||#{searchKeyword}||'%'
+													</when>
+													<when test="searchCondition == 1 and searchKeyword !='' ">
+										 				 and recipe_Name LIKE '%'||#{searchKeyword}||'%'
+													</when>
+													<otherwise>
+													  and recipe_NO LIKE '%'|| ''||'%'
+													</otherwise>
+													</choose>
+											</if>
+											
+													
+											<if test="orderCondition != null">
+											
+											<choose>
+													<when test="orderCondition == 0  ">
+										 				ORDER BY review_num ASC
+													</when>
+													<when test="orderCondition == 1 ">
+										 				ORDER BY recipe_difficulty DESC
+													</when>
+													<when test="orderCondition == 2  ">
+										 				ORDER BY cooking_time DESC
+													</when>
+													<otherwise>
+														order by recipe_no
+													</otherwise>
+													</choose>
+													</if>
+
+
+ )  inner_table
+											
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+	 </select>
+	 
+	 <!-- SQL : 마이페이지(내가 쓴 레시피) ROW Count -->
+	 <select  id="getTotalMyCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT recipe_no 
+						FROM recipe
+						WHERE writer_nickname=#{writerNickname}
+						<if test="searchCondition != null">
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			and recipe_no LIKE '%'||#{searchKeyword}||'%'
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 		and recipe_name LIKE '%'||#{searchKeyword}||'%'
+								</if>
+								
+							
+						</if>  
+						
+						<if test="orderCondition != null">
+											<choose>
+													<when test="orderCondition == 0  ">
+										 				ORDER BY review_num ASC
+													</when>
+													<when test="orderCondition == 1 ">
+										 				ORDER BY recipe_difficulty DESC
+													</when>
+													<when test="orderCondition == 2  ">
+										 				ORDER BY cooking_time DESC
+													</when>
+													<otherwise>
+														order by recipe_no
+													</otherwise>
+													</choose>
+													</if>
+													) countTable						
+	 </select>
+	 
+	 <select  id="bestRecipeList" 	resultMap="recipeSelectMap">
+	  	SELECT *
+			FROM recipe
+		ORDER BY review_num DESC
+	 </select>
+</mapper>

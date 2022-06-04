@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration
+ 		 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ 		"http://mybatis.org/dtd/mybatis-3-config.dtd">
+  						
+<!--	mybatis-config.xml :: MyBatis Framework  MetaData -->
+<configuration>
+
+	<!-- 기타 설정정보 :: [MyBatis_Home]/mybatis-3.2.1.pdf 참조 -->
+	<settings>
+		<setting name="callSettersOnNulls" value="false"/>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>	
+	
+	<!-- FQCN(Full Qualified Class Name) Alias(별칭관리) -->
+	<typeAliases>
+		<typeAlias alias="user" type="com.sikon.service.domain.User" />
+		<typeAlias alias="product" type="com.sikon.service.domain.Product" />
+		<typeAlias alias="purchase" type="com.sikon.service.domain.Purchase" />
+		<typeAlias alias="coupon" type="com.sikon.service.domain.Coupon" />
+		<typeAlias alias="notice" type="com.sikon.service.domain.Notice" />
+		<typeAlias alias="search" type="com.sikon.common.Search" />
+		<typeAlias alias="review" type="com.sikon.service.domain.Review" />
+		<typeAlias alias="recipe" type="com.sikon.service.domain.Recipe" />
+		<typeAlias alias="ingredient" type="com.sikon.service.domain.Ingredient" />
+		<typeAlias alias="bookmark" type="com.sikon.service.domain.Bookmark" />
+		<typeAlias alias="apply" type="com.sikon.service.domain.Apply" />
+		<typeAlias alias="cook" type="com.sikon.service.domain.Cook" />
+		<typeAlias alias="career" type="com.sikon.service.domain.Career" />
+		<typeAlias alias="license" type="com.sikon.service.domain.License" />
+		<typeAlias alias="wish" type="com.sikon.service.domain.Wish" />
+		<typeAlias alias="heart" type="com.sikon.service.domain.Heart" />
+		<typeAlias alias="cart" type="com.sikon.service.domain.Cart" />
+	</typeAliases>
+	
+	 <!-- SQL Definition :: file include -->
+	<mappers>
+		<mapper resource="sql/UserMapper.xml"/>
+		<mapper resource="sql/CareerMapper.xml"/>
+		<mapper resource="sql/LicenseMapper.xml"/>
+		<mapper resource="sql/ProductMapper.xml"/>
+		<mapper resource="sql/PurchaseMapper.xml"/>
+		<mapper resource="sql/CouponMapper.xml"/>
+		<mapper resource="sql/CouponHolderMapper.xml"/>
+		<mapper resource="sql/NoticeMapper.xml"/>
+		<mapper resource="sql/ReviewMapper.xml"/>
+		<mapper resource="sql/RecipeMapper.xml"/>
+		<mapper resource="sql/BookmarkMapper.xml"/>
+		<mapper resource="sql/IngredientMapper.xml"/>
+		<mapper resource="sql/HeartMapper.xml"/>
+		<mapper resource="sql/WishMapper.xml"/>
+		<mapper resource="sql/CookMapper.xml"/>
+		<mapper resource="sql/ApplyMapper.xml"/>
+		<mapper resource="sql/CartMapper.xml"/>
+	</mappers>
+
+</configuration>

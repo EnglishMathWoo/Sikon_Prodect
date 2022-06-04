@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">
+
+
+<resultMap id="userSelectMap" type="user">
+		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR"/>
+		<result property="userName"	column="user_name" 		jdbcType="VARCHAR" />
+		<result property="password" 	column="password" 		jdbcType="VARCHAR" />
+		<result property="userBirth" 	column="user_birth" 		jdbcType="VARCHAR" />
+		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
+		<result property="userImage" 	column="user_image" 		jdbcType="VARCHAR" />
+		<result property="addr" 	column="user_addr" 		jdbcType="VARCHAR" />
+		<result property="role" 	column="role" 			jdbcType="VARCHAR" />
+		<result property="phone" 	column="user_phone" 		jdbcType="VARCHAR" />
+		<result property="holdpoint" 	column="holdpoint" 		jdbcType="NUMERIC" />
+		<result property="mentorApply" 	column="mentor_apply" 		jdbcType="VARCHAR"  />
+		<result property="regDate" 	column="user_regdate" 		jdbcType="DATE" />
+		<result property="quitDate" 	column="quit_date" 		jdbcType="DATE" />
+		<result property="quitStatus" 	column="quit_status" 		jdbcType="VARCHAR"  />
+</resultMap>
+
+
+<resultMap id="careerSelectMap" type="career">
+		<result property="careerNo" 	column="career_no" 		jdbcType="NUMERIC"/>
+		<result property="company"	column="company" 		jdbcType="VARCHAR" />
+		<result property="careerExperience" 	 column="career_experience" 		jdbcType="VARCHAR" />
+		<result property="startDate"	column="start_date" 		jdbcType="DATE" />
+		<result property="endDate"	column="end_date" 		jdbcType="DATE" />
+		<result property="userId"	column="user_id" 		jdbcType="VARCHAR" />
+</resultMap>
+
+
+<resultMap id="licenseSelectMap" type="license">
+		<result property="licenseNo" 	column="license_no" 		jdbcType="NUMERIC"/>
+		<result property="licenseName"	column="license_name" 		jdbcType="VARCHAR" />
+		<result property="licenseInstitution" 	 column="license_institution" 		jdbcType="VARCHAR" />
+		<result property="licenseDate"	column="license_date" 		jdbcType="DATE" />
+		<result property="userId"	column="user_id" 		jdbcType="VARCHAR" />
+</resultMap>
+
+
+
+
+
+
+
+	<!-- 회원가입 -->
+	<insert  id="addUser"		parameterType="user" >
+		 INSERT
+		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , role , user_phone , holdpoint , mentor_apply , user_regdate , quit_date , quit_status ) 
+		 VALUES	 ( #{userId} , #{userName} , #{password} , #{userBirth}, #{userNickname}, #{userImage}, #{addr}, 'user', #{phone}, 
+						#{holdpoint:NUMERIC}, #{mentorApply}, SYSDATE , #{quitDate:DATE} , #{quitStatus} )
+	<!-- INTO career( career_no , company , career_experience , start_date , end_date )
+		 VALUES ( seq_career_career_no.nextval , #{company} , #{careerExperience} , #{startDate:DATE} , #{endDate:DATE} )
+		 INTO license( license_no , license_name , license_institution , license_date )
+		 VALUES ( seq_license_license_no.nextval , #{licenseName} , #{licenseInstitution} , #{licenseDate:DATE})
+  	-->	
+	</insert>
+
+
+
+
+
+	<!-- 회원상세조회 -->
+	<select  id="getUser"		parameterType="string"	resultMap="userSelectMap">
+		 SELECT
+		 user_id , user_name ,password, user_nickname , user_phone , user_birth ,  user_addr , user_image , role , mentor_apply , quit_status , quit_date , user_regdate 		
+		 FROM users 
+		 WHERE user_id = #{value}
+        </select>
+
+
+	<!-- ID찾기 -->
+	<select  id="findUserId"	parameterType="string"	resultMap="userSelectMap">
+		SELECT user_id
+		FROM users
+		WHERE user_nickname = #{userNickname}
+		     AND user_birth = #{userBirth}
+		     AND user_phone = #{phone}
+	</select>
+
+
+
+
+
+
+	<!-- 회원수정 -->
+	<update	id="updateUser"	parameterType="user" >
+	   	UPDATE users
+	   	<set>
+			password	= #{password} , 
+	   		user_name 	= #{userName} ,
+			user_nickname	= #{userNickname} ,
+			user_birth	= #{userBirth} ,
+			user_addr 	= #{addr} ,
+			user_phone	= #{phone} ,
+			mentor_apply	= #{mentorApply}
+
+
+	   	</set>
+	   	WHERE user_id = #{userId}
+	</update>
+
+
+
+ 
+		
+
+
+
+	<!-- 회원목록 -->
+	<select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT user_id , user_name , user_nickname
+											FROM users
+											<!-- <if test="searchCondition != null">
+												 <where>
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				user_id = #{searchKeyword}
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				user_name = #{searchKeyword}
+													</if>
+												</where>
+											</if>
+											-->
+											ORDER BY user_id ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	
+
+
+	<!-- 회원탈퇴 -->
+	<update id="deleteUser" parameterType="user" >
+		UPDATE users
+		<set>
+			quit_status	= #{quitStatus} ,
+			quit_date	= SYSDATE ,
+
+		</set>
+		WHERE user_id = #{userId}
+	</update>
+</mapper>
