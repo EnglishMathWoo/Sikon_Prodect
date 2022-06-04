@@ -50,7 +50,7 @@
 
 
 	<!-- 회원가입 -->
-	<insert  id="addUser"		parameterType="java.util.map" >
+	<insert  id="addUser"		parameterType="map" >
 		 INSERT ALL
 		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , user_phone , holdpoint , mentor_apply , user_regdate , quit_date , quit_status ) 
 		 VALUES	 ( #{user.userId} , #{user.userName} , #{user.password} , #{user.userBirth}, #{user.userNickname}, #{user.userImage}, #{user.addr}, #{user.phone}, 
