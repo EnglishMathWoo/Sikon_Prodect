@@ -27,8 +27,9 @@
 
 
 	<!-- 경력사항 수정 -->
-	<update	id="updateCareer" 	parameterType="career" >
-		UPDATE license
+	<update	id="updateCareer" 	parameterType="java.util.List" >
+		<foreach collection="list" item="item" index="index">
+		UPDATE career
 		<set>
 			company			= #{company} ,
 			career_experience	= #{careerExperience} ,
@@ -36,6 +37,7 @@
 			end_date		= #{endDate:DATE}
 		</set>
 		WHERE career_no = #{careerNo}
+		</foreach>
 	</update>
 	
 	

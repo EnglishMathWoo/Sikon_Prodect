@@ -34,16 +34,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	///Method
-	public void addUser(User user) throws Exception {
-		userDao.addUser(user);
+	public void addUser(Map map) throws Exception {
+		System.out.println("map="+map);
+		userDao.addUser(map);
 	}
-	public void addCareer(Career career) throws Exception {
-		userDao.addCareer(career);
-	}
-	public void addLicense(License license) throws Exception {
-		userDao.addLicense(license);
-	}
-	
+
 	public User getUser(String userId) throws Exception {
 		return userDao.getUser(userId);
 	}
@@ -52,8 +47,11 @@ public class UserServiceImpl implements UserService{
 		return userDao.findUserId(userNickname);
 	}
 
-	public void updateUser(User user) throws Exception {
-		userDao.updateUser(user);
+	public void updateUser(User user, Map license, Map career) throws Exception {
+		System.out.println("user="+user);
+		System.out.println("license="+license);
+		System.out.println("career="+career);
+		userDao.updateUser(user, license, career);
 	}
 	
 	public Map<String , Object > getUserList(Search search) throws Exception {

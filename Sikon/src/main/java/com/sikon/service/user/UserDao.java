@@ -1,6 +1,7 @@
 package com.sikon.service.user;
 
 import java.util.List;
+import java.util.Map;
 
 import com.sikon.common.Search;
 import com.sikon.service.domain.Career;
@@ -12,11 +13,7 @@ import com.sikon.service.domain.User;
 public interface UserDao {
 	
 	// INSERT
-	public void addUser(User user) throws Exception ;
-	
-	public void addCareer(Career career) throws Exception ;
-	
-	public void addLicense(License license) throws Exception ;
+	public void addUser(Map map) throws Exception ;
 	
 
 	// SELECT ONE
@@ -26,7 +23,7 @@ public interface UserDao {
 	public User findUserId(String userNickname) throws Exception ;
 
 	// 회원정보수정
-	public void updateUser(User user) throws Exception ;
+	public void updateUser(User user, Map license, Map career) throws Exception ;
 	
 	// 회원목록
 	public List<User> getUserList(Search search) throws Exception ;

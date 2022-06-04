@@ -69,22 +69,22 @@ public class UserRestController {
 	}
 	
 	@RequestMapping( value= "json/addUser", method=RequestMethod.POST )
-	public User addUser( @RequestBody User user ) throws Exception {
+	public User addUser( @RequestBody Map map ) throws Exception {
 
 		System.out.println("/user/json/addUser : POST");
 		//Business Logic
-		userService.addUser(user);
-		
+		userService.addUser(map);
+		User user = new User();
 		return userService.getUser(user.getUserId());
 	}
 	
 	@RequestMapping( value="json/updateUser", method=RequestMethod.POST )
-	public User updateUser( @RequestBody User user ) throws Exception{
+	public User updateUser( @RequestBody User user, Map license, Map career ) throws Exception{
 
 		System.out.println("/user/json/updateUser : POST");
 		
 		//Business Logic
-		userService.updateUser(user);
+		userService.updateUser(user, license, career);
 		
 		return userService.getUser(user.getUserId());
 	}
