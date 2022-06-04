@@ -83,7 +83,7 @@ div.form-group{
 			$("form")[0].reset();
 		})
 	})
-
+	// 亜切たたたた
 	//function resetData(){
 	//	document.detailForm.reset();
 	//}
