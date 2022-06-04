@@ -37,11 +37,21 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-        }
-    </style>
+		body{
+			font-family: 'Nanum Myeongjo', serif;
+		}
+		body>div.container {
+			border: 3px solid #D6CDB7;
+			margin-top: 100px;
+			font-family: 'Nanum Myeongjo', serif;
+		}
+		h1.text-center {
+			font-family: 'Nanum Myeongjo', serif;
+		}
+			div.form-group{
+			font-family: 'Nanum Myeongjo', serif;
+		}
+	</style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">		
@@ -101,18 +111,12 @@
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Lego Land</a>
-   		</div>
-   	</div>
-   	<!-- ToolBar End /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
 
 	<!--  拳搁备己 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center">捻 迄 积 己</h1>
+		<h1 class="text-center"  style="color:#bc8f8f">捻 迄 积 己</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" name="detailForm"  enctype="multipart/form-data" >
