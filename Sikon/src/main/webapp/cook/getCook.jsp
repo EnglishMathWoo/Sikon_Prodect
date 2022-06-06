@@ -218,6 +218,7 @@ div.image{
 		  </div>
 		   <div class="row">
 		 	¿Í
+		 	${cook.cookContent}
 		 
 		 	
 		 	</div>
