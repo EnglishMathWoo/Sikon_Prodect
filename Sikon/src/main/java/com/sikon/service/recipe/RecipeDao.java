@@ -14,9 +14,9 @@ public interface RecipeDao {
 	public void addRecipe(Recipe recipe,Map ingredient) throws Exception;
 
 	//SELECT ONE
-	public List getRecipe(int prodNo) throws Exception;
+	public Recipe getRecipe(int recipeNo) throws Exception;
 
-//	public Ingredient getIngredient(int recipeNo) throws Exception;
+	public List getIngredient(int recipeNo) throws Exception;
 
 	//SELECT LIST
 	public List<Recipe> getRecipeList(Search search) throws Exception;

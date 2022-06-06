@@ -130,8 +130,15 @@ body>div.container {
 		
 
 
+		$(function() {
+			var point = $( "#price" ).val();
+			console.log("point: "+point);
+			
+			var earnpoint = Math.round(point*0.05);
+			console.log("earnpoint: "+earnpoint);
+			$( "#earnPoint" ).val(earnpoint);
+		});	
 		
-	
 		 
 	</script>		
 <!-- 주소록 --> 
@@ -298,8 +305,9 @@ function payment(data) {
 		  
 		   <div class="form-group">
 		  <label for="purchaseQuantity" class="col-sm-offset-1 col-sm-3 control-label">적립 포인트</label>
-		    <div class="col-sm-4">
-		      + ${product.prodDisPrice * 0.05 } P
+		    <div class="col-sm-4">+
+		      <input type="text" id="earnPoint" name="earnPoint" value=""  style="border:none;width:50px">P
+		      <input type="hidden" id="price" value="${product.prodDisPrice}">
 		    </div>
 		  </div>
 		 
@@ -336,7 +344,10 @@ function payment(data) {
 		    </div>
 		  </div>
 		  
-		  <c:if test="${param.menu }">
+		  <c:if test="${!empty user}">
+		      <input type="hidden" class="form-control" id="receiverEmail" name="receiverEmail" value="${user.userId}">
+		  </c:if>
+		  <c:if test="${empty user}">
 		  <div class="form-group">
 		    <label for="receiverEmail" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">

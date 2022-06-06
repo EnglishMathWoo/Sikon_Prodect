@@ -39,15 +39,15 @@ public class RecipeServiceImpl implements RecipeService {
 		recipeDao.addRecipe(recipe,ingredient);
 	}
 
-	public List getRecipe(int recipeNo) throws Exception {
+	public Recipe getRecipe(int recipeNo) throws Exception {
 		System.out.println("recipeNo=" + recipeNo);
 		return recipeDao.getRecipe(recipeNo);
 	}
 	
-//	public Ingredient getIngredient(int recipeNo) throws Exception {
-//		System.out.println("recipeNo=" + recipeNo);
-//		return recipeDao.getIngredient(recipeNo);
-//	}
+	public List getIngredient(int recipeNo) throws Exception {
+		System.out.println("recipeNo=" + recipeNo);
+		return recipeDao.getIngredient(recipeNo);
+	}
 
 	
 	public Map<String, Object> getRecipeList(Search search) throws Exception {

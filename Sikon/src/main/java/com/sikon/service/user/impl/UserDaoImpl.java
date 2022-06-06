@@ -1,6 +1,5 @@
 package com.sikon.service.user.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.Career;
-import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserDao;
 
@@ -34,8 +31,11 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	///Method
-	public void addUser(Map map) throws Exception {
-		sqlSession.insert("UserMapper.addUser", map);
+	public void addUser(User user, Map map) throws Exception {
+		System.out.println("map="+map);
+		sqlSession.insert("UserMapper.addUser", user);
+		sqlSession.insert("UserMapper.addLicense", map.get("list"));
+	//	sqlSession.insert("UserMapper.addCareer", map);
 	}
 	
 	public User getUser(String userId) throws Exception {
