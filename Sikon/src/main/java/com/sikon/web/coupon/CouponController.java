@@ -77,6 +77,7 @@ public class CouponController {
 		model.addAttribute("couponList", couponMap.get("list"));
 		model.addAttribute("issueList", issueMap.get("list"));
 		model.addAttribute("couponPage", couponPage);
+		System.out.println(couponPage);
 		model.addAttribute("issuePage", issuePage);
 		model.addAttribute("search", search);
 		
@@ -198,14 +199,16 @@ public class CouponController {
 	}
 	
 	@RequestMapping( value="/updateIssueStatus", method=RequestMethod.GET )
-	public String updateIssueStatus(@RequestParam("issueNo") int issueNo) throws Exception{
+	public String updateIssueStatus(@RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList) throws Exception{
 
 		System.out.println("/coupon/updateIssueStatus : GET");
-	
+		
 		//Business Logic
-		Coupon coupon = couponService.getIssuedCoupon(issueNo);
-		coupon.setIssueStatus("회수");
-		couponService.updateIssueStatus(coupon);
+		for(int i=0; i<checkCount; i++) {
+			Coupon coupon = couponService.getIssuedCoupon(checkList[i]);
+			coupon.setIssueStatus("회수");
+			couponService.updateIssueStatus(coupon);
+		}		
 		
 		return "forward:/coupon/manageCoupon";
 	}
