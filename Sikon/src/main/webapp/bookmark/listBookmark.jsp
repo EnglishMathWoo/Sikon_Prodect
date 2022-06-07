@@ -195,7 +195,27 @@ p {
 					console.log($(this).attr("value"));
 					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
 					});
+					
+					$(".submit").on("click" , function() {
+						
+						
+						var checkCount = $("input[name='ckBookmark']:checked").length;
+
+					    var array = new Array();
+					    
+						$("input[name='ckBookmark']:checked").each(function() {
+							array.push($(this).attr('id'));
+					    });
+						
+						if(checkCount != 0) {
+							alert(checkCount+"개의 책갈피를 삭제하시겠습니까?")
+
+						self.location = "/bookmark/deleteBookmark?bookmarkList="+array;
+						}
+						
+					});
 		 });
+		 
 					
 </script>
 			 </head>
@@ -219,6 +239,8 @@ p {
 		      <h3 class="font-x2 nospace" align="center"><br> 책갈피 조회 </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
+		    		    <button type="button" class="submit">선택삭제</button>
+		    
 		  
 		    
 		    <br/><hr/><br/>
@@ -234,7 +256,9 @@ p {
   <br/> <br/>
   
     <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" value="${list.recipe.recipeNo }" href="#"><img src="/resources/images/uploadFiles/${list.recipe.recipeImg }" width="320" height="300"></a>
+      <input type="checkbox" name="ckBookmark" id="${list.bookmarkNo }" >
+      <article class="one_third first">
+      <a class="imgover" value="${list.recipe.recipeNo }" href="#"><img src="/resources/images/uploadFiles/${list.recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">
           <h4 class="heading" >${list.recipe.recipeName }</h4>
            <h6 >${list.recipe.recipeDetail }</h6>
@@ -247,9 +271,10 @@ p {
         </div>
       </article>
      
+   <!-- ################################################################################################ -->
     </div>
-    <!-- ################################################################################################ -->
   </div>
+  
   </c:forEach>
   
      

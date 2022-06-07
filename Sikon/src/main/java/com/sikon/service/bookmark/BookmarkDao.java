@@ -12,7 +12,8 @@ public interface BookmarkDao {
 	public void addBookmark(Bookmark bookmark) throws Exception;
 	
 	//SELECT LIST
-	public List<Bookmark> getBookmarkList(Search search,String userId) throws Exception;
+//	public List<Bookmark> getBookmarkList(Search search,String userId) throws Exception;
+	public List getBookmarkList(Search search,String userId) throws Exception;
 
 	//DELETE
 	public void deleteBookmark(int bookmarkNo) throws Exception;
