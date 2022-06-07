@@ -1,5 +1,6 @@
 package com.sikon.service.bookmark;
 
+import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
@@ -16,5 +17,6 @@ public interface BookmarkService {
 
 	//책갈피 삭제
 	public void deleteBookmark(int bookmarkNo) throws Exception;
+//	public void delCheckBookmark(List<Integer> bm) throws Exception;
 
 }

@@ -53,6 +53,7 @@
 <style>
 
 * {
+
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -86,18 +87,6 @@ a:hover {
 	color: #444
 }
 
-.search {
-	background-color: #fdfbfc
-}
-
-.search input {
-	width: 100px;
-	border: none;
-	outline: none;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	background-color: #fdfbfc
-}
 
 div.btn, button.btn {
 	background-color: #ac1f32;
@@ -128,7 +117,6 @@ nav {
 .wrapper {
 	width: 85%;
 	margin: 20px auto;
-	box-shadow: 1px 1px 30px 10px rgba(250, 250, 250, 0.8)
 }
 
 .h3 {
@@ -139,7 +127,8 @@ nav {
 label {
 	display: block;
 	font-size: 0.8rem;
-	font-weight: 700
+	font-weight: 700;
+	 text-align: left;
 }
 
 input {
@@ -151,6 +140,7 @@ input {
 }
 
 .wrapper {
+
 	clear: both
 }
 
@@ -285,73 +275,77 @@ input {
 
 </style>
 
-<!-- drag and drop css-->
+
 <style>
-
-:root {
-  --bgColor: #3a3a3a;
-  --hoverBg: #616161;
-  --text: #bbb;
+.file {
+  padding: 0px 0;
 }
 
-.container {
-  width: clamp(0px, 100%, 1170px);
-  margin: 32px auto;
+
+.box {
+  position: relative;
+  background: #ffffff;
+  width: 100%;
+}
+
+.box-header {
+  color: #444;
+  display: block;
+  padding: 10px;
+  position: relative;
+  border-bottom: 1px solid #f4f4f4;
+  margin-bottom: 10px;
+}
+
+.box-tools {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+.dropzone-wrapper {
+  border: 2px dashed #91b0b3;
+  color: #92b0b3;
+  position: relative;
+  height: 150px;
+  width: 800px;
+    margin-left: 200px;
+}
+
+.dropzone-desc {
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
   text-align: center;
-}
-
-.label {
-  width: 100%;
-  height: 100%;
-  margin: 0px auto;
-  cursor: pointer;
-  background-color: var(--bgColor);
-}
-
-.inner {
-  width: 100%;
-  height: 128px;
-  margin: 64px auto;
-  border-radius: 8px;
+  width: 40%;
+  top: 50px;
   font-size: 16px;
-  line-height: 128px;
-  background-color: #F7F7F7;
-  color: var(--text);
+}
+
+.dropzone,
+.dropzone:focus {
+  position: absolute;
+  outline: none !important;
+  width: 100%;
+  height: 150px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.dropzone-wrapper:hover,
+.dropzone-wrapper.dragover {
+  background: #ecf0f5;
+}
+
+.preview-zone {
   text-align: center;
 }
 
-@media (any-hover: hover){
-  .inner:hover{
-    background-color: var(--hoverBg);
-  }
-}
-
-.label--hover{
-  background-color: var(--hoverBg);
-}
-
-.preview-title{
-  font-size: 32px;
-  margin-bottom: 8px;
-}
-
-.preview {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  padding: 16px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  align-items: center;
-  background-color: #F7F7F7;
-}
-
-.embed-img{
-  width: 100%;
-  height: 128px;
-  object-position: center;
-  object-fit: cover;
-  border-radius: 8px;
+.preview-zone .box {
+  box-shadow: none;
+  border-radius: 0;
+  margin-bottom: 0;
 }
 
 </style>
@@ -379,6 +373,7 @@ input {
 		//$("form").attr("method", "POST").attr("action", "/recipe/addRecipe").submit();
 	}
 </script>
+
 <script>
 	$(document)
 			.ready(
@@ -457,113 +452,63 @@ input {
 		$('#dynamicTable tbody tr:last').remove();
 	}
 </script>
+
 <!-- drag and drop -->
 <script>
-var input = document.getElementById("input");
-var initLabel = document.getElementById("label");
+function readFile(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
 
-input.addEventListener("change", (event) => {
-  const files = changeEvent(event);
-  handleUpdate(files);
-});
+	    reader.onload = function(e) {
+	      var htmlPreview =
+	        '<img width="200" src="' + e.target.result + '" />' +
+	        '<p>' + input.files[0].name + '</p>';
+	      var wrapperZone = $(input).parent();
+	      var previewZone = $(input).parent().parent().find('.preview-zone');
+	      var boxZone = $(input).parent().parent().find('.preview-zone').find('.box').find('.box-body');
 
-initLabel.addEventListener("mouseover", (event) => {
-  event.preventDefault();
-  const label = document.getElementById("label");
-  label?.classList.add("label--hover");
-});
+	      wrapperZone.removeClass('dragover');
+	      previewZone.removeClass('hidden');
+	      boxZone.empty();
+	      boxZone.append(htmlPreview);
+	    };
 
-initLabel.addEventListener("mouseout", (event) => {
-  event.preventDefault();
-  const label = document.getElementById("label");
-  label?.classList.remove("label--hover");
-});
+	    reader.readAsDataURL(input.files[0]);
+	  }
+	}
 
-document.addEventListener("dragenter", (event) => {
-  event.preventDefault();
-  console.log("dragenter");
-  if (event.target.className === "inner") {
-    event.target.style.background = "#616161";
-  }
-});
+	function reset(e) {
+	  e.wrap('<form>').closest('form').get(0).reset();
+	  e.unwrap();
+	}
 
-document.addEventListener("dragover", (event) => {
-  console.log("dragover");
-  event.preventDefault();
-});
+	$(".dropzone").change(function() {
+	  readFile(this);
+	  alert('고');
+	});
 
-document.addEventListener("dragleave", (event) => {
-  event.preventDefault();
-  console.log("dragleave");
-  if (event.target.className === "inner") {
-    event.target.style.background = "#3a3a3a";
-  }
-});
+	$('.dropzone-wrapper').on('dragover', function(e) {
+	  e.preventDefault();
+	  e.stopPropagation();
+	  $(this).addClass('dragover');
+	});
 
-document.addEventListener("drop", (event) => {
-  event.preventDefault();
-  console.log("drop");
-  if (event.target.className === "inner") {
-    const files = event.dataTransfer?.files;
-    event.target.style.background = "#3a3a3a";
-    handleUpdate([...files]);
-  }
-});
+	$('.dropzone-wrapper').on('dragleave', function(e) {
+	  e.preventDefault();
+	  e.stopPropagation();
+	  $(this).removeClass('dragover');
+	});
 
-function changeEvent(event){
-  const { target } = event;
-  return [...target.files];
-};
+	$('.remove-preview').on('click', function() {
+	  var boxZone = $(this).parents('.preview-zone').find('.box-body');
+	  var previewZone = $(this).parents('.preview-zone');
+	  var dropzone = $(this).parents('.form-group').find('.dropzone');
+	  boxZone.empty();
+	  previewZone.addClass('hidden');
+	  reset(dropzone);
+	});
 
-function handleUpdate(fileList){
-  const preview = document.getElementById("preview");
 
-  fileList.forEach((file) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", (event) => {
-      const img = el("img", {
-        className: "embed-img",
-        src: event.target?.result,
-      });
-      const imgContainer = el("div", { className: "container-img" }, img);
-      preview.append(imgContainer);
-    });
-    reader.readAsDataURL(file);
-  });
-};
-
-function el(nodeName, attributes, ...children) {
-  const node =
-    nodeName === "fragment"
-      ? document.createDocumentFragment()
-      : document.createElement(nodeName);
-
-  Object.entries(attributes).forEach(([key, value]) => {
-    if (key === "events") {
-      Object.entries(value).forEach(([type, listener]) => {
-        node.addEventListener(type, listener);
-      });
-    } else if (key in node) {
-      try {
-        node[key] = value;
-      } catch (err) {
-        node.setAttribute(key, value);
-      }
-    } else {
-      node.setAttribute(key, value);
-    }
-  });
-
-  children.forEach((childNode) => {
-    if (typeof childNode === "string") {
-      node.appendChild(document.createTextNode(childNode));
-    } else {
-      node.appendChild(childNode);
-    }
-  });
-
-  return node;
-}
 </script>
 
 </head>
@@ -579,39 +524,81 @@ function el(nodeName, attributes, ...children) {
 		<div
 			class="wrapper d-flex justify-content-center flex-column px-md-5 px-1">
 			<div class="h3 text-center font-weight-bold">레시피등록</div><br/>
-			
+			<!--  
       <div class="inner" id="inner">드래그하거나 클릭해서 업로드하세요</div>
     <input id="input" class="input" accept="image/*" type="file" required="true" multiple="true" hidden="true">
     <p class="preview-title">preview</p>
     <div class="preview" id="preview"></div>
 			</div>
-			
-			
-			
-			
-			
-			
-			
+			-->
+
+<section>
+  <form action="" method="POST" enctype="multipart/form-data">
+    <div class="file">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="control-label">Upload File</label>
+            <div class="preview-zone hidden">
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                  <div><b>Preview</b></div>
+                  <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-danger btn-xs remove-preview">
+                      <i class="fa fa-times"></i> Reset This Form
+                    </button>
+                  </div>
+                </div>
+                <div class="box-body"></div>
+              </div>
+            </div>
+            <div class="dropzone-wrapper">
+              <div class="dropzone-desc">
+                <i class="glyphicon glyphicon-download-alt"></i>
+                <p>Choose an image file or drag it here.</p>
+              </div>
+              <input type="file" name="img_logo" class="dropzone">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-primary pull-right">Upload</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+</div>
 			<div class="row my-4">
 				<div class="col-md-6">
 					<label>레시피명</label> <input type="text"
-						placeholder="Jhon Smith">
+					>
 				</div>
+				
 				<div class="col-md-6 pt-md-0 pt-4">
-					<label>레시피간략설명</label> <input type="text" placeholder="Manager">
+					<label>레시피간략설명</label> <input type="text" >
 				</div>
 			</div>
-			<div class="row my-md-4 my-2">
+			
+			<br/>
+			
+			<div class="row my-4">
 				<div class="col-md-6">
-					<label>소요시간</label> <input type="email"
-						placeholder="jhon19@mail.com">
+					<label>소요시간</label> <input type="number" placeholder="5분 단위로 입력하세요." >
 				</div>
 				<div class="col-md-6 pt-md-0 pt-4">
 					<label>영상</label> <input type="file"
-						placeholder="+7 483 779 90 60">
+						>
 				</div>
 			</div>
-			<div class="row my-md-4 my-2">
+			
+			<br/>
+			
+			<div class="row my-4">
 				<div class="col-md-6 pt-md-0 pt-4">
 					<label>테마</label> <select name="country" id="country">
 						<option value="ind">한식</option>
@@ -629,37 +616,18 @@ function el(nodeName, attributes, ...children) {
 					</select>
 				</div>
 			</div>
-			<label class="mt-md-0 mt-2">Company Size</label>
-			<div
-				class="d-lg-flex justify-content-between align-items-center pb-4">
-				<div class="size">
-					<label class="option"> <input type="radio" name="radio">&lt;
-						250 <span class="checkmark"></span>
-					</label>
-				</div>
-				<div class="size">
-					<label class="option"> <input type="radio" name="radio">251
-						- 1000 <span class="checkmark"></span>
-					</label>
-				</div>
-				<div class="size">
-					<label class="option"> <input type="radio" name="radio">1001
-						- 5000 <span class="checkmark"></span>
-					</label>
-				</div>
-				<div class="size">
-					<label class="option"> <input type="radio" name="radio">5001
-						- 10,000 <span class="checkmark"></span>
-					</label>
-				</div>
-				<div class="size">
-					<label class="option"> <input type="radio" name="radio">&gt;
-						10,000 <span class="checkmark"></span>
-					</label>
-				</div>
-			</div>
+			
+			<br/>
+			
+		
+			
+			
+			
+			
+			
 			<div class="d-flex justify-content-end">
-				<button class="btn">Request a demo</button>
+			<br/><br/>
+				<button class="btn">등록하기</button>
 			</div>
 		</div>
 	<!--  화면구성 div Start /////////////////////////////////////-->
