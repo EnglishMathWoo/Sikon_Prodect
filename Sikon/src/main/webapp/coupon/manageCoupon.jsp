@@ -190,7 +190,7 @@
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="page-header text-info">
-		<h3>쿠폰관리</h3>
+		<h3 style="color:#bc8f8f">쿠폰관리</h3>
 	</div>
 	
 	<form class="form-inline" name="detailForm">
@@ -208,7 +208,7 @@
       	    
 	    <input type="hidden" id="issueStatus" name="issueStatus" value="사용가능"/>
 	    
-		 <p class="text-primary" align="left">
+		 <p class="text-primary" align="left" style="color:gray">
 		 <br>
 		 &nbsp;&nbsp; 전체  ${couponPage.totalCount} 건수, 현재 ${couponPage.currentPage}  페이지
 		 </p>
@@ -256,7 +256,7 @@
 
       <div>
                 
-		<p class="text-primary" align="left">
+		<p class="text-primary" align="left" style="color:gray">
 		<br>
 		&nbsp;&nbsp; 전체  ${issuePage.totalCount} 건수, 현재 ${issuePage.currentPage}  페이지
 		</p>

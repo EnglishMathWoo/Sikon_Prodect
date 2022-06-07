@@ -27,16 +27,37 @@
 
 
 	<!-- 경력사항 수정 -->
-	<update	id="updateCareer" 	parameterType="java.util.List" >
+	<update	id="updateCareer" 	parameterType="map" >
 		<foreach collection="list" item="item" index="index">
 		UPDATE career
-		<set>
-			company			= #{company} ,
-			career_experience	= #{careerExperience} ,
-			start_date		= #{startDate:DATE} ,
-			end_date		= #{endDate:DATE}
-		</set>
-		WHERE career_no = #{careerNo}
+		set	company=
+		case career_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.careerNo} then #{item.company}
+		</foreach>
+		else company end
+		,
+		career_experience=
+		case career_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.careerNo} then #{item.careerExperience}
+		</foreach>
+		else career_experience end
+		,
+		start_date=
+		case career_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.careerNo} then #{item.startDate:DATE}
+		</foreach>
+		else start_date end
+		,
+		end_date=
+		case career_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.careerNo} then #{item.endDate:DATE}
+		</foreach>
+		else end_date end
+		WHERE user_id = #{userId}
 		</foreach>
 	</update>
 	

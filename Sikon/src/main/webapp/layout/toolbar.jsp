@@ -4,383 +4,543 @@
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-
-<script type="text/javascript">
-	var socket = null;
-	
-	$(document).ready(function(){
-		//if(${login != null}){
-			connectWs();
-		//}
-	})
-		
-	//소켓
-		
-	function connectWs(){
-		console.log("tttttt")
-		var ws = new SockJS("/alarm");
-		socket = ws;
-	
-		ws.onopen = function() {
-		 	console.log('open');
-		};
-	
-		ws.onmessage = function(event) {
-			console.log("onmessage"+event.data);
-			
-			alert(event.data);
-			
-			let $socketAlert = $('div#socketAlert');
-			$socketAlert.html(event.data)
-			$socketAlert.css('display', 'block');
-			
-			setTimeout(function(){
-				$socketAlert.css('display','none');
-				
-			}, 5000);
-		};
-	
-		ws.onclose = function() {
-		    console.log('close');
-	 	};
-	 
-	};
-	
-	//소켓끝
-</script>
+<!--  ///////////////////////// font ////////////////////////// -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+<link href="/resources/css/fontawesome.all.min.css" rel="stylesheet">
 
 
-<!-- ToolBar Start /////////////////////////////////////-->
-<div class="navbar  navbar-default navbar-fixed-top">
+<style>
+/* 배경색 */
+body {
+	background-color: #F7F7F7;
 	
-	<div class="container">
-	       
-		<a class="navbar-brand" href="/index.jsp">식탁의온도</a>
-		
-		<!-- toolBar Button Start //////////////////////// -->
-		<div class="navbar-header">
-		    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#target">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		    </button>
-		</div>
-		<!-- toolBar Button End //////////////////////// -->
-		
-	    <!--  dropdown hover Start -->
-		<div 	class="collapse navbar-collapse" id="target" 
-	       			data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
-	         
-	         	<!-- Tool Bar 를 다양하게 사용하면.... -->
-	             <ul class="nav navbar-nav">
-	             
-	             
-	              <!--  회원관리 DrowDown -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >회원관리</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">개인정보조회</a></li>
-	                         <li><a href="#">공지사항목록</a></li>
-	                         
-	                         <c:if test="${sessionScope.user.role == 'admin'}">
-	                         	<li><a href="#">회원정보조회</a></li>
-	                         	<li><a href="#">공지사항관리</a></li>
-	                         	<li><a href="#">쿠폰관리</a></li>
-	                         	<li><a href="#">쿠폰생성</a></li>
-	                           	<li><a href="#">쿠폰발급</a></li>
-	                           	<li><a href="#">생성쿠폰목록조회</a></li>
-	                           	<li><a href="#">쿠폰발급목록조회</a></li>
-	                         </c:if>
-	                     </ul>
-	                 </li>
-	                 
-	              <!-- 판매상품관리 DrowDown  -->
-	                <c:if test="${sessionScope.user.role == 'admin'}">
-		              <li class="dropdown">
-		                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-		                         <span >스토어관리</span>
-		                         <span class="caret"></span>
-		                     </a>
-		                     <ul class="dropdown-menu">
-		                         <li><a href="#">상품등록</a></li>
-		                         <li><a href="#">상품관리</a></li>
-		                         <li class="divider"></li>
-		                         <li><a href="#">판매리스트조회</a></li>
-		                     </ul>
-		                </li>
-	                 </c:if>
-	                 
-	                 
-	              <!-- 구매관리 DrowDown -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >스토어</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">상품검색</a></li>
-	                         <li class="divider"></li>
-	                         <li><a href="#">최근 본 상품</a></li>
-	                         <c:if test="${sessionScope.user.role == 'user'}">
-	                         <li class="divider"></li>
-	                           <li><a href="#">구매이력조회</a></li>
-	                         </c:if>
-	                     </ul>
-	                 </li>
-	                 
-	                 <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >레시피</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">레시피검색</a></li>
-              	             <li><a href="#">레시피등록</a></li>
-	                           <li><a href="#">나의레시피</a></li>
-	                         <li><a href="#">최근본상품</a></li>
-	                         <li class="divider"></li>
-	                     </ul>
-	                 </li>
-	                 
-	                 <!-- 판매상품관리 DrowDown  -->
-	                <c:if test="${sessionScope.user.role == 'admin'}">
-		              <li class="dropdown">
-		                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-		                         <span >쿠킹클래스관리</span>
-		                         <span class="caret"></span>
-		                     </a>
-		                     <ul class="dropdown-menu">
-		                         <li><a href="#">쿠킹클래스등록</a></li>
-		                         <li><a href="#">클래스관리</a></li>
-		                         <li class="divider"></li>
-		                         <li><a href="#">판매리스트조회</a></li>
-		                     </ul>
-		                </li>
-	                 </c:if>
-	                 
-	                 
-	              <!-- 구매관리 DrowDown -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >쿠킹클래스</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">쿠킹클래스검색</a></li>
-	                         <li><a href="#"> 장바구니</a></li>
-	                         <li><a href="#"> 신청목록조회</a></li>
-	                         <li><a href="#">판매목록관리</a></li>
-	                        
-	                         <li class="divider"></li>
-	                         <li><a href="#">최근 본 클래스</a></li>
-	                         <c:if test="${sessionScope.user.role == 'user'}">
-	                         <li class="divider"></li>
-	                           <li><a href="#">신청이력조회</a></li>
-	                          
-	                           
-	                         </c:if>
-	                     </ul>
-	                 </li>
+}
 
-	             </ul>
-	             
-	             
-	             
-	             <c:if test="${! empty sessionScope.user.role}">
-				<ul class="nav navbar-nav navbar-right">
-	                 <li><a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"/> Cart</a></li>
-	                 <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"/> MyPage</a></li>
-	                <li><a href="#"> <span class="glyphicon glyphicon-log-out" aria-hidden="true"/> LOGOUT</a></li>
-				</ul>
-				</c:if>
-				
-				<c:if test="${empty sessionScope.user.role}">
-				<ul class="nav navbar-nav navbar-right">
-	                 <li><a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"/> Cart</a></li>
-				</ul>
-				</c:if>
-		</div>
-		<!-- dropdown hover END -->	       
-	    
+/* <hr/> 색상 */
+hr, .borderedbox {
+	border-color: #D7D7D7;
+}
+
+/* topbar '식탁의온도' 폰트 */
+#logo {
+	font-family: 'Gowun Batang', serif;
+}
+
+/* 우리의식탁 로고 이미지 비율 */
+#usik {
+float:left;
+	width: 15%;
+	height: 15%
+}
+
+/* toolbar css (from layout.css) */
+
+/* Header
+--------------------------------------------------------------------------------------------------------------- */
+@media screen and (max-width:750px) {
+	.imgl, .imgr {
+		display: inline-block;
+		float: none;
+		margin: 0 0 10px 0;
+	}
+	.fl_left, .fl_right {
+		display: block;
+		float: none;
+	}
+	.one_half, .one_third, .two_third, .one_quarter, .two_quarter,
+		.three_quarter {
+		display: block;
+		float: none;
+		width: auto;
+		margin: 0 0 30px 0;
+		padding: 0;
+	}
+	#topbar {
+		padding-top: 15px;
+		text-align: center;
+	}
+	#header {
+		text-align: center;
+	}
+	#header #logo {
+		margin: 0 0 30px 0;
+	}
+	#mainav form {
+		margin-top: 0;
+	}
+	#pageintro article .heading {
+		margin-bottom: 30px;
+		font-size: 38px;
+	}
+	#pageintro article p:first-of-type {
+		margin-bottom: 20px;
+		font-size: 18px;
+	}
+	#services .table, #services .table-row, #services .table-cell {
+		display: block;
+		width: 100%;
+	}
+	#services .table-cell {
+		padding: 5%;
+	}
+}
+
+/* Header */
+#header #logo h1 a {
+	color: inherit;
+	background-color: inherit;
+	text-decoration-line: none;
+	float:left;
+}
+
+
+/* Max Wrapper Width - Laptop, Desktop etc.
+--------------------------------------------------------------------------------------------------------------- */
+@media screen and (min-width:978px) {
+	.hoc {
+		max-width: 1170px;
+	}
+}
+
+/* Transition Fade
+--------------------------------------------------------------------------------------------------------------- */
+#mainav form * {
+	transition: none !important;
+}
+
+
+/* Navigation
+--------------------------------------------------------------------------------------------------------------- */
+nav ul, nav ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#topbar ul {
+	margin: 0 0 15px 0;
+	line-height: normal;
+}
+
+#mainav, #breadcrumb, .sidebar nav {
+	line-height: normal;
+}
+
+.drop::after, #mainav li li .drop::after, #breadcrumb li a::after,
+	.sidebar nav a::after {
+	position: absolute;
+	font-family: "FontAwesome";
+	font-size: 10px;
+	line-height: 10px;
+}
+
+/* Top Navigation */
+#mainav {
+	
+}
+
+#mainav ul.clear {
+	margin-top: 3px;
+}
+
+#mainav ul {
+	text-transform: uppercase;
+}
+
+#mainav ul ul {
+	z-index: 9999;
+	position: absolute;
+	width: 180px;
+	text-transform: none;
+}
+
+#mainav ul ul ul {
+	left: 180px;
+	top: 0;
+}
+
+#mainav li {
+	display: inline-block;
+	position: relative;
+	margin: 0 15px 0 0;
+	padding: 0;
+}
+
+#mainav li:last-child {
+	margin-right: 0;
+}
+
+#mainav li li {
+	width: 100%;
+	margin: 0;
+}
+
+#mainav li a {
+	display: block;
+	padding: 10px 0;
+}
+
+#mainav li li a {
+	border: solid;
+	border-width: 0 0 1px 0;
+}
+
+#mainav .drop {
+	padding-left: 15px;
+}
+
+#mainav li li a, #mainav li li .drop {
+	display: block;
+	margin: 0;
+	padding: 10px 15px;
+}
+
+.drop::after, #mainav li li .drop::after {
+	
+}
+
+.drop::after {
+	top: 35px;
+	left: 5px;
+}
+
+#mainav li li .drop::after {
+	top: 15px;
+	left: 5px;
+}
+
+#mainav ul ul {
+	visibility: hidden;
+	opacity: 0;
+}
+
+#mainav ul li:hover>ul {
+	visibility: visible;
+	opacity: 1;
+}
+
+#mainav form {
+	display: none;
+	margin: 0;
+	padding: 0;
+}
+
+#mainav form select, #mainav form select option {
+	display: block;
+	cursor: pointer;
+	outline: none;
+}
+
+#mainav form select {
+	width: 100%;
+	padding: 5px;
+	border: none;
+}
+
+#mainav form select option {
+	margin: 5px;
+	padding: 0;
+	border: none;
+}
+
+/* Navigation */
+#mainav li a {
+	color: inherit;
+	text-decoration-line: none;
+}
+
+#mainav a:hover, #mainav li:hover>a {
+	color: #B97D2D;
+}
+
+#mainav li li a, #mainav .active li a {
+	color: #413E3D;
+	background-color: #FFFFFF;
+	border-color: #FFFFFF;
+}
+
+#mainav li li:hover>a, #mainav .active .active>a {
+	color: #FFFFFF;
+	color: #B97D2D;
+}
+
+#mainav form select {
+	color: #FFFFFF;
+	background-color: #413E3D;
+}
+
+.fl_left, .imgl {
+	float: left;
+}
+
+.fl_right, .imgr {
+	float: right;
+}
+
+html {
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	line-height: 1.6em;
+}
+
+.clear, .group {
+	display: block;
+}
+
+.clear::before, .clear::after, .group::before, .group::after {
+	display: table;
+	content: "";
+}
+
+.clear, .clear::after, .group, .group::after {
+	clear: both;
+}
+
+a {
+	outline: none;
+	text-decoration: none;
+}
+
+/* navigation 해도 툴바 고정 */
+/* Generalise
+--------------------------------------------------------------------------------------------------------------- */
+h1, .heading {
+	margin: 0 0 20px 0;
+	font-size: 22px;
+	line-height: normal;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+address {
+	font-style: normal;
+	font-weight: normal;
+}
+
+.font-xs {
+	font-size: .8rem;
+}
+
+.font-x1 {
+	font-size: 1.2rem;
+}
+
+.font-x2 {
+	font-size: 1.8rem;
+}
+
+.font-x3 {
+	font-size: 2.8rem;
+}
+
+.wrapper {
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	word-wrap: break-word;
+}
+.hoc {
+	display: block;
+	margin: 0 auto;
+}
+
+/* Top Bar
+--------------------------------------------------------------------------------------------------------------- */
+#topbar {
+	padding: 15px 0;
+	font-size: .8rem;
+	text-transform: uppercase;
+}
+
+#topbar * {
+	margin: 0;
+}
+
+#topbar ul li {
+	display: inline-block;
+	margin-right: 10px;
+	padding-right: 15px;
+	border-right: 1px solid;
+}
+
+#topbar ul li:last-child {
+	margin-right: 0;
+	padding-right: 0;
+	border-right: none;
+}
+
+#topbar i {
+	margin: 0 5px 0 0;
+	line-height: normal;
+}
+
+/* Top Bar */
+#topbar ul li {
+	border-color: rgba(255, 255, 255, .2);
+}
+
+#topbar>div:last-of-type li:first-child a {
+	color: #B97D2D;
+}
+
+#topbar>div:last-of-type li:last-child a {
+	color: #B97D2D;
+}
+
+
+/*  주석 풀면 위에 있는 hr css랑 충돌
+hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 ";}
+*/
+
+</style> 
+
+<!-- /////////////////////// ToolBar Start ////////////////////////////-->
+
+<header id="header" class="hoc clear">
+	<div id="topbar" class="hoc clear"> 
+	    <div class="fl_right">
+	      <ul class="nospace">
+	        <c:if test="${empty sessionScope.user.role}">
+	        <li><a href="#">Login</a></li>
+	        </c:if>
+	        <c:if test="${!empty sessionScope.user.role}">
+	        <li><a href="#">Logout</a></li>
+	        </c:if>
+	        <li><a href="#">Mypage</a></li>
+	      </ul>
+	    </div>
 	</div>
-</div>
-		<!-- ToolBar End /////////////////////////////////////-->
+
+    <!-- ################################################################################################ -->
+
+    <div id="logo" class="fl_left">
+	  
+      <h1><img src="/resources/images/logo/SIKON (5).png" id="usik"><a href="#"> 식탁의온도</a></h1>
+    </div>
+
+    <!-- ################################################################################################ -->
+    <nav id="mainav" class="fl_right">
+      <ul class="clear">
+        <li class="active"><a href="#">레시피</a></li>
+        <li><a class="drop" href="#">스토어</a>
+        			<ul>
+		                <li><a href="#">구매목록</a></li>
+              		</ul>
+        </li>
+        <li><a class="drop" href="#">쿠킹클래스</a>
+        <li><a class="drop" href="#">공지사항</a>
+        <li><a class="drop" href="#">관리</a>
+      		<ul>
+		        <li><a href="#">회원관리</a></li>
+		        <li><a href="#">레시피관리</a></li>
+		        <li><a class="drop" href="#">스토어관리</a>
+		      		<ul>
+		                <li><a href="#">상품등록</a></li>
+		                <li><a href="#">상품목록</a></li>
+		                <li><a href="#">판매목록</a></li>
+              		</ul>
+            	</li>
+	            <li><a href="#">쿠킹클래스관리</a></li>
+	            <li><a href="#">공지사항관리</a></li>
+	            <li><a href="#">쿠폰관리</a></li>
+          	</ul>
+        </li>
+      </ul>
+    </nav>
+    
+    <!-- ################################################################################################ -->
+  
+  </header>
+  
+	<!-- ////////////////////////////////// ToolBar End /////////////////////////////////////-->
  	
-   	
-   	
    	<script type="text/javascript">
 	
-		//============= logout Event  처리 =============	
 		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		 	$("a:contains(' LOGOUT')").on("click" , function() {
-				$(self.location).attr("href","/user/logout");
-				//self.location = "/user/logout"
-			}); 
-		 });
-		
-		//============= 회원정보조회 Event  처리 =============	
-		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		 	$("a:contains('회원정보조회')").on("click" , function() {
-				//$(self.location).attr("href","/user/logout");
-				self.location = "/user/listUser"
-			}); 
-		 });
-		
-		
-		//=============  개인정보조회 Event  처리 =============	
-	 	$( "a:contains('개인정보조회')" ).on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
-		});
-			
-		
-		//=============  마이페이지 Event  처리 =============	
-		 $( "a:contains(' MyPage')" ).on("click" , function() {
-		 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-				$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
-			});
-		
-	 	//=============  장바구니 Event  처리 =============	
-	 	$( "a:contains(' Cart')" ).on("click" , function() {
-	 		
-			$(self.location).attr("href","/cart/getCartlist");
-		});
-		
-	 	 $(function() {
-	 		//=============  판매상품등록 Event  처리 =============
-		 	$("a:contains('상품등록')").on("click" , function() {
-				self.location = "/product/addProductView.jsp"
-			}); 			 		
-		 });
-	 	 
-	 	$(function() {
-	 	//=============  판매상품관리 Event  처리 =============
-		 	$("a:contains('상품관리')").on("click" , function() {
-				self.location = "/product/listProduct?menu=manage"
-			}); 
-	 	 });
-	 	
-	 	//=============  판매리스트조회 Event  처리 =============	
-	 	$( "a:contains('판매리스트조회')" ).on("click" , function() {
-	 		
-			$(self.location).attr("href","/purchase/listSales?menu=manage");
-		});
-	 	
-	 	$(function() {
-		//=============  상 품 검 색 Event  처리 =============
-			$("a:contains('상품검색')").on("click" , function() {
-				self.location = "/product/listProduct?menu=search"
-			}); 
-		});
-	 	
-	 	
-	 	$(function() {
-		//=============  구매이력조회 Event  처리 =============
-		 	$("a:contains('구매이력조회')").on("click" , function() {
-				self.location = "/purchase/listPurchase"
-			}); 
-		});
-	 	
-	 	$(function() {
-		 	$("a:contains('공지사항관리')").on("click" , function() {
-		 		self.location = "/notice/listNotice?menu=manage"
-			}); 
-		});
-	 	
-	 	$(function() {
-		 	$("a:contains('공지사항목록')").on("click" , function() {
-		 		self.location = "/notice/listNotice?menu=search"
-			}); 
-		});
-	 	
-	 	$(function() {
-		 	$("a:contains('쿠폰관리')").on("click" , function() {
-		 		self.location = "/coupon/manageCoupon"
-			}); 
-		});
-	 	
-	 	$(function() {
-		 	$("a:contains('쿠폰생성')").on("click" , function() {
-		 		self.location = "/coupon/addCoupon.jsp"
-			}); 
-		});
-	 	
-		$(function() {
-		 	$("a:contains('쿠폰발급')").on("click" , function() {
-		 		self.location = "/coupon/issueCoupon"
-			}); 
-		});
-		
-		$(function() {
-		 	$("a:contains('생성쿠폰목록조회')").on("click" , function() {
-		 		self.location = "/coupon/listCoupon"
-			}); 
-		});
-		
-		$(function() {
-		 	$("a:contains('쿠폰발급목록조회')").on("click" , function() {
-		 		self.location = "/coupon/listIssuedCoupon"
-			}); 
-		});
-	 	
-	 	$( "a:contains('최근 본 상품')" ).bind("click" , function() {
-	 		popWin = window.open("/history.jsp", "popWin",
-	 		"left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
-		}); 
-	 	
-	 	
-	 	$( "a:contains('레시피검색')" ).on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+
+			$( "a:contains(' 식탁의온도')" ).on("click" , function() {
 			$(self.location).attr("href","/recipe/listRecipe");
-		});
-		
-		$( "a:contains('레시피등록')" ).on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/recipe/addRecipe.jsp");
-		});
-		
-		$( "a:contains('마이페이지')" ).on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/bookmark/listBookmark");
-		});
-		
-		$( "a:contains('나의레시피')" ).on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/recipe/getMyRecipeList");
-		});
-	 	$( "a:contains('쿠킹클래스검색')" ).on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/cook/listCook?menu=search");
-		});
-	 	
-	 	$( "a:contains('쿠킹클래스등록')" ).on("click" , function() {
-	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/cook/addCook.jsp");
-		});
-		$( "a:contains(' 장바구니')" ).on("click" , function() {
+			});
+			
+			$( "a:contains('Login')" ).on("click" , function() {
+			$(self.location).attr("href","/user/loginView.jsp");
+			});
+			
+	 		$( "a:contains('MyPage')" ).on("click" , function() {
+			//$(self.location).attr("href","/user/getUser?userId="+${user.userId});
+			//console.log(${user.userId});
+	 		});
 	 		
-			$(self.location).attr("href","/wish/getWish?userId=${sessionScope.user.userId}");
-		});
-		
-		
-		$( "a:contains('신청목록조회')" ).on("click" , function() {
-			//Debug..
-			//alert(  $( ".Depth03:contains('회원정보조회')" ) );
-	 		$(self.location).attr("href","/apply/listApply?menu=search");
-		});
-		$( "a:contains('판매목록관리')" ).on("click" , function() {
-			//Debug..
-			//alert(  $( ".Depth03:contains('회원정보조회')" ) );
-	 		$(self.location).attr("href","/apply/listSale?menu=manage");
-		}); 
+	 		$( "a:contains('레시피')" ).on("click" , function() {
+			$(self.location).attr("href","/recipe/listRecipe");
+			});
+	 		
+	 		$( "a:contains('스토어')" ).on("click" , function() {
+			$(self.location).attr("href","/product/listProduct?menu=search");
+			});
+	 		
+	 		$( "a:contains('쿠킹클래스')" ).on("click" , function() {
+			$(self.location).attr("href","/cook/listCook?menu=search");
+			});
+
+	 		$( "a:contains('공지사항')" ).on("click" , function() {
+			$(self.location).attr("href","/notice/listNotice?menu=search");
+			});
+	 		
+	 		$( "a:contains('회원관리')" ).on("click" , function() {
+			$(self.location).attr("href","/user/manageUser");
+			});
 	 	
-		
-		
+	 		$( "a:contains('레시피관리')" ).on("click" , function() {
+			$(self.location).attr("href","/recipe/manageRecipe");
+			});
+	 		
+	 		$( "a:contains('스토어관리')" ).on("click" , function() {
+			$(self.location).attr("href","/product/listProduct?menu=manage");
+			});
+	 		
+	 		$( "a:contains('쿠킹클래스관리')" ).on("click" , function() {
+			$(self.location).attr("href","/cook/listCook?menu=manage");
+			});
+
+	 		$( "a:contains('공지사항관리')" ).on("click" , function() {
+			$(self.location).attr("href","/notice/listNotice?menu=manage");
+			});
+	 		
+	 		$( "a:contains('쿠폰관리')" ).on("click" , function() {
+			$(self.location).attr("href","/coupon/manageCoupon");
+			});
+	 		
+	 		//====================================================
+	 			
+	 		$( "a:contains('구매목록')" ).on("click" , function() {
+			$(self.location).attr("href","/purchase/listPurchase");
+			});
+	 		
+	 		$( "a:contains('상품등록')" ).on("click" , function() {
+			$(self.location).attr("href","/product/addProduct");
+			});
+	 			
+	 		$( "a:contains('상품목록')" ).on("click" , function() {
+			$(self.location).attr("href","/product/listProduct?menu=manage");
+			});
+	 		
+	 		$( "a:contains('판매목록')" ).on("click" , function() {
+			$(self.location).attr("href","/purchase/listSales");
+			});
+	 			
+	 		//====================================================
+	 		
+		 });
+	 	
 	</script>  
