@@ -74,22 +74,22 @@ table {
 
 		 $(function() {
 			 
+			 console.log('list');
 			 
 			 $( "#sorting" ).on("click" , function() {
 					console.log('조회');
 						fncGetList(1);
-				});
-				 
-			 /*
+				});				 
+	
 			$( "td.prodNum" ).on("click" , function() {
 				console.log('상세보기');
 				var message1 = $(this).attr("value1");
 				console.log(message1);
 				var message2 = $(this).attr("value2");
 				console.log(message2);
-					self.location ="/product/getProduct?prodNo="+message1+"&menu="+message2;
+				self.location ="/product/getProduct?prodNo="+message1+"&menu="+message2;
 			});
-			//*/
+		
 			$( "td.divy" ).on("click" , function() {
 				console.log('배송하기');
 				var message1 = $(this).attr("value1");
@@ -97,100 +97,14 @@ table {
 				var message2 = $(this).attr("value2");
 				console.log(message2);
 				
-				self.location ="/purchase/updateTranCode?tranNo="+message1+"&tranCode="+message2;
+				//self.location ="/purchase/updateTranCode?tranNo="+message1+"&tranCode="+message2;
 			});
-			///*
-			$( "td.user" ).on("click" , function() {
-				console.log('유저정보');
-				var message = $(this).attr("value");
-				console.log(message);
-				
-				self.location ="/user/getUser?userId="+message;
-			});
-			//*/
+		
+
 			$( "td.prodNum" ).css("color" , "#f08080");
 			$( "td.divy" ).css("color" , "#ffb6c1");
 			$( "td.user" ).css("color" , "#708090");
-			
-			///*
-			$( "td.prodNum" ).on("click" , function() {
-		         console.log($(this).attr("value1"));
-		         
-		         var prodNo =$(this).attr("value1");
-		         $.ajax( 
-		               {
-		                  url : "/product/json/getProduct/"+prodNo ,
-		                  method : "GET" ,
-		                  dataType : "json" ,
-		                  headers : {
-		                     "Accept" : "application/json",
-		                     "Content-Type" : "application/json"
-		                  },
-		                  success : function(JSONData , status) {
-		                	  
-		                     var displayValue = "<table class='display' width='500' height='180'>"
-				            					  +"<tr>"
-				             					  +"<td>&emsp;"
-				             					  +"<img src='/images/uploadFiles/"+JSONData.fileName+"' width='125' height='125' />"
-				                                  +"</td>"
-				                                  +"<td>"
-				                                  +"<h5>&emsp;"
-				                                  +"상품번호	: "+JSONData.prodNo+"<br/><br/>&emsp;"
-				                                  +"상품명	: "+JSONData.prodName+"<br/><br/>&emsp;"
-				                                  +"상세정보	: "+JSONData.prodDetail+"<br/><br/>&emsp;"
-				                                  +"제조일자 	: "+JSONData.manuDate
-				                                  +"</h5>"
-				                                  +"</td>"
-				                                  +"</tr>"	                                          
-				                                  +"</table>";
-		                                          
-		                     //Debug...                           
-		                     //alert(displayValue);
-		                     $("table.display").remove();
-		                     $( "#"+prodNo+"" ).html(displayValue);
-		                  }
-		            });
-	  			 });
-				//*/
-				
-				/*
-			$( "td.user" ).on("click" , function() {
-		         console.log($(this).attr("value"));
-		         
-		         var userId =$(this).attr("value");
-		         $.ajax( 
-		               {
-		                  url : "/user/json/getUser/"+userId ,
-		                  method : "GET" ,
-		                  dataType : "json" ,
-		                  headers : {
-		                     "Accept" : "application/json",
-		                     "Content-Type" : "application/json"
-		                  },
-		                  success : function(JSONData , status) {
-		                	  
-		                     var displayValue = "<table class='display' height='180'>"
-				            					  +"<tr>"
-				                                  +"<td>"
-				                                  +"<h4>&emsp;"
-				                                  +"아이디 : "+JSONData.userId+"<br/><br/>&emsp;"
-												  +"이  름 : "+JSONData.userName+"<br/><br/>&emsp;"
-												  +"이메일 : "+JSONData.email+"<br/><br/>&emsp;"
-												  +"ROLE : "+JSONData.role+"<br/><br/>&emsp;"
-												  +"등록일 : "+JSONData.regDateString
-				                                  +"</h4>"
-				                                  +"</td>"
-				                                  +"</tr>"	                                          
-				                                  +"</table>";
-		                                          
-		                     //Debug...                           
-		                     //alert(displayValue);
-		                     $("table.display").remove();
-		                     $( "#"+userId+"" ).html(displayValue);
-		                  }
-		            });
-	  			 });
-				//*/
+
 			
 		});	
 	</script>		
@@ -262,12 +176,14 @@ table {
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
+			  
 			  <td align="center">${purchase.tranNo}</td>
+			  
 			  <td align="center" class="prodNum" value1="${purchase.purchaseProd.prodNo }" value2="${param.menu}" >
 				${purchase.purchaseProd.prodNo }
-			  	<i class="glyphicon glyphicon-ok" id= "${purchase.purchaseProd.prodNo}"></i>
 			  	<input type="hidden" value="${purchase.purchaseProd.prodNo}">
-			 	 </td>
+			 </td>
+			 
 			  <c:choose>
 				<c:when test="${purchase.tranCode.equals('000')}">
 					<td align="center">현재 <b>구매취소</b> 상태입니다.</td>

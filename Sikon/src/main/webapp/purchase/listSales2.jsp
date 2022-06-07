@@ -92,6 +92,19 @@ table {
 			});
 
 			
+			$( "td.prodNum" ).on("click" , function() {
+				console.log('상세보기');
+				var message1 = $(this).attr("value1");
+				console.log(message1);
+				var message2 = $(this).attr("value2");
+				console.log(message2);
+				self.location ="/product/getProduct?prodNo="+message1+"&menu="+message2;
+			});
+			
+
+			
+			
+			
 			$( "td.user" ).on("click" , function() {
 				console.log('유저정보');
 				var message = $(this).attr("value");
@@ -103,9 +116,7 @@ table {
 			$( "td.prodNum" ).css("color" , "#f08080");
 			$( "td.divy" ).css("color" , "#ffb6c1");
 			$( "td.user" ).css("color" , "#708090");
-			
-			
-			
+
 				
 			$('#myTabs a').click(function (e) {
 			  e.preventDefault()
