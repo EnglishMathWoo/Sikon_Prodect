@@ -87,6 +87,14 @@ $(function() {
 		<div class="page-header">
 	       <h3 class=" text-info"  style="color:#bc8f8f">상품등록조회</h3>
 	    </div>
+	    
+	    <div class="row">
+	  		<div class="col-md-12 text-right">
+	  			<button type="button" class="btn btn-default" id="check">확인</button>
+	  			<button type="button" class="btn btn-default" id="add">추가등록</button>
+	  		</div>
+		</div>
+	
 	
 		<div class="row">
 		<div class="col-xs-12 col-md-12" align="center">
@@ -209,14 +217,6 @@ $(function() {
 			<div class="col-xs-8 col-md-8">${product.prodContent }</div>
 		</div>
 		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-md-12 text-right ">
-	  			<button type="button" class="btn btn-default" id="check">확인</button>
-	  			<button type="button" class="btn btn-default" id="add">추가등록</button>
-	  		</div>
-		</div>
 		
 		<br/>
 		

@@ -98,7 +98,7 @@ public class ProductRestController {
         Map map = new HashMap();
 		
 		
-        String fileRoot = "C:\\z.utility\\summernote_image\\";	//저장될 파일 경로
+        String fileRoot = "C:\\summernote_image\\";	//저장될 파일 경로
         String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
 

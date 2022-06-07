@@ -19,6 +19,7 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Product;
 import com.sikon.service.domain.User;
+import com.sikon.service.product.ProductService;
 import com.sikon.service.domain.Cart;
 import com.sikon.service.user.UserService;
 import com.sikon.service.cart.CartService;
@@ -33,6 +34,9 @@ public class CartController {
 	@Autowired
 	@Qualifier("cartServiceImpl")
 	private CartService cartService;
+	@Autowired
+	@Qualifier("productServiceImpl")
+	private ProductService productService;
 	
 		
 	public CartController(){
@@ -42,14 +46,27 @@ public class CartController {
 	
 	
 	@RequestMapping("addCart")
-	public String addCart( @ModelAttribute("cart") Cart cart) throws Exception {
+	public String addCart(@RequestParam("quantity") int quantity, @RequestParam("prodNo") int prodNo, HttpSession session) throws Exception {
 
 		System.out.println("/addCart");
-		System.out.println("userId : "+cart.getUserId());
 		
+		User user = (User) session.getAttribute("user");
+		Product product = productService.getProduct(prodNo);
+		
+		
+		Cart cart = new Cart();
+		cart.setUserId(user.getUserId());
+		cart.setProdNo(prodNo);
+		cart.setFileName(product.getProdThumbnail());
+		cart.setPrice(product.getProdDisPrice());
+		cart.setProdName(product.getProdName());
+		cart.setQuantity(quantity);
+		
+		System.out.println(cart);
+	
 		cartService.addCart(cart);
 		
-		return "redirect:/product/getProduct?menu=search&prodNo="+cart.getCartProd().getProdNo();
+		return "redirect:/product/getProduct?menu=search&prodNo="+prodNo;
 	}
 	
 	
@@ -64,39 +81,38 @@ public class CartController {
 		
 		List<Cart> list = cartService.getCartList(userId);
 		
+		System.out.println(list);
 		
 		// Model °ú View ¿¬°á
 		model.addAttribute("Cart", list);
 		
 		return "forward:/cart/cart.jsp";
 	}
-	/*
+
 	@RequestMapping("updatecart")
-	public String updateCart( @RequestParam("cartNo") int cartNo, @RequestParam("buyNum") int buyNum, HttpSession session) throws Exception{
+	public String updateCart( @RequestParam("cartNo") int cartNo, @RequestParam("quantity") int quantity) throws Exception{
 		
 		System.out.println("/updateCart");
 		
-		User user = (User) session.getAttribute("user");
-		String userid = user.getUserId();
-		
+		Cart cart = cartService.getCart(cartNo);
+		cart.setQuantity(quantity);
 		
 		cartService.updateCart(cart);
 		
-		System.out.println("userId: "+userid);
 		
-		return "redirect:/cart/getcart";
+		return "redirect:/cart/getCartList";
 	}
-	*/
+
 	@RequestMapping("deleteCart")
-	public String deleteCart( @RequestParam("wishNo") int wishNo, Model model, HttpSession session) throws Exception{
+	public String deleteCart( @RequestParam("cartNo") int cartNo, Model model, HttpSession session) throws Exception{
 		
 		System.out.println("/deleteCart");
 		
 		User user = (User) session.getAttribute("user");
-		cartService.deleteCart(wishNo);
+		cartService.deleteCart(cartNo);
 		
 		
-		return "redirect:/cart/getCart";
+		return "redirect:/cart/getCartList";
 	}
 
 }

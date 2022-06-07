@@ -44,7 +44,7 @@
 
 body>div.container {
 	border: 3px solid #630606;
-	margin-top: 150px;
+	margin-top: 100px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 
@@ -255,7 +255,7 @@ function payment(data) {
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
-	
+	<br>
 		<h1 class="bg-defualt text-center" style="color:#bc8f8f">결제하기</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
@@ -264,11 +264,11 @@ function payment(data) {
 		  <input type="hidden" name="prodNo" value="${product.prodNo }" />
 		  <input type="hidden" name="userId" value="${user.userId }" />
 		  
-		  
+		  <div class="text-center">		  
 		  <hr/>
 		  <h4 align="center">주문상품</h4>
 		  <hr/>
-		  
+
 		  <div class="form-group">
 		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
 		    <div class="col-sm-4">
@@ -324,7 +324,9 @@ function payment(data) {
 		    </div>
 		  </div>
 		 
+		  </div>
 		  
+		   <div class="text-center">	
 		  
 		  <hr/>
 		  <h4 align="center">배송정보</h4>
@@ -377,7 +379,9 @@ function payment(data) {
 		    </div>
 		  </div>
 
-		  
+		
+		</div>
+		 <div class="text-center">	  
 		  <hr/>
 		  <h4 align="center">쿠폰 / 포인트</h4>
 		  <hr/>
@@ -404,6 +408,7 @@ function payment(data) {
 		    </div>
 		  </div>
 		  
+		  </div>
 		  
 		</form>
 		<!-- form Start /////////////////////////////////////-->
