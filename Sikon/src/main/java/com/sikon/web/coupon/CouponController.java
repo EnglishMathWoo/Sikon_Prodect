@@ -57,6 +57,8 @@ public class CouponController {
 	///Method
 	@RequestMapping( value="/manageCoupon" )
 	public String manageCoupon(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+		
+		System.out.println("/coupon/manageCoupon");
 				
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
@@ -136,7 +138,6 @@ public class CouponController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
 		
 		// Business logic ผ๖วเ
 		Map<String , Object> map = userService.getUserList(search);
@@ -166,7 +167,7 @@ public class CouponController {
 			couponService.issueCoupon(coupon);
 	    }
 		
-		return "forward:/coupon/manageCoupon";
+		return "redirect:/coupon/manageCoupon";
 	}
 	
 	@RequestMapping( value="/listIssuedCoupon" )

@@ -213,7 +213,8 @@ CREATE TABLE cook (
 	cook_video         			VARCHAR2(200)  ,
 	cook_stock         			 NUMBER    not null,
 	heart_hit 					 NUMBER    default 0  not null,
-	cook_content 		                   CLOB 		NOT NULL, 
+	cook_content 		                   CLOB 		NOT NULL,
+	mentor_id			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_id), 
 	PRIMARY KEY(cook_no)
 );
 
@@ -306,8 +307,8 @@ INTO cart( cart_no , prod_no, user_id, quantity, prod_name, prod_image, prod_pri
 VALUES (seq_cart_cart_no.NEXTVAL , 10000, 'user@naver.com', 5, '계란', 'eggs.jpg&', 2700);
 
 INSERT
-INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content  )
-VALUES (seq_cook_cook_no.nextval, '예다의 계란 후라이 쿠킹클래스', 'yyy.jpg', '진짜 쉬워요', '초급', 14000, '한식', SYSDATE, SYSDATE, 5, SYSDATE, SYSDATE, '강남구 비트캠프', SYSDATE, 'aaa.jpg', 20, 0, '후라이content' );
+INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content, mentor_id  )
+VALUES (seq_cook_cook_no.nextval, '예다의 계란 후라이 쿠킹클래스', 'yyy.jpg', '진짜 쉬워요', '초급', 14000, '한식', SYSDATE, SYSDATE, 5, SYSDATE, SYSDATE, '강남구 비트캠프', SYSDATE, 'aaa.jpg', 20, 0, '후라이content','mentor@naver.com' );
 
 INSERT 
 INTO apply(apply_no, cook_no, applier_id, payment_option, apply_status, cook_status, check_date)
