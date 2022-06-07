@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
 <head>
 	<meta charset="EUC-KR">
@@ -117,7 +117,13 @@ div.image{
 
 	<div class="container">
 	
+				<div class="row">
+					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo}"/>
+					  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
+				</div>		 
+	
 		<div class="row">
+		
 	
 				<div class="col-xs-6 col-md-6 text-center image">				
 						<c:forEach var="name" items="${cook.cookFilename.split('/')[0]}">
@@ -142,8 +148,11 @@ div.image{
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
 					<div>${cook.cookBrief }</div>
 					
-					<input type="hidden" name="detail" value="${cook.cookBrief }"/>
+					
+					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>
 					<input type="hidden" name="cookName" value="${cook.cookName}"/>
+					<input type="hidden" name="cookContent" value="${cook.cookContent}"/>
+					
 				</div>
 				
 				<br/><br/>
@@ -159,12 +168,28 @@ div.image{
 				<br/>
 				
 				<div class="row">
-					신청인원: &emsp;
-				      <input type="number" min="0" id="cookStatus" name="cookStatus" value="1" style="width:40px"/> 명
+			<c:if test = "${cook.cookTheme =='KO'}">
+			 <h5><strong>테마 : 한식</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'JA'}">
+			 <h5><strong>테마 : 일식</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'AM'}">
+		 <h5><strong>테마 : 양식</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'CH'}">
+			 <h5><strong>테마 : 중식</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'DE'}">
+			 <h5><strong>테마 : 간식</strong></h5>
+			</c:if>		
 				</div>
 				
-				<br/><br/>
-				
+
+				<div class="row">
+			
+					<div><h5><strong>장소 : ${cook.cookLocation}</strong></h5></div>
+				</div>				
 				
 			
 				
@@ -175,7 +200,7 @@ div.image{
 				<div class="row">
 				<div><h5><strong>수업시간 : ${cook.startTime}&emsp;~&emsp;${cook.endTime}</strong></h5></div>				
 				</div>
-				<hr/> 
+		
 				
 		
 				
@@ -193,47 +218,20 @@ div.image{
 				
 		 	</div>
 		 	
-		 	
-		 	
-		 	
-		 	<div class="row">
-		    <label for="cookTheme" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스테마</label>
-		    <div class="col-sm-4">
-		     <h5><strong>${cook.cookTheme}</strong></h5>
-		    </div>
-		  </div>
-		  
-		   	<div class="row">
-		    <label for="cookTheme" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스장소</label>
-		    <div class="col-sm-2">
-		     <h5><strong>${cook.cookLocation}</strong></h5>
-		    </div>
-		  </div>
-		  
-		    <div class="row">
-		    <label for="cookRegdate" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스등록날짜</label>
-		    <div class="col-sm-2">
-		     <h5><strong>${cook.cookRegdate}</strong></h5>
-		    </div>
-		  </div>
-		   <div class="row">
-		 	와
-		 
-		 	
-		 	</div>
-		  
-	
-		 	
+		 	<div class="col-xs-2 col-md-2">
 		 	</div>
 		 	
-	
+		 	</div>
 		 	
 		 	<hr/>
 		 	
+		 	<div class="col-xs-10 col-md-10 text-center">
+		 	쿠킹클래스 내용
+		 	${cook.cookContent }
 		 	
+		 	</div>
 		 	
 </div>
- 	<!--  화면구성 div Start /////////////////////////////////////-->
 
 </body>
 </html>
