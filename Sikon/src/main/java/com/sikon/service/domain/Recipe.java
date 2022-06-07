@@ -16,17 +16,46 @@ private int cookingTime;
 private String recipeOrder;
 private String recipeTheme;
 private int reviewNum;
-private List<Ingredient> ingredient;
+private int ingredientNo;
+private String ingredientName;
+private String ingredientAmount;
 
 
-public List<Ingredient> getIngredient() {
-	return ingredient;
+
+
+
+public int getIngredientNo() {
+	return ingredientNo;
 }
 
 
 
-public void setIngredient(List<Ingredient> ingredient) {
-	this.ingredient = ingredient;
+public void setIngredientNo(int ingredientNo) {
+	this.ingredientNo = ingredientNo;
+}
+
+
+
+public String getIngredientName() {
+	return ingredientName;
+}
+
+
+
+public void setIngredientName(String ingredientName) {
+	this.ingredientName = ingredientName;
+}
+
+
+
+public String getIngredientAmount() {
+	return ingredientAmount;
+}
+
+
+
+public void setIngredientAmount(String ingredientAmount) {
+	this.ingredientAmount = ingredientAmount;
 }
 
 
@@ -181,9 +210,12 @@ public String toString() {
 	return "Recipe [recipeNo=" + recipeNo + ", recipeName=" + recipeName + ", recipeDetail=" + recipeDetail
 			+ ", writer=" + writer + ", recipeRegDate=" + recipeRegDate + ", recipeImg=" + recipeImg + ", recipeVideo="
 			+ recipeVideo + ", recipeDifficulty=" + recipeDifficulty + ", cookingTime=" + cookingTime + ", recipeOrder="
-			+ recipeOrder + ", recipeTheme=" + recipeTheme + ", reviewNum=" + reviewNum + ", ingredient=" 
-			+ "]";
+			+ recipeOrder + ", recipeTheme=" + recipeTheme + ", reviewNum=" + reviewNum + ", ingredientNo="
+			+ ingredientNo + ", ingredientName=" + ingredientName + ", ingredientAmount=" + ingredientAmount + "]";
 }
+
+
+
 
 
 

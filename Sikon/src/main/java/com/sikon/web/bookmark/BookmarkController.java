@@ -48,27 +48,27 @@ public class BookmarkController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	@RequestMapping(value="addBookmark" )
-	public ModelAndView addBookmark(@ModelAttribute("bookmark") Bookmark bookmark,@RequestParam("recipeNo") int recipeNo, HttpServletRequest request) throws Exception {
-
-		System.out.println("/bookmark/addBookmark : POST");
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("user");
-		System.out.println(user);
-		
-		Recipe recipe=recipeService.getRecipe(recipeNo);
-		System.out.println(recipe);
-		
-		bookmark.setRecipe(recipe);
-		bookmark.setUserId(user.getUserId());
-
-		bookmarkService.addBookmark(bookmark);
-		
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("forward:/recipe/getRecipe?recipeNo="+recipeNo);
-		
-		return modelAndView;
-	}
+//	@RequestMapping(value="addBookmark" )
+//	public ModelAndView addBookmark(@ModelAttribute("bookmark") Bookmark bookmark,@RequestParam("recipeNo") int recipeNo, HttpServletRequest request) throws Exception {
+//
+//		System.out.println("/bookmark/addBookmark : POST");
+//		HttpSession session=request.getSession();
+//		User user=(User)session.getAttribute("user");
+//		System.out.println(user);
+//		
+//		Recipe recipe=recipeService.getRecipe(recipeNo);
+//		System.out.println(recipe);
+//		
+//		bookmark.setRecipe(recipe);
+//		bookmark.setUserId(user.getUserId());
+//
+//		bookmarkService.addBookmark(bookmark);
+//		
+//		ModelAndView modelAndView=new ModelAndView();
+//		modelAndView.setViewName("forward:/recipe/getRecipe?recipeNo="+recipeNo);
+//		
+//		return modelAndView;
+//	}
 	
 	
 	@RequestMapping(value = "listBookmark")

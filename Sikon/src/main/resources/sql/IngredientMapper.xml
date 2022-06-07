@@ -7,44 +7,38 @@
 <mapper namespace="IngredientMapper">
  	
  	
-	<resultMap id="ingredientSelectMap" type="ingredient">
-		<result property="ingredientNo" 			column="ingredient_no" 			jdbcType="NUMERIC"/>
-		<result property="ingredientName"			column="ingredient_name" 		jdbcType="VARCHAR" />
-		<result property="ingredientAmount" 	column="ingredient_amount" 		jdbcType="VARCHAR" />
-		<result property="recipeNo" 			column="recipe_no" 		jdbcType="NUMERIC" />
+		<resultMap id="recipeSelectMap" type="recipe">
+		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
+		<result property="writer.userNickname" 				column="writer_nickname" 					jdbcType="VARCHAR" />
+		<result property="recipeName"			column="recipe_name" 		jdbcType="VARCHAR" />
+		<result property="recipeDetail" 	column="recipe_detail" 		jdbcType="VARCHAR" />
+		<result property="recipeImg" 			column="recipe_img" 		jdbcType="VARCHAR" />
+		<result property="recipeVideo" 			column="recipe_video" 		jdbcType="VARCHAR" />
+		<result property="recipeDifficulty" 				column="recipe_difficulty" 					jdbcType="VARCHAR" />
+		<result property="recipeTheme"      column="recipe_theme"           jdbcType="VARCHAR"/>
+		<result property="cookingTime"      column="cooking_time"           jdbcType="NUMERIC"/>
+		<result property="recipeOrder"      column="recipe_order"            jdbcType="CLOB" javaType="java.lang.String" />
+		<result property="recipeRegDate" 				column="recipe_regdate" 					jdbcType="DATE" />
+		<result property="reviewNum"      column="review_num"           jdbcType="NUMERIC"/>
+		<result property="ingredientNo"      column="ingredient_no"           jdbcType="NUMERIC"/>
+		<result property="ingredientName"      column="ingredient_name"           jdbcType="VARCHAR"/>
+		<result property="ingredientAmount"      column="ingredient_amount"           jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
-	 <insert 	id="addIngredient"		parameterType="ingredient" >
-	 	INSERT
-		INTO ingredient 
-		VALUES	 (	seq_ingredient_no.nextval , #{ingredientName}, #{ingredientAmount},#{recipeNo})
+	<insert id="addIngredient" parameterType="java.util.Map">
+	  	insert 
+        into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
+        select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
+        from(
+        <foreach collection="list" item="item" separator="UNION ALL ">
+        SELECT #{item.ingredientName} AS ingredientName , #{item.ingredientAmount} AS ingredientAmount FROM DUAL
+        </foreach>
+        ) A
 	 </insert>
 	 
-	 <!-- SQL : SELECT ONE -->
-	 <select 	id="getIngredient"	parameterType="int"	resultMap="ingredientSelectMap">
-		SELECT *
-		FROM ingredient 
-		WHERE ingredient_no= #{ingredientNo}
-	 </select>
-	 
-	 <!-- SQL : UPDATE -->
-	 <update	id="updateIngredient"	parameterType="ingredient" >
-	   	UPDATE ingredient
-	   	<set>
-	   		ingredient_name 	= #{ingredientName} ,
-			ingredient_amount	= #{ingredientAmount},
-	   	</set>
-	   	WHERE ingredient_no = #{ingredientNo}
-	 </update>
 	 
 	 
-	<!-- SQL : SELECT LIST -->
-	<select  id="getIngredientList"  parameterType="int"	resultMap="ingredientSelectMap">
-	  	SELECT *
-			FROM ingredient
-											where ingredient_NO = #{ingredientNo}
-	 </select>
 	
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">

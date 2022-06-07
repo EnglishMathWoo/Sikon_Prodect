@@ -119,8 +119,9 @@ public class RecipeController {
 		System.out.println("/recipe/getRecipe : post / get");
 		System.out.println("recipeNo" + recipeNo);
 		// Business Logic
-		Recipe recipe =recipeService.getRecipe(recipeNo);
-		List list=recipeService.getIngredient(recipeNo);
+		List list =recipeService.getRecipe(recipeNo);
+//		Recipe recipe =recipeService.getRecipe(recipeNo);
+	//	List list=recipeService.getIngredient(recipeNo);
 		
 		System.out.println("재료"+list);
 //		if (search.getCurrentPage() == 0) {
@@ -138,25 +139,27 @@ public class RecipeController {
 		// Model 과 View 연결
 		//model.addAttribute("recipe", list);
 		model.addAttribute("list", list);
-		model.addAttribute("recipe", recipe);
+		model.addAttribute("recipe", list.get(0));
+		
+//		model.addAttribute("recipe", recipe);
 //		model.addAttribute("resultPage", resultPage);
 //		model.addAttribute("search", search);
 
 		return "forward:/recipe/getRecipe.jsp?";
 	}
 
-	@RequestMapping(value = "updateRecipe", method = RequestMethod.GET)
-	public String updateRecipe(@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
-
-		System.out.println("/recipe/updateRecipe :  get");
-		// Business Logic
-		Recipe recipe = recipeService.getRecipe(recipeNo);
-
-		// Model 과 View 연결
-		model.addAttribute("recipe", recipe);
-
-		return "forward:/recipe/updateRecipe.jsp";
-	}
+//	@RequestMapping(value = "updateRecipe", method = RequestMethod.GET)
+//	public String updateRecipe(@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
+//
+//		System.out.println("/recipe/updateRecipe :  get");
+//		// Business Logic
+//		Recipe recipe = recipeService.getRecipe(recipeNo);
+//
+//		// Model 과 View 연결
+//		model.addAttribute("recipe", recipe);
+//
+//		return "forward:/recipe/updateRecipe.jsp";
+//	}
 
 //	// @RequestMapping("/updateRecipe.do")
 ////	@RequestMapping(value = "updateRecipe", method = RequestMethod.POST)
