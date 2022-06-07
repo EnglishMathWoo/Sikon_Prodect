@@ -42,8 +42,17 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
+
+</style>
 
 <style>
+
+#usik{
+width:38px;
+height:38px;
+}
+
 body {
   padding: 0;
   margin: 0; }
@@ -524,16 +533,13 @@ $(document).ready(function() {
 	}
 
 </script>
+
 </head>
 
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand">식탁의 온도</a>
-   		</div>
-   	</div>
+	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->

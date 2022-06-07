@@ -73,7 +73,7 @@ public class BookmarkController {
 	public String listBookmark(@ModelAttribute("search") Search search, Model model,
 			HttpServletRequest request) throws Exception {
 
-		System.out.println("/recipe/listBookmark :  POST/get");
+		System.out.println("/bookmark/listBookmark :  POST/get");
 		System.out.println("search:" + search);
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -98,9 +98,8 @@ public class BookmarkController {
 		model.addAttribute("resultPage", resultPage);
 		System.out.println("resultPage´Â" + resultPage);
 		model.addAttribute("search", search);
-		model.addAttribute("user", user);
 
-		return "forward:/user/mypage.jsp";
+		return "forward:/bookmark/listBookmark.jsp";
 	}
 	
 	@RequestMapping(value="deleteBookmark" )

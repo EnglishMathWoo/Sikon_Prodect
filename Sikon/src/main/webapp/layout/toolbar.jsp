@@ -439,6 +439,11 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
               		</ul>
         </li>
         <li><a class="drop" href="#">쿠킹클래스</a>
+        			<ul>
+		                <li><a href="#">쿠킹클래스신청목록</a></li>
+		                <li><a href="#">쿠킹클래스장바구니</a></li>
+              		</ul>
+        </li>        
         <li><a class="drop" href="#">공지사항</a>
         <li><a class="drop" href="#">관리</a>
       		<ul>
@@ -451,7 +456,13 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		                <li><a href="#">판매목록</a></li>
               		</ul>
             	</li>
-	            <li><a href="#">쿠킹클래스관리</a></li>
+	            <li><a class="drop" href="#">쿠킹클래스관리</a>
+		      		<ul>
+		                <li><a href="#">쿠킹클래스등록</a></li>
+		                <li><a href="#">쿠킹클래스목록</a></li>
+		                <li><a href="#">쿠킹클래스판매목록</a></li>
+              		</ul>
+            	</li>     
 	            <li><a href="#">공지사항관리</a></li>
 	            <li><a href="#">쿠폰관리</a></li>
           	</ul>
@@ -482,8 +493,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 			
 	 		$( "a:contains('Mypage')" ).on("click" , function() {
-			$(self.location).attr("href","/mypage/mymain.jsp?userId=${user.userId}");
-			//alert('${user.userId}');
+			$(self.location).attr("href","/mypage/mymain.jsp");
 	 		});
 	 		
 	 		$( "a:contains('레시피')" ).on("click" , function() {
@@ -533,7 +543,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 	 		
 	 		$( "a:contains('상품등록')" ).on("click" , function() {
-			$(self.location).attr("href","/product/addProduct");
+			$(self.location).attr("href","/product/addProductView.jsp");
 			});
 	 			
 	 		$( "a:contains('상품목록')" ).on("click" , function() {
@@ -549,7 +559,29 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 	 			
 	 		//====================================================
+	 			 	
+	 			
+	 		$( "a:contains('쿠킹클래스신청목록')" ).on("click" , function() {
+			$(self.location).attr("href","/apply/listApply?menu=search");
+			});
 	 		
+	 		$( "a:contains('쿠킹클래스등록')" ).on("click" , function() {
+			$(self.location).attr("href","/cook/addCook.jsp");
+			});
+	 		
+	 		$( "a:contains('쿠킹클래스목록')" ).on("click" , function() {
+				$(self.location).attr("href","/cook/listCook?menu=manage");
+				});
+	 		
+	 		$( "a:contains('쿠킹클래스판매목록')" ).on("click" , function() {
+			$(self.location).attr("href","/apply/listSale?menu=manage");
+			});
+	 		
+	 		$( "a:contains('쿠킹클래스장바구니')" ).on("click" , function() {
+			$(self.location).attr("href","/wish/getWish?userId=${sessionScope.user.userId}");
+			});
+	 			
+	 		//====================================================
 		 });
 	 	
 	</script>  
