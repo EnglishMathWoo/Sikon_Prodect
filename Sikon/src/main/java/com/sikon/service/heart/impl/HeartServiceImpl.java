@@ -76,7 +76,10 @@ public class HeartServiceImpl implements HeartService{
 	}
 	
 
-	
+	public List<Heart> getHeart(String userId) throws Exception {
+		
+		return heartDao.getHeart(userId);	
+	}		
 
 	
 

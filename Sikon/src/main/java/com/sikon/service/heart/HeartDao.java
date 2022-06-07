@@ -3,6 +3,7 @@ package com.sikon.service.heart;
 import java.util.List;
 
 import com.sikon.service.domain.Heart;
+import com.sikon.service.domain.Wish;
 
 
 
@@ -23,6 +24,8 @@ public interface HeartDao {
 	public void updateHeartCheck(int cookNo,String userId) throws Exception;
 	
 	public void updateHeartCheckCancel(int cookNo,String userId) throws Exception;
+	
+	public List<Heart> getHeart(String userId) throws Exception;
 	
 	
 	

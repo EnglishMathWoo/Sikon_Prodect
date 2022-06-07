@@ -37,6 +37,7 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.User;
+import com.sikon.service.domain.Wish;
 import com.sikon.service.domain.Heart;
 
 import com.sikon.service.heart.HeartService;
@@ -86,7 +87,7 @@ public class CookController {
 	int pageSize;
 
 
-	@RequestMapping( value="addCook", method=RequestMethod.GET)
+	@RequestMapping( value="addCook	", method=RequestMethod.GET)
 	public String addCook( HttpSession session, Model model) throws Exception {
 
 		System.out.println("/cook/addCook : GET");
@@ -96,8 +97,6 @@ public class CookController {
 		User user = userService.getUser(userId);
 		
 		model.addAttribute("user",user );
-		
-		System.out.println(user);
 		
 		return "redirect:/cook/addCook.jsp";
 	}
@@ -109,7 +108,7 @@ public class CookController {
 
 	public String addCook(@ModelAttribute("cook") Cook cook,Model model
 	,@RequestParam("uploadfile") MultipartFile[] fileArray
-			
+	,HttpServletRequest request		
 			) throws Exception {
 		
 		
@@ -132,12 +131,16 @@ public class CookController {
 			
 			
 		}
+		HttpSession session=request.getSession();
+		User user=(User)session.getAttribute("user");		
+		
 		
 		//취소는 초기 상태값을 0으로 준다
 		
 		System.out.println(cook);
-		
+		cook.setMentor(user);
 		cook.setCookFilename(cookFilename);
+		
 
 		
 		cookService.addCook(cook);
@@ -245,9 +248,11 @@ public class CookController {
 		
 	
 		search.setPageSize(pageSize);
-		
+
+		HttpSession session=request.getSession();
+		User user=(User)session.getAttribute("user");
 		// Business logic 수행
-		Map<String, Object> map = cookService.getCookList(search);
+		Map<String, Object> map = cookService.getCookList(search,user);
 		
 	
 				
@@ -256,8 +261,6 @@ public class CookController {
 				pageSize);
 		
 
-		HttpSession session=request.getSession();
-		User user=(User)session.getAttribute("user");
 		
 		model.addAttribute("list", map.get("list"));
 		System.out.println(map.get("list"));
@@ -268,6 +271,40 @@ public class CookController {
 	
 
 		return "forward:/cook/listCook.jsp?menu="+menu;
+	}
+	
+	@RequestMapping(value = "listMyCook")
+	public ModelAndView listMyCook(@ModelAttribute("search") Search search, Model model,
+			HttpServletRequest request) throws Exception {
+
+		System.out.println("/cook/listMyCook :  POST/get");
+		System.out.println("search:" + search);
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+
+		search.setPageSize(pageSize);
+
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+
+		// Business logic 수행
+		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		System.out.println(resultPage);
+
+		// Model 과 View 연결
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("resultPage", resultPage);
+		modelAndView.addObject("search", search);
+
+		modelAndView.setViewName("forward:/cook/listMyCook.jsp");
+
+		return modelAndView;
 	}
 	
 	@RequestMapping( value="/deleteCook", method=RequestMethod.GET)
@@ -283,3 +320,4 @@ public class CookController {
 		return "forward:/cook/listCook?menu=search";
 	}	
 }
+

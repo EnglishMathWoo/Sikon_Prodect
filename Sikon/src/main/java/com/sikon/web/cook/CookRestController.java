@@ -127,7 +127,7 @@ public class CookRestController {
 		
 		Map map = new HashMap();
 		
-		String fileRoot = "C:\\summernote_image\\";	//저장될 외부 파일 경로
+		String fileRoot = "C:\\Users\\bitcamp\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\summerNote\\";	//저장될 외부 파일 경로
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
 		
 		System.out.println(originalFileName);
@@ -216,7 +216,7 @@ public class CookRestController {
 		
 	}
 	@RequestMapping( value="json/listCook", method=RequestMethod.POST )
-	public Map  listCook(  @RequestBody Search search ) throws Exception{
+	public Map  listCook(  @RequestBody Search search , HttpServletRequest request) throws Exception{
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
@@ -224,8 +224,10 @@ public class CookRestController {
 		
 		search.setPageSize(pageSize);
 		
+		HttpSession session=request.getSession();
+		User user=(User)session.getAttribute("user");
 		// Business logic 수행
-		Map<String , Object> map=cookService.getCookList(search);
+		Map<String , Object> map=cookService.getCookList(search,user);
 		
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(),pageUnit , pageSize);

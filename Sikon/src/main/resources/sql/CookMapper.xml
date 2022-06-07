@@ -27,7 +27,7 @@
 		<result property="cookStock"      column="cook_stock"           jdbcType="NUMERIC"/>
 		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
 		<result property="cookContent" 			column="cook_content " 			jdbcType="CLOB" javaType="java.lang.String"/>
-		
+		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
 	
 		
 	</resultMap>
@@ -35,9 +35,9 @@
 	<!-- SQL : INSERT -->
 	<insert 	id="addCook"		parameterType="cook" >
 	 	INSERT
-		INTO cook(cook_no , cook_name , cook_filename , cook_brief, cook_difficuty, cook_price,cook_theme,apl_startime,apl_endtime,cook_recruit,start_time,end_time,cook_location,cook_regdate,cook_video, cook_stock,heart_hit,cook_content) 
+		INTO cook(cook_no , cook_name , cook_filename , cook_brief, cook_difficuty, cook_price,cook_theme,apl_startime,apl_endtime,cook_recruit,start_time,end_time,cook_location,cook_regdate,cook_video, cook_stock,heart_hit,cook_content, mentor_nickname ) 
 		VALUES	 (	seq_cook_cook_no.nextval , #{cookName} , #{cookFilename} , #{cookBrief} , #{cookDifficuty} , #{cookPrice} , #{cookTheme} , #{aplstarTime} , #{aplendTime} ,
-		#{cookRecruit} , #{startTime}, #{endTime}, #{cookLocation},SYSDATE, #{cookVideo}, #{cookStock:NUMERIC}, #{hearthit:NUMERIC},#{cookContent})
+		#{cookRecruit} , #{startTime}, #{endTime}, #{cookLocation},SYSDATE, #{cookVideo}, #{cookStock:NUMERIC}, #{hearthit:NUMERIC},#{cookContent}, #{mentor.userNickname:VARCHAR} )
 	 </insert>
 	 
 	 
@@ -80,11 +80,12 @@
 
 		 
 	<!-- SQL : SELECT LIST -->
-	<select  id="getCookList"  parameterType="search"	resultMap="cookSelectMap">
+	<select  id="getCookList"  parameterType="map"	resultMap="cookSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT *
 											FROM cook
+										
 											
 												
 												<if test="searchCondition != null">
@@ -102,8 +103,8 @@
 											</if>
 										
 											ORDER BY  cook_no ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>
 	 	<!--  위 두번째 subQuery 의  
 	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
@@ -117,25 +118,29 @@
 		-->
 	
 	<!-- SQL : SELECT ROW Count -->	 
-	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT cook_no , cook_name ,cook_price
-						FROM cook
-						<if test="searchCondition != null">
-							<where>
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			cook_no LIKE '%'||#{searchKeyword}||'%'
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		cook_name LIKE '%'||#{searchKeyword}||'%'
-								</if>
-							
-							</where>
-							
-						</if>  
-						
+	  	FROM(	SELECT *
+						FROM (	SELECT *
+											FROM cook
+										
+											
+												
+												<if test="searchCondition != null">
+												
+												
+												
+													<if test="searchCondition == 0 and searchKeyword !='' ">
+										 				WHERE cook_no like '%' || #{searchKeyword} || '%'
+													</if>
+													<if test="searchCondition == 1 and searchKeyword !='' ">
+										 				WHERE cook_name like '%' || #{searchKeyword} || '%'
+													</if>
+												
+												
+											</if>
 					
-													) countTable						
+								ORDER BY cook_no 	) countTable		)				
 	 </select>
 	 
 	 <delete	id="deleteCook"	parameterType="int" >
@@ -144,6 +149,56 @@
 	   	WHERE cook_no = #{cookNo}
 	 </delete>
 	 
+
+	 <!-- SQL : 마이페이지(내가 쓴 쿠킹클래스) LIST -->
+	 <select  id="listMyCook"  parameterType="search"	resultMap="cookSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT *
+											FROM cook
+											WHERE mentor_nickname=#{userNickname}
+											<if test="searchCondition != null">
+											<choose>
+													<when test="searchCondition == 0 and searchKeyword !='' ">
+										 				and cook_NO LIKE '%'||#{searchKeyword}||'%'
+													</when>
+													<when test="searchCondition == 1 and searchKeyword !='' ">
+										 				 and cook_Name LIKE '%'||#{searchKeyword}||'%'
+													</when>
+													<otherwise>
+													  and cook_NO LIKE '%'|| ''||'%'
+													</otherwise>
+													</choose>
+											</if>
+											
+													
+								
+
+
+ )  inner_table
+											
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+	 </select>	 
+	 <select  id="getTotalMyCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT cook_no 
+						FROM cook
+						WHERE mentor_nickname=#{userNickname}
+						<if test="searchCondition != null">
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			and cook_no LIKE '%'||#{searchKeyword}||'%'
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 		and cook_name LIKE '%'||#{searchKeyword}||'%'
+								</if>
+								
+							
+						</if>  
+						
+
+													) countTable						
+	 </select> 
 
 	 
 </mapper>

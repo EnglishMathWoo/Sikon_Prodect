@@ -106,7 +106,24 @@ div.thumbnail {
 			console.log('${param.menu}');
 		}
 		
-		
+		 $(function() {
+				
+				$("button.delete").on("click" , function() {
+					
+					var checkCount = $("input[name='cookCheck']:checked").length;
+				    var array = new Array();
+					$("input[name='cookCheck']:checked").each(function() {
+						array.push($(this).attr('id'));
+				    });
+					
+					if(checkCount != 0) {
+						alert("쿠킹클래스를 삭제하시겠습니까?")
+						self.location = "/cook/deleteCook?checkCount="+checkCount+"&checkList="+array;
+					} else {
+						alert("선택된 게시물이 없습니다.")	
+					}
+				});
+			});		
 
 		
 		 $(document).on('click', 'a.update', function(){
@@ -419,6 +436,7 @@ div.thumbnail {
 
 
 <c:forEach var="cook" items="${list}">
+<td align="left"><input type="checkbox" name="cookCheck" id="${cook.cookNo}"/></td>
  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
   <input type="hidden" name="userId" value="${user.userId}">
   <input type="hidden" name="cookNo" value="${cook.cookNo}">
@@ -427,7 +445,7 @@ div.thumbnail {
 
 	<div class="row">
 		
-	
+
 				<div class="col-xs-4 col-md-6 text-lefr image"  value="${cook.cookNo }">				
      <c:choose>
     
@@ -515,8 +533,8 @@ div.thumbnail {
 				<div><h5><strong>수업시간 : ${cook.startTime}&emsp;~&emsp;${cook.endTime}</strong></h5></div>				
 				</div>
 		
-				
-		
+				<button type="button" class="btn btn-primary delete" value="${cook.cookNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
+			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
 				
 				
 	
