@@ -119,8 +119,7 @@
 		    $(".tabContent > div").eq(idx).show();
 		  })
 		});
-			
-			
+						
 		 $(function() {
 				
 			$("#addCoupon").on("click" , function() {
@@ -145,7 +144,7 @@
 				    var array = new Array();
 					$("input[name='deleteCheck']:checked").each(function() {
 						array.push($(this).attr('id'));
-				    });
+			    });
 					
 					//Debug..
 					if(checkCount != 0) {
