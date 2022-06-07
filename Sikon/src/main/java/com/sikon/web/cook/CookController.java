@@ -136,14 +136,16 @@ public class CookController {
 
 
 	@RequestMapping("getCook")
-	public ModelAndView getCook( @RequestParam("cookNo") int cookNo ,
+	public String getCook( @RequestParam("cookNo") int cookNo ,@RequestParam("menu") String menu,
 		@CookieValue(value="history", required=false) Cookie cookie,
-		HttpServletResponse response) throws Exception {
+		HttpServletResponse response,Model model) throws Exception {
 		
 		System.out.println("getCook");
 		
 		Cook cook = cookService.getCook(cookNo);
 		
+		model.addAttribute("cook", cook);
+		model.addAttribute("menu", menu);
 		
 		String history = "/"+cookNo;
 		
@@ -157,10 +159,8 @@ public class CookController {
 		cookie.setMaxAge(3600);
 		response.addCookie(cookie);						
 		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("forward:/cook/getCook.jsp");
-		modelAndView.addObject("cook", cook);
-		return modelAndView;
+
+		return "forward:/cook/getCook.jsp";
 	}
 
 
@@ -257,4 +257,17 @@ public class CookController {
 
 		return "forward:/cook/listCook.jsp?menu="+menu;
 	}
+	
+	@RequestMapping( value="/deleteCook", method=RequestMethod.GET)
+	public String deleteCook( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
+
+		System.out.println("/cook/deleteCook : GET");
+		
+		//Business Logic
+		for(int i=0; i<checkCount; i++) {
+			cookService.deleteCook(checkList[i]);
+		}		
+
+		return "forward:/cook/listCook?menu=search";
+	}	
 }

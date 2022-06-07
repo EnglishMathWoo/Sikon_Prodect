@@ -212,7 +212,8 @@ public class Cook {
 	public void setHearthit(int hearthit) {
 		this.hearthit = hearthit;
 	}
-	
+
+
 	@Override
 	public String toString() {
 		return "Cook [cookNo=" + cookNo + ", cookName=" + cookName + ", cookFilename=" + cookFilename + ", cookBrief="
@@ -220,8 +221,10 @@ public class Cook {
 				+ cookTheme + ", aplstarTime=" + aplstarTime + ", aplendTime=" + aplendTime + ", cookRecruit="
 				+ cookRecruit + ", startTime=" + startTime + ", endTime=" + endTime + ", cookLocation=" + cookLocation
 				+ ", cookRegdate=" + cookRegdate + ", cookVideo=" + cookVideo + ", cookStock=" + cookStock
-				+ ", hearthit=" + hearthit + "]";
+				+ ", hearthit=" + hearthit + ", cookContent=" + cookContent + "]";
 	}
+	
+
 
 
 

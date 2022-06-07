@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=euc-kr" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -50,7 +51,7 @@ $(function() {
 	 $( "button:contains('확인')" ).on("click" , function() {
 		 
 		 
-		 self.location = "/cook/listCook.jsp?menu=search"
+		 self.location = "/cook/listCook.jsp?menu=manage"
 	});
 	
 	 $( "button:contains('추가등록')" ).on("click" , function() {
@@ -163,19 +164,33 @@ $(function() {
 		    <div class="col-sm-4">
 		   
 		    	
-		    
+		<c:choose>	    
 		
 		<c:when test="${cook.cookFilename.contains('/')}">
 		
 			<td class="ct_write01">
 		
+				<c:choose>
+				<c:when test="${cook.cookFilename.contains('mp4')}">
 					<c:forEach var="name" items="${cook.cookFilename.split('/')}">
-						<img src="/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+						<video width="400" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"></video>
 					</c:forEach>
-	
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="name" items="${cook.cookFilename.split('/')}">
+						<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+					</c:forEach>
+				</c:otherwise>
+				</c:choose>		
+		
 			</td>
 		
 		</c:when>
+		
+		<c:otherwise>
+			<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle"/>
+		</c:otherwise>
+		</c:choose>
 		
 	
 
@@ -185,11 +200,40 @@ $(function() {
 		  <div class="form-group">
 		    <label for="cookTheme" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스테마</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookTheme" name="cookTheme" value="${cook.cookTheme}" placeholder="쿠킹클래스테마">
-		      
+			<c:if test = "${cook.cookTheme =='KO'}">
+			한식 
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'JA'}">
+			일식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'AM'}">
+			양식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'CH'}">
+			중식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'DE'}">
+			간식
+			</c:if>						
 		    </div>
 		  
 		  </div>
+		  <div class="form-group">
+		    <label for="cookDifficuty" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스난이도</label>
+		    <div class="col-sm-4">
+				<c:if test = "${cook.cookDifficuty == '1'}">
+			초급 
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '2'}">
+			중급
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '3'}">
+			고급
+			</c:if>
+					
+		    </div>
+		  
+		  </div>		  
 		  
 		    <div class="form-group">
 		    <label for="cookLocation" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스장소</label>
@@ -197,7 +241,17 @@ $(function() {
 		      <input type="text" class="form-control" id="cookLocation" name="cookLocation" value="${cook.cookLocation}" placeholder="쿠킹클래스장소">
 		      
 		    </div>
+    
+
+
+		  <div class="form-group">
+		    <label for="cookContent" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스내용</label>
+		    <div class="col-sm-4">
+		        ${cook.cookContent}
+		    </div>
+		  </div>
 		  
+		  		  
 		  </div>
 		  
 	<div class="row">
