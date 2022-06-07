@@ -23,7 +23,6 @@
 		<typeAlias alias="search" type="com.sikon.common.Search" />
 		<typeAlias alias="review" type="com.sikon.service.domain.Review" />
 		<typeAlias alias="recipe" type="com.sikon.service.domain.Recipe" />
-		<typeAlias alias="ingredient" type="com.sikon.service.domain.Ingredient" />
 		<typeAlias alias="bookmark" type="com.sikon.service.domain.Bookmark" />
 		<typeAlias alias="apply" type="com.sikon.service.domain.Apply" />
 		<typeAlias alias="cook" type="com.sikon.service.domain.Cook" />

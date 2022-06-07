@@ -184,7 +184,7 @@ public class ProductController {
 		product.setProdThumbnail(fileName);
 		productService.updateProduct(product);
 		
-		return "redirect:/product/getProduct?prodNo="+product.getProdNo();
+		return "redirect:/product/getProduct?prodNo="+product.getProdNo()+"&menu=manage";
 	}
 	
 	

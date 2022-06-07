@@ -182,6 +182,12 @@ p {
     margin: 0 0 0px;
 }
 
+#image {
+	width: 250px;
+	height:250px;
+} 
+
+
 </style>
 
 

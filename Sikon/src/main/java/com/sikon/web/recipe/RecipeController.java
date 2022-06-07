@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
@@ -118,8 +119,9 @@ public class RecipeController {
 		System.out.println("/recipe/getRecipe : post / get");
 		System.out.println("recipeNo" + recipeNo);
 		// Business Logic
-		Recipe recipe =recipeService.getRecipe(recipeNo);
-		List list=recipeService.getIngredient(recipeNo);
+		List list =recipeService.getRecipe(recipeNo);
+//		Recipe recipe =recipeService.getRecipe(recipeNo);
+	//	List list=recipeService.getIngredient(recipeNo);
 		
 		System.out.println("재료"+list);
 //		if (search.getCurrentPage() == 0) {
@@ -137,13 +139,15 @@ public class RecipeController {
 		// Model 과 View 연결
 		//model.addAttribute("recipe", list);
 		model.addAttribute("list", list);
-		model.addAttribute("recipe", recipe);
+		model.addAttribute("recipe", list.get(0));
+		
+//		model.addAttribute("recipe", recipe);
 //		model.addAttribute("resultPage", resultPage);
 //		model.addAttribute("search", search);
 
 		return "forward:/recipe/getRecipe.jsp?";
 	}
-//
+
 //	@RequestMapping(value = "updateRecipe", method = RequestMethod.GET)
 //	public String updateRecipe(@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
 //
@@ -156,7 +160,7 @@ public class RecipeController {
 //
 //		return "forward:/recipe/updateRecipe.jsp";
 //	}
-//
+
 //	// @RequestMapping("/updateRecipe.do")
 ////	@RequestMapping(value = "updateRecipe", method = RequestMethod.POST)
 ////	public String updateRecipe(@ModelAttribute("recipe") Recipe recipe,
@@ -224,40 +228,40 @@ public class RecipeController {
 
 		return "forward:/recipe/listRecipe.jsp";
 	}
-//
-//	@RequestMapping(value = "getMyRecipeList")
-//	public ModelAndView getMyRecipeList(@ModelAttribute("search") Search search, Model model,
-//			HttpServletRequest request) throws Exception {
-//
-//		System.out.println("/recipe/myRecipe :  POST/get");
-//		System.out.println("search:" + search);
-//		if (search.getCurrentPage() == 0) {
-//			search.setCurrentPage(1);
-//		}
-//
-//		search.setPageSize(pageSize);
-//
-//		HttpSession session = request.getSession();
-//		User user = (User) session.getAttribute("user");
-//
-//		// Business logic 수행
-//		Map<String, Object> map = recipeService.getMyRecipeList(search, user.getUserNickname());
-//
-//		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-//				pageSize);
-//		System.out.println(resultPage);
-//
-//		// Model 과 View 연결
-//
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.addObject("list", map.get("list"));
-//		modelAndView.addObject("resultPage", resultPage);
-//		modelAndView.addObject("search", search);
-//
-//		modelAndView.setViewName("forward:/recipe/myRecipe.jsp");
-//
-//		return modelAndView;
-//	}
+
+	@RequestMapping(value = "listMyRecipe")
+	public ModelAndView listMyRecipe(@ModelAttribute("search") Search search, Model model,
+			HttpServletRequest request) throws Exception {
+
+		System.out.println("/recipe/myRecipe :  POST/get");
+		System.out.println("search:" + search);
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+
+		search.setPageSize(pageSize);
+
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+
+		// Business logic 수행
+		Map<String, Object> map = recipeService.getMyRecipeList(search, user.getUserNickname());
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		System.out.println(resultPage);
+
+		// Model 과 View 연결
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("resultPage", resultPage);
+		modelAndView.addObject("search", search);
+
+		modelAndView.setViewName("forward:/recipe/myRecipe.jsp");
+
+		return modelAndView;
+	}
 	
 //	@RequestMapping(value = "bestRecipeList")
 //	public String bestRecipeList(Model model) throws Exception {

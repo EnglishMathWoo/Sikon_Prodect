@@ -75,7 +75,7 @@ div.row{
 			 
 			 var list = [];
 		   		<c:forEach var="cartprod" items="${Cart}" >
-		   		totalprice += (Number(${cartprod.price})*Number(${cartprod.quantity}));
+		   		totalprice += (Number(${cartprod.cartProd.prodDisPrice})*Number(${cartprod.quantity}));
 		   		</c:forEach>
 		   		
 			 console.log(totalprice);
@@ -90,6 +90,8 @@ div.row{
 					console.log('delete');
 					console.log(cartNo);
 					self.location = "/cart/deleteCart?cartNo="+cartNo;
+					
+					alert('삭제');
 			  });
 
 	
@@ -195,28 +197,16 @@ div.row{
 			<c:set var="i" value="${ i+1 }" />
 			  
 			  <div class="col-md-1 text-center">
-			  	<input type="checkbox" name="wishNo" value="${cart.cartNo}"/>		  	
+			  	<input type="checkbox" name="cartNo" value="${cart.cartNo}"/>		  	
 			  </div>
 			  
 			  <div class="col-md-6 text-left">
-			  <c:choose>
-				    <c:when test="${cart.fileName.contains('&')}">
-					    <c:choose>
-						<c:when test="${cart.fileName.contains('mp4')}">
-							<img src="/resources/images/uploadFiles/tumbnail.png" class="image" width="100" height="100">
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="name" items="${cart.fileName.split('&')[0]}">
-								<img src="/resources/images/uploadFiles/${name}" class="image" width="100" height="100">
-							</c:forEach>
-						</c:otherwise>
-						</c:choose>
-				    </c:when>
-				    <c:otherwise>
-						<img src="/resources/images/uploadFiles/${cart.fileName}" class="img-responsive img-rounded" class="image" width="100" height="100">
-					</c:otherwise>
-				</c:choose>
-				&emsp;&emsp;${cart.prodName }
+				    
+				<c:forEach var="name" items="${cart.cartProd.prodThumbnail.split('&')[0]}">
+					<img src="/resources/images/uploadFiles/${name}" class="image" width="100" height="100">
+				</c:forEach>
+						
+				&emsp;&emsp;${cart.cartProd.prodName }
 			  </div>	 
 			    	  
 			    	  
@@ -236,7 +226,7 @@ div.row{
 			  
 			  
 			  
-			  <div align="center" class="col-md-2 text-center price" value="${cart.price*cart.quantity }" >${cart.price*cart.quantity } 원</div>
+			  <div align="center" class="col-md-2 text-center price" value="${cart.cartProd.prodDisPrice*cart.quantity }" >${cart.cartProd.prodDisPrice*cart.quantity } 원</div>
 			  
 			  
 			  
@@ -259,7 +249,6 @@ div.row{
 	  <hr/>
 	  
 	  <div align="right">
-	 	 <button class="btn btn-default btn-sm test">TEST</button>
 	  	<button class="btn btn-default btn-sm">구매하기</button>
 	  </div>
 	  

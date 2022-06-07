@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.Ingredient;
 import com.sikon.service.domain.Recipe;
 
 //레시피에서 CRUD 추상화/캡슐화한 DAO Interface Definition
@@ -14,9 +13,10 @@ public interface RecipeDao {
 	public void addRecipe(Recipe recipe,Map ingredient) throws Exception;
 
 	//SELECT ONE
-	public Recipe getRecipe(int recipeNo) throws Exception;
+//	public Recipe getRecipe(int recipeNo) throws Exception;
+	public List getRecipe(int recipeNo) throws Exception;
 
-	public List getIngredient(int recipeNo) throws Exception;
+//	public List getIngredient(int recipeNo) throws Exception;
 
 	//SELECT LIST
 	public List<Recipe> getRecipeList(Search search) throws Exception;
