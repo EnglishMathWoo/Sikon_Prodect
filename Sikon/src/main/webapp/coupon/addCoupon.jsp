@@ -42,10 +42,11 @@
 		}
 		body>div.container {
 			border: 3px solid #D6CDB7;
-			margin-top: 100px;
+			margin-top: 80px;
 			font-family: 'Nanum Myeongjo', serif;
 		}
 		h1.text-center {
+			margin-top: 20px;
 			font-family: 'Nanum Myeongjo', serif;
 		}
 			div.form-group{

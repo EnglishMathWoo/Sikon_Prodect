@@ -48,8 +48,7 @@
 		
 		div.form-group{
 			font-family: 'Nanum Myeongjo', serif;
-		}
-		              
+		}  
     </style>
     
     
@@ -137,17 +136,17 @@
 	
 		<div class="page-header text-info">
 			<c:if test = "${menu == 'manage'}">
-				<h3>공지사항관리</h3>
+				<h3 style="color:#bc8f8f">공지사항관리</h3>
 			</c:if>
 			<c:if test = "${menu == 'search'}">
-				<h3>공지사항목록</h3>
+				<h3 style="color:#bc8f8f">공지사항목록</h3>
 			</c:if>
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row">
 	    	<form class="form-inline" name="detailForm">
-		    	<p class="text-primary">
+		    	<p class="text-primary" style="color:gray">
 		    		&nbsp;&nbsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
 			<c:if test = "${menu == 'manage'}">
@@ -169,13 +168,14 @@
           	<c:if test = "${menu == 'manage'}">
           	<th align="center"></th>
           	</c:if>
+          	<th align="center"></th>
             <th align="center">공지번호</th>
             <th align="center"></th>
             <th align="left" >공지제목</th>
             <th align="center"></th>
             <th align="left">공지시간</th>
           </tr>
-        </thead>
+         </thead>
        
 		<tbody>
 		
@@ -185,6 +185,7 @@
 		<tr class="ct_list_pop">
 			<c:if test = "${menu == 'manage'}">
 				<td align="left"><input type="checkbox" name="noticeCheck" id="${notice.noticeNo}"/></td>
+				<td></td>
 				<td align="left"> ${notice.noticeNo}</td>
 				<td></td>
 				<td align="left" name="manageNoticeTitle" id="manageNoticeTitle">
@@ -195,6 +196,7 @@
 				<td align="left"> ${notice.noticeDate} </td>
 			</c:if>
 			<c:if test = "${menu == 'search'}">
+				<td></td>
 				<td align="left"> ${notice.noticeNo}</td>
 				<td></td>
 				<td align="left" name="searchNoticeTitle" id="searchNoticeTitle">
@@ -205,7 +207,6 @@
 				<td align="left"> ${notice.noticeDate} </td>
 				<td></td>
 			</c:if>
-			
 		</tr>
 	</c:forEach>
         

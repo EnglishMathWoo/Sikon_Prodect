@@ -509,7 +509,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 
 	 		$( "a:contains('공지사항관리')" ).on("click" , function() {
-			$(self.location).attr("href","/notice/listNotic?menu=manage");
+			$(self.location).attr("href","/notice/listNotice?menu=manage");
 			});
 	 		
 	 		$( "a:contains('쿠폰관리')" ).on("click" , function() {
