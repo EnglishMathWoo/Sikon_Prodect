@@ -64,15 +64,9 @@ body {
 	padding-top: 50px;
 }
 div.thumbnail {
-	height:410px;
-	border-radius: 5px;
+	height: 500px;
+	width: 340px;
 }
-
-#image {
-	width: 250px;
-	height:250px;
-	border-radius: 5px;
-} 
 </style>
 
 
@@ -106,7 +100,11 @@ div.thumbnail {
 		}
 		
 		
-
+		$(document).on('click', 'a.btn-defualt', function(){
+			 var cookNo =$(this).attr("value");
+			 console.log('상세정보');
+			 self.location = "/cook/getCook&cookNo="+cookNo
+		});
 		
 		 $(document).on('click', 'a.update', function(){
 			 var cookNo =$(this).attr("value");
@@ -170,23 +168,22 @@ div.thumbnail {
 				 $(document).on('click', 'a.btn-defualt', function(){
 					 var cookNo =$(this).attr("value");
 					 console.log('상세정보');
-					 self.location = "/cook/getCook?menu=search&cookNo="+cookNo
+					 self.location = "/cook/getcook?menu=search&cookNo="+cookNo
 				});
 				 
 				
 				 $(document).on('click', 'a.update', function(){
 					 var cookNo =$(this).attr("value");
 					 console.log('수정하기');
-					 self.location = "/cook/updateCook?cookNo="+cookNo
+					 self.location = "/cook/updatecook?cookNo="+cookNo
 				});
 				 
-				 $(document).on('click', '.thumbnail', function(){
+				 $(document).on('click', 'a.buy', function(){
 					 var cookNo =$(this).attr("value");
-					 console.log('썸네일 클릭'+cookNo);
-					 self.location = "/cook/getCook?menu=search&cookNo="+cookNo
+					 console.log('구매하기');
+					 self.location = "/cook/getcook?menu=search&cookNo="+cookNo
 				});
-				 
-
+				
 				 //=========autoComplete=================================================
 				 
 				 var list = [];
@@ -213,7 +210,7 @@ div.thumbnail {
 		        	   		
 					            $.ajax({
 					                
-					                  url : "/cook/json/listCook?&menu=${param.menu }" ,
+					                  url : "/cook/json/listcook?&menu=${param.menu }" ,
 					                  method : "POST" ,
 					                  data : JSON.stringify({
 					                	  currentPage : cpage
@@ -238,38 +235,43 @@ div.thumbnail {
 					                		var cancel;
 					                		var button;
 					                
-					                		if(JSONData.list[i].cookStock == '0'){
+					                		if(JSONData.list[i].cancel == '0'){
 				                				
-				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' id='image'>";
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image'>";
 				                				
 					                			
-					                		}else{
+					                		}else if(JSONData.list[i].cancel == '1'){
 					                			
-				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' id='image'>";
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image_none'>";
 				                				
 					                		}
 					                		
 					                		
 					                		if(${user.role.equals('admin') && param.menu.equals('manage')}){
-					                			message="<p>남은 재고량 : "+JSONData.list[i].cookStock+"</p>";
+					                			message="<p>남은 재고량 : "+JSONData.list[i].stock+"</p>";
 					                		}else{
 					                			message="<p></p>";
 					                		}
 					                		
 					                		
-
+					                		if(JSONData.list[i].cancel == '1' && param.menu.equals('search')){
+					                			cancel = "<p style='color:#DB4455'>판매중지</p>";
+					                		}else if(JSONData.list[i].cancel == '1' && param.menu.equals('manage')){
+					                			cancel = "<p style='color:#DB4455'>*판매중지된 상품입니다.</p>";
+					                		}else if(JSONData.list[i].cancel == '0'){
+					                			cancel = "<p></p>";
+					                		}
 					                		
 					                		if(${param.menu=='manage' }){
 					                			button = "<a class='btn btn-defualt btn update'  role='button' value='"+JSONData.list[i].cookNo+"'>수정하기</a>" ;
 					                		}else{
-					                			if(JSONData.list[i].cookStock == "0"){
+					                			if(JSONData.list[i].stock == "0"){
 					                				button = "<a class='btn btn-defualt btn disabled' role='button' >재고없음</a>";
 					                			}else{
-					                				if(JSONData.list[i].cookStock=='0'){
-					                					
-					                					button = "<a class='btn btn-default btn disabled' role='button' value='"+JSONData.list[i].cookNo+"'>구매하기</a>";
-					                				}else{
+					                				if(JSONData.list[i].cancel=='0'){
 					                					button = "<a class='btn btn-default btn buy' role='button' value='"+JSONData.list[i].cookNo+"'>구매하기</a>";
+					                				}else{
+					                					button = "<a class='btn btn-default btn disabled' role='button' value='"+JSONData.list[i].cookNo+"'>구매하기</a>";
 					                				}
 					                			}
 					                		}
@@ -278,7 +280,9 @@ div.thumbnail {
 						                     					+"<div class='thumbnail'>"
 						                     					+image
 					                     						+"<div class='caption'>"
-					                     						+"<h3>"+JSONData.list[i].cookName+"</h3>"   
+					                     						+"<h3>"+JSONData.list[i].cookName+"</h3>"
+					                     						+cancel
+					                     						+"<p>"+JSONData.list[i].price+" 원</p>"
 					                     						+"<p align='right'>"
 					                     						+"<a class='btn btn-defualt btn'  role='button' value='"+JSONData.list[i].cookNo+"'>상세정보</a>"
 					                     						+button
@@ -364,8 +368,6 @@ div.thumbnail {
 				
 					
 						<input type="hidden" id="currentPage" name="currentPage" value="1" />
-						<input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
-						  <input type="hidden" name="cookNo" value="${cook.cookNo}">
 				
 		</form>
 			
@@ -380,45 +382,63 @@ div.thumbnail {
 		
 <div class="container">
 	
-<div class="row" id="target">
+<div class="row">
 	<c:set var="i" value="0" />
 
-
+<c:if test="${param.menu=='search'}">
 <c:forEach var="cook" items="${list}">
- <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
   <input type="hidden" name="userId" value="${user.userId}">
   <input type="hidden" name="cookNo" value="${cook.cookNo}">
     <input type="hidden" name="cookNo" value="${cook.cookStock}">
    <input type="hidden" name="heartcheck" value="${heart.heartcheck}">
-
- <div class="col-sm-6 col-md-3">
+ <div class="col-sm-6 col-md-4">
  <br/> <br/>
-    <div class="thumbnail" value="${cook.cookNo}">
- 
-				    <c:choose>
-				    <c:when test="${cook.cookFilename.contains('/')}">
-					    <c:choose>
-						<c:when test="${cook.cookFilename.contains('mp4')}">
-							<img src="/resources/images/uploadFiles/${name}" id="image">
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="name" items="${cook.cookFilename.split('&')[0]}">
-								<img src="/resources/images/uploadFiles/${name}" id="image">
-							</c:forEach>
-						</c:otherwise>
-						</c:choose>
-				    </c:when>
-				    <c:otherwise>
-						<img src="/resources/images/uploadFiles/${cook.cookFilename}" class="img-responsive img-rounded" id="image">
-					</c:otherwise>
-					</c:choose>
+    <div class="thumbnail">
+    				<c:choose>
+    
+    	<c:when test="${(cook.cookFilename).contains('/')}">
+    		<c:forEach var="name" items="${(cook.cookFilename).split('/')[0]}">
+		<img class="image" src="/resources/images/uploadFiles/${name}" width="200" height="200" ><br/>
+			</c:forEach>
+		
+      </c:when>
+		
+		<c:otherwise>
+		
+		<img class="image" src="/resources/images/uploadFiles/${cook.cookFilename}" width="200" height="200"><br/>
+		</c:otherwise>
+		</c:choose>
 		
       <div class="caption">
         <h4 style="color:black;">${cook.cookName }</h4>
-       <p align="left" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>    
+        <p>${cook.cookPrice }</p>
         
      
+      
+        <p><a href="/cook/getCook?menu=search&cookNo=${cook.cookNo}" class="btn btn-default" role="button">상세정보</a>
+         <a href="/cook/updateCook?menu=${param.menu}&cookNo=${cook.cookNo }" class="btn btn-default" role="button">수정</a> 
+        
+        <a class="btn btn-default" disabled="disabled" role="button">구매</a>
+                    <p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
+                    	
 
+        
+                   <script>
+    
+          
+            var p =  $(this).attr("value");
+            $('p').on('click',function(){
+                if(p<=0){
+                	 $(this).attr('class','bi-heart-fill');
+                    p++;
+                }else if(p==1){
+                	$(this).attr('class','bi-heart');
+                    p--;
+                }
+                
+            });
+
+</script>
     
 
 
@@ -429,9 +449,41 @@ div.thumbnail {
     </div>
   </div>		
     </c:forEach>
-
+    </c:if>
     
-
+<c:if test="${param.menu=='manage'}">
+    <c:forEach var="cook" items="${list}">
+    
+ <div class="col-sm-6 col-md-4">
+ <br/> <br/>
+    <div class="thumbnail">
+     <c:choose>
+    
+    	<c:when test="${(cook.cookFilename).contains('/')}">
+    		<c:forEach var="name" items="${(cook.cookFilename).split('/')[0]}">
+		<img src="/resources/images/uploadFiles/${name}" width="200" height="200"><br/>
+			</c:forEach>
+		
+      </c:when>                                                                                                                           
+		
+		<c:otherwise>
+		<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="200" height="200"><br/>
+		</c:otherwise>
+		</c:choose>
+      <div class="caption">
+        <h4 style="color:black;">${cook.cookName }</h4>
+        <p>${cook.cookPrice }</p>
+        <c:if test="${cook.cancel=='1' }">
+        <p style="color:red;">판매중지</p>
+        </c:if>
+        <p><a href="/cook/getcook?menu=manage&cookNo=${cook.cookNo }" class="btn btn-default" role="button" >상세정보</a> 
+        <a href="/cook/updatecook?menu=${param.menu}&cookNo=${cook.cookNo }" class="btn btn-default" role="button">수정</a>
+       
+      </div>
+    </div>
+  </div>		
+    </c:forEach>
+    </c:if>
     
               <div  id="scrollList"></div>
     
@@ -439,10 +491,11 @@ div.thumbnail {
 		
 	  
  	</div>
-
-	  
-	  
-
+ 	<!--  화면구성 div End /////////////////////////////////////-->
+ 	
+ 	<!-- PageNavigation Start... -->
+	<!-- PageNavigation End... -->
+	
 </body>
 
 </html>

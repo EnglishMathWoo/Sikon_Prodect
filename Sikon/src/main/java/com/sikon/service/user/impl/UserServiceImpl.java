@@ -45,13 +45,18 @@ public class UserServiceImpl implements UserService{
 		return userDao.findUserId(userNickname);
 	}
 
-	public void updateUser(User user, Map license, Map career) throws Exception {
+	public void updateUser(User user) throws Exception {
 		System.out.println("user="+user);
-		System.out.println("license="+license);
-		System.out.println("career="+career);
-		userDao.updateUser(user, license, career);
+	//	System.out.println("map="+map);
+		
+		userDao.updateUser(user);
 	}
-	
+	public void updateLicense(List license, String userId) throws Exception {
+		userDao.updateLicense(license, userId);
+	}
+	public void updateCareer(List career, String userId) throws Exception {
+		userDao.updateCareer(career, userId);
+	}
 	public Map<String , Object > getUserList(Search search) throws Exception {
 		List<User> list= userDao.getUserList(search);
 		int totalCount = userDao.getTotalCount(search);

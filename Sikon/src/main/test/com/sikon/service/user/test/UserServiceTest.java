@@ -44,16 +44,16 @@ public class UserServiceTest {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 
-	@Test
+	//@Test
 	public void testAddUser() throws Exception {
 		
 		User user = new User();
+		License license = new License();
+		License license2 = new License();
 		Career career = new Career();
 		Career career2 = new Career();
-		License license = new License();
-		License license2 = new License(); 
-		
-		
+		 
+				
 		user.setUserId("test@naver.com");
 		user.setUserName("testUserName");
 		user.setPassword("3333");
@@ -63,10 +63,26 @@ public class UserServiceTest {
 		user.setAddr("경기도");
 	//	user.setRole("user");
 		user.setPhone("01033334444");
-		user.setHoldpoint(1);
+	//	user.setHoldpoint(1);
 		user.setMentorApply("Y");
 		user.setQuitStatus("N");
 	
+			
+		
+	//	license.setLicenseNo(10015);
+		license.setLicenseName("1종보통");
+		license.setLicenseInstitution("강남구청");
+		license.setLicenseDate("2019-10-23");
+		license.setUserId("test@naver.com");
+		
+	//	license2.setLicenseNo(10016);
+		license2.setLicenseName("4종보통");
+		license2.setLicenseInstitution("중남구청");
+		license2.setLicenseDate("2019-10-23");
+		license2.setUserId("test@naver.com");
+		
+		
+		
 		career.setCompany("강남");
 		career.setCareerExperience("ㅇㅇㅇㅇㅇㅇㅇ");
 		career.setStartDate("2017-10-23");
@@ -78,63 +94,27 @@ public class UserServiceTest {
 		career2.setStartDate("2016-10-23");
 		career2.setEndDate("2017-10-23");
 		career2.setUserId("test@naver.com");
-	
-		license.setLicenseNo(10015);
-		license.setLicenseName("1종보통");
-		license.setLicenseInstitution("강남구청");
-		license.setLicenseDate("2019-10-23");
-		license.setUserId("test@naver.com");
-		
-		license2.setLicenseNo(10016);
-		license2.setLicenseName("4종보통");
-		license2.setLicenseInstitution("중남구청");
-		license2.setLicenseDate("2019-10-23");
-		license2.setUserId("test@naver.com");
 		
 		List list = new ArrayList();
-//		list.add(career);
-//		list.add(career2);
 		list.add(license);
 		list.add(license2);
 		
-//		List list2 = new ArrayList();
-//		list2.add(license);
-//		list2.add(license2);
+		List list2 = new ArrayList();
+		list2.add(career);
+		list2.add(career2);
 
 		Map map=new HashMap();
 //		map.put("user", user);
 		map.put("list", list);
-//		map.put("list2", list2);
+		map.put("list2", list2);
 		System.out.println("map="+map);
 		
 		userService.addUser(user, map);
 
-		
-//		user = userService.getUser("test@naver.com");
-	
-		
-		//==> console 확인
+				
 		System.out.println("map="+map);
 		
-		//==> API 확인
-//		Assert.assertEquals("testUserId", user.getUserId());
-//		Assert.assertEquals("testUserName", user.getUserName());
-//		Assert.assertEquals("testPasswd", user.getPassword());
-//		Assert.assertEquals("19991111", user.getUserBirth());
-//		Assert.assertEquals("testddd", user.getUserNickname());
-//		Assert.assertEquals("11.jpg", user.getUserImage());
-//		Assert.assertEquals("user", user.getAddr());
-//		Assert.assertEquals("경기도", user.getRole());
-//		Assert.assertEquals("01033334444", user.getPhone());
-//		Assert.assertEquals(1, user.getHoldpoint());
-//		Assert.assertEquals("N", user.getMentorApply());
-//		Assert.assertEquals("강남", career.getCompany());
-//		Assert.assertEquals("ㅇㅇㅇㅇㅇㅇㅇ", career.getCareerExperience());
-//		Assert.assertEquals("2017/11/25", career.getStartDate());
-//		Assert.assertEquals("2018/10/22", career.getEndDate());
-//		Assert.assertEquals("1종보통", license.getLicenseName());
-//		Assert.assertEquals("강남구청", license.getLicenseInstitution());
-//		Assert.assertEquals("2019/02/03", license.getLicenseDate());
+
 	}
 	
 	//@Test
@@ -186,27 +166,15 @@ public class UserServiceTest {
 	 //@Test
 	 public void testUpdateUser() throws Exception{
 		
-		Career career = new Career();
-		Career career2 = new Career();
-		career.setUserId("admin@naver.com");
+		User user = new User();
 		
 		License license = new License();
 		License license2 =new License();
-		license.setUserId("admin@naver.com");
 		
-		User user = userService.getUser("admin@naver.com");
-//		Assert.assertNotNull(user);
+		Career career = new Career();
+		Career career2 = new Career();
 		
-//		Assert.assertEquals("3333", user.getPassword());
-//		Assert.assertEquals("exchange", user.getUserName());
-//		Assert.assertEquals("testddd", user.getUserNickname());
-//		Assert.assertEquals("19991111", user.getUserBirth());
-//		Assert.assertEquals("안면도", user.getAddr());
-//		Assert.assertEquals("01044449999", user.getPhone());
-//		Assert.assertEquals("Y", user.getMentorApply());
-//		
-//		Assert.assertEquals("회사", career.getCompany());
-	
+		user.setUserId("test@naver.com");
 		user.setPassword("4444");
 		user.setUserName("change");
 		user.setUserNickname("testa");
@@ -216,42 +184,56 @@ public class UserServiceTest {
 		user.setUserImage("66.jpg");
 		user.setMentorApply("N");
 		
+		license.setLicenseNo(10010);
 		license.setLicenseName("5종");
 		license.setLicenseInstitution("강서구청");
-		license.setLicenseDate("20/05/13");
+		license.setLicenseDate("20-05-13");
+		license.setUserId("test@naver.com");
 		
+		license2.setLicenseNo(10011);
 		license2.setLicenseName("6종");
 		license2.setLicenseInstitution("강서구청");
-		license2.setLicenseDate("20/05/13");
+		license2.setLicenseDate("20-05-13");
+		license2.setUserId("test@naver.com");
 		
+		career.setCareerNo(10006);
 		career.setCompany("동동");
 		career.setStartDate("18/09/09");
 		career.setEndDate("19/10/12");
 		career.setCareerExperience("문서작업");
+		career.setUserId("test@naver.com");
 		
+		career2.setCareerNo(10007);
 		career2.setCompany("서서");
 		career2.setStartDate("16/05/09");
 		career2.setEndDate("17/06/12");
 		career2.setCareerExperience("야간작업");
+		career2.setUserId("test@naver.com");
 		
 		List list = new ArrayList();
 		list.add(license);
 		list.add(license2);
+//		list.add(user.getUserId());
+//		list.add(license.getLicenseNo());
+//		list.add(license2.getLicenseNo());
 		
 		List list2 = new ArrayList();
 		list2.add(career);
 		list2.add(career2);
+//		list2.add(user.getUserId());
+
 		
-		Map map = new HashMap();
-	//	map.put("user", user);
-		map.put("list", list);
-		map.put("list2", list2);
+//		Map map = new HashMap();
+//	//	map.put("user", user);
+//		map.put("list", list);
+//		map.put("list2", list2);
 		
 	//	Map map2 = new HashMap();
 	//	map2.put("list2", list2);
 		
-		userService.updateUser(user, map, map);
-		
+		userService.updateUser(user);
+		userService.updateLicense(list,"test@naver.com");
+		userService.updateCareer(list2,"test@naver.com");
 	//	user = userService.getUser("test@naver.com");
 	//	Assert.assertNotNull(user);
 		
@@ -338,7 +320,7 @@ public class UserServiceTest {
 	 	Map<String,Object> map = userService.getUserList(search);
 	 	
 	 	List<Object> list = (List<Object>)map.get("list");
-	 	Assert.assertEquals(1, list.size());
+	 	Assert.assertEquals(3, list.size());
 	 	
 		//==> console 확인
 	 	//System.out.println(list);
@@ -353,7 +335,7 @@ public class UserServiceTest {
 	 	map = userService.getUserList(search);
 	 	
 	 	list = (List<Object>)map.get("list");
-	 	Assert.assertEquals(0, list.size());
+	 	Assert.assertEquals(3, list.size());
 	 	
 		//==> console 확인
 	 	//System.out.println(list);
@@ -388,7 +370,7 @@ public class UserServiceTest {
 	 	map = userService.getUserList(search);
 	 	
 	 	list = (List<Object>)map.get("list");
-	 	Assert.assertEquals(0, list.size());
+	 	Assert.assertEquals(3, list.size());
 	 	
 		//==> console 확인
 	 	//System.out.println(list);

@@ -52,9 +52,9 @@
 	<!-- 회원가입 -->
 	<insert  id="addUser"		parameterType="user" >
 		 INSERT
-		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , user_phone , holdpoint , mentor_apply , user_regdate , quit_date , quit_status ) 
+		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , user_phone , mentor_apply , user_regdate , quit_date , quit_status ) 
 		 VALUES	 ( #{userId} , #{userName} , #{password} , #{userBirth}, #{userNickname}, #{userImage}, #{addr}, #{phone}, 
-						#{holdpoint:NUMERIC}, #{mentorApply}, SYSDATE , #{quitDate:DATE} , #{quitStatus} )
+						#{mentorApply}, SYSDATE , #{quitDate:DATE} , #{quitStatus} )
 <!--  	 INTO career( career_no , company , career_experience , start_date , end_date , user_id )
 		 VALUES ( seq_career_career_no.nextval , #{career.company} , #{career.careerExperience} , #{career.startDate:DATE} , #{career.endDate:DATE} , #{career.userId} )
 		 INTO license( license_no , license_name , license_institution , license_date , user_id )
@@ -63,14 +63,28 @@
  -->
 	</insert>
 
-	<insert id="addLicense" 	parameterType="java.util.List" >
-	 	 INSERT INTO license ( licenseNo , licenseName , licenseInstitution , licenseDate:DATE , userId)
-		 VALUES 
-		 <foreach collection="list" item="item" index="index">
-		 ( #{item.licenseNo} , #{item.licenseName} , #{item.licenseInstitution} , #{item.licenseDate:DATE} , #{item.userId})
-		
-	 </foreach>
-	</insert>
+	<insert id="addLicense" parameterType="map">
+        insert 
+        into license(license_no , license_name , license_institution , license_date , user_id)
+        select seq_license_license_no.nextval AS licenseNo, A.*
+        FROM (
+        <foreach collection="list" item="item" separator="UNION ALL ">
+        SELECT #{item.licenseName}, #{item.licenseInstitution}, #{item.licenseDate:DATE}, #{item.userId} FROM DUAL
+        </foreach>
+        ) A
+	 </insert>
+	 
+	 
+	 <insert id="addCareer" parameterType="map">
+        insert 
+        into career(career_no , company , career_experience , start_date , end_date , user_id)
+        select seq_career_career_no.nextval AS careerNo, A.*
+        FROM (
+        <foreach collection="list" item="item" separator="UNION ALL ">
+        SELECT #{item.company}, #{item.careerExperience}, #{item.startDate:DATE}, #{item.endDate:DATE}, #{item.userId} FROM DUAL
+        </foreach>
+        ) A
+	 </insert>
 
 <!-- 
 	<insert id="addCareer" 	parameterType="map" >
@@ -83,7 +97,7 @@
 	<!-- 회원상세조회 -->
 	<select  id="getUser"		parameterType="string"	resultMap="userSelectMap">
 		 SELECT *
-		 FROM users 
+		 FROM users
 		 WHERE user_id = #{value}
         </select>
 
@@ -121,6 +135,63 @@
 	</update>
 
 
+	<update	id="updateLicense" 	parameterType="map" >
+		UPDATE license
+		set	license_name=
+		case license_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.licenseNo} then #{item.licenseName}
+		</foreach>
+		else license_name end
+		,
+		license_institution=
+		case license_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.licenseNo} then #{item.licenseInstitution}
+		</foreach>
+		else license_institution end
+		,
+		license_date=
+		case license_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.licenseNo} then #{item.licenseDate:DATE}
+		</foreach>
+		else TO_CHAR(SYSDATE, 'yyyy-mm-dd') end
+		WHERE user_id = #{userId}
+	</update>
+	
+	
+	<update	id="updateCareer" 	parameterType="map" >
+		UPDATE career
+		set	company=
+		case career_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.careerNo} then #{item.company}
+		</foreach>
+		else company end
+		,
+		career_experience=
+		case career_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.careerNo} then #{item.careerExperience}
+		</foreach>
+		else career_experience end
+		,
+		start_date=
+		case career_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.careerNo} then #{item.startDate:DATE}
+		</foreach>
+		else TO_CHAR(SYSDATE, 'yyyy-mm-dd') end
+		,
+		end_date=
+		case career_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.careerNo} then #{item.endDate:DATE}
+		</foreach>
+		else TO_CHAR(SYSDATE, 'yyyy-mm-dd') end
+		WHERE user_id = #{userId}
+	</update>
 
  
 		
@@ -161,4 +232,22 @@
 		</set>
 		WHERE user_id = #{userId}
 	</update>
+	
+	
+	<select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT user_id , user_name , user_nickname
+						FROM users
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			user_id = #{searchKeyword}
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 		user_name = #{searchKeyword}
+								</if>
+							</where>
+						</if> ) countTable						
+	 </select>
+	 
 </mapper>

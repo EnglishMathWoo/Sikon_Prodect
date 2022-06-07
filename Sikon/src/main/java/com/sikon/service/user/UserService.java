@@ -1,5 +1,6 @@
 package com.sikon.service.user;
 
+import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
@@ -19,8 +20,9 @@ public interface UserService {
 	public User findUserId(String userNickname) throws Exception ;
 	
 	// 회원정보수정
-	public void updateUser(User user, Map license, Map career) throws Exception;
-	
+	public void updateUser(User user) throws Exception;
+	public void updateLicense(List license, String userId) throws Exception;
+	public void updateCareer(List career, String userId) throws Exception;
 	// 회원정보리스트 
 	public Map<String , Object> getUserList(Search search) throws Exception;
 	
@@ -29,5 +31,9 @@ public interface UserService {
 	
 	// 회원 ID 중복 확인
 	public boolean checkDuplication(String userId) throws Exception;
+
+	
+
+	
 	
 }
