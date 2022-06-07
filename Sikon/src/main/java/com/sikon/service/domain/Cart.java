@@ -5,18 +5,13 @@ public class Cart {
 	
 	private int cartNo;
 	private String userId;
-	private int prodNo;
 	private int quantity;
-	private String prodName;
-	private String fileName;
-	private int price;	
+	private Product cartProd;
 	
 
 
 	public Cart(){
 	}
-
-	
 
 
 
@@ -26,13 +21,9 @@ public class Cart {
 
 
 
-
-
 	public void setCartNo(int cartNo) {
 		this.cartNo = cartNo;
 	}
-
-
 
 
 
@@ -42,29 +33,9 @@ public class Cart {
 
 
 
-
-
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-
-
-
-
-	public int getProdNo() {
-		return prodNo;
-	}
-
-
-
-
-
-	public void setProdNo(int prodNo) {
-		this.prodNo = prodNo;
-	}
-
-
 
 
 
@@ -74,72 +45,30 @@ public class Cart {
 
 
 
-
-
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
 
 
-
-
-	public String getProdName() {
-		return prodName;
+	public Product getCartProd() {
+		return cartProd;
 	}
 
 
 
-
-
-	public void setProdName(String prodName) {
-		this.prodName = prodName;
+	public void setCartProd(Product cartProd) {
+		this.cartProd = cartProd;
 	}
-
-
-
-
-
-	public String getFileName() {
-		return fileName;
-	}
-
-
-
-
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-
-
-
-
-	public int getPrice() {
-		return price;
-	}
-
-
-
-
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-
 
 
 
 	@Override
 	public String toString() {
-		return "Cart [cartNo=" + cartNo + ", userId=" + userId + ", prodNo=" + prodNo + ", quantity=" + quantity
-				+ ", prodName=" + prodName + ", fileName=" + fileName + ", price=" + price + "]";
+		return "Cart [cartNo=" + cartNo + ", userId=" + userId + ", quantity=" + quantity + ", cartProd=" + cartProd+ "]";
 	}
 
-
-
+	
 
 
 }

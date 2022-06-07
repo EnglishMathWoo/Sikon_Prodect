@@ -28,52 +28,50 @@ import com.sikon.service.recipe.RecipeService;
 @Controller
 @RequestMapping("/bookmark/*")
 public class BookmarkController {
-	
-	///Field
+
+	/// Field
 	@Autowired
 	@Qualifier("bookmarkServiceImpl")
 	private BookmarkService bookmarkService;
-	
+
 	@Autowired
 	@Qualifier("recipeServiceImpl")
 	private RecipeService recipeService;
-	
+
 	public BookmarkController() {
 		System.out.println("bookmark시작~");
 	}
-	
+
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
-	
-//	@RequestMapping(value="addBookmark" )
-//	public ModelAndView addBookmark(@ModelAttribute("bookmark") Bookmark bookmark,@RequestParam("recipeNo") int recipeNo, HttpServletRequest request) throws Exception {
-//
-//		System.out.println("/bookmark/addBookmark : POST");
-//		HttpSession session=request.getSession();
-//		User user=(User)session.getAttribute("user");
-//		System.out.println(user);
-//		
-//		Recipe recipe=recipeService.getRecipe(recipeNo);
-//		System.out.println(recipe);
-//		
-//		bookmark.setRecipe(recipe);
-//		bookmark.setUserId(user.getUserId());
-//
-//		bookmarkService.addBookmark(bookmark);
-//		
-//		ModelAndView modelAndView=new ModelAndView();
-//		modelAndView.setViewName("forward:/recipe/getRecipe?recipeNo="+recipeNo);
-//		
-//		return modelAndView;
-//	}
-	
-	
+
+	@RequestMapping(value = "addBookmark")
+	public ModelAndView addBookmark(@ModelAttribute("bookmark") Bookmark bookmark,
+			@ModelAttribute("recipe") Recipe recipe, HttpServletRequest request) throws Exception {
+
+		System.out.println("/bookmark/addBookmark : POST");
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		System.out.println(user);
+
+		
+		bookmark.setRecipe(recipe);
+		bookmark.setUserId(user.getUserId());
+
+		bookmarkService.addBookmark(bookmark);
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("forward:/recipe/getRecipe?recipeNo=" + recipe.getRecipeNo());
+
+		return modelAndView;
+	}
+
 	@RequestMapping(value = "listBookmark")
-	public String listBookmark(@ModelAttribute("search") Search search, Model model,
-			HttpServletRequest request) throws Exception {
+	public String listBookmark(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
+			throws Exception {
 
 		System.out.println("/bookmark/listBookmark :  POST/get");
 		System.out.println("search:" + search);
@@ -81,43 +79,46 @@ public class BookmarkController {
 			search.setCurrentPage(1);
 		}
 
-
 		search.setPageSize(pageSize);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
 		// Business logic 수행
-		Map<String, Object> map = bookmarkService.getBookmarkList(search,user.getUserId());
+		Map<String, Object> map = bookmarkService.getBookmarkList(search, user.getUserId());
+
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println(resultPage);
+		System.out.println(map);
 
-	
+		System.out.println(map.get("list"));
 		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
-		System.out.println("listRecipe::list=" + map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		System.out.println("resultPage는" + resultPage);
 		model.addAttribute("search", search);
 
 		return "forward:/bookmark/listBookmark.jsp";
 	}
-	
-	@RequestMapping(value="deleteBookmark" )
-	public ModelAndView deleteBookmark(@RequestParam("bookmarkNo") int bookmarkNo) throws Exception {
+
+	@RequestMapping(value = "deleteBookmark")
+	public String deleteBookmark(@RequestParam("bookmarkList") int[] bookmarkList) throws Exception {
 
 		System.out.println("/bookmark/deleteBookmark : POST");
+		System.out.println(bookmarkList.length);
 
+		for (int i = 0; i < bookmarkList.length; i++) {
+			System.out.println(bookmarkList[i]);
+		}
 
-		bookmarkService.deleteBookmark(bookmarkNo);
-		
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("forward:/bookmark/listBookmark");
-		
-		return modelAndView;
+		for (int i = 0; i < bookmarkList.length; i++) {
+			bookmarkService.deleteBookmark(bookmarkList[i]);
+		}
+
+		return "redirect:/bookmark/listBookmark";
 	}
-	
+
 //	@RequestMapping(value="delCheckBookmark",method=RequestMethod.POST )
 //	public String delCheckBookmark(@RequestParam("bno[]") List<Integer> bno) throws Exception {
 //
