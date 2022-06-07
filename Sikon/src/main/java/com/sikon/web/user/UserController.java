@@ -90,7 +90,7 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="updateUser", method=RequestMethod.POST )
-	public String updateUser( @ModelAttribute("user") User user ,Map license, Map career, Model model , HttpSession session) throws Exception{
+	public String updateUser( @ModelAttribute("user") User user , Model model , HttpSession session) throws Exception{
 
 		System.out.println("/user/updateUser : POST");
 		//Business Logic
@@ -117,13 +117,15 @@ public class UserController {
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
-		System.out.println("getuserid"+user.getUserId());
+		System.out.println("getuserid="+user.getUserId());
 		User dbUser=userService.getUser(user.getUserId());
-System.out.println(user.getPassword());
-System.out.println(dbUser.getPassword());
+		
+		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 		}
+		System.out.println(user.getPassword());
+		System.out.println(dbUser.getPassword());
 		
 		return "redirect:/index.jsp";
 	}

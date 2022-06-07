@@ -31,8 +31,8 @@ hr, .borderedbox {
 /* 우리의식탁 로고 이미지 비율 */
 #usik {
 float:left;
-	width: 15%;
-	height: 15%
+	width: 43px;
+	height: 41px
 }
 
 /* toolbar css (from layout.css) */
@@ -435,6 +435,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
         <li><a class="drop" href="#">스토어</a>
         			<ul>
 		                <li><a href="#">구매목록</a></li>
+		                <li><a href="#">장바구니</a></li>
               		</ul>
         </li>
         <li><a class="drop" href="#">쿠킹클래스</a>
@@ -476,9 +477,13 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			$(self.location).attr("href","/user/loginView.jsp");
 			});
 			
-	 		$( "a:contains('MyPage')" ).on("click" , function() {
-			//$(self.location).attr("href","/user/getUser?userId="+${user.userId});
-			//console.log(${user.userId});
+			$( "a:contains('Logout')" ).on("click" , function() {
+			$(self.location).attr("href","/user/logout");
+			});
+			
+	 		$( "a:contains('Mypage')" ).on("click" , function() {
+			$(self.location).attr("href","/mypage/mymain.jsp?userId=${user.userId}");
+			//alert('${user.userId}');
 	 		});
 	 		
 	 		$( "a:contains('레시피')" ).on("click" , function() {
@@ -498,7 +503,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 	 		
 	 		$( "a:contains('회원관리')" ).on("click" , function() {
-			$(self.location).attr("href","/user/manageUser");
+			$(self.location).attr("href","/user/listUser");
 			});
 	 	
 	 		$( "a:contains('레시피관리')" ).on("click" , function() {
@@ -537,6 +542,10 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	 		
 	 		$( "a:contains('판매목록')" ).on("click" , function() {
 			$(self.location).attr("href","/purchase/listSales");
+			});
+	 		
+	 		$( "a:contains('장바구니')" ).on("click" , function() {
+			$(self.location).attr("href","/cart/getCartList");
 			});
 	 			
 	 		//====================================================
