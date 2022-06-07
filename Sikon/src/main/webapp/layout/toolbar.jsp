@@ -536,7 +536,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 	 		
 	 		$( "a:contains('판매목록')" ).on("click" , function() {
-			$(self.location).attr("href","/product/listSales");
+			$(self.location).attr("href","/purchase/listSales");
 			});
 	 			
 	 		//====================================================
