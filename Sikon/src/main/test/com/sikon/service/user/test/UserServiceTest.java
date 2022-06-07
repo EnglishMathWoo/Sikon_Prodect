@@ -116,39 +116,24 @@ public class UserServiceTest {
 		
 
 	}
-	
+	// User 정보만 가져옴
 	//@Test
 	public void testGetUser() throws Exception {
 		
 		User user = new User();
-		//==> 필요하다면...
-//		user.setUserId("test@naver.com");
-//		user.setUserName("testUserName");
-//		user.setPassword("3333");
-//		user.setUserBirth("19991111");
-//		user.setUserNickname("testddd");
-//		user.setUserImage("11.jpg");
-//		user.setAddr("경기도");
-//		user.setRole("user");
-//		user.setPhone("01033334444");
-//		user.setHoldpoint(1);
-//		user.setMentorApply("Y");
-//		user.setQuitStatus("N");
 		
 		user = userService.getUser("test@naver.com");
-
+			
 		//==> console 확인
-		System.out.println(user);
+		System.out.println("user="+user);
 		
-		//==> API 확인
-//		Assert.assertEquals("testUserId", user.getUserId());
-//		Assert.assertEquals("testUserName", user.getUserName());
-//		Assert.assertEquals("testPasswd", user.getPassword());
-//		Assert.assertEquals("111-2222-3333", user.getPhone());
-//		Assert.assertEquals("경기도", user.getAddr());
-//
-//		Assert.assertNotNull(userService.getUser("user02"));
-//		Assert.assertNotNull(userService.getUser("user05"));
+	}
+	// User, license, career 정보 가져옴
+	//@Test
+	public void testGetUCL() throws Exception {
+		
+		List list = (List)userService.getUCL("test@naver.com");
+		System.out.println("list="+list);
 	}
 	
 	//@Test
@@ -184,26 +169,26 @@ public class UserServiceTest {
 		user.setUserImage("66.jpg");
 		user.setMentorApply("N");
 		
-		license.setLicenseNo(10010);
+		license.setLicenseNo(10020);
 		license.setLicenseName("5종");
 		license.setLicenseInstitution("강서구청");
 		license.setLicenseDate("20-05-13");
 		license.setUserId("test@naver.com");
 		
-		license2.setLicenseNo(10011);
+		license2.setLicenseNo(10021);
 		license2.setLicenseName("6종");
 		license2.setLicenseInstitution("강서구청");
 		license2.setLicenseDate("20-05-13");
 		license2.setUserId("test@naver.com");
 		
-		career.setCareerNo(10006);
+		career.setCareerNo(10020);
 		career.setCompany("동동");
 		career.setStartDate("18/09/09");
 		career.setEndDate("19/10/12");
 		career.setCareerExperience("문서작업");
 		career.setUserId("test@naver.com");
 		
-		career2.setCareerNo(10007);
+		career2.setCareerNo(10021);
 		career2.setCompany("서서");
 		career2.setStartDate("16/05/09");
 		career2.setEndDate("17/06/12");
@@ -222,15 +207,7 @@ public class UserServiceTest {
 		list2.add(career2);
 //		list2.add(user.getUserId());
 
-		
-//		Map map = new HashMap();
-//	//	map.put("user", user);
-//		map.put("list", list);
-//		map.put("list2", list2);
-		
-	//	Map map2 = new HashMap();
-	//	map2.put("list2", list2);
-		
+				
 		userService.updateUser(user);
 		userService.updateLicense(list,"test@naver.com");
 		userService.updateCareer(list2,"test@naver.com");
@@ -249,29 +226,29 @@ public class UserServiceTest {
 	 }
 	 
 	//@Test
-	public void testCheckDuplication() throws Exception{
-
-		//==> 필요하다면...
-//			User user = new User();
-//			user.setUserId("testUserId");
-//			user.setUserName("testUserName");
-//			user.setPassword("testPasswd");
-//			user.setSsn("1111112222222");
-//			user.setPhone("111-2222-3333");
-//			user.setAddr("경기도");
-//			user.setEmail("test@test.com");
-//			
-//			userService.addUser(user);
-		
-		//==> console 확인
-		//System.out.println(userService.checkDuplication("testUserId"));
-		//System.out.println(userService.checkDuplication("testUserId"+System.currentTimeMillis()) );
-	 	
-		//==> API 확인
-		Assert.assertFalse( userService.checkDuplication("testUserId") );
-	 	Assert.assertTrue( userService.checkDuplication("testUserId"+System.currentTimeMillis()) );
-		 	
-	}
+//	public void testCheckDuplication() throws Exception{
+//
+//		//==> 필요하다면...
+////			User user = new User();
+////			user.setUserId("testUserId");
+////			user.setUserName("testUserName");
+////			user.setPassword("testPasswd");
+////			user.setSsn("1111112222222");
+////			user.setPhone("111-2222-3333");
+////			user.setAddr("경기도");
+////			user.setEmail("test@test.com");
+////			
+////			userService.addUser(user);
+//		
+//		//==> console 확인
+//		//System.out.println(userService.checkDuplication("testUserId"));
+//		//System.out.println(userService.checkDuplication("testUserId"+System.currentTimeMillis()) );
+//	 	
+//		//==> API 확인
+////		Assert.assertFalse( userService.checkDuplication("testUserId") );
+////	 	Assert.assertTrue( userService.checkDuplication("testUserId"+System.currentTimeMillis()) );
+//		 	
+//	}
 	
 	 //==>  주석을 풀고 실행하면....
 	 //@Test

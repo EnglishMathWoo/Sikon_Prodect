@@ -39,9 +39,19 @@ public class UserDaoImpl implements UserDao{
 		sqlSession.insert("UserMapper.addCareer", map.get("list2"));
 	}
 	
+	// id 중복체크
+	public int checkId(String userId) throws Exception {
+		return sqlSession.selectOne("UserMapper.checkId", userId);
+	}
+		
 	public User getUser(String userId) throws Exception {
 		System.out.println("userId="+userId);
 		return sqlSession.selectOne("UserMapper.getUser", userId);
+	}
+	
+	public List getUCL(String userId) throws Exception {
+		System.out.println("userId="+userId);
+		return sqlSession.selectList("UserMapper.getUCL", userId);
 	}
 	
 	public User findUserId(String userNickname) throws Exception {
