@@ -68,7 +68,7 @@
    	<mvc:resources mapping="/javascript/**" location="/javascript/" />
 	--> 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-   	<mvc:resources mapping="/summernoteImage/**" location="file:///C:/summernote_image/" />
+   	<mvc:resources mapping="/summernoteImage/**" location="file:///C:/Users/bitcamp/git/Sikon_PJT/Sikon/src/main/webapp/resources/images/uploadFiles/summerNote/" />
    	
 
 	<!-- 	:: exception resolver  선언 :: 서술적 / 선언적 예외처리 

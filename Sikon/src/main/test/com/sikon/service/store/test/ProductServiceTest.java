@@ -1,4 +1,4 @@
-package com.sikon.service.test;
+package com.sikon.service.store.test;
 
 import java.util.List;
 import java.util.Map;

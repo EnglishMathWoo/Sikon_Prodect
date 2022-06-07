@@ -90,6 +90,10 @@
         .buttonDiv button{
         	margin-right:10px;
         }
+        
+        #addTab {
+        	margin-left:-40px;
+        }
 
     </style>
     
@@ -133,7 +137,7 @@
 				
 				$("#issueCoupon").on("click" , function() {
 							
-					self.location = "/coupon/issueCoupon";
+					self.location = "/coupon/issueCouponView";
 				});
 			});
 		 		 
@@ -198,7 +202,7 @@
 	<div class="tab">
 	
     <ul class="tabTitle">
-      <li class="on">积己</li>
+      <li class="on" id="addTab">积己</li>
       <li>惯鞭</li>
     </ul>
     
@@ -216,7 +220,7 @@
 		<button type="button" class="btn btn-primary delete" style="float: right;  margin-right: 10px;" >昏&nbsp;力</button>
 		<button type="button" class="btn btn-primary" id="addCoupon" style="float: right; margin-right: 10px;">积 &nbsp;己</button>
 				
-      <table class="table table-hover table-striped" >
+      <table class="table table-hover table-striped">
 
         <thead>
           <tr>

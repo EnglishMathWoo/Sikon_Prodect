@@ -184,7 +184,7 @@ public class ProductController {
 		product.setProdThumbnail(fileName);
 		productService.updateProduct(product);
 		
-		return "redirect:/product/getProduct?prodNo="+product.getProdNo();
+		return "redirect:/product/getProduct?prodNo="+product.getProdNo()+"&menu=manage";
 	}
 	
 	
@@ -219,7 +219,7 @@ public class ProductController {
 		System.out.println("2:"+mapName.get("list"));
 		
 		
-		return "forward:/product/listProduct.jsp";
+		return "forward:/product/listProduct2.jsp";
 	}
 
 }

@@ -121,7 +121,6 @@
 		 
 		 
 		 function commentInsert(pushData){
-				console.debug("reply.socket",socket)
 				
 				data = new FormData();
 				data.append("pushData", pushData);

@@ -188,7 +188,10 @@ CREATE TABLE cart (
 	cart_no 			NUMBER 		NOT NULL, 
 	prod_no 			NUMBER  	NOT NULL 	REFERENCES 	product(prod_no), 
 	user_id 	 		VARCHAR2(50)  	NOT NULL 	REFERENCES 	users(user_id), 
-	quantity 			NUMBER, 	
+	quantity 			NUMBER, 
+	prod_name 		VARCHAR2(100),
+	prod_image 		VARCHAR2(500),
+	prod_price 		NUMBER,
 	PRIMARY KEY(cart_no)
 );
 
@@ -299,8 +302,8 @@ INTO purchase( tran_no , prod_no, user_id, serial_no, receiver_name, receiver_ph
 VALUES (seq_purchase_tran_no.NEXTVAL , 10000, 'mentor@naver.com', '2022060310000', '힙쟁이', '01012345678', 'heap@naver.com', 5, '비트캠프', '8층으로 가져다주세요', '10% 할인쿠폰', 500, 270, SYSDATE, 'KA', '001', '송장번호', 3000);
 
 INSERT
-INTO cart( cart_no , prod_no, user_id, quantity) 
-VALUES (seq_cart_cart_no.NEXTVAL , 10000, 'mentor@naver.com', 5);
+INTO cart( cart_no , prod_no, user_id, quantity, prod_name, prod_image, prod_price ) 
+VALUES (seq_cart_cart_no.NEXTVAL , 10000, 'user@naver.com', 5, '계란', 'eggs.jpg&', 2700);
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content  )

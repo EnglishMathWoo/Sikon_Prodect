@@ -33,7 +33,7 @@
 
 <style>
 body>div.container{
-	padding-top : 150px;
+	padding-top : 70px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 div.row{
@@ -46,6 +46,7 @@ div.page-header{
 div.image{
 	padding-top : 30px;
 }
+
 
 </style>
  <!-- //////////////////////////////////공유하기////////////////////////////// -->
@@ -129,6 +130,11 @@ div.image{
 			 self.location = "/product/updateProduct?prodNo="+prodNo
 		});
 		 
+		 $( "button.btn-default" ).on("click" , function() {
+			 var quantity = $('#quantity').val();
+			 self.location = "/cart/addCart?prodNo=${product.prodNo}&quantity="+quantity;
+		});
+		 
 	});
 	
 	
@@ -138,14 +144,10 @@ div.image{
 </head>
 
 <body>
-
 	<jsp:include page="/layout/toolbar.jsp" />
-	
-
-
 
 	<div class="container">
-	
+
 		<div class="row">
 	
 				<div class="col-xs-6 col-md-6 text-center image">				
