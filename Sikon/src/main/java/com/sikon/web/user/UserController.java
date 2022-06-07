@@ -117,13 +117,15 @@ public class UserController {
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
-		System.out.println("getuserid"+user.getUserId());
+		System.out.println("getuserid="+user.getUserId());
 		User dbUser=userService.getUser(user.getUserId());
-System.out.println(user.getPassword());
-System.out.println(dbUser.getPassword());
+		
+		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 		}
+		System.out.println(user.getPassword());
+		System.out.println(dbUser.getPassword());
 		
 		return "redirect:/index.jsp";
 	}
