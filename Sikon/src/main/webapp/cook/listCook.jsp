@@ -70,8 +70,8 @@ div.thumbnail {
 }
 
 #image {
-	width: 250px;
-	height:250px;
+	width: 400px;
+	height:400px;
 	border-radius: 5px;
 } 
 </style>
@@ -238,25 +238,36 @@ div.thumbnail {
 					                		var message;
 					                		var cancel;
 					                		var button;
+					                		var cookTheme;
 					                
 					                		if(JSONData.list[i].cookStock == '0'){
 				                				
-				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='400' height='400' id='image'>";
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='500' height='500' id='image'>";
 				                				
 					                			
 					                		}else{
 					                			
-				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='400' height='400' id='image'>";
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='500' height='500' id='image'>";
 				                				
 					                		}
 					                		
 					                		
-					                		if(${user.role.equals('admin') && param.menu.equals('manage')}){
-					                			message="<p>남은 재고량 : "+JSONData.list[i].cookStock+"</p>";
-					                		}else{
-					                			message="<p></p>";
-					                		}
+
 					                		
+					                		if(JSONData.list[i].cookTheme == 'KO'){
+				                				
+					                			cookTheme = "<h5><strong>테마 : 한식</strong></h5>";               				
+				                			
+				                			}else if(JSONData.list[i].cookTheme == 'JA'){
+				                			
+				                				cookTheme = "<h5><strong>테마 : 일식</strong></h5>";			                				
+				                			}else if(JSONData.list[i].cookTheme == 'AM'){
+				                				cookTheme = "<h5><strong>테마 : 양식</strong></h5>";
+				                			}else if(JSONData.list[i].cookTheme == 'CH'){
+				                				cookTheme = "<h5><strong>테마 : 중식</strong></h5>";
+				                			}else if(JSONData.list[i].cookTheme == 'DE'){
+				                				cookTheme = "<h5><strong>테마 : 간식</strong></h5>";
+				                			}
 					                		
 
 					                		
@@ -275,19 +286,36 @@ div.thumbnail {
 					                			}
 					                		}
 					                		
-						                     var displayValue = "<div class='row'>"
-						                     					+"<div class='col-xs-4 col-md-6 text-left image'>"
+						                     var displayValue = "<div class='container'>"
+						                    	 				+"<div class='row'>"
+						                     					+"<div class='col-xs-4 col-md-6 text-left image' value='"+JSONData.list[i].cookNo+"'>"
 						                     					+image
-						                     					+"</div>"
+						                     					+"<br/></div>"
+						                     					+"<div class='col-xs-4 col-md-4'>"
 					                     						+"<div class='row'>"
 					                     						+"<div><h4><strong>"+JSONData.list[i].cookName+"</strong></h4></div><br>"   
-					                     						+"<div>"+JSONData.list[i].cookBrief+"</div></div><br/><br/>" 
-					                     						+"<div class='row'>"
-					                     						+"<div><h6>"+JSONData.list[i].cookPrice+"</h6></div>"
-					                     						+"<div><h6><strong>"+JSONData.list[i].cookRecruit+"</strong></h6></div>"
+					                     						+"<div>"+JSONData.list[i].cookBrief+"</div>"
 					                     						+"</div>"
-					                     					
-					                     						
+					                     						+"<br/><br/>"
+					                     						+"<div class='row'>"
+					                     						+"<div><h6>"+JSONData.list[i].cookPrice+" 원</h6></div>"
+					                     						+"<div><h5><strong>모집인원"+JSONData.list[i].cookRecruit+" 명</strong></h5></div>"
+					                     						+"</div><br/>"
+					                     						+"<div class='row'>"
+					                     						+"<h5><strong> "+cookTheme+"</strong></h5></div>"
+					                     						+"<div class='row'>"
+					                     						+"<h5><strong>장소 : "+JSONData.list[i].cookLocation+"</strong></h5></div>"					                     						
+					                     						+"<div class='row'>"
+					                     						+"<div><h5><strong>모집기간: "+JSONData.list[i].aplstarTime+"&emsp;~&emsp;"+JSONData.list[i].aplendTime+"</strong></h5></div>"
+					                     						+"</div>"
+					                     						+"<div class='row'>"
+					                     						+"<div><h5><strong>수업시간: "+JSONData.list[i].startTime+"&emsp;~&emsp;"+JSONData.list[i].endTime+"</strong></h5></div>"
+					                     						+"</div>"
+					                     						+"</div>"
+					                     						+"<div class='col-xs-2 col-md-2'>"
+					                     						+"</div>"
+					                     						+"</div>"
+					                     						+"<hr/>"
 					                     		//*/				
 						               	$( '#scrollList' ).append(displayValue);	
 					                     						
@@ -380,6 +408,8 @@ div.thumbnail {
 		</div>
 </div>
 
+
+
 	
 		
 <div class="container">
@@ -398,18 +428,18 @@ div.thumbnail {
 	<div class="row">
 		
 	
-				<div class="col-xs-4 col-md-6 text-lefr image" value="${cook.cookNo }">				
+				<div class="col-xs-4 col-md-6 text-lefr image"  value="${cook.cookNo }">				
      <c:choose>
     
     	<c:when test="${(cook.cookFilename).contains('/')}">
     		<c:forEach var="name" items="${(cook.cookFilename).split('/')[0]}">
-		<img src="/resources/images/uploadFiles/${name}" width="400" height="400"><br/>
+		<img src="/resources/images/uploadFiles/${name}" id="image"><br/>
 			</c:forEach>
 		
       </c:when>                                                                                                                           
 		
 		<c:otherwise>
-		<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="400" height="400"><br/>
+		<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="400" height="400" id="image"><br/>
 		</c:otherwise>
 		</c:choose>
 				</div>	
@@ -422,7 +452,7 @@ div.thumbnail {
 					<input type="hidden" name="cookRegdate" id="cookRegdate" value="${cook.cookRegdate }"/>
 				</div>
 				
-				<hr/>
+				
 				
 				<div class="row">
 				
@@ -434,6 +464,7 @@ div.thumbnail {
 					
 					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>
 					<input type="hidden" name="cookName" value="${cook.cookName}"/>
+					<input type="hidden" name="cookRecruit" value="${cook.cookRecruit}"/>
 					<input type="hidden" name="cookContent" value="${cook.cookContent}"/>
 					
 				</div>
