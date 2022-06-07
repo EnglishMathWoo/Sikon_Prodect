@@ -65,6 +65,11 @@
       #couponName {
       	margin-left:59px;
       }
+      
+      #gogogo {
+      	width:325.08px;
+      }
+     
               
     </style>
     
@@ -74,7 +79,7 @@
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage)
-			$("form").attr("method" , "POST").attr("action" , "/user/listUser").submit();
+			self.location = "/coupon/issueCoupon";
 		}
 		
 
@@ -179,10 +184,8 @@
         <thead>
           <tr>
           	<th align="center"></th>
-          	<th align="center"></th>
-            <th align="center">회원ID</th>
+            <th align="left" id="gogogo">회원ID</th>
             <th align="left">회원명</th>
-            <th align="center"></th>
             <th align="left">닉네임</th>
           </tr>
          </thead>
@@ -194,12 +197,10 @@
 			<c:set var="i" value="${ i+1 }" />
 			<tr class="ct_list_pop">
 				<td align="left"><input type="checkbox" name="userId" value="${user.userId}" ></td>
-				<td></td>
 				<td align="left">${user.userId}</td>
-				<td></td>
 				<td align="left">${user.userName}</td>
-				<td></td>
 				<td align="left">${user.userNickname}</td>
+				<td></td>
 			</tr>
           </c:forEach>
         
