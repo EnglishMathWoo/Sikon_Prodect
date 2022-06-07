@@ -241,12 +241,12 @@ div.thumbnail {
 					                
 					                		if(JSONData.list[i].cookStock == '0'){
 				                				
-				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='400' height='400' id='image'>";
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' id='image'>";
 				                				
 					                			
 					                		}else{
 					                			
-				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='400' height='400' id='image'>";
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' id='image'>";
 				                				
 					                		}
 					                		
@@ -275,18 +275,16 @@ div.thumbnail {
 					                			}
 					                		}
 					                		
-						                     var displayValue = "<div class='row'>"
-						                     					+"<div class='col-xs-4 col-md-6 text-left image'>"
+						                     var displayValue = "<div class='col-sm-6 col-md-3'>"
+						                     					+"<div class='thumbnail'>"
 						                     					+image
-						                     					+"</div>"
-					                     						+"<div class='row'>"
-					                     						+"<div><h4><strong>"+JSONData.list[i].cookName+"</strong></h4></div><br>"   
-					                     						+"<div>"+JSONData.list[i].cookBrief+"</div></div><br/><br/>" 
-					                     						+"<div class='row'>"
-					                     						+"<div><h6>"+JSONData.list[i].cookPrice+"</h6></div>"
-					                     						+"<div><h6><strong>"+JSONData.list[i].cookRecruit+"</strong></h6></div>"
-					                     						+"</div>"
-					                     					
+					                     						+"<div class='caption'>"
+					                     						+"<h3>"+JSONData.list[i].cookName+"</h3>"   
+					                     						+"<p align='right'>"
+					                     						+"<a class='btn btn-defualt btn'  role='button' value='"+JSONData.list[i].cookNo+"'>상세정보</a>"
+					                     						+button
+					                     						+"</p>"
+					                     						+"</div></div></div>"
 					                     						
 					                     		//*/				
 						               	$( '#scrollList' ).append(displayValue);	
@@ -398,7 +396,7 @@ div.thumbnail {
 	<div class="row">
 		
 	
-				<div class="col-xs-4 col-md-6 text-lefr image" value="${cook.cookNo }">				
+				<div class="col-xs-4 col-md-6 text-left image" value="${cook.cookNo }">				
      <c:choose>
     
     	<c:when test="${(cook.cookFilename).contains('/')}">
