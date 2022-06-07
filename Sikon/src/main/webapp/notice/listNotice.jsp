@@ -43,7 +43,7 @@
         }
         
         table {
-        	margin-top:30px;
+        	margin-top:20px;
         }
         	
 		h1.text-center {
@@ -59,8 +59,9 @@
 	<script type="text/javascript">
 
 	function fncGetList(currentPage) {
+		
 		$("#currentPage").val(currentPage);
-	  	$("form").attr("method" , "POST").attr("action", "/notice/listNotice").submit();
+	  	$("form").attr("method" , "POST").attr("action", "/notice/listNotice?menu=${menu}").submit();
 	}
 
 	
@@ -160,9 +161,7 @@
 			
 		</div>
 		
-		
-		
-		 <input type="hidden" id="currentPage" name="currentPage" value=""/>
+		<input type="hidden" id="currentPage" name="currentPage" value=""/>
 		
 		<!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped" >

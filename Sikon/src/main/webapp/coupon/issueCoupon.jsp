@@ -66,7 +66,7 @@
       	margin-left:59px;
       }
       
-      #gogogo {
+      #userId {
       	width:325.08px;
       }
      
@@ -79,7 +79,7 @@
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage)
-			self.location = "/coupon/issueCoupon";
+			$("form").attr("method" , "POST").attr("action" , "/coupon/issueCoupon").submit();
 		}
 		
 
@@ -139,6 +139,7 @@
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row">
 	    
+	    <input type="hidden" id="currentPage" name="currentPage" value=""/>
 	    <input type="hidden" id="issueStatus" name="issueStatus" value="사용가능"/>
 	    
 		 <p class="text-primary" style="color:gray">
@@ -184,7 +185,7 @@
         <thead>
           <tr>
           	<th align="center"></th>
-            <th align="left" id="gogogo">회원ID</th>
+            <th align="left" id="userId">회원ID</th>
             <th align="left">회원명</th>
             <th align="left">닉네임</th>
           </tr>
