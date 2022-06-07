@@ -128,10 +128,10 @@ public class CouponController {
 		return "forward:/coupon/manageCoupon";
 	}
 		
-	@RequestMapping(value="/issueCoupon", method=RequestMethod.GET)
+	@RequestMapping(value="/issueCouponView")
 	public String issueCouponView(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 				
-		System.out.println("/coupon/issueCoupon : GET/POST");
+		System.out.println("/coupon/issueCouponView");
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
@@ -158,8 +158,6 @@ public class CouponController {
 	public String issueCoupon(@ModelAttribute("coupon") Coupon coupon, @RequestParam("userId") List<String> userId) throws Exception{
 
 		System.out.println("/coupon/issueCoupon : POST");
-		
-		System.out.println(coupon.getIssueStatus());
 		
 		//Business Logic		
 		for (String couponUser : userId) {

@@ -137,7 +137,7 @@
 				
 				$("#issueCoupon").on("click" , function() {
 							
-					self.location = "/coupon/issueCoupon";
+					self.location = "/coupon/issueCouponView";
 				});
 			});
 		 		 
