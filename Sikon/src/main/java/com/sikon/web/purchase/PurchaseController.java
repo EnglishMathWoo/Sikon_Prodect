@@ -133,8 +133,46 @@ public class PurchaseController {
 	}
 	
 	
+//=================================== 장바구니 구매 ===================================
 	
+	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.GET)
+	public String addPurchaseByCart(@RequestParam("cartNo") int[] cartNo,  Model model) throws Exception {
 
+		System.out.println("/addPurchaseByCart : GET");
+		
+		List list = new ArrayList();
+		
+		for(int cartnum : cartNo) {
+			
+			System.out.println("cartnum: "+cartnum);
+			
+			Cart cart = cartService.getCart(cartnum);			
+			
+			System.out.println("cart: "+cart);
+			
+			Product product = productService.getProduct(cart.getCartProd().getProdNo());
+			
+			System.out.println("product: "+product);
+			
+			list.add(product);
+			
+			System.out.println("--------------------------------");
+		}
+		
+		System.out.println("list: "+list);
+		model.addAttribute("list", list);
+		
+		System.out.println("===================================");
+		
+		//return "forward:/purchase/addPurchaseViewByCart.jsp";
+		return null;
+	}	
+	
+	
+	
+//==================================================================================
+	
+		
 	@RequestMapping( value="getPurchase", method=RequestMethod.GET)
 	public ModelAndView getPurchase( @RequestParam("tranNo") int tranNo) throws Exception {
 		
@@ -193,7 +231,6 @@ public class PurchaseController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/purchase/getPurchase?tranNo="+tranNo);		
 		
-		//return "redirect:/getPurchase.do?tranNo="+purchase.getTranNo();
 		return modelAndView;
 	}
 	
@@ -235,7 +272,6 @@ public class PurchaseController {
 		}
 			
 		
-		//return "redirect:/getPurchase.do?tranNo="+purchase.getTranNo();
 		return modelAndView;
 	}
 

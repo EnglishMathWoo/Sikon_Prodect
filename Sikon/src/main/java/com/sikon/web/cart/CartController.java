@@ -56,10 +56,7 @@ public class CartController {
 		
 		Cart cart = new Cart();
 		cart.setUserId(user.getUserId());
-		cart.setProdNo(prodNo);
-		cart.setFileName(product.getProdThumbnail());
-		cart.setPrice(product.getProdDisPrice());
-		cart.setProdName(product.getProdName());
+		cart.setCartProd(product);
 		cart.setQuantity(quantity);
 		
 		System.out.println(cart);
