@@ -64,7 +64,7 @@ table {
 
 
 		function fncGetList(currentPage) {
-			console.log(currentPage);
+			console.log("currentPage: "+currentPage);
 			$("#currentPage").val(currentPage)
 			$("form").attr("method" , "POST").attr("action" , "/purchase/listPurchase").submit();
 		}
@@ -88,7 +88,7 @@ table {
 				var message2 = $(this).attr("value2");
 				console.log(message2);
 				
-				self.location ="/purchase/updateTranCode?tranNo="+message1+"&tranCode="+message2;
+				self.location ="/purchase/updatedivyStatus?tranNo="+message1+"&divyStatus="+message2;
 			});
 			
 			$( "td.cancel" ).on("click" , function() {
@@ -98,7 +98,7 @@ table {
 				var message2 = $(this).attr("value2");
 				console.log(message2);
 				
-				self.location ="/purchase/cancelOrder?tranNo="+message1+"&tranCode="+message2;
+				self.location ="/purchase/cancelOrder?tranNo="+message1+"&divyStatus="+message2;
 			});
 			
 			
@@ -136,8 +136,9 @@ table {
 	    	
 		</div>
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-		
-		
+		<form>
+			<input type="hidden" id="currentPage" name="currentPage" value=""/>
+		</form>
       <!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped">
       
@@ -147,7 +148,6 @@ table {
             <th align="center" >구매내역</th>
             <th align="center">배송현황</th>
             <th align="center">정보수정</th>
-            <th align="center">간략정보</th>
           </tr>
         </thead>
        
@@ -161,13 +161,13 @@ table {
 			  <td align="center" class="view" value="${purchase.tranNo }">상세보기</td>	
 			  
 			  <c:choose>
-				<c:when test="${purchase.tranCode.equals('000')}">
+				<c:when test="${purchase.divyStatus.equals('000')}">
 					<td align="center">구매 취소된 상품입니다.</td>
 				</c:when>
-				<c:when test="${purchase.tranCode.equals('001')}">
+				<c:when test="${purchase.divyStatus.equals('001')}">
 					<td align="center">현재 구매완료 상태입니다.</td>
 				</c:when>
-				<c:when test="${purchase.tranCode.equals('002')}">
+				<c:when test="${purchase.divyStatus.equals('002')}">
 					<td align="center">현재 배송중 상태입니다.</td>
 				</c:when>
 				<c:otherwise>
@@ -176,13 +176,13 @@ table {
 		      </c:choose>
 			  
 			  <c:choose>
-			  <c:when test="${purchase.tranCode.equals('002')}">
-					<td align="center" class="divy"  value1="${purchase.tranNo }" value2="${purchase.tranCode}">물건도착</td>
+			  <c:when test="${purchase.divyStatus.equals('002')}">
+					<td align="center" class="divy"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">물건도착</td>
 				</c:when>
-				<c:when test="${purchase.tranCode.equals('001')}">
-					<td align="center" class="cancel"  value1="${purchase.tranNo }" value2="${purchase.tranCode}">구매취소</a>
+				<c:when test="${purchase.divyStatus.equals('001')}">
+					<td align="center" class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</a>
 				</c:when>
-				<c:when test="${purchase.tranCode.equals('000')}">
+				<c:when test="${purchase.divyStatus.equals('000')}">
 					<td align="center" class="complete">구매취소완료</td>
 				</c:when>
 				<c:otherwise>
@@ -190,10 +190,6 @@ table {
 				</c:otherwise>
 			  	</c:choose>
 			  	
-			  <td align="center">
-			  	<i class="glyphicon glyphicon-ok" id= "${purchase.tranNo}"></i>
-			  	<input type="hidden" value="${purchase.tranNo}">
-			  </td>
 			</tr>
           </c:forEach>
         

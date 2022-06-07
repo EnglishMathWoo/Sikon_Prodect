@@ -146,12 +146,12 @@ public class PurchaseController {
 		
 		purchase.setBuyer(user);
 		purchase.setPurchaseProd(product);
+		
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/getPurchase.jsp");
 		modelAndView.addObject("purchase", purchase);
 		
-		//return "forward:/purchase/getPurchase.jsp";
 		return modelAndView;
 	}
 	
@@ -161,13 +161,24 @@ public class PurchaseController {
 
 		System.out.println("/purchase/updatePurchase : GET ");
 		//Business Logic
+		
+
 		Purchase purchase = purchaseService.getPurchase(tranNo);
+		
+		int prodNo = purchase.getPurchaseProd().getProdNo();
+		Product product = productService.getProduct(prodNo);
+				
+		String userId = purchase.getBuyer().getUserId(); 
+		User user = userService.getUser(userId);
+		
+		purchase.setBuyer(user);
+		purchase.setPurchaseProd(product);
+		
 		// Model 과 View 연결
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/updatePurchase.jsp");
 		modelAndView.addObject("purchase", purchase);
 		
-		//return "forward:/purchase/updatePurchase.jsp";
 		return modelAndView;
 	}
 	
@@ -204,6 +215,7 @@ public class PurchaseController {
 		
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
+		System.out.println("Role: "+user.getRole());
 		
 		user = userService.getUser(user.getUserId());
 		
@@ -216,8 +228,10 @@ public class PurchaseController {
 		ModelAndView modelAndView = new ModelAndView();
 		if(user.getRole().equals("admin")) {
 			modelAndView.setViewName("/purchase/listSales");	
+			System.out.println("Role: "+user.getRole());
 		}else {
 			modelAndView.setViewName("/purchase/listPurchase");
+			System.out.println("Role: "+user.getRole());
 		}
 			
 		
@@ -239,13 +253,16 @@ public class PurchaseController {
 		
 		purchaseService.cancelOrder(quantity, prodNo);
 		
+		System.out.println("구매취소완료");
+		
 		purchase.setDivyStatus("000");
 		purchaseService.updateDivyStatus(purchase);
 		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/listPurchase.do");		
+		System.out.println("코드변경완료");
 		
-		//return "redirect:/getPurchase.do?tranNo="+purchase.getTranNo();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/listPurchase");		
+		
 		return modelAndView;
 	}
 	

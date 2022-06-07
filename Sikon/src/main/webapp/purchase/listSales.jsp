@@ -66,7 +66,7 @@ table {
 		function fncGetList(currentPage) {
 			console.log(currentPage);
 			$("#currentPage").val(currentPage)
-			$("#divyform").attr("method" , "POST").attr("action" , "/purchase/listSales").submit();
+			$("#form").attr("method" , "POST").attr("action" , "/purchase/listSales").submit();
 		}
 		
 		
@@ -173,7 +173,7 @@ table {
 				    </div>
 				  </div>  
 				     <div class="row">
-					    <form class="form-inline" name="divyform"> 
+					    <form class="form-inline " id="form"> 
 						 <div class="col-md-6 text-left"> 
 						  <div class="form-group" align="left">
 								<select name="orderCondition" class="form-control" style="width:125px">
@@ -212,8 +212,9 @@ table {
 				
 				  <c:set var="i" value="0" />
 				  <c:forEach var="purchase" items="${list}">
+				  <c:if test="${!purchase.divyStatus.equals('000')}">
 					<c:set var="i" value="${ i+1 }" />
-					<c:if test="${!purchase.divyStatus.equals('000')}">
+					
 					<tr>
 					  <td align="center">${ i }</td>
 					  <td align="center">${purchase.tranNo}</td>
@@ -273,7 +274,7 @@ table {
 				    </div>
 				  </div>  
 				     <div class="row">
-					    <form class="form-inline" name="cancelform"> 
+					    <form class="form-inline" name="form"> 
 						 <div class="col-md-6 text-left"> 
 						  <div class="form-group" align="left">
 								<select name="orderCondition" class="form-control" style="width:125px">
@@ -312,8 +313,9 @@ table {
 				
 				  <c:set var="i" value="0" />
 				  <c:forEach var="purchase" items="${list}">
+				  <c:if test="${purchase.divyStatus.equals('000')}">
 					<c:set var="i" value="${ i+1 }" />
-					<c:if test="${purchase.divyStatus.equals('000')}">
+					
 					<tr>
 					  <td align="center">${ i }</td>
 					  <td align="center">${purchase.tranNo}</td>

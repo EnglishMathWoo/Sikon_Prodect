@@ -72,26 +72,30 @@ body{
 	<div class="container">
 	
 		<div class="page-header">
-	       <h3 class=" text-info" style="color:#bc8f8f">상품상세조회</h3>
+	       <h3 class=" text-info" style="color:#bc8f8f">결제내용</h3>
 	    </div>
 	
-		<div class="row">
+		 <hr/>
+		 <h4 align="center">주문상품</h4>
+		 <hr/>
+		 
+		 <div class="row">
 		<div class="col-xs-12 col-md-12" align="center">
 		
 		<c:choose>
 		
-		<c:when test="${purchase.purchaseProd.fileName.contains('&')}">
+		<c:when test="${purchase.purchaseProd.prodThumbnail.contains('&')}">
 		
 			<td class="ct_write01">
 				<c:choose>
-				<c:when test="${purchase.purchaseProd.fileName.contains('mp4')}">
-					<c:forEach var="name" items="${purchase.purchaseProd.fileName.split('&')}">
-						<video width="400" height="300" controls autoplay src="/images/uploadFiles/${name}" type="video/mp4"></video>
+				<c:when test="${purchase.purchaseProd.prodThumbnail.contains('mp4')}">
+					<c:forEach var="name" items="${purchase.purchaseProd.prodThumbnail.split('&')}">
+						<video width="400" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"></video>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<c:forEach var="name" items="${purchase.purchaseProd.fileName.split('&')}">
-						<img src="/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+					<c:forEach var="name" items="${purchase.purchaseProd.prodThumbnail.split('&')}">
+						<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
 					</c:forEach>
 				</c:otherwise>
 				</c:choose>		
@@ -101,94 +105,91 @@ body{
 		</c:when>
 		
 		<c:otherwise>
-			<img src="/images/uploadFiles/${purchase.purchaseProd.fileName}" width="300" height="300" align="absmiddle"/>
+			<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail}" width="300" height="300" align="absmiddle"/>
 		</c:otherwise>
 		</c:choose>
 
 		</div>
 		</div>
-
-		<hr/>
-	
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>상품번호</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.purchaseProd.prodNo }</div>
+		  <br>
+		 <div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>상품명</strong></div>
+			<div class="col-xs-8 col-md-8">${purchase.purchaseProd.prodName}</div>
 		</div>
-		
-		<hr/>
-		
+			  		<hr/>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>결제금액</strong></div><br>
+			<div class="col-xs-8 col-md-8">상품가격: ${purchase.purchaseProd.prodDisPrice} 원</div>
+			<div class="col-xs-8 col-md-8">+ 배송비: ${purchase.divyFee} 원</div>
+		</div>
+			  		<hr/>
 		<div class="row">
 	  		<div class="col-xs-4 col-md-4"><strong>구매수량</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.buyNum }</div>
+			<div class="col-xs-8 col-md-8">${purchase.purchaseQuantity} 개</div>
 		</div>
 		
 		<hr/>
-		
+			  		
+		<input type="hidden" id="price" value="${purchase.purchaseProd.prodDisPrice}">
+		<input type="hidden" id="purchaseQuantity" value="${purchase.purchaseQuantity}">
+			  		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>구매자아이디</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.buyer.userId}</div>
+	  		<div class="col-xs-4 col-md-4"><strong>총 결제금액</strong></div>
+			<div class="col-xs-8 col-md-8">
+		     <input type="text" id="totalprice" value="" style="border:none;width:50px"> 원</div>
 		</div>
 		
-		<hr/>
-		
-		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>구매방법</strong></div>
-	  		<c:if test="${purchase.paymentOption.contains('1')}">
-	  			<div class="col-xs-8 col-md-8">현금구매</div>
-	  		</c:if>
-	  		<c:if test="${purchase.paymentOption.contains('2')}">
-	  			<div class="col-xs-8 col-md-8">신용구매</div>
-	  		</c:if>
+	  		<div class="col-xs-4 col-md-4"><strong>적립 포인트</strong></div>
+			<div class="col-xs-8 col-md-8">+
+		      ${purchase.earnPoint} P</div>
 		</div>
-		
-		<hr/>
-			
-		
+		  
+	  
+		 <hr/>
+		  <h4 align="center">배송정보</h4>
+		  <hr/>
+	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>구매자이름</strong></div>
+	  		<div class="col-xs-4 col-md-4"><strong>받는분 이름</strong></div>
 			<div class="col-xs-8 col-md-8">${purchase.receiverName }</div>
 		</div>
-		
-		<hr/>
-		
-		
-		
+
 		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>구매자연락처</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.receiverPhone }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>구매자주소</strong></div>
+	  		<div class="col-xs-4 col-md-4"><strong>배송지</strong></div>
 			<div class="col-xs-8 col-md-8">${purchase.divyAddr }</div>
 		</div>
 		
-		<hr/>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>연락처</strong></div>
+			<div class="col-xs-8 col-md-8">${purchase.receiverPhone }</div>
+		</div>
 		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>이메일</strong></div>
+			<div class="col-xs-8 col-md-8">${purchase.buyer.userId }</div>
+		</div>
 		
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>구매요청사항</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.divyRequest }</div>
+	  		<div class="col-xs-4 col-md-4"><strong>배송메시지</strong></div>
+			<div class="col-xs-8 col-md-8">${purchase.divyMessage }</div>
 		</div>
+		
 		
 		<hr/>
+		  <h4 align="center">쿠폰 / 포인트</h4>
+		  <hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>배송희망일</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.divyDate }</div>
+	  		<div class="col-xs-4 col-md-4"><strong>사용 쿠폰</strong></div>
+			<div class="col-xs-8 col-md-8">${purchase.usedCoupon }</div>
 		</div>
-		
-		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>주문일</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.orderDate }</div>
+	  		<div class="col-xs-4 col-md-4"><strong>사용 포인트</strong></div>
+			<div class="col-xs-8 col-md-8">- ${purchase.usedPoint } P</div>
 		</div>
-		
 		
 		
 		
@@ -196,7 +197,7 @@ body{
 	  		<div class="col-md-12 text-right ">
 	  		
 	  			<button type="button" class="btn btn-default" id="check">확인</button>
-	  		<c:if test="${purchase.tranCode.equals('001') }">	
+	  		<c:if test="${purchase.divyStatus.equals('001') }">	
 	  			<button type="button" class="btn btn-primary" id="update">수정</button>
 	  		</c:if>
 		</div>
