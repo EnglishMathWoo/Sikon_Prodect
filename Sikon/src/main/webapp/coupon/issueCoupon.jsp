@@ -121,7 +121,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>쿠폰발급</h3>
+	       <h3 style="color:#bc8f8f">쿠폰발급</h3>
 	    </div>
 	    
 	    <form class="form-horizontal" name="detailForm"  enctype="multipart/form-data" >
@@ -130,7 +130,7 @@
 	    
 	    <input type="hidden" id="issueStatus" name="issueStatus" value="사용가능"/>
 	    
-		 <p class="text-primary">
+		 <p class="text-primary" style="color:gray">
 		 	전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		 </p>
 		  		    
@@ -173,8 +173,10 @@
         <thead>
           <tr>
             <th align="center"></th>
-            <th align="center">회원 ID</th>
-            <th align="left">회원명</th>
+            <th align="center"></th>
+            <th align="left">회원ID</th>
+            <th align="left" >회원명</th>
+            <th align="center"></th>
             <th align="left">닉네임</th>
           </tr>
         </thead>
@@ -184,10 +186,12 @@
 		  <c:set var="i" value="0" />
 		  <c:forEach var="user" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-			<tr>
+			<tr class="ct_list_pop">
 			  <td align="left"><input type="checkbox" name="userId" value="${user.userId}" ></td>
+			  <td></td>
 			  <td align="left">${user.userId}</td>
 			  <td align="left">${user.userName}</td>
+			  <td></td>
 			  <td align="left">${user.userNickname}</td>
 			</tr>
           </c:forEach>
