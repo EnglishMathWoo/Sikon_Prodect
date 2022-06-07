@@ -86,7 +86,7 @@ public class CookController {
 	int pageSize;
 
 
-	@RequestMapping( value="addCook	", method=RequestMethod.GET)
+	@RequestMapping( value="addCook", method=RequestMethod.GET)
 	public String addCook( HttpSession session, Model model) throws Exception {
 
 		System.out.println("/cook/addCook : GET");
