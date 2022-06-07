@@ -81,15 +81,13 @@
 	    </div>
 	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>공지사항 제목</strong></div>
-			<div class="col-xs-8 col-md-4">${notice.noticeTitle}</div>
+			<div class="col-xs-8 col-md-4"><h3>${notice.noticeTitle}</h3></div>
 		</div>
 		
 		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>공지사항 내용</strong></div>
-			<div class="col-xs-8 col-md-4">${notice.noticeContent}</div>
+			<div class="col-xs-8 col-md-4"><strong>${notice.noticeContent}</strong></div>
 		</div>
 		
 		<hr/>
