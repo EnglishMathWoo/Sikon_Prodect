@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.sikon.common.Search;
 import com.sikon.service.domain.User;
+import com.sikon.service.domain.Wish;
 import com.sikon.service.domain.Heart;
 
 public interface HeartService {
@@ -23,5 +24,7 @@ public void updateHeart (int cookNo) throws Exception;
 	public void updateHeartCheck(int cookNo,String userId) throws Exception;
 	
 	public void updateHeartCheckCancel(int cookNo,String userId) throws Exception;
+	
+	public List<Heart> getHeart(String userId) throws Exception;
 
 }

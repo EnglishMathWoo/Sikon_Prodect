@@ -789,7 +789,13 @@ footer {
 		    </div>
 		  </div>
 		  
-
+		   <input type="hidden" id="userId"  value="${user.userId }" />
+    <div class="form-group">
+		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">쿠킹멘토닉네임</label>
+		    <div class="col-sm-4">
+			${user.userNickname}
+		    </div>
+		  </div>
 	    
 	    <br>
 	    

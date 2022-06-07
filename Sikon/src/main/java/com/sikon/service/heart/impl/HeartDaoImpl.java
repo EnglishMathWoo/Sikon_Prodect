@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.sikon.service.domain.Heart;
+import com.sikon.service.domain.Wish;
 import com.sikon.service.heart.HeartDao;
 
 
@@ -84,7 +85,10 @@ public class HeartDaoImpl implements HeartDao{
 		sqlSession.update("HeartMapper.updateHeartCheckCancel", map);
 	}
 
-	
+	public List<Heart> getHeart(String userId) throws Exception {
+		
+		return sqlSession.selectList("HeartMapper.getHeart", userId);
+	}
 
 
 }
