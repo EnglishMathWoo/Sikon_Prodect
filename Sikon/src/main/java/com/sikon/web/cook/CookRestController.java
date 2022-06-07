@@ -20,7 +20,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -153,15 +154,35 @@ public class CookRestController {
 		
 		return map;
 	}
-	@RequestMapping( value="json/getCook/{cookNo}", method=RequestMethod.GET )
-	public Cook getCook( @PathVariable int cookNo ) throws Exception{
+	@RequestMapping(value="json/getCook/{cookNo}", method=RequestMethod.GET)
+	public Cook getCook( @RequestParam("cookNo") int cookNo ,
+			@CookieValue(value="history", required=false) Cookie cookie,
+			HttpServletResponse response, Model model,@RequestParam("menu") String menu) throws Exception {
 		
+		Cook cook = cookService.getCook(cookNo);
 		
+		String img = cook.getCookFilename();
+		String co = cook.getCookName().replace(" ", "_");
+		String cn = "/"+cookNo+"&"+img+"&"+co;
+		String first = cookNo+"&"+img+"&"+co;
 		
-		
-		return cookService.getCook(cookNo);
-		
+		if(cookie != null) {
+			Cookie cookCookie = new Cookie("history",first);
+			cookCookie.setPath("/");
+			response.addCookie(cookCookie);
+		}else {
+			String str1 = cookie.getValue()+ cn;
+			
+			Cookie cookCookie02 = new Cookie("history",str1);
+			cookCookie02.setPath("/");
+			response.addCookie(cookCookie02);
+			
+			System.out.println("Not NULL일 때 저장된 co쿠키값"+cookie.getValue());
+			System.out.println("Not NULL일 때 저장될 co쿠키값"+str1);
+		}
+		return cook;
 	}
+	
 	@RequestMapping( value="json/updateCook", method=RequestMethod.POST )
 	public Cook updateCook(  @RequestBody Cook cook 
 			, Model model, HttpSession session,

@@ -27,16 +27,29 @@
 
 
 	<!-- 자격증 수정 -->
-	<update	id="updateLicense" 	parameterType="java.util.List" >
-		<foreach collection="list" item="item" index="index">
+	<update	id="updateLicense" 	parameterType="map" >
 		UPDATE license
-		<set>
-			license_name		= #{licenseName} ,
-			license_institution	= #{licenseInstitution} ,
-			license_date		= #{licenseDate:DATE}
-		</set>
-		WHERE license_no = 10000
+		set	license_name=
+		case license_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.licenseNo} then #{item.licenseName}
 		</foreach>
+		else license_name end
+		,
+		license_institution=
+		case license_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.licenseNo} then #{item.licenseInstitution}
+		</foreach>
+		else license_institution end
+		,
+		license_date=
+		case license_no
+		<foreach collection="list" item="item" separator=" ">
+		when #{item.licenseNo} then #{item.licenseDate:DATE}
+		</foreach>
+		else license_date end
+		WHERE user_id = #{userId}
 	</update>
 
 

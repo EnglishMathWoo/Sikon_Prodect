@@ -84,7 +84,7 @@ public class UserRestController {
 		System.out.println("/user/json/updateUser : POST");
 		
 		//Business Logic
-		userService.updateUser(user, license, career);
+		userService.updateUser(user);
 		
 		return userService.getUser(user.getUserId());
 	}

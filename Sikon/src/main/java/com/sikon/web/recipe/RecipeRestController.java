@@ -47,8 +47,7 @@ public class RecipeRestController {
 
 		System.out.println("/recipe/json/listRecipe : POST");
 		// Business Logic
-		System.out.println(pageUnit);
-		System.out.println(pageSize);
+
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
