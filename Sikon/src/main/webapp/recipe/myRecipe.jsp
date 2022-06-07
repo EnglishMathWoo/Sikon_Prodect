@@ -17,8 +17,10 @@
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+	
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -26,10 +28,9 @@
 	
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   <link href="/resources/css/animate.min.css" rel="stylesheet">
+   <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+    
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -38,19 +39,15 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
+
+
 <style>
+
 body {
 	padding-top: 50px;
+	
 }
 
-div.thumbnail {
-	height: 500px;
-	width: 340px;
-}
-</style>
-
-
-<style>
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
@@ -70,162 +67,132 @@ div.thumbnail {
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
 }
+
+.ref-sort{display:block; margin-bottom:50px; text-align:center;}
+.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
+}
+.ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
+.ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
+.ref-sort li:last-child{margin:0; padding:0;}
+.ref-sort li:last-child::after{display:none;}
+.ref-sort li a{}
+
+/* References */
+.ref-sort li a{color:inherit;}
+.ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
+
+.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
+
+.sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
+.sectiontitle .heading{margin:0; padding:0; line-height:1;}
+
+.sectiontitle{max-width:none; margin-bottom:50px;}
+
+.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
+
+.imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
+.imgover, .imgover:hover::after{color:#333333;} 
+
+/* Latest */
+.excerpt time{border-color:#D7D7D7;}
+
+#latest article{max-width:348px;}
+
+#footer{padding-bottom:50px;}/* Not required, just looks a little better */
+.latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
+.latestimg > li img{width:auto;}
+
+* Latest
+--------------------------------------------------------------------------------------------------------------- */
+#latest{}
+
+#latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
+article{}
+article img{width:100%;}/* Force the image to have the full width of parent at all times */
+.excerpt{padding:30px 0 0;}
+.excerpt time{display:block; margin:0 0 30px 0; padding:0 0 15px 0; font-style:normal; font-size:.8rem; line-height:1; border-bottom:1px solid;}
+.excerpt time i{margin-right:5px;}
+.excerpt .heading{margin:0 0 10px 0; font-size:1.3rem;}
+.excerpt .meta{margin:0 0 30px 0; padding:0; list-style:none; text-align:left;}
+.excerpt .meta li{display:inline-block; font-size:.8rem;}
+.excerpt .meta li::after{margin-left:5px; content:"|";}
+.excerpt .meta li:last-child::after{margin:0; content:"";}
+.excerpt p{}
+.excerpt footer{margin-top:30px;}
+
+.latestimg{}
+.latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
+.latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
+.latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
+.latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
+.latestimg > li a.imgover{display:block;}
+
+.carousel-inner > .item > img {
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  max-height: 500px;
+} 
+
+/* [RECIPE LIST] 폰트 적용 */
+.wrapper{
+font-family: 'Gowun Batang', serif;
+}
+
+
+
+/* 레시피 등록 버튼 css */
+.submit
+ {
+  display: block;
+  border: none;
+  width: 80px;
+  height: 30px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #d4af7a;
+  float: right;
+  	font-family: 'Gowun Batang', serif;
+  
+}
+
+/* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
+hr {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+/* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
+p {
+    margin: 0 0 0px;
+}
+
 </style>
+
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-		function fncGetList(currentPage) {
-			$("#currentPage").val(currentPage);
-			$("form").attr("method" , "POST").attr("action" , "/recipe/listProduct").submit();
-		}
-		
 		 
 		 $(function() {
-			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			
-					$( "#name" ).on("click" , function() {
-				console.log($(this).attr("value"));
-				self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
-		});
-					$( "#name" ).css("color","red");
+					$( ".imgover" ).on("click" , function() {
+					console.log($(this).attr("value"));
+					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
+					});
 					
-				$( "button.btn.btn-default:contains('정렬')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
-				
-				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
-				
-				 //=========autoComplete=================================================
-			<!--	 
-				 var list = [];
-			   		<c:forEach var="names" items="${autoproduct }" >
-			   		list.push("${names.prodName}");
-			   		</c:forEach>
-			   		
-		   		    
-			   		$( "#prodname" ).autocomplete({
-			   		      source: list,
-			   		      
-			   		});
-			   	-->	
-			   	//====================================================================
-			 <!--
-			   	 $(window).scroll(function() {
-		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
-		                	
-		                	var cpage = $("#currentPage").val();
-		                	console.log(cpage);
-		                	cpage = Number(cpage)+1;
-		                	console.log(cpage);
-		        	   		
-		        	   		
-					            $.ajax({
-					                
-					                  url : "/product/json/listProduct?&menu=${param.menu }" ,
-					                  method : "POST" ,
-					                  data : JSON.stringify({
-					                	  currentPage : cpage
-					                  }), 
-					                  dataType : "json" ,
-					                  headers : {
-					                     "Accept" : "application/json",
-					                     "Content-Type" : "application/json"
-					                  },
-					                success : function(JSONData , status) {
-					                	 
-					                	$("#currentPage").val(cpage)
-					                	//console.log(cpage); 
-					                	//alert(JSONData.list[0].prodName);
-					                	//alert(JSONData.list.length);
-					                	console.log(JSONData.list[0].prodName);
-						                	 
-					                	for(var i=0; i<JSONData.list.length-1; i++){
-					                		///*
-					                		var image;
-					                		var message;
-					                		var cancel;
-					                		var button;
-					                
-					                		if(JSONData.list[i].cancel == '0'){
-				                				
-				                					image = "<img src='/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image'>";
-				                				
-					                			
-					                		}else if(JSONData.list[i].cancel == '1'){
-					                			
-				                					image = "<img src='/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image_none'>";
-				                				
-					                		}
-					                		
-					                		
-					                		if(${user.role.equals('admin') && param.menu.equals('manage')}){
-					                			message="<p>남은 재고량 : "+JSONData.list[i].total+"</p>";
-					                		}else{
-					                			message="<p></p>";
-					                		}
-					                		
-					                		
-					                		if(JSONData.list[i].cancel == '1' && param.menu.equals('search')){
-					                			cancel = "<p style='color:#DB4455'>판매중지</p>";
-					                		}else if(JSONData.list[i].cancel == '1' && param.menu.equals('manage')){
-					                			cancel = "<p style='color:#DB4455'>*판매중지된 상품입니다.</p>";
-					                		}else if(JSONData.list[i].cancel == '0'){
-					                			cancel = "<p></p>";
-					                		}
-					                		
-					                		if(${param.menu=='manage' }){
-					                			button = "<a class='btn btn-defualt btn update'  role='button' value='"+JSONData.list[i].prodNo+"'>수정하기</a>" ;
-					                		}else{
-					                			if(JSONData.list[i].total == "0"){
-					                				button = "<a class='btn btn-defualt btn disabled' role='button' >재고없음</a>";
-					                			}else{
-					                				if(JSONData.list[i].cancel=='0'){
-					                					button = "<a class='btn btn-default btn buy' role='button' value='"+JSONData.list[i].prodNo+"'>구매하기</a>";
-					                				}else{
-					                					button = "<a class='btn btn-default btn disabled' role='button' value='"+JSONData.list[i].prodNo+"'>구매하기</a>";
-					                				}
-					                			}
-					                		}
-					                		
-						                     var displayValue = "<div class='col-sm-6 col-md-4'>"
-						                     					+"<div class='thumbnail'>"
-						                     					+image
-					                     						+"<div class='caption'>"
-					                     						+"<h3>"+JSONData.list[i].prodName+"</h3>"
-					                     						+cancel
-					                     						+"<p>"+JSONData.list[i].price+" 원</p>"
-					                     						+"<p align='right'>"
-					                     						+"<a class='btn btn-defualt btn'  role='button' value='"+JSONData.list[i].prodNo+"' style='color:#bc8f8f'>상세조회</a>"
-
-					                     						+button
-					                     						+"</p>"
-					                     						+"</div></div></div>"
-					                     						
-					                     		//*/				
-						               	$( '#scrollList' ).append(displayValue);	
-					                     						
-					                     						 		
-					                    						
-					                     						
-					                	}//for 
-					                 }
-					            });//ajax
-					           
-		                }//if
-		            });//function
-		           
-		            -->
-		   });
+		 });
 		 
-	</script>
-	
-</head>
+		 
+					
+</script>
+			 </head>
 
 <body>
 
@@ -236,113 +203,56 @@ div.thumbnail {
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	
-	<div class="container">
-	
-		<div class="page-header">
-	       <h3 class=" text-info" style="color:#75574B;">
-	       나의레시피
-	       </h3>
-	    </div>
-	    
-	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
-		<div class="row">
-
-			<div class="col-md-6 text-left">
-				<p class="text-primary" style="color:black;">전체 ${resultPage.totalCount } 건수, 현재
-					${resultPage.currentPage} 페이지</p>
-			</div>
-
-			
-			<form class="form-inline" name="detailForm">
-				<div class="col-md-6 text-right">
-					<div class="form-group">
-						<select class="form-control" name="searchCondition">
-							<option value="0"
-								${!empty search.searchCondition && search.searchCondition==0 ? "selected" : ""}>정렬조건</option>
-							<option value="1"
-								${!empty search.searchCondition && search.searchCondition==1 ? "selected" : ""}>레시피명</option>
-						</select>
-
-					</div>
-
-					<div class="form-group">
-						<label class="sr-only" for="searchKeyword">검색어</label> <input
-							type="text" class="form-control" id="prodname"
-							name="searchKeyword" placeholder="검색어"
-							value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							
-					<button type="button" class="btn btn-default">검색</button>
-					</div>
-					
-				</div>
-				<div class="col-md-6 text-left">
-					<div class="form-group">
-						<select class="form-control" name="orderCondition">
-							<option value="0"
-								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
-							<option value="1"
-								${!empty search.orderCondition && search.orderCondition==1 ? "selected" : ""}>인기순</option>
-							<option value="2"
-								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
-								<option value="2"
-								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>소요시간순</option>
-								
-						</select>
-					</div>
-					
-					<button type="button"  class="btn btn-default">정렬</button>
-				</div>
-					
-					
-						<input type="hidden" id="currentPage" name="currentPage" value="1" />
-				
-		</form>
-			
-		
-
-					<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-
-
-		</div>
-</div>
-	
-		
 <div class="container">
-	
+<!-- ################################################################################################ -->
+
+	<div class="wrapper row3">
+		  <section class="hoc container clear"> 
+		    <div class="center btmspace-50">
+		    <br/>
+		      <h3 class="font-x2 nospace" align="center"><br> 내가 쓴 레시피 </h3>
+		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
+		    </div>
+		  		    <button type="button" class="submit">삭제</button>
+		  
+		    
+		    <br/><hr/><br/>
+    </section>
+  	</div>
+ 
+ <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+ 
 <div class="row">
 	<c:set var="i" value="0" />
-
-<c:forEach var="recipe" items="${list}">
- <div class="col-sm-6 col-md-4">
- <br/> <br/>
- <br/> <br/>
-    <div class="thumbnail">
-		<img class="imange" src="/images/uploadFiles/${recipe.recipeImg}" width="320" height="300"><br/>
-		  
-		
-      <div class="caption">
-        <h4 style="color:black;"  id="name" value="${recipe.recipeNo }" >${recipe.recipeName }</h4>
-        <p>${recipe.recipeDetail }</p>
-        <p><a href="/recipe/getRecipe?recipeNo=${recipe.recipeNo }" class="btn btn-default" role="button">레시피상세보기</a> 
-        <c:if test="${user.userId==recipe.writer}">
-        <p><a href="/recipe/updateRecipe?recipeNo=${recipe.recipeNo }" class="btn btn-default" role="button">수정</a> 
-        </c:if>
+	<c:forEach var="recipe" items="${list}">
+  <div class="col-sm-6 col-md-3">
+  <br/> <br/>
+  
+    <div id="latest" class="group">
+      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#"> 
+      <ul>
+  <li><input type="checkbox" value="${recipe.recipeNo }" />
+  <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></li></ul></a>
+        <div class="excerpt">
+          <h4 class="heading" >${recipe.recipeName }</h4>
+           <h6 >${recipe.recipeDetail }</h6>
+          <ul class="meta">
+            <li > ${recipe.recipeTheme }</li>
+            <li>${recipe.recipeDifficulty }</li>
+            <li>${recipe.cookingTime }분</li>
+            <li> ${recipe.writer.userNickname }</li>
+          </ul>
         </div>
+      </article>
+     
     </div>
-  </div>		
-    </c:forEach>
-    
-    
-    
+    <!-- ################################################################################################ -->
   </div>
-		
-	  
- 	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 	
- 	<!-- PageNavigation Start... -->
-	<!-- PageNavigation End... -->
-	
+  </c:forEach>
+  
+     
+</div>
+	  </div>
 </body>
 
 </html>

@@ -28,7 +28,7 @@ public class RecipeServiceTest {
 	@Qualifier("recipeServiceImpl")
 	private RecipeService recipeService;
 
-	 @Test
+	// @Test
 	public void testAddRecipe() throws Exception {
 
 		// Recipe
@@ -70,12 +70,13 @@ public class RecipeServiceTest {
 
 	}
 
-	//@Test
+	@Test
 	public void testGetRecipe() throws Exception {
 
-		List list = (List) recipeService.getRecipe(10002);
-
+		List list =  recipeService.getRecipe(10039);
+		
 		System.out.println(list);
+		System.out.println(list.get(0));
 
 	}
 	
@@ -123,7 +124,7 @@ public class RecipeServiceTest {
 
 			// addRecipe의 인자로 recipe 객체와 ingredient list를 담은 map을 넘긴다.
 			recipeService.updateRecipe(recipe);
-			recipeService.updateIngredient(list,10003);
+//			recipeService.updateIngredient(list,10003);
 
 		}
 		
