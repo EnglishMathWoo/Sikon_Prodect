@@ -21,8 +21,9 @@ public interface UserDao {
 	public User findUserId(String userNickname) throws Exception ;
 
 	// 회원정보수정
-	public void updateUser(User user, Map license, Map career) throws Exception ;
-	
+	public void updateUser(User user) throws Exception ;
+	public void updateLicense(List license, String userId) throws Exception ;
+	public void updateCareer(List career, String userId) throws Exception;
 	// 회원목록
 	public List<User> getUserList(Search search) throws Exception ;
 	
@@ -31,5 +32,13 @@ public interface UserDao {
 		
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception ;
+
+
+	
+
+
+
+
+	
 	
 }
