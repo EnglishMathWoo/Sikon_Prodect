@@ -95,7 +95,7 @@
 									var displayValue = "<h6>"
 																+"아이디 : "+JSONData.userId+"<br/>"
 																+"이  름 : "+JSONData.userName+"<br/>"
-																+"이메일 : "+JSONData.email+"<br/>"
+																+"닉네임 : "+JSONData.userNickname+"<br/>"
 																+"ROLE : "+JSONData.role+"<br/>"
 																+"등록일 : "+JSONData.regDateString+"<br/>"
 																+"</h6>";
@@ -177,7 +177,7 @@
             <th align="center">No</th>
             <th align="left" >회원 ID</th>
             <th align="left">회원명</th>
-            <th align="left">이메일</th>
+            <th align="left">닉네임</th>
             <th align="left">간략정보</th>
           </tr>
         </thead>
@@ -191,7 +191,7 @@
 			  <td align="center">${ i }</td>
 			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
 			  <td align="left">${user.userName}</td>
-			  <td align="left">${user.email}</td>
+			  <td align="left">${user.userNickname}</td>
 			  <td align="left">
 			  	<i class="glyphicon glyphicon-ok" id= "${user.userId}"></i>
 			  	<input type="hidden" value="${user.userId}">

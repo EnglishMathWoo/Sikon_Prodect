@@ -79,6 +79,11 @@ body {
 					history.go(-1);
 				});
 			 
+			 $( "button:contains('책갈피')" ).on("click" , function() {
+				 self.location = "/bookmark/addBookmark?recipeNo="+${recipe.recipeNo }
+				//alert(${recipe.recipeNo});
+				});
+			 
 		});
 		
 		 
@@ -103,8 +108,8 @@ body {
 		</div>
 		
 		<div class="row">
-			<img src="/images/uploadFiles/${recipe.recipeImg}" width="300" height="300"><br/>
-			<button type="button" class="btn btn-default">책갈피</button>
+			<img src="/resources/images/uploadFiles/${recipe.recipeImg}" width="300" height="300"><br/>
+			<button type="button" class="btn btn-default" >책갈피</button>
 			
 		</div>
 		<hr />
@@ -135,7 +140,7 @@ body {
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>재료명</strong></div>
 			<c:set var="i" value="0" />
-			<c:forEach var="ingredient" items="${ingredient}">
+			<c:forEach var="ingredient" items="${list}">
 			<div class="col-xs-8 col-md-4">${ingredient.ingredientName}</div>
 		</c:forEach>
 		</div>
@@ -144,7 +149,7 @@ body {
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>재료양</strong></div>
 			<c:set var="i" value="0" />
-			<c:forEach var="ingredient" items="${ingredient}">
+			<c:forEach var="ingredient" items="${list}">
 			<div class="col-xs-8 col-md-4">${ingredient.ingredientAmount}</div>
 		</c:forEach>
 		</div>
@@ -161,9 +166,6 @@ body {
 		</div>
 		
 		<hr/>
-				<div class="main-icon-like-text-write_comment">
-			div 태그 안에 제가 자바스크립트로 만든 화면이 들어갈 공간입니다.
-</div> 
 		
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
@@ -180,23 +182,7 @@ body {
 		
 		<br/>
 		
-		<div class="row">
-			<h3 class=" text-info" style="color: #75574B;">리뷰목록</h3>
-			<br/>
-	<c:set var="i" value="0" />
-<c:forEach var="review" items="${list}">
-		<div class="caption">
-
-        
-        
-        <blockquote>
-  <footer>${review.content }</footer>
-</blockquote>
-
-        <hr/>
-        </div>
-        </c:forEach>
-		</div>
+	
 
  	</div> <!-- container -->
  	<!--  화면구성 div Start /////////////////////////////////////-->

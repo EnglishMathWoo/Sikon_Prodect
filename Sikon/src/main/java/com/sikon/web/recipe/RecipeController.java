@@ -65,10 +65,10 @@ public class RecipeController {
 		System.out.println(ingredientName[j]);
 		}
 		// Business Logic
-		//String rootPath = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+		String FILE_SERVER_PATH = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 		
 		String newFileName = "";
-		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+//		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 
 		for(int i=0; i<fileArray.length;i++) {
 			
@@ -110,32 +110,36 @@ public class RecipeController {
 		return "forward:/recipe/readRecipe.jsp";
 	}
 
+	//@ModelAttribute("search") Search search,
 	@RequestMapping(value = "getRecipe")
-	public String getRecipe(@ModelAttribute("search") Search search, @RequestParam("recipeNo") int recipeNo,
+	public String getRecipe( @RequestParam("recipeNo") int recipeNo,
 			Model model) throws Exception {
 
 		System.out.println("/recipe/getRecipe : post / get");
 		System.out.println("recipeNo" + recipeNo);
 		// Business Logic
-	//	List list =recipeService.getRecipe(recipeNo);
-//
-		if (search.getCurrentPage() == 0) {
-			search.setCurrentPage(1);
-		}
-		search.setPageSize(pageSize);
-		System.out.println("모냐recipeNo" + recipeNo);
+		Recipe recipe =recipeService.getRecipe(recipeNo);
+		List list=recipeService.getIngredient(recipeNo);
 		
-		Map<String, Object> map = reviewService.getReviewList(search, 200, recipeNo);
-		System.out.println("map:" + map.get("list"));
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
-		System.out.println(resultPage);
+		System.out.println("재료"+list);
+//		if (search.getCurrentPage() == 0) {
+//			search.setCurrentPage(1);
+//		}
+//		search.setPageSize(pageSize);
+//		System.out.println("모냐recipeNo" + recipeNo);
+//		
+//		Map<String, Object> map = reviewService.getReviewList(search, 200, recipeNo);
+//		System.out.println("map:" + map.get("list"));
+//		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+//				pageSize);
+//		System.out.println(resultPage);
 
 		// Model 과 View 연결
 		//model.addAttribute("recipe", list);
-		model.addAttribute("list", map.get("list"));
-		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("search", search);
+		model.addAttribute("list", list);
+		model.addAttribute("recipe", recipe);
+//		model.addAttribute("resultPage", resultPage);
+//		model.addAttribute("search", search);
 
 		return "forward:/recipe/getRecipe.jsp?";
 	}
