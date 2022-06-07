@@ -219,7 +219,7 @@ public class ProductController {
 		System.out.println("2:"+mapName.get("list"));
 		
 		
-		return "forward:/product/listProduct.jsp";
+		return "forward:/product/listProduct2.jsp";
 	}
 
 }

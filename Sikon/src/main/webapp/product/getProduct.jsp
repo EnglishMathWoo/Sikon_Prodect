@@ -129,6 +129,11 @@ div.image{
 			 self.location = "/product/updateProduct?prodNo="+prodNo
 		});
 		 
+		 $( "button.btn-default" ).on("click" , function() {
+			 var quantity = $('#quantity').val();
+			 self.location = "/cart/addCart?prodNo=${product.prodNo}&quantity="+quantity;
+		});
+		 
 	});
 	
 	

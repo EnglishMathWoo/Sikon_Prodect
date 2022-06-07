@@ -1,47 +1,29 @@
-<%@ page contentType="text/html; charset=euc-kr"%>
+<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page pageEncoding="EUC-KR"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="ko">
 <head>
-<meta charset="EUC-KR">
-
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-
-
-<link rel="stylesheet"
-	href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-
-
-<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
-<script
-	src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
-
-<link rel="stylesheet"
-	href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-
-
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-
-
-<!-- jQuery UI toolTip 사용 CSS-->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip 사용 JS-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+	<meta charset="EUC-KR">
+	
+	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
  <!-- font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,13 +31,9 @@
 
 <style>
 body{
+	padding-top : 50px;
 	font-family: 'Nanum Myeongjo', serif;
 	font-family: 'Open Sans', sans-serif;
-}
-
-body>div.container {
-	border: 3px solid #D6CDB7;
-	margin-top: 50px;
 }
 </style>
 
@@ -110,16 +88,18 @@ $(function() {
 		
 	});
 	
+	
 });
-//*/
+
 $(function() {
-			$('#divyDate').datepicker({
-				format : "yyyy-mm-dd"
-
-			});
-
-		});
-
+	var price = $( "#price" ).val();
+	console.log("price: "+price);
+	
+	var quantity = $("#purchaseQuantity").val();
+	console.log("quantity: "+quantity);
+	
+	$("#totalprice").val(price*quantity);
+});	
 </script>
 
  <!-- 주소록 --> 
@@ -178,47 +158,106 @@ $(function() {
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Home Deco</a>
-   		</div>
-   	</div>
+	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-warning text-center" style="color:#bc8f8f">구매정보수정</h1>
+		<h1 class="text-center" style="color:#bc8f8f">구매정보수정</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
+		  <input type="hidden" name="prodNo" value="${product.prodNo }" />
+		  <input type="hidden" name="userId" value="${user.userId }" />
+		  
+		  
+		  <hr/>
+		 <h4 align="center">주문상품</h4>
+		 <hr/>
+		 
+		 <div class="row">
+		<div class="col-xs-12 col-md-12" align="center">
+		
+		<c:choose>
+		
+		<c:when test="${purchase.purchaseProd.prodThumbnail.contains('&')}">
+		
+			<td class="ct_write01">
+				<c:choose>
+				<c:when test="${purchase.purchaseProd.prodThumbnail.contains('mp4')}">
+					<c:forEach var="name" items="${purchase.purchaseProd.prodThumbnail.split('&')}">
+						<video width="400" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"></video>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="name" items="${purchase.purchaseProd.prodThumbnail.split('&')}">
+						<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+					</c:forEach>
+				</c:otherwise>
+				</c:choose>		
+		
+			</td>
+		
+		</c:when>
+		
+		<c:otherwise>
+			<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail}" width="300" height="300" align="absmiddle"/>
+		</c:otherwise>
+		</c:choose>
+
+		</div>
+		</div>
+		  <br>
+		 <div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>상품명</strong></div>
+			<div class="col-xs-8 col-md-8">${purchase.purchaseProd.prodName}</div>
+		</div>
+			  		<hr/>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>결제금액</strong></div><br>
+			<div class="col-xs-8 col-md-8">상품가격: ${purchase.purchaseProd.prodDisPrice} 원</div>
+			<div class="col-xs-8 col-md-8">+ 배송비: ${purchase.divyFee} 원</div>
+		</div>
+			  		<hr/>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>구매수량</strong></div>
+			<div class="col-xs-8 col-md-8">${purchase.purchaseQuantity} 개</div>
+		</div>
+		
+		<hr/>
+			  		
+		<input type="hidden" id="price" value="${purchase.purchaseProd.prodDisPrice}">
+		<input type="hidden" id="purchaseQuantity" value="${purchase.purchaseQuantity}">
+			  		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>총 결제금액</strong></div>
+			<div class="col-xs-8 col-md-8">
+		     <input type="text" id="totalprice" value="" style="border:none;width:50px"> 원</div>
+		</div>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>적립 포인트</strong></div>
+			<div class="col-xs-8 col-md-8">+
+		      ${purchase.earnPoint} P</div>
+		</div>
+		  
+		  
+		  <hr/>
+		  <h4 align="center">배송정보</h4>
+		  <hr/>
+		  
+		  	  
 		  <div class="form-group">
-		    <label for="buyerId" class="col-sm-offset-1 col-sm-3 control-label">구매자아이디</label>
+		    <label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">받는분 이름</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control"  name="buyerId"  value="${purchase.buyer.userId}" readonly>
-		      <input type="hidden" name="buyerId" value="${purchase.buyer.userId}">
+		      <input type="text" class="form-control" id="receiverName" name="receiverName" value="${user.userName}"> 
 		    </div>
 		  </div>
 		  
-			  
-		  
 		  <div class="form-group">
-		    <label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">구매자이름</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="receiverName" name="receiverName" value="${purchase.receiverName }">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label">구매자연락처</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="receiverPhone" name="receiverPhone" value="${purchase.receiverPhone }">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="divyAddr" class="col-sm-offset-1 col-sm-3 control-label">구매자주소</label>
+		    <label for="divyAddr" class="col-sm-offset-1 col-sm-3 control-label">배송지</label>
 		    <div class="col-sm-4">
 		        <input type="text" id="sample6_postcode" name="postcode" placeholder="우편번호" value="">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
@@ -226,47 +265,54 @@ $(function() {
 				<input type="text" id="sample6_detailAddress" name="detailAddress" placeholder="상세주소" value=""><br>
 				<input type="text" id="sample6_extraAddress" name="extraAddress" placeholder="참고항목" value="">
 		    </div>
-		    <input type="hidden" name="divyAddr" value="${purchase.divyAddr}">
+		    <input type="hidden" name="divyAddr" value="${user.addr}">
 		  </div>
 		  
-		  	  
-		  	  
+		    <div class="form-group">
+		    <label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label">연락처</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="receiverPhone" name="receiverPhone" value="${user.phone}">
+		    </div>
+		  </div>
+		  
+		  <c:if test="${!empty user}">
+		      <input type="hidden" class="form-control" id="receiverEmail" name="receiverEmail" value="${user.userId}">
+		  </c:if>
+		  <c:if test="${empty user}">
 		  <div class="form-group">
-		    <label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label">구매방법</label>
+		    <label for="receiverEmail" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
 		    <div class="col-sm-4">
-		      <select 	name="paymentOption"		class="form-control" >
-				<option value="1" selected="selected">현금구매</option>
-				<option value="2">신용구매</option>
-			  </select>
-		    </div>
-		  </div> 
-		  	  
-		  	  
-		  	  
-		  <div class="form-group">
-		    <label for="divyRequest" class="col-sm-offset-1 col-sm-3 control-label">구매요청사항</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="divyRequest" name="divyRequest"  value="${purchase.divyRequest }" >
+		      <input type="text" class="form-control" id="receiverEmail" name="receiverEmail" placeholder="비회원 구매" >
 		    </div>
 		  </div>
+		  </c:if>
 		  
-		  	 
 		  
-		     <div class="form-group">
-		    <label for="buyNum" class="col-sm-offset-1 col-sm-3 control-label">구매수량</label>
+		   <div class="form-group">
+		    <label for="divyMessage" class="col-sm-offset-1 col-sm-3 control-label">배송메시지</label>
 		    <div class="col-sm-4">
-		      <input type="number" min="0" class="form-control" id="buyNum" name="buyNum" value="${purchase.buyNum }" >
+		      <input type="text" class="form-control" id="divyMessage" name="divyMessage" placeholder="요청사항을 적어주세요."  >
 		    </div>
 		  </div>
+
+		  
+		  <hr/>
+		  <h4 align="center">쿠폰 / 포인트</h4>
+		  <hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>사용 쿠폰</strong></div>
+			<div class="col-xs-8 col-md-8">${purchase.usedCoupon }</div>
+		</div>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>사용 포인트</strong></div>
+			<div class="col-xs-8 col-md-8">- ${purchase.usedPoint } P</div>
+		</div>
 		  
 		  
-		       <div class="form-group">
-		    <label for="divyDate" class="col-sm-offset-1 col-sm-3 control-label">배송희망일자</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="divyDate" name="divyDate" value="${purchase.divyDate }">
-		    </div>
-		  </div>
-		  
+		</form>
+		<!-- form Start /////////////////////////////////////-->
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
@@ -275,8 +321,6 @@ $(function() {
 		    </div>
 		  </div>
 		  
-		</form>
-		<!-- form Start /////////////////////////////////////-->
 		
  	</div>
 	

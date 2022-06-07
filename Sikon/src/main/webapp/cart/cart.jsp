@@ -68,14 +68,14 @@ div.row{
 			 
 			 var totalprice = 0;
 			 var price = $("div.price").attr("value");
-			 var buyNum = $("div.buyNum").attr("value");
+			 var quantity = $("div.quantity").attr("value");
 			 console.log(price);
-			 console.log(buyNum);
+			 console.log(quantity);
 		
 			 
 			 var list = [];
-		   		<c:forEach var="wishprod" items="${wishlist}" >
-		   		totalprice += (Number(${wishprod.price})*Number(${wishprod.buyNum}));
+		   		<c:forEach var="cartprod" items="${Cart}" >
+		   		totalprice += (Number(${cartprod.price})*Number(${cartprod.quantity}));
 		   		</c:forEach>
 		   		
 			 console.log(totalprice);
@@ -86,29 +86,29 @@ div.row{
 			 <!-- ------------- 장바구니 삭제 --------------- -->
 			 
 			 $( "button.delete" ).on("click" , function() {
-				 var wishNo = $(this).val();
+				 var cartNo = $(this).val();
 					console.log('delete');
-					console.log(wishNo);
-					self.location = "/wishList/deleteWishlist?wishNo="+wishNo;
+					console.log(cartNo);
+					self.location = "/cart/deleteCart?cartNo="+cartNo;
 			  });
 
 	
 			 <!-- ------------- 상품수량 수정 --------------- -->
 
-			 
+			 //*
 			 
 			 $( "button.plus" ).on("click" , function() {
 		         
-				 var wishNo = $(this).val();
+				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
 				 quantity = Number(quantity)+1;
 				console.log('plus');
-				console.log(wishNo);
+				console.log(cartNo);
 				console.log(quantity);
 				
 		         $.ajax( 
 		               {
-		                  url : "/wishList/json/updateWishlist?wishNo="+wishNo+"&buyNum="+quantity ,
+		                  url : "/cart/json/updateCart?cartNo="+cartNo+"&quantity="+quantity ,
 		                  method : "GET" ,
 		                  dataType : "json" ,
 		                  headers : {
@@ -117,7 +117,7 @@ div.row{
 		                  },
 		                  success : function(JSONData , status) {
 
-		                	 //$('input[name=buyNum]').val(JSONData)
+		                	 //$('input[name=quantity]').val(JSONData)
 		                	 
 		                  }
 		            });
@@ -125,16 +125,16 @@ div.row{
 			 
 			 $( "button.minus" ).on("click" , function() {
 		         
-				 var wishNo = $(this).val();
+				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
 				 quantity = Number(quantity)-1;
 					console.log('minus');
-					console.log(wishNo);
+					console.log(cartNo);
 					console.log(quantity);
 				
 		         $.ajax( 
 		               {
-		                  url : "/wishList/json/updateWishlist?wishNo="+wishNo+"&buyNum="+quantity ,
+		                  url : "/cart/json/updateCart?cartNo="+cartNo+"&quantity="+quantity ,
 		                  method : "GET" ,
 		                  dataType : "json" ,
 		                  headers : {
@@ -143,19 +143,19 @@ div.row{
 		                  },
 		                  success : function(JSONData , status) {
 		                	  
-		                	  //$('input[name=buyNum]').val(JSONData)
+		                	  //$('input[name=quantity]').val(JSONData)
 		                	 
 		                  }
 		            });
 	  			 });
 			 
 		 
-			 
+			 //*/
 			 
 			 $( "button:contains('구매')" ).on("click" , function() {
 				 console.log('구매');
 				 
-				 $("form").attr("method" , "GET").attr("action" , "/purchase/addPurchaseByWishlist").submit();
+				 $("form").attr("method" , "GET").attr("action" , "/purchase/addPurchaseByCart").submit();
 				 
 				});
 			 
@@ -190,58 +190,58 @@ div.row{
 		<hr/>
 		<form class="form-horizontal">
 		  <c:set var="i" value="0" />
-		  <c:forEach var="wishlist" items="${wishlist}">
+		  <c:forEach var="cart" items="${Cart}">
 		  <div class="row">
 			<c:set var="i" value="${ i+1 }" />
 			  
 			  <div class="col-md-1 text-center">
-			  	<input type="checkbox" name="wishNo" value="${wishlist.wishNo}"/>		  	
+			  	<input type="checkbox" name="wishNo" value="${cart.cartNo}"/>		  	
 			  </div>
 			  
 			  <div class="col-md-6 text-left">
 			  <c:choose>
-				    <c:when test="${wishlist.fileName.contains('&')}">
+				    <c:when test="${cart.fileName.contains('&')}">
 					    <c:choose>
-						<c:when test="${wishlist.fileName.contains('mp4')}">
-							<img src="/images/uploadFiles/tumbnail.png" class="image" width="100" height="100">
+						<c:when test="${cart.fileName.contains('mp4')}">
+							<img src="/resources/images/uploadFiles/tumbnail.png" class="image" width="100" height="100">
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="name" items="${wishlist.fileName.split('&')[0]}">
-								<img src="/images/uploadFiles/${name}" class="image" width="100" height="100">
+							<c:forEach var="name" items="${cart.fileName.split('&')[0]}">
+								<img src="/resources/images/uploadFiles/${name}" class="image" width="100" height="100">
 							</c:forEach>
 						</c:otherwise>
 						</c:choose>
 				    </c:when>
 				    <c:otherwise>
-						<img src="/images/uploadFiles/${wishlist.fileName}" class="img-responsive img-rounded" class="image" width="100" height="100">
+						<img src="/resources/images/uploadFiles/${cart.fileName}" class="img-responsive img-rounded" class="image" width="100" height="100">
 					</c:otherwise>
 				</c:choose>
-				&emsp;&emsp;${wishlist.prodName }
+				&emsp;&emsp;${cart.prodName }
 			  </div>	 
 			    	  
 			    	  
 			    	  
-			  <div align="center" class="col-md-2 text-center buyNum" value="${wishlist.buyNum }">
+			  <div align="center" class="col-md-2 text-center quantity" value="${cart.quantity }">
 			  	<c:choose>
-			  		<c:when test="${wishlist.buyNum == 1 }">
-			  			<a href="#" class="btn btn-default btn-xs disabled" role="button" value="${wishlist.wishNo}">-</a>
+			  		<c:when test="${cart.quantity == 1 }">
+			  			<a href="#" class="btn btn-default btn-xs disabled" role="button" value="${cart.cartNo}">-</a>
 			  		</c:when>
 			  		<c:otherwise>
-			  			<button class="btn btn-default btn-xs minus" value="${wishlist.wishNo}">-</button>
+			  			<button class="btn btn-default btn-xs minus" value="${cart.cartNo}">-</button>
 			  		</c:otherwise>
 			  	</c:choose>
-			  	<input type="text" name="buyNum" value=" ${wishlist.buyNum }" style="width:30px;" readonly/>
-			  	<button class="btn btn-default btn-xs plus" value="${wishlist.wishNo}">+</button>
+			  	<input type="text" name="quantity" value=" ${cart.quantity }" style="width:30px;" readonly/>
+			  	<button class="btn btn-default btn-xs plus" value="${cart.cartNo}">+</button>
 			  </div>
 			  
 			  
 			  
-			  <div align="center" class="col-md-2 text-center price" value="${wishlist.price*wishlist.buyNum }" >${wishlist.price*wishlist.buyNum } 원</div>
+			  <div align="center" class="col-md-2 text-center price" value="${cart.price*cart.quantity }" >${cart.price*cart.quantity } 원</div>
 			  
 			  
 			  
 			  <div class="col-md-1 text-center">
-			  	<button class="btn btn-default btn-sm delete" value="${wishlist.wishNo}">삭제</button>
+			  	<button class="btn btn-default btn-sm delete" value="${cart.cartNo}">삭제</button>
 			  </div>
 			  
 			  

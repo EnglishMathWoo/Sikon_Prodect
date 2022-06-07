@@ -9,7 +9,10 @@
  	
 	<resultMap id="CartSelectMap" type="cart">
 		<result property="cartNo" 				column="cart_no" 				jdbcType="NUMERIC"/>
-		<result property="cartProd.prodNo"	   	column="prod_no" 				jdbcType="NUMERIC" />
+		<result property="prodNo"	   			column="prod_no" 				jdbcType="NUMERIC" />
+		<result property="price"	   			column="prod_price" 			jdbcType="NUMERIC" />
+		<result property="prodName"	   			column="prod_name" 				jdbcType="VARCHAR" />
+		<result property="fileName" 			column="prod_image" 			jdbcType="VARCHAR" />
 		<result property="userId" 				column="user_id" 				jdbcType="VARCHAR" />
 		<result property="quantity" 			column="quantity" 				jdbcType="NUMERIC" />
 	</resultMap>	
@@ -18,8 +21,8 @@
 	<!-- SQL : INSERT -->
 	<insert 	id="addCart"		parameterType="cart" >
 		INSERT
-		INTO cart( cart_no , prod_no, user_id, quantity) 
-	 	VALUES (seq_cart_cart_no.NEXTVAL , #{cartProd.prodNo}, #{userId}, #{quantity})
+		INTO cart( cart_no , prod_no, prod_price, prod_name, prod_image, user_id, quantity) 
+	 	VALUES (seq_cart_cart_no.NEXTVAL , #{prodNo}, #{price}, #{prodName}, #{fileName}, #{userId}, #{quantity})
 	 </insert>
 	 
 	 	 
@@ -33,11 +36,10 @@
 	 
 	 <!-- SQL : SELECT -->
 	 <select 	id="getCartList"	parameterType="string"	resultMap="CartSelectMap">
-		SELECT p.*, c.*
-		FROM product p, cart c
-		WHERE p.prod_no = c.prod_no
-		AND c.user_id = #{value}
-		ORDER BY c.cart_no DESC
+		SELECT *
+		FROM cart
+		WHERE user_id = #{value}
+		ORDER BY cart_no DESC
 	 </select>
 	 
 	 

@@ -33,7 +33,7 @@ public class CartServiceTest {
 	private ProductService productService;
 
 	
-	
+	/*
 	
 	//method
 	//@Test
@@ -118,5 +118,6 @@ public class CartServiceTest {
 	 	System.out.println(list);
 	 	
 	 }
+	 //*/
 
 }

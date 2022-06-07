@@ -86,9 +86,7 @@ div.form-group{
 
 	$(function() {
 		$("button.btn-default").on("click", function() {
-			// resetData();
-			var prodNo = $("#prodNo").val();
-			self.location = "/product/getProduct?prodNo="+prodNo
+			history.go(-1);
 		})
 	})
 

@@ -43,7 +43,7 @@
 	 </delete>
 	 
 	<select  id="getBookmarkList"  parameterType="map"	statementType="CALLABLE"  resultMap="bookmarkSelectMap">
-	  	 select b.*,r.*
+	  	select b.*,r.*
 		from bookmark b,  recipe r
 		where 
 		r.recipe_no=b.recipe_no

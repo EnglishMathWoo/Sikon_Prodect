@@ -149,6 +149,117 @@ p {
 
 </style>
 
+<!-- left bar css -->
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	list-style: none;
+	text-decoration: none;
+	font-family: arial;
+}
+
+/* left bar 아래로 위치 이동 margin-top:0=>15*/
+ol, ul {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+body{
+	background: #eee;
+}
+.wrapper{
+	position: relative;
+}
+.sidebar{
+	position: fixed;
+	width: 250px;
+	height: 100%;
+	background:#F7F7F7;
+	padding: 10px 0;
+
+	    
+}
+.wrapper .sidebar ul li{
+	padding: 15px;
+    width: 400px;
+    margin-left: 200px;	
+}
+.wrapper .sidebar ul li a{
+	color: #bdb8d7;
+	display: block;
+}
+.wrapper .sidebar ul li a .fas{
+	width: 25px!important;
+}
+.wrapper .sidebar ul li a .far{
+	width: 25px!important;
+}
+.wrapper .sidebar ul li:hover{
+	background: none;
+}
+/* 메뉴바 마우스 갖다댈 때 css */
+.wrapper .sidebar ul li a:hover{
+	color: #4527A0;
+	text-decoration: none;
+}
+.myproject{
+	margin-top: 25px;
+	color: #ffffffa8;
+	font-size: 14px;
+	margin-bottom: 0;
+}
+.userProfile{
+	position: absolute;
+	bottom: 0;
+	left: 5%;
+	display: flex;
+
+}
+.userProfile a{
+	width: 20px;
+	background: #4527A0;
+	color: #bdb8d7;
+	text-decoration: none;
+	font-size: 15px;
+}
+.userProfile a:hover{
+	color: #fff;
+	background: #4527A0;
+}
+.userProfile p{
+	color: #fff;
+	padding: 0 15px 0 15px;
+}
+.userProfile 
+.xyz,
+.mnp{
+	padding-top: 60%;
+	line-height: 30px;
+	font-size: 25px!important;
+}
+.notification1{
+	display: flex;
+}
+.notification1 .number1{
+	font-size: 15px;
+	display: block;
+    padding-left: 100px;
+    color: #fff;
+} 
+ 
+.notification2{
+	display: flex;
+}
+.notification2 .number2{
+	font-size: 15px;
+	display: block;
+    padding-left: 85px;
+    color: #fff;
+   }
+</style>
+
 
 
 </head>
@@ -157,10 +268,26 @@ p {
 
 <!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-	<jsp:include page="/mypage/leftbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 
+<div class="wrapper d-flex">
+		<div class="sidebar">
+			
+			<ul>
+				<li><a href="#"><i class="fas fa-home"></i>내정보보기</a></li>
+				<li><a href="#"><i class="fas fa-users"></i>마이레시피</a></li>
+				<li><a href="#"><i class="fas fa-signal"></i>마이리뷰</a></li>
+				<li><a href="#"><i class="fas fa-signal"></i>마이쿠킹클래스</a></li>
+				<li><a href="#"><i class="fas fa-signal"></i>주문배송조회</a></li>
+				<li><a href="#"><i class="fas fa-signal"></i>책갈피조회</a></li>
+				<li><a href="#"><i class="fas fa-signal"></i>즐겨찾는멘토</a></li>
+				<li><a href="#"><i class="fas fa-signal"></i>포인트조회</a></li>
+				<li><a href="#"><i class="fas fa-signal"></i>쿠폰조회</a></li>
+			</ul>
+		<p class="myproject px-3">PROJECTS</p>
 
+	</div>
+</div>
 
 <div class="padding">
     <div class="col-md-8">
