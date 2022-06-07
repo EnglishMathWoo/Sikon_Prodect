@@ -17,8 +17,12 @@
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap" rel="stylesheet">
+	
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -26,10 +30,9 @@
 	
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   <link href="/resources/css/animate.min.css" rel="stylesheet">
+   <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+    
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -38,19 +41,15 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
+
+
 <style>
+
 body {
 	padding-top: 50px;
+	
 }
 
-div.thumbnail {
-	height: 500px;
-	width: 340px;
-}
-</style>
-
-
-<style>
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
@@ -71,12 +70,9 @@ div.thumbnail {
 	font-family: 'Gowun Batang', serif;
 }
 
-
-
-</style>
-<style>
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase;}
+.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
+}
 .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
 .ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
 .ref-sort li:last-child{margin:0; padding:0;}
@@ -92,11 +88,102 @@ div.thumbnail {
 .sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
 .sectiontitle .heading{margin:0; padding:0; line-height:1;}
 
-	.sectiontitle{max-width:none; margin-bottom:50px;}
+.sectiontitle{max-width:none; margin-bottom:50px;}
 
-	.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
+.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
+
+.imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
+.imgover, .imgover:hover::after{color:#FFFFFF;}
+
+/* Latest */
+.excerpt time{border-color:#D7D7D7;}
+
+#latest article{max-width:348px;}
+
+#footer{padding-bottom:50px;}/* Not required, just looks a little better */
+.latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
+.latestimg > li img{width:auto;}
+
+* Latest
+--------------------------------------------------------------------------------------------------------------- */
+#latest{}
+
+#latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
+article{}
+article img{width:100%;}/* Force the image to have the full width of parent at all times */
+.excerpt{padding:30px 0 0;}
+.excerpt time{display:block; margin:0 0 30px 0; padding:0 0 15px 0; font-style:normal; font-size:.8rem; line-height:1; border-bottom:1px solid;}
+.excerpt time i{margin-right:5px;}
+.excerpt .heading{margin:0 0 10px 0; font-size:1.3rem;}
+.excerpt .meta{margin:0 0 30px 0; padding:0; list-style:none; text-align:left;}
+.excerpt .meta li{display:inline-block; font-size:.8rem;}
+.excerpt .meta li::after{margin-left:5px; content:"|";}
+.excerpt .meta li:last-child::after{margin:0; content:"";}
+.excerpt p{}
+.excerpt footer{margin-top:30px;}
+
+.latestimg{}
+.latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
+.latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
+.latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
+.latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
+.latestimg > li a.imgover{display:block;}
+
+.carousel-inner > .item > img {
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  max-height: 500px;
+} 
+
+/* [RECIPE LIST] 폰트 적용 */
+.wrapper{
+font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+
+/* 검색, 정렬조건 css */
+.condition{
+font-family: 'Gowun Batang', serif;
+width: 100px;
+float:right;
+border-color:#D7D7D7;
+}
+
+
+/* 레시피 등록 버튼 css */
+.submit
+ {
+  display: block;
+  border: none;
+  width: 150px;
+  height: 36px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #d4af7a;
+  float: right;
+  	font-family: 'Gowun Batang', serif;
+  
+}
+
+/* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
+hr {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+/* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
+p {
+    margin: 0 0 0px;
+}
 
 </style>
+
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -111,14 +198,20 @@ div.thumbnail {
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			
-					$( "#name" ).on("click" , function() {
-				console.log($(this).attr("value"));
-				self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
-		});
-					$( "#name" ).css("color","red");
+					$( ".imgover" ).on("click" , function() {
+					console.log($(this).attr("value"));
+					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
+					});
 					
-				$( "button.btn.btn-default:contains('정렬')" ).on("click" , function() {
-					fncGetList(1);
+				$(".theme").on("click" , function() {
+					//fncGetList(1);
+				});
+				
+				
+
+				$( ".submit" ).on("click" , function() {
+					self.location = "/recipe/addRecipe.jsp"
+
 				 
 			 });
 				
@@ -127,19 +220,10 @@ div.thumbnail {
 				 
 			 });
 				
-				 //=========autoComplete=================================================
-			<!--	 
-				 var list = [];
-			   		<c:forEach var="names" items="${autoproduct }" >
-			   		list.push("${names.prodName}");
-			   		</c:forEach>
-			   		
-		   		    
-			   		$( "#prodname" ).autocomplete({
-			   		      source: list,
-			   		      
-			   		});
-			   	-->	
+				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
+					fncGetList(1);
+				 
+			 });
 			   	//====================================================================
 			 <!--
 			   	 $(window).scroll(function() {
@@ -153,7 +237,7 @@ div.thumbnail {
 		        	   		
 					            $.ajax({
 					                
-					                  url : "/product/json/listProduct?&menu=${param.menu }" ,
+					                  url : "/recipe/json/listRecipe" ,
 					                  method : "POST" ,
 					                  data : JSON.stringify({
 					                	  currentPage : cpage
@@ -167,9 +251,9 @@ div.thumbnail {
 					                	 
 					                	$("#currentPage").val(cpage)
 					                	//console.log(cpage); 
-					                	//alert(JSONData.list[0].prodName);
+					                	//alert(JSONData.list[0].recipeName);
 					                	//alert(JSONData.list.length);
-					                	console.log(JSONData.list[0].prodName);
+					                	console.log(JSONData.list[0].recipeName);
 						                	 
 					                	for(var i=0; i<JSONData.list.length-1; i++){
 					                		///*
@@ -262,7 +346,9 @@ div.thumbnail {
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	
-	<div class="container">
+<div class="container">
+<div class="page-header text-info text-left">
+	    </div>
 		 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 	        <ol class="carousel-indicators">
 	          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -274,18 +360,19 @@ div.thumbnail {
 	      <div class="carousel-inner" role="listbox">
 	          
 	          <div class="item active">
-	            <img src="/resources/images/homedeco/main30.jpg"  width="100%" height="100%" alt="First slide">
+	            <img src="/resources/images/uploadFiles/unnamed (2).jpg"  alt="First slide">
 	          </div>
 	          
 	          <div class="item">
-	            <img src="/resources/images/homedeco/main32.jpg"  width="100%" height="100%"alt="Second slide">
+	            <img src="/resources/images/uploadFiles/unnamed (4).jpg" alt="Second slide">
 	          </div>
 	          
 	          <div class="item">
-	            <img src="/resources/images/homedeco/main09.jpg"  width="100%" height="100%"alt="Third slide">
+	            <img src="/resources/images/uploadFiles/unnamed (15).jpg"  alt="Third slide">
 	          </div>
 	          
-	       </div>
+	       </div> 
+	       <!-- carousel-inner end -->
 	        
 	       <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 	          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -296,164 +383,75 @@ div.thumbnail {
 	          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 	          <span class="sr-only">Next</span>
 	        </a>
-	     </div>
-</div>
+	    </div>
 <br/>	     
-
-<div class="wrapper row3">
-  <section class="hoc container clear"> 
-    <!-- ################################################################################################ -->
-    <div class="center btmspace-50">
-      <h3 class="font-x2 nospace" align="center">[ RECIPE LIST ]</h3>
-    <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
-    </div>
-    <hr/>
-    <br/><br/>
-      <nav class="ref-sort" >
-      <ul>
-        <li class="current" ><a href="#">한식</a></li>
-        <li><a href="#">중식</a></li>
-        <li><a href="#">양식</a></li>
-        <li><a href="#">일식</a></li>
-        <li><a href="#">간식</a></li>
-      </ul>
-    </nav>
-    
-    </section>
 <!-- ################################################################################################ -->
-	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
-		<!-- 
-		<div class="row">
 
-
-			
-			<form class="form-inline" name="detailForm">
-				<div class="col-md-6 text-right">
-					<div class="form-group">
-						<select class="form-control" name="searchCondition">
-							<option value="0"
-								${!empty search.searchCondition && search.searchCondition==0 ? "selected" : ""}>정렬조건</option>
-							<option value="1"
-								${!empty search.searchCondition && search.searchCondition==1 ? "selected" : ""}>레시피명</option>
-						</select>
-
-					</div>
-
-					<div class="form-group">
-						<label class="sr-only" for="searchKeyword">검색어</label> <input
-							type="text" class="form-control" id="prodname"
-							name="searchKeyword" placeholder="검색어"
-							value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							
-					<button type="button" class="btn btn-default">검색</button>
-					</div>
-					
-				</div>
-				<div class="col-md-6 text-left">
-					<div class="form-group">
-						<select class="form-control" name="orderCondition">
+	<div class="wrapper row3">
+		  <section class="hoc container clear"> 
+		    <div class="center btmspace-50">
+		    <br/>
+		      <h3 class="font-x2 nospace" align="center"><br> RECIPE LIST </h3>
+		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
+		    </div>
+		    <button type="button" class="submit">레시피등록</button>
+		  
+		    
+		    <br/><hr/><br/>
+    
+	      <nav class="ref-sort" >
+	      <ul>
+	        <li class="current" ><a href="#" class="theme">한식</a></li>
+	        <li><a href="#" class="theme" >중식</a></li>
+	        <li><a href="#" class="theme" >양식</a></li>
+	        <li><a href="#" class="theme" >일식</a></li>
+	        <li><a href="#" class="theme">간식</a></li>
+	      </ul>
+	    </nav>
+	    
+		            
+      <div class="center btmspace-50">
+	   <select class="condition" name="orderCondition">
 							<option value="0"
 								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
 							<option value="1"
 								${!empty search.orderCondition && search.orderCondition==1 ? "selected" : ""}>인기순</option>
 							<option value="2"
 								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
-								<option value="2"
+								<option value="3"
 								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>소요시간순</option>
 								
 						</select>
-					</div>
-					
-					<button type="button"  class="btn btn-default">정렬</button>
-				</div>
-					
-					
-						<input type="hidden" id="currentPage" name="currentPage" value="1" />
-				
-		</form>
-			
-		
+	     </div>
+    	</section>
+  	</div>
 
-
-
-		</div>
-	-->
-</div>
-		
-<div class="container">
-	<section class="hoc container clear"> 
-    <!-- ################################################################################################ -->
-    <div class="sectiontitle">
-      <h6 class="heading">Pellentesque consectetuer</h6>
-      <p>Felis vitae sapien gravida interdum curabitur eu quam nec est</p>
-    </div>
-    <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
-        <div class="excerpt">
-          <time datetime="2045-04-03T08:15+00:00"><i class="far fa-calendar-alt"></i> 03<sup>rd</sup> April 2045 @ 15:00pm</time>
-          <h6 class="heading">Aliquam volutpat donec posuere</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
-          <p>Ornare dolor phasellus ornare dui vel euismod ultrices orci libero pulvinar justo quis condimentum quam.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
-        </div>
-      </article>
-      <article class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
-        <div class="excerpt">
-          <time datetime="2045-04-02T08:15+00:00"><i class="far fa-calendar-alt"></i> 02<sup>nd</sup> April 2045 @ 15:00pm</time>
-          <h6 class="heading">Nisl id ligula pellentesque</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
-          <p>Felis nunc interdum vitae pretium ac bibendum vel velit phasellus commodo nullam vitae quam cras auctor.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
-        </div>
-      </article>
-      <article class="one_third"><a class="imgover" href="#"><img src="images/demo/348x261.png" alt=""></a>
-        <div class="excerpt">
-          <time datetime="2045-04-01T08:15+00:00"><i class="far fa-calendar-alt"></i> 01<sup>st</sup> April 2045 @ 15:00pm</time>
-          <h6 class="heading">Commodo metus proin blandit</h6>
-          <ul class="meta">
-            <li><i class="fas fa-user rgtspace-5"></i> <a href="#">Admin</a></li>
-            <li><i class="fas fa-tags rgtspace-5"></i> <a href="#">Tag 1</a>, <a href="#">Tag 2</a></li>
-          </ul>
-          <p>Quam molestie luctus vehicula orci massa interdum justo nec rutrum risus augue ut nisl suspendisse elit.</p>
-          <footer><a class="btn" href="#">Full Story</a></footer>
-        </div>
-      </article>
-    </div>
-    <!-- ################################################################################################ -->
-  </section>
 <div class="row">
 	<c:set var="i" value="0" />
-
-<c:forEach var="recipe" items="${list}">
- <div class="col-sm-6 col-md-4">
- <br/> <br/>
- <br/> <br/>
-    <div class="thumbnail">
-		<img class="imange" src="/images/uploadFiles/${recipe.recipeImg}" width="320" height="300"><br/>
-		  
-		
-      <div class="caption">
-        <h4 style="color:black;"  id="name" value="${recipe.recipeNo }" >${recipe.recipeName }</h4>
-        <p>${recipe.recipeDetail }</p>
-        <p><a href="/recipe/getRecipe?recipeNo=${recipe.recipeNo }" class="btn btn-default" role="button">레시피상세보기</a> 
-        <c:if test="${user.userId==recipe.writer.userNickname}">
-        <p><a href="/recipe/updateRecipe?recipeNo=${recipe.recipeNo }" class="btn btn-default" role="button">수정</a> 
-        </c:if>
+	<c:forEach var="recipe" items="${list}">
+  <div class="col-sm-6 col-md-3">
+  <br/> <br/>
+  
+    <div id="latest" class="group">
+      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#"><img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
+        <div class="excerpt">
+          <h4 class="heading" >${recipe.recipeName }</h4>
+           <h6 >${recipe.recipeDetail }</h6>
+          <ul class="meta">
+            <li > ${recipe.recipeTheme }</li>
+            <li>${recipe.recipeDifficulty }</li>
+            <li>${recipe.cookingTime }분</li>
+            <li> ${recipe.writer.userNickname }</li>
+          </ul>
         </div>
+      </article>
+     
     </div>
-  </div>		
-    </c:forEach>
-    
+    <!-- ################################################################################################ -->
   </div>
-		
+  </c:forEach>
+</div>
 	  </div>
- 	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
  	<!-- PageNavigation Start... -->
