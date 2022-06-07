@@ -493,8 +493,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 			
 	 		$( "a:contains('Mypage')" ).on("click" , function() {
-			$(self.location).attr("href","/mypage/mymain.jsp?userId=${user.userId}");
-			//alert('${user.userId}');
+			$(self.location).attr("href","/mypage/mymain.jsp");
 	 		});
 	 		
 	 		$( "a:contains('·¹½ÃÇÇ')" ).on("click" , function() {
