@@ -78,6 +78,13 @@ public class UserRestController {
 		return userService.getUser(user.getUserId());
 	}
 	
+	// id 중복체크
+	@RequestMapping( value="json/checkId", method=RequestMethod.POST )
+	public int checkId( @RequestParam("userId") String userId) throws Exception{
+			int cnt = userService.checkId(userId);
+			return cnt;
+	}
+		
 	@RequestMapping( value="json/updateUser", method=RequestMethod.POST )
 	public User updateUser( @RequestBody User user, Map license, Map career ) throws Exception{
 
@@ -107,16 +114,16 @@ public class UserRestController {
 		return map;
 	}
 	
-	@RequestMapping( value="json/checkDuplication/{userId}", method=RequestMethod.GET )
-	public Map<String, Object> checkDuplication( @PathVariable String userId ) throws Exception{
-		
-		System.out.println("user/json/checkDuplication : POST");
-		//Business Logic
-		Map<String, Object> map = new HashMap();
-		boolean result=userService.checkDuplication(userId);
-		map.put(userId, new Boolean(result));
-
-		return map;
-	}
+//	@RequestMapping( value="json/checkDuplication/{userId}", method=RequestMethod.GET )
+//	public Map<String, Object> checkDuplication( @PathVariable String userId ) throws Exception{
+//		
+//		System.out.println("user/json/checkDuplication : POST");
+//		//Business Logic
+//		Map<String, Object> map = new HashMap();
+//		boolean result=userService.checkDuplication(userId);
+//		map.put(userId, new Boolean(result));
+//
+//		return map;
+//	}
 
 }
