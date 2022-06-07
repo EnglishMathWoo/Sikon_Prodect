@@ -131,12 +131,17 @@ body>div.container {
 
 
 		$(function() {
-			var point = $( "#price" ).val();
-			console.log("point: "+point);
+			var price = $( "#price" ).val();
+			console.log("price: "+price);
 			
-			var earnpoint = Math.round(point*0.05);
+			var quantity = $("#purchaseQuantity").val();
+			console.log("quantity: "+quantity);
+			
+			var earnpoint = Math.round(price*0.05*quantity);
 			console.log("earnpoint: "+earnpoint);
+			
 			$( "#earnPoint" ).val(earnpoint);
+			$("#totalprice").val(price*quantity);
 		});	
 		
 		 
@@ -303,11 +308,19 @@ function payment(data) {
 		  
 		  <hr>
 		  
+		  <input type="hidden" id="price" value="${product.prodDisPrice}">
+		  
+		  <div class="form-group">
+		  <label for="purchaseQuantity" class="col-sm-offset-1 col-sm-3 control-label">총 결제금액</label>
+		    <div class="col-sm-4">
+		      <input type="text" id="totalprice" name="totalprice" value=""  style="border:none;width:50px"> 원
+		    </div>
+		  </div>
+		  
 		   <div class="form-group">
 		  <label for="purchaseQuantity" class="col-sm-offset-1 col-sm-3 control-label">적립 포인트</label>
 		    <div class="col-sm-4">+
 		      <input type="text" id="earnPoint" name="earnPoint" value=""  style="border:none;width:50px">P
-		      <input type="hidden" id="price" value="${product.prodDisPrice}">
 		    </div>
 		  </div>
 		 
