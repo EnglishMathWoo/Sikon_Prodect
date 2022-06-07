@@ -40,12 +40,11 @@
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 
 <style>
-body{
-	font-family: 'Nanum Myeongjo', serif;
-}
+
+
+
 body>div.container {
-	border: 3px solid #D6CDB7;
-	margin-top: 150px;
+	margin-top: 70px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 h1.text-center {
@@ -74,7 +73,7 @@ div.form-group{
 
 
 	$(function() {
-		$("button.btn.btn-primary").on("click", function() {
+		$("button.btn.btn-warning").on("click", function() {
 			
 			console.log($('input[name=prodDisRate]').val());
 			alert($("button.btn.btn-primary").text());
@@ -92,34 +91,34 @@ div.form-group{
 </head>
 
 <body>
-
+<div>
 	<jsp:include page="/layout/toolbar.jsp" />
-
+</div>
 
 	<div class="container">
 
 		<h1 class="text-center"  style="color:#bc8f8f">상품등록</h1>
-
+		<br>
 		<form class="form-horizontal" enctype="multipart/form-data">
 		
 
 			<div class="form-group">
-		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
-		    <div class="col-sm-4">
+		    <label for="prodName" class="col-sm-3 control-label">상품명</label>
+		    <div class="col-sm-6">
 		      <input type="text" class="form-control" id="prodName" name="prodName" placeholder="상품명">
 		    </div>
 		  </div>
 
 			<div class="form-group">
-		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">상품간략정보</label>
-		    <div class="col-sm-4">
+		    <label for="prodDetail" class="col-sm-3 control-label">상품간략정보</label>
+		    <div class="col-sm-6">
 		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" placeholder="상품간략정보 입력">
 		    </div>
 		  </div>
 
 		  <div class="form-group">
-		    <label for="prodTheme" class="col-sm-offset-1 col-sm-3 control-label">상품테마</label>
-		    <div class="col-sm-4">
+		    <label for="prodTheme" class="col-sm-3 control-label">상품테마</label>
+		    <div class="col-sm-6">
 		      <select class="form-control" name="prodTheme" id="prodTheme">
 				  <option value="TW" selected="selected">식기류</option>
 				  <option value="CW">조리도구</option>
@@ -129,8 +128,8 @@ div.form-group{
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="prodStatus" class="col-sm-offset-1 col-sm-3 control-label">판매여부</label>
-		    <div class="col-sm-4">
+		    <label for="prodStatus" class="col-sm-3 control-label">판매여부</label>
+		    <div class="col-sm-6">
 		       <div class="btn-group" data-toggle="buttons">
 				    <input type="radio" name="prodStatus" id="option1" value="Y" checked> 판매중
 				    <input type="radio" name="prodStatus" id="option2" value="N"> 판매중지
@@ -139,8 +138,8 @@ div.form-group{
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="couponApply" class="col-sm-offset-1 col-sm-3 control-label">쿠폰적용여부</label>
-		    <div class="col-sm-4">
+		    <label for="couponApply" class="col-sm-3 control-label">쿠폰적용여부</label>
+		    <div class="col-sm-6">
 		       <div class="btn-group" data-toggle="buttons">
 				    <input type="radio" name="couponApply" id="option1" value="Y" checked> 적용가능
 				    <input type="radio" name="couponApply" id="option2" value="N"> 적용불가
@@ -149,54 +148,55 @@ div.form-group{
 		  </div>
 
 			<div class="form-group">
-			    <label for="prodStock" class="col-sm-offset-1 col-sm-3 control-label">상품재고량</label>
-			    <div class="col-sm-4">
+			    <label for="prodStock" class="col-sm-3 control-label">상품재고량</label>
+			    <div class="col-sm-6">
 			      <input type="text" class="form-control" id="prodStock" name="prodStock" placeholder="개수입력">
 			    </div>
 			  </div>
 
 			<div class="form-group">
-		    <label for="prodPrice" class="col-sm-offset-1 col-sm-3 control-label">정상가</label>
-		    <div class="col-sm-4">
+		    <label for="prodPrice" class="col-sm-3 control-label">정상가</label>
+		    <div class="col-sm-6">
 		      <input type="text" class="form-control" id="prodPrice" name="prodPrice" placeholder="정상가">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="prodDisRate" class="col-sm-offset-1 col-sm-3 control-label">할인율</label>
-		    <div class="col-sm-4">
+		    <label for="prodDisRate" class="col-sm-3 control-label">할인율</label>
+		    <div class="col-sm-6">
 		      <input type="number" step="0.1" class="form-control" id="prodDisRate" name="prodDisRate" >
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="prodDisPrice" class="col-sm-offset-1 col-sm-3 control-label">할인가</label>
-		    <div class="col-sm-4">
+		    <label for="prodDisPrice" class="col-sm-3 control-label">할인가</label>
+		    <div class="col-sm-6">
 		      <input type="text" class="form-control" id="prodDisPrice" name="prodDisPrice" placeholder="할인가">
 		    </div>
 		  </div>
 
 			<div class="form-group">
-		    <label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">상품썸네일</label>
-		    <div class="col-sm-4">
+		    <label for="fileName" class="col-sm-3 control-label">상품썸네일</label>
+		    <div class="col-sm-6">
 		      <input type="file" id="fileName" name="uploadfiles[]" multiple="multiple" >
 		    </div>
 		  </div>
 		  
 		  
 		  <div class="form-group">
-		    <label for="prodContent" class="col-sm-offset-1 col-sm-1 control-label">상품상세내용</label>
-		    <br>
-		    <div class="col-sm-12" height=100px>
-		      <textarea id="summernote" class="form-control col-sm-5" rows="5" name="prodContent"
-						placeholder="내용" style="resize: none"></textarea>
-		    </div>
+		    <label for="prodContent" class="col-sm-3 control-label">상품상세내용</label>
+		    <div class="col-sm-6 text-center" height=100px>
+	      <textarea id="summernote" class="form-control col-sm-5" rows="5" name="prodContent"
+					placeholder="내용" style="resize: none"></textarea>
+	    </div>
 		</div>
+		
+		
 
 
 			<div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >등록</button>
+		      <button type="button" class="btn btn-warning"  >등록</button>
 			  <button type="button" class="btn btn-default" href="#" >초기화</button>
 		    </div>
 		  </div>

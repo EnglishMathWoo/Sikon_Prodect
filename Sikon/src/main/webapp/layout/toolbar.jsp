@@ -415,8 +415,8 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        </c:if>
 	        <c:if test="${!empty sessionScope.user.role}">
 	        <li><a href="#">Logout</a></li>
-	        </c:if>
 	        <li><a href="#">Mypage</a></li>
+	        </c:if>
 	      </ul>
 	    </div>
 	</div>
@@ -433,18 +433,24 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
       <ul class="clear">
         <li class="active"><a href="#">레시피</a></li>
         <li><a class="drop" href="#">스토어</a>
+        			<c:if test="${! empty sessionScope.user.role}">
         			<ul>
 		                <li><a href="#">구매목록</a></li>
 		                <li><a href="#">장바구니</a></li>
               		</ul>
+              		</c:if>
         </li>
         <li><a class="drop" href="#">쿠킹클래스</a>
+        			<c:if test="${! empty sessionScope.user.role}">
         			<ul>
 		                <li><a href="#">쿠킹클래스신청목록</a></li>
 		                <li><a href="#">쿠킹클래스장바구니</a></li>
               		</ul>
+              		</c:if>
         </li>        
         <li><a class="drop" href="#">공지사항</a>
+        
+        <c:if test="${sessionScope.user.role == 'admin'}">
         <li><a class="drop" href="#">관리</a>
       		<ul>
 		        <li><a href="#">회원관리</a></li>
@@ -467,6 +473,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	            <li><a href="#">쿠폰관리</a></li>
           	</ul>
         </li>
+        </c:if>
       </ul>
     </nav>
     
