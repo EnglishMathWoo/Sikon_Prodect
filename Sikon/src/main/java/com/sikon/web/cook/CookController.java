@@ -41,6 +41,7 @@ import com.sikon.service.domain.Heart;
 
 import com.sikon.service.heart.HeartService;
 import com.sikon.service.cook.CookService;
+import com.sikon.service.user.UserService;
 
 
 
@@ -64,7 +65,10 @@ public class CookController {
 		@Qualifier("heartServiceImpl")
 		private HeartService heartService;
 	
-
+		/// Field
+		@Autowired
+		@Qualifier("userServiceImpl")
+		private UserService userService;
 	
 
 
@@ -82,11 +86,19 @@ public class CookController {
 	int pageSize;
 
 
-	@RequestMapping( value="addCook	", method=RequestMethod.GET )
-	public String addCook() throws Exception {
+	@RequestMapping( value="addCook	", method=RequestMethod.GET)
+	public String addCook( HttpSession session, Model model) throws Exception {
 
 		System.out.println("/cook/addCook : GET");
-
+		
+		String userId= (String)session.getAttribute("user");
+		
+		User user = userService.getUser(userId);
+		
+		model.addAttribute("user",user );
+		
+		System.out.println(user);
+		
 		return "redirect:/cook/addCook.jsp";
 	}
 
