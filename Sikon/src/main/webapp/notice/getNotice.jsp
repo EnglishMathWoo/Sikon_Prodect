@@ -47,9 +47,14 @@
         	display:flex;
         	flex-direction: row-reverse;        	
         }
+        
         .buttonDiv button{
         	margin-right:10px;
         }
+        
+        h2{
+    		margin-top: 50px;
+}
      </style>
 
   <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -76,20 +81,14 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<div class="page-header">
-	       <h3 class=" text-info">공지사항 상세조회</h3>
-	    </div>
-	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>공지사항 제목</strong></div>
-			<div class="col-xs-8 col-md-4">${notice.noticeTitle}</div>
+			<div class="col-xs-8 col-md-4"><h2>${notice.noticeTitle}</h2></div>
 		</div>
-		
+		 
 		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>공지사항 내용</strong></div>
-			<div class="col-xs-8 col-md-4">${notice.noticeContent}</div>
+			<div class="col-xs-8 col-md-4"><strong>${notice.noticeContent}</strong></div>
 		</div>
 		
 		<hr/>

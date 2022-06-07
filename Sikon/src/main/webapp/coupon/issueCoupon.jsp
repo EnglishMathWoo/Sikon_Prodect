@@ -15,10 +15,6 @@
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
-	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
-	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
@@ -46,11 +42,35 @@
             font-family: 'Nanum Myeongjo', serif;
         }
         
-      .form-Control {
-      	float:right;
-      	width:50px;
+      .form-control {
+      	float:left;
+      	width:200px;
+      	margin-left:30px;
       }
-        
+      
+      label{
+      	float:left;
+      	margin-left:30px;
+      }
+      
+      p {
+
+	    margin-bottom: 40px;
+	  }
+      
+      .table {
+      	margin-top:20px;
+      }
+      
+      #couponName {
+      	margin-left:59px;
+      }
+      
+      #userId {
+      	width:325.08px;
+      }
+     
+              
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -59,7 +79,7 @@
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage)
-			$("form").attr("method" , "POST").attr("action" , "/user/listUser").submit();
+			$("form").attr("method" , "POST").attr("action" , "/coupon/issueCouponView").submit();
 		}
 		
 
@@ -69,15 +89,6 @@
 				fncGetList(1);
 			});
 		 });
-		
-		$(function(){
-     	   $("#startDate").datepicker({ dateFormat: 'yy-mm-dd' });
-		});
-	
-	
-		$(function(){
-   		    $("#endDate").datepicker({ dateFormat: 'yy-mm-dd' });
-		});
 		
 		$(function() {
 			$("#issueCoupon").on("click" , function() {
@@ -128,6 +139,7 @@
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row">
 	    
+	    <input type="hidden" id="currentPage" name="currentPage" value=""/>
 	    <input type="hidden" id="issueStatus" name="issueStatus" value="사용가능"/>
 	    
 		 <p class="text-primary" style="color:gray">
@@ -136,17 +148,17 @@
 		  		    
 		   <div class="form-group">
 		    <label for="startDate">쿠폰시작일자</label>
-		      <input type="text" class="form-control" id="startDate"  name="startDate" placeholder="쿠폰시작일자">
+		      <input type="DATE" class="form-control" id="startDate"  name="startDate" placeholder="쿠폰시작일자">
 		  </div>
 		  
 		   <div class="form-group">
 		    <label for="endDate">쿠폰만료일자</label>
-		      <input type="text" class="form-control" id="endDate"  name="endDate" placeholder="쿠폰만료일자">
+		      <input type="DATE" class="form-control" id="endDate"  name="endDate" placeholder="쿠폰만료일자">
 		   </div>
 		    
 		    <div class="form-group">
-		    <label for="couponList" >쿠폰종류</label>
-		        <select class="form-control" name="couponNo" id="couponNo">
+		    <label for="couponList">쿠폰종류</label>
+		        <select class="form-control" name="couponNo" id="couponName">
 		     <c:forEach var="coup" items="${couponList}">
 		       <c:choose>
          		<c:when test = "${coup.couponName != null}">
@@ -172,14 +184,12 @@
       
         <thead>
           <tr>
-            <th align="center"></th>
-            <th align="center"></th>
-            <th align="left">회원ID</th>
-            <th align="left" >회원명</th>
-            <th align="center"></th>
+          	<th align="center"></th>
+            <th align="left" id="userId">회원ID</th>
+            <th align="left">회원명</th>
             <th align="left">닉네임</th>
           </tr>
-        </thead>
+         </thead>
        
 		<tbody>
 		
@@ -187,12 +197,11 @@
 		  <c:forEach var="user" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr class="ct_list_pop">
-			  <td align="left"><input type="checkbox" name="userId" value="${user.userId}" ></td>
-			  <td></td>
-			  <td align="left">${user.userId}</td>
-			  <td align="left">${user.userName}</td>
-			  <td></td>
-			  <td align="left">${user.userNickname}</td>
+				<td align="left"><input type="checkbox" name="userId" value="${user.userId}" ></td>
+				<td align="left">${user.userId}</td>
+				<td align="left">${user.userName}</td>
+				<td align="left">${user.userNickname}</td>
+				<td></td>
 			</tr>
           </c:forEach>
         

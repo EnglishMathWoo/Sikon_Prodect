@@ -4,32 +4,21 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.sikon.common.Page;
-import com.sikon.common.Search;
-import com.sikon.service.domain.Notice;
-import com.sikon.service.domain.User;
 import com.sikon.service.notice.NoticeService;
 import com.sikon.service.user.UserService;
 
@@ -58,6 +47,9 @@ public class NoticeRestController {
 	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
+	@Value("#{commonProperties['summerNote']}")
+	String summerNote;
+	
 	
 	///Constructor
 	public NoticeRestController(){
@@ -72,7 +64,8 @@ public class NoticeRestController {
 		
 		Map map = new HashMap();
 		
-		String fileRoot = "C:\\summernote_image\\";	//저장될 외부 파일 경로
+		String fileRoot = summerNote;	//저장될 외부 파일 경로
+		System.out.println(fileRoot);
 		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
 		
 		System.out.println(originalFileName);
@@ -87,7 +80,7 @@ public class NoticeRestController {
 		
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
+			FileUtils.copyInputStreamToFile(fileStream, targetFile); //파일 저장
 			map.put("url", "/summernoteImage/"+savedFileName);
 			map.put("responseCode", "success");
 				

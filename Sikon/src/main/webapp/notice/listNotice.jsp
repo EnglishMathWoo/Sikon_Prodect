@@ -41,6 +41,10 @@
 			font-family: 'Nanum Myeongjo', serif;
             padding-top : 50px;
         }
+        
+        table {
+        	margin-top:20px;
+        }
         	
 		h1.text-center {
 			font-family: 'Nanum Myeongjo', serif;
@@ -55,8 +59,9 @@
 	<script type="text/javascript">
 
 	function fncGetList(currentPage) {
+		
 		$("#currentPage").val(currentPage);
-	  	$("form").attr("method" , "POST").attr("action", "/product/listProduct").submit();
+	  	$("form").attr("method" , "POST").attr("action", "/notice/listNotice?menu=${menu}").submit();
 	}
 
 	
@@ -156,9 +161,7 @@
 			
 		</div>
 		
-		
-		
-		 <input type="hidden" id="currentPage" name="currentPage" value=""/>
+		<input type="hidden" id="currentPage" name="currentPage" value=""/>
 		
 		<!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped" >
