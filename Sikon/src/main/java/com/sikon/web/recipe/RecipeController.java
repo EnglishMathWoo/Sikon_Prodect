@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
@@ -53,49 +52,60 @@ public class RecipeController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 
-	@RequestMapping(value = "addRecipe", method = RequestMethod.GET)
-	public String addRecipe() throws Exception {
 
-		System.out.println("/recipe/addRecipe : GET");
-
-		return "redirect:/recipe/addRecipe.jsp";
-	}
 
 	@RequestMapping(value = "addRecipe", method = RequestMethod.POST)
-	public String addRecipe(@RequestParam("recipeImg") MultipartFile recipeImg, @ModelAttribute("recipe") Recipe recipe,
-			@ModelAttribute("ingredient") Ingredient[] ingredient, Model model, HttpServletRequest request)
+	public String addRecipe( @ModelAttribute("recipe") Recipe recipe,@RequestParam("multiImg") MultipartFile[] fileArray,
+			@RequestParam("ingredientName") String[] ingredientName,@RequestParam("ingredientAmount") String[] ingredientAmount, Model model, HttpServletRequest request)
 			throws Exception {
 
 		System.out.println("/recipe/addRecipe : post");
 		System.out.println(recipe);
-
+		for(int j=0;j<ingredientName.length;j++) {
+		System.out.println(ingredientName[j]);
+		}
 		// Business Logic
-		String rootPath = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+		//String rootPath = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+		
+		String newFileName = "";
+		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 
-		String filePath = rootPath + "\\" + recipeImg.getOriginalFilename();
-
-		File dest = new File(filePath);
-
-		recipeImg.transferTo(dest); // 파일 업로드 작업 수행
+		for(int i=0; i<fileArray.length;i++) {
+			
+			if(!fileArray[i].getOriginalFilename().isEmpty()) {
+				fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
+				model.addAttribute("msg", "File uploaded successfully.");
+				
+			}else {
+				model.addAttribute("msg", "Please select a valid mediaFile..");
+			}
+		
+			newFileName+=fileArray[i].getOriginalFilename();
+			
+			
+		}
+		recipe.setRecipeImg(newFileName);
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		System.out.println("여까진오나");
 		recipe.setWriter(user);
-		recipe.setRecipeImg(recipeImg.getOriginalFilename());
 		// map에 ingredinet랑 둘 다 담을거섀
 	
 		List<Ingredient> list = new ArrayList<Ingredient>();
-		for(int i=0; i<ingredient.length;i++) {
-			list.add(ingredient[i]);
+		for(int i=0; i<ingredientName.length;i++) {
+			Ingredient ingredient=new Ingredient();
+			ingredient.setIngredientName(ingredientName[i]);
+			ingredient.setIngredientAmount(ingredientAmount[i]);
+			list.add(ingredient);
 		}
-		
+		System.out.println("list는"+list);
 		Map map = new HashMap();
 		map.put("list", list);
 		System.out.println(map);
 		
 		recipeService.addRecipe(recipe,map);
-		model.addAttribute("recipe", recipe);
+//		model.addAttribute("recipe", recipe);
 
 		return "forward:/recipe/readRecipe.jsp";
 	}
@@ -107,26 +117,25 @@ public class RecipeController {
 		System.out.println("/recipe/getRecipe : post / get");
 		System.out.println("recipeNo" + recipeNo);
 		// Business Logic
-		Recipe recipe =recipeService.getRecipe(recipeNo);
-		List list=recipeService.getIngredient(recipeNo);
-//		if (search.getCurrentPage() == 0) {
-//			search.setCurrentPage(1);
-//		}
-//		search.setPageSize(pageSize);
-//		System.out.println("모냐recipeNo" + recipeNo);
-//		
-//		Map<String, Object> map = reviewService.getReviewList(search, 200, recipeNo);
-//		System.out.println("map:" + map.get("list"));
-//		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-//				pageSize);
-//		System.out.println(resultPage);
+	//	List list =recipeService.getRecipe(recipeNo);
+//
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		System.out.println("모냐recipeNo" + recipeNo);
+		
+		Map<String, Object> map = reviewService.getReviewList(search, 200, recipeNo);
+		System.out.println("map:" + map.get("list"));
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		System.out.println(resultPage);
 
 		// Model 과 View 연결
-		model.addAttribute("recipe", recipe);
-		model.addAttribute("ingredient", list);
-//		model.addAttribute("list", map.get("list"));
-//		model.addAttribute("resultPage", resultPage);
-//		model.addAttribute("search", search);
+		//model.addAttribute("recipe", list);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
 
 		return "forward:/recipe/getRecipe.jsp?";
 	}
