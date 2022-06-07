@@ -134,7 +134,7 @@ public class PurchaseController {
 	
 	
 	
-	/*
+
 	@RequestMapping( value="getPurchase", method=RequestMethod.GET)
 	public ModelAndView getPurchase( @RequestParam("tranNo") int tranNo) throws Exception {
 		
@@ -175,13 +175,7 @@ public class PurchaseController {
 	public ModelAndView updatePurchase( @ModelAttribute("purchase") Purchase purchase, @RequestParam("tranNo") int tranNo) throws Exception{
 
 		System.out.println("/purchase/updatePurchase : POST ");
-		//Business Logic
 		
-		String divyDate = "";
-		String[]  divyDates = purchase.getDivyDate().split("/");
-		divyDate = divyDates[2]+divyDates[0]+divyDates[1];
-		
-		purchase.setDivyDate(divyDate);
 		purchase.setTranNo(tranNo);
 		purchaseService.updatePurchase(purchase);
 		
@@ -192,20 +186,20 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="updateTranCode", method=RequestMethod.GET)
-	public ModelAndView updateTranCode( @ModelAttribute("purchase") Purchase purchase, HttpServletRequest request) throws Exception{
+	@RequestMapping(value="updatedivyStatus", method=RequestMethod.GET)
+	public ModelAndView updatedivyStatus( @ModelAttribute("purchase") Purchase purchase, HttpServletRequest request) throws Exception{
 
-		System.out.println("/purchase/updateTranCode : GET");
+		System.out.println("/purchase/updatedivyStatus : GET");
 		//Business Logic
 		
 		int tranNo = Integer.parseInt(request.getParameter("tranNo")); 
-		String tranCode = request.getParameter("tranCode");
+		String divyStatus = request.getParameter("divyStatus");
 		
 		
-		if(tranCode.equals("001")) {
-			tranCode = "002";
-		}else if(tranCode.equals("002")) {
-			tranCode = "003";
+		if(divyStatus.equals("001")) {
+			divyStatus = "002";
+		}else if(divyStatus.equals("002")) {
+			divyStatus = "003";
 		}
 		
 		HttpSession session = request.getSession();
@@ -213,15 +207,15 @@ public class PurchaseController {
 		
 		user = userService.getUser(user.getUserId());
 		
-		purchase.setTranCode(tranCode);
+		purchase.setDivyStatus(divyStatus);
 		purchase.setTranNo(tranNo);
 		purchase.setBuyer(user);
 		
-		purchaseService.updateTranCode(purchase);
+		purchaseService.updateDivyStatus(purchase);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		if(user.getRole().equals("admin")) {
-			modelAndView.setViewName("/purchase/listSales?menu=menage");	
+			modelAndView.setViewName("/purchase/listSales");	
 		}else {
 			modelAndView.setViewName("/purchase/listPurchase");
 		}
@@ -240,13 +234,13 @@ public class PurchaseController {
 		
 		Purchase purchase = purchaseService.getPurchase(tranNo);
 		
-		int buyNum = purchase.getBuyNum();
+		int quantity = purchase.getPurchaseQuantity();
 		int prodNo = purchase.getPurchaseProd().getProdNo();
 		
-		purchaseService.cancelOrder(buyNum, prodNo);
+		purchaseService.cancelOrder(quantity, prodNo);
 		
-		purchase.setTranCode("000");
-		purchaseService.updateTranCode(purchase);
+		purchase.setDivyStatus("000");
+		purchaseService.updateDivyStatus(purchase);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/listPurchase.do");		
@@ -255,7 +249,7 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
-	//*/	
+
 	@RequestMapping(value="listPurchase" )
 	public ModelAndView listPurchase( @ModelAttribute("search") Search search ,  HttpServletRequest request) throws Exception{
 		
@@ -311,7 +305,7 @@ public class PurchaseController {
 		System.out.println(resultPage);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/listSales2.jsp");
+		modelAndView.setViewName("/purchase/listSales.jsp");
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);

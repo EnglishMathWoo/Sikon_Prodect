@@ -432,7 +432,11 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
     <nav id="mainav" class="fl_right">
       <ul class="clear">
         <li class="active"><a href="#">레시피</a></li>
-        <li><a class="drop" href="#">스토어</a></li>
+        <li><a class="drop" href="#">스토어</a>
+        			<ul>
+		                <li><a href="#">구매목록</a></li>
+              		</ul>
+        </li>
         <li><a class="drop" href="#">쿠킹클래스</a>
         <li><a class="drop" href="#">공지사항</a>
         <li><a class="drop" href="#">관리</a>
@@ -441,8 +445,9 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		        <li><a href="#">레시피관리</a></li>
 		        <li><a class="drop" href="#">스토어관리</a>
 		      		<ul>
-		                <li><a href="#">상품관리</a></li>
-		                <li><a href="#">판매관리</a></li>
+		                <li><a href="#">상품등록</a></li>
+		                <li><a href="#">상품목록</a></li>
+		                <li><a href="#">판매목록</a></li>
               		</ul>
             	</li>
 	            <li><a href="#">쿠킹클래스관리</a></li>
@@ -481,7 +486,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 	 		
 	 		$( "a:contains('스토어')" ).on("click" , function() {
-			$(self.location).attr("href","/product/listProduct");
+			$(self.location).attr("href","/product/listProduct?menu=search");
 			});
 	 		
 	 		$( "a:contains('쿠킹클래스')" ).on("click" , function() {
@@ -509,12 +514,32 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 
 	 		$( "a:contains('공지사항관리')" ).on("click" , function() {
-			$(self.location).attr("href","/notice/listNotic?menu=manage");
+			$(self.location).attr("href","/notice/listNotice?menu=manage");
 			});
 	 		
 	 		$( "a:contains('쿠폰관리')" ).on("click" , function() {
 			$(self.location).attr("href","/coupon/manageCoupon");
 			});
+	 		
+	 		//====================================================
+	 			
+	 		$( "a:contains('구매목록')" ).on("click" , function() {
+			$(self.location).attr("href","/purchase/listPurchase");
+			});
+	 		
+	 		$( "a:contains('상품등록')" ).on("click" , function() {
+			$(self.location).attr("href","/product/addProduct");
+			});
+	 			
+	 		$( "a:contains('상품목록')" ).on("click" , function() {
+			$(self.location).attr("href","/product/listProduct?menu=manage");
+			});
+	 		
+	 		$( "a:contains('판매목록')" ).on("click" , function() {
+			$(self.location).attr("href","/purchase/listSales");
+			});
+	 			
+	 		//====================================================
 	 		
 		 });
 	 	

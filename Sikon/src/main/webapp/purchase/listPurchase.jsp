@@ -73,7 +73,7 @@ table {
 
 		 $(function() {
 				 
-			 ///*
+			
 			$( "td.view" ).on("click" , function() {
 				console.log('상세보기');
 				var message = $(this).attr("value");
@@ -106,58 +106,7 @@ table {
 			$( "td.divy" ).css("color" , "#f08080");
 			$( "td.end" ).css("color" , "#87cefa");
 			$( "td.complete" ).css("color" , "#708090");
-			///*
-			$( "td:nth-child(5) > i" ).on("click" , function() {
-		         
-		         var tranNo =$(this).next().val();
-		         $.ajax( 
-		               {
-		                  url : "/purchase/json/getPurchase/"+tranNo ,
-		                  method : "GET" ,
-		                  dataType : "json" ,
-		                  headers : {
-		                     "Accept" : "application/json",
-		                     "Content-Type" : "application/json"
-		                  },
-		                  success : function(JSONData , status) {
-		                	  
-		                	  
-		                	  var image = "";
-		                	  
-		                	if(JSONData.purchaseProd.fileName.indexOf('mp4',0) != -1){
-               					image="<img src='/images/uploadFiles/tumbnail.png' id='image' width='150' height='150'>";
-               				}else{
-               					image = "<img src='/images/uploadFiles/"+JSONData.purchaseProd.fileName.split('&')[0]+"' id='image'  width='150' height='150'>";
-               				}
-		                	  
-		                	  
-		                	  var displayValue = "<table class='display' width='500' height='180'>"
-				            					  +"<tr>"
-				             					  +"<td>&emsp;"
-				             					  + image
-				                                  +"</td>"
-				                                  +"<td>"
-				                                  +"<h5>&emsp;"
-				                                  +"상품명	: "+JSONData.purchaseProd.prodName+"<br/>&emsp;"
-		                                          +"구매자아이디	: "+JSONData.buyer.userId+"<br/>&emsp;"
-		                                          +"구매방법	: "+JSONData.paymentOption+"<br/>&emsp;"
-		                                          +"구매자이름 	: "+JSONData.receiverName+"<br/>&emsp;"
-		                                          +"구매자연락처	: "+JSONData.receiverPhone+"<br/>&emsp;"
-		                                          +"구매자주소	: "+JSONData.divyAddr+"<br/>&emsp;"
-		                                          +"구매요청사항	: "+JSONData.divyRequest+"<br/>&emsp;"
-		                                          +"배송희망일	: "+JSONData.divyDate+"<br/>&emsp;"
-		                                          +"주문일	: "+JSONData.orderDate
-				                                  +"</h5>"
-				                                  +"</td>"
-				                                  +"</tr>"	                                          
-				                                  +"</table>";
-				                                  
-				             $("table.display").remove();                     
-		                     $( "#"+tranNo+"" ).html(displayValue);
-		                  }
-		            });
-	  			 });
-				//*/
+			
 		});	
 	</script>		
 

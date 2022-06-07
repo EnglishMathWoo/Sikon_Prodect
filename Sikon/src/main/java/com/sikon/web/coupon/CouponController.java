@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.coupon.CouponService;
 import com.sikon.service.domain.Coupon;
-import com.sikon.service.domain.Notice;
-import com.sikon.service.domain.Purchase;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserService;
 
@@ -166,8 +163,8 @@ public class CouponController {
 		System.out.println(coupon.getIssueStatus());
 		
 		//Business Logic		
-		for (String c : userId) {
-			User user = userService.getUser(c);
+		for (String couponUser : userId) {
+			User user = userService.getUser(couponUser);
 			coupon.setCouponUser(user);
 			couponService.issueCoupon(coupon);
 	    }

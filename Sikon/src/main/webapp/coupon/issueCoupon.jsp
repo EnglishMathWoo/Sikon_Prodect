@@ -40,9 +40,17 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
+	
 	  body {
             padding-top : 50px;
+            font-family: 'Nanum Myeongjo', serif;
         }
+        
+      .form-Control {
+      	float:right;
+      	width:50px;
+      }
+        
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -77,8 +85,6 @@
 				var startDate = $("input[name='startDate']").val();
 				var endDate = $("input[name='endDate']").val();
 				
-				console.log(startDate);
-											
 				if(startDate == ""){
 					alert("쿠폰시작일자는 반드시 입력하셔야 합니다.");
 					return;
@@ -88,8 +94,16 @@
 					alert("쿠폰만료일자는 반드시 입력하셔야 합니다.");
 					return;
 				}
-			
-			$("form").attr("method", "POST").attr("action", "/coupon/issueCoupon").submit();
+				
+				var checkCount = $("input[name='userId']:checked").length;
+				
+				//Debug..
+				if(checkCount != 0) {
+					alert("쿠폰을 발급하시겠습니까?")
+					$("form").attr("method", "POST").attr("action", "/coupon/issueCoupon").submit();
+				} else {
+					alert("선택된 회원이 없습니다.")						
+				}	
 			});
 		});
 		
@@ -107,7 +121,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>쿠폰발급</h3>
+	       <h3 style="color:#bc8f8f">쿠폰발급</h3>
 	    </div>
 	    
 	    <form class="form-horizontal" name="detailForm"  enctype="multipart/form-data" >
@@ -116,29 +130,22 @@
 	    
 	    <input type="hidden" id="issueStatus" name="issueStatus" value="사용가능"/>
 	    
-		    <div class="col-md-6 text-left">
-		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
-		    	</p>
-		    </div>
-		    
+		 <p class="text-primary" style="color:gray">
+		 	전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		 </p>
+		  		    
 		   <div class="form-group">
-		    <label for="startDate" class="col-sm-offset-1 col-sm-3 control-label">쿠폰시작일자</label>
-		    <div class="col-sm-4">
+		    <label for="startDate">쿠폰시작일자</label>
 		      <input type="text" class="form-control" id="startDate"  name="startDate" placeholder="쿠폰시작일자">
-		    </div>
 		  </div>
 		  
 		   <div class="form-group">
-		    <label for="endDate" class="col-sm-offset-1 col-sm-3 control-label">쿠폰만료일자</label>
-		    <div class="col-sm-4">
+		    <label for="endDate">쿠폰만료일자</label>
 		      <input type="text" class="form-control" id="endDate"  name="endDate" placeholder="쿠폰만료일자">
-		    </div>
 		   </div>
 		    
 		    <div class="form-group">
-		    <label for="couponList" class="col-sm-offset-1 col-sm-3 control-label">쿠폰종류</label>
-		     <div class="col-sm-2">
+		    <label for="couponList" >쿠폰종류</label>
 		        <select class="form-control" name="couponNo" id="couponNo">
 		     <c:forEach var="coup" items="${couponList}">
 		       <c:choose>
@@ -151,10 +158,9 @@
       		  </c:choose>
       		  </c:forEach>
          	</select>
-		    </div>
 		  </div>
 		  
-		  <button type="button" class="btn btn-primary" id="issueCoupon">발 &nbsp;급</button>
+		  <button type="button" class="btn btn-primary" id="issueCoupon" style="float:right">발 &nbsp;급</button>
 		    
 	    	
 		</div>
@@ -166,11 +172,12 @@
       
         <thead>
           <tr>
-            <th align="center">No</th>
-            <th align="left" >회원 ID</th>
-            <th align="left">회원명</th>
-            <th align="left">이메일</th>
-            <th align="left">간략정보</th>
+            <th align="center"></th>
+            <th align="center"></th>
+            <th align="left">회원ID</th>
+            <th align="left" >회원명</th>
+            <th align="center"></th>
+            <th align="left">닉네임</th>
           </tr>
         </thead>
        
@@ -179,16 +186,13 @@
 		  <c:set var="i" value="0" />
 		  <c:forEach var="user" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="left"><input type="checkbox" name="userId" id="userId" value = "${user.userId}" ></td>
-			  <td align="center">${ i }</td> 
+			<tr class="ct_list_pop">
+			  <td align="left"><input type="checkbox" name="userId" value="${user.userId}" ></td>
+			  <td></td>
 			  <td align="left">${user.userId}</td>
 			  <td align="left">${user.userName}</td>
-			  <td align="left">${user.email}</td>
-			  <td align="left">
-			  	<i class="glyphicon glyphicon-ok" id= "${user.userId}"></i>
-			  	<input type="hidden" value="${user.userId}">
-			  </td>
+			  <td></td>
+			  <td align="left">${user.userNickname}</td>
 			</tr>
           </c:forEach>
         
