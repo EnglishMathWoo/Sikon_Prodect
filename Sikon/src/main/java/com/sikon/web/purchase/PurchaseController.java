@@ -215,7 +215,7 @@ public class PurchaseController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		if(user.getRole().equals("admin")) {
-			modelAndView.setViewName("/purchase/listSales2?menu=menage");	
+			modelAndView.setViewName("/purchase/listSales");	
 		}else {
 			modelAndView.setViewName("/purchase/listPurchase");
 		}
@@ -305,7 +305,7 @@ public class PurchaseController {
 		System.out.println(resultPage);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/listSales2.jsp");
+		modelAndView.setViewName("/purchase/listSales.jsp");
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);
