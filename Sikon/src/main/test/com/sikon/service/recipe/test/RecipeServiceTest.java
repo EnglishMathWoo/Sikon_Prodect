@@ -28,7 +28,7 @@ public class RecipeServiceTest {
 	@Qualifier("recipeServiceImpl")
 	private RecipeService recipeService;
 
-	// @Test
+	 @Test
 	public void testAddRecipe() throws Exception {
 
 		// Recipe
@@ -36,7 +36,7 @@ public class RecipeServiceTest {
 		recipe.setCookingTime(30);
 		recipe.setRecipeDetail("레시피간략설명");
 		recipe.setRecipeDifficulty("100");
-		recipe.setRecipeImg("a.jpg");
+		recipe.setRecipeImg("987eb588939a8cb12033994139c0018e.jpg");
 		recipe.setRecipeName("레시피명");
 		recipe.setRecipeOrder("요리조리");
 		recipe.setRecipeTheme("KO");
@@ -79,7 +79,7 @@ public class RecipeServiceTest {
 
 	}
 	
-		@Test
+		//@Test
 		public void testUpdateRecipe() throws Exception {
 
 			// Recipe
@@ -88,9 +88,9 @@ public class RecipeServiceTest {
 			recipe.setCookingTime(100);
 			recipe.setRecipeDetail("태호르");
 			recipe.setRecipeDifficulty("300");
-			recipe.setRecipeImg("bb.jpg");
+			recipe.setRecipeImg("987eb588939a8cb12033994139c0018e.jpg");
 			recipe.setRecipeVideo("");
-			recipe.setRecipeName("tl");
+			recipe.setRecipeName("도전");
 			recipe.setRecipeOrder("태호르");
 			recipe.setRecipeTheme("KO");
 

@@ -93,7 +93,7 @@ body {
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
 
 .imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
-.imgover, .imgover:hover::after{color:#FFFFFF;}
+.imgover, .imgover:hover::after{color:#333333;} 
 
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
@@ -225,12 +225,11 @@ p {
 				 
 			 });
 			   	//====================================================================
-			 <!--
+			
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 		                	
 		                	var cpage = $("#currentPage").val();
-		                	console.log(cpage);
 		                	cpage = Number(cpage)+1;
 		                	console.log(cpage);
 		        	   		
@@ -254,68 +253,32 @@ p {
 					                	//alert(JSONData.list[0].recipeName);
 					                	//alert(JSONData.list.length);
 					                	console.log(JSONData.list[0].recipeName);
+					                	console.log(JSONData.list[0].recipeImg);
 						                	 
 					                	for(var i=0; i<JSONData.list.length-1; i++){
 					                		///*
 					                		var image;
-					                		var message;
-					                		var cancel;
-					                		var button;
 					                
-					                		if(JSONData.list[i].cancel == '0'){
 				                				
-				                					image = "<img src='/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image'>";
-				                				
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'>";
 					                			
-					                		}else if(JSONData.list[i].cancel == '1'){
-					                			
-				                					image = "<img src='/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image_none'>";
-				                				
-					                		}
 					                		
 					                		
-					                		if(${user.role.equals('admin') && param.menu.equals('manage')}){
-					                			message="<p>남은 재고량 : "+JSONData.list[i].total+"</p>";
-					                		}else{
-					                			message="<p></p>";
-					                		}
-					                		
-					                		
-					                		if(JSONData.list[i].cancel == '1' && param.menu.equals('search')){
-					                			cancel = "<p style='color:#DB4455'>판매중지</p>";
-					                		}else if(JSONData.list[i].cancel == '1' && param.menu.equals('manage')){
-					                			cancel = "<p style='color:#DB4455'>*판매중지된 상품입니다.</p>";
-					                		}else if(JSONData.list[i].cancel == '0'){
-					                			cancel = "<p></p>";
-					                		}
-					                		
-					                		if(${param.menu=='manage' }){
-					                			button = "<a class='btn btn-defualt btn update'  role='button' value='"+JSONData.list[i].prodNo+"'>수정하기</a>" ;
-					                		}else{
-					                			if(JSONData.list[i].total == "0"){
-					                				button = "<a class='btn btn-defualt btn disabled' role='button' >재고없음</a>";
-					                			}else{
-					                				if(JSONData.list[i].cancel=='0'){
-					                					button = "<a class='btn btn-default btn buy' role='button' value='"+JSONData.list[i].prodNo+"'>구매하기</a>";
-					                				}else{
-					                					button = "<a class='btn btn-default btn disabled' role='button' value='"+JSONData.list[i].prodNo+"'>구매하기</a>";
-					                				}
-					                			}
-					                		}
-					                		
-						                     var displayValue = "<div class='col-sm-6 col-md-4'>"
-						                     					+"<div class='thumbnail'>"
+						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
+						                     					+"<div id='latest' class='group'>"
+						                     					+"<article class='one_third first'>"
+						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
 						                     					+image
-					                     						+"<div class='caption'>"
-					                     						+"<h3>"+JSONData.list[i].prodName+"</h3>"
-					                     						+cancel
-					                     						+"<p>"+JSONData.list[i].price+" 원</p>"
-					                     						+"<p align='right'>"
-					                     						+"<a class='btn btn-defualt btn'  role='button' value='"+JSONData.list[i].prodNo+"' style='color:#bc8f8f'>상세조회</a>"
-
-					                     						+button
-					                     						+"</p>"
-					                     						+"</div></div></div>"
+					                     						+"<div class='excerpt'>"
+					                     						+"<h4 class='heading'>"+JSONData.list[i].recipeName+"</h4>"
+					                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
+					                     						+"<ul class='meta'>"
+					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
+					                     			            +"<li>"+ JSONData.list[i].recipeDifficulty +"</li>"
+					                     			            +"<li>"+ JSONData.list[i].cookingTime +"</li>"
+					                     			            +"<li>"+ JSONData.list[i].writer.userNickname +"</li>"
+					                     						+"</ul></div></article></div></div>"
+					                     						
 					                     						
 					                     		//*/				
 						               	$( '#scrollList' ).append(displayValue);	
@@ -330,7 +293,7 @@ p {
 		                }//if
 		            });//function
 		           
-		            -->
+		           
 		   });
 		 
 	</script>
@@ -425,7 +388,9 @@ p {
 	     </div>
     	</section>
   	</div>
-
+ 
+ <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+ 
 <div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="recipe" items="${list}">
@@ -450,6 +415,9 @@ p {
     <!-- ################################################################################################ -->
   </div>
   </c:forEach>
+  
+     <div  id="scrollList"></div>
+     
 </div>
 	  </div>
  	<!--  화면구성 div End /////////////////////////////////////-->

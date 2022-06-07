@@ -476,9 +476,9 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			$(self.location).attr("href","/user/loginView.jsp");
 			});
 			
-	 		$( "a:contains('MyPage')" ).on("click" , function() {
-			//$(self.location).attr("href","/user/getUser?userId="+${user.userId});
-			//console.log(${user.userId});
+	 		$( "a:contains('Mypage')" ).on("click" , function() {
+			$(self.location).attr("href","/mypage/mymain.jsp?userId='${user.userId}'");
+			//alert('${user.userId}');
 	 		});
 	 		
 	 		$( "a:contains('·¹½ÃÇÇ')" ).on("click" , function() {
