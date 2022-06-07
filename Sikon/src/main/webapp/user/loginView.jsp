@@ -83,11 +83,11 @@
 		<!--  row Start /////////////////////////////////////-->
 		<div class="row">
 		
-			<div class="col-md-6">
-					<img src="/images/uploadFiles/레고배경.jpg" class="img-rounded" width="100%" height="430" />
+		  	<div class="col-md-8">
+				<!-- <img src="/images/uploadFiles/레고배경.jpg" class="img-rounded" width="100%" height="430" />-->
 			</div>
 	   	 	
-	 	 	<div class="col-md-6">
+	 	 	<div class="col-md-10">
 	 	 	
 		 	 	<br/><br/>
 				
@@ -111,7 +111,7 @@
 					  </div>
 					  
 					  <div class="form-group">
-					    <div class="col-sm-offset-4 col-sm-6 text-center">
+					    <div class="col-sm-offset-3 col-sm-7 text-center">
 					      <button type="button" class="btn btn-primary"  >로 &nbsp;그 &nbsp;인</button>
 					      <a class="btn btn-primary btn" href="#" role="button">회 &nbsp;원 &nbsp;가 &nbsp;입</a>
 					    </div>

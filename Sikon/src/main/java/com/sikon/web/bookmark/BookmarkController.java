@@ -21,6 +21,7 @@ import com.sikon.service.bookmark.BookmarkService;
 import com.sikon.service.domain.Bookmark;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
+import com.sikon.service.recipe.RecipeService;
 
 @Controller
 @RequestMapping("/bookmark/*")
@@ -31,6 +32,9 @@ public class BookmarkController {
 	@Qualifier("bookmarkServiceImpl")
 	private BookmarkService bookmarkService;
 	
+	@Autowired
+	@Qualifier("recipeServiceImpl")
+	private RecipeService recipeService;
 	
 	public BookmarkController() {
 		System.out.println("bookmarkΩ√¿€~");
@@ -43,20 +47,23 @@ public class BookmarkController {
 	int pageSize;
 	
 	@RequestMapping(value="addBookmark" )
-	public ModelAndView addBookmark(@ModelAttribute("bookmark") Bookmark bookmark,@ModelAttribute("recipe") Recipe recipe, HttpServletRequest request) throws Exception {
+	public ModelAndView addBookmark(@ModelAttribute("bookmark") Bookmark bookmark,@RequestParam("recipeNo") int recipeNo, HttpServletRequest request) throws Exception {
 
 		System.out.println("/bookmark/addBookmark : POST");
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute("user");
 		System.out.println(user);
+		
+		Recipe recipe=recipeService.getRecipe(recipeNo);
 		System.out.println(recipe);
+		
 		bookmark.setRecipe(recipe);
 		bookmark.setUserId(user.getUserId());
 
 		bookmarkService.addBookmark(bookmark);
 		
 		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("forward:/recipe/getRecipe?recipeNo="+recipe.getRecipeNo());
+		modelAndView.setViewName("forward:/recipe/getRecipe?recipeNo="+recipeNo);
 		
 		return modelAndView;
 	}
