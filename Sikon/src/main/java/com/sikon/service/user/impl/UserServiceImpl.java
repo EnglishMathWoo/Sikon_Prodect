@@ -36,9 +36,19 @@ public class UserServiceImpl implements UserService{
 		System.out.println("map="+map);
 		userDao.addUser(user, map);
 	}
+	
+	// id 중복체크
+	public int checkId(String userId) throws Exception {
+		int cnt = userDao.checkId(userId);
+		System.out.println("cnt: " + cnt);
+		return cnt;
+	}
 
 	public User getUser(String userId) throws Exception {
 		return userDao.getUser(userId);
+	}
+	public List getUCL(String userId) throws Exception {
+		return userDao.getUCL(userId);
 	}
 	
 	public User findUserId(String userNickname) throws Exception {
@@ -72,12 +82,12 @@ public class UserServiceImpl implements UserService{
 		userDao.deleteUser(user);
 	}
 
-	public boolean checkDuplication(String userId) throws Exception {
-		boolean result=true;
-		User user=userDao.getUser(userId);
-		if(user != null) {
-			result=false;
-		}
-		return result;
-	}
+//	public boolean checkDuplication(String userId) throws Exception {
+//		boolean result=true;
+//		User user=userDao.getUser(userId);
+//		if(user != null) {
+//			result=false;
+//		}
+//		return result;
+//	}
 }
