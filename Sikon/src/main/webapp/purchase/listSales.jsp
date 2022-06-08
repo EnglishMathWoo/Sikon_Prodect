@@ -262,6 +262,7 @@ table {
 		      
 		      </table>
 			  <!--  table1 End /////////////////////////////////////-->
+			  	<jsp:include page="../common/pageNavigator_new.jsp"/>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="profile">
 			    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -338,6 +339,7 @@ table {
 		      
 		      </table>
 			  <!--  table2 End /////////////////////////////////////-->
+				  	<jsp:include page="../common/pageNavigator_coupon.jsp"/>
 		  </div>
 		</div>
 			
@@ -348,7 +350,7 @@ table {
  	
  	
  	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
+
 	<!-- PageNavigation End... -->
 	
 </body>

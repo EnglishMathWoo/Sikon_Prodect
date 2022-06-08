@@ -150,7 +150,7 @@ public class PurchaseController {
 	}
 	
 	
-//=================================== 장바구니 구매 ===================================
+//=================================== 장바구니 구매 ===========================================================
 	
 	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.GET)
 	public String addPurchaseByCart(@RequestParam("cartNo") int[] cartNo,  Model model) throws Exception {
@@ -177,7 +177,63 @@ public class PurchaseController {
 		return "forward:/purchase/addPurchaseViewByCart.jsp";
 	}	
 	
-	
+	/*
+	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.POST)
+	public ModelAndView addPurchaseByCart( @ModelAttribute("purchase") Purchase[] purchase, @RequestParam("prodNo") int[] prodNo, @RequestParam("userId") String userId ) throws Exception {
+
+		System.out.println("/purchase/addPurchaseByCart : POST");
+		//Business Logic
+		
+		User user = userService.getUser(userId);
+		Product product = productService.getProduct(prodNo);
+		
+		System.out.println("usedPoint: "+purchase.getUsedPoint());
+		System.out.println("earnPoint: "+purchase.getEarnPoint());
+		
+		purchase.setBuyer(user);
+		purchase.setPurchaseProd(product);
+		purchase.setDivyStatus("001");
+		
+		//==================================================================================
+		//결제수단
+		purchase.setPaymentOpt("KA");
+				
+		//==================================================================================
+		//일련번호 만들기
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String nowrandom = now.format(formatter);   
+		
+		Random random = new Random();
+		for(int i=0;i<7;i++) {
+			nowrandom += Integer.toString(random.nextInt(10));
+		}
+		
+		String sub = "str";
+		String serialNo = sub+nowrandom;	
+		System.out.println("일련번호: "+serialNo);
+		
+		purchase.setSerialNo(serialNo);
+		//==================================================================================	
+		
+		int quantity = purchase.getPurchaseQuantity();
+		
+		System.out.println(purchase);
+		purchaseService.addPurchase(purchase);
+		
+		
+		System.out.println(quantity);
+		System.out.println(prodNo);
+		purchaseService.updateStock(quantity, prodNo);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/readPurchase.jsp");
+		modelAndView.addObject("purchsae", purchase);
+		
+		return modelAndView;
+	}
+	//*/
+//=============================================================================================================	
 /*	
 //==================================================================================
 	//일련번호 만들기
