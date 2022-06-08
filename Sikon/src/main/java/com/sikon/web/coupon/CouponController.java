@@ -138,6 +138,7 @@ public class CouponController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
+		search.setPageSize(pageSize);
 		
 		// Business logic ผ๖วเ
 		Map<String , Object> map = userService.getUserList(search);
@@ -167,7 +168,7 @@ public class CouponController {
 			couponService.issueCoupon(coupon);
 	    }
 		
-		return "redirect:/coupon/manageCoupon";
+		return "redirect:/coupon/manageCoupon?tabName=issueTab";
 	}
 	
 	@RequestMapping( value="/listIssuedCoupon" )
