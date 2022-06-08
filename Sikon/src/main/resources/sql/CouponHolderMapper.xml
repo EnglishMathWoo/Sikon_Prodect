@@ -46,7 +46,7 @@
 		SELECT h.*, c.coupon_name
  		FROM couponholder h, coupon c
 		<where>
-		h.coupon_no = c.coupon_no AND h.holder_id = #{userId} AND h.issue_status = '사용가능' AND h.end_date > TO_CHAR(SYSDATE, 'YYYYMMDD')
+		h.coupon_no = c.coupon_no AND h.holder_id = #{userId} AND h.issue_status = '001' AND h.end_date > TO_CHAR(SYSDATE, 'YYYYMMDD')
 		</where>
   	 </select>
   	 
@@ -66,27 +66,71 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT h.*, c.coupon_name
  										FROM couponholder h, coupon c
- 										WHERE h.coupon_no = c.coupon_no 
- 										ORDER BY h.issue_no DESC) inner_table
+ 										WHERE h.coupon_no = c.coupon_no
+ 										<if test="orderCondition == null">
+											ORDER BY h.issue_no DESC
+										</if>
+										<if test="orderCondition != null">
+											<choose>
+												<when test="orderCondition == 0">
+													ORDER BY h.issue_no DESC 
+												</when>
+												<when test="orderCondition == 1">
+													AND NVL(h.issue_status,'000')='001' 
+													ORDER BY h.issue_no DESC 
+												</when>
+												<when test="orderCondition == 2">
+													AND NVL(h.issue_status,'000')='002' 
+													ORDER BY h.issue_no DESC 
+												</when>
+												<otherwise>
+													AND NVL(h.issue_status,'000')='003' 
+													 ORDER BY h.issue_no DESC 
+												</otherwise>
+											</choose>
+										</if>
+ 										) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
-	 	<!--  위 두번째 subQuery 의  
-	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
-	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
-	 			< 는 keyword 로 &lt; 를	사용.
-	 			
-	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
-	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
-
-				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
-		-->
 	
-	<!-- SQL : SELECT ROW Count -->	 
+	<!-- 
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT issue_no, coupon_no, holder_id, start_date, end_date, issue_status
 						FROM couponholder) countTable						
 	 </select>
- 
+	  -->
+	 
+	 <!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	 SELECT COUNT(*)
+	  	FROM( SELECT h.*, c.coupon_name
+ 										FROM couponholder h, coupon c
+ 										WHERE h.coupon_no = c.coupon_no
+ 										<if test="orderCondition == null">
+											ORDER BY h.issue_no DESC
+										</if>
+										<if test="orderCondition != null">
+											<choose>
+												<when test="orderCondition == 0">
+													ORDER BY h.issue_no DESC 
+												</when>
+												<when test="orderCondition == 1">
+													AND NVL(h.issue_status,'000')='001' 
+													ORDER BY h.issue_no DESC 
+												</when>
+												<when test="orderCondition == 2">
+													AND NVL(h.issue_status,'000')='002' 
+													ORDER BY h.issue_no DESC 
+												</when>
+												<otherwise>
+													AND NVL(h.issue_status,'000')='003' 
+													 ORDER BY h.issue_no DESC 
+												</otherwise>
+											</choose>
+										</if>
+ 										) countTable					
+	 </select>
+
 </mapper>
