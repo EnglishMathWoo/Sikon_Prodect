@@ -194,6 +194,14 @@ p {
 			$("form").attr("method" , "POST").attr("action" , "/recipe/listProduct").submit();
 		}
 		
+		function chageLangSelect(){
+			console.log('고');
+		    var orderCondition = document.getElementById("orderCondition");
+		    
+		    fncGetList(1);
+		    console.log('이양');
+		}
+		
 		 
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -203,27 +211,13 @@ p {
 					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
 					});
 					
-				$(".theme").on("click" , function() {
+				//$("#theme").on("click" , function() {
+				//	var searchCondition = document.getElementById("theme").getAttribute('data-value');
+					//console.log(lineValue);		
 					//fncGetList(1);
-				});
+				//});
 				
-				
-
-				$( ".submit" ).on("click" , function() {
-					self.location = "/recipe/addRecipe.jsp"
-
-				 
-			 });
-				
-				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
-				
-				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
+			
 			   	//====================================================================
 			
 			   	 $(window).scroll(function() {
@@ -364,17 +358,17 @@ p {
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li class="current" ><a href="#" class="theme">한식</a></li>
-	        <li><a href="#" class="theme" >중식</a></li>
-	        <li><a href="#" class="theme" >양식</a></li>
-	        <li><a href="#" class="theme" >일식</a></li>
-	        <li><a href="#" class="theme">간식</a></li>
+	        <li class="current" ><a href="#" id="theme" data-value="KO">한식</a></li>
+	        <li><a href="#" id="theme" data-value="CH">중식</a></li>
+	        <li><a href="#" id="theme" data-value="FR">양식</a></li>
+	        <li><a href="#" id="theme" data-value="JP">일식</a></li>
+	        <li><a href="#" id="theme"data-value="DES">간식</a></li>
 	      </ul>
 	    </nav>
 	    
 		            
       <div class="center btmspace-50">
-	   <select class="condition" name="orderCondition">
+	   <select class="condition" id="orderCondition" name="orderCondition" onchange="chageLangSelect()">
 							<option value="0"
 								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
 							<option value="1"

@@ -16,6 +16,9 @@ import com.sikon.service.domain.Wish;
 import com.sikon.service.cook.CookDao;
 import com.sikon.service.cook.CookService;
 import com.sikon.service.domain.User;
+import com.sikon.service.domain.Recipe;
+import com.sikon.service.recipe.RecipeDao;
+import com.sikon.service.recipe.RecipeService;;
 
 
 
@@ -29,6 +32,15 @@ public class CookServiceImpl implements CookService{
 	private CookDao cookDao;
 	public void setCookDao(CookDao cookDao) {
 		this.cookDao = cookDao;
+	}
+	
+	/// Field
+	@Autowired
+	@Qualifier("recipeDaoImpl")
+	private RecipeDao recipeDao;
+
+	public void setRecipeDao(RecipeDao recipeDao) {
+		this.recipeDao = recipeDao;
 	}
 	
 	///Constructor

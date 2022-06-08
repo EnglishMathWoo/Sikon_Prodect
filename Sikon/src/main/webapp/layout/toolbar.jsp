@@ -32,8 +32,8 @@ hr, .borderedbox {
 #usik {
 float:left;
 margin-top:10px;
-	width: 50%;
-	height: 50%;
+	width: 150px;
+	height: 37px;
 }
 
 /* toolbar css (from layout.css) */
@@ -595,6 +595,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	 		$( "a:contains('하바나')" ).on("click" , function() {
 				$(self.location).attr("href","/cook/listMyCook");
 			}); 
+	 		
 	 		$( "a:contains('하트')" ).on("click" , function() {
 				$(self.location).attr("href","/heart/getHeart?userId=${sessionScope.user.userId}");
 			}); 	 		

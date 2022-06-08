@@ -41,6 +41,7 @@ import com.sikon.service.domain.Wish;
 import com.sikon.service.domain.Heart;
 
 import com.sikon.service.heart.HeartService;
+import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.cook.CookService;
 import com.sikon.service.user.UserService;
 
@@ -71,7 +72,10 @@ public class CookController {
 		@Qualifier("userServiceImpl")
 		private UserService userService;
 	
-
+		/// Field
+		@Autowired
+		@Qualifier("recipeServiceImpl")
+		private RecipeService recipeService;
 
 	public CookController() {
 		System.out.println(this.getClass());
@@ -289,7 +293,8 @@ public class CookController {
 		User user = (User) session.getAttribute("user");
 
 		// Business logic ผ๖วเ
-		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
+		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());		
+		
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
@@ -306,6 +311,7 @@ public class CookController {
 
 		return modelAndView;
 	}
+	
 	
 	@RequestMapping( value="/deleteCook", method=RequestMethod.GET)
 	public String deleteCook( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{

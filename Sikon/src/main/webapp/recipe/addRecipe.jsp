@@ -75,6 +75,9 @@ table.type09 {
     border-collapse: collapse;
     text-align: left;
     line-height: 1.5;
+        width: 350px;
+                text-align: center;
+    
 }
 table.type09 thead th {
     padding: 10px;
@@ -82,9 +85,12 @@ table.type09 thead th {
     vertical-align: top;
     color: #369;
     border-bottom: 3px solid #036;
+        width: 350px;
+        text-align: center;
+    
 }
 table.type09 tbody th {
-    width: 150px;
+    width: 350px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
@@ -184,17 +190,13 @@ function tableCreate(){
 	var ingredientAmount = $("#ingredientAmount").val();
 				
 	html += '<tr>';
-	html += '<td>'+ingredientName+'</td>';
-	html += '<input type="hidden" name="ingredientName" value="'+ingredientName+'"/>';
-	html += '<td>'+ingredientAmount+'</td>';
-	html += '<input type="hidden" name="ingredientAmount" value="'+ingredientAmount+'"/>';
+	html += '<td>'+'<input type="text" placeholder="재료명" id="ingredientName" name="ingredientName">'+'</td>';
+	html += '<td>'+'<input type="text" placeholder="재료양" id="ingredientAmount" name="ingredientAmount">'+'</td>';
 	html += '</tr>';
 				
 	
 	$("#dynamicTable").append(html);
 				
-	$("#ingredientName").val('');
-	$("#ingredientAmount").val('');
 	console.log('왜이러니'+$("#dynamicTable tr").find("td").length);
 	}
 	
@@ -290,11 +292,8 @@ function tableDelete(){
 							<th>재료양</th>
 						</tr>
 					</thead>
-					<tbody id="dynamicTbody">
 					</tbody>
 				</table>
-				<input type="text" placeholder="재료명" id="ingredientName" > 
-				<input type="text" placeholder="재료양" id="ingredientAmount">
 				<button type="button" 
 							style="float: right; ">재료추가</button>
 				<button type="button" 

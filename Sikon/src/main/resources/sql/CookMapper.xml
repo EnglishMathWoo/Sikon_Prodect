@@ -28,10 +28,13 @@
 		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
 		<result property="cookContent" 			column="cook_content " 			jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
-	
+		
 		
 	</resultMap>
-	
+
+
+
+		
 	<!-- SQL : INSERT -->
 	<insert 	id="addCook"		parameterType="cook" >
 	 	INSERT
@@ -199,6 +202,6 @@
 
 													) countTable						
 	 </select> 
-
 	 
+
 </mapper>

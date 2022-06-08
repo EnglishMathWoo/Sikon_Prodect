@@ -99,21 +99,7 @@ public class PurchaseController {
 
 		System.out.println("/purchase/addPurchase : POST");
 		//Business Logic
-		
-		User user = userService.getUser(userId);
-		Product product = productService.getProduct(prodNo);
-		
-		System.out.println("usedPoint: "+purchase.getUsedPoint());
-		System.out.println("earnPoint: "+purchase.getEarnPoint());
-		
-		purchase.setBuyer(user);
-		purchase.setPurchaseProd(product);
-		purchase.setDivyStatus("001");
-		
-		//==================================================================================
-		//결제수단
-		purchase.setPaymentOpt("KA");
-				
+
 		//==================================================================================
 		//일련번호 만들기
 		LocalDate now = LocalDate.now();
@@ -128,10 +114,17 @@ public class PurchaseController {
 		String sub = "str";
 		String serialNo = sub+nowrandom;	
 		System.out.println("일련번호: "+serialNo);
+		//==================================================================================
 		
+		User user = userService.getUser(userId);
+		Product product = productService.getProduct(prodNo);
+		
+		purchase.setBuyer(user);
+		purchase.setPurchaseProd(product);
+		purchase.setDivyStatus("001");
 		purchase.setSerialNo(serialNo);
-		//==================================================================================	
-		
+		purchase.setPaymentOpt("KA");
+				
 		int quantity = purchase.getPurchaseQuantity();
 		
 		System.out.println(purchase);
@@ -150,7 +143,7 @@ public class PurchaseController {
 	}
 	
 	
-//=================================== 장바구니 구매 ===========================================================
+//=== 장바구니 구매 ===========================================================================================
 	
 	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.GET)
 	public String addPurchaseByCart(@RequestParam("cartNo") int[] cartNo,  Model model) throws Exception {
@@ -177,28 +170,17 @@ public class PurchaseController {
 		return "forward:/purchase/addPurchaseViewByCart.jsp";
 	}	
 	
-	/*
-	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.POST)
-	public ModelAndView addPurchaseByCart( @ModelAttribute("purchase") Purchase[] purchase, @RequestParam("prodNo") int[] prodNo, @RequestParam("userId") String userId ) throws Exception {
 
+	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.POST)
+	public ModelAndView addPurchaseByCart(@ModelAttribute("purchase") Purchase purchase, @RequestParam("coupon") String[] coupon,
+															@RequestParam("cartNo") int[] cartNo, @RequestParam("userId") String userId ) throws Exception {
+
+		System.out.println("========================================================================");
 		System.out.println("/purchase/addPurchaseByCart : POST");
-		//Business Logic
 		
 		User user = userService.getUser(userId);
-		Product product = productService.getProduct(prodNo);
 		
-		System.out.println("usedPoint: "+purchase.getUsedPoint());
-		System.out.println("earnPoint: "+purchase.getEarnPoint());
-		
-		purchase.setBuyer(user);
-		purchase.setPurchaseProd(product);
-		purchase.setDivyStatus("001");
-		
-		//==================================================================================
-		//결제수단
-		purchase.setPaymentOpt("KA");
-				
-		//==================================================================================
+		//====================================
 		//일련번호 만들기
 		LocalDate now = LocalDate.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -212,45 +194,46 @@ public class PurchaseController {
 		String sub = "str";
 		String serialNo = sub+nowrandom;	
 		System.out.println("일련번호: "+serialNo);
+		//=======================================	
+		//for문
+		for(int i=0; i<cartNo.length; i++) {
+			
+			Cart cart = cartService.getCart(cartNo[i]);
+			
+			Product product = productService.getProduct(cart.getCartProd().getProdNo());			
+			
+			purchase.setBuyer(user);
+			purchase.setPurchaseProd(product);
+			purchase.setUsedCoupon(coupon[i]);
+			purchase.setPurchaseQuantity(cart.getQuantity());
+			
+			purchase.setDivyStatus("001");
+			purchase.setPaymentOpt("KA");
+			purchase.setSerialNo(serialNo);		
+			
+			
+			System.out.println(purchase);
+			purchaseService.addPurchase(purchase);
+			
+			
+			System.out.println(cart.getQuantity());
+			purchaseService.updateStock(cart.getQuantity(), product.getProdNo());
+			
+			cartService.deleteCart(cartNo[i]);
 		
-		purchase.setSerialNo(serialNo);
-		//==================================================================================	
+		}
 		
-		int quantity = purchase.getPurchaseQuantity();
-		
-		System.out.println(purchase);
-		purchaseService.addPurchase(purchase);
-		
-		
-		System.out.println(quantity);
-		System.out.println(prodNo);
-		purchaseService.updateStock(quantity, prodNo);
+		System.out.println("========================================================================");
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/readPurchase.jsp");
+		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");
 		modelAndView.addObject("purchsae", purchase);
 		
 		return modelAndView;
 	}
-	//*/
+
 //=============================================================================================================	
-/*	
-//==================================================================================
-	//일련번호 만들기
-			LocalDate now = LocalDate.now();
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-			String nowrandom = now.format(formatter);   
-			
-			Random random = new Random();
-			for(int i=0;i<7;i++) {
-				nowrandom += Integer.toString(random.nextInt(10));
-			}
-			
-			String sub = "str";
-			String serialNo = sub+nowrandom;	
-			System.out.println("일련번호: "+serialNo);
-//==================================================================================		
-*/	
+
 		
 	@RequestMapping( value="getPurchase", method=RequestMethod.GET)
 	public ModelAndView getPurchase( @RequestParam("tranNo") int tranNo) throws Exception {
@@ -409,7 +392,7 @@ public class PurchaseController {
 		// Model 과 View 연결
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/listPurchase.jsp");
+		modelAndView.setViewName("/mypage/listPurchase.jsp");
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);
