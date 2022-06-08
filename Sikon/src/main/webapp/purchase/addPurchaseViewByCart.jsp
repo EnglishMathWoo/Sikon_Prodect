@@ -56,7 +56,7 @@ body>div.container {
 		//============= "구매"  Event 연결 =============
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "button.btn.btn-primary" ).on("click" , function() {
+			$( "#iamportPayment" ).on("click" , function() {
 				console.log('구매');
 				fncAddPurchase();
 			});
@@ -193,51 +193,7 @@ body>div.container {
 </script> 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
-<script>
-  
 
-	
-	$(function() {
-		$("button.iamportPayment").on("click" , function() {
-			console.log("시작");		
-			payment();	
-		});
-	});	
-	
-function payment(data) {
-	
-
-	
-	IMP.init('imp05238113'); 
-    
-    IMP.request_pay({
-    	pg : "html5_inicis", 
-        pay_method : 'card',
-        merchant_uid : '1012',
-        name : '테스트',
-        amount : 100,
-        buyer_email : 'pjn39@naver.com',
-        buyer_name : 'pjw',
-        buyer_tel : '010-4242-4242',
-        buyer_addr : '서울특별시 강남구 신사동',
-        buyer_postcode : '구매자 주소',
-        m_redirect_url : '01181'
-    }, function(rsp) {
-        if ( rsp.success ) {
-            alert("성공! imp_uid: "+rsp.imp_uid+" / merchant_uid(orderkey): "+rsp.merchant_uid);
-            self.location = "/product/listProduct?menu=search";
-        } else {
-        	alert("실패.. 코드: "+rsp.error_code+" / 메시지: "+rsp.error_msg);
-            
-        }
-    });
-	
-}
-    
-    
-
-
-    </script>
 	
 </head>
 
@@ -255,8 +211,6 @@ function payment(data) {
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
-		  <input type="hidden" name="userId" value="${user.userId }" />
-		  
 		  <div class="text-center">		  
 		  <hr/>
 		  <h4 align="center">주문상품</h4>
@@ -283,7 +237,7 @@ function payment(data) {
 		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">배송비</label>
 		    <div class="col-sm-4">
 		      3000 원
-		      <input type="hidden" class="form-control" id="divyFee" name="divyFee" value="3000">
+		      <input type="hidden" class="form-control" value="3000">
 		    </div>
 		  </div>
 		  
@@ -291,7 +245,7 @@ function payment(data) {
 		    <label for="purchaseQuantity" class="col-sm-offset-1 col-sm-3 control-label">구매수량</label>
 		    <div class="col-sm-4">
 		    ${cart.quantity} 개
-		      <input type="hidden" min="0" class="form-control" id="purchaseQuantity" name="purchaseQuantity" value="${cart.quantity}">
+		      <input type="hidden" min="0" class="form-control"value="${cart.quantity}">
 		    </div>
 		  </div>
 		  
@@ -301,25 +255,13 @@ function payment(data) {
 			  </div>
 		  </c:if>
 		  
-		  <div class="form-group">
-		    <label for="usedCoupon" class="col-sm-offset-1 col-sm-3 control-label">쿠폰 사용</label>
-		    <div class="col-sm-4">
-		   	  <c:if test="${cart.cartProd.couponApply == 'Y' }">
-		      	<input type="text" class="form-control" id="usedCoupon" name="usedCoupon" placeholder="사용할 쿠폰을 선택해주세요" >
-		      </c:if>
-		      <c:if test="${cart.cartProd.couponApply == 'N' }">
-		      	<input type="text" class="form-control" id="usedCoupon" name="usedCoupon" placeholder="쿠폰적용이 불가한 상품입니다." readonly >
-		      </c:if>
-		    </div>
-		  </div>
+		  <input type="hidden" class="cartNo" name="cartNo" value="${cart.cartNo}">
 		  
-		  <input type="hidden" class="prodNo" name="prodNo" value="${cart.cartProd.prodNo}">
-		  <input type="hidden" class="price" name="price" value="${cart.cartProd.prodDisPrice}">
-		  
+		  <hr>
 		  
 </c:forEach>		 
  
-		  <hr>
+		  
 
 		  
 		  <div class="form-group">
@@ -332,7 +274,7 @@ function payment(data) {
 		  <div class="form-group">
 		  <label for="purchaseQuantity" class="col-sm-offset-1 col-sm-3 control-label">총 배송비</label>
 		    <div class="col-sm-4">
-		      + <input type="text" id="totalDivyFee" name="totalDivyFee" value=""  style="border:none;width:50px"> 원 <hr>
+		      + <input type="text" id="totalDivyFee" name="divyFee" value=""  style="border:none;width:50px"> 원 <hr>
 		    </div>
 		  </div>
 		  
@@ -358,6 +300,7 @@ function payment(data) {
 		  <h4 align="center">배송정보</h4>
 		  <hr/>
 		  
+		  <input type="hidden" name="userId" value="${user.userId }" />
 		  	  
 		  <div class="form-group">
 		    <label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">받는분 이름</label>
@@ -409,8 +352,24 @@ function payment(data) {
 		</div>
 		 <div class="text-center">	  
 		  <hr/>
-		  <h4 align="center">쿠폰포인트</h4>
+		  <h4 align="center">쿠폰 / 포인트</h4>
 		  <hr/>
+		  
+		  
+		  <div class="form-group">
+		    <label for="usedCoupon" class="col-sm-offset-1 col-sm-3 control-label">쿠폰 사용</label>
+		    <div class="col-sm-4">
+		    <c:forEach var="cart" items="${cartlist}">
+		   	  <c:if test="${cart.cartProd.couponApply == 'Y' }">
+		      	<input type="text" class="form-control" name="coupon" placeholder="사용할 쿠폰을 선택해주세요" >
+		      </c:if>
+		      <c:if test="${cart.cartProd.couponApply == 'N' }">
+		      	<input type="text" class="form-control" name="coupon" placeholder="쿠폰적용이 불가한 상품입니다." readonly >
+		      </c:if>
+		      </c:forEach>
+		    </div>
+		  </div>
+
 
 		  
 		  <div class="form-group">
