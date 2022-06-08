@@ -48,28 +48,6 @@ body>div.container {
 	font-family: 'Nanum Myeongjo', serif;
 }
 
-#aaa{
-	background: #630606 
-}
-#bbb{
-	background: #BB6464
-}
-#ccc{
-	background: #F7F7F7
-}
-#ddd{
-	background: #D0C9C0
-}
-#eee{
-	background: #5F7161
-}
-#fff{
-	background: #6D8B74
-}
-
-
-
-
 
 </style>
     

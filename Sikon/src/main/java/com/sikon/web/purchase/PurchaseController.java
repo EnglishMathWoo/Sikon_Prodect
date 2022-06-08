@@ -1,9 +1,12 @@
 package com.sikon.web.purchase;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -107,13 +110,27 @@ public class PurchaseController {
 		purchase.setPurchaseProd(product);
 		purchase.setDivyStatus("001");
 		
-		//===================================
+		//==================================================================================
+		//결제수단
 		purchase.setPaymentOpt("KA");
-		purchase.setSerialNo("202206041234");
+				
+		//==================================================================================
+		//일련번호 만들기
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String nowrandom = now.format(formatter);   
 		
+		Random random = new Random();
+		for(int i=0;i<7;i++) {
+			nowrandom += Integer.toString(random.nextInt(10));
+		}
 		
-		//===================================
+		String sub = "str";
+		String serialNo = sub+nowrandom;	
+		System.out.println("일련번호: "+serialNo);
 		
+		purchase.setSerialNo(serialNo);
+		//==================================================================================	
 		
 		int quantity = purchase.getPurchaseQuantity();
 		
@@ -139,39 +156,45 @@ public class PurchaseController {
 	public String addPurchaseByCart(@RequestParam("cartNo") int[] cartNo,  Model model) throws Exception {
 
 		System.out.println("/addPurchaseByCart : GET");
-		
+	
 		List list = new ArrayList();
 		
 		for(int cartnum : cartNo) {
 			
-			System.out.println("cartnum: "+cartnum);
-			
-			Cart cart = cartService.getCart(cartnum);			
-			
-			System.out.println("cart: "+cart);
-			
+			Cart cart = cartService.getCart(cartnum);
 			Product product = productService.getProduct(cart.getCartProd().getProdNo());
+			cart.setCartProd(product);
 			
-			System.out.println("product: "+product);
+			list.add(cart);
 			
-			list.add(product);
-			
-			System.out.println("--------------------------------");
 		}
 		
-		System.out.println("list: "+list);
-		model.addAttribute("list", list);
+		System.out.println("cartlist: "+list);
 		
-		System.out.println("===================================");
+		model.addAttribute("cartlist", list);
 		
-		//return "forward:/purchase/addPurchaseViewByCart.jsp";
-		return null;
+		
+		return "forward:/purchase/addPurchaseViewByCart.jsp";
 	}	
 	
 	
-	
+/*	
 //==================================================================================
-	
+	//일련번호 만들기
+			LocalDate now = LocalDate.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+			String nowrandom = now.format(formatter);   
+			
+			Random random = new Random();
+			for(int i=0;i<7;i++) {
+				nowrandom += Integer.toString(random.nextInt(10));
+			}
+			
+			String sub = "str";
+			String serialNo = sub+nowrandom;	
+			System.out.println("일련번호: "+serialNo);
+//==================================================================================		
+*/	
 		
 	@RequestMapping( value="getPurchase", method=RequestMethod.GET)
 	public ModelAndView getPurchase( @RequestParam("tranNo") int tranNo) throws Exception {
