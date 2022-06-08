@@ -187,6 +187,30 @@ p {
 					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
 					});
 					
+					$( ".update" ).on("click" , function() {
+						self.location ="/recipe/updateRecipe?recipeNo="+$(this).attr("value")
+						});
+					
+					$(".submit").on("click" , function() {
+						
+						
+						var checkCount = $("input[name='ckRecipe']:checked").length;
+
+					    var array = new Array();
+					    
+						$("input[name='ckRecipe']:checked").each(function() {
+							array.push($(this).attr('id'));
+					    });
+						
+						if(checkCount != 0) {
+							alert(checkCount+"개의 레시피를 삭제하시겠습니까?")
+
+						self.location = "/recipe/deleteRecipe?recipeList="+array;
+						}
+						
+					});
+						
+					
 		 });
 		 
 		 
@@ -229,9 +253,10 @@ p {
   <br/> <br/>
   
     <div id="latest" class="group">
+       <input type="checkbox" name="ckRecipe" id="${recipe.recipeNo }" >
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#"> 
       <ul>
-  <li><input type="checkbox" value="${recipe.recipeNo }" />
+  <li>
   <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></li></ul></a>
         <div class="excerpt">
           <h4 class="heading" >${recipe.recipeName }</h4>
@@ -242,6 +267,8 @@ p {
             <li>${recipe.cookingTime }분</li>
             <li> ${recipe.writer.userNickname }</li>
           </ul>
+          <button type="button" class="update"  value="${recipe.recipeNo }">수정하기</button>
+          
         </div>
       </article>
      

@@ -80,6 +80,12 @@
         where recipe_no=#{recipeNo}
 	 </update>
 	 
+	  <delete id="deleteRecipe" parameterType="int" >
+	 DELETE
+	 FROM recipe 
+	 WHERE recipe_no= #{recipeNo} 
+	 </delete>
+	 
 	 
 	<!-- SQL : SELECT LIST -->
 	<select  id="getRecipeList"  parameterType="search"	resultMap="recipeSelectMap">
