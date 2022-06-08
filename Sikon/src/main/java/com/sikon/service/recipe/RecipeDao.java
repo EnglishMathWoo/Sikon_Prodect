@@ -10,36 +10,31 @@ import com.sikon.service.domain.Recipe;
 public interface RecipeDao {
 
 	// INSERT
-	public void addRecipe(Recipe recipe,Map ingredient) throws Exception;
+	public void addRecipe(Recipe recipe, Map ingredient) throws Exception;
 
-	//SELECT ONE
-//	public Recipe getRecipe(int recipeNo) throws Exception;
+	// SELECT ONE
 	public List getRecipe(int recipeNo) throws Exception;
 
-//	public List getIngredient(int recipeNo) throws Exception;
-
-	//SELECT LIST
+	// SELECT LIST
 	public List<Recipe> getRecipeList(Search search) throws Exception;
 
-	//SELECT LIST
-	public List<Recipe> getMyRecipeList(Search search,String writerNickname) throws Exception;
+	// SELECT LIST
+	public List<Recipe> getMyRecipeList(Search search, String writerNickname) throws Exception;
 
-	//UPDATE
+	// UPDATE
 	public void updateRecipe(Recipe recipe) throws Exception;
 
-	public void updateIngredient(List ingredient,int recipeNo) throws Exception;
+	public void updateIngredient(List ingredient, int recipeNo) throws Exception;
 
-	//DELETE
-	public void deleteRecipe(Recipe recipe) throws Exception;
+	// DELETE
+	public void deleteRecipe(int recipeNo) throws Exception;
 
-	//SELECT ROW Count
-	public int getTotalCount(Search search) throws Exception ;
-	
-	//SELECT ROW Count
-	public int getTotalMyCount(Search search,String userId) throws Exception ;
-	
+	// SELECT ROW Count
+	public int getTotalCount(Search search) throws Exception;
+
+	// SELECT ROW Count
+	public int getTotalMyCount(Search search, String userId) throws Exception;
+
 	public List<Recipe> bestRecipeList() throws Exception;
-
-	
 
 }

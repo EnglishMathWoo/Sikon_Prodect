@@ -491,7 +491,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	
 		 $(function() {
 
-			$( "a:contains(' ½ÄÅ¹ÀÇ¿Âµµ')" ).on("click" , function() {
+			$( "#usik" ).on("click" , function() {
 			$(self.location).attr("href","/recipe/listRecipe");
 			});
 			

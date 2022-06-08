@@ -17,6 +17,5 @@ public interface BookmarkService {
 
 	//책갈피 삭제
 	public void deleteBookmark(int bookmarkNo) throws Exception;
-//	public void delCheckBookmark(List<Integer> bm) throws Exception;
 
 }
