@@ -13,9 +13,9 @@ public interface UserService {
 	// 회원가입
 	public void addUser(User user, Map map) throws Exception;
 
-	// 내정보확인 / 로그인
+	// 내정보확인 
 	public User getUser(String userId) throws Exception;
-	
+	public List getUCL(String userId) throws Exception;
 	// ID찾기
 	public User findUserId(String userNickname) throws Exception ;
 	
@@ -30,7 +30,12 @@ public interface UserService {
 	public void deleteUser(User user) throws Exception ;
 	
 	// 회원 ID 중복 확인
-	public boolean checkDuplication(String userId) throws Exception;
+//	public boolean checkDuplication(String userId) throws Exception;
+	
+	// id 중복체크
+	public int checkId(String userId) throws Exception;
+
+	
 
 	
 

@@ -13,10 +13,13 @@ public interface UserDao {
 	// INSERT
 	public void addUser(User user, Map map) throws Exception ;
 	
+	// id 중복체크
+	public int checkId(String userId) throws Exception;
+	
 
 	// SELECT ONE
 	public User getUser(String userId) throws Exception ;
-	
+	public List getUCL(String userId) throws Exception;
 	// ID찾기
 	public User findUserId(String userNickname) throws Exception ;
 
@@ -33,6 +36,7 @@ public interface UserDao {
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception ;
 
+	
 
 	
 

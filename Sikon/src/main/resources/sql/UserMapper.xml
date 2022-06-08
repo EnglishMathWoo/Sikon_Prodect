@@ -22,9 +22,18 @@
 		<result property="regDate" 	column="user_regdate" 		jdbcType="DATE" />
 		<result property="quitDate" 	column="quit_date" 		jdbcType="DATE" />
 		<result property="quitStatus" 	column="quit_status" 		jdbcType="VARCHAR"  />
+		<result property="careerNo" 	column="career_no" 		jdbcType="NUMERIC"/>
+		<result property="company"	column="company" 		jdbcType="VARCHAR" />
+		<result property="careerExperience" 	 column="career_experience" 		jdbcType="VARCHAR" />
+		<result property="startDate"	column="start_date" 		jdbcType="DATE" />
+		<result property="endDate"	column="end_date" 		jdbcType="DATE" />
+		<result property="licenseNo" 	column="license_no" 		jdbcType="NUMERIC"/>
+		<result property="licenseName"	column="license_name" 		jdbcType="VARCHAR" />
+		<result property="licenseInstitution" 	 column="license_institution" 		jdbcType="VARCHAR" />
+		<result property="licenseDate"	column="license_date" 		jdbcType="DATE" />
 </resultMap>
 
-
+ 
 <resultMap id="careerSelectMap" type="career">
 		<result property="careerNo" 	column="career_no" 		jdbcType="NUMERIC"/>
 		<result property="company"	column="company" 		jdbcType="VARCHAR" />
@@ -42,6 +51,7 @@
 		<result property="licenseDate"	column="license_date" 		jdbcType="DATE" />
 		<result property="userId"	column="user_id" 		jdbcType="VARCHAR" />
 </resultMap>
+
 
 
 
@@ -86,22 +96,35 @@
         ) A
 	 </insert>
 
-<!-- 
-	<insert id="addCareer" 	parameterType="map" >
-		 INTO career( career_no , company , career_experience , start_date , end_date , user_id )
-		 VALUES ( seq_career_career_no.nextval , #{career.company} , #{career.careerExperience} , #{career.startDate:DATE} , #{career.endDate:DATE} , #{career.userId} )
 
-	</insert>
--->
+	
+	<!-- id 중복체크 -->
+	 <select id="checkId" parameterType="String" resultType="int">
+		SELECT COUNT(user_id)
+		FROM users
+		WHERE user_id= #{id}
+	</select>
+	
  
 	<!-- 회원상세조회 -->
 	<select  id="getUser"		parameterType="string"	resultMap="userSelectMap">
-		 SELECT *
-		 FROM users
-		 WHERE user_id = #{value}
+		SELECT *
+		FROM users
+		WHERE user_id = #{value}
         </select>
 
-
+	<!-- 멘토상세조회 -->
+	<select  id="getUCL"		parameterType="string"	resultMap="userSelectMap">
+		SELECT a.*, b.*, c.*
+		FROM users a, license b, career c
+		WHERE a.user_id = b.user_id 
+	     AND b.user_id = c.user_id
+	     AND a.user_id = c.user_id
+	     AND a.user_id = #{userId}
+        </select>
+        
+		
+	
 	<!-- ID찾기 -->
 	<select  id="findUserId"	parameterType="string"	resultMap="userSelectMap">
 		SELECT user_id
@@ -111,9 +134,6 @@
 		    		 AND user_phone = #{phone}
 	-->
 	</select>
-
-
-
 
 
 
@@ -204,7 +224,7 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT user_id , user_name , user_nickname
 											FROM users
-											<!-- <if test="searchCondition != null">
+											 <if test="searchCondition != null">
 												 <where>
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 										 				user_id = #{searchKeyword}
@@ -213,8 +233,8 @@
 										 				user_name = #{searchKeyword}
 													</if>
 												</where>
-											</if>
-											-->
+											 </if>
+											
 											ORDER BY user_id ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 

@@ -38,7 +38,7 @@ public class BookmarkDaoImpl implements BookmarkDao {
 	}
 
 
-	public List<Bookmark> getBookmarkList(Search search, String userId) throws Exception {
+	public List getBookmarkList(Search search, String userId) throws Exception {
 		System.out.println("userid="+userId+"search="+search);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search", search);

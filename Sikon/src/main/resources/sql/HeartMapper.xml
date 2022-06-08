@@ -70,6 +70,13 @@ select count(*) from heart
  where cook_no = #{cookNo} and user_id = #{userId} 
 </select>
 
+	 <select 	id="getHeart"	parameterType="string"	resultMap="heartSelectMap">
+		SELECT c.cook_name, c.cook_filename, c.cook_price, h.*
+		FROM cook c, heart h 
+		WHERE c.cook_no=h.cook_no 
+		AND user_id = #{userId}
+		ORDER BY heart_no DESC
+	 </select>
 
 	 
 </mapper>

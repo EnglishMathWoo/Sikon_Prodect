@@ -9,7 +9,15 @@
 <head>
 	<meta charset="EUC-KR">
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
+	<!-- datepicker -->
+	<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+
+	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
+	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
+
+	<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+
+	<!-- ì°¸ì¡° : http://getbootstrap.com/css/   ì°¸ì¡° -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -18,29 +26,47 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
+	<!-- jQuery UI toolTip ì‚¬ìš© CSS-->
+  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<!-- jQuery UI toolTip ì‚¬ìš© JS-->
+ 	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
        body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
+        	border: 2px solid #D6CDB7;
+            margin-top: 30px;
+            
         }
     </style>
+    
+    <style>
+		.id_ok{
+		color:#008000;
+		display: none;
+		}
+
+		.id_already{
+		color:#6A82FB; 
+		display: none;
+		}
+	</style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		//============= "°¡ÀÔ"  Event ¿¬°á =============
+		//============= "ê°€ì…"  Event ì—°ê²° =============
 		 $(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "button.btn.btn-primary" ).on("click" , function() {
 				fncAddUser();
 			});
 		});	
 		
 		
-		//============= "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á =============
+		//============= "ì·¨ì†Œ"  Event ì²˜ë¦¬ ë°  ì—°ê²° =============
 		$(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("#previous").on("click" , function() {
 				history.go(-1);
 			});
@@ -56,24 +82,24 @@
 			
 			
 			if(id == null || id.length <1){
-				alert("¾ÆÀÌµğ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+				alert("ì•„ì´ë””ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 				return;
 			}
 			if(pw == null || pw.length <1){
-				alert("ÆĞ½º¿öµå´Â  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+				alert("íŒ¨ìŠ¤ì›Œë“œëŠ”  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 				return;
 			}
 			if(pw_confirm == null || pw_confirm.length <1){
-				alert("ÆĞ½º¿öµå È®ÀÎÀº  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+				alert("íŒ¨ìŠ¤ì›Œë“œ í™•ì¸ì€  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 				return;
 			}
 			if(name == null || name.length <1){
-				alert("ÀÌ¸§Àº  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+				alert("ì´ë¦„ì€  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 				return;
 			}
 			
 			if( pw != pw_confirm ) {				
-				alert("ºñ¹Ğ¹øÈ£ È®ÀÎÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+				alert("ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 				$("input:text[name='password2']").focus();
 				return;
 			}
@@ -90,67 +116,90 @@
 			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 		}
 		
-
-		//==>"ÀÌ¸ŞÀÏ" À¯È¿¼ºCheck  Event Ã³¸® ¹× ¿¬°á
+		
+		function checkId(){
+	        var userId = $('#userId').val(); //idê°’ì´ "id"ì¸ ì…ë ¥ë€ì˜ ê°’ì„ ì €ì¥
+	        console.log(userId);
+	        
+	        $.ajax({
+	            url:'./json/checkId', //Controllerì—ì„œ ìš”ì²­ ë°›ì„ ì£¼ì†Œ
+	            type:'post', //POST ë°©ì‹ìœ¼ë¡œ ì „ë‹¬
+	            data:{userId:userId},
+	            success:function(cnt){ //ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ë„˜ì–´ì˜¨ cntê°’ì„ ë°›ëŠ”ë‹¤ 
+	                if(cnt == 0){ //cntê°€ 1ì´ ì•„ë‹ˆë©´(=0ì¼ ê²½ìš°) -> ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë”” 
+	                    $('.id_ok').css("display","inline-block"); 
+	                    $('.id_already').css("display", "none");
+	                } else { // cntê°€ 1ì¼ ê²½ìš° -> ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì•„ì´ë””
+	                    $('.id_already').css("display","inline-block");
+	                    $('.id_ok').css("display", "none");
+	                    alert("ì•„ì´ë””ë¥¼ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
+	                    $('#userid').val('');
+	                }
+	            },
+	            error:function(){
+	                alert("ì—ëŸ¬ì…ë‹ˆë‹¤");
+	            }
+	        });
+	        };
+	        
+		//==>ì•„ì´ë”” "ì´ë©”ì¼" ìœ íš¨ì„±Check  Event ì²˜ë¦¬ ë° ì—°ê²°
 		 $(function() {
 			 
-			 $("input[name='email']").on("change" , function() {
+			 $("input[name='userId']").on("change" , function() {
 				
-				 var email=$("input[name='email']").val();
+				 var email=$("input[name='userId']").val();
 			    
 				 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
-			    	alert("ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾Æ´Õ´Ï´Ù.");
+			    	alert("ì´ë©”ì¼ í˜•ì‹ì´ ì•„ë‹™ë‹ˆë‹¤.");
 			     }
 			});
 			 
 		});	
 		
 		
-	   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	   //==> ÁÖ¹Î¹øÈ£ À¯È¿¼º check ´Â ÀÌÇØÁ¤µµ·Î....
-		function checkSsn() {
-			var ssn1, ssn2; 
-			var nByear, nTyear; 
-			var today; 
-	
-			ssn = document.detailForm.ssn.value;
-			// À¯È¿ÇÑ ÁÖ¹Î¹øÈ£ Çü½ÄÀÎ °æ¿ì¸¸ ³ªÀÌ °è»ê ÁøÇà, PortalJuminCheck ÇÔ¼ö´Â CommonScript.js ÀÇ °øÅë ÁÖ¹Î¹øÈ£ Ã¼Å© ÇÔ¼öÀÓ 
-			if(!PortalJuminCheck(ssn)) {
-				alert("Àß¸øµÈ ÁÖ¹Î¹øÈ£ÀÔ´Ï´Ù.");
-				return false;
+		// ìƒë…„ì›”ì¼
+		 $(function() {
+				$('#userBirth').datepicker({
+					dateFormat: "yy-mm-dd"
+				});
+		});
+	   
+		// ë„ë¡œëª… ì£¼ì†Œ
+		 function findAddr(){
+				new daum.Postcode({
+			        oncomplete: function(data) {
+			        	
+			        	console.log(data);
+			        	
+			            // íŒì—…ì—ì„œ ê²€ìƒ‰ê²°ê³¼ í•­ëª©ì„ í´ë¦­í–ˆì„ë•Œ ì‹¤í–‰í•  ì½”ë“œë¥¼ ì‘ì„±í•˜ëŠ” ë¶€ë¶„.
+			            // ë„ë¡œëª… ì£¼ì†Œì˜ ë…¸ì¶œ ê·œì¹™ì— ë”°ë¼ ì£¼ì†Œë¥¼ í‘œì‹œí•œë‹¤.
+			            // ë‚´ë ¤ì˜¤ëŠ” ë³€ìˆ˜ê°€ ê°’ì´ ì—†ëŠ” ê²½ìš°ì—” ê³µë°±('')ê°’ì„ ê°€ì§€ë¯€ë¡œ, ì´ë¥¼ ì°¸ê³ í•˜ì—¬ ë¶„ê¸° í•œë‹¤.
+			            var roadAddr = data.roadAddress; // ë„ë¡œëª… ì£¼ì†Œ ë³€ìˆ˜
+			            var jibunAddr = data.jibunAddress; // ì§€ë²ˆ ì£¼ì†Œ ë³€ìˆ˜
+			            // ìš°í¸ë²ˆí˜¸ì™€ ì£¼ì†Œ ì •ë³´ë¥¼ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
+			            document.getElementById('member_post').value = data.zonecode;
+			            if(roadAddr !== ''){
+			                document.getElementById("member_addr").value = roadAddr;
+			            } 
+			            else if(jibunAddr !== ''){
+			                document.getElementById("member_addr").value = jibunAddr;
+			            }
+			        }
+			    }).open();
 			}
-		}
-	
-		function PortalJuminCheck(fieldValue){
-		    var pattern = /^([0-9]{6})-?([0-9]{7})$/; 
-			var num = fieldValue;
-		    if (!pattern.test(num)) return false; 
-		    num = RegExp.$1 + RegExp.$2;
-	
-			var sum = 0;
-			var last = num.charCodeAt(12) - 0x30;
-			var bases = "234567892345";
-			for (var i=0; i<12; i++) {
-				if (isNaN(num.substring(i,i+1))) return false;
-				sum += (num.charCodeAt(i) - 0x30) * (bases.charCodeAt(i) - 0x30);
-			}
-			var mod = sum % 11;
-			return ((11 - mod) % 10 == last) ? true : false;
-		}
-		 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 		 
-		//==>"IDÁßº¹È®ÀÎ" Event Ã³¸® ¹× ¿¬°á
-		 $(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $("button.btn.btn-info").on("click" , function() {
-				popWin 
-				= window.open("/user/checkDuplication.jsp",
-											"popWin", 
-											"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
-											"scrollbars=no,scrolling=no,menubar=no,resizable=no");
-			});
-		});	
+//		//==>"IDì¤‘ë³µí™•ì¸" Event ì²˜ë¦¬ ë° ì—°ê²°
+//		 $(function() {
+//			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+//			 $("button.btn.btn-info").on("click" , function() {
+//				popWin 
+//				= window.open("/user/checkDuplication.jsp",
+//											"popWin", 
+//											"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
+//											"scrollbars=no,scrolling=no,menubar=no,resizable=no");
+//			});
+//		});	
 
 	</script>		
     
@@ -161,72 +210,91 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Lego Land</a>
+        	<a class="navbar-brand" href="/index.jsp">ì‹íƒì˜ ì˜¨ë„</a>
    		</div>
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center">È¸ ¿ø °¡ ÀÔ</h1>
+		<h1 class="bg-primary text-center">íšŒ ì› ê°€ ì…</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
-		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">¾Æ ÀÌ µğ</label>
+		   <div class="form-group">
+		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">ì•„ ì´ ë””</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="Áßº¹È®ÀÎÇÏ¼¼¿ä"  readonly>
-		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">ÀÔ·ÂÀü Áßº¹È®ÀÎ ºÎÅÍ..</strong>
-		      </span>
-		    </div>
-		    <div class="col-sm-3">
-		      <button type="button" class="btn btn-info">Áßº¹È®ÀÎ</button>
+		      <input type="text" class="form-control" id="userId" name="userId" oninput = "checkId()" >
+		      
+		      <span id="helpBlock" class="id_ok">ì‚¬ìš© ê°€ëŠ¥í•œ ì•„ì´ë””ì…ë‹ˆë‹¤.</span>
+			  <span id="helpBlock" class="id_already">ëˆ„êµ°ê°€ ì´ ì•„ì´ë””ë¥¼ ì‚¬ìš©í•˜ê³  ìˆì–´ìš”.</span>
+			</div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">ë¹„ë°€ë²ˆí˜¸</label>
+		    <div class="col-sm-4">
+		      <input type="password" class="form-control" id="password" name="password" placeholder="ë¹„ë°€ë²ˆí˜¸">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">ºñ¹Ğ¹øÈ£</label>
+		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="ºñ¹Ğ¹øÈ£">
+		      <input type="password" class="form-control" id="password2" name="password2" placeholder="ë¹„ë°€ë²ˆí˜¸ í™•ì¸">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">ºñ¹Ğ¹øÈ£ È®ÀÎ</label>
+		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">ì´ë¦„</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="ºñ¹Ğ¹øÈ£ È®ÀÎ">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="íšŒì›ì´ë¦„">
+		    </div>
+		  </div>
+		  
+	  	  <div class="form-group">
+		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">ë‹‰ë„¤ì„</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="userNickname" name="userNickname" placeholder="ë‹‰ë„¤ì„">
+		    </div>
+		  </div>
+	
+		  <div class="form-group">
+    		<label for="userBirth" class="col-sm-offset-1 col-sm-3 control-label" >ìƒë…„ì›”ì¼</label>
+   			<div class="col-sm-4">
+      	  <input type="text" class="form-control" id="userBirth" name="userBirth" placeholder="ìƒë…„ì›”ì¼">
+    		</div>
+ 	 	  </div>
+  
+		  <!--  <span id="helpBlock" class="help-block">
+		      	 <strong class="text-danger">" -  " ì œì™¸ 13ìë¦¬ì…ë ¥í•˜ì„¸ìš”</strong>
+		  		</span>
+	 	  -->
+	 	   
+	 	  	     
+		  <div class="form-group">
+		   <label for="addr" class="col-sm-offset-1 col-sm-3 control-label">ì£¼ì†Œ</label>
+		    <div class="col-sm-4">
+		     <input id="member_post" class="form-control"  type="text" name="addr" placeholder="ìš°í¸ë²ˆí˜¸" readonly onclick="findAddr()">
+  			 <input id="member_addr" class="form-control"  type="text" name="addr" placeholder="ì£¼ì†Œ" readonly>
+  			 <input type="text" class="form-control" name="addr" placeholder="ìƒì„¸ì£¼ì†Œ">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">ÀÌ¸§</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="È¸¿øÀÌ¸§">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÁÖ¹Î¹øÈ£</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="ssn" name="ssn" placeholder="ÁÖ¹Î¹øÈ£">
-		      <span id="helpBlock" class="help-block">
-		      	 <strong class="text-danger">" -  " Á¦¿Ü 13ÀÚ¸®ÀÔ·ÂÇÏ¼¼¿ä</strong>
-		      </span>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÁÖ¼Ò</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="addr" name="addr" placeholder="ÁÖ¼Ò">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÈŞ´ëÀüÈ­¹øÈ£</label>
+    		<label for="phone" class="col-sm-offset-1 col-sm-3 control-label" >íœ´ëŒ€í°</label>
+   			<div class="col-sm-4">
+      	  	<input type="text" class="form-control" id="phone" name="phone" placeholder="íœ´ëŒ€í°">
+      	  		<span id="helpBlock" class="help-block">
+		      	 <strong class="text-danger">" -  " ì œì™¸ 11ìë¦¬ì…ë ¥í•˜ì„¸ìš”</strong>
+		  		</span>
+    		</div>
+ 	 	  </div>
+ 	 	  
+	<!--    <div class="form-group">
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">íœ´ëŒ€ì „í™”ë²ˆí˜¸</label>
 		     <div class="col-sm-2">
 		      <select class="form-control" name="phone1" id="phone1">
 				  	<option value="010" >010</option>
@@ -237,32 +305,33 @@
 				</select>
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="¹øÈ£">
+		      <input type="text" class="form-control" id="phone2" name="phone2" placeholder="ë²ˆí˜¸">
 		    </div>
 		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="¹øÈ£">
+		      <input type="text" class="form-control" id="phone3" name="phone3" placeholder="ë²ˆí˜¸">
 		    </div>
 		    <input type="hidden" name="phone"  />
 		  </div>
+	-->	  
 		  
-		   <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ÀÌ¸ŞÀÏ</label>
+	<!--  	<div class="form-group">
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">ì´ë©”ì¼</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="email" name="email" placeholder="ÀÌ¸ŞÀÏ">
+		      <input type="text" class="form-control" id="email" name="email" placeholder="ì´ë©”ì¼">
 		    </div>
 		  </div>
-		  
+	-->	  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >°¡ &nbsp;ÀÔ</button>
-			  <a class="btn btn-primary btn" id="previous" role="button">Ãë&nbsp;¼Ò</a>
+		      <button type="button" class="btn btn-primary"  >ê°€ &nbsp;ì…</button>
+			  <a class="btn btn-primary btn" id="previous" role="button">ì·¨&nbsp;ì†Œ</a>
 		    </div>
 		  </div>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 		
  	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+	<!--  í™”ë©´êµ¬ì„± div end /////////////////////////////////////-->
 	
 </body>
 

@@ -46,7 +46,41 @@ public class UserController {
 	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
+	@RequestMapping( value="login", method=RequestMethod.GET )
+	public String login() throws Exception{
+		
+		System.out.println("/user/logon : GET");
+
+		return "redirect:/user/loginView.jsp";
+	}
 	
+	@RequestMapping( value="login", method=RequestMethod.POST )
+	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
+		
+		System.out.println("/user/login : POST");
+		//Business Logic
+		System.out.println("getuserid="+user.getUserId());
+		User dbUser=userService.getUser(user.getUserId());
+		
+		
+		if( user.getPassword().equals(dbUser.getPassword())){
+			session.setAttribute("user", dbUser);
+		}
+		System.out.println(user.getPassword());
+		System.out.println(dbUser.getPassword());
+		
+		return "redirect:/index.jsp";
+	}
+	
+	@RequestMapping( value="logout", method=RequestMethod.GET )
+	public String logout(HttpSession session ) throws Exception{
+		
+		System.out.println("/user/logout : POST");
+		
+		session.invalidate();
+		
+		return "redirect:/index.jsp";
+	}
 	@RequestMapping( value="addUser", method=RequestMethod.GET )
 	public String addUserView() throws Exception {
 
@@ -104,55 +138,7 @@ public class UserController {
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	
-	@RequestMapping( value="login", method=RequestMethod.GET )
-	public String login() throws Exception{
 		
-		System.out.println("/user/logon : GET");
-
-		return "redirect:/user/loginView.jsp";
-	}
-	
-	@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
-		
-		System.out.println("/user/login : POST");
-		//Business Logic
-		System.out.println("getuserid="+user.getUserId());
-		User dbUser=userService.getUser(user.getUserId());
-		
-		
-		if( user.getPassword().equals(dbUser.getPassword())){
-			session.setAttribute("user", dbUser);
-		}
-		System.out.println(user.getPassword());
-		System.out.println(dbUser.getPassword());
-		
-		return "redirect:/index.jsp";
-	}
-	
-	@RequestMapping( value="logout", method=RequestMethod.GET )
-	public String logout(HttpSession session ) throws Exception{
-		
-		System.out.println("/user/logout : POST");
-		
-		session.invalidate();
-		
-		return "redirect:/index.jsp";
-	}
-	
-	@RequestMapping( value="checkDuplication", method=RequestMethod.POST )
-	public String checkDuplication( @RequestParam("userId") String userId , Model model ) throws Exception{
-		
-		System.out.println("/user/checkDuplication : POST");
-		//Business Logic
-		boolean result=userService.checkDuplication(userId);
-		// Model 과 View 연결
-		model.addAttribute("result", new Boolean(result));
-		model.addAttribute("userId", userId);
-
-		return "forward:/user/checkDuplication.jsp";
-	}
-	
 	@RequestMapping( value="listUser" )
 	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 		
@@ -176,4 +162,18 @@ public class UserController {
 		
 		return "forward:/user/listUser.jsp";
 	}
+	
+//	@RequestMapping( value="checkDuplication", method=RequestMethod.POST )
+//	public String checkDuplication( @RequestParam("userId") String userId , Model model ) throws Exception{
+//		
+//		System.out.println("/user/checkDuplication : POST");
+//		//Business Logic
+//		boolean result=userService.checkDuplication(userId);
+//		// Model 과 View 연결
+//		model.addAttribute("result", new Boolean(result));
+//		model.addAttribute("userId", userId);
+//
+//		return "forward:/user/checkDuplication.jsp";
+//	}
+	
 }

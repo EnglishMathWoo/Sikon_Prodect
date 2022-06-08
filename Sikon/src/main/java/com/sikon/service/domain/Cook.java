@@ -22,6 +22,8 @@ public class Cook {
 	private int cookStock  ; //모집인원재고 이거를 왜 해주냐! 우리의 cookRecruit는 모집인원 표시일뿐! 사실상 모집인원 재고는 cookStock입니다
 	private int hearthit;		//좋아요
 	private String cookContent;
+	private User mentor;
+	private String userNickname;
 	
 	
 	public Cook(){
@@ -168,22 +170,6 @@ public class Cook {
 	}
 
 
-
-
-
-
-
-
-	public String getCookContent() {
-		return cookContent;
-	}
-
-
-	public void setCookContent(String cookContent) {
-		this.cookContent = cookContent;
-	}
-
-
 	public String getCookVideo() {
 		return cookVideo;
 	}
@@ -214,6 +200,36 @@ public class Cook {
 	}
 
 
+	public String getCookContent() {
+		return cookContent;
+	}
+
+
+	public void setCookContent(String cookContent) {
+		this.cookContent = cookContent;
+	}
+
+
+	public User getMentor() {
+		return mentor;
+	}
+
+
+	public void setMentor(User mentor) {
+		this.mentor = mentor;
+	}
+
+
+	public String getUserNickname() {
+		return userNickname;
+	}
+
+
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Cook [cookNo=" + cookNo + ", cookName=" + cookName + ", cookFilename=" + cookFilename + ", cookBrief="
@@ -221,18 +237,12 @@ public class Cook {
 				+ cookTheme + ", aplstarTime=" + aplstarTime + ", aplendTime=" + aplendTime + ", cookRecruit="
 				+ cookRecruit + ", startTime=" + startTime + ", endTime=" + endTime + ", cookLocation=" + cookLocation
 				+ ", cookRegdate=" + cookRegdate + ", cookVideo=" + cookVideo + ", cookStock=" + cookStock
-				+ ", hearthit=" + hearthit + ", cookContent=" + cookContent + "]";
+				+ ", hearthit=" + hearthit + ", cookContent=" + cookContent + ", mentor=" + mentor + ", userNickname="
+				+ userNickname + "]";
 	}
-	
-
-
-
-
-
 
 
 	
-
 
 
 }

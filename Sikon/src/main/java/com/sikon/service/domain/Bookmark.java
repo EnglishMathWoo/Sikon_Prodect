@@ -12,7 +12,6 @@ public int getBookmarkNo() {
 public void setBookmarkNo(int bookmarkNo) {
 	this.bookmarkNo = bookmarkNo;
 }
-
 public Recipe getRecipe() {
 	return recipe;
 }
@@ -25,9 +24,8 @@ public String getUserId() {
 public void setUserId(String userId) {
 	this.userId = userId;
 }
-
 @Override
 public String toString() {
-	return "bookmarkNo="+ bookmarkNo+"recipeNo="+recipe+"userId="+userId;
+	return "Bookmark [bookmarkNo=" + bookmarkNo + ", recipe=" + recipe + ", userId=" + userId + "]";
 }
 }

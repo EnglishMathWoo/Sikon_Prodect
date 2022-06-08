@@ -31,8 +31,9 @@ hr, .borderedbox {
 /* 우리의식탁 로고 이미지 비율 */
 #usik {
 float:left;
-	width: 43px;
-	height: 41px
+margin-top:10px;
+	width: 50%;
+	height: 50%;
 }
 
 /* toolbar css (from layout.css) */
@@ -425,7 +426,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 
     <div id="logo" class="fl_left">
 	  
-      <h1><img src="/resources/images/logo/SIKON (5).png" id="usik"><a href="#"> 식탁의온도</a></h1>
+      <h1><a href="#"><img src="/resources/images/logo/usik.png" id="usik"></a></h1>
     </div>
 
     <!-- ################################################################################################ -->
@@ -445,6 +446,8 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
         			<ul>
 		                <li><a href="#">쿠킹클래스신청목록</a></li>
 		                <li><a href="#">쿠킹클래스장바구니</a></li>
+		                <li><a href="#">하바나</a></li>
+		                <li><a href="#">하트</a></li>
               		</ul>
               		</c:if>
         </li>        
@@ -467,6 +470,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		                <li><a href="#">쿠킹클래스등록</a></li>
 		                <li><a href="#">쿠킹클래스목록</a></li>
 		                <li><a href="#">쿠킹클래스판매목록</a></li>
+		               
               		</ul>
             	</li>     
 	            <li><a href="#">공지사항관리</a></li>
@@ -587,7 +591,13 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	 		$( "a:contains('쿠킹클래스장바구니')" ).on("click" , function() {
 			$(self.location).attr("href","/wish/getWish?userId=${sessionScope.user.userId}");
 			});
-	 			
+	 		
+	 		$( "a:contains('하바나')" ).on("click" , function() {
+				$(self.location).attr("href","/cook/listMyCook");
+			}); 
+	 		$( "a:contains('하트')" ).on("click" , function() {
+				$(self.location).attr("href","/heart/getHeart?userId=${sessionScope.user.userId}");
+			}); 	 		
 	 		//====================================================
 		 });
 	 	

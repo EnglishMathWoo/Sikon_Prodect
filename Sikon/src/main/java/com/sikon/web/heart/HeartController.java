@@ -1,5 +1,6 @@
 package com.sikon.web.heart;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +22,7 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Heart;
 import com.sikon.service.domain.User;
+import com.sikon.service.domain.Wish;
 import com.sikon.service.domain.Apply;
 import com.sikon.service.heart.HeartService;
 import com.sikon.service.apply.ApplyService;
@@ -67,6 +70,19 @@ public class HeartController {
 		}
 		return heartCheck;
 	
+	}
+	@RequestMapping("getHeart")
+	public String getHeart( @RequestParam("userId") String userId, Model model) throws Exception{
+		
+		System.out.println("/getHeart");
+		
+		List<Heart> list = heartService.getHeart(userId);
+		
+		
+		
+		model.addAttribute("heart", list);
+		
+		return "forward:/heart/listHeart.jsp";
 	}
 	
 	
