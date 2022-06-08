@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/ef3e0db941.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
 <style>
 /* 배경색 */
@@ -615,5 +616,47 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			}); 	 		
 	 		//====================================================
 		 });
+		 
+		//web socket 시작
+		var socket = null;
+		
+		$(document).ready(function(){
+			//if(${login != null}){
+				connectWs();
+			//}
+		})
+			
+		//소켓
+			
+		function connectWs(){
+			
+			console.log("tttttt")
+			var ws = new SockJS("/alarm");
+			socket = ws;
+		
+			ws.onopen = function() {
+				console.log('open');
+			};
+		
+			ws.onmessage = function(event) {
+				console.log("onmessage"+event.data);
+				let $socketAlert = $('div#socketAlert');
+				$socketAlert.html(event.data)
+				$socketAlert.css('display', 'block');
+				
+				setTimeout(function(){
+					$socketAlert.css('display','none');
+					
+				}, 5000);
+			};
+		
+			ws.onclose = function() {
+			    console.log('close');
+			};
+		
+		
+		};
+		
+		//web socket 끝
 	 	
 	</script>  
