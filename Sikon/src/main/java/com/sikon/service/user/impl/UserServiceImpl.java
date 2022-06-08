@@ -43,6 +43,12 @@ public class UserServiceImpl implements UserService{
 		System.out.println("cnt: " + cnt);
 		return cnt;
 	}
+	// id 중복체크
+	public int checkNickname(String userNickname) throws Exception {
+		int cnt = userDao.checkNickname(userNickname);
+		System.out.println("cnt: " + cnt);
+		return cnt;
+	}
 
 	public User getUser(String userId) throws Exception {
 		return userDao.getUser(userId);

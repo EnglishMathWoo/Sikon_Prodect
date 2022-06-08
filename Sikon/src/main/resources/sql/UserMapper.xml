@@ -62,9 +62,9 @@
 	<!-- 회원가입 -->
 	<insert  id="addUser"		parameterType="user" >
 		 INSERT
-		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , user_phone , mentor_apply , user_regdate , quit_date , quit_status ) 
+		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , user_phone , mentor_apply , user_regdate , quit_date ) 
 		 VALUES	 ( #{userId} , #{userName} , #{password} , #{userBirth}, #{userNickname}, #{userImage}, #{addr}, #{phone}, 
-						#{mentorApply}, SYSDATE , #{quitDate:DATE} , #{quitStatus} )
+						#{mentorApply}, SYSDATE , #{quitDate:DATE} )
 <!--  	 INTO career( career_no , company , career_experience , start_date , end_date , user_id )
 		 VALUES ( seq_career_career_no.nextval , #{career.company} , #{career.careerExperience} , #{career.startDate:DATE} , #{career.endDate:DATE} , #{career.userId} )
 		 INTO license( license_no , license_name , license_institution , license_date , user_id )
@@ -102,9 +102,15 @@
 	 <select id="checkId" parameterType="String" resultType="int">
 		SELECT COUNT(user_id)
 		FROM users
-		WHERE user_id= #{id}
+		WHERE user_id= #{userId}
 	</select>
 	
+	<!-- id 중복체크 -->
+	 <select id="checkNickname" parameterType="String" resultType="int">
+		SELECT COUNT(user_nickname)
+		FROM users
+		WHERE user_nickname= #{userNickname}
+	</select>
  
 	<!-- 회원상세조회 -->
 	<select  id="getUser"		parameterType="string"	resultMap="userSelectMap">

@@ -44,7 +44,7 @@ public class UserServiceTest {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 
-	//@Test
+	@Test
 	public void testAddUser() throws Exception {
 		
 		User user = new User();
@@ -66,7 +66,8 @@ public class UserServiceTest {
 	//	user.setHoldpoint(1);
 		user.setMentorApply("Y");
 		user.setQuitStatus("N");
-	
+
+		
 			
 		
 	//	license.setLicenseNo(10015);

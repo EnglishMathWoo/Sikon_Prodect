@@ -1,5 +1,8 @@
 package com.sikon.web.user;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +17,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
+import com.sikon.service.domain.Career;
+import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserService;
 
@@ -45,6 +52,8 @@ public class UserController {
 	@Value("#{commonProperties['pageSize']}")
 	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
+	
+	private  String FILE_SERVER_PATH= "C:\\Users\\bitcamp\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles";
 	
 	@RequestMapping( value="login", method=RequestMethod.GET )
 	public String login() throws Exception{
@@ -90,10 +99,47 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.POST )
-	public String addUser( @ModelAttribute("user") User user, Map map ) throws Exception {
+	public String addUser(  User user, Map map, 
+			@RequestParam("uploadFile")  MultipartFile file, ModelAndView mv, Model model) throws Exception {
 
 		System.out.println("/user/addUser : POST");
-		//Business Logic
+		
+		if(!file.getOriginalFilename().isEmpty()) {
+			file.transferTo(new File(FILE_SERVER_PATH, file.getOriginalFilename()));
+			model.addAttribute("msg", "File uploaded successfully.");
+		}else {
+			model.addAttribute("msg", "Please select a valid mediaFile..");
+		}
+		
+		License license = new License();
+		License license2 = new License();
+		Career career = new Career();
+		Career career2 = new Career();
+		
+		license.setLicenseName(license.getLicenseName());
+		license.setLicenseInstitution(license.getLicenseInstitution());
+		license.setLicenseDate(license.getLicenseDate());
+		license.setUserId(license.getUserId());
+		
+		license2.setLicenseName(license.getLicenseName());
+		license2.setLicenseInstitution(license.getLicenseInstitution());
+		license2.setLicenseDate(license.getLicenseDate());
+		license2.setUserId(license.getUserId());
+		
+		
+		List list = new ArrayList();
+		list.add(license);
+		list.add(license2);
+		
+		List list2 = new ArrayList();
+		list2.add(career);
+		list2.add(career2);
+		
+		map.put("list", list);
+		map.put("list2", list2);
+		
+		user.setUserImage(file.getOriginalFilename());
+		user.setUserBirth(user.getUserBirth().replace("-",""));
 		userService.addUser(user, map);
 		
 		return "redirect:/user/loginView.jsp";

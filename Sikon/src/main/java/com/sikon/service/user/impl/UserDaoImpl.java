@@ -43,7 +43,10 @@ public class UserDaoImpl implements UserDao{
 	public int checkId(String userId) throws Exception {
 		return sqlSession.selectOne("UserMapper.checkId", userId);
 	}
-		
+	// id 중복체크
+	public int checkNickname(String userNickname) throws Exception {
+		return sqlSession.selectOne("UserMapper.checkNickname", userNickname);
+	}	
 	public User getUser(String userId) throws Exception {
 		System.out.println("userId="+userId);
 		return sqlSession.selectOne("UserMapper.getUser", userId);

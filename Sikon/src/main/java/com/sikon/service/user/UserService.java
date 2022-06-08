@@ -34,6 +34,8 @@ public interface UserService {
 	
 	// id 중복체크
 	public int checkId(String userId) throws Exception;
+	// 닉네임 중복체크
+	public int checkNickname(String userNickname) throws Exception;
 
 	
 

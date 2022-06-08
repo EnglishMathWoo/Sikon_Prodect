@@ -15,7 +15,8 @@ public interface UserDao {
 	
 	// id 중복체크
 	public int checkId(String userId) throws Exception;
-	
+	// 닉네임 중복체크
+	public int checkNickname(String userNickname) throws Exception;
 
 	// SELECT ONE
 	public User getUser(String userId) throws Exception ;
