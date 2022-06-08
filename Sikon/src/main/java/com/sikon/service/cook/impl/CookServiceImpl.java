@@ -16,6 +16,9 @@ import com.sikon.service.domain.Wish;
 import com.sikon.service.cook.CookDao;
 import com.sikon.service.cook.CookService;
 import com.sikon.service.domain.User;
+import com.sikon.service.domain.Recipe;
+import com.sikon.service.recipe.RecipeDao;
+import com.sikon.service.recipe.RecipeService;;
 
 
 
@@ -29,6 +32,15 @@ public class CookServiceImpl implements CookService{
 	private CookDao cookDao;
 	public void setCookDao(CookDao cookDao) {
 		this.cookDao = cookDao;
+	}
+	
+	/// Field
+	@Autowired
+	@Qualifier("recipeDaoImpl")
+	private RecipeDao recipeDao;
+
+	public void setRecipeDao(RecipeDao recipeDao) {
+		this.recipeDao = recipeDao;
 	}
 	
 	///Constructor
@@ -82,6 +94,19 @@ public class CookServiceImpl implements CookService{
 		return map;
 	}
 
+	public Map<String, Object> lisyMyRecipe(Search search, String userNickname) throws Exception {
+		System.out.println("search=" + search);
+		System.out.println("userNickname=" + userNickname);
 
+		List<Cook> list = cookDao.lisyMyRecipe(search, userNickname);
+		int totalCount = cookDao.getTotalRCount(search, userNickname);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		System.out.println(list);
+
+		return map;
+	}
 		
 }

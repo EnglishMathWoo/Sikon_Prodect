@@ -76,7 +76,7 @@ public class CookDaoImpl implements CookDao{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userNickname", userNickname);
 		map.put("search", search);
-		return sqlSession.selectOne("RecipeMapper.getTotalMyCount", map);
+		return sqlSession.selectOne("CookMapper.getTotalMyCount", map);
 	}
 	
 	public List<Cook> listMyCook(Search search, String userNickname) throws Exception {
@@ -88,9 +88,23 @@ public class CookDaoImpl implements CookDao{
 		map.put("search", search);
 		return sqlSession.selectList("CookMapper.listMyCook", map);
 	}
+	
+	public List<Cook> lisyMyRecipe(Search search, String userNickname) throws Exception {
+		System.out.println("search=" + search);
+		System.out.println("userNickname=" + userNickname);
 
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNickname", userNickname);
+		map.put("search", search);
+		return sqlSession.selectList("CookMapper.lisyMyRecipe", map);
+	}
 	
-	
+	public int getTotalRCount(Search search, String userNickname) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNickname", userNickname);
+		map.put("search", search);
+		return sqlSession.selectOne("CookMapper.getTotalRCount", map);
+	}	
 	
 	
 }
