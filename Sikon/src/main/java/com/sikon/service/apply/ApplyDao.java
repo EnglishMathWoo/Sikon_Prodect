@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sikon.common.Search;
 import com.sikon.service.domain.Apply;
+import com.sikon.service.domain.Heart;
 
 public interface ApplyDao {
 
@@ -13,7 +14,7 @@ public interface ApplyDao {
 
 	public Apply getApply(int applyNo) throws Exception;
 
-	
+	//public List<Apply> getApply(Search search,String applierId) throws Exception;
 	
 	public void updateApplyStatus(Apply apply) throws Exception;
 	

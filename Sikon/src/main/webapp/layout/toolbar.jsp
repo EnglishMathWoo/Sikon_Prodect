@@ -448,6 +448,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		                <li><a href="#">쿠킹클래스장바구니</a></li>
 		                <li><a href="#">하바나</a></li>
 		                <li><a href="#">하트</a></li>
+		                <li><a href="#">수강예정목록</a></li>
               		</ul>
               		</c:if>
         </li>        
@@ -613,6 +614,9 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	 		
 	 		$( "a:contains('하트')" ).on("click" , function() {
 				$(self.location).attr("href","/heart/getHeart?userId=${sessionScope.user.userId}");
+			});
+	 		$( "a:contains('수강예정목록')" ).on("click" , function() {
+				$(self.location).attr("href","/apply/listMyClass");
 			}); 	 		
 	 		//====================================================
 		 });
@@ -639,7 +643,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			};
 		
 			ws.onmessage = function(event) {
-				console.log("onmessage"+event.data);
+				alert("onmessage"+event.data);
 				let $socketAlert = $('div#socketAlert');
 				$socketAlert.html(event.data)
 				$socketAlert.css('display', 'block');

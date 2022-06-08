@@ -101,6 +101,9 @@ select count(*) from heart
 		AND user_id = #{userId}
 		ORDER BY heart_no DESC
 	 </select>
+	 
+
+	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	select c.*, h.*
