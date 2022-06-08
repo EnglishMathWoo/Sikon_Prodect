@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/ef3e0db941.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
 <style>
 /* 배경색 */
@@ -447,6 +448,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		                <li><a href="#">쿠킹클래스장바구니</a></li>
 		                <li><a href="#">하바나</a></li>
 		                <li><a href="#">하트</a></li>
+		                <li><a href="#">수강예정목록</a></li>
               		</ul>
               		</c:if>
         </li>        
@@ -612,8 +614,53 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	 		
 	 		$( "a:contains('하트')" ).on("click" , function() {
 				$(self.location).attr("href","/heart/getHeart?userId=${sessionScope.user.userId}");
+			});
+	 		$( "a:contains('수강예정목록')" ).on("click" , function() {
+				$(self.location).attr("href","/apply/listMyClass");
 			}); 	 		
 	 		//====================================================
 		 });
+		 
+		//web socket 시작
+		var socket = null;
+		
+		$(document).ready(function(){
+			//if(${login != null}){
+				connectWs();
+			//}
+		})
+			
+		//소켓
+			
+		function connectWs(){
+			
+			console.log("tttttt")
+			var ws = new SockJS("/alarm");
+			socket = ws;
+		
+			ws.onopen = function() {
+				console.log('open');
+			};
+		
+			ws.onmessage = function(event) {
+				alert("onmessage"+event.data);
+				let $socketAlert = $('div#socketAlert');
+				$socketAlert.html(event.data)
+				$socketAlert.css('display', 'block');
+				
+				setTimeout(function(){
+					$socketAlert.css('display','none');
+					
+				}, 5000);
+			};
+		
+			ws.onclose = function() {
+			    console.log('close');
+			};
+		
+		
+		};
+		
+		//web socket 끝
 	 	
 	</script>  

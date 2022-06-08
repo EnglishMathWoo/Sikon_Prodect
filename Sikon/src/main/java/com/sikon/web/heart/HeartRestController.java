@@ -74,26 +74,15 @@ public class HeartRestController {
 				heartService.updateHeart(cookNo);	//ÁÁ¾Æ¿ä +1
 				heartService.updateHeartCheck(cookNo, userId);//ÁÁ¾Æ¿ä check 1
 				System.out.println("»ç¶ûÇØ");
-				System.out.println("»ç¶ûÇØ");
-				System.out.println("»ç¶ûÇØ");
-				System.out.println("»ç¶ûÇØ");
-				System.out.println("»ç¶ûÇØ");
-				System.out.println("»ç¶ûÇØ");
+
 				
 			}else  {
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!");
-				System.out.println("!!!!!!!!!!!!!!!!!!!!!");
+
 				heartService.updateHeartCheckCancel(cookNo, userId); //heart check0
 				heartService.updateHeartCancel(cookNo); //ÁÁ¾Æ¿ä - 1
 				heartService.deleteHeart(cookNo, userId); //ÁÁ¾Æ¿ä »èÁ¦
 				System.out.println("½È¾îÇØ");
-				System.out.println("½È¾îÇØ");
-				System.out.println("½È¾îÇØ");
-				System.out.println("½È¾îÇØ");
-				System.out.println("½È¾îÇØ");
-				System.out.println("½È¾îÇØ");
+
 			
 			}
 			return heartCheck;
