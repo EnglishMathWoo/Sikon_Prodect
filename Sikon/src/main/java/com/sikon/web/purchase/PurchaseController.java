@@ -219,6 +219,7 @@ public class PurchaseController {
 			System.out.println(cart.getQuantity());
 			purchaseService.updateStock(cart.getQuantity(), product.getProdNo());
 			
+			cartService.deleteCart(cartNo[i]);
 		
 		}
 		
@@ -391,7 +392,7 @@ public class PurchaseController {
 		// Model °ú View ¿¬°á
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/listPurchase.jsp");
+		modelAndView.setViewName("/mypage/listPurchase.jsp");
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);
