@@ -71,16 +71,16 @@ public class RecipeServiceImpl implements RecipeService {
 		return map;
 	}
 
-	public void updateRecipe(Recipe recipe) throws Exception {
+	public void updateRecipe(Recipe recipe, Map ingredient) throws Exception {
 		System.out.println("¶ì¿ë");
 		System.out.println("recipe=" + recipe);
-		recipeDao.updateRecipe(recipe);
+		recipeDao.updateRecipe(recipe,ingredient);
 	}
 
-	public void updateIngredient(List ingredient, int recipeNo) throws Exception {
-		System.out.println("¶ì¿ë");
-		recipeDao.updateIngredient(ingredient, recipeNo);
-	}
+//	public void updateIngredient(List ingredient, int recipeNo) throws Exception {
+//		System.out.println("¶ì¿ë");
+//		recipeDao.updateIngredient(ingredient, recipeNo);
+//	}
 
 	public void deleteRecipe(int recipeNo) throws Exception{
 		System.out.println("recipe=" + recipeNo);

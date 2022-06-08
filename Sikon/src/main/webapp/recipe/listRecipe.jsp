@@ -204,8 +204,8 @@ p {
 		  });
 			  
 		  $(".theme").on( "click", function() {
-			  console.log($(".theme").data('value'));
-		      fncGetList(1);
+			  console.log($(".theme").val());
+		      //fncGetList(1);
 			  });
 		  
 		});
@@ -222,16 +222,12 @@ p {
 					$( ".submit" ).on("click" , function() {
 						self.location ="/recipe/addRecipe.jsp"
 						});
+		 });
 					
-				//$("#theme").on("click" , function() {
-				//	var searchCondition = document.getElementById("theme").getAttribute('data-value');
-					//console.log(lineValue);		
-					//fncGetList(1);
-				//});
 				
 			
 			   	//====================================================================
-			
+			 $(function() {
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 		                	
@@ -255,9 +251,6 @@ p {
 					                success : function(JSONData , status) {
 					                	 
 					                	$("#currentPage").val(cpage)
-					                	//console.log(cpage); 
-					                	//alert(JSONData.list[0].recipeName);
-					                	//alert(JSONData.list.length);
 					                	console.log(JSONData.list[0].recipeName);
 					                	console.log(JSONData.list[0].recipeImg);
 						                	 
@@ -270,7 +263,8 @@ p {
 					                			
 					                		
 					                		
-						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
+						                     var displayValue = 
+						                    	 				"<div class='col-sm-6 col-md-3'><br/> <br/>"
 						                     					+"<div id='latest' class='group'>"
 						                     					+"<article class='one_third first'>"
 						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
@@ -367,21 +361,21 @@ p {
 		    </div>
 		    <button type="button" class="submit">레시피등록</button>
 		  
+    			    <form class="form-inline" name="detailForm">
 		    
 		    <br/><hr/><br/>
-    			    <form class="form-inline" name="detailForm">
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li class="current" ><a href="#" class="theme" data-value="KO">한식</a></li>
-	        <li><a href="#" class="theme" data-value="CH">중식</a></li>
-	        <li><a href="#" class="theme" data-value="FR">양식</a></li>
-	        <li><a href="#" class="theme" data-value="JP">일식</a></li>
-	        <li><a href="#" class="theme"data-value="DES">간식</a></li>
+	        <li class="current" ><a href="#" class="theme" value="KO">한식</a></li>
+	        <li><a href="#" class="theme" value="CH">중식</a></li>
+	        <li><a href="#" class="theme" value="FR">양식</a></li>
+	        <li><a href="#" class="theme" value="JP">일식</a></li>
+	        <li><a href="#" class="theme" value="DES">간식</a></li>
 	      </ul>
 	    </nav>
 	    
-		            
+		             
       <div class="center btmspace-50">
 	   <select class="condition" id="orderCondition" name="orderCondition">
 							<option value="0"

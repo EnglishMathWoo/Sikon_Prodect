@@ -138,23 +138,30 @@ body {
 		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>재료명</strong></div>
-			<c:set var="i" value="0" />
-			<c:forEach var="ingredient" items="${list}">
-			<div class="col-xs-8 col-md-4">${ingredient.ingredientName}</div>
-		</c:forEach>
-		</div>
-		<hr/>
+		<div class="col-xs-4 col-md-2 "><strong>재료</strong></div>
+				<div class="col-xs-8 col-md-4">
 		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>재료양</strong></div>
-			<c:set var="i" value="0" />
+		<table class="type09"  style="border: 1px;">
+		<thead>
+						<tr>
+							<th>재료명</th>
+							<th>재료양</th>
+						</tr>
+						<c:set var="i" value="0" />
 			<c:forEach var="ingredient" items="${list}">
-			<div class="col-xs-8 col-md-4">${ingredient.ingredientAmount}</div>
-		</c:forEach>
-		</div>
+						<tr>
+						<td>${ingredient.ingredientName}</td>
+						<td>${ingredient.ingredientAmount}</td>
+						</tr>
+						</c:forEach>
+					</thead>
+					</tbody>
+					</table>
+					</div>
+					</div>
 		<hr/>
 
+	
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>테마</strong></div>
 			<div class="col-xs-8 col-md-4">${recipe.recipeTheme}</div>

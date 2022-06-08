@@ -61,24 +61,7 @@
 		WHERE recipe_no = #{recipeNo}
 	</update>
 	 
-		<update id="updateIngredient" parameterType="java.util.HashMap">
-		update ingredient
-		set
-		ingredient_name=
-		case ingredient_no
-        <foreach collection="list" item="item" separator=" " >
-		when  #{item.ingredientNo} then #{item.ingredientName}
-        </foreach>
-        else ingredient_name end
-        ,
-        ingredient_amount=
-        case ingredient_no
-        <foreach collection="list" item="item" separator=" " >
-        when #{item.ingredientNo} then #{item.ingredientAmount}
-        </foreach>
-        else ingredient_amount end
-        where recipe_no=#{recipeNo}
-	 </update>
+		
 	 
 	  <delete id="deleteRecipe" parameterType="int" >
 	 DELETE

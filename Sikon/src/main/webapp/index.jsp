@@ -93,7 +93,7 @@ body {
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
 
 .imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
-.imgover, .imgover:hover::after{color:#FFFFFF;}
+.imgover, .imgover:hover::after{color:#333333;} 
 
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
@@ -188,49 +188,54 @@ p {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
+		 
+	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage);
-			$("form").attr("method" , "POST").attr("action" , "/recipe/listProduct").submit();
+			$("form").attr("method" , "POST").attr("action" , "/recipe/listRecipe").submit();
 		}
+		
+		$(function() {
+			
+		  $("#orderCondition").on( "change", function() {
+		  console.log($("#orderCondition").val());
+	      fncGetList(1);
+		  });
+			  
+		  $(".theme").on( "click", function() {
+			  console.log($(".theme").data('value'));
+		      fncGetList(1);
+			  });
+		  
+		});
+			  
 		
 		 
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			
 					$( ".imgover" ).on("click" , function() {
 					console.log($(this).attr("value"));
 					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
 					});
+			 
+					$( ".submit" ).on("click" , function() {
+						self.location ="/recipe/addRecipe.jsp"
+						});
 					
-				$(".theme").on("click" , function() {
+				//$("#theme").on("click" , function() {
+				//	var searchCondition = document.getElementById("theme").getAttribute('data-value');
+					//console.log(lineValue);		
 					//fncGetList(1);
-				});
+				//});
 				
-				
-
-				$( ".submit" ).on("click" , function() {
-					self.location = "/recipe/addRecipe.jsp"
-
-				 
-			 });
-				
-				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
-				
-				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
+			
 			   	//====================================================================
-			 <!--
+			
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 		                	
 		                	var cpage = $("#currentPage").val();
-		                	console.log(cpage);
 		                	cpage = Number(cpage)+1;
 		                	console.log(cpage);
 		        	   		
@@ -254,68 +259,32 @@ p {
 					                	//alert(JSONData.list[0].recipeName);
 					                	//alert(JSONData.list.length);
 					                	console.log(JSONData.list[0].recipeName);
+					                	console.log(JSONData.list[0].recipeImg);
 						                	 
 					                	for(var i=0; i<JSONData.list.length-1; i++){
 					                		///*
 					                		var image;
-					                		var message;
-					                		var cancel;
-					                		var button;
 					                
-					                		if(JSONData.list[i].cancel == '0'){
 				                				
-				                					image = "<img src='/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image'>";
-				                				
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'>";
 					                			
-					                		}else if(JSONData.list[i].cancel == '1'){
-					                			
-				                					image = "<img src='/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image_none'>";
-				                				
-					                		}
 					                		
 					                		
-					                		if(${user.role.equals('admin') && param.menu.equals('manage')}){
-					                			message="<p>남은 재고량 : "+JSONData.list[i].total+"</p>";
-					                		}else{
-					                			message="<p></p>";
-					                		}
-					                		
-					                		
-					                		if(JSONData.list[i].cancel == '1' && param.menu.equals('search')){
-					                			cancel = "<p style='color:#DB4455'>판매중지</p>";
-					                		}else if(JSONData.list[i].cancel == '1' && param.menu.equals('manage')){
-					                			cancel = "<p style='color:#DB4455'>*판매중지된 상품입니다.</p>";
-					                		}else if(JSONData.list[i].cancel == '0'){
-					                			cancel = "<p></p>";
-					                		}
-					                		
-					                		if(${param.menu=='manage' }){
-					                			button = "<a class='btn btn-defualt btn update'  role='button' value='"+JSONData.list[i].prodNo+"'>수정하기</a>" ;
-					                		}else{
-					                			if(JSONData.list[i].total == "0"){
-					                				button = "<a class='btn btn-defualt btn disabled' role='button' >재고없음</a>";
-					                			}else{
-					                				if(JSONData.list[i].cancel=='0'){
-					                					button = "<a class='btn btn-default btn buy' role='button' value='"+JSONData.list[i].prodNo+"'>구매하기</a>";
-					                				}else{
-					                					button = "<a class='btn btn-default btn disabled' role='button' value='"+JSONData.list[i].prodNo+"'>구매하기</a>";
-					                				}
-					                			}
-					                		}
-					                		
-						                     var displayValue = "<div class='col-sm-6 col-md-4'>"
-						                     					+"<div class='thumbnail'>"
+						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
+						                     					+"<div id='latest' class='group'>"
+						                     					+"<article class='one_third first'>"
+						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
 						                     					+image
-					                     						+"<div class='caption'>"
-					                     						+"<h3>"+JSONData.list[i].prodName+"</h3>"
-					                     						+cancel
-					                     						+"<p>"+JSONData.list[i].price+" 원</p>"
-					                     						+"<p align='right'>"
-					                     						+"<a class='btn btn-defualt btn'  role='button' value='"+JSONData.list[i].prodNo+"' style='color:#bc8f8f'>상세조회</a>"
-
-					                     						+button
-					                     						+"</p>"
-					                     						+"</div></div></div>"
+					                     						+"<div class='excerpt'>"
+					                     						+"<h4 class='heading'>"+JSONData.list[i].recipeName+"</h4>"
+					                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
+					                     						+"<ul class='meta'>"
+					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
+					                     			            +"<li>"+ JSONData.list[i].recipeDifficulty +"</li>"
+					                     			            +"<li>"+ JSONData.list[i].cookingTime +"</li>"
+					                     			            +"<li>"+ JSONData.list[i].writer.userNickname +"</li>"
+					                     						+"</ul></div></article></div></div>"
+					                     						
 					                     						
 					                     		//*/				
 						               	$( '#scrollList' ).append(displayValue);	
@@ -330,7 +299,7 @@ p {
 		                }//if
 		            });//function
 		           
-		            -->
+		           
 		   });
 		 
 	</script>
@@ -387,31 +356,32 @@ p {
 <br/>	     
 <!-- ################################################################################################ -->
 
+
+
 	<div class="wrapper row3">
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
 		      <h3 class="font-x2 nospace" align="center"><br> RECIPE LIST </h3>
-		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
-		    <button type="button" class="submit">레시피등록</button>
 		  
 		    
 		    <br/><hr/><br/>
+    			    <form class="form-inline" name="detailForm">
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li class="current" ><a href="#" class="theme">한식</a></li>
-	        <li><a href="#" class="theme" >중식</a></li>
-	        <li><a href="#" class="theme" >양식</a></li>
-	        <li><a href="#" class="theme" >일식</a></li>
-	        <li><a href="#" class="theme">간식</a></li>
+	        <li class="current" ><a href="#" class="theme" data-value="KO">한식</a></li>
+	        <li><a href="#" class="theme" data-value="CH">중식</a></li>
+	        <li><a href="#" class="theme" data-value="FR">양식</a></li>
+	        <li><a href="#" class="theme" data-value="JP">일식</a></li>
+	        <li><a href="#" class="theme"data-value="DES">간식</a></li>
 	      </ul>
 	    </nav>
-	    
+	   
 		            
       <div class="center btmspace-50">
-	   <select class="condition" name="orderCondition">
+	   <select class="condition" id="orderCondition" name="orderCondition">
 							<option value="0"
 								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
 							<option value="1"
@@ -423,9 +393,12 @@ p {
 								
 						</select>
 	     </div>
+  	</form>
     	</section>
   	</div>
-
+ 
+ <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+ 
 <div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="recipe" items="${list}">
@@ -450,6 +423,11 @@ p {
     <!-- ################################################################################################ -->
   </div>
   </c:forEach>
+  
+ 
+  
+     <div  id="scrollList"></div>
+     
 </div>
 	  </div>
  	<!--  화면구성 div End /////////////////////////////////////-->
@@ -458,5 +436,4 @@ p {
 	<!-- PageNavigation End... -->
 	
 </body>
-
 </html>
