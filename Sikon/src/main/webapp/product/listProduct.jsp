@@ -92,8 +92,7 @@ body {
 
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
 
-.imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
-.imgover, .imgover:hover::after{color:#333333;} 
+
 
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
@@ -114,7 +113,7 @@ article img{width:100%;}/* Force the image to have the full width of parent at a
 .excerpt{padding:30px 0 0;}
 .excerpt time{display:block; margin:0 0 30px 0; padding:0 0 15px 0; font-style:normal; font-size:.8rem; line-height:1; border-bottom:1px solid;}
 .excerpt time i{margin-right:5px;}
-.excerpt .heading{margin:0 0 10px 0; font-size:1.3rem;}
+.excerpt .heading{margin:0 0 10px 0; font-size:1.3rem;}`
 .excerpt .meta{margin:0 0 30px 0; padding:0; list-style:none; text-align:left;}
 .excerpt .meta li{display:inline-block; font-size:.8rem;}
 .excerpt .meta li::after{margin-left:5px; content:"|";}
@@ -203,39 +202,7 @@ p {
 		 
 			 $(function() {
 	
-				 var menu = $("#menu").val();
-				 console.log(menu);
-			
-				$( ".imgover" ).on("click" , function() {
-					var prodNo = $(this).attr("value");
-				console.log($(this).attr("value"));
-				self.location ="/product/getProduct?prodNo="+prodNo+"&menu="+menu;
-				});
-					
-				
-				$(".theme").on("click" , function() {
-					//fncGetList(1);
-				});
-				
-				
-
-				$( ".submit" ).on("click" , function() {
-					self.location = "/product/addProductView.jsp"
-
 				 
-			 });
-				
-				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
-				
-				$( "button.btn.btn-default:contains('조회')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
-				
-				
 				
 				//=========autoComplete=================================================
 				 
@@ -251,8 +218,7 @@ p {
 			   		});
 			   	//====================================================================
 				
-			   		var pricerate =  
-			   	//====================================================================
+			   	
 			
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
@@ -284,18 +250,16 @@ p {
 						                	 
 					                	for(var i=0; i<JSONData.list.length; i++){
 					                		
-					                		var image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].prodThumbnail.split('&')[0]+"' id='image'>";
+					                		//var image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].prodThumbnail.split('&')[0]+"' id='image' class='image' value='"+JSONData.list[i].prodNo+"'>";
 					                		var rate = Number(JSONData.list[i].prodDisRate)*100;
 					                		
 						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/><br/>"
 						                     					+"<div id='latest' class='group'>"
 						                     					+"<article class='one_third first'>"
-						                     					+"<a class='imgover' value='"+JSONData.list[i].prodNo+"' href='#'>"
-						                     					+image
-					                     						+"</a>"
+						                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].prodThumbnail.split('&')[0]+"' id='image' class='image' value='"+JSONData.list[i].prodNo+"'>"
 					                     						+"<div class='excerpt'>"
 					                     						+"<p>"+JSONData.list[i].prodDetail+"</p>"
-					                     						+"<h4 class='heading'>"+JSONData.list[i].prodName+"</h4>"
+					                     						+"<h4 class='heading prodName'>"+JSONData.list[i].prodName+"</h4>"
 					                     						+"<p style='text-align:right'><del>"+JSONData.list[i].prodPrice+" 원</del></p>"
 					                     						+"<p style='text-align:right;'><span style='color:#bc8f8f'>"+rate+"%</span> &nbsp;"
 					                     						+"<strong>"+JSONData.list[i].prodDisPrice+" 원</strong></p>"
@@ -316,7 +280,34 @@ p {
 		            });//function
 		           
 		           
-		   });
+		       //====================================================================  
+		            
+				 
+				$( ".submit" ).on("click" , function() {
+					self.location = "/product/addProductView.jsp"
+				 });
+				
+				
+				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
+					fncGetList(1);
+				 });
+				
+				
+				$( "button.btn.btn-default:contains('조회')" ).on("click" , function() {
+					fncGetList(1);
+				 });
+					
+				
+	 });
+			 
+			 
+			 $(document).on('click', '.image', function(){
+				 var prodNo =$(this).attr("value");
+				 console.log('prodNo: '+prodNo);
+				 var menu = $("#menu").val();
+				 console.log(menu);
+				 self.location = "/product/getProduct?prodNo="+prodNo+"&menu="+menu
+			});
 		 
 	</script>
 	
@@ -375,10 +366,11 @@ p {
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br>[ PRODUCT LIST ]</h3>
-		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
+		      <h3 class="font-x2 nospace" align="center"><br>PRODUCT LIST</h3>
 		    </div>
+		    <c:if test="${user.role == 'admin' }">
 		    <button type="button" class="submit">상품등록</button>
+		    </c:if>
 		  
 		    
 		    <br/><hr/><br/>
@@ -391,7 +383,6 @@ p {
 	      </ul>
 	    </nav>
 	    
-          <jsp:include page="../common/pageNavigator_new.jsp"/>
           
       <div class="center btmspace-50">
 	   			<form class="form-inline" name="detailForm">
@@ -462,14 +453,12 @@ p {
   
     <div id="latest" class="group">
       <article class="one_third first">
-      	<a class="imgover" value="${product.prodNo }" href="#">
 			<c:forEach var="name" items="${product.prodThumbnail.split('&')[0]}">
-				<img src="/resources/images/uploadFiles/${name}" id="image">
+				<img src="/resources/images/uploadFiles/${name}" id="image" class="image" value="${product.prodNo }">
 			</c:forEach>
-		</a>
         <div class="excerpt">
         	<p>${product.prodDetail}<p>
-          	<h4 class="heading" >${product.prodName}</h4>
+          	<h4 class="heading prodName" value="${product.prodNo }">${product.prodName}</h4>
           	<p style="text-align:right"><del>${product.prodPrice} 원</del></p>
 			<p style="text-align:right;"><span style="color:#bc8f8f"><fmt:formatNumber value="${product.prodDisRate}" type="percent"/> &nbsp;</span>
 			<strong>${product.prodDisPrice} 원</strong></p>

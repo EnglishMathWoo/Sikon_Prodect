@@ -15,7 +15,7 @@
 		<result property="applyStatus" 				column="apply_status" 					jdbcType="VARCHAR" />
 		<result property="cookStatus" 			column="cook_status" 		jdbcType="NUMERIC" />
 		<result property="checkDate" 				column="check_date" 			jdbcType="DATE"/>
-		
+
 		
 		
 
@@ -33,13 +33,15 @@
 	 </insert>
 	 
 	  <!-- SQL : SELECT ONE -->
+
 	 <select 	id="getApply"	parameterType="int"	resultMap="applySelectMap">
 		SELECT
 		* 		
 		FROM apply
 		WHERE apply_no= #{applyNo}
 	 </select>
-	 
+
+ 
 	 	 <!-- SQL : UPDATE -->
 	 <update	id="updateApplyStatus"	parameterType="apply" >
 	   	UPDATE apply

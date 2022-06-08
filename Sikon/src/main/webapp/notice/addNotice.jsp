@@ -146,7 +146,7 @@
 			           		if(socket){
 			           			console.log(data.noticeTitle)
 			        			let socketMsg = "reply,"+data.userId+","+data.noticeTitle;
-			        			console.log(socketMsg);
+			        			alert(socketMsg);
 			        			socket.send(socketMsg);
 			           		}
 			        	//}
