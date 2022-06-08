@@ -15,7 +15,7 @@ public interface ApplyService {
 
 	public Apply getApply(int applyNo) throws Exception;
 
-	
+	//public Map<String, Object> getApply(Search search,String applierId) throws Exception;
 	
 	public void updateApplyStatus(Apply apply) throws Exception;
 	

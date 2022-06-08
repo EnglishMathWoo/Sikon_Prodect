@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
 import com.sikon.service.domain.Apply;
+import com.sikon.service.domain.Heart;
 import com.sikon.service.apply.ApplyDao;
 
 
@@ -85,4 +86,6 @@ public class ApplyDaoImpl implements ApplyDao{
 		sqlSession.update("ApplyMapper.cancel",map);
 		
 	}
+	
+
 }

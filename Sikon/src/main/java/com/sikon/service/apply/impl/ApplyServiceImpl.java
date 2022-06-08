@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Apply;
 import com.sikon.service.domain.Cook;
-
+import com.sikon.service.domain.Heart;
 import com.sikon.service.apply.ApplyDao;
 import com.sikon.service.apply.ApplyService;
 
@@ -68,6 +68,7 @@ public class ApplyServiceImpl implements ApplyService{
 		applyDao.cancel(cookStatus, cookNo);
 	}
 
+	
 
 	
 
