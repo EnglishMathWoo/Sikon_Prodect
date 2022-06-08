@@ -56,7 +56,9 @@ public class CouponController {
 		
 	///Method
 	@RequestMapping( value="/manageCoupon" )
-	public String manageCoupon(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+	public String manageCoupon(@ModelAttribute("search") Search search, Model model , HttpServletRequest request) throws Exception{
+		
+		System.out.println("/coupon/manageCoupon");
 				
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
@@ -102,13 +104,12 @@ public class CouponController {
 		search.setPageSize(pageSize);
 		
 		// Business logic 수행
-		Map<String , Object> map = couponService.getCouponList(search);
+		Map<String , Object> resultMap = couponService.getCouponList(search);
 		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(resultPage);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
 		
 		// Model 과 View 연결
-		model.addAttribute("list", map.get("list"));
+		model.addAttribute("list", resultMap.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
@@ -166,7 +167,7 @@ public class CouponController {
 			couponService.issueCoupon(coupon);
 	    }
 		
-		return "forward:/coupon/manageCoupon";
+		return "redirect:/coupon/manageCoupon?tabName=issueTab";
 	}
 	
 	@RequestMapping( value="/listIssuedCoupon" )
@@ -204,7 +205,7 @@ public class CouponController {
 			couponService.updateIssueStatus(coupon);
 		}		
 		
-		return "forward:/coupon/manageCoupon";
+		return "redirect:/coupon/manageCoupon?tabName=issueTab";
 	}
 	
 }

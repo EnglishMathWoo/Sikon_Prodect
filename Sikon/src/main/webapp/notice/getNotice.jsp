@@ -54,7 +54,14 @@
         
         h2{
     		margin-top: 50px;
-}
+		}
+		
+		#noticeDate {
+			margin-top:70px;
+			text-align:right;
+			margin-right:30px;
+		}
+		
      </style>
 
   <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -82,13 +89,14 @@
 	<div class="container">
 	
 		<div class="row">
-			<div class="col-xs-8 col-md-4"><h2>${notice.noticeTitle}</h2></div>
+			<div style="float:left"><h2>${notice.noticeTitle}</h2></div>
+			<div id="noticeDate" style="float:right">등록일자: ${notice.noticeDate}</div>
 		</div>
 		 
 		<hr/>
 		
 		<div class="row">
-			<div class="col-xs-8 col-md-4"><strong>${notice.noticeContent}</strong></div>
+			<div><strong>${notice.noticeContent}</strong></div>
 		</div>
 		
 		<hr/>

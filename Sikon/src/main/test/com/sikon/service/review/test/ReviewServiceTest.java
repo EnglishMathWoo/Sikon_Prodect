@@ -37,7 +37,7 @@ public class ReviewServiceTest {
 		Review review = new Review();
 		review.setWriterNickname("user");
 		review.setReviewContent("¸®ºä");
-		review.setReviewCategory("100");
+		review.setReviewCategory("REC");
 		Recipe recipe = new Recipe();
 		recipe.setRecipeNo(10002);
 		review.setRecipe(recipe);
@@ -47,7 +47,7 @@ public class ReviewServiceTest {
 //		Review review = new Review();
 //		review.setWriterNickname("mentor");
 //		review.setReviewContent("ÇÁ·Î´öÆ®");
-//		review.setReviewCategory("200");
+//		review.setReviewCategory("PRD");
 //		Product product=new Product();
 //		product.setProdNo(10000);
 //		review.setProduct(product);
@@ -56,7 +56,7 @@ public class ReviewServiceTest {
 		// Review
 //		Review review = new Review();
 //		review.setWriterNickname("mentor");
-//		review.setReviewContent("Å¬·¡½º");
+//		review.setReviewContent("COOK");
 //		review.setReviewCategory("300");
 //		Cook cook=new Cook();
 //		cook.setCookNo(10000);

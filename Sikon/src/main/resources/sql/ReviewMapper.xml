@@ -9,16 +9,15 @@
  	
 	<resultMap id="reviewSelectMap" type="review">
 		<result property="reviewNo" 			column="review_no" 			jdbcType="NUMERIC"/>
+		<result property="reviewCategory" 			column="review_category" 			jdbcType="VARCHAR"/>
 		<result property="writerNickname" 	column="writer_nickname" 		jdbcType="VARCHAR" />
 		<result property="reviewContent" 	column="review_content" 		 jdbcType="VARCHAR"  />
-		<result property="reviewRegdate" 	column="review_regdate" 		jdbcType="DATE" />
-		<result property="reviewCategory" 			column="review_category" 			jdbcType="VARCHAR"/>
 		<result property="reviewImg" 			column="review_img" 			jdbcType="VARCHAR"/>
+		<result property="reviewRegdate" 	column="review_regdate" 		jdbcType="DATE" />
 		<result property="recipe.recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
 		<result property="product.prodNo" 			column="prod_no" 			jdbcType="NUMERIC"/>
-		<result property="purchase.tranNo" 			column="tran_no" 			jdbcType="NUMERIC"/>
 		<result property="cook.cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
-		<result property="apply.applyNo" 			column="apply_no" 			jdbcType="NUMERIC"/>
+		<result property="status" 			column="status" 			jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	
@@ -26,11 +25,11 @@
 	<insert 	id="addReview"		parameterType="review" >
 	 	INSERT
 		INTO review 
-		VALUES	 (	seq_review_no.nextval  ,#{writerNickname}, #{reviewContent},SYSDATE,#{reviewCategory},#{recipe.recipeNo},#{product.prodNo},#{purchase.tranNo},#{cook.cookNo},#{apply.applyNo},#{reviewImg})		
+		VALUES	 (	seq_review_no.nextval ,#{reviewCategory} ,#{writerNickname}, #{reviewContent},#{reviewImg},SYSDATE,#{recipe.recipeNo},#{product.prodNo},#{cook.cookNo},'100')		
 	 </insert>
 	 
 	 
-	 
+  
 	  <!-- SQL : UPDATE -->
 	 <update	id="updateReview"	parameterType="review" >
 	   	UPDATE review
@@ -50,13 +49,13 @@
 	  					from review
 	  					<if test="category !=null">
 	  					<choose>
-						<when test="category == 100 || category =='100' ">
+						<when test="category == PRD || category =='PRD' ">
 	  					where prod_no=#{textNo}
 	  					</when>
-	  					<when test="category == 200 || category =='200' ">
+	  					<when test="category == REC || category =='REC' ">
 	  					where recipe_no=#{textNo}
 	  					</when>
-	  					<when test="category == 300 || category =='300' ">
+	  					<when test="category == COOK || category =='COOK' ">
 	  					where cook_no=#{textNo}
 	  					</when>
 	  					</choose>
@@ -88,5 +87,6 @@
 						
 													) countTable						
 	 </select>
+	 
 	 
 </mapper>

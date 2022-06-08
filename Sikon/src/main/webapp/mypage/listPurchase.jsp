@@ -186,7 +186,8 @@ table {
 					<td align="center" class="complete">구매취소완료</td>
 				</c:when>
 				<c:otherwise>
-					<td align="center" class="end">배송완료</td>
+					<td align="center" class="end">배송완료&nbsp;&nbsp;
+					<a onclick="window.open('/review/addReview.jsp', 'window_name', 'width=500, height=500, location=no, status=no, scrollbars=yes');">리뷰쓰기</a></td>
 				</c:otherwise>
 			  	</c:choose>
 			  	
