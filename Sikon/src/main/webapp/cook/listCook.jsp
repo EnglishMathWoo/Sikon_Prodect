@@ -530,7 +530,7 @@ div.thumbnail {
 
 				<div class="row">
 			
-					<div><h5><strong>장소 : ${cook.cookLocation}${heart.heartCheck}</strong></h5></div>
+					<div><h5><strong>장소 : ${cook.cookLocation}</strong></h5></div>
 				</div>				
 				
 			
@@ -571,10 +571,7 @@ div.thumbnail {
 
               <div  id="scrollList"></div>
     
-  </div>
-		
-	  
- 	</div>
+
 	  
 
 </body>

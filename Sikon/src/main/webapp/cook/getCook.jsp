@@ -266,7 +266,7 @@ div.image{
 		 	
 		 	<div class="col-xs-10 col-md-10 text-center">
 		 	쿠킹클래스 내용
-		 	${cook.cookContent }
+		 	${cook.cookContent}
 		 	
 		 	</div>
 		 	

@@ -154,7 +154,7 @@ public class CookController {
 	}
 
 
-	@RequestMapping("getCook")
+	@RequestMapping(value="getCook", method=RequestMethod.GET)
 	public String getCook( @RequestParam("cookNo") int cookNo ,@RequestParam("menu") String menu,
 		@CookieValue(value="history", required=false) Cookie cookie,
 		HttpServletResponse response,Model model) throws Exception {

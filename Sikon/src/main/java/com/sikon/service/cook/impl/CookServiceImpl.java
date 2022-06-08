@@ -55,7 +55,10 @@ public class CookServiceImpl implements CookService{
 	}
 
 	public Cook getCook(int cookNo) throws Exception {
-		return cookDao.getCook(cookNo);
+		
+		Cook cook = cookDao.getCook(cookNo);
+		System.out.println(cook);
+		return cook;
 	}
 
 	public Map<String, Object> getCookList(Search search,User metor) throws Exception {

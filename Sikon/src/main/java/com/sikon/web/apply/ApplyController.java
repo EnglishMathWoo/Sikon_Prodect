@@ -130,7 +130,7 @@ public class ApplyController {
 			User user = (User)session.getAttribute("user");
 			apply.setApplier(user);
 			// Model °ú View ¿¬°á
-			
+			apply.setClassCook(cook);
 			
 			ModelAndView modelAndView=new ModelAndView();
 			modelAndView.setViewName("forward:/apply/getApply.jsp");

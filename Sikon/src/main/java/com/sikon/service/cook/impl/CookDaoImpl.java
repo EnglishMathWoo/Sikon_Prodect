@@ -42,6 +42,7 @@ public class CookDaoImpl implements CookDao{
 	}
 
 	public Cook getCook(int cookNo) throws Exception {
+		
 		return sqlSession.selectOne("CookMapper.getCook", cookNo);
 	}
 	
