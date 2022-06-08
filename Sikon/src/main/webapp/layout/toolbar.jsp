@@ -474,7 +474,12 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
               		</ul>
             	</li>     
 	            <li><a href="#">공지사항관리</a></li>
-	            <li><a href="#">쿠폰관리</a></li>
+	            <li><a class="drop" href="#">쿠폰관리</a>
+	            	<ul>
+	            		<li><a href="#">쿠폰목록</a></li>
+		                <li><a href="#">쿠폰발급목록</a></li>
+	            	</ul>
+	            </li>
           	</ul>
         </li>
         </c:if>
@@ -544,9 +549,19 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 	 		
 	 		$( "a:contains('쿠폰관리')" ).on("click" , function() {
-			$(self.location).attr("href","/coupon/manageCoupon");
+			$(self.location).attr("href","/coupon/listCoupon");
 			});
 	 		
+	 		//====================================================
+	 		
+	 		$( "a:contains('쿠폰목록')" ).on("click" , function() {
+			$(self.location).attr("href","/coupon/listCoupon");
+			});
+	 		
+	 		$( "a:contains('쿠폰발급목록')" ).on("click" , function() {
+			$(self.location).attr("href","/coupon/listIssuedCoupon");
+			});
+	 			
 	 		//====================================================
 	 			
 	 		$( "a:contains('구매목록')" ).on("click" , function() {

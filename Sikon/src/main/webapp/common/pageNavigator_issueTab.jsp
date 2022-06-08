@@ -13,14 +13,16 @@
 		    <!--  <<== ÁÂÃø nav -->
 		  	<c:if test="${ issuePage.currentPage <= issuePage.pageUnit }">
 		 		<li class="disabled">
+		 			<span aria-hidden="true">&laquo;</span>
+		 		</li>
 			</c:if>
 			<c:if test="${ issuePage.currentPage > issuePage.pageUnit }">
 				<li>
-			</c:if>
-		      <a href="javascript:fncGetIssueList('${ issuePage.currentPage-1}')" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
+		      		<a href="javascript:fncGetIssueList('${ issuePage.currentPage-1}')" aria-label="Previous">
+		        	<span aria-hidden="true">&laquo;</span>
+		      		</a>
+		    	</li>
+		    </c:if>
 		    
 		    <!--  Áß¾Ó  -->
 			<c:forEach var="i"  begin="${issuePage.beginUnitPage}" end="${issuePage.endUnitPage}" step="1">
@@ -42,14 +44,16 @@
 		     <!--  ¿ìÃø nav==>> -->
 		     <c:if test="${ issuePage.endUnitPage >= issuePage.maxPage }">
 		  		<li class="disabled">
+		  			<span aria-hidden="true">&raquo;</span>
+		  		</li>
 			</c:if>
 			<c:if test="${ issuePage.endUnitPage < issuePage.maxPage }">
 				<li>
-			</c:if>
-		      <a href="javascript:fncGetIssueList('${issuePage.endUnitPage+1}')" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
+				    <a href="javascript:fncGetIssueList('${issuePage.endUnitPage+1}')" aria-label="Next">
+		        	<span aria-hidden="true">&raquo;</span>
+		      		</a>
+		    	</li>
+		    </c:if>
 		  </ul>
 		</nav>
 		

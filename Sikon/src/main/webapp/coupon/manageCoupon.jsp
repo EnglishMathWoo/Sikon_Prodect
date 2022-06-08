@@ -78,7 +78,7 @@
 		}
 		
 		.tab_con div.active {
-		  display: block;
+		  display:block;
 		}
 		
 		.buttonDiv{
@@ -105,7 +105,7 @@
 	
 		function fncGetCouponList(currentPage) {
 			$("#currentPage").val(currentPage)
-			$("#addForm").attr("method" , "POST").attr("action" , "/coupon/manageCoupon?tabName=addTab").submit();
+			$("#addForm").attr("method" , "POST").attr("action" , "/coupon/manageCoupon").submit();
 		}
 		
 		
@@ -118,7 +118,8 @@
 		
 		 function fncGetIssueList(currentPage) {
 			$("#currentPage").val(currentPage)
-			$("#issueForm").attr("method" , "POST").attr("action" , "/coupon/manageCoupon?tabName=issueTab").submit();
+			
+			 self.location = "/coupon/manageCoupon?tabName=issueTab"
 		}
 			
 			
@@ -221,8 +222,6 @@
 			            $('.tab_wrap .tit_list > li:first-child a').trigger('click');
 			        }
 			    }
-
-		
 		  
 		});
 			
