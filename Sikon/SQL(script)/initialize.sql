@@ -134,14 +134,15 @@ CREATE TABLE ingredient(
 	ingredient_no   NUMBER  NOT NULL,
 	ingredient_name  VARCHAR2(50)  NOT NULL,
 	ingredient_amount  VARCHAR2(30)  NOT NULL,
-	recipe_no   NUMBER  REFERENCES recipe(recipe_no) ,
+	recipe_no   NUMBER  REFERENCES recipe(recipe_no)  ON DELETE CASCADE,
 	PRIMARY KEY(ingredient_no)
 );
 
+
 CREATE TABLE bookmark(
 bookmark_no  NUMBER NOT NULL,
-recipe_no NUMBER REFERENCES recipe(recipe_no),
-user_id   VARCHAR2(50)   	REFERENCES  users(user_id),
+recipe_no NUMBER REFERENCES recipe(recipe_no) ON DELETE CASCADE,
+user_id   VARCHAR2(50)   	REFERENCES  users(user_id) ON DELETE CASCADE,
 PRIMARY KEY(bookmark_no)
 );
 
@@ -214,14 +215,14 @@ CREATE TABLE cook (
 	cook_stock         			 NUMBER    not null,
 	heart_hit 					 NUMBER    default 0  not null,
 	cook_content 		                   CLOB 		NOT NULL,
-	mentor_id			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_id), 
+	mentor_nickname			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_nickname) ON DELETE CASCADE, 
 	PRIMARY KEY(cook_no)
 );
 
 CREATE TABLE apply ( 
 	apply_no 			 		NUMBER 			 NOT  NULL,
-	cook_no 			 		NUMBER		 NOT  NULL  REFERENCES  cook(cook_no),
-	applier_id 			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_id),
+	cook_no 			 		NUMBER		 NOT  NULL  REFERENCES  cook(cook_no) ON DELETE CASCADE,
+	applier_id 			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_id) ON DELETE CASCADE,
 	payment_option	 	VARCHAR(50),	
 	apply_status 	VARCHAR(20),
 	cook_status         			 NUMBER  not null,
@@ -231,8 +232,8 @@ CREATE TABLE apply (
 
 CREATE TABLE wish(
 	wish_no				  NUMBER 			  	  NOT NULL,
-	cook_no 			 		NUMBER		 NOT  NULL  REFERENCES  cook(cook_no),
-	user_id				  VARCHAR2(50)	    NOT NULL REFERENCES     users(user_id),
+	cook_no 			 		NUMBER		 NOT  NULL  REFERENCES  cook(cook_no) ON DELETE CASCADE,
+	user_id				  VARCHAR2(50)	    NOT NULL REFERENCES     users(user_id) ON DELETE CASCADE,
 	cook_status NUMBER,
 	cook_name 			 	VARCHAR2(100)  	NOT NULL,
 	cook_filename VARCHAR2(200),
@@ -242,23 +243,23 @@ CREATE TABLE wish(
 
 CREATE TABLE heart (
 	heart_no				  NUMBER 			  	  NOT NULL,
-	cook_no 			 		NUMBER		 NOT  NULL  REFERENCES  cook(cook_no),
-	user_id				  VARCHAR2(50)	    NOT NULL REFERENCES     users(user_id),
+	cook_no 			 		NUMBER		 NOT  NULL  REFERENCES  cook(cook_no) ON DELETE CASCADE,
+	user_id				  VARCHAR2(50)	    NOT NULL REFERENCES     users(user_id) ON DELETE CASCADE,
 	heart_check                           NUMBER(20)         DEFAULT 0              NOT NULL,	
 	PRIMARY KEY(heart_no)
 );
 
 CREATE TABLE review(
 	review_no  NUMBER 		 		NOT NULL,
-	writer_nickname   VARCHAR2(50)   	REFERENCES  users(user_nickname),
+	writer_nickname   VARCHAR2(50)   	REFERENCES  users(user_nickname) ,
 	review_content         VARCHAR2(400)   NOT NULL,
 	review_regdate        DATE NOT NULL,
 	review_category        VARCHAR2(20) NOT NULL,
 	review_img    VARCHAR2(100),
-	recipe_no   NUMBER(16)    REFERENCES  recipe(recipe_no),
-	prod_no   NUMBER(16)     REFERENCES  product(prod_no),
+	recipe_no   NUMBER(16)    REFERENCES  recipe(recipe_no) ON DELETE CASCADE,
+	prod_no   NUMBER(16)     REFERENCES  product(prod_no) ON DELETE CASCADE,
 	tran_no   NUMBER(16)     REFERENCES  purchase(tran_no),
-	cook_no   NUMBER(16)     REFERENCES  cook(cook_no),
+	cook_no   NUMBER(16)     REFERENCES  cook(cook_no) ON DELETE CASCADE,
 	apply_no   NUMBER(16)    REFERENCES  apply(apply_no),
 	PRIMARY KEY(review_no)
 );
@@ -307,8 +308,8 @@ INTO cart( cart_no , prod_no, user_id, quantity, prod_name, prod_image, prod_pri
 VALUES (seq_cart_cart_no.NEXTVAL , 10000, 'user@naver.com', 5, '계란', 'eggs.jpg&', 2700);
 
 INSERT
-INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content, mentor_id  )
-VALUES (seq_cook_cook_no.nextval, '예다의 계란 후라이 쿠킹클래스', 'yyy.jpg', '진짜 쉬워요', '초급', 14000, '한식', SYSDATE, SYSDATE, 5, SYSDATE, SYSDATE, '강남구 비트캠프', SYSDATE, 'aaa.jpg', 20, 0, '후라이content','mentor@naver.com' );
+INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname  )
+VALUES (seq_cook_cook_no.nextval, '예다의 계란 후라이 쿠킹클래스', 'yyy.jpg', '진짜 쉬워요', '초급', 14000, '한식', SYSDATE, SYSDATE, 5, SYSDATE, SYSDATE, '강남구 비트캠프', SYSDATE, 'aaa.jpg', 20, 0, '후라이content','mentor' );
 
 INSERT 
 INTO apply(apply_no, cook_no, applier_id, payment_option, apply_status, cook_status, check_date)

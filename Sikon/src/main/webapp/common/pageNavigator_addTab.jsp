@@ -13,14 +13,16 @@
 		    <!--  <<== 謝難 nav -->
 		  	<c:if test="${ couponPage.currentPage <= couponPage.pageUnit }">
 		 		<li class="disabled">
+		 			<span aria-hidden="true">&laquo;</span>
+		 		</li>
 			</c:if>
 			<c:if test="${ couponPage.currentPage > couponPage.pageUnit }">
 				<li>
-			</c:if>
-		      <a href="javascript:fncGetList('${ couponPage.currentPage-1}')" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
+		   			<a href="javascript:fncGetCouponList('${couponPage.currentPage-1}')" aria-label="Previous">
+		   			<span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
+		    </c:if>
 		    
 		    <!--  醞懈  -->
 			<c:forEach var="i"  begin="${couponPage.beginUnitPage}" end="${couponPage.endUnitPage}" step="1">
@@ -28,13 +30,13 @@
 				<c:if test="${ couponPage.currentPage == i }">
 					<!--  ⑷營 page 陛腦鑒唳辦 : active -->
 				    <li class="active">
-				    	<a href="javascript:fncGetList('${ i }');">${ i }<span class="sr-only">(current)</span></a>
+				    	<a href="javascript:fncGetCouponList('${ i }');">${ i }<span class="sr-only">(current)</span></a>
 				    </li>
 				</c:if>	
 				
 				<c:if test="${ couponPage.currentPage != i}">	
 					<li>
-						<a href="javascript:fncGetList('${ i }');">${ i }</a>
+						<a href="javascript:fncGetCouponList('${ i }');">${ i }</a>
 					</li>
 				</c:if>
 			</c:forEach>
@@ -42,14 +44,16 @@
 		     <!--  辦難 nav==>> -->
 		     <c:if test="${ couponPage.endUnitPage >= couponPage.maxPage }">
 		  		<li class="disabled">
+		  			<span aria-hidden="true">&raquo;</span>
+		  		</li>
 			</c:if>
 			<c:if test="${ couponPage.endUnitPage < couponPage.maxPage }">
 				<li>
-			</c:if>
-		      <a href="javascript:fncGetList('${couponPage.endUnitPage+1}')" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
+		      		<a href="javascript:fncGetCouponList('${couponPage.endUnitPage+1}')" aria-label="Next">
+		        	<span aria-hidden="true">&raquo;</span>
+		      		</a>
+		    	</li>
+		    </c:if>
 		  </ul>
 		</nav>
 		

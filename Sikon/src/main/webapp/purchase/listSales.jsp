@@ -116,19 +116,7 @@ table {
 			$( "td.prodNum" ).css("color" , "#f08080");
 			$( "td.divy" ).css("color" , "#ffb6c1");
 			$( "td.user" ).css("color" , "#708090");
-
-				
-			$('#myTabs a').click(function (e) {
-			  e.preventDefault()
-			  $(this).tab('show')
-			})
-				
-				
-				
-				
-				
-				
-				
+			
 		});	
 	</script>		
 
@@ -339,7 +327,7 @@ table {
 		      
 		      </table>
 			  <!--  table2 End /////////////////////////////////////-->
-				  	<jsp:include page="../common/pageNavigator_coupon.jsp"/>
+				  	<jsp:include page="../common/pageNavigator_new.jsp"/>
 		  </div>
 		</div>
 			

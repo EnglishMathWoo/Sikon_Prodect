@@ -74,7 +74,6 @@
 		}
 		
 		.tab_con div {
-		  display: none;
 		  text-align: center;
 		}
 		
@@ -104,17 +103,29 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-		function fncGetList(currentPage) {
+		function fncGetCouponList(currentPage) {
 			$("#currentPage").val(currentPage)
-			$("form").attr("method" , "POST").attr("action" , "/coupon/manageCoupon").submit();
+			$("#addForm").attr("method" , "POST").attr("action" , "/coupon/manageCoupon?tabName=addTab").submit();
 		}
 		
 		
-		//============= "검색"  Event  처리 =============	
+		//============= "생성 Tab 검색"  Event  처리 =============	
 		 $(function() {
 			$( "button.btn.btn-default" ).on("click" , function() {
-				fncGetList(1);
+				fncGetCouponList(1);
+			});
+		 });
+		
+		 function fncGetIssueList(currentPage) {
+			$("#currentPage").val(currentPage)
+			$("#issueForm").attr("method" , "POST").attr("action" , "/coupon/manageCoupon?tabName=issueTab").submit();
+		}
+			
+			
+		//============= "발급 Tab 검색"  Event  처리 =============	
+		 $(function() {
+			$( "button.btn.btn-default" ).on("click" , function() {
+				fncGetIssueList(1);
 			});
 		 });
 
@@ -287,30 +298,33 @@
 	<div class="page-header text-info">
 		<h3 style="color:#bc8f8f">쿠폰관리</h3>
 	</div>
-
+	
 	<div class="tab_wrap">
 	
-    <ul class="tit_list" id="myTab">
+	<!-- Tab메뉴 제목 --> 
+    <ul class="tit_list" id="myTab" role="tablist">
       <li class="active" id="controlWidth"><a href="#addTab" style="color:gray">생성</a></li>
       <li><a href="#issueTab" style="color:gray">발급</a></li>
     </ul>
     
     <div class="tab_con">
 
+	<!-- 첫번째 Tab메뉴 내용 시작-->
       <div class="tab_list" id="addTab">
       
-      <form class="form-inline" name="detailForm">
+		<form class="form-inline" id="addForm">
       	    
 	    <input type="hidden" id="issueStatus" name="issueStatus" value="사용가능"/>
+	    <input type="hidden" id="currentPage" name="currentPage" value=""/>
 	    
 		 <p class="text-primary" align="left" style="color:gray">
 		 <br>
-		 &nbsp;&nbsp; 전체  ${couponPage.totalCount} 건수, 현재 ${couponPage.currentPage}  페이지
+		 &nbsp;&nbsp; 전체  ${couponPage.totalCount} 건수, 현재 ${couponPage.currentPage} 페이지
 		 </p>
 		
 		<button type="button" class="btn btn-primary delete" style="float: right;  margin-right: 10px;" >삭&nbsp;제</button>
 		<button type="button" class="btn btn-primary" id="addCoupon" style="float: right; margin-right: 10px;">생 &nbsp;성</button>
-				
+			
       <table class="table table-hover table-striped">
 		
         <thead>
@@ -342,21 +356,23 @@
         </tbody>
                  
       </table>
-                         
-      <c:if test="${empty couponList}">
+      
+     <c:if test="${empty couponList}">
       	<h3>생성된 쿠폰이 없습니다.</h3>
       	<br>
      </c:if>
-     
-      <jsp:include page="../common/pageNavigator_coupon.jsp"/>
-     
-     </form>
-     
-    
            
+      <jsp:include page="../common/pageNavigator_addTab.jsp"/>
+      
+     </form>
+              
      </div>
+    <!-- 첫번째 Tab메뉴 내용 끝-->
 
-      <div id="issueTab" class="tab_list">
+	<!-- 두번째 Tab메뉴 내용 시작-->
+      <div class="tab_list" id="issueTab">
+      
+      <form class="form-inline" id="issueForm">
                 
 		<p class="text-primary" align="left" style="color:gray">
 		<br>
@@ -414,17 +430,19 @@
       	<br>
       </c:if> 
       
+      <jsp:include page="../common/pageNavigator_issueTab.jsp"/>
+      
+      </form>
+      
  </div>
+  <!-- 두번째 Tab메뉴 내용 끝-->
 	
       </div>
       
     </div>
     
-  </div>
-   
-  	
-  
-	
+ </div>
+ 
 </body>
 
 </html>
