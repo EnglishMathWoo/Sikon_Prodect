@@ -42,6 +42,7 @@ public class RecipeRestController {
 		System.out.println(this.getClass());
 	}
 
+	// 무한스크롤
 	@RequestMapping(value = "json/listRecipe", method = RequestMethod.POST)
 	public Map listRecipe(@RequestBody Search search) throws Exception {
 
@@ -64,29 +65,30 @@ public class RecipeRestController {
 		map2.put("resultPage", map);
 		map2.put("search", search);
 
-		System.out.println("map" + map);
+		System.out.println("map=" + map);
 		return map2;
 	}
 
 	@RequestMapping(value = "json/uploadSummernoteImageFile")
 	public Map uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
-		System.out.println("들어옴");
+
+		System.out.println("썸머노트 json/imageUpload");
+
 		String fileRoot = "C:\\summernote_image\\"; // 저장될 외부 파일 경로
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 
 		String savedFileName = UUID.randomUUID() + extension; // 저장될 파일 명
-		System.out.println("savedfilename" + savedFileName);
+		System.out.println("savedfilename: " + savedFileName);
 		File targetFile = new File(fileRoot + savedFileName);
+
 		Map map = new HashMap();
 
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
-			System.out.println("오나욘" + fileStream);
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);
 			map.put("url", "/summernoteImage/" + savedFileName);
 			map.put("responseCode", "success");
-			map.put("name", "yeda");
 
 		} catch (IOException e) {
 			System.out.println("에러");
@@ -95,7 +97,7 @@ public class RecipeRestController {
 			e.printStackTrace();
 		}
 
-		System.out.println("맵" + map);
+		System.out.println("map=" + map);
 		return map;
 	}
 

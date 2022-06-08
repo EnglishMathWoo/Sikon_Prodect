@@ -32,29 +32,18 @@ public class RecipeDaoImpl implements RecipeDao {
 	}
 
 	/// Method
-	public void addRecipe(Recipe recipe,Map ingredient) throws Exception {
+	public void addRecipe(Recipe recipe, Map ingredient) throws Exception {
 		System.out.println("recipe=" + recipe);
 		System.out.println("ingredient=" + ingredient);
-//		Recipe recipe=(Recipe)map.get("recipe");
-		
+
 		sqlSession.insert("RecipeMapper.addRecipe", recipe);
-		sqlSession.insert("RecipeMapper.addIngredient",ingredient.get("list"));
+		sqlSession.insert("IngredientMapper.addIngredient", ingredient.get("list"));
 	}
 
-//	public Recipe getRecipe(int recipeNo) throws Exception {
-//		System.out.println("recipeNo=" + recipeNo);
-//		return sqlSession.selectOne("RecipeMapper.getRecipe", recipeNo);
-//	}
-	
 	public List getRecipe(int recipeNo) throws Exception {
 		System.out.println("recipeNo=" + recipeNo);
 		return sqlSession.selectList("RecipeMapper.getRecipe", recipeNo);
 	}
-	
-//	public List getIngredient(int recipeNo) throws Exception {
-//		System.out.println("recipeNo=" + recipeNo);
-//		return sqlSession.selectList("RecipeMapper.getIngredient", recipeNo);
-//	} 
 
 	public List<Recipe> getRecipeList(Search search) throws Exception {
 		System.out.println("search=" + search);
@@ -87,8 +76,8 @@ public class RecipeDaoImpl implements RecipeDao {
 		System.out.println("¾Ærecipe=" + recipe);
 		sqlSession.update("RecipeMapper.updateRecipe", recipe);
 	}
-	
-	public void updateIngredient(List ingredient,int recipeNo) throws Exception {
+
+	public void updateIngredient(List ingredient, int recipeNo) throws Exception {
 		System.out.println("ingredient=" + ingredient);
 		System.out.println("recipeNo=" + recipeNo);
 //		System.out.println(ingredient.get("list"));
@@ -98,16 +87,15 @@ public class RecipeDaoImpl implements RecipeDao {
 		sqlSession.update("RecipeMapper.updateIngredient", map);
 	}
 
-	public void deleteRecipe(Recipe recipe) throws Exception {
-		System.out.println("recipe=" + recipe);
-		sqlSession.delete("RecipeMapper.deleteRecipe", recipe);
+	public void deleteRecipe(int recipeNo) throws Exception {
+		System.out.println("recipeNo" + recipeNo);
+		sqlSession.delete("RecipeMapper.deleteRecipe", recipeNo);
 	}
 
 	@Override
 	public List<Recipe> bestRecipeList() throws Exception {
 		// TODO Auto-generated method stub
-		return	sqlSession.selectList("RecipeMapper.bestRecipeList");
+		return sqlSession.selectList("RecipeMapper.bestRecipeList");
 	}
-
 
 }

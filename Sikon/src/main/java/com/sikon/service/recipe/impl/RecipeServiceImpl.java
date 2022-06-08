@@ -31,30 +31,18 @@ public class RecipeServiceImpl implements RecipeService {
 		System.out.println(this.getClass());
 	}
 
-	
 	/// Method
-	public void addRecipe(Recipe recipe,Map ingredient) throws Exception {
+	public void addRecipe(Recipe recipe, Map ingredient) throws Exception {
 		System.out.println("recipe=" + recipe);
 		System.out.println("ingredient=" + ingredient);
-		recipeDao.addRecipe(recipe,ingredient);
+		recipeDao.addRecipe(recipe, ingredient);
 	}
 
-//	public Recipe getRecipe(int recipeNo) throws Exception {
-//		System.out.println("recipeNo=" + recipeNo);
-//		return recipeDao.getRecipe(recipeNo);
-//	}
-	
 	public List getRecipe(int recipeNo) throws Exception {
 		return recipeDao.getRecipe(recipeNo);
 
 	}
-	
-//	public List getIngredient(int recipeNo) throws Exception {
-//		System.out.println("recipeNo=" + recipeNo);
-//		return recipeDao.getIngredient(recipeNo);
-//	}
 
-	
 	public Map<String, Object> getRecipeList(Search search) throws Exception {
 		System.out.println("search=" + search);
 		List<Recipe> list = recipeDao.getRecipeList(search);
@@ -88,22 +76,22 @@ public class RecipeServiceImpl implements RecipeService {
 		System.out.println("recipe=" + recipe);
 		recipeDao.updateRecipe(recipe);
 	}
-	
-	public void updateIngredient(List ingredient,int recipeNo) throws Exception {
+
+	public void updateIngredient(List ingredient, int recipeNo) throws Exception {
 		System.out.println("¶ì¿ë");
-		recipeDao.updateIngredient(ingredient,recipeNo);
+		recipeDao.updateIngredient(ingredient, recipeNo);
 	}
 
-	public void deleteRecipe(Recipe recipe) throws Exception {
-		System.out.println("recipe=" + recipe);
-		recipeDao.deleteRecipe(recipe);
+	public void deleteRecipe(int recipeNo) throws Exception{
+		System.out.println("recipe=" + recipeNo);
+		recipeDao.deleteRecipe(recipeNo);
 	}
 
 	@Override
 	public Map<String, Object> bestRecipeList() throws Exception {
-		List<Recipe> list= recipeDao.bestRecipeList();
+		List<Recipe> list = recipeDao.bestRecipeList();
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list );
+		map.put("list", list);
 		return map;
 	}
 
