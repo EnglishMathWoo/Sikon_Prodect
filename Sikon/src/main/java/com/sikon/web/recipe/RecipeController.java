@@ -228,6 +228,7 @@ public class RecipeController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
+		System.out.println("orderCondition=" + search.getOrderCondition());
 
 		if (search.getOrderCondition() == null) {
 			search.setOrderCondition("100");

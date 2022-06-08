@@ -37,18 +37,18 @@
 
 <!--  /////////////////////////summernote////////////////////////// -->
 
-<script src="/javascript/summernote-lite.js"></script>
+<script src="/resources/javascript/summernote-lite.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
-<script src="/javascript/summernote-ko-KR.js"></script>
+<script src="/resources/javascript/summernote-ko-KR.js"></script>
 <!--  -->
 
 
 
 <style>
 body {
-	padding-top: 50px;
+	padding-top: 0px;
 	font-family: 'Gowun Batang', serif;
 }
 </style>
@@ -79,11 +79,12 @@ $(function() {
 	
 	 
 	 $( "button:contains('취소')" ).on("click" , function() {
-			self.location = "/product/listProduct?menu=manage"
+			//self.location = "/product/listProduct?menu=manage"
 		});
 	
 	 $( "button:contains('리뷰등록')" ).on("click" , function() {
 			fncAddReview();
+
 		});
 	 
 });
@@ -92,7 +93,7 @@ $( "button:contains('리뷰등록')" ).css("color","red")
 
 function fncAddReview() {
 	
-	$("form").attr("method" , "POST").attr("action" , "/review/addReview").submit();
+	$("form").attr("method" , "POST").attr("action" , "/review/addReview?textNo=10000&category=100").submit();
 
 	
 }
@@ -155,7 +156,6 @@ function fncAddReview() {
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->

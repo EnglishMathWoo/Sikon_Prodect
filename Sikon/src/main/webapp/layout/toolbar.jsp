@@ -8,8 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
-<link href="/resources/css/fontawesome.all.min.css" rel="stylesheet">
-
+<script src="https://kit.fontawesome.com/ef3e0db941.js" crossorigin="anonymous"></script>
 
 <style>
 /* ¹è°æ»ö */
