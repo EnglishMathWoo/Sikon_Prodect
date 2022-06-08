@@ -110,20 +110,14 @@ table.type09 td {
 		$("button:contains('취소')").on("click", function() {
 			self.location = "/recipe/listRecipe"
 		});
-		$("button:contains('레시피등록')").on("click", function() {
-			fncAddRecipe();
+		$("button:contains('레시피수정')").on("click", function() {
+			fncUpdateRecipe();
 		});
 		
-		$("button:contains('재료추가')").on("click", function() {
-			tableCreate();
-		});
-		$("button:contains('재료빼기')").on("click", function() {
-			tableDelete();
-		});
 	});
-	$("button:contains('레시피등록')").css("color", "red")
-	function fncAddRecipe() {
-		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action", "/recipe/addRecipe").submit();
+	
+	function fncUpdateRecipe() {
+		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action", "/recipe/updateRecipe").submit();
 		//$("form").attr("method", "POST").attr("action", "/recipe/addRecipe").submit();
 	}
 	
@@ -180,34 +174,6 @@ table.type09 td {
 	}
 </script>
 
-<script>
-function tableCreate(){
-	var tc = new Array();
-	var html = '';
-				
-	var ingredientName = $("#ingredientName").val();
-	var ingredientAmount = $("#ingredientAmount").val();
-				
-	html += '<tr>';
-	html += '<td>'+ingredientName+'</td>';
-	html += '<input type="hidden" name="ingredientName" value="'+ingredientName+'"/>';
-	html += '<td>'+ingredientAmount+'</td>';
-	html += '<input type="hidden" name="ingredientAmount" value="'+ingredientAmount+'"/>';
-	html += '</tr>';
-				
-	
-	$("#dynamicTable").append(html);
-				
-	$("#ingredientName").val('');
-	$("#ingredientAmount").val('');
-	console.log('왜이러니'+$("#dynamicTable tr").find("td").length);
-	}
-	
-function tableDelete(){
-	$('#dynamicTable tbody tr:last').remove();
-	}
-	
-</script>
 
 
 </head>
@@ -238,6 +204,8 @@ function tableDelete(){
 							name="recipeName" placeholder="제목">
 					</div>
 				</div>
+
+<input type="hidden" name="recipeNo" value="${recipe.recipeNo }"/>
 
 				<div class="form-group">
 					<label for="recipeDetail"
@@ -297,20 +265,16 @@ function tableDelete(){
 						<c:set var="i" value="0" />
 					<c:forEach var="ingredient" items="${ingredient}">
 						<tr>
-						<td><input type="text" value="${ingredient. ingredientName}"></td>
-						<td><input type="text" value="${ingredient. ingredientAmount}"></td>
+						<td><input type="text" name="ingredientName" value="${ingredient. ingredientName}" >		<input type="hidden" name="ingredientNo" value="${ingredient.ingredientNo }"></td>
+						<td><input type="text" name="ingredientAmount" value="${ingredient. ingredientAmount} "></td>
+				
 						</tr>
+						
 						</c:forEach>						
 					</thead>
 					<tbody id="dynamicTbody">
 					</tbody>
 				</table>
-				<input type="text" placeholder="재료명" id="ingredientName"  > 
-				<input type="text" placeholder="재료양" id="ingredientAmount" >
-				<button type="button" 
-							style="float: right; ">재료추가</button>
-				<button type="button" 
-							style="float: right; ">재료빼기</button>
 			</div>
 			</div>
 

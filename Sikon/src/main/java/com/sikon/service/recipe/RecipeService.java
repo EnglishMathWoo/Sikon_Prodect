@@ -22,7 +22,7 @@ public interface RecipeService {
 	public Map<String, Object> getMyRecipeList(Search search, String writerNickname) throws Exception;
 
 	// 레시피 수정
-	public void updateRecipe(Recipe recipe) throws Exception;
+	public void updateRecipe(Recipe recipe, Map ingredient) throws Exception;
 //	public void updateIngredient(List ingredient,int recipeNo) throws Exception;
 
 	// 레시피 삭제

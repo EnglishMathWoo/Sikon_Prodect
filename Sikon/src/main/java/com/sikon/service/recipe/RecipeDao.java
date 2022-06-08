@@ -22,9 +22,9 @@ public interface RecipeDao {
 	public List<Recipe> getMyRecipeList(Search search, String writerNickname) throws Exception;
 
 	// UPDATE
-	public void updateRecipe(Recipe recipe) throws Exception;
+	public void updateRecipe(Recipe recipe, Map ingredient) throws Exception;
 
-	public void updateIngredient(List ingredient, int recipeNo) throws Exception;
+//	public void updateIngredient(List ingredient, int recipeNo) throws Exception;
 
 	// DELETE
 	public void deleteRecipe(int recipeNo) throws Exception;

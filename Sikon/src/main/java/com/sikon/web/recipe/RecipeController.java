@@ -160,7 +160,8 @@ public class RecipeController {
 		System.out.println("/recipe/updateRecipe :  get");
 
 		List list = recipeService.getRecipe(recipeNo);
-
+		System.out.println(list);
+		
 		model.addAttribute("ingredient", list);
 		model.addAttribute("recipe", list.get(0));
 
@@ -170,13 +171,14 @@ public class RecipeController {
 	@RequestMapping(value = "updateRecipe", method = RequestMethod.POST)
 	public String updateRecipe(@ModelAttribute("recipe") Recipe recipe,
 			@RequestParam("multiImg") MultipartFile[] fileArray,
-			@RequestParam("ingredientName") String[] ingredientName,
+			@RequestParam("ingredientName") String[] ingredientName,@RequestParam("ingredientNo") int[] ingredientNo,
 			@RequestParam("ingredientAmount") String[] ingredientAmount, Model model, HttpServletRequest request)
 			throws Exception {
 
 		System.out.println("/recipe/updateRecipe :  POST");
 		// Business Logic
 
+		
 		String newFileName = "";
 
 		String FILE_SERVER_PATH = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
@@ -202,19 +204,22 @@ public class RecipeController {
 		List<Ingredient> list = new ArrayList<Ingredient>();
 		for (int i = 0; i < ingredientName.length; i++) {
 			Ingredient ingredient = new Ingredient();
+			ingredient.setRecipeNo(recipe.getRecipeNo());
 			ingredient.setIngredientName(ingredientName[i]);
 			ingredient.setIngredientAmount(ingredientAmount[i]);
+			ingredient.setIngredientNo(ingredientNo[i]);
 			list.add(ingredient);
 		}
 
 		System.out.println("list=" + list);
+		
 
 		Map map = new HashMap();
 		map.put("list", list);
 
-		recipeService.updateRecipe(recipe);
+		recipeService.updateRecipe(recipe, map);
 
-		return "forward:/recipe/getRecipe.jsp?recipeNo=" + recipe.getRecipeNo();
+		return "forward:/recipe/getRecipe.jsp";
 	}
 
 	@RequestMapping(value = "listRecipe")
