@@ -264,15 +264,17 @@ public class CookController {
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		
-
+		Map<String, Object> heartMap = heartService.getHeart2(user.getUserId());
 		
+		System.out.println(heartMap.get("list"));
+		System.out.println("^^^^^^^^^^^");
+					
 		model.addAttribute("list", map.get("list"));
 		System.out.println(map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		model.addAttribute("user",user);
-		
-	
+		model.addAttribute("heart", heartMap.get("list"));
 
 		return "forward:/cook/listCook.jsp?menu="+menu;
 	}

@@ -53,7 +53,7 @@
         .bi-heart-fill{
             font-size: 30px;
             line-height: 30px;
-            color:crimson;
+            color:blue;
         }
 
     </style>
@@ -170,15 +170,17 @@ div.thumbnail {
 			                    if(heartCheck == 0){
 			                    	alert("추천완료.");
 						           
-						            $(this).addClass('bi-heart-fill');
+			                    	$("#like_btn").removeClass('bi-heart');
+						            $("#like_btn").addClass('bi-heart-fill');
 						           
 			                       
 			                    	location.reload();
 			                    }
 			                    else if (heartCheck == 1){
 			                     alert("추천취소");
-						          
-						            $(this).addClass('bi-heart');
+			                     
+			                     	$("#like_btn").removeClass('bi-heart-fill');
+						            $("#like_btn").addClass('bi-heart');
 						         
 			                  
 			                    	location.reload();
@@ -450,7 +452,7 @@ div.thumbnail {
   <input type="hidden" name="userId" value="${user.userId}">
   <input type="hidden" name="cookNo" value="${cook.cookNo}">
     <input type="hidden" name="cookNo" value="${cook.cookStock}">
-   <input type="hidden" name="heartCheck" value="${heart.heartCheck}">
+  
       <input type="hidden" name="hearthit" value="${cook.hearthit}">
 
 	<div class="row">
@@ -545,12 +547,17 @@ div.thumbnail {
 		
 				<button type="button" class="btn btn-primary delete" value="${cook.cookNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
 		
+		<c:forEach var="heart" items="${heart}" >
+		<c:choose>
+ 		<c:when test = "${heart.heartCheck == '1'}">
 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
- 
-    
-		
-				
-	
+ 		</c:when>    
+ 		<c:otherwise>
+ 		<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
+ 		</c:otherwise>
+ 		</c:choose>
+ 		</c:forEach>
+
 		
 				
 		 	</div>

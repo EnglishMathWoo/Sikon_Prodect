@@ -30,7 +30,7 @@ public interface HeartDao {
 	
 	public int getTotalCount(Search search,String userId) throws Exception ;
 	
-	
+	public List<Heart> getHeart2(String userId) throws Exception;
 	
 	
 	

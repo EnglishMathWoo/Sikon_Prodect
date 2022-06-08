@@ -97,6 +97,14 @@ public class HeartDaoImpl implements HeartDao{
 		return list;
 	}
 	
+	public List<Heart> getHeart2(String userId) throws Exception {
+		
+		List<Heart> list = sqlSession.selectList("HeartMapper.getHeart2", userId);
+
+		return list;
+		
+	}
+	
 	public int getTotalCount(Search search, String userId) throws Exception {
 		System.out.println("userid="+userId+"search="+search);
 		Map<String, Object> map = new HashMap<String, Object>();

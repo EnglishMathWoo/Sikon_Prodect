@@ -93,6 +93,16 @@ public class HeartServiceImpl implements HeartService{
 
 		return map;
 	}		
+	
+	public Map<String, Object> getHeart2(String userId) throws Exception {
+
+
+		List<Heart> heart = heartDao.getHeart2(userId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", heart);
+		
+		return map;
+	}		
 
 	
 
