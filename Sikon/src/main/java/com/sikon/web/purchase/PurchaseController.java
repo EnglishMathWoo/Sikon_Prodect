@@ -141,9 +141,10 @@ public class PurchaseController {
 		
 		return modelAndView;
 	}
-	
-	
-//=== 장바구니 구매 ===========================================================================================
+
+//=============================================================================================================	
+//=== 장바구니 구매 ==============================================================================================
+//=============================================================================================================	
 	
 	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.GET)
 	public String addPurchaseByCart(@RequestParam("cartNo") int[] cartNo,  Model model) throws Exception {
@@ -194,29 +195,41 @@ public class PurchaseController {
 		String sub = "str";
 		String serialNo = sub+nowrandom;	
 		System.out.println("일련번호: "+serialNo);
-		//=======================================	
+		//=======================================
+		
+		List list = new ArrayList();
+		
 		//for문
 		for(int i=0; i<cartNo.length; i++) {
 			
 			Cart cart = cartService.getCart(cartNo[i]);
 			
-			Product product = productService.getProduct(cart.getCartProd().getProdNo());			
+			Product product = productService.getProduct(cart.getCartProd().getProdNo());
 			
-			purchase.setBuyer(user);
-			purchase.setPurchaseProd(product);
-			purchase.setUsedCoupon(coupon[i]);
-			purchase.setPurchaseQuantity(cart.getQuantity());
+			Purchase purchaseByCart = new Purchase();
+			purchaseByCart.setReceiverName(purchase.getReceiverName());
+			purchaseByCart.setReceiverPhone(purchase.getReceiverPhone());
+			purchaseByCart.setReceiverEmail(purchase.getReceiverEmail());
+			purchaseByCart.setDivyAddr(purchase.getDivyAddr());
+			purchaseByCart.setDivyMessage(purchase.getDivyMessage());
+			purchaseByCart.setDivyFee(purchase.getDivyFee());
+			purchaseByCart.setUsedPoint(purchase.getUsedPoint());
+			purchaseByCart.setEarnPoint(purchase.getEarnPoint());
+			purchaseByCart.setBuyer(user);
+			purchaseByCart.setPurchaseProd(product);
+			purchaseByCart.setUsedCoupon(coupon[i]);
+			purchaseByCart.setPurchaseQuantity(cart.getQuantity());
+			purchaseByCart.setDivyStatus("001");
+			purchaseByCart.setPaymentOpt("KA");
+			purchaseByCart.setSerialNo(serialNo);		
 			
-			purchase.setDivyStatus("001");
-			purchase.setPaymentOpt("KA");
-			purchase.setSerialNo(serialNo);		
+			list.add(purchaseByCart);
 			
-			
-			System.out.println(purchase);
-			purchaseService.addPurchase(purchase);
-			
+			System.out.println(purchaseByCart);
+			purchaseService.addPurchase(purchaseByCart);
 			
 			System.out.println(cart.getQuantity());
+			System.out.println(product.getProdNo());
 			purchaseService.updateStock(cart.getQuantity(), product.getProdNo());
 			
 			cartService.deleteCart(cartNo[i]);
@@ -225,13 +238,17 @@ public class PurchaseController {
 		
 		System.out.println("========================================================================");
 		
+		System.out.println("list: "+list);
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");
-		modelAndView.addObject("purchsae", purchase);
+		modelAndView.addObject("list", list);
 		
 		return modelAndView;
 	}
 
+//=============================================================================================================	
+//=============================================================================================================	
 //=============================================================================================================	
 
 		
@@ -392,7 +409,7 @@ public class PurchaseController {
 		// Model 과 View 연결
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/mypage/listPurchase.jsp");
+		modelAndView.setViewName("/purchase/listPurchase.jsp");
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);

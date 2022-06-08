@@ -274,7 +274,8 @@ body>div.container {
 		  <div class="form-group">
 		  <label for="purchaseQuantity" class="col-sm-offset-1 col-sm-3 control-label">총 배송비</label>
 		    <div class="col-sm-4">
-		      + <input type="text" id="totalDivyFee" name="divyFee" value=""  style="border:none;width:50px"> 원 <hr>
+		      + <input type="text" id="totalDivyFee" name="totalDivyFee" value=""  style="border:none;width:50px"> 원 <hr>
+		      <input type="hidden" class="divyFee" name="divyFee" value="3000">
 		    </div>
 		  </div>
 		  

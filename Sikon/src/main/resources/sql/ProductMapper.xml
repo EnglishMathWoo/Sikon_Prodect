@@ -85,10 +85,10 @@
 														ORDER BY prod_status DESC, prod_no
 													</when>
 													<when test="orderCondition == 1">
-														ORDER BY prod_status DESC, price, prod_no
+														ORDER BY prod_status DESC, prod_disprice, prod_no
 													</when>
 													<when test="orderCondition == 2">
-														ORDER BY prod_status DESC, price DESC, prod_no
+														ORDER BY prod_status DESC, prod_disprice DESC, prod_no
 													</when>
 													<when test="orderCondition == 3">
 														AND  prod_stock>0 AND prod_status LIKE UPPER('y') ORDER BY prod_status DESC, prod_no
@@ -133,10 +133,10 @@
 														ORDER BY prod_status DESC, prod_no
 													</when>
 													<when test="orderCondition == 1">
-														ORDER BY prod_status DESC, price, prod_no
+														ORDER BY prod_status DESC, prod_disprice, prod_no
 													</when>
 													<when test="orderCondition == 2">
-														ORDER BY prod_status DESC, price DESC, prod_no
+														ORDER BY prod_status DESC, prod_disprice DESC, prod_no
 													</when>
 													<when test="orderCondition == 3">
 														AND  prod_stock>0 AND prod_status LIKE UPPER('y') ORDER BY prod_status DESC, prod_no
