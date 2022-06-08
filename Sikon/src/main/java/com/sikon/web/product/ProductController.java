@@ -44,20 +44,15 @@ public class ProductController {
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
-	//setter Method 구현 않음
 		
 	public ProductController(){
 		System.out.println(this.getClass());
 	}
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
-	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
 	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 	
 	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
 	@Value("#{commonProperties['filepath']}")
@@ -69,7 +64,6 @@ public class ProductController {
 		
 		System.out.println("/product/addProduct : POST");
 		
-		//String temDir = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 		String temDir = filePath;
 		
 		String fileName = "";
@@ -93,7 +87,7 @@ public class ProductController {
 		
 		product.setProdThumbnail(fileName);
 		
-		System.out.println(product);
+		System.out.println("product: "+product);
 		productService.addProduct(product);
 		
 		model.addAttribute(product);
@@ -147,7 +141,7 @@ public class ProductController {
 	public String updateProduct( @ModelAttribute("product") Product product , Model model) throws Exception{
 
 		System.out.println("/product/updateProduct : GET");
-		//Business Logic
+		
 		product = productService.getProduct(product.getProdNo());
 		
 		model.addAttribute("product", product);
@@ -209,7 +203,6 @@ public class ProductController {
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
-		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
@@ -219,7 +212,7 @@ public class ProductController {
 		System.out.println("2:"+mapName.get("list"));
 		
 		
-		return "forward:/product/listProduct2.jsp";
+		return "forward:/product/listProduct.jsp";
 	}
 
 }
