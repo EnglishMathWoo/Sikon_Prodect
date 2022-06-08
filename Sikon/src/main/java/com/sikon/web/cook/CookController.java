@@ -312,39 +312,7 @@ public class CookController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "listMyRecipe")
-	public ModelAndView listMyRecipe(@ModelAttribute("search") Search search, Model model,
-			HttpServletRequest request) throws Exception {
-
-		System.out.println("/recipe/myRecipe :  POST/get");
-		System.out.println("search:" + search);
-		if (search.getCurrentPage() == 0) {
-			search.setCurrentPage(1);
-		}
-
-		search.setPageSize(pageSize);
-
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-
-		// Business logic 수행
-		Map<String, Object> map = cookService.lisyMyRecipe(search, user.getUserNickname());
-
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
-		System.out.println(resultPage);
-
-		// Model 과 View 연결
-
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", map.get("list"));
-		modelAndView.addObject("resultPage", resultPage);
-		modelAndView.addObject("search", search);
-
-		modelAndView.setViewName("forward:/cook/listMyCook.jsp");
-
-		return modelAndView;
-	}	
+	
 	@RequestMapping( value="/deleteCook", method=RequestMethod.GET)
 	public String deleteCook( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
 

@@ -199,7 +199,7 @@ public class ApplyController {
 			modelAndView.addObject("resultPage", resultPage);
 			modelAndView.addObject("search", search);
 			
-			modelAndView.setViewName("forward:/apply/listApply.jsp");
+			modelAndView.setViewName("forward:/mypage/listApply.jsp");
 			
 			
 			return modelAndView;

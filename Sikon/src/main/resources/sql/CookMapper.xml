@@ -28,28 +28,12 @@
 		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
 		<result property="cookContent" 			column="cook_content " 			jdbcType="CLOB" javaType="java.lang.String"/>
 		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
-		<collection property="recipe" resultMap="recipeSelectMap"/>
+		
 		
 	</resultMap>
 
 
-	<resultMap id="recipeSelectMap" type="recipe">
-		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
-		<result property="writer.userNickname" 				column="writer_nickname" 					jdbcType="VARCHAR" />
-		<result property="recipeName"			column="recipe_name" 		jdbcType="VARCHAR" />
-		<result property="recipeDetail" 	column="recipe_detail" 		jdbcType="VARCHAR" />
-		<result property="recipeImg" 			column="recipe_img" 		jdbcType="VARCHAR" />
-		<result property="recipeVideo" 			column="recipe_video" 		jdbcType="VARCHAR" />
-		<result property="recipeDifficulty" 				column="recipe_difficulty" 					jdbcType="VARCHAR" />
-		<result property="recipeTheme"      column="recipe_theme"           jdbcType="VARCHAR"/>
-		<result property="cookingTime"      column="cooking_time"           jdbcType="NUMERIC"/>
-		<result property="recipeOrder"      column="recipe_order"            jdbcType="CLOB" javaType="java.lang.String" />
-		<result property="recipeRegDate" 				column="recipe_regdate" 					jdbcType="DATE" />
-		<result property="reviewNum"      column="review_num"           jdbcType="NUMERIC"/>
-		<result property="ingredientNo"      column="ingredient_no"           jdbcType="NUMERIC"/>
-		<result property="ingredientName"      column="ingredient_name"           jdbcType="VARCHAR"/>
-		<result property="ingredientAmount"      column="ingredient_amount"           jdbcType="VARCHAR"/>
-	</resultMap>
+
 		
 	<!-- SQL : INSERT -->
 	<insert 	id="addCook"		parameterType="cook" >
@@ -219,51 +203,5 @@
 													) countTable						
 	 </select> 
 	 
-	 <select  id="lisyMyRecipe"  parameterType="search"	resultMap="recipeSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *
-											FROM recipe
-											WHERE mentor_nickname=#{userNickname}
-											<if test="searchCondition != null">
-											<choose>
-													<when test="searchCondition == 0 and searchKeyword !='' ">
-										 				and recipe_NO LIKE '%'||#{searchKeyword}||'%'
-													</when>
-													<when test="searchCondition == 1 and searchKeyword !='' ">
-										 				 and recipe_Name LIKE '%'||#{searchKeyword}||'%'
-													</when>
-													<otherwise>
-													  and recipe_NO LIKE '%'|| ''||'%'
-													</otherwise>
-													</choose>
-											</if>
 
-
-
- )  inner_table
-											
-						WHERE ROWNUM &lt;= #{search.endRowNum} )
-		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
-	 </select>
-	 <!-- SQL : 마이페이지(내가 쓴 레시피) ROW Count -->
-	 <select  id="getTotalRCount"  parameterType="map"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(	SELECT recipe_no 
-						FROM recipe
-						WHERE writer_nickname=#{writerNickname}
-						<if test="searchCondition != null">
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			and recipe_no LIKE '%'||#{searchKeyword}||'%'
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		and recipe_name LIKE '%'||#{searchKeyword}||'%'
-								</if>
-								
-							
-						</if>  
-						
-			
-													) countTable						
-	 </select>	 
 </mapper>

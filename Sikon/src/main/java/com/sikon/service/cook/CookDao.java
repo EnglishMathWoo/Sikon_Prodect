@@ -29,6 +29,5 @@ public interface CookDao {
 	public int getTotalMyCount(Search search,String userNickname) throws Exception ;
 	public List<Cook> listMyCook(Search search,String userNickname) throws Exception;
 	
-	public List<Cook> lisyMyRecipe(Search search,String userNickname) throws Exception;
-	public int getTotalRCount(Search search,String userNickname) throws Exception ;
+
 }
