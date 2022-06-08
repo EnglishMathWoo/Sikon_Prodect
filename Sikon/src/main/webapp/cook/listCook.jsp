@@ -149,9 +149,14 @@ div.thumbnail {
 				//var cookNo = $(this).attr("value");
 				var userId = $("input[name='userId']").val();
 				var cookNo = $(this).attr("value");
+				var hearthit = $("input[name='hearthit']").val();
+				var heartCheck = $("input[name='heartCheck']").val();
+		
 				
 				console.log(cookNo);
 				console.log(userId);
+				console.log(heartCheck);
+				console.log(hearthit);
 			     $.ajax({
 			            type : "POST",  
 			            url : "/heart/json/updateHeart",       
@@ -164,13 +169,17 @@ div.thumbnail {
 			                
 			                    if(heartCheck == 0){
 			                    	alert("추천완료.");
-			                    	  
+						           
+						            $(this).addClass('bi-heart-fill');
+						           
 			                       
 			                    	location.reload();
 			                    }
 			                    else if (heartCheck == 1){
 			                     alert("추천취소");
-			                   
+						          
+						            $(this).addClass('bi-heart');
+						         
 			                  
 			                    	location.reload();
 
@@ -441,7 +450,8 @@ div.thumbnail {
   <input type="hidden" name="userId" value="${user.userId}">
   <input type="hidden" name="cookNo" value="${cook.cookNo}">
     <input type="hidden" name="cookNo" value="${cook.cookStock}">
-   <input type="hidden" name="heartcheck" value="${heart.heartcheck}">
+   <input type="hidden" name="heartCheck" value="${heart.heartCheck}">
+      <input type="hidden" name="hearthit" value="${cook.hearthit}">
 
 	<div class="row">
 		
@@ -520,7 +530,7 @@ div.thumbnail {
 
 				<div class="row">
 			
-					<div><h5><strong>장소 : ${cook.cookLocation}</strong></h5></div>
+					<div><h5><strong>장소 : ${cook.cookLocation}${heart.heartCheck}</strong></h5></div>
 				</div>				
 				
 			
@@ -534,8 +544,16 @@ div.thumbnail {
 				</div>
 		
 				<button type="button" class="btn btn-primary delete" value="${cook.cookNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
+	    <c:choose>			
+		<c:when test= "${cook.hearthit =='0' } ">		
 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
-				
+ 		</c:when> 
+ 		<c:otherwise>
+ 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
+ 		</c:otherwise>
+		</c:choose>
+    
+		
 				
 	
 		

@@ -12,11 +12,35 @@
 		<result property="cookNo"	   			column="cook_no" 				jdbcType="NUMERIC" />		
 		<result property="userId" 			column="user_id" 		jdbcType="VARCHAR" />
 		<result property="heartCheck" 			column="heart_check" 		jdbcType="NUMERIC" />
-		
+		<collection property="cook" resultMap="cookSelectMap"/>
 		
 		
 	</resultMap>
+	<resultMap id="cookSelectMap" type="cook">
 	
+		<result property="cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
+		<result property="cookName"			column="cook_name" 		jdbcType="VARCHAR" />
+		<result property="cookFilename" 	column="cook_filename" 		jdbcType="VARCHAR" />
+		<result property="cookBrief"      column="cook_brief"           jdbcType="VARCHAR"/>
+		<result property="cookDifficuty" 				column="cook_difficuty" 					jdbcType="VARCHAR" />		
+		<result property="cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
+		<result property="cookTheme" 			column="cook_theme" 		jdbcType="VARCHAR" />
+		<result property="aplstarTime"      column="apl_startime"           jdbcType="VARCHAR"/>
+		<result property="aplendTime"      column="apl_endtime"           jdbcType="VARCHAR"/>	
+		<result property="cookRecruit" 				column="cook_recruit" 					jdbcType="NUMERIC" />
+		<result property="startTime"      column="start_time"           jdbcType="VARCHAR"/>		
+		<result property="endTime"      column="end_time"           jdbcType="VARCHAR"/>		
+		<result property="cookLocation"      column="cook_location"           jdbcType="VARCHAR"/>
+		<result property="cookRegdate"      column="cook_regdate"           jdbcType="DATE"/>
+		<result property="cookVideo"      column="cook_video"           jdbcType="VARCHAR"/>
+		<result property="cookStock"      column="cook_stock"           jdbcType="NUMERIC"/>
+		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
+		<result property="cookContent" 			column="cook_content " 			jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
+	
+		
+	</resultMap>
+		
 <update id="updateHeart" parameterType="int">
 update cook
 <set> 
@@ -70,13 +94,21 @@ select count(*) from heart
  where cook_no = #{cookNo} and user_id = #{userId} 
 </select>
 
-	 <select 	id="getHeart"	parameterType="string"	resultMap="heartSelectMap">
-		SELECT c.cook_name, c.cook_filename, c.cook_price, h.*
+	 <select 	id="getHeart"	 parameterType="map"	statementType="CALLABLE"	resultMap="heartSelectMap">
+		SELECT c.*, h.*
 		FROM cook c, heart h 
 		WHERE c.cook_no=h.cook_no 
 		AND user_id = #{userId}
 		ORDER BY heart_no DESC
 	 </select>
-
+	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	select c.*, h.*
+		from cook c, heart h 
+		where 
+		c.cook_no=h.cook_no 
+		and user_id = #{userId}
+						) countTable
+	 </select>
 	 
 </mapper>

@@ -24,6 +24,7 @@ public class Cook {
 	private String cookContent;
 	private User mentor;
 	private String userNickname;
+	private Recipe recipe;
 	
 	
 	public Cook(){
@@ -230,6 +231,16 @@ public class Cook {
 	}
 
 
+	public Recipe getRecipe() {
+		return recipe;
+	}
+
+
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Cook [cookNo=" + cookNo + ", cookName=" + cookName + ", cookFilename=" + cookFilename + ", cookBrief="
@@ -238,11 +249,11 @@ public class Cook {
 				+ cookRecruit + ", startTime=" + startTime + ", endTime=" + endTime + ", cookLocation=" + cookLocation
 				+ ", cookRegdate=" + cookRegdate + ", cookVideo=" + cookVideo + ", cookStock=" + cookStock
 				+ ", hearthit=" + hearthit + ", cookContent=" + cookContent + ", mentor=" + mentor + ", userNickname="
-				+ userNickname + "]";
+				+ userNickname + ", recipe=" + recipe + "]";
 	}
 
 
-	
+
 
 
 }

@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.sikon.service.domain.Bookmark;
 import com.sikon.service.domain.Heart;
 import com.sikon.service.heart.HeartDao;
 import com.sikon.service.heart.HeartService;
+import com.sikon.common.Search;
 import com.sikon.service.cook.CookService;
 
 
@@ -76,9 +78,20 @@ public class HeartServiceImpl implements HeartService{
 	}
 	
 
-	public List<Heart> getHeart(String userId) throws Exception {
-		
-		return heartDao.getHeart(userId);	
+	public Map<String, Object> getHeart(Search search, String userId) throws Exception {
+		System.out.println("userid=" + userId + "search=" + search);
+
+		List<Heart> list = heartDao.getHeart(search, userId);
+		int totalCount = heartDao.getTotalCount(search, userId);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+
+		System.out.println("list=" + list);
+		System.out.println("totalCount=" + totalCount);
+
+		return map;
 	}		
 
 	

@@ -2,6 +2,13 @@ package com.sikon.web.heart;
 
 import java.util.List;
 import java.util.Map;
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,6 +33,7 @@ import com.sikon.service.domain.Wish;
 import com.sikon.service.domain.Apply;
 import com.sikon.service.heart.HeartService;
 import com.sikon.service.apply.ApplyService;
+import com.sikon.service.cook.CookService;
 
 
 
@@ -35,6 +43,11 @@ import com.sikon.service.apply.ApplyService;
 @RequestMapping("/heart/*")
 public class HeartController {
 	
+	
+	/// Field
+	@Autowired
+	@Qualifier("cookServiceImpl")
+	private CookService cookService;
 	/// Field
 	@Autowired
 	@Qualifier("heartServiceImpl")
@@ -43,6 +56,14 @@ public class HeartController {
 	public HeartController() {
 		System.out.println(this.getClass());
 	}
+	
+	@Value("#{commonProperties['pageUnit']}")
+	// @Value("#{commonProperties['pageUnit'] ?: 3}")
+	int pageUnit;
+
+	@Value("#{commonProperties['pageSize']}")
+	// @Value("#{commonProperties['pageSize'] ?: 2}")
+	int pageSize;
 	
 	@ResponseBody
 	@RequestMapping( value="updateHeart", method=RequestMethod.POST )
@@ -71,19 +92,45 @@ public class HeartController {
 		return heartCheck;
 	
 	}
+	
 	@RequestMapping("getHeart")
-	public String getHeart( @RequestParam("userId") String userId, Model model) throws Exception{
+	public String getHeart( @ModelAttribute("search") Search search, Model model, HttpServletRequest request)
+			throws Exception{
 		
-		System.out.println("/getHeart");
+
+		System.out.println("/heart/getHeart :  POST/get");
+		System.out.println("search:" + search);
+
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
 		
-		List<Heart> list = heartService.getHeart(userId);
-		
-		
-		
-		model.addAttribute("heart", list);
+	
+		search.setPageSize(pageSize);
+
+		search.setPageSize(pageSize);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+
+		// Business logic 수행
+		Map<String, Object> map = heartService.getHeart(search, user.getUserId());
+
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		System.out.println(resultPage);
+		System.out.println(map);
+
+		System.out.println(map.get("list"));
+		// Model 과 View 연결
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		System.out.println("resultPage는" + resultPage);
+		model.addAttribute("search", search);
 		
 		return "forward:/heart/listHeart.jsp";
 	}
+	
 	
 	
 

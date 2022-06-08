@@ -41,6 +41,7 @@ import com.sikon.service.domain.Wish;
 import com.sikon.service.domain.Heart;
 
 import com.sikon.service.heart.HeartService;
+import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.cook.CookService;
 import com.sikon.service.user.UserService;
 
@@ -71,7 +72,10 @@ public class CookController {
 		@Qualifier("userServiceImpl")
 		private UserService userService;
 	
-
+		/// Field
+		@Autowired
+		@Qualifier("recipeServiceImpl")
+		private RecipeService recipeService;
 
 	public CookController() {
 		System.out.println(this.getClass());
@@ -289,7 +293,8 @@ public class CookController {
 		User user = (User) session.getAttribute("user");
 
 		// Business logic 수행
-		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
+		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());		
+		
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
@@ -307,6 +312,39 @@ public class CookController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value = "listMyRecipe")
+	public ModelAndView listMyRecipe(@ModelAttribute("search") Search search, Model model,
+			HttpServletRequest request) throws Exception {
+
+		System.out.println("/recipe/myRecipe :  POST/get");
+		System.out.println("search:" + search);
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+
+		search.setPageSize(pageSize);
+
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+
+		// Business logic 수행
+		Map<String, Object> map = cookService.lisyMyRecipe(search, user.getUserNickname());
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		System.out.println(resultPage);
+
+		// Model 과 View 연결
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("resultPage", resultPage);
+		modelAndView.addObject("search", search);
+
+		modelAndView.setViewName("forward:/cook/listMyCook.jsp");
+
+		return modelAndView;
+	}	
 	@RequestMapping( value="/deleteCook", method=RequestMethod.GET)
 	public String deleteCook( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
 
