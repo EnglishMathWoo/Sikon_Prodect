@@ -221,15 +221,7 @@ $(function() {
 		  <div class="form-group">
 		    <label for="cookDifficuty" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스난이도</label>
 		    <div class="col-sm-4">
-				<c:if test = "${cook.cookDifficuty == '1'}">
-			초급 
-			</c:if>
-			<c:if test = "${cook.cookDifficuty == '2'}">
-			중급
-			</c:if>
-			<c:if test = "${cook.cookDifficuty == '3'}">
-			고급
-			</c:if>
+
 					
 		    </div>
 		  

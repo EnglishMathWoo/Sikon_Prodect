@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-
+import com.sikon.common.Search;
 import com.sikon.service.domain.Heart;
 import com.sikon.service.domain.Wish;
 import com.sikon.service.heart.HeartDao;
@@ -85,9 +85,25 @@ public class HeartDaoImpl implements HeartDao{
 		sqlSession.update("HeartMapper.updateHeartCheckCancel", map);
 	}
 
-	public List<Heart> getHeart(String userId) throws Exception {
+	public List<Heart> getHeart(Search search, String userId) throws Exception {
 		
-		return sqlSession.selectList("HeartMapper.getHeart", userId);
+		System.out.println("userid="+userId+"search="+search);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("userId", userId);
+
+		List<Heart> list = sqlSession.selectList("HeartMapper.getHeart", map);
+		System.out.println("list=" + list);
+		return list;
+	}
+	
+	public int getTotalCount(Search search, String userId) throws Exception {
+		System.out.println("userid="+userId+"search="+search);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("userId", userId);
+		return sqlSession.selectOne("HeartMapper.getTotalCount", map);
+
 	}
 
 

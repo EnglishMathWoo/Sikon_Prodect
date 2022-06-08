@@ -167,7 +167,7 @@
 						<td align="center" > 구매취소 </td>
 					</c:when>
 					<c:when test="${apply.applyStatus.equals('100') }">
-						<td align="center" class="divy" value1="${apply.applyNo }" value2="${apply.applyStatus}">수강완료하심</td>			
+						<td align="center" class="divy" value1="${apply.applyNo }" value2="${apply.applyStatus}">수강완료 시 눌러주세요</td>			
 					</c:when>
 					<c:when test="${apply.applyStatus.equals('200') }">
 						

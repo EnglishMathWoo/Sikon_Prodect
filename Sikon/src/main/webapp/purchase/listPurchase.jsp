@@ -145,7 +145,8 @@ table {
         <thead>
           <tr class="jaewoong">
             <th align="center">No</th>
-            <th align="center" >구매내역</th>
+            <th align="center">주문일련번호</th>
+            <th align="center">구매내역</th>
             <th align="center">배송현황</th>
             <th align="center">정보수정</th>
           </tr>
@@ -158,6 +159,7 @@ table {
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
+			  <td align="center" class="view" value="${purchase.serialNo }">${purchase.serialNo }</td>	
 			  <td align="center" class="view" value="${purchase.tranNo }">상세보기</td>	
 			  
 			  <c:choose>

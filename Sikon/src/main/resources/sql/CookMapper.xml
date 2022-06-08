@@ -26,12 +26,15 @@
 		<result property="cookVideo"      column="cook_video"           jdbcType="VARCHAR"/>
 		<result property="cookStock"      column="cook_stock"           jdbcType="NUMERIC"/>
 		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
-		<result property="cookContent" 			column="cook_content " 			jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="cookContent" 			column="cook_content" 			jdbcType="VARCHAR" />
 		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
-	
+		
 		
 	</resultMap>
-	
+
+
+
+		
 	<!-- SQL : INSERT -->
 	<insert 	id="addCook"		parameterType="cook" >
 	 	INSERT
@@ -199,6 +202,6 @@
 
 													) countTable						
 	 </select> 
-
 	 
+
 </mapper>

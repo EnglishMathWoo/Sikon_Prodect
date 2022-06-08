@@ -188,44 +188,46 @@ p {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
+		 
+	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage);
-			$("form").attr("method" , "POST").attr("action" , "/recipe/listProduct").submit();
+			$("form").attr("method" , "POST").attr("action" , "/recipe/listRecipe").submit();
 		}
+		
+		$(function() {
+			
+		  $("#orderCondition").on( "change", function() {
+		  console.log($("#orderCondition").val());
+	      fncGetList(1);
+		  });
+			  
+		  $(".theme").on( "click", function() {
+			  console.log($(".theme").val());
+		      //fncGetList(1);
+			  });
+		  
+		});
+			  
 		
 		 
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			
 					$( ".imgover" ).on("click" , function() {
 					console.log($(this).attr("value"));
 					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
 					});
+			 
+					$( ".submit" ).on("click" , function() {
+						self.location ="/recipe/addRecipe.jsp"
+						});
+		 });
 					
-				$(".theme").on("click" , function() {
-					//fncGetList(1);
-				});
 				
-				
-
-				$( ".submit" ).on("click" , function() {
-					self.location = "/recipe/addRecipe.jsp"
-
-				 
-			 });
-				
-				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
-				
-				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
-					fncGetList(1);
-				 
-			 });
-			   	//====================================================================
 			
+			   	//====================================================================
+			 $(function() {
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 		                	
@@ -249,9 +251,6 @@ p {
 					                success : function(JSONData , status) {
 					                	 
 					                	$("#currentPage").val(cpage)
-					                	//console.log(cpage); 
-					                	//alert(JSONData.list[0].recipeName);
-					                	//alert(JSONData.list.length);
 					                	console.log(JSONData.list[0].recipeName);
 					                	console.log(JSONData.list[0].recipeImg);
 						                	 
@@ -264,7 +263,8 @@ p {
 					                			
 					                		
 					                		
-						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
+						                     var displayValue = 
+						                    	 				"<div class='col-sm-6 col-md-3'><br/> <br/>"
 						                     					+"<div id='latest' class='group'>"
 						                     					+"<article class='one_third first'>"
 						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
@@ -350,6 +350,8 @@ p {
 <br/>	     
 <!-- ################################################################################################ -->
 
+
+
 	<div class="wrapper row3">
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
@@ -359,22 +361,23 @@ p {
 		    </div>
 		    <button type="button" class="submit">레시피등록</button>
 		  
+    			    <form class="form-inline" name="detailForm">
 		    
 		    <br/><hr/><br/>
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li class="current" ><a href="#" class="theme">한식</a></li>
-	        <li><a href="#" class="theme" >중식</a></li>
-	        <li><a href="#" class="theme" >양식</a></li>
-	        <li><a href="#" class="theme" >일식</a></li>
-	        <li><a href="#" class="theme">간식</a></li>
+	        <li class="current" ><a href="#" class="theme" value="KO">한식</a></li>
+	        <li><a href="#" class="theme" value="CH">중식</a></li>
+	        <li><a href="#" class="theme" value="FR">양식</a></li>
+	        <li><a href="#" class="theme" value="JP">일식</a></li>
+	        <li><a href="#" class="theme" value="DES">간식</a></li>
 	      </ul>
 	    </nav>
 	    
-		            
+		             
       <div class="center btmspace-50">
-	   <select class="condition" name="orderCondition">
+	   <select class="condition" id="orderCondition" name="orderCondition">
 							<option value="0"
 								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
 							<option value="1"
@@ -386,6 +389,7 @@ p {
 								
 						</select>
 	     </div>
+  	</form>
     	</section>
   	</div>
  
@@ -416,6 +420,8 @@ p {
   </div>
   </c:forEach>
   
+ 
+  
      <div  id="scrollList"></div>
      
 </div>
@@ -426,5 +432,4 @@ p {
 	<!-- PageNavigation End... -->
 	
 </body>
-
 </html>

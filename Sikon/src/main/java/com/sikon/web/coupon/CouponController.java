@@ -55,31 +55,6 @@ public class CouponController {
 	}
 		
 	///Method
-	@RequestMapping( value="/manageCoupon" )
-	public String manageCoupon(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
-				
-		if(search.getCurrentPage() ==0 ){
-			search.setCurrentPage(1);
-		}
-		search.setPageSize(pageSize);
-		
-		// Business logic 수행
-		Map<String , Object> couponMap = couponService.getCouponList(search);
-		Map<String , Object> issueMap = couponService.getIssuedCouponList(search);
-		
-		Page couponPage = new Page( search.getCurrentPage(), ((Integer)couponMap.get("totalCount")).intValue(), pageUnit, pageSize);
-		Page issuePage = new Page( search.getCurrentPage(), ((Integer)issueMap.get("totalCount")).intValue(), pageUnit, pageSize);
-		
-		// Model 과 View 연결
-		model.addAttribute("couponList", couponMap.get("list"));
-		model.addAttribute("issueList", issueMap.get("list"));
-		model.addAttribute("couponPage", couponPage);
-		model.addAttribute("issuePage", issuePage);
-		model.addAttribute("search", search);
-		
-		return "forward:/coupon/manageCoupon.jsp";
-	}
-	
 	@RequestMapping( value="/addCoupon", method=RequestMethod.POST )
 	public String addCoupon(@ModelAttribute("coupon") Coupon coupon) throws Exception{
 
@@ -89,7 +64,7 @@ public class CouponController {
 		System.out.println(coupon.getCouponNo());
 		couponService.addCoupon(coupon);
 		
-		return "forward:/coupon/manageCoupon";
+		return "forward:/coupon/listCoupon";
 	}
 	
 	@RequestMapping( value="/listCoupon" )
@@ -102,13 +77,12 @@ public class CouponController {
 		search.setPageSize(pageSize);
 		
 		// Business logic 수행
-		Map<String , Object> map = couponService.getCouponList(search);
+		Map<String , Object> resultMap = couponService.getCouponList(search);
 		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(resultPage);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
 		
 		// Model 과 View 연결
-		model.addAttribute("list", map.get("list"));
+		model.addAttribute("list", resultMap.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
@@ -125,7 +99,7 @@ public class CouponController {
 			couponService.deleteCoupon(checkList[i]);
 		}		
 		
-		return "forward:/coupon/manageCoupon";
+		return "forward:/coupon/listCoupon";
 	}
 		
 	@RequestMapping(value="/issueCouponView")
@@ -163,10 +137,11 @@ public class CouponController {
 		for (String couponUser : userId) {
 			User user = userService.getUser(couponUser);
 			coupon.setCouponUser(user);
+			coupon.setIssueStatus("001");
 			couponService.issueCoupon(coupon);
 	    }
 		
-		return "forward:/coupon/manageCoupon";
+		return "redirect:/coupon/listIssuedCoupon";
 	}
 	
 	@RequestMapping( value="/listIssuedCoupon" )
@@ -179,16 +154,15 @@ public class CouponController {
 		search.setPageSize(pageSize);
 		
 		// Business logic 수행
-		Map<String , Object> map=couponService.getIssuedCouponList(search);
+		Map<String , Object> resultMap = couponService.getIssuedCouponList(search);
 		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(resultPage);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
 		
 		// Model 과 View 연결
-		model.addAttribute("list", map.get("list"));
+		model.addAttribute("list", resultMap.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-		
+				
 		return "forward:/coupon/listIssuedCoupon.jsp";
 	}
 	
@@ -200,11 +174,11 @@ public class CouponController {
 		//Business Logic
 		for(int i=0; i<checkCount; i++) {
 			Coupon coupon = couponService.getIssuedCoupon(checkList[i]);
-			coupon.setIssueStatus("회수");
+			coupon.setIssueStatus("003");
 			couponService.updateIssueStatus(coupon);
 		}		
 		
-		return "forward:/coupon/manageCoupon";
+		return "redirect:/coupon/listIssuedCoupon";
 	}
 	
 }

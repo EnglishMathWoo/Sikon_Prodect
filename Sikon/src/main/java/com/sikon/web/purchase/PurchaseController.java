@@ -1,9 +1,12 @@
 package com.sikon.web.purchase;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -96,25 +99,32 @@ public class PurchaseController {
 
 		System.out.println("/purchase/addPurchase : POST");
 		//Business Logic
+
+		//==================================================================================
+		//일련번호 만들기
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String nowrandom = now.format(formatter);   
+		
+		Random random = new Random();
+		for(int i=0;i<7;i++) {
+			nowrandom += Integer.toString(random.nextInt(10));
+		}
+		
+		String sub = "str";
+		String serialNo = sub+nowrandom;	
+		System.out.println("일련번호: "+serialNo);
+		//==================================================================================
 		
 		User user = userService.getUser(userId);
 		Product product = productService.getProduct(prodNo);
 		
-		System.out.println("usedPoint: "+purchase.getUsedPoint());
-		System.out.println("earnPoint: "+purchase.getEarnPoint());
-		
 		purchase.setBuyer(user);
 		purchase.setPurchaseProd(product);
 		purchase.setDivyStatus("001");
-		
-		//===================================
+		purchase.setSerialNo(serialNo);
 		purchase.setPaymentOpt("KA");
-		purchase.setSerialNo("202206041234");
-		
-		
-		//===================================
-		
-		
+				
 		int quantity = purchase.getPurchaseQuantity();
 		
 		System.out.println(purchase);
@@ -131,47 +141,116 @@ public class PurchaseController {
 		
 		return modelAndView;
 	}
-	
-	
-//=================================== 장바구니 구매 ===================================
+
+//=============================================================================================================	
+//=== 장바구니 구매 ==============================================================================================
+//=============================================================================================================	
 	
 	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.GET)
 	public String addPurchaseByCart(@RequestParam("cartNo") int[] cartNo,  Model model) throws Exception {
 
 		System.out.println("/addPurchaseByCart : GET");
-		
+	
 		List list = new ArrayList();
 		
 		for(int cartnum : cartNo) {
 			
-			System.out.println("cartnum: "+cartnum);
+			Cart cart = cartService.getCart(cartnum);
+			Product product = productService.getProduct(cart.getCartProd().getProdNo());
+			cart.setCartProd(product);
 			
-			Cart cart = cartService.getCart(cartnum);			
+			list.add(cart);
 			
-			System.out.println("cart: "+cart);
+		}
+		
+		System.out.println("cartlist: "+list);
+		
+		model.addAttribute("cartlist", list);
+		
+		
+		return "forward:/purchase/addPurchaseViewByCart.jsp";
+	}	
+	
+
+	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.POST)
+	public ModelAndView addPurchaseByCart(@ModelAttribute("purchase") Purchase purchase, @RequestParam("coupon") String[] coupon,
+															@RequestParam("cartNo") int[] cartNo, @RequestParam("userId") String userId ) throws Exception {
+
+		System.out.println("========================================================================");
+		System.out.println("/purchase/addPurchaseByCart : POST");
+		
+		User user = userService.getUser(userId);
+		
+		//====================================
+		//일련번호 만들기
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String nowrandom = now.format(formatter);   
+		
+		Random random = new Random();
+		for(int i=0;i<7;i++) {
+			nowrandom += Integer.toString(random.nextInt(10));
+		}
+		
+		String sub = "str";
+		String serialNo = sub+nowrandom;	
+		System.out.println("일련번호: "+serialNo);
+		//=======================================
+		
+		List list = new ArrayList();
+		
+		//for문
+		for(int i=0; i<cartNo.length; i++) {
+			
+			Cart cart = cartService.getCart(cartNo[i]);
 			
 			Product product = productService.getProduct(cart.getCartProd().getProdNo());
 			
-			System.out.println("product: "+product);
+			Purchase purchaseByCart = new Purchase();
+			purchaseByCart.setReceiverName(purchase.getReceiverName());
+			purchaseByCart.setReceiverPhone(purchase.getReceiverPhone());
+			purchaseByCart.setReceiverEmail(purchase.getReceiverEmail());
+			purchaseByCart.setDivyAddr(purchase.getDivyAddr());
+			purchaseByCart.setDivyMessage(purchase.getDivyMessage());
+			purchaseByCart.setDivyFee(purchase.getDivyFee());
+			purchaseByCart.setUsedPoint(purchase.getUsedPoint());
+			purchaseByCart.setEarnPoint(purchase.getEarnPoint());
+			purchaseByCart.setBuyer(user);
+			purchaseByCart.setPurchaseProd(product);
+			purchaseByCart.setUsedCoupon(coupon[i]);
+			purchaseByCart.setPurchaseQuantity(cart.getQuantity());
+			purchaseByCart.setDivyStatus("001");
+			purchaseByCart.setPaymentOpt("KA");
+			purchaseByCart.setSerialNo(serialNo);		
 			
-			list.add(product);
+			list.add(purchaseByCart);
 			
-			System.out.println("--------------------------------");
+			System.out.println(purchaseByCart);
+			purchaseService.addPurchase(purchaseByCart);
+			
+			System.out.println(cart.getQuantity());
+			System.out.println(product.getProdNo());
+			purchaseService.updateStock(cart.getQuantity(), product.getProdNo());
+			
+			cartService.deleteCart(cartNo[i]);
+		
 		}
 		
+		System.out.println("========================================================================");
+		
 		System.out.println("list: "+list);
-		model.addAttribute("list", list);
 		
-		System.out.println("===================================");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");
+		modelAndView.addObject("list", list);
 		
-		//return "forward:/purchase/addPurchaseViewByCart.jsp";
-		return null;
-	}	
-	
-	
-	
-//==================================================================================
-	
+		return modelAndView;
+	}
+
+//=============================================================================================================	
+//=============================================================================================================	
+//=============================================================================================================	
+
 		
 	@RequestMapping( value="getPurchase", method=RequestMethod.GET)
 	public ModelAndView getPurchase( @RequestParam("tranNo") int tranNo) throws Exception {

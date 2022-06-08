@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!DOCTYPE html>
 
@@ -54,6 +56,10 @@
 body>div.container {
 	border: 3px solid #D6CDB7;
 	margin-top: 30px;
+}
+
+#all {
+	margin-top:50px;
 }
 </style>
     
@@ -138,12 +144,26 @@ $(function() {
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container" >
 	
 		<h1 class="bg-defualt text-center">쿠킹클래스신청</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
+		
+		
+		  <div class="form-group">
+		    <label for="uploadfile" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스이미지</label>
+		    <div class="col-sm-4">
+
+		
+	<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle"/>
+		
+		
+
+		    
+		    </div>
+		  </div>		
 		
 		  <div class="form-group">
 		    <label for="cookNo" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스번호</label>
@@ -165,10 +185,40 @@ $(function() {
 		  <div class="form-group">
 		    <label for="cookDifficuty" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스난이도</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookDifficuty" name="cookDifficuty" placeholder="쿠킹클래스난이도" value="${cook.cookDifficuty}" readonly>
+		    
+			<c:if test = "${cook.cookDifficuty == '1'}">
+			초급 
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '2'}">
+			중급
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '3'}">
+			고급
+			</c:if>
+			
 		    </div>
 		  </div>
+		  <div class="form-group">
+		    <label for="cookTheme" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스테마</label>
+		    <div class="col-sm-4">
+			<c:if test = "${cook.cookTheme =='KO'}">
+			<div >한식</div> 
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'JA'}">
+			일식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'AM'}">
+			양식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'CH'}">
+			중식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'DE'}">
+			간식
+			</c:if>						
+		    </div>
 		  
+		  </div>		  
 		  <div class="form-group">
 		    <label for="cookRegdate" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스등록날짜</label>
 		    <div class="col-sm-4">
@@ -201,6 +251,17 @@ $(function() {
 			</select>
 		    </div>
 		  </div>
+		  
+		    <div class="form-group">
+		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">수업시간</label>
+		    <div class="col-sm-2">
+		      <input type="TIME" class="form-control" id="startTime"  name="startTime" value="${cook.startTime}" placeholder="수업시작시간">
+		    </div>
+		    
+		      <div class="col-sm-2">
+		      <input type="TIME" class="form-control" id="endTime"  name="endTime"  value="${cook.endTime}" placeholder="수업종료시간">
+		    </div>
+		  </div>		  
 		  
 		  	<input type="hidden" id="userName"  value="${user.userName }" />  
 		  <div class="form-group">
@@ -307,6 +368,7 @@ function payment(data) {
 			<div class="text-left">
 			<button type="button" class="kakao" id="kakao">결제하기</button>	
 		</div>
+			</div>
  
 	
 </body>

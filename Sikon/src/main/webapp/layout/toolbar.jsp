@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
-<link href="/resources/css/fontawesome.all.min.css" rel="stylesheet">
-
+<script src="https://kit.fontawesome.com/ef3e0db941.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
 <style>
 /* 배경색 */
@@ -32,8 +32,8 @@ hr, .borderedbox {
 #usik {
 float:left;
 margin-top:10px;
-	width: 50%;
-	height: 50%;
+	width: 150px;
+	height: 37px;
 }
 
 /* toolbar css (from layout.css) */
@@ -448,6 +448,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		                <li><a href="#">쿠킹클래스장바구니</a></li>
 		                <li><a href="#">하바나</a></li>
 		                <li><a href="#">하트</a></li>
+		                <li><a href="#">수강예정목록</a></li>
               		</ul>
               		</c:if>
         </li>        
@@ -474,7 +475,12 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
               		</ul>
             	</li>     
 	            <li><a href="#">공지사항관리</a></li>
-	            <li><a href="#">쿠폰관리</a></li>
+	            <li><a class="drop" href="#">쿠폰관리</a>
+	            	<ul>
+	            		<li><a href="#">쿠폰목록</a></li>
+		                <li><a href="#">쿠폰발급목록</a></li>
+	            	</ul>
+	            </li>
           	</ul>
         </li>
         </c:if>
@@ -491,7 +497,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	
 		 $(function() {
 
-			$( "a:contains(' 식탁의온도')" ).on("click" , function() {
+			$( "#usik" ).on("click" , function() {
 			$(self.location).attr("href","/recipe/listRecipe");
 			});
 			
@@ -544,9 +550,19 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 	 		
 	 		$( "a:contains('쿠폰관리')" ).on("click" , function() {
-			$(self.location).attr("href","/coupon/manageCoupon");
+			$(self.location).attr("href","/coupon/listCoupon");
 			});
 	 		
+	 		//====================================================
+	 		
+	 		$( "a:contains('쿠폰목록')" ).on("click" , function() {
+			$(self.location).attr("href","/coupon/listCoupon");
+			});
+	 		
+	 		$( "a:contains('쿠폰발급목록')" ).on("click" , function() {
+			$(self.location).attr("href","/coupon/listIssuedCoupon");
+			});
+	 			
 	 		//====================================================
 	 			
 	 		$( "a:contains('구매목록')" ).on("click" , function() {
@@ -595,10 +611,56 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	 		$( "a:contains('하바나')" ).on("click" , function() {
 				$(self.location).attr("href","/cook/listMyCook");
 			}); 
+	 		
 	 		$( "a:contains('하트')" ).on("click" , function() {
 				$(self.location).attr("href","/heart/getHeart?userId=${sessionScope.user.userId}");
+			});
+	 		$( "a:contains('수강예정목록')" ).on("click" , function() {
+				$(self.location).attr("href","/apply/listMyClass");
 			}); 	 		
 	 		//====================================================
 		 });
+		 
+		//web socket 시작
+		var socket = null;
+		
+		$(document).ready(function(){
+			//if(${login != null}){
+				connectWs();
+			//}
+		})
+			
+		//소켓
+			
+		function connectWs(){
+			
+			console.log("tttttt")
+			var ws = new SockJS("/alarm");
+			socket = ws;
+		
+			ws.onopen = function() {
+				console.log('open');
+			};
+		
+			ws.onmessage = function(event) {
+				alert("onmessage"+event.data);
+				let $socketAlert = $('div#socketAlert');
+				$socketAlert.html(event.data)
+				$socketAlert.css('display', 'block');
+				
+				setTimeout(function(){
+					$socketAlert.css('display','none');
+					
+				}, 5000);
+			};
+		
+			ws.onclose = function() {
+			    console.log('close');
+			};
+		
+		
+		};
+		
+		//web socket 끝
 	 	
 	</script>  

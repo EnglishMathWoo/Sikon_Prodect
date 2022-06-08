@@ -32,6 +32,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	/// Method
+
 	public void addReview(Review review) throws Exception {
 		System.out.println("review=" + review);
 		reviewDao.addReview(review);

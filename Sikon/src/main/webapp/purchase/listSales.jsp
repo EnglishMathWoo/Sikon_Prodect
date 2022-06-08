@@ -116,19 +116,7 @@ table {
 			$( "td.prodNum" ).css("color" , "#f08080");
 			$( "td.divy" ).css("color" , "#ffb6c1");
 			$( "td.user" ).css("color" , "#708090");
-
-				
-			$('#myTabs a').click(function (e) {
-			  e.preventDefault()
-			  $(this).tab('show')
-			})
-				
-				
-				
-				
-				
-				
-				
+			
 		});	
 	</script>		
 
@@ -262,6 +250,7 @@ table {
 		      
 		      </table>
 			  <!--  table1 End /////////////////////////////////////-->
+			  	<jsp:include page="../common/pageNavigator_new.jsp"/>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="profile">
 			    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -338,6 +327,7 @@ table {
 		      
 		      </table>
 			  <!--  table2 End /////////////////////////////////////-->
+				  	<jsp:include page="../common/pageNavigator_new.jsp"/>
 		  </div>
 		</div>
 			
@@ -348,7 +338,7 @@ table {
  	
  	
  	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
+
 	<!-- PageNavigation End... -->
 	
 </body>

@@ -6,6 +6,7 @@ public class Heart {
 	private int cookNo;
 	private String userId;
 	private int heartCheck;
+	private Cook cook;
 
 	public Heart() {
 	}
@@ -42,11 +43,20 @@ public class Heart {
 		this.heartCheck = heartCheck;
 	}
 
+	public Cook getCook() {
+		return cook;
+	}
+
+	public void setCook(Cook cook) {
+		this.cook = cook;
+	}
+
 	@Override
 	public String toString() {
 		return "Heart [heartNo=" + heartNo + ", cookNo=" + cookNo + ", userId=" + userId + ", heartCheck=" + heartCheck
-				+ "]";
+				+ ", cook=" + cook + "]";
 	}
+
 
 	
 }

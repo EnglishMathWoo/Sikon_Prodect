@@ -11,6 +11,10 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -30,6 +34,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+
+    <style>
+
+        .bi-heart{
+            font-size: 30px;
+            line-height: 30px;
+            color:crimson;
+        }
+
+        .bi-heart-fill{
+            font-size: 30px;
+            line-height: 30px;
+            color:crimson;
+        }
+
+    </style>
 
 <style>
 body>div.container{
@@ -143,6 +163,25 @@ div.image{
 				
 				<div class="row">
 				
+ <i class="bi bi-heart"></i>
+    
+    <script>
+    var i = 0;
+    $('.bi-heart').on('click',function(){
+        if(i==0){
+            $(this).removeClass('bi-heart');
+            $(this).addClass('bi-heart-fill');
+            i++;
+        }else if(i==1){
+            $(this).removeClass('bi-heart-fill');
+            $(this).addClass('bi-heart');
+            i--;
+        }
+        
+    });
+
+</script>
+				
 				
 					
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
@@ -227,7 +266,7 @@ div.image{
 		 	
 		 	<div class="col-xs-10 col-md-10 text-center">
 		 	쿠킹클래스 내용
-		 	${cook.cookContent }
+		 	${cook.cookContent}
 		 	
 		 	</div>
 		 	

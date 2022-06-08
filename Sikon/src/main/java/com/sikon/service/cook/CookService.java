@@ -23,6 +23,6 @@ public interface CookService {
 	
 	public Map<String, Object> listMyCook(Search search,String userNickname) throws Exception;
 
-	
+
 
 }
