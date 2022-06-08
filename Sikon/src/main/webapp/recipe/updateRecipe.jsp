@@ -71,20 +71,25 @@ body {
 .row {
 	font-family: 'Gowun Batang', serif;
 }
+
 table.type09 {
     border-collapse: collapse;
-    text-align: left;
+    text-align: center;
     line-height: 1.5;
+      width: 350px;
 }
+
 table.type09 thead th {
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
     color: #369;
     border-bottom: 3px solid #036;
+     text-align: center;
+     
 }
 table.type09 tbody th {
-    width: 150px;
+    width: 350px;
     padding: 10px;
     font-weight: bold;
     vertical-align: top;
