@@ -52,6 +52,14 @@ public class RecipeRestController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
+		System.out.println("orderCondition=" + search.getOrderCondition());
+
+		if (search.getOrderCondition() == null) {
+			search.setOrderCondition("100");
+		}
+
+		System.out.println("orderCondition=" + search.getOrderCondition());
+		
 		search.setPageSize(pageSize);
 
 		Map<String, Object> map = recipeService.getRecipeList(search);

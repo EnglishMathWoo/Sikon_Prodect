@@ -188,28 +188,40 @@ p {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
+		 
+	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage);
-			$("form").attr("method" , "POST").attr("action" , "/recipe/listProduct").submit();
+			$("form").attr("method" , "POST").attr("action" , "/recipe/listRecipe").submit();
 		}
 		
-		function chageLangSelect(){
-			console.log('고');
-		    var orderCondition = document.getElementById("orderCondition");
-		    
-		    fncGetList(1);
-		    console.log('이양');
-		}
+		$(function() {
+			
+		  $("#orderCondition").on( "change", function() {
+		  console.log($("#orderCondition").val());
+	      fncGetList(1);
+		  });
+			  
+		  $(".theme").on( "click", function() {
+			  console.log($(".theme").data('value'));
+		      fncGetList(1);
+			  });
+		  
+		});
+			  
 		
 		 
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			
 					$( ".imgover" ).on("click" , function() {
 					console.log($(this).attr("value"));
 					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
 					});
+			 
+					$( ".submit" ).on("click" , function() {
+						self.location ="/recipe/addRecipe.jsp"
+						});
 					
 				//$("#theme").on("click" , function() {
 				//	var searchCondition = document.getElementById("theme").getAttribute('data-value');
@@ -344,6 +356,8 @@ p {
 <br/>	     
 <!-- ################################################################################################ -->
 
+
+
 	<div class="wrapper row3">
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
@@ -355,20 +369,21 @@ p {
 		  
 		    
 		    <br/><hr/><br/>
+    			    <form class="form-inline" name="detailForm">
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li class="current" ><a href="#" id="theme" data-value="KO">한식</a></li>
-	        <li><a href="#" id="theme" data-value="CH">중식</a></li>
-	        <li><a href="#" id="theme" data-value="FR">양식</a></li>
-	        <li><a href="#" id="theme" data-value="JP">일식</a></li>
-	        <li><a href="#" id="theme"data-value="DES">간식</a></li>
+	        <li class="current" ><a href="#" class="theme" data-value="KO">한식</a></li>
+	        <li><a href="#" class="theme" data-value="CH">중식</a></li>
+	        <li><a href="#" class="theme" data-value="FR">양식</a></li>
+	        <li><a href="#" class="theme" data-value="JP">일식</a></li>
+	        <li><a href="#" class="theme"data-value="DES">간식</a></li>
 	      </ul>
 	    </nav>
 	    
 		            
       <div class="center btmspace-50">
-	   <select class="condition" id="orderCondition" name="orderCondition" onchange="chageLangSelect()">
+	   <select class="condition" id="orderCondition" name="orderCondition">
 							<option value="0"
 								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
 							<option value="1"
@@ -380,6 +395,7 @@ p {
 								
 						</select>
 	     </div>
+  	</form>
     	</section>
   	</div>
  
@@ -410,6 +426,8 @@ p {
   </div>
   </c:forEach>
   
+ 
+  
      <div  id="scrollList"></div>
      
 </div>
@@ -420,5 +438,4 @@ p {
 	<!-- PageNavigation End... -->
 	
 </body>
-
 </html>
