@@ -53,7 +53,7 @@
         .bi-heart-fill{
             font-size: 30px;
             line-height: 30px;
-            color:crimson;
+            color:blue;
         }
 
     </style>
@@ -64,9 +64,16 @@ body {
 	padding-top: 50px;
 }
 div.thumbnail {
-	height: 500px;
-	width: 340px;
+	height:300px;
+	border-radius: 5px;
+	
 }
+
+#image {
+	width: 400px;
+	height:400px;
+	border-radius: 5px;
+} 
 </style>
 
 
@@ -99,12 +106,25 @@ div.thumbnail {
 			console.log('${param.menu}');
 		}
 		
-		
-		$(document).on('click', 'a.btn-defualt', function(){
-			 var cookNo =$(this).attr("value");
-			 console.log('상세정보');
-			 self.location = "/cook/getCook&cookNo="+cookNo
-		});
+		 $(function() {
+				
+				$("button.delete").on("click" , function() {
+					
+					var checkCount = $("input[name='cookCheck']:checked").length;
+				    var array = new Array();
+					$("input[name='cookCheck']:checked").each(function() {
+						array.push($(this).attr('id'));
+				    });
+					
+					if(checkCount != 0) {
+						alert("쿠킹클래스를 삭제하시겠습니까?")
+						self.location = "/cook/deleteCook?checkCount="+checkCount+"&checkList="+array;
+					} else {
+						alert("선택된 게시물이 없습니다.")	
+					}
+				});
+			});		
+
 		
 		 $(document).on('click', 'a.update', function(){
 			 var cookNo =$(this).attr("value");
@@ -129,9 +149,14 @@ div.thumbnail {
 				//var cookNo = $(this).attr("value");
 				var userId = $("input[name='userId']").val();
 				var cookNo = $(this).attr("value");
+				var hearthit = $("input[name='hearthit']").val();
+				var heartCheck = $("input[name='heartCheck']").val();
+		
 				
 				console.log(cookNo);
 				console.log(userId);
+				console.log(heartCheck);
+				console.log(hearthit);
 			     $.ajax({
 			            type : "POST",  
 			            url : "/heart/json/updateHeart",       
@@ -144,13 +169,19 @@ div.thumbnail {
 			                
 			                    if(heartCheck == 0){
 			                    	alert("추천완료.");
-			                    	  
+						           
+			                    	$("#like_btn").removeClass('bi-heart');
+						            $("#like_btn").addClass('bi-heart-fill');
+						           
 			                       
 			                    	location.reload();
 			                    }
 			                    else if (heartCheck == 1){
 			                     alert("추천취소");
-			                   
+			                     
+			                     	$("#like_btn").removeClass('bi-heart-fill');
+						            $("#like_btn").addClass('bi-heart');
+						         
 			                  
 			                    	location.reload();
 
@@ -168,22 +199,23 @@ div.thumbnail {
 				 $(document).on('click', 'a.btn-defualt', function(){
 					 var cookNo =$(this).attr("value");
 					 console.log('상세정보');
-					 self.location = "/cook/getcook?menu=search&cookNo="+cookNo
+					 self.location = "/cook/getCook?menu=search&cookNo="+cookNo
 				});
 				 
 				
 				 $(document).on('click', 'a.update', function(){
 					 var cookNo =$(this).attr("value");
 					 console.log('수정하기');
-					 self.location = "/cook/updatecook?cookNo="+cookNo
+					 self.location = "/cook/updateCook?cookNo="+cookNo
 				});
 				 
-				 $(document).on('click', 'a.buy', function(){
+				 $(document).on('click', '.image', function(){
 					 var cookNo =$(this).attr("value");
-					 console.log('구매하기');
-					 self.location = "/cook/getcook?menu=search&cookNo="+cookNo
+					 console.log('썸네일 클릭'+cookNo);
+					 self.location = "/cook/getCook?menu=search&cookNo="+cookNo
 				});
-				
+				 
+
 				 //=========autoComplete=================================================
 				 
 				 var list = [];
@@ -210,7 +242,7 @@ div.thumbnail {
 		        	   		
 					            $.ajax({
 					                
-					                  url : "/cook/json/listcook?&menu=${param.menu }" ,
+					                  url : "/cook/json/listCook?&menu=${param.menu }" ,
 					                  method : "POST" ,
 					                  data : JSON.stringify({
 					                	  currentPage : cpage
@@ -234,61 +266,84 @@ div.thumbnail {
 					                		var message;
 					                		var cancel;
 					                		var button;
+					                		var cookTheme;
 					                
-					                		if(JSONData.list[i].cancel == '0'){
+					                		if(JSONData.list[i].cookStock == '0'){
 				                				
-				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image'>";
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='500' height='500' id='image'>";
 				                				
 					                			
-					                		}else if(JSONData.list[i].cancel == '1'){
-					                			
-				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].fileName.split('/')[0]+"' id='image_none'>";
-				                				
-					                		}
-					                		
-					                		
-					                		if(${user.role.equals('admin') && param.menu.equals('manage')}){
-					                			message="<p>남은 재고량 : "+JSONData.list[i].stock+"</p>";
 					                		}else{
-					                			message="<p></p>";
+					                			
+				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='500' height='500' id='image'>";
+				                				
 					                		}
 					                		
 					                		
-					                		if(JSONData.list[i].cancel == '1' && param.menu.equals('search')){
-					                			cancel = "<p style='color:#DB4455'>판매중지</p>";
-					                		}else if(JSONData.list[i].cancel == '1' && param.menu.equals('manage')){
-					                			cancel = "<p style='color:#DB4455'>*판매중지된 상품입니다.</p>";
-					                		}else if(JSONData.list[i].cancel == '0'){
-					                			cancel = "<p></p>";
-					                		}
+
+					                		
+					                		if(JSONData.list[i].cookTheme == 'KO'){
+				                				
+					                			cookTheme = "<h5><strong>테마 : 한식</strong></h5>";               				
+				                			
+				                			}else if(JSONData.list[i].cookTheme == 'JA'){
+				                			
+				                				cookTheme = "<h5><strong>테마 : 일식</strong></h5>";			                				
+				                			}else if(JSONData.list[i].cookTheme == 'AM'){
+				                				cookTheme = "<h5><strong>테마 : 양식</strong></h5>";
+				                			}else if(JSONData.list[i].cookTheme == 'CH'){
+				                				cookTheme = "<h5><strong>테마 : 중식</strong></h5>";
+				                			}else if(JSONData.list[i].cookTheme == 'DE'){
+				                				cookTheme = "<h5><strong>테마 : 간식</strong></h5>";
+				                			}
+					                		
+
 					                		
 					                		if(${param.menu=='manage' }){
 					                			button = "<a class='btn btn-defualt btn update'  role='button' value='"+JSONData.list[i].cookNo+"'>수정하기</a>" ;
 					                		}else{
-					                			if(JSONData.list[i].stock == "0"){
+					                			if(JSONData.list[i].cookStock == "0"){
 					                				button = "<a class='btn btn-defualt btn disabled' role='button' >재고없음</a>";
 					                			}else{
-					                				if(JSONData.list[i].cancel=='0'){
-					                					button = "<a class='btn btn-default btn buy' role='button' value='"+JSONData.list[i].cookNo+"'>구매하기</a>";
-					                				}else{
+					                				if(JSONData.list[i].cookStock=='0'){
+					                					
 					                					button = "<a class='btn btn-default btn disabled' role='button' value='"+JSONData.list[i].cookNo+"'>구매하기</a>";
+					                				}else{
+					                					button = "<a class='btn btn-default btn buy' role='button' value='"+JSONData.list[i].cookNo+"'>구매하기</a>";
 					                				}
 					                			}
 					                		}
 					                		
-						                     var displayValue = "<div class='col-sm-6 col-md-4'>"
-						                     					+"<div class='thumbnail'>"
+						                     var displayValue = "<div class='container'>"
+						                    	 				+"<div class='row'>"
+						                     					+"<div class='col-xs-4 col-md-6 text-left image' value='"+JSONData.list[i].cookNo+"'>"
 						                     					+image
-					                     						+"<div class='caption'>"
-					                     						+"<h3>"+JSONData.list[i].cookName+"</h3>"
-					                     						+cancel
-					                     						+"<p>"+JSONData.list[i].price+" 원</p>"
-					                     						+"<p align='right'>"
-					                     						+"<a class='btn btn-defualt btn'  role='button' value='"+JSONData.list[i].cookNo+"'>상세정보</a>"
-					                     						+button
-					                     						+"</p>"
-					                     						+"</div></div></div>"
-					                     						
+						                     					+"<br/></div>"
+						                     					+"<div class='col-xs-4 col-md-4'>"
+					                     						+"<div class='row'>"
+					                     						+"<div><h4><strong>"+JSONData.list[i].cookName+"</strong></h4></div><br>"   
+					                     						+"<div>"+JSONData.list[i].cookBrief+"</div>"
+					                     						+"</div>"
+					                     						+"<br/><br/>"
+					                     						+"<div class='row'>"
+					                     						+"<div><h6>"+JSONData.list[i].cookPrice+" 원</h6></div>"
+					                     						+"<div><h5><strong>모집인원"+JSONData.list[i].cookRecruit+" 명</strong></h5></div>"
+					                     						+"</div><br/>"
+					                     						+"<div class='row'>"
+					                     						+"<h5><strong> "+cookTheme+"</strong></h5></div>"
+					                     						+"<div class='row'>"
+					                     						+"<h5><strong>장소 : "+JSONData.list[i].cookLocation+"</strong></h5></div>"					                     						
+					                     						+"<div class='row'>"
+					                     						+"<div><h5><strong>모집기간: "+JSONData.list[i].aplstarTime+"&emsp;~&emsp;"+JSONData.list[i].aplendTime+"</strong></h5></div>"
+					                     						+"</div>"
+					                     						+"<div class='row'>"
+					                     						+"<div><h5><strong>수업시간: "+JSONData.list[i].startTime+"&emsp;~&emsp;"+JSONData.list[i].endTime+"</strong></h5></div>"
+					                     						+"</div>"
+					                     						+"</div>"
+					                     						+"<div class='col-xs-2 col-md-2'>"
+					                     						+"</div>"
+					                     						+"</div>"
+					                     						+"<hr/>"
 					                     		//*/				
 						               	$( '#scrollList' ).append(displayValue);	
 					                     						
@@ -368,6 +423,8 @@ div.thumbnail {
 				
 					
 						<input type="hidden" id="currentPage" name="currentPage" value="1" />
+						<input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
+						  <input type="hidden" name="cookNo" value="${cook.cookNo}">
 				
 		</form>
 			
@@ -378,124 +435,152 @@ div.thumbnail {
 
 		</div>
 </div>
+
+
+
 	
 		
 <div class="container">
 	
-<div class="row">
+<div class="row" id="target">
 	<c:set var="i" value="0" />
 
-<c:if test="${param.menu=='search'}">
+
 <c:forEach var="cook" items="${list}">
+<td align="left"><input type="checkbox" name="cookCheck" id="${cook.cookNo}"/></td>
+ <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
   <input type="hidden" name="userId" value="${user.userId}">
   <input type="hidden" name="cookNo" value="${cook.cookNo}">
     <input type="hidden" name="cookNo" value="${cook.cookStock}">
-   <input type="hidden" name="heartcheck" value="${heart.heartcheck}">
- <div class="col-sm-6 col-md-4">
- <br/> <br/>
-    <div class="thumbnail">
-    				<c:choose>
-    
-    	<c:when test="${(cook.cookFilename).contains('/')}">
-    		<c:forEach var="name" items="${(cook.cookFilename).split('/')[0]}">
-		<img class="image" src="/resources/images/uploadFiles/${name}" width="200" height="200" ><br/>
-			</c:forEach>
+  
+      <input type="hidden" name="hearthit" value="${cook.hearthit}">
+
+	<div class="row">
 		
-      </c:when>
-		
-		<c:otherwise>
-		
-		<img class="image" src="/resources/images/uploadFiles/${cook.cookFilename}" width="200" height="200"><br/>
-		</c:otherwise>
-		</c:choose>
-		
-      <div class="caption">
-        <h4 style="color:black;">${cook.cookName }</h4>
-        <p>${cook.cookPrice }</p>
-        
-     
-      
-        <p><a href="/cook/getCook?menu=search&cookNo=${cook.cookNo}" class="btn btn-default" role="button">상세정보</a>
-         <a href="/cook/updateCook?menu=${param.menu}&cookNo=${cook.cookNo }" class="btn btn-default" role="button">수정</a> 
-        
-        <a class="btn btn-default" disabled="disabled" role="button">구매</a>
-                    <p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
-                    	
 
-        
-                   <script>
-    
-          
-            var p =  $(this).attr("value");
-            $('p').on('click',function(){
-                if(p<=0){
-                	 $(this).attr('class','bi-heart-fill');
-                    p++;
-                }else if(p==1){
-                	$(this).attr('class','bi-heart');
-                    p--;
-                }
-                
-            });
-
-</script>
-    
-
-
-
-        
-   
-      </div>
-    </div>
-  </div>		
-    </c:forEach>
-    </c:if>
-    
-<c:if test="${param.menu=='manage'}">
-    <c:forEach var="cook" items="${list}">
-    
- <div class="col-sm-6 col-md-4">
- <br/> <br/>
-    <div class="thumbnail">
+				<div class="col-xs-4 col-md-6 text-lefr image"  value="${cook.cookNo }">				
      <c:choose>
     
     	<c:when test="${(cook.cookFilename).contains('/')}">
     		<c:forEach var="name" items="${(cook.cookFilename).split('/')[0]}">
-		<img src="/resources/images/uploadFiles/${name}" width="200" height="200"><br/>
+		<img src="/resources/images/uploadFiles/${name}" id="image"><br/>
 			</c:forEach>
 		
       </c:when>                                                                                                                           
 		
 		<c:otherwise>
-		<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="200" height="200"><br/>
+		<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="400" height="400" id="image"><br/>
 		</c:otherwise>
 		</c:choose>
-      <div class="caption">
-        <h4 style="color:black;">${cook.cookName }</h4>
-        <p>${cook.cookPrice }</p>
-        <c:if test="${cook.cancel=='1' }">
-        <p style="color:red;">판매중지</p>
-        </c:if>
-        <p><a href="/cook/getcook?menu=manage&cookNo=${cook.cookNo }" class="btn btn-default" role="button" >상세정보</a> 
-        <a href="/cook/updatecook?menu=${param.menu}&cookNo=${cook.cookNo }" class="btn btn-default" role="button">수정</a>
-       
-      </div>
-    </div>
-  </div>		
-    </c:forEach>
-    </c:if>
-    
+				</div>	
+			
+
+				<div class="col-xs-4 col-md-4">
+			
+				<div class="row">
+					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo }"/>
+					<input type="hidden" name="cookRegdate" id="cookRegdate" value="${cook.cookRegdate }"/>
+				</div>
+				
+				
+				
+				<div class="row">
+				
+				
+					
+					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
+					<div>${cook.cookBrief }</div>
+					
+					
+					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>
+					<input type="hidden" name="cookName" value="${cook.cookName}"/>
+					<input type="hidden" name="cookRecruit" value="${cook.cookRecruit}"/>
+					
+					
+				</div>
+				
+				<br/><br/>
+				
+				
+				
+				
+				<div class="row">
+					<div><h6>${cook.cookPrice } 원</h6></div>
+					<div><h5><strong>모집인원${cook.cookRecruit}명</strong></h5></div>
+				</div>
+				
+				<br/>
+				
+				<div class="row">
+			<c:if test = "${cook.cookTheme =='KO'}">
+			 <h5><strong>테마 : 한식</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'JA'}">
+			 <h5><strong>테마 : 일식</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'AM'}">
+		 <h5><strong>테마 : 양식</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'CH'}">
+			 <h5><strong>테마 : 중식</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'DE'}">
+			 <h5><strong>테마 : 간식</strong></h5>
+			</c:if>		
+				</div>
+				
+
+				<div class="row">
+			
+					<div><h5><strong>장소 : ${cook.cookLocation}</strong></h5></div>
+				</div>				
+				
+			
+				
+				<div class="row">
+				<div><h5><strong>모집기간 : ${cook.aplstarTime}&emsp;~&emsp;${cook.aplendTime}</strong></h5></div>				
+				</div>
+				
+				<div class="row">
+				<div><h5><strong>수업시간 : ${cook.startTime}&emsp;~&emsp;${cook.endTime}</strong></h5></div>				
+				</div>
+		
+				<button type="button" class="btn btn-primary delete" value="${cook.cookNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
+				<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
+		<c:forEach var="heart" items="${heart}" >
+		<c:choose>
+ 		<c:when test = "${heart.heartCheck == '1'}">
+			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
+ 		</c:when>    
+ 		<c:otherwise>
+ 		<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
+ 		</c:otherwise>
+ 		</c:choose>
+ 		</c:forEach>
+
+		
+				
+		 	</div>
+		 	
+		 	<div class="col-xs-2 col-md-2">
+		 	</div>
+		 	
+		 	</div>
+		 	
+		 	<hr/>
+		 	
+</c:forEach>
+		 	
+</div>
+</div>
+
+
+
               <div  id="scrollList"></div>
     
-  </div>
-		
+
 	  
- 	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 	
- 	<!-- PageNavigation Start... -->
-	<!-- PageNavigation End... -->
-	
+
 </body>
 
 </html>

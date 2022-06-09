@@ -108,19 +108,29 @@ div.image{
 	});
 //=========================================장바구니=========================================//	
 	
-	 function fncAddWish() {	
-			
-			$("form").attr("method" , "POST").attr("action" , "/wish/addWish").submit();
-			
-		}
+function fncAddWish() {
+	
+	var cookStock=$("#cookStock").val();
+	var cookStatus=$("input[name='cookStatus']").val();
+	console.log(cookStock);
+	console.log(cookStatus);
+	if (cookStock < cookStatus) {
+		alert("장바구니 담기가능 개수가 초과되었습니다");
+		return;
+	}
+	
+	
+	$("form").attr("method" , "POST").attr("action" , "/wish/addWish").submit();
+	
+}
 	 
-	 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "#wish" ).on("click" , function() {
-				console.log('장바구니');
-				fncAddWish();
-			});
-		});
+$(function() {
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	$( "#wish" ).on("click" , function() {
+		console.log('장바구니');
+		fncAddWish();
+	});
+});
 //=========================================================================================//	
 	
 		
@@ -190,7 +200,7 @@ div.image{
 					
 					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>
 					<input type="hidden" name="cookName" value="${cook.cookName}"/>
-					<input type="hidden" name="cookContent" value="${cook.cookContent}"/>
+					
 					
 				</div>
 				
@@ -246,7 +256,7 @@ div.image{
 				
 				<div class="form-group">
 			  		<div class="text-center">	
-			  				<button type="button" class="btn btn-default btn-lg" id="wish">장바구니</button>&emsp;
+			  			 <button type="button"  class="btn btn-warning" id="wish" >장바구니</button>
 			  				<button type="button" class="btn btn-warning btn-lg" id="buy" >구매하기</button>
 			  			
 			  				<button type="button" class="btn btn-primary btn-lg" id="buy" >수정하기</button>
@@ -263,14 +273,16 @@ div.image{
 		 	</div>
 		 	
 		 	<hr/>
-		 	
-		 	<div class="col-xs-10 col-md-10 text-center">
-		 	쿠킹클래스 내용
-		 	${cook.cookContent}
-		 	
+
+		<div class="col-xs-10 col-md-10 text-center">
+			<div><strong>${cook.cookContent}</strong></div>
+		</div>
+		
+
 		 	</div>
+	
 		 	
-</div>
+
 
 </body>
 </html>

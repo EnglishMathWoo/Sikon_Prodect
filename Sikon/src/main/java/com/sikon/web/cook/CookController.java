@@ -264,7 +264,7 @@ public class CookController {
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		
-		Map<String, Object> heartMap = heartService.getHeart2(user.getUserId());
+		Map<String, Object> heartMap = heartService.getHeart2(10000, user.getUserId());
 		
 		System.out.println(heartMap.get("list"));
 		System.out.println("^^^^^^^^^^^");

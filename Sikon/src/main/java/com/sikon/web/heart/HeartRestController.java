@@ -66,6 +66,7 @@ public class HeartRestController {
 
 			System.out.println(cookNo);
 			System.out.println(userId);
+			System.out.println("!$!@!#%#@%#@@#%!@%#!#%@!@%#!%@#@%!");
 			int heartCheck = heartService.heartCheck(cookNo, userId);
 			System.out.println(heartCheck);
 			if(heartCheck == 0) {

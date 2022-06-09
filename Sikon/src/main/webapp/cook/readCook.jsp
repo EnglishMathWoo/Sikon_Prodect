@@ -69,7 +69,7 @@ $(function() {
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
+        	<a class="navbar-brand">식탁의 온도</a>
    		</div>
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -115,40 +115,31 @@ $(function() {
 		    </div>
 		  </div>
 		  
+
 		  <div class="form-group">
-		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스등록날짜</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookRegdate"  name="cookRegdate" value="${cook.cookRegdate}" placeholder="제조일자">
+		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">모집기간</label>
+		    <div class="col-sm-2">
+		      <input type="DATE" class="form-control" id="aplstarTime"  name="aplstarTime" value="${cook.aplstarTime}" placeholder="모집시작기간">
+		    </div>
+		    
+		     <div class="col-sm-2">
+		      <input type="DATE" class="form-control" id="aplendTime"  name="aplendTime" value="${cook.aplendTime}" placeholder="모집종료기간">
+		    </div>
+		  </div>
+		  		  
+		    <div class="form-group">
+		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">수업시간</label>
+		    <div class="col-sm-2">
+		      <input type="TIME" class="form-control" id="startTime"  name="startTime"  value="${cook.startTime}" placeholder="수업시작시간">
+		    </div>
+		    
+		      <div class="col-sm-2">
+		      <input type="TIME" class="form-control" id="endTime"  name="endTime" value="${cook.endTime}"  placeholder="수업종료시간">
 		    </div>
 		  </div>
 		  
-		   <div class="form-group">
-		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">모집시작기간</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="aplstarTime"  name="aplstarTime" value="${cook.aplstarTime}" placeholder="모집시작기간">
-		    </div>
-		  </div>
 		  
-		   <div class="form-group">
-		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">모집종료기간</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="aplendTime"  name="aplendTime" value="${cook.aplendTime}" placeholder="모집종료기간">
-		    </div>
-		  </div>
-		  
-		   <div class="form-group">
-		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">수업시작시간</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="startTime"  name="startTime" value="${cook.startTime}" placeholder="수업시작시간">
-		    </div>
-		  </div>
-		  
-		   <div class="form-group">
-		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">수업종료시간</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="endTime"  name="endTime" value="${cook.endTime}" placeholder="수업종료시간">
-		    </div>
-		  </div>
+
 		  
 		  
 		  
@@ -221,6 +212,16 @@ $(function() {
 		  <div class="form-group">
 		    <label for="cookDifficuty" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스난이도</label>
 		    <div class="col-sm-4">
+		    <c:if test = "${cook.cookDifficuty =='1'}">
+			초급
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '2'}">
+			중급
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '3'}">
+			고급
+			</c:if>
+
 
 					
 		    </div>
@@ -234,15 +235,13 @@ $(function() {
 		      
 		    </div>
     
-
-
-		  <div class="form-group">
-		    <label for="cookContent" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스내용</label>
-		    <div class="col-sm-4">
-		        ${cook.cookContent}
-		    </div>
-		  </div>
-		  
+<br/><br/>
+<br/><br/>
+ 	<div class="form-group">
+		<div class="col-xs-10 col-md-10 text-center">
+			<div><strong>${cook.cookContent}</strong></div>
+		</div>
+	   </div>	  
 		  		  
 		  </div>
 		  

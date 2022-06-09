@@ -267,6 +267,7 @@ div.thumbnail {
 					                		var cancel;
 					                		var button;
 					                		var cookTheme;
+					                		var heart;
 					                
 					                		if(JSONData.list[i].cookStock == '0'){
 				                				
@@ -298,21 +299,11 @@ div.thumbnail {
 				                			}
 					                		
 
+					                	
+					                	
+					                			button = "<a class='btn btn-defualt btn delete'  role='button' value='"+JSONData.list[i].cookNo+"'>삭&nbsp;제</a>" ;
+					                			heart= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</a>" ;
 					                		
-					                		if(${param.menu=='manage' }){
-					                			button = "<a class='btn btn-defualt btn update'  role='button' value='"+JSONData.list[i].cookNo+"'>수정하기</a>" ;
-					                		}else{
-					                			if(JSONData.list[i].cookStock == "0"){
-					                				button = "<a class='btn btn-defualt btn disabled' role='button' >재고없음</a>";
-					                			}else{
-					                				if(JSONData.list[i].cookStock=='0'){
-					                					
-					                					button = "<a class='btn btn-default btn disabled' role='button' value='"+JSONData.list[i].cookNo+"'>구매하기</a>";
-					                				}else{
-					                					button = "<a class='btn btn-default btn buy' role='button' value='"+JSONData.list[i].cookNo+"'>구매하기</a>";
-					                				}
-					                			}
-					                		}
 					                		
 						                     var displayValue = "<div class='container'>"
 						                    	 				+"<div class='row'>"
@@ -339,11 +330,15 @@ div.thumbnail {
 					                     						+"<div class='row'>"
 					                     						+"<div><h5><strong>수업시간: "+JSONData.list[i].startTime+"&emsp;~&emsp;"+JSONData.list[i].endTime+"</strong></h5></div>"
 					                     						+"</div>"
+					                     						+button
+					                     						+heart	
 					                     						+"</div>"
 					                     						+"<div class='col-xs-2 col-md-2'>"
 					                     						+"</div>"
 					                     						+"</div>"
 					                     						+"<hr/>"
+					                     						+"</div>"
+					                     						+"</div>"
 					                     		//*/				
 						               	$( '#scrollList' ).append(displayValue);	
 					                     						
@@ -452,7 +447,6 @@ div.thumbnail {
   <input type="hidden" name="userId" value="${user.userId}">
   <input type="hidden" name="cookNo" value="${cook.cookNo}">
     <input type="hidden" name="cookNo" value="${cook.cookStock}">
-  
       <input type="hidden" name="hearthit" value="${cook.hearthit}">
 
 	<div class="row">
@@ -495,7 +489,7 @@ div.thumbnail {
 					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>
 					<input type="hidden" name="cookName" value="${cook.cookName}"/>
 					<input type="hidden" name="cookRecruit" value="${cook.cookRecruit}"/>
-					<input type="hidden" name="cookContent" value="${cook.cookContent}"/>
+					
 					
 				</div>
 				
@@ -546,17 +540,18 @@ div.thumbnail {
 				</div>
 		
 				<button type="button" class="btn btn-primary delete" value="${cook.cookNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
+				<!-- <p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>  -->
 		
-		<c:forEach var="heart" items="${heart}" >
+		
 		<c:choose>
- 		<c:when test = "${heart.heartCheck == '1'}">
-			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
- 		</c:when>    
+ 		<c:when test = "${heart == '0'}">
+ 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
+		</c:when>    
  		<c:otherwise>
- 		<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
+ 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
  		</c:otherwise>
  		</c:choose>
- 		</c:forEach>
+
 
 		
 				
