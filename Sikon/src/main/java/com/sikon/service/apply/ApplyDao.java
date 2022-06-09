@@ -23,5 +23,7 @@ public interface ApplyDao {
 	public void buyCook (int cookStatus, int applyNo ) throws Exception ;
 	
 	public void  cancel (int cookStatus, int applyNo ) throws Exception ;
+	
+	public List<Apply>  sale  (Apply apply)  throws Exception ;
 
 }

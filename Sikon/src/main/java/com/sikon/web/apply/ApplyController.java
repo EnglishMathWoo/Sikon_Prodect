@@ -1,7 +1,7 @@
 package com.sikon.web.apply;
 
 import java.util.Map;
-
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -224,37 +224,27 @@ public class ApplyController {
 		}
 		@RequestMapping( value="listMyClass" )
 
-		public ModelAndView listMyClass( @ModelAttribute("search") Search search ,  HttpServletRequest request,@RequestParam("applyNo") int applyNo) throws Exception{
+		public ModelAndView listMyClass( Model model,HttpServletRequest request,@RequestParam("applyNo") int applyNo) throws Exception{
 			
-			System.out.println("/apply/listMyClass : GET,Post");
-			
-			if(search.getCurrentPage() ==0 ){
-				search.setCurrentPage(1);
-			}
-			search.setPageSize(pageSize);
+			System.out.println("/apply/getApply : GET, POST");
+			//Business Logic
 			
 			Apply apply = applyService.getApply(applyNo);
 			Cook cook = cookService.getCook(apply.getClassCook().getCookNo());
 			HttpSession session=request.getSession();
-			User user=(User)session.getAttribute("user");
-			
-			// Business logic 수행
-			Map<String , Object> map=applyService.getApplyList(search,user.getUserId());
-			
-			Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-			System.out.println(resultPage);
-			
+			User user = (User)session.getAttribute("user");
+			apply.setApplier(user);
 			// Model 과 View 연결
+			apply.setClassCook(cook);
 			
 			ModelAndView modelAndView=new ModelAndView();
-			modelAndView.addObject("list", map.get("list"));
-			modelAndView.addObject("resultPage", resultPage);
-			modelAndView.addObject("search", search);
-			modelAndView.addObject("user", user);
+			modelAndView.setViewName("forward:/apply/getApply.jsp");
 			modelAndView.addObject("apply", apply);
 			modelAndView.addObject("cook", cook);
+			modelAndView.addObject("user", user);
+
+			// 여기서는 value값만 넣어줬다
 			
-			modelAndView.setViewName("forward:/apply/listMyClass.jsp");
 			
 			
 			return modelAndView;
@@ -316,6 +306,17 @@ public class ApplyController {
 			
 			return modelAndView;
 		}
+		
+		@RequestMapping(value="sale",method=RequestMethod.GET)
+		public List<Apply> sale( @ModelAttribute("apply") Apply apply, Model model) throws Exception{
+			
+			List<Apply> list = applyService.sale(apply);
+			
+			
+			
+			model.addAttribute("apply", list);
+			return list ;
+		}	
 		
 		
 		

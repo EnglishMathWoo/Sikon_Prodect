@@ -25,5 +25,7 @@ public interface ApplyService {
 	
 	public void  cancel (int cookStatus, int applyNo ) throws Exception ;
 	
+	public List<Apply>  sale  (Apply apply)  throws Exception ;
+	
 	
 }
