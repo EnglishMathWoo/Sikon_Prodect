@@ -45,8 +45,8 @@
 
 <style>
 
-body {
-	padding-top: 50px;
+div.container {
+	padding-top: 120px;
 	
 }
 
@@ -190,21 +190,6 @@ p {
 	color:#937062;
 }
 
-div.topbar{
-	height : 32px;
-	text-align: center;
-	background-color: #937062;
-	color: #F7F7F7;
-	padding: 5px;
-	font-weight: bold;
-    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
-    font-size: 12px;
-}
-
-#topbar{
-	text-decoration-line: none;
-	color:#f7f7f7
-}
 
 div.emptyProd{
 	border: 1px solid #937062;
@@ -213,10 +198,6 @@ div.emptyProd{
 	text-align: center;
 	font-weight: bold;
 	color: #333;
-}
-
-#logo{
-	border-radius: 5px;
 }
 
 </style>
@@ -395,13 +376,6 @@ div.emptyProd{
 </head>
 
 <body>
-
-<div class="topbar">
-	<a href="/user/addUser" id="topbar">
-		<img src="/resources/images/logo/logo.png" width="24px" height="24px" id="logo"> 
-	 	&nbsp;회원가입 시 5000원 할인쿠폰 증정!
-	 </a>
-</div> 
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
