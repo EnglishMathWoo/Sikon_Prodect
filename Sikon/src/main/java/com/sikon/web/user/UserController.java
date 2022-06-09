@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
+import com.sikon.service.alarm.AlarmService;
 import com.sikon.service.domain.Career;
 import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
@@ -39,6 +40,10 @@ public class UserController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	//setter Method 구현 않음
+	
+	@Autowired
+	@Qualifier("alarmServiceImpl")
+	private AlarmService alarmService;
 		
 	public UserController(){
 		System.out.println(this.getClass());
@@ -72,7 +77,7 @@ public class UserController {
 		System.out.println("getuserid="+user.getUserId());
 		User dbUser=userService.getUser(user.getUserId());
 		
-		
+
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
