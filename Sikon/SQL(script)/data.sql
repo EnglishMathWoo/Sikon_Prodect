@@ -97,13 +97,10 @@ INSERT
 INTO apply(apply_no, cook_no, applier_id, payment_option, apply_status, cook_status, check_date, review_status)
 VALUES (seq_apply_apply_no.nextval, '10000', 'mentor@naver.com', '카카오페이', '100', 10, '2022/06/30','001');
 
-INSERT
-INTO heart(heart_no, cook_no, user_id,heart_check ) 
-VALUES(seq_heart_heart_no.nextval, '10000', 'mentor@naver.com','0');
 
 INSERT
 INTO wish( wish_no , cook_no, user_id, cook_status, cook_name ,cook_filename ,cook_price)
-VALUES (seq_wish_wish_no.NEXTVAL, 10000, 'mentor@naver.com', 5, '예다의 계란 후라이 쿠킹클래스', 'yyy.jpg', 14000);
+VALUES (seq_wish_wish_no.NEXTVAL, 10020, 'user@naver.com', 5, '예다의 계란 후라이 쿠킹클래스', '0a2bb178-ac96-4c04-85e9-bd424f4d849b.jpg', 14000);
 
 INSERT 
 INTO notice(notice_no, notice_title, notice_content, notice_image, notice_date) 
