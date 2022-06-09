@@ -40,7 +40,7 @@
 	 	INSERT
 		INTO cook(cook_no , cook_name , cook_filename , cook_brief, cook_difficuty, cook_price,cook_theme,apl_startime,apl_endtime,cook_recruit,start_time,end_time,cook_location,cook_regdate,cook_video, cook_stock,heart_hit,cook_content, mentor_nickname ) 
 		VALUES	 (	seq_cook_cook_no.nextval , #{cookName} , #{cookFilename} , #{cookBrief} , #{cookDifficuty} , #{cookPrice} , #{cookTheme} , #{aplstarTime} , #{aplendTime} ,
-		#{cookRecruit} , #{startTime}, #{endTime}, #{cookLocation},SYSDATE, #{cookVideo}, #{cookStock:NUMERIC}, #{hearthit:NUMERIC},#{cookContent}, #{mentor.userNickname:VARCHAR} )
+		#{cookRecruit} , #{startTime}, #{endTime}, #{cookLocation}, SYSDATE , #{cookVideo}, #{cookStock:NUMERIC}, #{hearthit:NUMERIC},#{cookContent}, #{mentor.userNickname:VARCHAR} )
 	 </insert>
 	 
 	 

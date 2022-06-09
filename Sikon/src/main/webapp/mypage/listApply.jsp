@@ -157,10 +157,10 @@
         <thead>
           <tr>
             <th align="center">No</th>
-            <th align="center" >회원ID</th>            
-          
-            <th align="center">배송현황</th>
-             <th align="center">현재상태</th>
+            <th align="center" >신청번호</th>  
+            <th align="center">수강현황</th>
+             <th align="center">정보수정</th>
+            
             
           </tr>
         </thead>
@@ -177,23 +177,23 @@
 
 			<tr class="ct_list_pop">
 		
-			<td align="center"	class="tran"  value="${apply.applyNo}">${ i }</td>
+			<td align="left"	class="tran"  value="${apply.applyNo}">${ i }</td>
 		
-			<td align="center"	class="userid"  value="${apply.applier.userId}">
+			<td align="left"	class="tran"  value="${apply.applyNo}">${apply.applyNo}</td>
 			
-			${apply.applier.userId}</td>
+			
 
 		
 	
 		<c:choose>
 		<c:when test="${apply.applyStatus=='000'}">
-		<td align="center">현재 구매 취소된 상품입니다.</td>
+		<td align="left">현재 구매 취소된 상품입니다.</td>
 		</c:when>
 		<c:when test="${apply.applyStatus=='100' }">
-		<td align="center">현재 신청완료 상태 입니다.</td>
+		<td align="left">현재 신청완료 상태 입니다.</td>
 		</c:when>
 		<c:when test="${apply.applyStatus=='200' }">
-		<td align="center">수강완료입니다.</td>
+		<td align="left">수강완료입니다.</td>
 		</c:when>
 	
 		</c:choose>
@@ -201,13 +201,13 @@
 		
 		<c:choose>
 		<c:when test="${apply.applyStatus=='200'}">
-		<td align="right" class="divy" value1="${apply.applyNo }" value2="${apply.applyStatus}">수강완료</td>	
+		<td align="left" class="divy" value1="${apply.applyNo }" value2="${apply.applyStatus}">수강완료</td>	
 		</c:when>
 		<c:when test="${apply.applyStatus=='100'}">
-		<td align="right" class="cancel" value1="${apply.applyNo }" value2="${apply.applyStatus}">신청취소</td>	
+		<td align="left" class="cancel" value1="${apply.applyNo }" value2="${apply.applyStatus}">신청취소</td>	
 		</c:when>
 		<c:when test="${apply.applyStatus=='000'}">
-		<td align="right" class="complete" >구매취소되었습니다</td>	
+		<td align="left" class="complete" >구매취소되었습니다</td>	
 		</c:when>
 			
 			  	</c:choose>
