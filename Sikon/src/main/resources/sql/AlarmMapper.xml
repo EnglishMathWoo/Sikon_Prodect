@@ -27,6 +27,13 @@
 	 
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getAlarm"	parameterType="String"	resultMap="alarmSelectMap">
+		SELECT COUNT(*) 
+		FROM alarm
+		WHERE alarm_target = #{userId}
+	 </select>
+	 
+	 <!-- SQL : SELECT ONE -->
+	 <select 	id="getAlarmCount"	parameterType="String"	resultType="int">
 		SELECT * 
 		FROM alarm
 		WHERE alarm_target = #{userId}

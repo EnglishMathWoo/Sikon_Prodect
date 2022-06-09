@@ -74,14 +74,14 @@ body {
 .ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
 }
 .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
-.ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
+.ref-sort li::after{position:absolute; top:0; right:0; content:"|";}
 .ref-sort li:last-child{margin:0; padding:0;}
 .ref-sort li:last-child::after{display:none;}
 .ref-sort li a{}
 
 /* References */
-.ref-sort li a{color:inherit;}
-.ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
+.ref-sort li a{color:#333;font-weight: bold;}
+.ref-sort li a:hover, #references .ref-sort li.current a{color:#937062;text-decoration-line: none;}
 
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
 
@@ -162,9 +162,9 @@ border-color:#D7D7D7;
   cursor: pointer;
   margin-top: 20px;
   margin-bottom: 20px;
-  background: #d4af7a;
+  background: #937062;
   float: right;
-  	font-family: 'Gowun Batang', serif;
+  font-family: 'Gowun Batang', serif;
   
 }
 
@@ -186,12 +186,44 @@ p {
 	height:250px;
 } 
 
+#themeAll{
+	color:#937062;
+}
+
+div.topbar{
+	height : 32px;
+	text-align: center;
+	background-color: #937062;
+	color: #F7F7F7;
+	padding: 5px;
+	font-weight: bold;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+    font-size: 12px;
+}
+
+#topbar{
+	text-decoration-line: none;
+	color:#f7f7f7
+}
+
+div.emptyProd{
+	border: 1px solid #937062;
+	padding : 90px;
+	height: 200px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
+}
+
+#logo{
+	border-radius: 5px;
+}
 
 </style>
 
 
-<!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
+<!--  ///////////////////////// JavaScript Start ////////////////////////// -->
+<script type="text/javascript">
 	
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
@@ -227,8 +259,8 @@ p {
 		                	cpage = Number(cpage)+1;
 		                	console.log("cpage: "+cpage);
 		        	   		
-		        	   		var order = $("#orderCondition").val();
-		        	   		console.log("order: "+order);
+		        	   		var orderCon = $("#orderCondition").val();
+		        	   		console.log("order: "+orderCon);
 		                	
 		                	var keyword = $("#prodname").val();
 		        	   		console.log("keyword: "+keyword);
@@ -236,57 +268,72 @@ p {
 		        	   		var search = $("#searchCondition").val();
 		        	   		console.log("search: "+search);
 		        	   		
+		        	   		var themeCon = $("#themeCondition").val();
+		        	   		console.log("theme: "+themeCon);
 		        	   		
-					            $.ajax({
-					                
-					                  url : "/product/json/listProduct?&menu=${param.menu }" ,
-					                  method : "POST" ,
-					                  data : JSON.stringify({
-					                	  currentPage : cpage,
-					                	  orderCondition : order,
-					                	  searchKeyword : keyword,
-					                	  searchCondition : search
-					                  }), 
-					                  dataType : "json" ,
-					                  headers : {
-					                     "Accept" : "application/json",
-					                     "Content-Type" : "application/json"
-					                  },
-					                success : function(JSONData , status) {
+		        	   		
+				            $.ajax({
+				                
+				                  url : "/product/json/listProduct?&menu=${param.menu }" ,
+				                  method : "POST" ,
+				                  data : JSON.stringify({
+				                	  currentPage : cpage,
+				                	  orderCondition : orderCon,
+				                	  searchKeyword : keyword,
+				                	  searchCondition : search,
+				                	  themeCondition : themeCon
+				                  }), 
+				                  dataType : "json" ,
+				                  headers : {
+				                     "Accept" : "application/json",
+				                     "Content-Type" : "application/json"
+				                  },
+				                success : function(JSONData , status) {
+				                	 
+				                	$("#currentPage").val(cpage)
+				                	console.log(cpage); 
+				                	console.log(JSONData.list[0].prodName);
+				                	
+				                	console.log(JSONData.list[0].prodThumbnail.split('&')[0]); 
 					                	 
-					                	$("#currentPage").val(cpage)
-					                	console.log(cpage); 
-					                	console.log(JSONData.list[0].prodName);
-					                	
-					                	console.log(JSONData.list[0].prodThumbnail.split('&')[0]); 
-						                	 
-					                	for(var i=0; i<JSONData.list.length; i++){
-					                		
-					                		//var image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].prodThumbnail.split('&')[0]+"' id='image' class='image' value='"+JSONData.list[i].prodNo+"'>";
-					                		var rate = Number(JSONData.list[i].prodDisRate)*100;
-					                		
-						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/><br/>"
-						                     					+"<div id='latest' class='group'>"
-						                     					+"<article class='one_third first'>"
-						                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].prodThumbnail.split('&')[0]+"' id='image' class='image' value='"+JSONData.list[i].prodNo+"'>"
-					                     						+"<div class='excerpt'>"
-					                     						+"<p>"+JSONData.list[i].prodDetail+"</p>"
-					                     						+"<h4 class='heading prodName'>"+JSONData.list[i].prodName+"</h4>"
-					                     						+"<p style='text-align:right'><del>"+JSONData.list[i].prodPrice+" 원</del></p>"
-					                     						+"<p style='text-align:right;'><span style='color:#bc8f8f'>"+rate+"%</span> &nbsp;"
-					                     						+"<strong>"+JSONData.list[i].prodDisPrice+" 원</strong></p>"
-					                     						+"</div><br></article></div></div>"
-					                     						
-					                     		
-					                     		
-					                     	$( '#scrollList' ).append(displayValue);	
-					                     						
-					                     						 		
-					                    						
-					                     						
-					                	}//for 
-					                 }
-					            });//ajax
+				                	for(var i=0; i<JSONData.list.length; i++){
+				                		
+				                		var status="";
+				                		var stock="";
+				                		var rate = Number(JSONData.list[i].prodDisRate)*100;
+				                		
+				                		if(JSONData.list[i].prodStatus == 'N'){
+				                			status = "<p style='text-align:right;color:#d9534f'>*판매중지된 상품입니다.</p>";
+				                		}
+				                		
+				                		if(${user.role.equals('admin')}){
+				                			stock="<p style='text-align:right;'>재고량: "+JSONData.list[i].prodStock+" 개</p>";
+				                		}
+				                		
+					                     var displayValue = "<div class='col-sm-6 col-md-3'><br/><br/>"
+					                     					+"<div id='latest' class='group'>"
+					                     					+"<article class='one_third first'>"
+					                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].prodThumbnail.split('&')[0]+"' id='image' class='image' value='"+JSONData.list[i].prodNo+"'>"
+				                     						+"<div class='excerpt'>"
+				                     						+"<p>"+JSONData.list[i].prodDetail+"</p>"
+				                     						+"<h4 class='heading prodName' style='font-weight: bold'>"+JSONData.list[i].prodName+"</h4>"
+				                     						+"<p style='text-align:left;color:#aba6a6'><del>"+JSONData.list[i].prodPrice+"</del></p>"
+				                     						+"<p style='text-align:left;font-size:17px;font-weight: bold'><span style='color:#d9534f'>"+rate+"%&nbsp;</span>"
+				                     						+JSONData.list[i].prodDisPrice+"<span style='font-size:14px;font-weight:600'>원</span></p>"
+				                     						+status
+				                     						+stock
+				                     						+"</div><br></article></div></div>"
+				                     						
+				                     		
+				                     		
+				                     	$( '#scrollList' ).append(displayValue);	
+				                     						
+				                     						 		
+				                    						
+				                     						
+				                	}//for 
+				                 }
+				            });//ajax
 					           
 		                }//if
 		            });//function
@@ -298,7 +345,17 @@ p {
 				$( ".submit" ).on("click" , function() {
 					self.location = "/product/addProductView.jsp"
 				 });
+
+		        $( "#themeAll" ).on("click" , function() {
+		        	fncGetList(1);
+				 });
 				
+				$( ".theme" ).on("click" , function() {
+					var theme = $(this).attr('value');
+					console.log(theme);
+					$("#themeCondition").val(theme);
+					fncGetList(1);
+				 });
 				
 				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
 					fncGetList(1);
@@ -312,21 +369,39 @@ p {
 				
 	 });
 			 
-			 
-			 $(document).on('click', '.image', function(){
-				 var prodNo =$(this).attr("value");
-				 console.log('prodNo: '+prodNo);
-				 var menu = $("#menu").val();
-				 console.log(menu);
-				 self.location = "/product/getProduct?prodNo="+prodNo+"&menu="+menu
-			});
-		 
-	</script>
+//=== 무한스크롤로 생성된 article 클릭 이벤트 ========================================================
+	
+	 $(document).on('click', '.image', function(){
+		 var prodNo =$(this).attr("value");
+		 console.log('prodNo: '+prodNo);
+		 var menu = $("#menu").val();
+		 console.log(menu);
+		 self.location = "/product/getProduct?prodNo="+prodNo+"&menu="+menu
+	});
+
+	 
+//==== 검색창 입력 후 enter시 검색 이벤트 ===========================================================
+	
+	function enterkey() { 
+		if(window.event.keyCode == 13){
+			fncGetList(1);
+		}
+	} 
+	
+	
+</script>
+<!--  ///////////////////////// JavaScript End ////////////////////////// -->
 	
 </head>
 
 <body>
 
+<div class="topbar">
+	<a href="/user/addUser" id="topbar">
+		<img src="/resources/images/logo/logo.png" width="24px" height="24px" id="logo"> 
+	 	&nbsp;회원가입 시 5000원 할인쿠폰 증정!
+	 </a>
+</div> 
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
@@ -378,20 +453,21 @@ p {
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br>PRODUCT LIST</h3>
+		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">PRODUCT LIST</span></h3>
 		    </div>
 		    <c:if test="${user.role == 'admin' }">
 		    <button type="button" class="submit">상품등록</button>
 		    </c:if>
 		  
 		    
-		    <br/><hr/><br/>
+		    <br/><hr id="hr"/><br/>
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li class="current" ><a href="#" class="theme">식기류</a></li>
-	        <li><a href="#" class="theme" >조리도구</a></li>
-	        <li><a href="#" class="theme" >밀키트</a></li>
+	        <li><a href="#" id="themeAll">모두보기</a></li>
+	        <li><a href="#" class="theme" value="tw">식기류</a></li>
+	        <li><a href="#" class="theme" value="cw">조리도구</a></li>
+	        <li><a href="#" class="theme" value="mk">밀키트</a></li>
 	      </ul>
 	    </nav>
 	    
@@ -399,7 +475,34 @@ p {
       <div class="center btmspace-50">
 	   			<form class="form-inline" name="detailForm">
 	   			
-	   			 <div class="col-md-6 text-left"> 
+	   			<input type="hidden" id=themeCondition name=themeCondition value="${search.themeCondition }">
+	   			
+			    <div class="text-right">
+				  <div class="form-group">
+				    <c:if test="${ user.role.equals('admin')}">
+						<select name="searchCondition" id="searchCondition" class="form-control" style="width:110px">
+						 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
+							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
+							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
+						</select>
+					</c:if>
+					<c:if test="${ !user.role.equals('admin')}">
+						<input type="hidden" name="searchCondition" id="searchCondition" value="1">
+					</c:if>	
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="sr-only" for="searchKeyword">검색</label>
+				    <input type="text" style="display: none;">
+				    <input type="text" class="form-control" id="prodname" name="searchKeyword"  placeholder="검색"
+				    		onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+				  </div>
+				  
+				  <button type="button" class="btn btn-default" id="search">검색</button>
+				</div>
+				
+				  
+				 <div class=" text-left"> 
 				  <div class="form-group" align="left">
 				    <c:if test="${ !user.role.equals('admin')}">
 						<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
@@ -421,30 +524,6 @@ p {
 				  
 				  <button type="button" class="btn btn-default" id="sorting">조회</button>
 				  </div>
-	   			
-			    <div class="col-md-6 text-right">
-				  <div class="form-group">
-				    <c:if test="${ user.role.equals('admin')}">
-						<select name="searchCondition" id="searchCondition" class="form-control" style="width:125px">
-						 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
-							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
-							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
-						</select>
-					</c:if>
-					<c:if test="${ !user.role.equals('admin')}">
-						<input type="hidden" name="searchCondition" id="searchCondition" value="1">
-					</c:if>	
-				  </div>
-				  
-				  <div class="form-group">
-				    <label class="sr-only" for="searchKeyword">검색</label>
-				    <input type="text" class="form-control" id="prodname" name="searchKeyword"  placeholder="검색"
-				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-				  </div>
-				  
-				  <button type="button" class="btn btn-default" id="search">검색</button>
-				</div>  
-				 
 				
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
@@ -458,35 +537,49 @@ p {
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
 <div class="row">
-	<c:set var="i" value="0" />
+
+	<c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			판매중인 상품이 없습니다.
+		</div>
+		<br>
+	</c:if>
+
 	<c:forEach var="product" items="${list}">
-  <div class="col-sm-6 col-md-3">
-  <br/> <br/>
-  
-    <div id="latest" class="group">
-      <article class="one_third first">
-			<c:forEach var="name" items="${product.prodThumbnail.split('&')[0]}">
-				<img src="/resources/images/uploadFiles/${name}" id="image" class="image" value="${product.prodNo }">
-			</c:forEach>
-        <div class="excerpt">
-        	<p>${product.prodDetail}<p>
-          	<h4 class="heading prodName" value="${product.prodNo }">${product.prodName}</h4>
-          	<p style="text-align:right"><del>${product.prodPrice} 원</del></p>
-			<p style="text-align:right;"><span style="color:#bc8f8f"><fmt:formatNumber value="${product.prodDisRate}" type="percent"/> &nbsp;</span>
-			<strong>${product.prodDisPrice} 원</strong></p>
-        </div>
-         <br>
-      </article>
-    
-    </div>
-  </div>
-  </c:forEach>
+	  <div class="col-sm-6 col-md-3">
+	  <br/> <br/>
+	  
+	    <div id="latest" class="group">
+	      <article class="one_third first">
+			<img src="/resources/images/uploadFiles/${product.prodThumbnail.split('&')[0]}" id="image" class="image" value="${product.prodNo }">
+	        <div class="excerpt">
+	        	<p>${product.prodDetail}<p>
+	          	<h4 class="heading prodName" style="font-weight: bold">${product.prodName}</h4>
+	          	<p style="text-align:left;color:#aba6a6"><del>${product.prodPrice}</del></p>
+				<p style="text-align:left;font-size:17px;font-weight: bold"><span style="color:#d9534f"><fmt:formatNumber value="${product.prodDisRate}" type="percent"/>&nbsp;</span>
+				${product.prodDisPrice}<span style="font-size:14px;font-weight:600">원</span></p>
+				
+				<c:if test="${product.prodStatus == 'N'}">
+					<p style="text-align:right;color:#d9534f">*판매중지된 상품입니다.</p>
+				</c:if>
+				<c:if test="${user.role == 'admin'}">
+					<p style="text-align:right;">재고량: ${product.prodStock} 개</p>
+				</c:if>
+				
+	        </div>
+	         <br>
+	      </article>
+	    
+	    </div>
+	  </div>
+	  </c:forEach>
   
      <div id="scrollList"></div>
      
-	</div>
 </div>
-	
+
+</div>	
 </body>
 
 </html>

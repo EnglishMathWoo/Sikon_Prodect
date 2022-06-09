@@ -187,8 +187,7 @@ public class ProductController {
 		
 		System.out.println("/product/listProduct :  GET / POST ");
 		
-		System.out.println("productlist Ctrl: "+search);
-		System.out.println("OrderCondition: "+search.getOrderCondition());
+		System.out.println("productlist search: "+search);
 
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);

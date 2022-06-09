@@ -124,6 +124,7 @@ public class PurchaseController {
 		purchase.setDivyStatus("001");
 		purchase.setSerialNo(serialNo);
 		purchase.setPaymentOpt("KA");
+		purchase.setReviewStatus("001");
 				
 		int quantity = purchase.getPurchaseQuantity();
 		
@@ -221,7 +222,8 @@ public class PurchaseController {
 			purchaseByCart.setPurchaseQuantity(cart.getQuantity());
 			purchaseByCart.setDivyStatus("001");
 			purchaseByCart.setPaymentOpt("KA");
-			purchaseByCart.setSerialNo(serialNo);		
+			purchaseByCart.setSerialNo(serialNo);
+			purchaseByCart.setReviewStatus("001");
 			
 			list.add(purchaseByCart);
 			

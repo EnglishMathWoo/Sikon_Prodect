@@ -35,6 +35,14 @@ public class AlarmDaoImpl implements AlarmDao {
 	public void insertAlarm(Alarm alarm) throws Exception {
 		sqlSession.insert("AlarmMapper.addAlarm", alarm);
 	}
+	
+	public Alarm getAlarm(String userId) throws Exception {
+		return sqlSession.selectOne("AlarmMapper.getAlarm", userId);
+	}
+	
+	public int getAlarmCount(String userId) throws Exception {
+		return sqlSession.selectOne("AlarmMapper.getAlarmCount", userId);
+	}
 		
 	public List<Alarm> getAlarmList(Search search) throws Exception {
 		return sqlSession.selectList("AlarmMapper.getAlarmList", search);

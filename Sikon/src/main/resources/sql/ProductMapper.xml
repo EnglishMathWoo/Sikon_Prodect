@@ -75,6 +75,17 @@
 										 				WHERE prod_price LIKE '%'||#{searchKeyword}||'%'
 													</if>
 											</if>
+											<if test="themeCondition != null">
+													<if test='themeCondition == "cw"'>
+										 				AND prod_theme LIKE UPPER('cw')
+													</if>
+													<if test='themeCondition == "tw"'>
+										 				AND prod_theme LIKE UPPER('tw')
+													</if>
+													<if test='themeCondition == "mk"'>
+										 				AND prod_theme LIKE UPPER('mk')
+													</if>
+											</if>
 											
 											<if test="orderCondition == null">
 												ORDER BY prod_status DESC, prod_no 
@@ -122,6 +133,17 @@
 													</if>
 													<if test="searchCondition == 2 ">
 										 				WHERE prod_price LIKE '%'||#{searchKeyword}||'%'
+													</if>
+											</if>
+											<if test="themeCondition != null">
+													<if test='themeCondition == "cw"'>
+										 				AND prod_theme LIKE UPPER('cw')
+													</if>
+													<if test='themeCondition == "tw"'>
+										 				AND prod_theme LIKE UPPER('tw')
+													</if>
+													<if test='themeCondition == "mk"'>
+										 				AND prod_theme LIKE UPPER('mk')
 													</if>
 											</if>
 											<if test="orderCondition == null">
