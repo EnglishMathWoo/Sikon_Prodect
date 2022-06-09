@@ -59,7 +59,7 @@ CREATE TABLE users (
 	password 	VARCHAR2(30)	NOT NULL,
 	user_birth 	VARCHAR2(20),
 	user_nickname 	VARCHAR2(40)	UNIQUE  NOT NULL,
-	user_image 	VARCHAR2(100)	NOT NULL,
+	user_image 	VARCHAR2(100)	DEFAULT '??.jpg',
 	user_addr 	VARCHAR2(500),
 	role 		VARCHAR2(20) 	DEFAULT 'user'	NOT NULL,
 	user_phone 	VARCHAR2(20)	UNIQUE,
@@ -67,25 +67,25 @@ CREATE TABLE users (
 	mentor_apply 	VARCHAR2(20)	NOT NULL,
 	user_regdate 	DATE 		NOT NULL,
 	quit_date 	DATE,
-	quit_status 	VARCHAR2(20)	NOT NULL,
+	quit_status 	VARCHAR2(20)	DEFAULT 'N' NOT NULL,
 	PRIMARY KEY(user_id)
 );
 
 CREATE TABLE license ( 
-	license_no 	NUMBER(38) 	NOT NULL 	PRIMARY KEY,
-	license_name 	VARCHAR2(30) 	NOT NULL,
-	license_institution 	VARCHAR2(40) 	NOT NULL,
-	license_date 	DATE 		NOT NULL,
-	user_id 		VARCHAR2(50) 	NOT NULL 	REFERENCES users(user_id) ON DELETE CASCADE	
+	license_no 	NUMBER(38)  	PRIMARY KEY,
+	license_name 	VARCHAR2(30) 	,
+	license_institution 	VARCHAR2(40) 	,
+	license_date 	DATE 		,
+	user_id 		VARCHAR2(50)  	REFERENCES users(user_id) ON DELETE CASCADE	
 );
 
 CREATE TABLE career ( 
-	career_no 	NUMBER(38)	NOT NULL,
-	company 	VARCHAR2(30) 	NOT NULL,
-	start_date 		DATE 		NOT NULL,
-	end_date 		DATE 		NOT NULL,
-	career_experience 	VARCHAR2(1000) 	NOT NULL,
-	user_id 		VARCHAR2(50)	NOT NULL 	REFERENCES users(user_id) ON DELETE CASCADE,
+	career_no 	NUMBER(38)	,
+	company 	VARCHAR2(30) 	,
+	start_date 		DATE 		,
+	end_date 		DATE 		,
+	career_experience 	VARCHAR2(1000) 	,
+	user_id 		VARCHAR2(50) 	REFERENCES users(user_id) ON DELETE CASCADE,
 	PRIMARY KEY(career_no)	
 );
 
@@ -256,16 +256,15 @@ CREATE TABLE heart (
 
 CREATE TABLE review(
 	review_no  NUMBER 		 		NOT NULL,
+           review_category        VARCHAR2(20) NOT NULL,
 	writer_nickname   VARCHAR2(50)   	REFERENCES  users(user_nickname) ,
 	review_content         VARCHAR2(400)   NOT NULL,
+	review_img    VARCHAR2(100),	
 	review_regdate        DATE NOT NULL,
-	review_category        VARCHAR2(20) NOT NULL,
-	review_img    VARCHAR2(100),
 	recipe_no   NUMBER(16)    REFERENCES  recipe(recipe_no) ON DELETE CASCADE,
 	prod_no   NUMBER(16)     REFERENCES  product(prod_no) ON DELETE CASCADE,
-	tran_no   NUMBER(16)     REFERENCES  purchase(tran_no),
 	cook_no   NUMBER(16)     REFERENCES  cook(cook_no) ON DELETE CASCADE,
-	apply_no   NUMBER(16)    REFERENCES  apply(apply_no),
+	status    NUMBER(16)   ,
 	PRIMARY KEY(review_no)
 );
 
@@ -273,6 +272,7 @@ CREATE TABLE alarm (
 	alarm_no 	NUMBER(38) 	NOT NULL, 
 	alarm_target 	VARCHAR2(100),
 	alarm_content 	VARCHAR2(4000), 
+	alarm_status 	VARCHAR2(20), 
 	alarm_date 	DATE 		NOT NULL,	
 	PRIMARY KEY(alarm_no)
 );

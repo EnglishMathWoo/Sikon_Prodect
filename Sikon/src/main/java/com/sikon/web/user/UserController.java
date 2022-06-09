@@ -77,12 +77,12 @@ public class UserController {
 		System.out.println("getuserid="+user.getUserId());
 		User dbUser=userService.getUser(user.getUserId());
 		
-		int alarmCount = alarmService.getAlarmCount(user.getUserId());
-		System.out.println("alarmCount="+alarmCount);
+		int statusCount = alarmService.getStatusCount(user.getUserId());
+		System.out.println("statusCount="+statusCount);
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
-			session.setAttribute("alarm", alarmCount );
+			session.setAttribute("alarm", statusCount );
 		}
 		System.out.println(user.getPassword());
 		System.out.println(dbUser.getPassword());
@@ -212,11 +212,11 @@ public class UserController {
 		System.out.println("/user/updateUser : POST");
 		//Business Logic
 		userService.updateUser(user);
-		
-		String sessionId=((User)session.getAttribute("user")).getUserId();
-		if(sessionId.equals(user.getUserId())){
-			session.setAttribute("user", user);
-		}
+	
+//		String sessionId=((User)session.getAttribute("user")).getUserId();
+//		if(sessionId.equals(user.getUserId())){
+//			session.setAttribute("user", user);
+//		}
 		
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}

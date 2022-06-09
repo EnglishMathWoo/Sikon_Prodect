@@ -53,6 +53,10 @@
 		div.form-group{
 			font-family: 'Nanum Myeongjo', serif;
 		}  
+		
+		.soo{
+			padding-top : 170px;
+		}
     </style>
     
     
@@ -137,7 +141,7 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	
 	
-	<div class="container">
+	<div class="container soo">
 	
 		<div class="page-header text-info">
 			<c:if test = "${menu == 'manage'}">

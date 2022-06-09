@@ -41,10 +41,15 @@
 			font-family: 'Nanum Myeongjo', serif;
 		}
 		body>div.container {
-			border: 3px solid #D6CDB7;
-			margin-top: 80px;
+			padding-top : 250px;
 			font-family: 'Nanum Myeongjo', serif;
 		}
+		
+		.soo {
+			border: 2px solid #C0C0C0;
+			
+		}
+		
 		h1.text-center {
 			margin-top: 20px;
 			font-family: 'Nanum Myeongjo', serif;
@@ -52,6 +57,7 @@
 			div.form-group{
 			font-family: 'Nanum Myeongjo', serif;
 		}
+		
 	</style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -116,7 +122,7 @@
 
 	<!--  拳搁备己 div Start /////////////////////////////////////-->
 	<div class="container">
-	
+	<div class="soo">
 		<h1 class="text-center"  style="color:#bc8f8f">捻 迄 积 己</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
@@ -154,6 +160,7 @@
 		  </div>
 	
 		</form>
+		</div>
  	</div>
 </body>
 

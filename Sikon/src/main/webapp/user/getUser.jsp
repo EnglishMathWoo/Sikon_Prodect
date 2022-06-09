@@ -30,6 +30,9 @@
  		body {
             padding-top : 50px;
         }
+        .container{
+        	padding-top : 150px;
+        }
      </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -115,6 +118,9 @@
 	  			<button type="button" class="btn btn-primary" id="editUserInfo">회원정보수정</button>
 	  		</div>
 	  		
+	  		<div class="col-md-12 text-center ">
+	  			<button type="button" class="btn btn-primary" id="editUserInfo">회원탈퇴</button>
+	  		</div>
 		</div>
 		
 		<br/>

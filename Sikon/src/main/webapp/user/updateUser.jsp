@@ -29,11 +29,17 @@
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-		body {
-            padding-top : 50px;
-        }
-    </style>
+<style>
+body {
+  padding-top : 40px;
+      }
+div.container {
+	padding-top : 170px;
+}
+.h3{
+	height: 40px;
+}
+   </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -43,7 +49,6 @@
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "button.btn.btn-primary" ).on("click" , function() {
 				fncUpdateUser();
-				
 			});
 		});	
 		
@@ -56,19 +61,7 @@
 			});
 		});	
 		
-		//=============이메일" 유효성Check  Event 처리 =============
-		 $(function() {
-			 
-			 $("input[name='email']").on("change" , function() {
-					
-				 var email=$("input[name='email']").val();
-			    
-				 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
-			    	alert("이메일 형식이 아닙니다.");
-			     }
-			});
-			 
-		});	
+		
 		
 		///////////////////////////////////////////////////////////////////////
 		function fncUpdateUser() {
@@ -79,17 +72,13 @@
 				return;
 			}
 				
-		//	var value = "";	
-		//	if( $("input[name='phone2']").val() != ""  &&  $("input[name='phone3']").val() != "") {
-		//		var value = $("option:selected").val() + "-" 
-		//							+ $("input[name='phone2']").val() + "-" 
-		//							+ $("input[name='phone3']").val();
-		//	}
-			
+		
 			//Debug...
 			//alert("phone : "+value);
-			$("input:hidden[name='phone']").val( value );
+			//$("input:hidden[name='phone']").val( value );
 				
+			//console.log('fnc');
+			
 			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
 		}
 	
@@ -104,12 +93,11 @@
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<div class="page-header text-center">
+	<div class="container" >
+			
+		<div class="text-center h3">
 	       <h3 class=" text-info">회원정보수정</h3>
-	       <h5 class="text-muted">내 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5>
-	    </div>
+	     </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
@@ -127,7 +115,7 @@
 		  <div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="변경비밀번호">
+		      <input type="password" class="form-control" id="password" name="password" value="${user.password}" placeholder="변경비밀번호">
 		    </div>
 		  </div>
 		  
@@ -171,10 +159,24 @@
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="phone" name="phone" value="${user.phone}"   placeholder="변경번호">
 		    </div>
-		    <input type="hidden" name="phone"  />
 		  </div>
 		  
-		  
+		  <div class="form-group">
+    		<label class="col-sm-offset-1 col-sm-3 control-label" for="userImage">회원이미지</label>
+   			<div class="col-sm-4">
+       		<input multiple="multiple" class="form-control" type="file" id ="uploadFile"  name="uploadFile" value="${user.userImage}"  placeholder="회원이미지">
+ 			</div>
+ 		  </div>
+ 		  
+ 		  <hr style="border: solid 1px black;" width="650px;">	
+ 	 	
+ 	 	   <div class="form-group">
+    		<label for="mentorApply" class="col-sm-offset-1 col-sm-3 control-label" >쿠킹멘토 신청 여부</label>
+   			<div class="col-sm-4">
+      	 	<input type="radio" name="mentorApply" value="N" checked="checked">미신청  &nbsp
+			<input type="radio" name="mentorApply" value="Y" >신청
+    		</div>
+ 	 	  </div>
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
@@ -184,7 +186,7 @@
 		  </div>
 		</form>
 		<!-- form Start /////////////////////////////////////-->
-	    
+	   
  	</div>
 	<!--  화면구성 div Start /////////////////////////////////////-->
  	

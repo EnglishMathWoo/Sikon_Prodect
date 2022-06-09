@@ -44,7 +44,7 @@
 
 
 body>div.container {
-	margin-top: 70px;
+	padding-top: 200px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 h1.text-center {
@@ -63,12 +63,16 @@ div.form-group{
 
 
 	function fncAddProduct() {
-		//Form 유효성 검증
 		
-
+		var summernote=$("#summernote").val();
+		
+		if(id == null || id.length <1){
+			alert("아이디는 반드시 입력하셔야 합니다.");
+			return;
+		}
+		
 		$("form").attr("method", "POST").attr("enctype","multipart/form-data").attr("action", "/product/addProduct").submit();
-		//document.detailForm.action='/product/addProduct';
-		//document.detailForm.submit();
+		
 	}
 
 

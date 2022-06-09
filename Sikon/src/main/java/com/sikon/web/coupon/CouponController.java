@@ -90,7 +90,7 @@ public class CouponController {
 	}
 	
 	@RequestMapping( value="/deleteCoupon", method=RequestMethod.GET)
-	public String updatePurchaseView( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
+	public String deleteCoupon( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
 
 		System.out.println("/coupon/deleteCoupon : GET");
 		
