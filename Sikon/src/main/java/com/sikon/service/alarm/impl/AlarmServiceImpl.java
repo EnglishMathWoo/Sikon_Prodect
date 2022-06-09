@@ -48,5 +48,12 @@ public class AlarmServiceImpl implements AlarmService{
 		
 		return map;
 	}
+	
+	public int getAlarmCount(String userId) throws Exception {
+		
+		int alarmCount = alarmDao.getAlarmCount(userId);
+				
+		return alarmCount;
+	}
 
 }
