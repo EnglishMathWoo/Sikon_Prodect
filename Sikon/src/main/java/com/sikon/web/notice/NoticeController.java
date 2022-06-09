@@ -3,6 +3,7 @@ package com.sikon.web.notice;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
+import com.sikon.service.alarm.AlarmService;
 import com.sikon.service.domain.Notice;
+import com.sikon.service.domain.User;
 import com.sikon.service.notice.NoticeService;
 
 
@@ -29,6 +32,10 @@ public class NoticeController {
 	@Autowired
 	@Qualifier("noticeServiceImpl")
 	private NoticeService noticeService;
+	
+	@Autowired
+	@Qualifier("alarmServiceImpl")
+	private AlarmService alarmService;
 		
 	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
 	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
@@ -75,7 +82,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/listNotice")
-	public String listProduct( @ModelAttribute("search") Search search , @RequestParam("menu") String menu, Model model) throws Exception{
+	public String listProduct( @ModelAttribute("search") Search search , @RequestParam("menu") String menu, Model model, HttpSession session) throws Exception{
 		
 		System.out.println("/listNotice");
 			
@@ -83,6 +90,16 @@ public class NoticeController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
+		
+		//------------------------------------------------------------------
+		
+		User user = (User)session.getAttribute("user");
+		System.out.println(user.getUserId());
+		
+		int alarmCount = alarmService.getAlarmCount(user.getUserId());
+		System.out.println("alarmCount="+alarmCount);
+		
+		//------------------------------------------------------------------
 	
 		// Business logic 수행
 		Map<String , Object> map = noticeService.getNoticeList(search);
