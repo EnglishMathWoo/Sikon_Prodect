@@ -42,9 +42,8 @@
 <style>
 
 
-body>div.container {
-	border: 3px solid #630606;
-	margin-top: 100px;
+div.container {
+	padding-top: 200px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 

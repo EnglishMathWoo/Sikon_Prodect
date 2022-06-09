@@ -41,8 +41,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 
 <style>
-body{
-	 padding-top : 50px;
+div.container{
+	 padding-top : 170px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 

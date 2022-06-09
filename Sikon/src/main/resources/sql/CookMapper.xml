@@ -83,7 +83,7 @@
 
 		 
 	<!-- SQL : SELECT LIST -->
-	<select  id="getCookList"  parameterType="map"	resultMap="cookSelectMap">
+	<select  id="getCookList"  parameterType="search"	resultMap="cookSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT *
@@ -93,21 +93,22 @@
 												
 												<if test="searchCondition != null">
 												
-												
-												
 													<if test="searchCondition == 0 and searchKeyword !='' ">
 										 				WHERE cook_no like '%' || #{searchKeyword} || '%'
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
 										 				WHERE cook_name like '%' || #{searchKeyword} || '%'
 													</if>
+													<if test="searchCondition == 2 and searchKeyword !='' ">
+										 				 WHERE cook_price like '%' || #{searchKeyword} || '%'
+													</if>
 												
 												
 											</if>
 										
 											ORDER BY  cook_no ) inner_table
-						WHERE ROWNUM &lt;= #{search.endRowNum} )
-		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	 	<!--  위 두번째 subQuery 의  
 	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
@@ -121,29 +122,26 @@
 		-->
 	
 	<!-- SQL : SELECT ROW Count -->	 
-	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT *
-						FROM (	SELECT *
-											FROM cook
-										
-											
-												
-												<if test="searchCondition != null">
-												
-												
-												
-													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				WHERE cook_no like '%' || #{searchKeyword} || '%'
-													</if>
-													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				WHERE cook_name like '%' || #{searchKeyword} || '%'
-													</if>
-												
-												
-											</if>
+	  	FROM(	SELECT cook_no , cook_name ,cook_price
+						FROM cook	
+						<if test="searchCondition != null">
+							<where>
+								<if test="searchCondition == 0 and searchKeyword !='' ">
+						 			cook_no LIKE '%'||#{searchKeyword}||'%'
+								</if>
+								<if test="searchCondition == 1 and searchKeyword !='' ">
+						 		cook_name LIKE '%'||#{searchKeyword}||'%'
+								</if>
+								<if test="searchCondition == 2 and searchKeyword !='' ">
+						 		cook_price LIKE '%'||#{searchKeyword}||'%'
+								</if>
+							</where>
+							
+						</if>  
 					
-								ORDER BY cook_no 	) countTable		)				
+									) countTable						
 	 </select>
 	 
 	 <delete	id="deleteCook"	parameterType="int" >

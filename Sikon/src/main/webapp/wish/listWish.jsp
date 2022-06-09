@@ -66,7 +66,7 @@ div.row{
 		 var totalprice = 0;
 		 var cookPrice = $("div.cookPrice").attr("value");
 		 var cookStatus = $("div.cookStatus").attr("value");
-		 console.log(price);
+		 console.log(cookPrice);
 		 console.log(cookStatus);
 	
 		 

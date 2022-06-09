@@ -13,7 +13,8 @@ public class Apply {
 	private int cookStatus;		//cookStock(재고)-cookStatus(신청인원)
 	private Date checkDate;
 	private String receiverPhone;
-
+	private String reviewStatus;
+	
 	public Apply() {
 		// TODO Auto-generated constructor stub
 	}
@@ -82,11 +83,19 @@ public class Apply {
 		this.receiverPhone = receiverPhone;
 	}
 
+	public String getReviewStatus() {
+		return reviewStatus;
+	}
+
+	public void setReviewStatus(String reviewStatus) {
+		this.reviewStatus = reviewStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Apply [applyNo=" + applyNo + ", classCook=" + classCook + ", applier=" + applier + ", paymentOption="
 				+ paymentOption + ", applyStatus=" + applyStatus + ", cookStatus=" + cookStatus + ", checkDate="
-				+ checkDate + ", receiverPhone=" + receiverPhone + "]";
+				+ checkDate + ", receiverPhone=" + receiverPhone + ", reviewStatus=" + reviewStatus + "]";
 	}
 
 

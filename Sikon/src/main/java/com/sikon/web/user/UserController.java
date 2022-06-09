@@ -212,11 +212,11 @@ public class UserController {
 		System.out.println("/user/updateUser : POST");
 		//Business Logic
 		userService.updateUser(user);
-		
-		String sessionId=((User)session.getAttribute("user")).getUserId();
-		if(sessionId.equals(user.getUserId())){
-			session.setAttribute("user", user);
-		}
+	
+//		String sessionId=((User)session.getAttribute("user")).getUserId();
+//		if(sessionId.equals(user.getUserId())){
+//			session.setAttribute("user", user);
+//		}
 		
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
