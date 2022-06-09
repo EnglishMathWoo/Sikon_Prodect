@@ -55,7 +55,7 @@ public class WishController {
 		System.out.println("cookName : "+wish.getCookName());
 		
 		
-		wish.setCookFilename("aaa.jpg");
+		
 		wishService.addWish(wish);
 		
 		return "redirect:/cook/getCook?menu=search&cookNo="+wish.getCookNo();
