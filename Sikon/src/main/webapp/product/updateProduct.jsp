@@ -47,8 +47,8 @@
 body{
 	font-family: 'Nanum Myeongjo', serif;
 }
-body>div.container {
-	margin-top: 70px;
+div.container {
+	padding-top: 200px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 h1.text-center {

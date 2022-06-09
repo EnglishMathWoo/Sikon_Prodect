@@ -46,7 +46,7 @@
 <style>
 
 div.container {
-	padding-top: 120px;
+	padding-top: 150px;
 	
 }
 
