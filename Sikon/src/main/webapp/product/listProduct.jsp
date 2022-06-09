@@ -225,7 +225,16 @@ p {
 		                	
 		                	var cpage = $("#currentPage").val();
 		                	cpage = Number(cpage)+1;
-		                	console.log(cpage);
+		                	console.log("cpage: "+cpage);
+		        	   		
+		        	   		var order = $("#orderCondition").val();
+		        	   		console.log("order: "+order);
+		                	
+		                	var keyword = $("#prodname").val();
+		        	   		console.log("keyword: "+keyword);
+		        	   		
+		        	   		var search = $("#searchCondition").val();
+		        	   		console.log("search: "+search);
 		        	   		
 		        	   		
 					            $.ajax({
@@ -233,7 +242,10 @@ p {
 					                  url : "/product/json/listProduct?&menu=${param.menu }" ,
 					                  method : "POST" ,
 					                  data : JSON.stringify({
-					                	  currentPage : cpage
+					                	  currentPage : cpage,
+					                	  orderCondition : order,
+					                	  searchKeyword : keyword,
+					                	  searchCondition : search
 					                  }), 
 					                  dataType : "json" ,
 					                  headers : {
@@ -390,14 +402,14 @@ p {
 	   			 <div class="col-md-6 text-left"> 
 				  <div class="form-group" align="left">
 				    <c:if test="${ !user.role.equals('admin')}">
-						<select name="orderCondition" class="form-control" style="width:125px">
+						<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
 						 	<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>--정렬하기--</option>
 							<option value="1"  ${ ! empty search.orderCondition && search.orderCondition==1 ? "selected" : "" }>낮은가격순</option>
 							<option value="2"  ${ ! empty search.orderCondition && search.orderCondition==2 ? "selected" : "" }>높은가격순</option>
 						</select>
 					</c:if>
 					<c:if test="${ user.role.equals('admin')}">
-						<select name="orderCondition" class="form-control" style="width:125px">
+						<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
 							<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>--정렬하기--</option>
 							<option value="3"  ${ ! empty search.orderCondition && search.orderCondition==3 ? "selected" : "" }>판매중</option>
 							<option value="4"  ${ ! empty search.orderCondition && search.orderCondition==4 ? "selected" : "" }>판매중지</option>
@@ -413,14 +425,14 @@ p {
 			    <div class="col-md-6 text-right">
 				  <div class="form-group">
 				    <c:if test="${ user.role.equals('admin')}">
-						<select name="searchCondition" class="form-control" style="width:125px">
+						<select name="searchCondition" id="searchCondition" class="form-control" style="width:125px">
 						 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
 							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
 							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
 						</select>
 					</c:if>
 					<c:if test="${ !user.role.equals('admin')}">
-						<input type="hidden" name="searchCondition" value="1">
+						<input type="hidden" name="searchCondition" id="searchCondition" value="1">
 					</c:if>	
 				  </div>
 				  
