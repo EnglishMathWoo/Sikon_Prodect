@@ -2,6 +2,7 @@
 <%@ page pageEncoding="EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -47,6 +48,20 @@ div.image{
 	padding-top : 30px;
 }
 
+.btn_gotop {
+	display:none;
+	position:fixed;
+	bottom:30px;
+	right:30px;
+	z-index:999;
+	outline:none;
+	background-color:#937062;
+	color:#f7f7f7;
+	padding:15px 20px;
+}
+.btn_gotop:hover{
+	color: #f7f7f7;
+}
 
 </style>
  <!-- //////////////////////////////////공유하기////////////////////////////// -->
@@ -136,8 +151,21 @@ div.image{
 		});
 		 
 	});
+
+//===================== 상단으로 이동 ====================================
 	
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 300){
+			$('.btn_gotop').show();
+		} else{
+			$('.btn_gotop').hide();
+		}
+	});
 	
+	$('.btn_gotop').click(function(){
+		$('html, body').animate({scrollTop:0},400);
+		return false;
+	});
 		
 	
 	</script>
@@ -173,20 +201,19 @@ div.image{
 					    </a>
 					</div>
 					
-					<div><h4><strong>${product.prodName}</strong></h4></div><br>
-					<div>${product.prodDetail }</div>
+					<p>${product.prodDetail }</p>
+					<h4><strong>${product.prodName}</strong></h4>
 					<input type="hidden" name="detail" value="${product.prodDetail }"/>
 					<input type="hidden" name="prodName" value="${product.prodName}"/>
+					
 				</div>
 				
-				<br/><br/>
-				
-				
-				
+				<br/>
 				
 				<div class="row">
-					<div><h6><del>${product.prodPrice } 원</del></h6></div>
-					<div><h5><strong>${product.prodDisPrice } 원</strong></h5></div>
+				<p style="color:#aba6a6"><del>${product.prodPrice}</del></p>
+				<p style="font-size:17px;font-weight: bold"><span style="color:#d9534f"><fmt:formatNumber value="${product.prodDisRate}" type="percent"/>&nbsp;</span>
+				${product.prodDisPrice}<span style="font-size:14px;font-weight:600">원</span></p>
 				</div>
 				
 				<br/>
@@ -203,6 +230,8 @@ div.image{
 					 배송비 : 3000원<br/>
 					------------------					
 				</div>
+				
+				<br/>
 				
 				<hr/> 
 				
@@ -227,7 +256,7 @@ div.image{
 		 	
 		 	<hr/>
 		 	
-		 	<div class="col-xs-10 col-md-10 text-center">
+		 	<div class="col-xs-12 col-md-12 text-center">
 		 	
 		 	${product.prodContent }
 		 	
@@ -235,6 +264,12 @@ div.image{
 		 	
 </div>
  	<!--  화면구성 div Start /////////////////////////////////////-->
+ 	
+ 	<!-- 상단으로 이동하기 버튼 -->
+	<a href="#" class="btn_gotop">
+	  <span class="glyphicon glyphicon-chevron-up">
+	  </span>
+	</a>
 
 </body>
 </html>

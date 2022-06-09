@@ -26,6 +26,7 @@ public class Purchase {
 	private int divyFee;
 	private String PaymentOpt;
 	private String divyStatus;
+	private String reviewStatus;
 
 
 	
@@ -251,10 +252,27 @@ public class Purchase {
 
 
 
-	public String toString() {
-		return "Purchase [tranNo=" + tranNo + ", serialNo=" + serialNo + ", usedCoupon=" + usedCoupon + ", receiverName=" + receiverName + ", receiverPhone=" + receiverPhone 
-				+ ", receiverEmail=" + receiverEmail+ ", divyAddr=" + divyAddr + ", divyMessage="+ divyMessage + ", purchaseQuantity=" + purchaseQuantity
-				+ ", orderDate=" + orderDate + ", invoiceNum="+ invoiceNum + ", usedPoint=" + usedPoint + ", earnPoint="+ earnPoint+ ", divyFee="+ divyFee
-				 + ", PaymentOpt="+ PaymentOpt + ", divyStatus="+ divyStatus+ ", Product="+ purchaseProd+ ", User="+ buyer + "]";
+	public String getReviewStatus() {
+		return reviewStatus;
 	}
+
+
+
+	public void setReviewStatus(String reviewStatus) {
+		this.reviewStatus = reviewStatus;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Purchase [tranNo=" + tranNo + ", purchaseProd=" + purchaseProd + ", buyer=" + buyer + ", serialNo="
+				+ serialNo + ", usedCoupon=" + usedCoupon + ", receiverName=" + receiverName + ", receiverPhone="
+				+ receiverPhone + ", receiverEmail=" + receiverEmail + ", divyAddr=" + divyAddr + ", divyMessage="
+				+ divyMessage + ", purchaseQuantity=" + purchaseQuantity + ", orderDate=" + orderDate + ", invoiceNum="
+				+ invoiceNum + ", usedPoint=" + usedPoint + ", earnPoint=" + earnPoint + ", divyFee=" + divyFee
+				+ ", PaymentOpt=" + PaymentOpt + ", divyStatus=" + divyStatus + ", reviewStatus=" + reviewStatus + "]";
+	}
+
+
 }
