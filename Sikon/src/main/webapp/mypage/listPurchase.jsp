@@ -187,7 +187,11 @@ table {
 				</c:when>
 				<c:otherwise>
 					<td align="center" class="end">배송완료&nbsp;&nbsp;
-					<a onclick="window.open('/review/addReview.jsp', 'window_name', 'width=500, height=500, location=no, status=no, scrollbars=yes');">리뷰쓰기</a></td>
+					<c:if test="${purchase.reviewStatus=='001' }">
+					<a onclick="window.open('/review/addReview.jsp?category=PRD&textNo=${purchase.tranNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">리뷰쓰기</a>					
+					</c:if>
+					</td>
+					
 				</c:otherwise>
 			  	</c:choose>
 			  	

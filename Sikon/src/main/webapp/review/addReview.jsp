@@ -13,17 +13,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
-<!--  ///////////////////////// font ////////////////////////// -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap"
-	rel="stylesheet">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -31,126 +29,151 @@
 
 
 <!-- include css/js -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-
-<!--  /////////////////////////summernote////////////////////////// -->
-
-<script src="/resources/javascript/summernote-lite.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
-	rel="stylesheet">
-<script src="/resources/javascript/summernote-ko-KR.js"></script>
-<!--  -->
-
+<link href="/resources/css/animate.min.css" rel="stylesheet">
+<link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<script src="/resources/javascript/bootstrap-dropdownhover.min.js"></script>
 
 
 <style>
-body {
-	padding-top: 0px;
-	font-family: 'Gowun Batang', serif;
+
+.container{
+background-color: #F7F7F7;
+}
+
+
+@media(min-width:568px){
+    .end{
+        margin-left: auto;
+    }
+}
+
+@media(max-width:768px){
+    #post{
+        width: 100%;
+    }
+}
+
+
+/* 버튼 css */
+
+#post{
+    margin: 10px;
+    padding: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-align: center;
+    background-color: #dc3545;
+    color: WHITE;
+    border-radius: 13px;
+    width: 50%;
+    margin-left: 80px;
+}
+
+body{
+    background-color: #F7F7F7;
+}
+
+
+h4{
+    color: #424242;
+    font-weight: bold;
+}
+label{
+    color: #424242;
+}
+
+
+.form-group p a{
+color: #424242;}
+
+
+.form-group textarea{
+    background-color: #F7F7F7;
+    border: 1px solid rgba(16, 46, 46, 0.973);
+    border-radius: 12px;
+}
+
+.form-group input{
+background-color: #F7F7F7;
+}
+
+
+form{
+    border: rgba(16, 46, 46, 0.973);
+    background-color: #F7F7F7;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top:15px;
+ }
+ 
+ img {
+    vertical-align: middle;
+    max-width: 400px;
+    max-height: 250px;
+    margin-bottom: 30px;
 }
 </style>
-
 
 <style>
-.page-header {
-	font-family: 'Gowun Batang', serif;
-	font-weight: bold;
-	color: #75574B
+.drop-zone{
+width:837px;
+height:200px;
+margin-top:0px;
+margin-bottom: 10px;
 }
 
-.text-info {
-	font-family: 'Gowun Batang', serif;
-	font-weight: bold;
-	color: #75574B
+
+.drop-zone {
+  max-width: 620px;
+    height: 200px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    cursor: pointer;
+    color: #cccccc;
+    border: 2px dashed #eee;
+    border-radius: 10px;
 }
 
-.row {
-	font-family: 'Gowun Batang', serif;
+.drop-zone--over {
+  border-style: solid;
 }
+
+.drop-zone__input {
+  display: none;
+}
+
+.drop-zone__thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #cccccc;
+  background-size: cover;
+  position: relative;
+}
+
+.drop-zone__thumb::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 0;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 14px;
+  text-align: center;
+}
+
 </style>
 
-	<script type="text/javascript">
 
-$(function() {
-	//여기서 또 상품/레시피/클래스 조건 걸어줘야됨
-	
-	 
-	 $( "button:contains('취소')" ).on("click" , function() {
-			//self.location = "/product/listProduct?menu=manage"
-		});
-	
-	 $( "button:contains('리뷰등록')" ).on("click" , function() {
-			fncAddReview();
-
-		});
-	 
-});
-
-$( "button:contains('리뷰등록')" ).css("color","red")
-
-function fncAddReview() {
-	
-	$("form").attr("method" , "POST").attr("action" , "/review/addReview?textNo=10000&category=100").submit();
-
-	
-}
-
-
-</script>
-		<script>
-			$(document).ready(function() {
-				$('#summernote').summernote({
-					
-					height: 300,                 // 에디터 높이
-					minHeight: null,             // 최소 높이
-					maxHeight: null,             // 최대 높이
-					focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-					placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-					callbacks: {	//여기 부분이 이미지를 첨부하는 부분
-						onImageUpload : function(files) {
-							uploadSummernoteImageFile(files[0],this);
-
-						},
-						onPaste: function (e) {
-							var clipboardData = e.originalEvent.clipboardData;
-							if (clipboardData && clipboardData.items && clipboardData.items.length) {
-								var item = clipboardData.items[0];
-								if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-									e.preventDefault();
-								}
-							}
-						}
-					}
-		});
-		});
-			    function uploadSummernoteImageFile(file, editor) {
-			        data = new FormData();
-			        data.append("file", file);
-			        $.ajax({
-			            data : data,
-			            type : "POST",
-						url : "/review/json/uploadSummernoteImageFile",
-			            contentType : false,
-			            processData : false,
-			            success : function(JSONData,status) {
-			                //항상 업로드된 파일의 url이 있어야 한다.
-			                console.log('성공');
-			                console.log(JSONData.url);
-			                $(editor).summernote('insertImage', JSONData.url);
-			            }
-			      
-			        });
-			    }
-			</script>
-	
-			
-
-			   
-			    
-		
 </head>
 
 <body>
@@ -159,35 +182,97 @@ function fncAddReview() {
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-
-		<div class="page-header">
-
-			<h3 class=" text-info" style="color: #75574B;">Review</h3>
-		</div>
-		
-
-
-		<div class="form-group">
-		<form method="post" action="/review/addReview">
-		<input type="hidden" name="tranNo" value="${param.tranNo }"/>
-		
-			<textarea id="summernote" class="form-control" name="content">
-     </textarea>
-	
-			
-			
-			
-		
-		<button type="button"  class="btn btn-default" style="float: right;">리뷰등록</button>
-		      <button type="button"  class="btn btn-default" style="float: right;" >취소</button>
-			</form>
-</div>
-
-
-	</div>
-	<!--  화면구성 div Start /////////////////////////////////////-->
+	<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                <form id="algin-form">
+                
+                    <div class="form-group">
+                        <h4>리뷰작성</h4>
+                        <label for="message">후기를 남겨주세요!</label>
+                        <textarea name="reviewContent" id="reviewContent" cols="30" rows="5" class="form-control" placeholder="최소 15자 이상 입력해주세요." style="background-color: #F7F7F7;"></textarea>
+                    </div>
+                    <div class="form-group">
+                    
+                        <label for="reviewImg">이미지</label>
+                        <div><input type="file" name="reviewImg" /></div>
+                         
+                        
+                        <!-- 
+                        <div class="drop-zone">
+    						<span class="drop-zone__prompt">Drop file here or click to upload</span>
+ 						 </div>
+                        -->
+                        
+                    </div>
+                    
+                    <div class="form-group">
+                        <p class="text-secondary">상품과 무관한 사진 및 욕설/비속어가 포함된 리뷰는 고지 없이 삭제될 수 있습니다.
+							구매하신 상품을 직접 촬영한 사진만 리뷰 등록 및 마일리지 지급이 가능합니다.
+							해당 사유들로 인해 고지없이 리뷰 및 사진이 삭제되는 경우, 지급 마일리지 일부 또는 전액이 회수될 수 있습니다.
+							상품 반품/취소 시, 리뷰 삭제 및 지급 마일리지가 회수 됩니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="post" class="btn">리뷰등록</button>
+                    </div>
+                    
+                    <input type="hidden" name="category" value="${param.category }"/>
+                    <input type="hidden" name="textNo" value="${param.textNo }"/>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 </body>
+<script type="text/javascript">
+	$(function() {
+
+		$("button:contains('리뷰등록')").on("click", function() {
+			fncAddReview();
+
+		});
+
+	});
+
+
+	function fncAddReview() {
+		//$("form").attr("method", "POST").attr("action","/review/addReview").submit();
+		
+		  $("form").attr("method", "POST").attr("action","/review/addReview").submit();
+	         setTimeout(function() {   
+	             window.close();
+
+	          }, 3);
+
+	      }
+	
+	// 이미지 미리보기
+	$(document).ready(function () {
+		var fileTypes = ['jpg', 'jpeg', 'png'];  //acceptable file types
+		$("input:file").change(function (evt) {
+		    var parentEl = $(this).parent();
+		    var tgt = evt.target || window.event.srcElement,
+		                    files = tgt.files;
+
+		    // FileReader support
+		    if (FileReader && files && files.length) {
+		        var fr = new FileReader();
+		        var extension = files[0].name.split('.').pop().toLowerCase(); 
+		        fr.onload = function (e) {
+		        	success = fileTypes.indexOf(extension) > -1;
+		        	if(success)
+			        	$(parentEl).append('<img src="' + fr.result + '" class="preview"/>');
+		        }
+		        fr.onloadend = function(e){
+		            console.debug("Load End");
+		        }
+		        fr.readAsDataURL(files[0]);
+		    }   
+		});
+	});
+</script>
 
 </html>

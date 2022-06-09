@@ -37,7 +37,7 @@ public class ReviewDaoImpl implements ReviewDao {
 		sqlSession.insert("ReviewMapper.addReview", review);
 	}
 
-	public List<Review> getReviewList(Search search, int category, int textNo) throws Exception {
+	public List<Review> getReviewList(Search search, String category, int textNo) throws Exception {
 		System.out.println("search=" + search);
 		System.out.println("category=" + category);
 		System.out.println("textNo" + textNo);
@@ -63,7 +63,7 @@ public class ReviewDaoImpl implements ReviewDao {
 
 	}
 
-	public int getTotalCount(Search search, int category, int textNo) throws Exception {
+	public int getTotalCount(Search search, String category, int textNo) throws Exception {
 		System.out.println("search=" + search);
 		System.out.println("category=" + category);
 		System.out.println("textNo" + textNo);
@@ -73,6 +73,17 @@ public class ReviewDaoImpl implements ReviewDao {
 		map.put("category", category);
 		map.put("textNo", textNo);
 		return sqlSession.selectOne("ReviewMapper.getTotalCount", map);
+	}
+
+	@Override
+	public void updateStatus(int textNo,String category) throws Exception {
+		if(category.equals("PRD")) {
+			sqlSession.update("ReviewMapper.updatePurchaseStatus", textNo);		
+
+		}else {
+			sqlSession.update("ReviewMapper.updateApplyStatus", textNo);		
+
+		}
 	}
 
 }
