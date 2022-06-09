@@ -14,12 +14,45 @@
 		<result property="reviewContent" 	column="review_content" 		 jdbcType="VARCHAR"  />
 		<result property="reviewImg" 			column="review_img" 			jdbcType="VARCHAR"/>
 		<result property="reviewRegdate" 	column="review_regdate" 		jdbcType="DATE" />
-		<result property="recipe.recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
-		<result property="product.prodNo" 			column="prod_no" 			jdbcType="NUMERIC"/>
-		<result property="cook.cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
-		<result property="status" 			column="status" 			jdbcType="VARCHAR"/>
+		<result property="review.recipe.recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
+		<result property="review.product.prodNo" 			column="prod_no" 			jdbcType="NUMERIC"/>
+		<result property="review.cook.cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
 	</resultMap>
 	
+		<resultMap id="purchaseSelectMap" type="purchase">
+		<result property="tranNo" 					column="tran_no" 				jdbcType="NUMERIC"/>
+  		<result property="purchaseProd.prodNo" 		column="prod_no" 				jdbcType="NUMERIC"/>
+  		<result property="buyer.userId" 			column="user_id"				jdbcType="VARCHAR"/>
+  		<result property="serialNo" 				column="serial_no" 				jdbcType="VARCHAR"/>
+  		<result property="receiverName"				column="receiver_name" 			jdbcType="VARCHAR"/>
+  		<result property="receiverPhone" 			column="receiver_phone" 		jdbcType="VARCHAR"/>
+  		<result property="purchaseQuantity" 		column="quantity" 				jdbcType="NUMERIC"/>
+  		<result property="divyAddr" 				column="divy_addr" 				jdbcType="VARCHAR"/>
+  		<result property="divyMessage" 				column="divy_message" 			jdbcType="VARCHAR"/>
+  		<result property="receiverEmail" 			column="receiver_email" 		jdbcType="VARCHAR"/>
+  		<result property="usedCoupon" 				column="used_coupon" 			jdbcType="VARCHAR"/>
+  		<result property="usedPoint" 				column="used_point" 			jdbcType="NUMERIC"/>  		 
+  		<result property="earnPoint" 				column="earn_point"				jdbcType="NUMERIC"/>
+  		<result property="orderDate" 				column="orderdate" 				jdbcType="DATE"/>
+  		<result property="PaymentOpt" 				column="payment_opt" 			jdbcType="VARCHAR"/>
+  		<result property="divyStatus" 				column="divy_status" 			jdbcType="VARCHAR"/>
+  		<result property="invoiceNum" 				column="invoice_num" 			jdbcType="VARCHAR"/>
+  		<result property="divyFee" 					column="divy_fee" 				jdbcType="NUMERIC"/>
+  		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
+		
+	</resultMap>
+	
+	<resultMap id="applySelectMap" type="apply">
+		<result property="applyNo" 			column="apply_no" 			jdbcType="NUMERIC"/>
+		<result property="classCook.cookNo" 				column="cook_no" 					jdbcType="NUMERIC" />
+		<result property="applier.userId" 		column="applier_id"		jdbcType="VARCHAR"/>
+		<result property="paymentOption" 		column="PAYMENT_OPTION" 					jdbcType="VARCHAR" />
+		<result property="applyStatus" 				column="apply_status" 					jdbcType="VARCHAR" />
+		<result property="cookStatus" 			column="cook_status" 		jdbcType="NUMERIC" />
+		<result property="checkDate" 				column="check_date" 			jdbcType="DATE"/>
+		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
+
+	</resultMap>
 	
 	<!-- SQL : INSERT -->
 	<insert 	id="addReview"		parameterType="review" >
@@ -40,6 +73,23 @@
 			WHERE review_no= #{reviewNo}
 	 </update>
 	 
+	  <!-- SQL : UPDATE -->
+	 <update	id="updatePurchaseStatus"	parameterType="int" >
+	   	UPDATE purchase
+	   	<set>
+	   		review_status='002'
+	   	</set>
+			WHERE tran_no= #{textNo}
+	 </update>
+	 
+	  <!-- SQL : UPDATE -->
+	 <update	id="updateApplyStatus"	parameterType="int" >
+	   	UPDATE apply
+	   	<set>
+	   		review_status='002'
+	   	</set>
+			WHERE apply_no= #{textNo}
+	 </update>
 	 
 	 
 	 <select  id="getReviewList"  parameterType="map"	resultMap="reviewSelectMap">

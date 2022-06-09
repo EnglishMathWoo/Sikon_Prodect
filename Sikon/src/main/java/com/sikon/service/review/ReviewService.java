@@ -12,7 +12,7 @@ public interface ReviewService {
 	public void addReview(Review review) throws Exception;
 
 	//¸®ºä ¸®½ºÆ® Á¶È¸
-	public Map<String, Object> getReviewList(Search search,int category, int textNo) throws Exception;
+	public Map<String, Object> getReviewList(Search search,String category, int textNo) throws Exception;
 
 	//¸®ºä ¼öÁ¤
 	public void updateReview(Review review) throws Exception;
@@ -20,5 +20,6 @@ public interface ReviewService {
 	//¸®ºä »èÁ¦
 	public void deleteReview(Review review) throws Exception;
 
+	public void updateStatus(int textNo,String category) throws Exception;
 
 }

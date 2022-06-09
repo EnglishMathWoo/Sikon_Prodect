@@ -12,7 +12,7 @@ public interface ReviewDao {
 	public void addReview(Review review) throws Exception;
 
 	//SELECT LIST
-	public List<Review> getReviewList(Search search,int category, int textNo) throws Exception;
+	public List<Review> getReviewList(Search search,String category, int textNo) throws Exception;
 
 	//UPDATE
 	public void updateReview(Review review) throws Exception;
@@ -20,7 +20,9 @@ public interface ReviewDao {
 	//DELETE
 	public void deleteReview(Review review) throws Exception;
 	
+	public void updateStatus(int textNo, String category) throws Exception;
+	
 	//SELECT ROW Count
-	public int getTotalCount(Search search,int category,int textNo) throws Exception ;
+	public int getTotalCount(Search search,String category,int textNo) throws Exception ;
 
 }

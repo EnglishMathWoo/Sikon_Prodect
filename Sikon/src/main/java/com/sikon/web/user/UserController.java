@@ -77,12 +77,12 @@ public class UserController {
 		System.out.println("getuserid="+user.getUserId());
 		User dbUser=userService.getUser(user.getUserId());
 		
-		int alarmCount = alarmService.getAlarmCount(user.getUserId());
-		System.out.println("alarmCount="+alarmCount);
+		int statusCount = alarmService.getStatusCount(user.getUserId());
+		System.out.println("statusCount="+statusCount);
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
-			session.setAttribute("alarm", alarmCount );
+			session.setAttribute("alarm", statusCount );
 		}
 		System.out.println(user.getPassword());
 		System.out.println(dbUser.getPassword());

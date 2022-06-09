@@ -11,6 +11,7 @@
 		<result property="alarmNo" 					column="alarm_no" 				jdbcType="NUMERIC"/>
   		<result property="alarmTarget" 				column="alarm_target" 				jdbcType="VARCHAR"/>
   		<result property="alarmContent" 			column="alarm_content"				jdbcType="VARCHAR"/>
+  		<result property="alarmStatus" 			column="alarm_status"				jdbcType="VARCHAR"/>
   		<result property="alarmDate" 				column="alarm_date" 				jdbcType="DATE"/>
 	</resultMap>
 	
@@ -22,6 +23,7 @@
 		VALUES (seq_alarm_alarm_no.NEXTVAL, 
 				#{alarmTarget}, 
 				#{alarmContent}, 
+				'001', 
 				SYSDATE)
 	 </insert>
 	 
@@ -40,30 +42,43 @@
 	 </select>
 	  
 		 
-	<!-- SQL : SELECT LIST -->
-	<select  id="getAlarmList"  parameterType="search"	resultMap="alarmSelectMap">
+	 <!-- SQL : SELECT LIST -->
+	<select  id="getAlarmList"  parameterType="map"	resultMap="alarmSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *
+	  					FROM		(	SELECT * 
 											FROM alarm
-											ORDER BY alarm_no DESC) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+												<where>
+													alarm_target = #{userId}
+													</where>
+											ORDER BY alarm_no DESC ) inner_table
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>
-	 	
+	 
+	 <update 	id="updateAlarmStatus"  parameterType="alarm">
+		UPDATE alarm
+		<set>
+		alarm_status = '002'
+		</set>
+		<where>
+		alarm_target = #{alarmTarget}
+		</where>
+	</update>
 	
-	<!-- SQL : SELECT ROW Count -->	 
-	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(	SELECT *
-						FROM alarm) countTable					
+	<!-- SQL : SELECT ONE -->
+	 <select 	id="getStatusCount"	parameterType="String"	resultType="int">
+		SELECT COUNT(*)
+	  	FROM(	SELECT * 
+						FROM alarm WHERE alarm_target = #{userId} AND alarm_status = '001') countTable	
 	 </select>
+	 
 	 
 	 <!-- 알람 삭제 -->	
 	 <select  id="deleteALarm"  parameterType="String">
 	  	DELETE FROM alarm
 	  	<where>
-			alarm_target= #{userId}
+			alarm_target= #{alarmTarget}
 		</where>		
 	 </select>
 	 	

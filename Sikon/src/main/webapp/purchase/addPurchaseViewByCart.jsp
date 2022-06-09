@@ -43,7 +43,7 @@
 
 
 body>div.container {
-	margin-top: 70px;
+	padding-top: 200px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 

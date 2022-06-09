@@ -51,6 +51,10 @@
         #noCoupon{
         	text-align:center;
         }
+        
+        .soo{
+			padding-top : 170px;
+		}
 
     </style>
     
@@ -109,7 +113,7 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
-	<div class="container">
+	<div class="container soo">
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="page-header text-info">

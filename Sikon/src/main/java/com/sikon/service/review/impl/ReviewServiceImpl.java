@@ -38,7 +38,7 @@ public class ReviewServiceImpl implements ReviewService {
 		reviewDao.addReview(review);
 	}
 
-	public Map<String, Object> getReviewList(Search search, int category, int textNo) throws Exception {
+	public Map<String, Object> getReviewList(Search search, String category, int textNo) throws Exception {
 		System.out.println("search=" + search);
 		System.out.println("category=" + category);
 		System.out.println("textNo" + textNo);
@@ -64,6 +64,12 @@ public class ReviewServiceImpl implements ReviewService {
 		System.out.println("review=" + review);
 		reviewDao.deleteReview(review);
 
+	}
+
+	@Override
+	public void updateStatus(int textNo,String category) throws Exception {
+		reviewDao.updateStatus(textNo,category);
+		
 	}
 
 }

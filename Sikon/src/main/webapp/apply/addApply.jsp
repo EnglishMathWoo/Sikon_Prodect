@@ -225,6 +225,12 @@ $(function() {
 		      <input type="text" class="form-control" id="cookRegdate" name="cookRegdate" placeholder="쿠킹클래스등록날짜" value="${cook.cookRegdate}" readonly>
 		    </div>
 		  </div>
+		  <div class="form-group">
+		    <label for="checkDate" class="col-sm-offset-1 col-sm-3 control-label">결제날짜</label>
+		    <div class="col-sm-4">
+		      <input type="date" class="form-control" id="checkDate" name="checkDate" placeholder="결제날짜" value="${apply.checkDate}" >
+		    </div>
+		  </div>		  
 		  
 		  <div class="form-group">
 		    <label for="cookPrice" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스가격</label>

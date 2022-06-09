@@ -7,6 +7,7 @@ public class Alarm {
 	private int alarmNo;
 	private String alarmTarget;
     private String alarmContent;
+    private String alarmStatus;
     private Date alarmDate;
 	
      
@@ -48,6 +49,20 @@ public class Alarm {
 
 	public void setAlarmContent(String alarmContent) {
 		this.alarmContent = alarmContent;
+	}
+
+
+
+
+	public String getAlarmStatus() {
+		return alarmStatus;
+	}
+
+
+
+
+	public void setAlarmStatus(String alarmStatus) {
+		this.alarmStatus = alarmStatus;
 	}
 
 

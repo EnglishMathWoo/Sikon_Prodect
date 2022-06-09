@@ -34,7 +34,7 @@
 
 <style>
 body>div.container{
-	padding-top : 70px;
+	padding-top : 200px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 div.row{

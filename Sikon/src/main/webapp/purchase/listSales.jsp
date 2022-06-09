@@ -46,7 +46,9 @@ body{
 	font-family: 'Nanum Myeongjo', serif;
 	font-family: 'Open Sans', sans-serif;
 }
-
+div.container{
+	padding-top : 170px;
+}
 .jaewoong th{
 	text-align:center;
 }

@@ -12,7 +12,6 @@ public class Review {
 	private Recipe recipe;
 	private Product product;
 	private Cook cook;
-	private String status;
 	
 	
 	public int getReviewNo() {
@@ -70,18 +69,12 @@ public class Review {
 	public void setCook(Cook cook) {
 		this.cook = cook;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
 	
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", reviewCategory=" + reviewCategory + ", writerNickname=" + writerNickname
 				+ ", reviewContent=" + reviewContent + ", reviewRegdate=" + reviewRegdate + ", reviewImg=" + reviewImg
-				+ ", recipe=" + recipe + ", product=" + product + ", cook=" + cook + ", status=" + status + "]";
+				+ ", recipe=" + recipe + ", product=" + product + ", cook=" + cook + ", status="+ "]";
 	}
 
 

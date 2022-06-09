@@ -407,6 +407,11 @@ address {
 	 font-size: 18px;
 }
 
+.bi-bell-fill {
+	 font-size: 18px;
+}
+
+
 
 div.addbar{
 	height : 32px;
@@ -462,8 +467,12 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        <c:if test="${!empty sessionScope.user.role}">
 	        <li><a href="#">Logout</a></li>
 	        <li><a href="#" style="color:#B97D2D">Mypage</a></li>
-	        
-	        <li><i class="bi bi-bell"></i></li>
+	        <c:if test="${sessionScope.alarm == 0}">
+	        <li><i class="bi bi-bell" id="vacantAlarm"></i></li>
+	        </c:if>
+	        <c:if test="${sessionScope.alarm != 0}">
+	        <li><i class="bi bi-bell-fill" id="filledAlarm"></i></li>
+	        </c:if>
 	        </c:if>
 	      </ul>
 	    </div>
@@ -496,6 +505,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		                <li><a href="#">하바나</a></li>
 		                <li><a href="#">하트</a></li>
 		                <li><a href="#">수강예정목록</a></li>
+		                <li><a href="#">매출</a></li>
               		</ul>
               		</c:if>
         </li>        
@@ -664,10 +674,24 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 	 		$( "a:contains('수강예정목록')" ).on("click" , function() {
 				$(self.location).attr("href","/apply/listMyClass");
-			}); 	 		
+			});
+	 		
+	 		$( "a:contains('매출')" ).on("click" , function() {
+				$(self.location).attr("href","/apply/sale.jsp");
+			}); 
 	 		//====================================================
 		 });
+
+		 $(function() {
+				
+				$("#filledAlarm").on("click" , function() {
+					
+					$(self.location).attr("href","/alarm/listAlarm?userId=${sessionScope.user.userId}");
+					
+				});
+			});		
 		 
+			 
 		//web socket 시작
 		var socket = null;
 		

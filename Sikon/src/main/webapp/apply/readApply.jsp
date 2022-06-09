@@ -120,6 +120,13 @@
 
 		<hr/>
 		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>결제날짜</strong></div>
+			<div class="col-xs-8 col-md-4">${apply.checkDate}</div>
+		</div>
+		
+		<hr/>
+		
 
 	
 	

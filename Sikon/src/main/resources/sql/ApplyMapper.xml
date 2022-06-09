@@ -107,4 +107,12 @@
 											
 	 </select>
 	 
+	 
+	 <select id="sale" resultMap="applySelectMap">
+        select * from apply 
+        where user_id=#{userId} and PAYMENT_OPTION=#{paymentOption} 
+        and check_date between DATE_SUB(NOW(), INTERVAL 7 DAY) and NOW() 
+        order by check_date;        
+    </select>
+	 
 </mapper>

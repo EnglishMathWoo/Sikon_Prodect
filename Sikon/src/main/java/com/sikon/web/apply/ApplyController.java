@@ -1,5 +1,6 @@
 package com.sikon.web.apply;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,12 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
-import com.sikon.service.domain.Cook;
-import com.sikon.service.domain.Apply;
-import com.sikon.service.domain.User;
-
-import com.sikon.service.cook.CookService;
 import com.sikon.service.apply.ApplyService;
+import com.sikon.service.cook.CookService;
+import com.sikon.service.domain.Apply;
+import com.sikon.service.domain.Cook;
+import com.sikon.service.domain.Review;
+import com.sikon.service.domain.User;
+import com.sikon.service.review.ReviewService;
 
 
 @Controller
@@ -39,6 +40,10 @@ public class ApplyController {
 		@Autowired
 		@Qualifier("cookServiceImpl")
 		private CookService cookService;
+		
+		@Autowired
+		@Qualifier("reviewServiceImpl")
+		private ReviewService reviewService;
 		
 		//setter Method 구현 않음
 			
@@ -116,12 +121,21 @@ public class ApplyController {
 		
 		//@RequestMapping("/getPurchase.do")
 		@RequestMapping( value="getApply" )
-		public ModelAndView getApply( Model model,HttpServletRequest request,@RequestParam("applyNo") int applyNo
+		public ModelAndView getApply(@ModelAttribute("search") Search search,HttpServletRequest request,@RequestParam("applyNo") int applyNo
 		
 				) throws Exception {
 			
 			System.out.println("/apply/getApply : GET, POST");
 			//Business Logic
+			
+			System.out.println("search:" + search);
+
+			if (search.getCurrentPage() == 0) {
+				search.setCurrentPage(1);
+			}
+
+			search.setPageSize(pageSize);
+
 			
 			Apply apply = applyService.getApply(applyNo);
 			Cook cook = cookService.getCook(apply.getClassCook().getCookNo());
@@ -131,11 +145,16 @@ public class ApplyController {
 			// Model 과 View 연결
 			apply.setClassCook(cook);
 			
+			String category="COOK";
+			
+			Map map=reviewService.getReviewList(search, category, applyNo);
+			
 			ModelAndView modelAndView=new ModelAndView();
 			modelAndView.setViewName("forward:/apply/getApply.jsp");
 			modelAndView.addObject("apply", apply);
 			modelAndView.addObject("cook", cook);
 			modelAndView.addObject("user", user);
+			modelAndView.addObject("review", map.get("list"));
 
 			// 여기서는 value값만 넣어줬다
 			

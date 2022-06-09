@@ -1,5 +1,6 @@
 package com.sikon.service.alarm.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.sikon.common.Search;
 import com.sikon.service.alarm.AlarmDao;
 import com.sikon.service.domain.Alarm;
+import com.sikon.service.domain.Coupon;
 
 
 @Repository("alarmDaoImpl")
@@ -44,8 +46,13 @@ public class AlarmDaoImpl implements AlarmDao {
 		return sqlSession.selectOne("AlarmMapper.getAlarmCount", userId);
 	}
 		
-	public List<Alarm> getAlarmList(Search search) throws Exception {
-		return sqlSession.selectList("AlarmMapper.getAlarmList", search);
+	public List<Alarm> getAlarmList(Search search, String userId) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("search", search);
+		
+		return sqlSession.selectList("AlarmMapper.getAlarmList", map);
 	}
 	
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
@@ -55,6 +62,15 @@ public class AlarmDaoImpl implements AlarmDao {
 	
 	public void deleteAlarm(String userId) throws Exception {
 		sqlSession.delete("AlarmMapper.deleteCook", userId);
+	}
+	
+	/// updateAlarm Method
+	public void updateAlarmStatus(Alarm alarm) throws Exception {
+		sqlSession.update("AlarmMapper.updateAlarmStatus", alarm);
+	}
+	
+	public int getStatusCount(String userId) throws Exception {
+		return sqlSession.selectOne("AlarmMapper.getStatusCount", userId);
 	}
 	
 }

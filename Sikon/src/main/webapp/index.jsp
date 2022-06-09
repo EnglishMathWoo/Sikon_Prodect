@@ -44,32 +44,26 @@
 
 
 <style>
-
 body {
 	padding-top: 50px;
 	
 }
-
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
 	color: #75574B
 }
-
 .text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
 	color: #75574B
 }
-
 .row {
 	font-family: 'Gowun Batang', serif;
 }
-
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
 }
-
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
 .ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
 }
@@ -78,36 +72,25 @@ body {
 .ref-sort li:last-child{margin:0; padding:0;}
 .ref-sort li:last-child::after{display:none;}
 .ref-sort li a{}
-
 /* References */
 .ref-sort li a{color:inherit;}
 .ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
-
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 .sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
 .sectiontitle .heading{margin:0; padding:0; line-height:1;}
-
 .sectiontitle{max-width:none; margin-bottom:50px;}
-
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 .imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
 .imgover, .imgover:hover::after{color:#333333;} 
-
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
-
 #latest article{max-width:348px;}
-
 #footer{padding-bottom:50px;}/* Not required, just looks a little better */
 .latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
 .latestimg > li img{width:auto;}
-
 * Latest
 --------------------------------------------------------------------------------------------------------------- */
 #latest{}
-
 #latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
 article{}
 article img{width:100%;}/* Force the image to have the full width of parent at all times */
@@ -121,26 +104,22 @@ article img{width:100%;}/* Force the image to have the full width of parent at a
 .excerpt .meta li:last-child::after{margin:0; content:"";}
 .excerpt p{}
 .excerpt footer{margin-top:30px;}
-
 .latestimg{}
 .latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
 .latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
 .latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
 .latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
 .latestimg > li a.imgover{display:block;}
-
 .carousel-inner > .item > img {
   top: 0;
   left: 0;
   min-width: 100%;
   max-height: 500px;
 } 
-
 /* [RECIPE LIST] 폰트 적용 */
 .wrapper{
 font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-
 /* 검색, 정렬조건 css */
 .condition{
 font-family: 'Gowun Batang', serif;
@@ -148,8 +127,6 @@ width: 100px;
 float:right;
 border-color:#D7D7D7;
 }
-
-
 /* 레시피 등록 버튼 css */
 .submit
  {
@@ -168,7 +145,6 @@ border-color:#D7D7D7;
   	font-family: 'Gowun Batang', serif;
   
 }
-
 /* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
 hr {
     margin-top: 60px;
@@ -176,12 +152,10 @@ hr {
     border: 0;
     border-top: 1px solid #eee;
 }
-
 /* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
     margin: 0 0 0px;
 }
-
 </style>
 
 
@@ -204,8 +178,8 @@ p {
 		  });
 			  
 		  $(".theme").on( "click", function() {
-			  console.log($(".theme").data('value'));
-		      fncGetList(1);
+			  console.log($(".theme").val());
+		      //fncGetList(1);
 			  });
 		  
 		});
@@ -222,16 +196,12 @@ p {
 					$( ".submit" ).on("click" , function() {
 						self.location ="/recipe/addRecipe.jsp"
 						});
+		 });
 					
-				//$("#theme").on("click" , function() {
-				//	var searchCondition = document.getElementById("theme").getAttribute('data-value');
-					//console.log(lineValue);		
-					//fncGetList(1);
-				//});
 				
 			
 			   	//====================================================================
-			
+			 $(function() {
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 		                	
@@ -255,9 +225,6 @@ p {
 					                success : function(JSONData , status) {
 					                	 
 					                	$("#currentPage").val(cpage)
-					                	//console.log(cpage); 
-					                	//alert(JSONData.list[0].recipeName);
-					                	//alert(JSONData.list.length);
 					                	console.log(JSONData.list[0].recipeName);
 					                	console.log(JSONData.list[0].recipeImg);
 						                	 
@@ -270,7 +237,8 @@ p {
 					                			
 					                		
 					                		
-						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
+						                     var displayValue = 
+						                    	 				"<div class='col-sm-6 col-md-3'><br/> <br/>"
 						                     					+"<div id='latest' class='group'>"
 						                     					+"<article class='one_third first'>"
 						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
@@ -364,22 +332,23 @@ p {
 		    <br/>
 		      <h3 class="font-x2 nospace" align="center"><br> RECIPE LIST </h3>
 		    </div>
+		    <button type="button" class="submit">레시피등록</button>
 		  
+    			    <form class="form-inline" name="detailForm">
 		    
 		    <br/><hr/><br/>
-    			    <form class="form-inline" name="detailForm">
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li class="current" ><a href="#" class="theme" data-value="KO">한식</a></li>
-	        <li><a href="#" class="theme" data-value="CH">중식</a></li>
-	        <li><a href="#" class="theme" data-value="FR">양식</a></li>
-	        <li><a href="#" class="theme" data-value="JP">일식</a></li>
-	        <li><a href="#" class="theme"data-value="DES">간식</a></li>
+	        <li class="current" ><a href="#" class="theme" value="KO">한식</a></li>
+	        <li><a href="#" class="theme" value="CH">중식</a></li>
+	        <li><a href="#" class="theme" value="FR">양식</a></li>
+	        <li><a href="#" class="theme" value="JP">일식</a></li>
+	        <li><a href="#" class="theme" value="DES">간식</a></li>
 	      </ul>
 	    </nav>
-	   
-		            
+	    
+		             
       <div class="center btmspace-50">
 	   <select class="condition" id="orderCondition" name="orderCondition">
 							<option value="0"
@@ -398,7 +367,83 @@ p {
   	</div>
  
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
- 
+
+ <div class="row">
+      <div class="col-sm-6 col-md-3 col-lg-3">
+  <br/> <br/>
+    <div id="latest" class="group">
+      <article class="one_third first"><a class="imgover" href="#"><img src="/resources/images/uploadFiles/karibi.PNG" width="320" height="300"></a>
+        <div class="excerpt">
+          <h4 class="heading" >가리비 칼국수</h4>
+           <h6 >담백하고 시원한 맛!</h6>
+          <ul class="meta">
+            <li >한식</li>
+            <li>중급</li>
+            <li>35분</li>
+            <li>Taeho</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    </div>
+    
+    
+      <div class="col-sm-6 col-md-3 col-lg-3">
+  <br/> <br/>
+    <div id="latest" class="group">
+      <article class="one_third first"><a class="imgover" href="#"><img src="/resources/images/uploadFiles/썸.PNG" width="320" height="300"></a>
+        <div class="excerpt">
+          <h4 class="heading" >대패삼겹살된장찌개</h4>
+           <h6 >진한 고기육수</h6>
+          <ul class="meta">
+            <li >한식</li>
+            <li>고급</li>
+            <li>30분</li>
+            <li>Woong</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+        </div>
+    
+      <div class="col-sm-6 col-md-3 col-lg-3">
+  <br/> <br/>
+    <div id="latest" class="group">
+      <article class="one_third first"><a class="imgover" href="#"><img src="/resources/images/uploadFiles/7.PNG" width="320" height="300"></a>
+        <div class="excerpt">
+          <h4 class="heading" >오징어 동그랑땡</h4>
+           <h6 >다진 오징어살이 들어가요!</h6>
+          <ul class="meta">
+            <li >한식</li>
+            <li>중급</li>
+            <li>40분</li>
+            <li>Soo</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+        </div>
+    
+      <div class="col-sm-6 col-md-3 col-lg-3">
+  <br/> <br/>
+    <div id="latest" class="group">
+      <article class="one_third first"><a class="imgover" href="#"><img src="/resources/images/uploadFiles/rara.PNG" width="320" height="300"></a>
+        <div class="excerpt">
+          <h4 class="heading" >라자냐</h4>
+           <h6 >오랜 시간과 정성이 담긴</h6>
+          <ul class="meta">
+            <li >양식</li>
+            <li>고급</li>
+            <li>100분</li>
+            <li>Seyoon</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+        </div>
+    
+  </div> <!-- row 끝 -->
+  
 <div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="recipe" items="${list}">

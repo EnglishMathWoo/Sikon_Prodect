@@ -67,6 +67,12 @@ public class ApplyServiceImpl implements ApplyService{
 	public void cancel(int cookStatus, int cookNo) throws Exception {
 		applyDao.cancel(cookStatus, cookNo);
 	}
+	
+	
+	public List<Apply>  sale  (Apply apply)  throws Exception {
+		
+		return applyDao.sale(apply);
+	}
 
 	
 
