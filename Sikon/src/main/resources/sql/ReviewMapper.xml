@@ -14,9 +14,9 @@
 		<result property="reviewContent" 	column="review_content" 		 jdbcType="VARCHAR"  />
 		<result property="reviewImg" 			column="review_img" 			jdbcType="VARCHAR"/>
 		<result property="reviewRegdate" 	column="review_regdate" 		jdbcType="DATE" />
-		<result property="review.recipe.recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
-		<result property="review.product.prodNo" 			column="prod_no" 			jdbcType="NUMERIC"/>
-		<result property="review.cook.cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
+		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
+		<result property="product.prodNo" 			column="prod_no" 			jdbcType="NUMERIC"/>
+		<result property="cook.cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
 	</resultMap>
 	
 		<resultMap id="purchaseSelectMap" type="purchase">
@@ -118,24 +118,28 @@
 	 
 	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(	 select *
+	  SELECT COUNT(*)
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	select *
 	  					from review
 	  					<if test="category !=null">
 	  					<choose>
-						<when test="category == 100 || category =='100' ">
+						<when test="category == PRD || category =='PRD' ">
 	  					where prod_no=#{textNo}
 	  					</when>
-	  					<when test="category == 200 || category =='200' ">
+	  					<when test="category == REC || category =='REC' ">
 	  					where recipe_no=#{textNo}
 	  					</when>
-	  					<when test="category == 300 || category =='300' ">
+	  					<when test="category == COOK || category =='COOK' ">
 	  					where cook_no=#{textNo}
 	  					</when>
 	  					</choose>
 	  					</if>
+	  					 ) inner_table
+											
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 						
-													) countTable						
 	 </select>
 	 
 	 
