@@ -7,6 +7,7 @@
 <!--  ///////////////////////// font ////////////////////////// -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/ef3e0db941.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
@@ -398,6 +399,10 @@ address {
 	color: #B97D2D;
 }
 
+.bi-bell {
+	 font-size: 18px;
+}
+
 
 /*  주석 풀면 위에 있는 hr css랑 충돌
 hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 ";}
@@ -416,7 +421,9 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        </c:if>
 	        <c:if test="${!empty sessionScope.user.role}">
 	        <li><a href="#">Logout</a></li>
-	        <li><a href="#">Mypage</a></li>
+	        <li><a href="#" style="color:#B97D2D">Mypage</a></li>
+	        
+	        <li><i class="bi bi-bell"></i></li>
 	        </c:if>
 	      </ul>
 	    </div>
@@ -461,7 +468,6 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		        <li><a href="#">레시피관리</a></li>
 		        <li><a class="drop" href="#">스토어관리</a>
 		      		<ul>
-		                <li><a href="#">상품등록</a></li>
 		                <li><a href="#">상품목록</a></li>
 		                <li><a href="#">판매목록</a></li>
               		</ul>
@@ -569,9 +575,11 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			$(self.location).attr("href","/purchase/listPurchase");
 			});
 	 		
+	 		/*
 	 		$( "a:contains('상품등록')" ).on("click" , function() {
 			$(self.location).attr("href","/product/addProductView.jsp");
 			});
+	 		*/
 	 			
 	 		$( "a:contains('상품목록')" ).on("click" , function() {
 			$(self.location).attr("href","/product/listProduct?menu=manage");
@@ -643,10 +651,12 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			};
 		
 			ws.onmessage = function(event) {
-				alert("onmessage"+event.data);
+				alert(event.data);
+				/*
 				let $socketAlert = $('div#socketAlert');
 				$socketAlert.html(event.data)
 				$socketAlert.css('display', 'block');
+				*/
 				
 				setTimeout(function(){
 					$socketAlert.css('display','none');
@@ -657,8 +667,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			ws.onclose = function() {
 			    console.log('close');
 			};
-		
-		
+				
 		};
 		
 		//web socket 끝
