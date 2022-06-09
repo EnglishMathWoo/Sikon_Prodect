@@ -15,6 +15,7 @@ DROP TABLE cook CASCADE CONSTRAINTS;
 DROP TABLE heart CASCADE CONSTRAINTS;
 DROP TABLE wish CASCADE CONSTRAINTS;
 DROP TABLE apply CASCADE CONSTRAINTS;
+DROP table alarm CASCADE CONSTRAINTS;
 
 DROP SEQUENCE seq_coupon_coupon_no;
 DROP SEQUENCE seq_couponhodler_issue_no;
@@ -32,6 +33,7 @@ DROP SEQUENCE seq_cook_cook_no;
 DROP SEQUENCE seq_wish_wish_no;
 DROP SEQUENCE seq_heart_heart_no;
 DROP SEQUENCE seq_apply_apply_no;
+DROP SEQUENCE seq_alarm_alarm_no;
 
 CREATE SEQUENCE seq_coupon_coupon_no INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_couponhodler_issue_no INCREMENT BY 1 START WITH 10000;
@@ -49,6 +51,7 @@ CREATE  SEQUENCE  seq_cook_cook_no	 INCREMENT  BY  1  START  WITH  10000;
 CREATE SEQUENCE seq_wish_wish_no	  INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_heart_heart_no	  INCREMENT BY 1 START WITH 1;
 CREATE  SEQUENCE  seq_apply_apply_no	 INCREMENT  BY  1  START  WITH  10000;
+CREATE  SEQUENCE  seq_alarm_alarm_no	 INCREMENT  BY  1  START  WITH  10000;
 
 CREATE TABLE users ( 
 	user_id 	VARCHAR2(50)	NOT NULL,
@@ -264,6 +267,14 @@ CREATE TABLE review(
 	cook_no   NUMBER(16)     REFERENCES  cook(cook_no) ON DELETE CASCADE,
 	apply_no   NUMBER(16)    REFERENCES  apply(apply_no),
 	PRIMARY KEY(review_no)
+);
+
+CREATE TABLE alarm ( 
+	alarm_no 	NUMBER(38) 	NOT NULL, 
+	alarm_target 	VARCHAR2(100),
+	alarm_content 	VARCHAR2(4000), 
+	alarm_date 	DATE 		NOT NULL,	
+	PRIMARY KEY(alarm_no)
 );
 
 commit;
