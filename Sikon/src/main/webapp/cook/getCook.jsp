@@ -256,7 +256,7 @@ $(function() {
 				
 				<div class="form-group">
 			  		<div class="text-center">	
-			  			 <button type="button"  class="btn btn-warning" id="wish" >장바구니</button>
+			  			
 			  				<button type="button" class="btn btn-warning btn-lg" id="buy" >구매하기</button>
 			  			
 			  				<button type="button" class="btn btn-primary btn-lg" id="buy" >수정하기</button>

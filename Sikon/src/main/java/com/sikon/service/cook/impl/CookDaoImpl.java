@@ -50,22 +50,18 @@ public class CookDaoImpl implements CookDao{
 		sqlSession.update("CookMapper.updateCook", cook);
 	}
 
-	public List<Cook> getCookList(Search search,User metor) throws Exception {
+	public List<Cook> getCookList(Search search) throws Exception {
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("metor", metor);
-		map.put("search", search);
+
 		
-		return sqlSession.selectList("CookMapper.getCookList", map);
+		return sqlSession.selectList("CookMapper.getCookList",search);
 	}
 
 	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
-	public int getTotalCount(Search search,User metor) throws Exception {
+	public int getTotalCount(Search search) throws Exception {
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("metor", metor);
-		map.put("search", search);	
-		return sqlSession.selectOne("CookMapper.getTotalCount", map);
+	
+		return sqlSession.selectOne("CookMapper.getTotalCount", search);
 	}
 	
 	public void deleteCook(int cookNo) throws Exception {

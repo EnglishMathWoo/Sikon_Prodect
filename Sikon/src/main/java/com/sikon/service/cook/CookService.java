@@ -13,7 +13,7 @@ public interface CookService {
 
 	public void addCook(Cook cook) throws Exception;
 
-	public Map<String, Object> getCookList(Search search,User metor) throws Exception;
+	public Map<String, Object> getCookList(Search search) throws Exception;
 
 	public Cook getCook(int cookNo) throws Exception;
 
