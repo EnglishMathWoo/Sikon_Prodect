@@ -77,12 +77,12 @@ public class UserController {
 		System.out.println("getuserid="+user.getUserId());
 		User dbUser=userService.getUser(user.getUserId());
 		
-//		int alarmCount = alarmService.getAlarmCount(user.getUserId());
-//		System.out.println("alarmCount="+alarmCount);
+		int alarmCount = alarmService.getAlarmCount(user.getUserId());
+		System.out.println("alarmCount="+alarmCount);
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
-//			session.setAttribute("alarm", alarmCount );
+			session.setAttribute("alarm", alarmCount );
 		}
 		System.out.println(user.getPassword());
 		System.out.println(dbUser.getPassword());
@@ -195,7 +195,7 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="updateUser", method=RequestMethod.GET )
-	public String updateUserView( @RequestParam("userId") String userId , Model model ) throws Exception{
+	public String updateUser( @RequestParam("userId") String userId , Model model ) throws Exception{
 
 		System.out.println("/user/updateUser : GET");
 		//Business Logic
