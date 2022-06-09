@@ -155,7 +155,8 @@
 			user_addr 	= #{addr} ,
 			user_phone	= #{phone} ,
 			user_image	= #{userImage} ,
-			mentor_apply	= #{mentorApply}
+			mentor_apply	= #{mentorApply},
+			holdpoint	=#{holdpoint}
 		</set>
 	   	WHERE user_id = #{userId}
 	</update>
