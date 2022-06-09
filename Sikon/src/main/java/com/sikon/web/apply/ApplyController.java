@@ -84,19 +84,18 @@ public class ApplyController {
 			System.out.println("/apply/addApply : POST");
 			
 			Cook cook=cookService.getCook(cookNo);			
-			apply.setClassCook(cook);
+			
 			User user = (User)session.getAttribute("user");
-			apply.setApplier(user);
-			applyService.addApply(apply);
+			
+			
 			
 		
-			//user 객체에 user를 넣어줍니다
 			
-
-			apply.setApplier(user);         //user객체를 set해줍니다
-				 //product 객체를 set해줍니다
-
-			apply.setApplyStatus("100");   
+			
+			apply.setClassCook(cook);
+			apply.setApplier(user);  
+			apply.setApplyStatus("100"); 
+			apply.setReviewStatus("001"); 
 			 //purchase 객체를  @ModelAttribute로 가져왔으니 trancode를 set해줍니다
 		
 			int buy= apply.getCookStatus();   //사는 상품수를 가져와 buy에 넣어줍니다
@@ -190,7 +189,8 @@ public class ApplyController {
 		//@RequestMapping("/listPurchase.do")
 		@RequestMapping( value="listApply" )
 
-		public ModelAndView listApply( @ModelAttribute("search") Search search ,  HttpServletRequest request) throws Exception{
+		public ModelAndView listApply( @ModelAttribute("search") Search search ,  HttpServletRequest request
+				) throws Exception{
 			
 			System.out.println("/apply/listApply : GET,Post");
 			
@@ -214,6 +214,8 @@ public class ApplyController {
 			modelAndView.addObject("list", map.get("list"));
 			modelAndView.addObject("resultPage", resultPage);
 			modelAndView.addObject("search", search);
+			
+			modelAndView.addObject("category", "COOK");
 			
 			modelAndView.setViewName("forward:/mypage/listApply.jsp");
 			

@@ -36,7 +36,7 @@
 	 <select 	id="getAlarmCount"	parameterType="String"	resultType="int">
 		SELECT COUNT(*)
 	  	FROM(	SELECT * 
-						FROM alarm) countTable	
+						FROM alarm WHERE alarm_target = #{userId}) countTable	
 	 </select>
 	  
 		 
@@ -57,6 +57,14 @@
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT *
 						FROM alarm) countTable					
+	 </select>
+	 
+	 <!-- 알람 삭제 -->	
+	 <select  id="deleteALarm"  parameterType="String">
+	  	DELETE FROM alarm
+	  	<where>
+			alarm_target= #{userId}
+		</where>		
 	 </select>
 	 	
 	 

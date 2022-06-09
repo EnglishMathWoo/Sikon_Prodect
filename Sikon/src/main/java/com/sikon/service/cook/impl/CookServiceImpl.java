@@ -61,9 +61,9 @@ public class CookServiceImpl implements CookService{
 		return cook;
 	}
 
-	public Map<String, Object> getCookList(Search search,User metor) throws Exception {
-		List<Cook> list= cookDao.getCookList(search,metor);
-		int totalCount = cookDao.getTotalCount(search,metor);
+	public Map<String, Object> getCookList(Search search) throws Exception {
+		List<Cook> list= cookDao.getCookList(search);
+		int totalCount = cookDao.getTotalCount(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );

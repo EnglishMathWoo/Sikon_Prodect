@@ -53,7 +53,7 @@
         .bi-heart-fill{
             font-size: 30px;
             line-height: 30px;
-            color:blue;
+            color:crimson;
         }
 
     </style>
@@ -398,7 +398,8 @@ div.thumbnail {
 								${!empty search.searchCondition && search.searchCondition==0 ? "selected" : ""}>쿠킹클래스번호</option>
 							<option value="1"
 								${!empty search.searchCondition && search.searchCondition==1 ? "selected" : ""}>쿠킹클래스명</option>
-							
+							<option value="2"
+								${!empty search.searchCondition && search.searchCondition==2 ? "selected" : ""}>쿠킹클래스가격</option>
 						</select>
 
 					</div>
