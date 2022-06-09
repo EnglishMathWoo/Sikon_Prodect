@@ -51,7 +51,7 @@ public class AlarmController {
 	
 	@RequestMapping( value="/listAlarm" )
 	public String listCoupon(@ModelAttribute("search") Search search, @RequestParam("userId") String userId,
-			Model model , HttpServletRequest request) throws Exception{
+			Model model , HttpServletRequest request, HttpSession session) throws Exception{
 		
 		
 		if(search.getCurrentPage() ==0 ){
@@ -65,6 +65,9 @@ public class AlarmController {
 		Alarm alarm = new Alarm();
 		alarm.setAlarmTarget(userId);
 		alarmService.updateAlarmStatus(alarm);
+		
+		session.removeAttribute("alarm");
+		session.setAttribute("alarm", 0);
 				
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
 		
