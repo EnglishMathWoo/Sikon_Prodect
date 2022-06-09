@@ -1,5 +1,6 @@
 package com.sikon.service.user.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
+import com.sikon.service.domain.Career;
+import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserDao;
 
@@ -38,6 +41,18 @@ public class UserDaoImpl implements UserDao{
 		sqlSession.insert("UserMapper.addLicense", map.get("list"));
 		sqlSession.insert("UserMapper.addCareer", map.get("list2"));
 	}
+//	public void addLicense(License license) throws Exception {
+//		System.out.println("license="+license);
+//		List list = new ArrayList();
+//		list.add(license);
+//		sqlSession.insert("UserMapper.addLicense", list);
+//	}
+//	public void addCareer(Career career) throws Exception {
+//		System.out.println("career="+career);
+//		List list = new ArrayList();
+//		list.add(career);
+//		sqlSession.insert("UserMapper.addCareer", list);
+//	}
 	
 	// id 중복체크
 	public int checkId(String userId) throws Exception {

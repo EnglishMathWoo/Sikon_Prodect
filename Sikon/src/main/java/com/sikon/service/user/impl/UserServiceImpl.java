@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.sikon.common.Search;
+import com.sikon.service.domain.Career;
+import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserDao;
 import com.sikon.service.user.UserService;;
@@ -36,6 +38,14 @@ public class UserServiceImpl implements UserService{
 		System.out.println("map="+map);
 		userDao.addUser(user, map);
 	}
+//	public void addLicense(License license) throws Exception {
+//		System.out.println("license="+license);
+//		userDao.addLicense(license);
+//	}
+//	public void addCareer(Career career) throws Exception {
+//		System.out.println("career="+career);
+//		userDao.addCareer(career);
+//	}
 	
 	// id 중복체크
 	public int checkId(String userId) throws Exception {

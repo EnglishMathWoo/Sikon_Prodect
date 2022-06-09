@@ -86,10 +86,10 @@ public class UserRestController {
 	}
 	
 	// id 중복체크
-		@RequestMapping( value="json/checkNickname", method=RequestMethod.POST )
-		public int checkNickname( @RequestParam("userNickname") String userNickname) throws Exception{
-				int cnt = userService.checkNickname(userNickname);
-				return cnt;
+	@RequestMapping( value="json/checkNickname", method=RequestMethod.POST )
+	public int checkNickname( @RequestParam("userNickname") String userNickname) throws Exception{
+			int cnt = userService.checkNickname(userNickname);
+			return cnt;
 	}
 		
 	@RequestMapping( value="json/updateUser", method=RequestMethod.POST )

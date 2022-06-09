@@ -58,7 +58,7 @@
 	
 		<div class="page-header">
 	       <h3 class=" text-info">회원정보조회</h3>
-	       <h5 class="text-muted">내 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5>
+	 <!--  <h5 class="text-muted">내 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5> --> 
 	    </div>
 	
 		<div class="row">
@@ -76,26 +76,33 @@
 		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>주소</strong></div>
-			<div class="col-xs-8 col-md-4">${user.addr}</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>닉 네 임</strong></div>
+			<div class="col-xs-8 col-md-4">${user.userNickname}</div>
 		</div>
 		
 		<hr/>
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>휴대전화번호</strong></div>
-			<div class="col-xs-8 col-md-4">${ !empty user.phone ? user.phone : ''}	</div>
+			<div class="col-xs-8 col-md-4">${user.phone}</div>
 		</div>
 		
 		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>이 메 일</strong></div>
-			<div class="col-xs-8 col-md-4">${user.email}</div>
+	  		<div class="col-xs-4 col-md-2 "><strong>생년월일</strong></div>
+			<div class="col-xs-8 col-md-4">${user.userBirth}</div>
 		</div>
 		
 		<hr/>
 		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>주소</strong></div>
+			<div class="col-xs-8 col-md-4">${user.addr}</div>
+		</div>
+		
+		<hr/>
+						
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>가입일자</strong></div>
 			<div class="col-xs-8 col-md-4">${user.regDate}</div>

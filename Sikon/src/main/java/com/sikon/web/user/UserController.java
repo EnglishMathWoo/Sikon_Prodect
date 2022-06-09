@@ -2,6 +2,7 @@ package com.sikon.web.user;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +73,7 @@ public class UserController {
 		User dbUser=userService.getUser(user.getUserId());
 		
 		
+		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 		}
@@ -99,10 +101,63 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.POST )
-	public String addUser(  User user, Map map, 
-			@RequestParam("uploadFile")  MultipartFile file, ModelAndView mv, Model model) throws Exception {
+	public String addUser(@ModelAttribute("user") User user,
+			@RequestParam("licenseName") String[] licenseName,
+			@RequestParam("licenseInstitution") String[] licenseInstitution,
+			@RequestParam("licenseDate") String[] licenseDate,
+			@RequestParam("company") String[] company,
+			@RequestParam("careerExperience") String[] careerExperience,
+			@RequestParam("startDate") String[] startDate,
+			@RequestParam("endDate") String[] endDate,
+			@RequestParam("uploadFile")  MultipartFile file, Model model) throws Exception {
 
 		System.out.println("/user/addUser : POST");
+		
+		for(int i=0 ; i<licenseName.length ; i++) {
+			System.out.println(licenseName[i]);
+			System.out.println(licenseInstitution[i]);
+			System.out.println(licenseDate[i]);
+			System.out.println(user.getUserId());
+		}
+		
+		for(int k=0 ; k<company.length ; k++) {
+			System.out.println(company[k]);
+			System.out.println(careerExperience[k]);
+			System.out.println(startDate[k]);
+			System.out.println(endDate[k]);
+			System.out.println(user.getUserId());
+		}
+		
+		
+		List list = new ArrayList();
+		for ( int j=0 ; j<licenseName.length ; j++) {
+			License license = new License();
+			license.setLicenseName(licenseName[j]);
+			license.setLicenseInstitution(licenseInstitution[j]);
+			license.setLicenseDate(licenseDate[j]);
+			license.setUserId(user.getUserId());
+			list.add(license);
+		}
+		
+		List list2 = new ArrayList();
+		for ( int m=0 ; m<company.length ; m++) {
+			Career career = new Career();
+			career.setCompany(company[m]);
+			career.setCareerExperience(careerExperience[m]);
+			career.setStartDate(startDate[m]);
+			career.setEndDate(endDate[m]);
+			career.setUserId(user.getUserId());
+			list2.add(career);
+		}
+
+		System.out.println("list=" + list);
+		System.out.println("list2=" + list2);
+		
+		Map map = new HashMap();
+		map.put("list", list);
+		map.put("list2", list2);
+		
+//		System.out.println("map.list="+map);
 		
 		if(!file.getOriginalFilename().isEmpty()) {
 			file.transferTo(new File(FILE_SERVER_PATH, file.getOriginalFilename()));
@@ -111,36 +166,11 @@ public class UserController {
 			model.addAttribute("msg", "Please select a valid mediaFile..");
 		}
 		
-		License license = new License();
-		License license2 = new License();
-		Career career = new Career();
-		Career career2 = new Career();
-		
-		license.setLicenseName(license.getLicenseName());
-		license.setLicenseInstitution(license.getLicenseInstitution());
-		license.setLicenseDate(license.getLicenseDate());
-		license.setUserId(license.getUserId());
-		
-		license2.setLicenseName(license.getLicenseName());
-		license2.setLicenseInstitution(license.getLicenseInstitution());
-		license2.setLicenseDate(license.getLicenseDate());
-		license2.setUserId(license.getUserId());
-		
-		
-		List list = new ArrayList();
-		list.add(license);
-		list.add(license2);
-		
-		List list2 = new ArrayList();
-		list2.add(career);
-		list2.add(career2);
-		
-		map.put("list", list);
-		map.put("list2", list2);
-		
 		user.setUserImage(file.getOriginalFilename());
 		user.setUserBirth(user.getUserBirth().replace("-",""));
 		userService.addUser(user, map);
+	//	userService.addLicense(license);
+	//	userService.addCareer(career);
 		
 		return "redirect:/user/loginView.jsp";
 	}

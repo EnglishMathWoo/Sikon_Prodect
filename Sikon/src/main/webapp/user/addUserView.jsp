@@ -51,6 +51,7 @@
 		color:#6A82FB; 
 		display: none;
 		}
+		
 		.id_ok2{
 		color:#008000;
 		display: none;
@@ -89,7 +90,7 @@
 			var pw=$("input[name='password']").val();
 			var pw_confirm=$("input[name='password2']").val();
 			var name=$("input[name='userName']").val();
-			
+			var nickname=$("input[name='userNickname']").val();
 			
 			if(id == null || id.length <1){
 				alert("아이디는 반드시 입력하셔야 합니다.");
@@ -107,14 +108,20 @@
 				alert("이름은  반드시 입력하셔야 합니다.");
 				return;
 			}
-			
+			if(nickname == null || nickname.length <1){
+				alert("닉네임은 반드시 입력하셔야 합니다.");
+				return;
+			}
 			if( pw != pw_confirm ) {				
 				alert("비밀번호 확인이 일치하지 않습니다.");
 				$("input:text[name='password2']").focus();
 				return;
 			}
 				
-			
+			if ($("#phone").val() == "" || $("#phone").val().length != 11 || isNaN($("#phone").val())) {
+				alert("휴대폰번호를 정확히 입력해 주세요");
+				return;
+			}
 			
 			
 			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
@@ -137,7 +144,7 @@
 	                    $('.id_already').css("display","inline-block");
 	                    $('.id_ok').css("display", "none");
 	                    alert("아이디를 다시 입력해주세요");
-	                    $('#userid').val('');
+	                 //   $('#userId').val('');
 	                }
 	            },
 	            error:function(){
@@ -146,7 +153,7 @@
 	        });
 	        };
 	        
-		//==>아이디 "이메일" 유효성Check  Event 처리 및 연결
+		//==>"이메일형식 아이디" 유효성Check  Event 처리 및 연결
 		 $(function() {
 			 
 			 $("input[name='userId']").on("change" , function() {
@@ -176,14 +183,14 @@
 		                    $('.id_already2').css("display","inline-block");
 		                    $('.id_ok2').css("display", "none");
 		                    alert("닉네임을 다시 입력해주세요");
-		                    $('#userNickname').val('');
+		                  //  $('#userNickname').val('');
 		                }
 		            },
 		            error:function(){
 		                alert("에러입니다");
 		            }
 		        });
-		      };
+		        };
 		        
 		// 생년월일
 		 $(function() {
@@ -258,6 +265,7 @@
 			    }).open();
 			}
 	
+		 
 		 
 //		//==>"ID중복확인" Event 처리 및 연결
 //		 $(function() {

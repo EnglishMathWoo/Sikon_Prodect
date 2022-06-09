@@ -68,7 +68,7 @@
 			});
 						
 			//==> userId LINK Event End User 에게 보일수 있도록 
-			$( "td:nth-child(2)" ).css("color" , "red");
+		//	$( "td:nth-child(2)" ).css("color" , "red");
 			
 		});	
 		
@@ -108,8 +108,8 @@
 			});
 			
 			//==> userId LINK Event End User 에게 보일수 있도록 
-			$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
-			$("h7").css("color" , "red");
+		//	$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+		//	$("h7").css("color" , "red");
 			
 			//==> 아래와 같이 정의한 이유는 ??
 			$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
@@ -129,7 +129,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>회원목록조회</h3>
+	       <h3>회원목록</h3>
 	    </div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -178,7 +178,7 @@
             <th align="left" >회원 ID</th>
             <th align="left">회원명</th>
             <th align="left">닉네임</th>
-            <th align="left">간략정보</th>
+           
           </tr>
         </thead>
        
@@ -192,10 +192,6 @@
 			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
 			  <td align="left">${user.userName}</td>
 			  <td align="left">${user.userNickname}</td>
-			  <td align="left">
-			  	<i class="glyphicon glyphicon-ok" id= "${user.userId}"></i>
-			  	<input type="hidden" value="${user.userId}">
-			  </td>
 			</tr>
           </c:forEach>
         
