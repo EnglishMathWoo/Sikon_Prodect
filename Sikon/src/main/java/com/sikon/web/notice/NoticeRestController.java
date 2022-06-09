@@ -101,6 +101,7 @@ public class NoticeRestController {
 		Map map = new HashMap();
 		
 		System.out.println(pushData);
+		System.out.println("한글 드럽게 안들어가네");
 				
 		map.put("userId", "admin@naver.com");
 		map.put("noticeTitle", pushData);

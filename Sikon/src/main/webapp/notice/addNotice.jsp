@@ -117,6 +117,7 @@
 										
 					var pushData = $("input[name='noticeTitle']").val();
 					console.log(pushData);
+					console.log("너임?");
 					commentInsert(pushData);
 					
 					//$("form").attr("method", "POST").attr("action", "/notice/addNotice").submit();
@@ -128,6 +129,8 @@
 				
 				data = new FormData();
 				data.append("pushData", pushData);
+				console.log("너냐고?");
+				console.log(pushData);
 				
 				$.ajax({
 			        url : "/notice/json/pushAlarm",
@@ -148,6 +151,7 @@
 			           		//소켓
 			           		//if(readWriter != writer){
 			           		if(socket){
+			           			console.log("너냐?");
 			           			console.log(data.noticeTitle)
 			        			let socketMsg = "reply,"+data.userId+","+data.noticeTitle;
 			        			console.log(socketMsg);

@@ -689,7 +689,17 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 					$(self.location).attr("href","/alarm/listAlarm?userId=${sessionScope.user.userId}");
 					
 				});
-			});		
+			});	
+		 
+		 
+		 $(function() {
+				
+				$("#vacantAlarm").on("click" , function() {
+					
+					$(self.location).attr("href","/alarm/listAlarm?userId=${sessionScope.user.userId}");
+					
+				});
+			});	
 		 
 			 
 		//web socket Ω√¿€

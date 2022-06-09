@@ -33,6 +33,10 @@
  		body {
             padding-top : 50px;
         }
+        
+        .container{
+			padding-top : 170px;
+		}
      </style>
 
   <!--  ///////////////////////// JavaScript ////////////////////////// -->

@@ -26,8 +26,8 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Qualifier("alarmServiceImpl")
 	private AlarmService alarmService;
 		
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ì°¸ì¡° í• ê²ƒ
-	//==> ì•„ë˜ì˜ ë‘ê°œë¥¼ ì£¼ì„ì„ í’€ì–´ ì˜ë¯¸ë¥¼ í™•ì¸ í• ê²ƒ
+	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml ÂüÁ¶ ÇÒ°Í
+	//==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
 	@Value("#{commonProperties['pageUnit']}")
 	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
@@ -37,55 +37,58 @@ public class EchoHandler extends TextWebSocketHandler {
 	int pageSize;
 	
 	
-	//ë¡œê·¸ì¸ í•œ ì¸ì› ì „ì²´
+	//·Î±×ÀÎ ÇÑ ÀÎ¿ø ÀüÃ¼
 	private List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
-	// 1:1ë¡œ í•  ê²½ìš°
+	// 1:1·Î ÇÒ °æ¿ì
 	private Map<String, WebSocketSession> userSessionsMap = new HashMap<String, WebSocketSession>();
 	
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session) throws Exception {//í´ë¼ì´ì–¸íŠ¸ì™€ ì„œë²„ê°€ ì—°ê²°
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception {//Å¬¶óÀÌ¾ğÆ®¿Í ¼­¹ö°¡ ¿¬°á
 		
-		System.out.println("Socket ì—°ê²°");
+		System.out.println("Socket ¿¬°á");
 		sessions.add(session);
-		System.out.println(currentUserName(session));//í˜„ì¬ ì ‘ì†í•œ ì‚¬ëŒ
+		System.out.println(currentUserName(session));//ÇöÀç Á¢¼ÓÇÑ »ç¶÷
 		String senderId = currentUserName(session);
 		userSessionsMap.put(senderId, session);
 	}
 	
 	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {// ë©”ì‹œì§€
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {// ¸Ş½ÃÁö
 		
 		System.out.println("session"+currentUserName(session));
-		String msg = message.getPayload();//ìë°”ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ë„˜ì–´ì˜¨ Msg
+		String msg = message.getPayload();//ÀÚ¹Ù½ºÅ©¸³Æ®¿¡¼­ ³Ñ¾î¿Â Msg
 		System.out.println("msg="+msg);
 		
 		if (StringUtils.isNotEmpty(msg)) {
-			System.out.println("ifë¬¸ ë“¤ì–´ì˜´?");
+			System.out.println("if¹® µé¾î¿È?");
 			String[] strs = msg.split(",");
 			if(strs != null && strs.length == 3) {
 				
 				String cmd = strs[0];
 				String replyWriter = strs[1];
 				String noticeTitle = strs[2];
-				System.out.println("length ì„±ê³µ?"+cmd);
+				System.out.println("length ¼º°ø?"+cmd);
 				
 				WebSocketSession replyWriterSession = userSessionsMap.get(replyWriter);
 				WebSocketSession boardWriterSession = userSessionsMap.get("user@naver.com");
 				System.out.println("replyWriterSession="+userSessionsMap.get(replyWriter));
 				System.out.println("boardWriterSession"+boardWriterSession);
 				
-				//ëŒ“ê¸€
-				if ("reply".equals(cmd) && boardWriterSession != null) {
-					System.out.println("onmessageë˜ë‚˜??");
-					TextMessage tmpMsg = new TextMessage(replyWriter + "ë‹˜ì´ "
-									+ noticeTitle+"ë¼ëŠ” ì œëª©ì˜ ê³µì§€ì‚¬í•­ì„ ì˜¬ë ¸ìŠµë‹ˆë‹¤!");
-					boardWriterSession.sendMessage(tmpMsg);
-				} else if ("reply".equals(cmd)){
+				Alarm alarm = new Alarm();
 				
-					Alarm alarm = new Alarm();
+				//´ñ±Û
+				if ("reply".equals(cmd) && boardWriterSession != null) {
+					System.out.println("onmessageµÇ³ª??");
+					TextMessage tmpMsg = new TextMessage(replyWriter + "´ÔÀÌ "
+									+ noticeTitle+"¶ó´Â Á¦¸ñÀÇ °øÁö»çÇ×À» ¿Ã·È½À´Ï´Ù!");
+					boardWriterSession.sendMessage(tmpMsg);
 					alarm.setAlarmTarget("user@naver.com");
-					alarm.setAlarmContent(replyWriter + "ë‹˜ì´ "
-							+ noticeTitle+"ë¼ëŠ” ì œëª©ì˜ ê³µì§€ì‚¬í•­ì„ ì˜¬ë ¸ìŠµë‹ˆë‹¤!");
+					alarm.setAlarmContent(tmpMsg.toString());
+					alarmService.addAlarm(alarm);
+				} else if ("reply".equals(cmd)){
+					alarm.setAlarmTarget("user@naver.com");
+					alarm.setAlarmContent(replyWriter + "´ÔÀÌ "
+							+ noticeTitle+"¶ó´Â Á¦¸ñÀÇ °øÁö»çÇ×À» ¿Ã·È½À´Ï´Ù!");
 					alarmService.addAlarm(alarm);
 				}
 			}
@@ -94,9 +97,9 @@ public class EchoHandler extends TextWebSocketHandler {
 	}
 	
 	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {//ì—°ê²° í•´ì œ
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {//¿¬°á ÇØÁ¦
 		
-		System.out.println("Socket ëŠìŒ");
+		System.out.println("Socket ²÷À½");
 		sessions.remove(session);
 		userSessionsMap.remove(currentUserName(session),session);
 	}
