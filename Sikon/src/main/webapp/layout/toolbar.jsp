@@ -95,6 +95,7 @@ margin-top:10px;
 	background-color: inherit;
 	text-decoration-line: none;
 	float:left;
+	padding-left: 375px;
 }
 
 
@@ -102,7 +103,7 @@ margin-top:10px;
 --------------------------------------------------------------------------------------------------------------- */
 @media screen and (min-width:978px) {
 	.hoc {
-		max-width: 1170px;
+		max-width: 100%;
 	}
 }
 
@@ -128,6 +129,7 @@ nav ul, nav ol {
 
 #mainav, #breadcrumb, .sidebar nav {
 	line-height: normal;
+	padding-right: 375px;
 }
 
 .drop::after, #mainav li li .drop::after, #breadcrumb li a::after,
@@ -362,6 +364,8 @@ address {
 	padding: 15px 0;
 	font-size: .8rem;
 	text-transform: uppercase;
+	padding-right: 375px;
+	
 }
 
 #topbar * {
@@ -404,6 +408,31 @@ address {
 }
 
 
+div.addbar{
+	height : 32px;
+	text-align: center;
+	background-color: #937062;
+	color: #F7F7F7;
+	padding: 5px;
+	font-weight: bold;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+    font-size: 12px;
+    z-index: 20;
+}
+
+#addbar{
+	text-decoration-line: none;
+	color:#f7f7f7;
+}
+
+header{
+background-color:#f7f7f7;
+position:fixed;
+width:100%;
+	z-index: 10;
+	
+}
+
 /*  주석 풀면 위에 있는 hr css랑 충돌
 hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 ";}
 */
@@ -412,7 +441,18 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 
 <!-- /////////////////////// ToolBar Start ////////////////////////////-->
 
+
+
+
 <header id="header" class="hoc clear">
+
+	<div class="addbar">
+		<a href="/user/addUser" id="addbar">
+			<img src="/resources/images/logo/logo.png" width="24px" height="24px" id="logo"> 
+		 	&nbsp;회원가입 시 5000원 할인쿠폰 증정!
+		 </a>
+	</div> 
+
 	<div id="topbar" class="hoc clear"> 
 	    <div class="fl_right">
 	      <ul class="nospace">
@@ -496,7 +536,6 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
     <!-- ################################################################################################ -->
   
   </header>
-  
 	<!-- ////////////////////////////////// ToolBar End /////////////////////////////////////-->
  	
    	<script type="text/javascript">

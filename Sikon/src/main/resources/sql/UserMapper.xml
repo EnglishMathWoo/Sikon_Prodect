@@ -156,8 +156,7 @@
 			user_phone	= #{phone} ,
 			user_image	= #{userImage} ,
 			mentor_apply	= #{mentorApply}
-		
-	   	</set>
+		</set>
 	   	WHERE user_id = #{userId}
 	</update>
 
