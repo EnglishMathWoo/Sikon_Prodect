@@ -57,6 +57,13 @@ public class AlarmServiceImpl implements AlarmService{
 		return alarmCount;
 	}
 	
+	public int getStatusCount(String userId) throws Exception {
+		
+		int statusCount = alarmDao.getStatusCount(userId);
+				
+		return statusCount;
+	}
+	
 	public void deleteAlarm(String userId) throws Exception {
 		alarmDao.deleteAlarm(userId);
 	}

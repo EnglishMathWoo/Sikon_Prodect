@@ -62,9 +62,16 @@
 		alarm_status = '002'
 		</set>
 		<where>
-		alarm_target = #{userId}
+		alarm_target = #{alarmTarget}
 		</where>
 	</update>
+	
+	<!-- SQL : SELECT ONE -->
+	 <select 	id="getStatusCount"	parameterType="String"	resultType="int">
+		SELECT COUNT(*)
+	  	FROM(	SELECT * 
+						FROM alarm WHERE alarm_target = #{userId} AND alarm_status = '001') countTable	
+	 </select>
 	 
 	 
 	 <!-- 알람 삭제 -->	

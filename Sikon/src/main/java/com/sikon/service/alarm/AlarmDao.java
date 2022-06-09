@@ -24,4 +24,6 @@ public interface AlarmDao{
 	
 	public void updateAlarmStatus(Alarm alarm) throws Exception;
 	
+	public int getStatusCount(String userId) throws Exception;
+	
 }

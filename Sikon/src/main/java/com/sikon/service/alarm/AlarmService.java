@@ -20,5 +20,7 @@ public interface AlarmService {
 	public void deleteAlarm(String userId) throws Exception;
 	
 	public void updateAlarmStatus(Alarm alarm) throws Exception;
+	
+	public int getStatusCount(String userId) throws Exception;
 		
 }

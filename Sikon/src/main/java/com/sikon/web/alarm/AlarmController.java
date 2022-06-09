@@ -65,7 +65,7 @@ public class AlarmController {
 		Alarm alarm = new Alarm();
 		alarm.setAlarmTarget(userId);
 		alarmService.updateAlarmStatus(alarm);
-		
+				
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
 		
 		// Model °ú View ¿¬°á

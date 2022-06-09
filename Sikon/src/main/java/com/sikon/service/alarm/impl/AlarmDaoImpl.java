@@ -69,4 +69,8 @@ public class AlarmDaoImpl implements AlarmDao {
 		sqlSession.update("AlarmMapper.updateAlarmStatus", alarm);
 	}
 	
+	public int getStatusCount(String userId) throws Exception {
+		return sqlSession.selectOne("AlarmMapper.getStatusCount", userId);
+	}
+	
 }
