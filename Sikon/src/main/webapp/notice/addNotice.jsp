@@ -124,8 +124,8 @@
 				
 				data = new FormData();
 				data.append("pushData", pushData);
-					
-			    $.ajax({
+				
+				$.ajax({
 			        url : "/notice/json/pushAlarm",
 			        type : 'post',
 			        data : data,
@@ -146,7 +146,7 @@
 			           		if(socket){
 			           			console.log(data.noticeTitle)
 			        			let socketMsg = "reply,"+data.userId+","+data.noticeTitle;
-			        			alert(socketMsg);
+			        			console.log(socketMsg);
 			        			socket.send(socketMsg);
 			           		}
 			        	//}

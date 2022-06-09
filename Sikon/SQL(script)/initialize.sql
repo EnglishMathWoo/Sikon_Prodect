@@ -182,6 +182,7 @@ CREATE TABLE purchase (
 	divy_status 		VARCHAR2(20) 	NOT NULL, 
 	invoice_num 		VARCHAR2(100), 	
 	divy_fee 			NUMBER, 
+	review_status 		VARCHAR2(20) 	NOT NULL, 
 	PRIMARY KEY(tran_no)
 );
 
@@ -214,7 +215,7 @@ CREATE TABLE cook (
 	cook_video         			VARCHAR2(200)  ,
 	cook_stock         			 NUMBER    not null,
 	heart_hit 					 NUMBER    default 0  not null,
-	cook_content 		                   CLOB 		NOT NULL,
+	cook_content 		                  VARCHAR2(2000)           NOT NULL,
 	mentor_nickname			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_nickname) ON DELETE CASCADE, 
 	PRIMARY KEY(cook_no)
 );
@@ -226,7 +227,8 @@ CREATE TABLE apply (
 	payment_option	 	VARCHAR(50),	
 	apply_status 	VARCHAR(20),
 	cook_status         			 NUMBER  not null,
-	check_date 		 	DATE,	
+	check_date 		 	DATE,
+	review_status 		VARCHAR2(20) 	NOT NULL, 	
 	PRIMARY KEY(apply_no)
 );
 
@@ -237,7 +239,7 @@ CREATE TABLE wish(
 	cook_status NUMBER,
 	cook_name 			 	VARCHAR2(100)  	NOT NULL,
 	cook_filename VARCHAR2(200),
-	cook_price 				 NUMBER(10)  NOT NULL,
+	cook_price 				 NUMBER(10)  NOT NULL,	
 		PRIMARY KEY(wish_no)
 );
 
@@ -264,4 +266,4 @@ CREATE TABLE review(
 	PRIMARY KEY(review_no)
 );
 
-COMMIT;
+commit;

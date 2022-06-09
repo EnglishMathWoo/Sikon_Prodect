@@ -144,10 +144,10 @@
 			<tr>
 			  <td align="center">${ i }</td>
 			  <td align="center">${apply.applyNo}</td>
-			  <td align="center" class="prodNum" value1="${apply.classCook.cookNo }" value2="${param.menu}" >
+			  <td align="center" class="prodNum" value1="${apply.cook.cookNo }" value2="${param.menu}" >
 				${apply.classCook.cookNo }
 			  
-			  	<input type="hidden" value="${apply.classCook.cookNo}">
+			  	<input type="hidden" value="${apply.cook.cookNo}">
 			 	 </td>
 			  <c:choose>
 				<c:when test="${apply.applyStatus.equals('000')}">
