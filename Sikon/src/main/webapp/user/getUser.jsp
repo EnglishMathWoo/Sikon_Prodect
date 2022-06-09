@@ -116,13 +116,15 @@
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
 	  			<button type="button" class="btn btn-primary" id="editUserInfo">회원정보수정</button>
-	  		</div>
-	  		
-	  		<div class="col-md-12 text-center ">
 	  			<button type="button" class="btn btn-primary" id="editUserInfo">회원탈퇴</button>
 	  		</div>
-		</div>
+	  	</div>
 		
+		<br>
+		
+		
+		
+				
 		<br/>
 		
  	</div>
