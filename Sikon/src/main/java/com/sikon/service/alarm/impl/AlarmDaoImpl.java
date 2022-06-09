@@ -53,4 +53,8 @@ public class AlarmDaoImpl implements AlarmDao {
 		return sqlSession.selectOne("AlarmMapper.getTotalCount", search);
 	}
 	
+	public void deleteAlarm(String userId) throws Exception {
+		sqlSession.delete("AlarmMapper.deleteCook", userId);
+	}
+	
 }
