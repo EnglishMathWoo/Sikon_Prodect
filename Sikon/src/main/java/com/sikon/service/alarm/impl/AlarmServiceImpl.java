@@ -55,5 +55,9 @@ public class AlarmServiceImpl implements AlarmService{
 				
 		return alarmCount;
 	}
+	
+	public void deleteAlarm(String userId) throws Exception {
+		alarmDao.deleteAlarm(userId);
+	}
 
 }
