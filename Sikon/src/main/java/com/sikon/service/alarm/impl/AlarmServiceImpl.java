@@ -14,6 +14,7 @@ import com.sikon.service.purchase.PurchaseDao;
 import com.sikon.service.alarm.AlarmDao;
 import com.sikon.service.alarm.AlarmService;
 import com.sikon.service.domain.Alarm;
+import com.sikon.service.domain.Coupon;
 import com.sikon.service.domain.Purchase;
 import com.sikon.service.domain.User;
 
@@ -38,13 +39,13 @@ public class AlarmServiceImpl implements AlarmService{
 		alarmDao.insertAlarm(Alarm);
 	}
 
-	public Map<String , Object > getAlarmList(Search search) throws Exception {
-		List<Alarm> list= alarmDao.getAlarmList(search);
-		int totalCount = alarmDao.getTotalCount(search);
+	public Map<String , Object> getAlarmList(Search search, String userId) throws Exception {
+		List<Alarm> list= alarmDao.getAlarmList(search, userId);
+		int totalCount = alarmDao.getAlarmCount(userId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );
-		map.put("totalCount", new Integer(totalCount));
+		map.put("totalCount", totalCount);
 		
 		return map;
 	}
@@ -58,6 +59,10 @@ public class AlarmServiceImpl implements AlarmService{
 	
 	public void deleteAlarm(String userId) throws Exception {
 		alarmDao.deleteAlarm(userId);
+	}
+	
+	public void updateAlarmStatus(Alarm alarm) throws Exception{
+		alarmDao.updateAlarmStatus(alarm);
 	}
 
 }

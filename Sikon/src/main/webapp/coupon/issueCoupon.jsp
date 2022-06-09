@@ -69,6 +69,10 @@
       #userId {
       	width:325.08px;
       }
+      
+      .soo{
+			padding-top : 170px;
+		}
      
               
     </style>
@@ -129,7 +133,7 @@
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container soo">
 	
 		<div class="page-header text-info">
 	       <h3 style="color:#bc8f8f">쿠폰발급</h3>

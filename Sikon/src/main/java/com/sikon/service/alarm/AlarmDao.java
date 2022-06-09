@@ -18,11 +18,10 @@ public interface AlarmDao{
 	public int getAlarmCount(String userId) throws Exception;
 	
 	//알람리스트
-	public List<Alarm> getAlarmList(Search search) throws Exception;
-	
-	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
-	public int getTotalCount(Search search) throws Exception ;
+	public List<Alarm> getAlarmList(Search search, String userId) throws Exception;
 	
 	public void deleteAlarm(String userId) throws Exception;
+	
+	public void updateAlarmStatus(Alarm alarm) throws Exception;
 	
 }

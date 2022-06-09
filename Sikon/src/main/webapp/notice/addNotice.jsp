@@ -53,6 +53,10 @@
 		div.form-group{
 			font-family: 'Nanum Myeongjo', serif;
 		}
+		
+		.container{
+			padding-top : 170px;
+		}
 	 
     </style>
     
@@ -181,12 +185,12 @@
 	    </div>
 	    
 	    <form class="form-horizontal" name="detailForm"  enctype="multipart/form-data" >
-	    
+	     <div class="row">
 	    <input type="text" class="form-control" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력해주세요.">
-	    
+	    </div>
 	    <br>
 	    
-	    <div class="container">
+	    <div class="row">
  		 <textarea class="summernote" id ="summernote" name="noticeContent"></textarea>    
 		</div>
 		
