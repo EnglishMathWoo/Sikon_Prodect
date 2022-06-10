@@ -48,10 +48,12 @@ body {
 	padding-top: 50px;
 	
 }
+
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
-	color: #75574B
+	color: #75574B;
+	border-bottom: none;
 }
 .text-info {
 	font-family: 'Gowun Batang', serif;
@@ -65,7 +67,7 @@ body {
 	font-family: 'Gowun Batang', serif;
 }
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
+.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
 }
 .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
 .ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
@@ -75,6 +77,8 @@ body {
 /* References */
 .ref-sort li a{color:inherit;}
 .ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
+
+
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
 .sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
 .sectiontitle .heading{margin:0; padding:0; line-height:1;}
@@ -152,9 +156,24 @@ hr {
     border: 0;
     border-top: 1px solid #eee;
 }
+
 /* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
     margin: 0 0 0px;
+    font-family: 'Gowun Batang', serif;
+    
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top:120px;
+}
+
+.hoc{
+padding-top:0px;
 }
 </style>
 
@@ -330,7 +349,7 @@ p {
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br> RECIPE LIST </h3>
+		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RECIPE LIST </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		    <button type="button" class="submit">레시피등록</button>
@@ -341,7 +360,7 @@ p {
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li class="current" ><a href="#" class="theme" value="KO">한식</a></li>
+	        <li class="current"><a href="#" class="theme" value="KO">한식</a></li>
 	        <li><a href="#" class="theme" value="CH">중식</a></li>
 	        <li><a href="#" class="theme" value="FR">양식</a></li>
 	        <li><a href="#" class="theme" value="JP">일식</a></li>
@@ -412,13 +431,13 @@ p {
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" href="#"><img src="/resources/images/uploadFiles/7.PNG" width="320" height="300"></a>
         <div class="excerpt">
-          <h4 class="heading" >가리비 칼국수</h4>
-           <h6 >담백하고 시원한 맛!</h6>
+          <h4 class="heading" >오징어 동그랑땡</h4>
+           <h6 >다진 오징어살이 들어가요!</h6>
           <ul class="meta">
             <li >한식</li>
             <li>중급</li>
-            <li>35분</li>
-            <li>Taeho</li>
+            <li>40분</li>
+            <li>Soo</li>
           </ul>
         </div>
       </article>

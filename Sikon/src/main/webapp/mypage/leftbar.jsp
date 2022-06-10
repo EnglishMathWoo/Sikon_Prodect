@@ -20,9 +20,8 @@
   /*   font-family: Musinsa, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; */
     font-size: 14px;
     padding: 60px 10px 10px 30px;
-    
     height: 630px;
-    padding-top:0;
+    padding-top:130px;
 }
   .leftBarNav::-webkit-scrollbar {
     width: 3px;
