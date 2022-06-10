@@ -19,6 +19,7 @@
 		<result property="phone" 	column="user_phone" 		jdbcType="VARCHAR" />
 		<result property="holdpoint" 	column="holdpoint" 		jdbcType="NUMERIC" />
 		<result property="mentorApply" 	column="mentor_apply" 		jdbcType="VARCHAR"  />
+		<result property="loginPath" 	column="login_path" 		jdbcType="VARCHAR"  />
 		<result property="regDate" 	column="user_regdate" 		jdbcType="DATE" />
 		<result property="quitDate" 	column="quit_date" 		jdbcType="DATE" />
 		<result property="quitStatus" 	column="quit_status" 		jdbcType="VARCHAR"  />

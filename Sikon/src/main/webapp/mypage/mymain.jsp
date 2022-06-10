@@ -155,6 +155,15 @@ padding-top:175px;
 }
 </style>
 
+<script type="text/javascript">
+$(function() {
+
+	$("a:contains('내정보수정')").on("click", function() {
+		self.location = "/user/updateUser?userId=${user.userId}"
+		
+		});
+	});
+</script>
 
 
 </head>
@@ -192,4 +201,7 @@ padding-top:175px;
     </div>
 </div>
 </body>
+
+
+	
 </html>

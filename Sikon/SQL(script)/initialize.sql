@@ -65,6 +65,7 @@ CREATE TABLE users (
 	user_phone 	VARCHAR2(20)	UNIQUE,
 	holdpoint 	NUMBER(38)	DEFAULT '0' NOT NULL,
 	mentor_apply 	VARCHAR2(20)	NOT NULL,
+	login_path      VARCHAR2(20)    DEFAULT 'S' NOT NULL,
 	user_regdate 	DATE 		NOT NULL,
 	quit_date 	DATE,
 	quit_status 	VARCHAR2(20)	DEFAULT 'N' NOT NULL,
@@ -219,7 +220,8 @@ CREATE TABLE cook (
 	cook_stock         			 NUMBER    not null,
 	heart_hit 					 NUMBER    default 0  not null,
 	cook_content 		                  VARCHAR2(2000)           NOT NULL,
-	mentor_nickname			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_nickname) ON DELETE CASCADE, 
+	mentor_nickname			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_nickname) ON DELETE CASCADE,
+	mentor_id 			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_id) ON DELETE CASCADE, 
 	PRIMARY KEY(cook_no)
 );
 

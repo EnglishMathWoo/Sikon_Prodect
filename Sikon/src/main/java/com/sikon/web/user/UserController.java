@@ -113,6 +113,7 @@ public class UserController {
 				user.setPassword("1234");
 				user.setUserNickname(userE);
 				user.setMentorApply("N");
+				user.setLoginPath("K");
 				System.out.println(user);
 				
 			//	Map map = new HashMap();
