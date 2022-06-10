@@ -61,19 +61,19 @@
 	</update>
 	
 	<!-- SQL : SELECT LIST -->
-	<select  id="getMyCouponList"  parameterType="search"	resultMap="couponSelectMap">
+	<select  id="getMyCouponList"  parameterType="map"	resultMap="couponSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT h.*, c.coupon_name
  										FROM couponholder h, coupon c
  										WHERE h.coupon_no = c.coupon_no AND h.holder_id = #{userId} AND h.issue_status = '001'
  										) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>
 	 
 	 <!-- SQL : SELECT ROW Count -->	 
-	 <select  id="getMyCouponCount"  parameterType="search"	 resultType="int">
+	 <select  id="getMyCouponCount"  parameterType="String"	 resultType="int">
 	 SELECT COUNT(*)
 	  	FROM( SELECT h.*, c.coupon_name
  										FROM couponholder h, coupon c

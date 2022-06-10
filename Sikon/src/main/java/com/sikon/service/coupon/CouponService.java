@@ -25,7 +25,7 @@ public interface CouponService {
 	public List<Coupon> getMyCoupon(String userId) throws Exception;
 	
 	//마이쿠폰리스트 
-	public Map<String , Object> getMyCouponList(Search search) throws Exception;
+	public Map<String , Object> getMyCouponList(Search search, String userId) throws Exception;
 	
 	// 생성쿠폰리스트 
 	public Map<String , Object> getCouponList(Search search) throws Exception;

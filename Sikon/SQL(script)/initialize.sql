@@ -65,6 +65,7 @@ CREATE TABLE users (
 	user_phone 	VARCHAR2(20)	UNIQUE,
 	holdpoint 	NUMBER(38)	DEFAULT '0' NOT NULL,
 	mentor_apply 	VARCHAR2(20)	NOT NULL,
+	login_path      VARCHAR2(20)    DEFAULT 'S' NOT NULL,
 	user_regdate 	DATE 		NOT NULL,
 	quit_date 	DATE,
 	quit_status 	VARCHAR2(20)	DEFAULT 'N' NOT NULL,

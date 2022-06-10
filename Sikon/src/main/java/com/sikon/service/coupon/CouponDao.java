@@ -24,10 +24,10 @@ public interface CouponDao{
 	public List<Coupon> findMyCoupon(String userId) throws Exception;
 	
 	//마이쿠폰리스트
-	public List<Coupon> getMyCouponList(Search search) throws Exception ;
+	public List<Coupon> getMyCouponList(Search search, String userId) throws Exception ;
 	
 	//마이쿠폰리스트 Count
-	public int getMyCouponCount(Search search) throws Exception;
+	public int getMyCouponCount(String userId) throws Exception;
 	
 	// 생성쿠폰리스트
 	public List<Coupon> getCouponList(Search search) throws Exception;

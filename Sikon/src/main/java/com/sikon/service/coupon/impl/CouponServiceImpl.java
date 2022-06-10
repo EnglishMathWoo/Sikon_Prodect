@@ -74,9 +74,9 @@ public class CouponServiceImpl implements CouponService{
 	}
 	
 	//¸¶ÀÌÄíÆù¸®½ºÆ® 
-	public Map<String , Object> getMyCouponList(Search search) throws Exception  {
-		List<Coupon> list= couponDao.getMyCouponList(search);
-		int totalCount = couponDao.getMyCouponCount(search);
+	public Map<String , Object> getMyCouponList(Search search, String userId) throws Exception  {
+		List<Coupon> list= couponDao.getMyCouponList(search, userId);
+		int totalCount = couponDao.getMyCouponCount(userId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );
@@ -85,7 +85,7 @@ public class CouponServiceImpl implements CouponService{
 		return map;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ë»ï¿½
+	//ÄíÆù ¸®½ºÆ®
 	public Map<String , Object > getCouponList(Search search) throws Exception {
 		List<Coupon> list= couponDao.getCouponList(search);
 		int totalCount = couponDao.getTotalCount(search);
@@ -97,7 +97,7 @@ public class CouponServiceImpl implements CouponService{
 		return map;
 	}
 	
-	//ï¿½ß±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ë»ï¿½
+	//¹ß±ÞÄíÆù ¸®½ºÆ®
 	public Map<String , Object > getIssuedCouponList(Search search) throws Exception {
 		List<Coupon> list= couponDao.getIssuedCouponList(search);
 		int totalCount = couponDao.getIssuedTotalCount(search);

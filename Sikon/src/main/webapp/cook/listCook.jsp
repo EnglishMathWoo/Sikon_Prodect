@@ -142,25 +142,25 @@ div.thumbnail {
 
 
 		//좋아요 push 알림
-		/*
-		 function pushAlarm(pushData){
-				
-				data = new FormData();
-				data.append("pushData", pushData);
-				console.log(pushData);
-				
+		
+		 function pushAlarm(userId, cookNo){
+												
 				$.ajax({
 			        url : "/cook/json/pushAlarm",
 			        type : 'POST',
 			        dataType : "json",   
-		            data : {'pushData' : pushData},
+		            data : {'cookNo' : cookNo, 'userId' : userId }, 
+		            async: false, 
+		            error : function(){
+			            alert("통신 에러");
+			        },
 			        success : function(data){
 			        	
 			        	alert("알람 전송 완료!!");
 			        	      	          
 			           		if(socket){
-			           			console.log(data.noticeTitle)
-			        			let socketMsg = "heart,"+data.userId+","+data.noticeTitle;
+			           			console.log(data.cookMentor)
+			        			let socketMsg = "heart,"+data.userNickname+","+data.mentorNickname+","+data.cookName;
 			        			console.log(socketMsg);
 			        			socket.send(socketMsg);
 			           		}
@@ -168,16 +168,16 @@ div.thumbnail {
 			    
 			    })
 		 };
-		 */
+		 
 	
 		 
-		 $(function() {
+		 $( document ).ready(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			
 			
 			 
 			$( "p.like_btn" ).on("click" , function(){
-				//var cookNo = $(this).attr("value");
+
 				var userId = $("input[name='userId']").val();
 				var cookNo = $(this).attr("value");
 			
@@ -196,12 +196,16 @@ div.thumbnail {
 			                
 			                    if(heartCheck == 0){
 			                    	alert("추천완료.");
+			                    	                    	
 			                    	
 			                    	var userNickname = $("input[name='userNickname']").val();
 
 			                    	console.log(userId);
 			                    	console.log(cookNo);
-			    					
+			                    	
+			                    	pushAlarm(userId, cookNo);
+			                    	
+			    					/*
 			    					$.ajax({
 			    				        url : "/cook/json/pushAlarm",
 			    				        type : 'POST',
@@ -222,7 +226,7 @@ div.thumbnail {
 			    				           		}
 			    				        }
 			    				    
-			    				    })
+			    				    })*/
 						           
 			                    $("#like_btn").removeClass('bi-heart');
 						        $("#like_btn").addClass('bi-heart-fill');

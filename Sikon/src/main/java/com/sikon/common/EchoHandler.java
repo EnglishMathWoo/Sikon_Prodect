@@ -65,14 +65,14 @@ public class EchoHandler extends TextWebSocketHandler {
 			if(strs != null && strs.length == 4) {
 				
 				String cmd = strs[0];
-				String userNickname = strs[1];
-				String mentorNickname = strs[2];
+				String userId = strs[1];
+				String mentorId = strs[2];
 				String cookName = strs[3];
 				System.out.println("length 성공?"+cmd);
 				
-				WebSocketSession userSession = userSessionsMap.get(userNickname);
-				WebSocketSession mentorSession = userSessionsMap.get(mentorNickname);
-				System.out.println("userSession="+userSessionsMap.get(userNickname));
+				WebSocketSession userSession = userSessionsMap.get(userId);
+				WebSocketSession mentorSession = userSessionsMap.get(mentorId);
+				System.out.println("userSession="+userSessionsMap.get(userId));
 				System.out.println("mentorSession"+mentorSession);
 				
 				Alarm alarm = new Alarm();
@@ -98,15 +98,15 @@ public class EchoHandler extends TextWebSocketHandler {
 				//좋아요
 				if ("heart".equals(cmd) && mentorSession != null) {
 					System.out.println("onmessage되나??");
-					TextMessage tmpMsg = new TextMessage(userNickname + "님이 멘토님의 게시글에 좋아요를 눌렀습니다! : [제목 : '"
+					TextMessage tmpMsg = new TextMessage(userId + "님이 멘토님의 게시글에 좋아요를 눌렀습니다! : [제목 : '"
 									+ cookName+"']");
 					mentorSession.sendMessage(tmpMsg);
-					alarm.setAlarmTarget(mentorNickname);
+					alarm.setAlarmTarget(mentorId);
 					alarm.setAlarmContent(tmpMsg.toString());
 					alarmService.addAlarm(alarm);
 				} else if ("heart".equals(cmd)){
-					alarm.setAlarmTarget(mentorNickname);
-					alarm.setAlarmContent(userNickname + "님이 공지사항을 올렸습니다! : [제목 : '"
+					alarm.setAlarmTarget(mentorId);
+					alarm.setAlarmContent(userId + "님이 공지사항을 올렸습니다! : [제목 : '"
 							+ cookName+"']");
 					alarmService.addAlarm(alarm);
 				}

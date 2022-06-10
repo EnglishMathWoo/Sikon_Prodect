@@ -167,7 +167,7 @@ public class CouponController {
 	}
 	
 	@RequestMapping( value="/listMyCoupon" )
-	public String listMyCoupon(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+	public String listMyCoupon(@ModelAttribute("search") Search search , Model model , HttpServletRequest request, @RequestParam("userId") String userId) throws Exception{
 		
 		
 		if(search.getCurrentPage() ==0 ){
@@ -176,7 +176,7 @@ public class CouponController {
 		search.setPageSize(pageSize);
 		
 		// Business logic ผ๖วเ
-		Map<String , Object> resultMap = couponService.getMyCouponList(search);
+		Map<String , Object> resultMap = couponService.getMyCouponList(search, userId);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
 		
