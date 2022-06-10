@@ -79,16 +79,16 @@ public class EchoHandler extends TextWebSocketHandler {
 				//댓글
 				if ("reply".equals(cmd) && boardWriterSession != null) {
 					System.out.println("onmessage되나??");
-					TextMessage tmpMsg = new TextMessage(replyWriter + "님이 "
-									+ noticeTitle+"라는 제목의 공지사항을 올렸습니다!");
+					TextMessage tmpMsg = new TextMessage(replyWriter + "님이 공지사항을 올렸습니다! : [제목 : '"
+									+ noticeTitle+"']");
 					boardWriterSession.sendMessage(tmpMsg);
 					alarm.setAlarmTarget("user@naver.com");
 					alarm.setAlarmContent(tmpMsg.toString());
 					alarmService.addAlarm(alarm);
 				} else if ("reply".equals(cmd)){
 					alarm.setAlarmTarget("user@naver.com");
-					alarm.setAlarmContent(replyWriter + "님이 "
-							+ noticeTitle+"라는 제목의 공지사항을 올렸습니다!");
+					alarm.setAlarmContent(replyWriter + "님이 공지사항을 올렸습니다! : [제목 : '"
+							+ noticeTitle+"']");
 					alarmService.addAlarm(alarm);
 				}
 			}

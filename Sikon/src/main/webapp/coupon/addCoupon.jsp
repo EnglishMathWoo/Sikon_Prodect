@@ -46,7 +46,7 @@
 		}
 		
 		.soo {
-			border: 2px solid #C0C0C0;
+			border: 2px solid 	#DEB887;
 			
 		}
 		
