@@ -93,6 +93,10 @@ div.image{
 			 self.location = "/cook/listCook?menu=search"
 		});
 		 
+		 $( "#mentor" ).on("click" , function() {
+			 self.location = "/cook/listCook?menu=search"
+		}); 
+		 
 		 $( "button.btn-warning" ).on("click" , function() {
 			 var quantity = $('#quantity').val();
 			 self.location = "/apply/addApply?menu=${param.menu}&cookNo=${cook.cookNo}"
@@ -195,6 +199,7 @@ $(function() {
 				
 					
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
+				
 					<div>${cook.cookBrief }</div>
 					
 					
@@ -260,6 +265,8 @@ $(function() {
 			  				<button type="button" class="btn btn-warning btn-lg" id="buy" >구매하기</button>
 			  			
 			  				<button type="button" class="btn btn-primary btn-lg" id="buy" >수정하기</button>
+			  				
+			  				<button type="button" class="btn btn-primary btn-lg" id="mentor" >멘토채널</button>
 			  				
 			  		</div>
 				</div>

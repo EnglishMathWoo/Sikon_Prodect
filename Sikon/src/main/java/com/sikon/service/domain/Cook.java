@@ -25,6 +25,7 @@ public class Cook {
 	private User mentor;
 	private String userNickname;
 	private Recipe recipe;
+	private String userId;
 	
 	
 	public Cook(){
@@ -241,6 +242,16 @@ public class Cook {
 	}
 
 
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Cook [cookNo=" + cookNo + ", cookName=" + cookName + ", cookFilename=" + cookFilename + ", cookBrief="
@@ -249,9 +260,8 @@ public class Cook {
 				+ cookRecruit + ", startTime=" + startTime + ", endTime=" + endTime + ", cookLocation=" + cookLocation
 				+ ", cookRegdate=" + cookRegdate + ", cookVideo=" + cookVideo + ", cookStock=" + cookStock
 				+ ", hearthit=" + hearthit + ", cookContent=" + cookContent + ", mentor=" + mentor + ", userNickname="
-				+ userNickname + ", recipe=" + recipe + "]";
+				+ userNickname + ", recipe=" + recipe + ", userId=" + userId + "]";
 	}
-
 
 
 

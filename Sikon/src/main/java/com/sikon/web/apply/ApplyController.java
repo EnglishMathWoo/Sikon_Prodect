@@ -141,6 +141,9 @@ public class ApplyController {
 			
 			Apply apply = applyService.getApply(applyNo);
 			Cook cook = cookService.getCook(apply.getClassCook().getCookNo());
+			
+			apply.setClassCook(cook);
+			
 			HttpSession session=request.getSession();
 			User user = (User)session.getAttribute("user");
 			apply.setApplier(user);
@@ -338,19 +341,41 @@ public class ApplyController {
 			return modelAndView;
 		}
 		
-		@RequestMapping("getTotalSales")
-		public String getTotalSales( @RequestParam("applierId") String applierId, Model model) throws Exception{
+		@RequestMapping( value="sale" )
+
+		public ModelAndView sale( @ModelAttribute("search") Search search ,  HttpServletRequest request
+				) throws Exception{
 			
-			System.out.println("/getTotalSales");
+			System.out.println("/apply/sale : GET,Post");
 			
-			List<Apply> list = applyService.getTotalSales(applierId);
+			if(search.getCurrentPage() ==0 ){
+				search.setCurrentPage(1);
+			}
+			search.setPageSize(pageSize);
+			
+			HttpSession session=request.getSession();
+			User user=(User)session.getAttribute("user");
+			
+			// Business logic 수행
+			Map<String , Object> map=applyService.getApplyList(search,user.getUserId());
+			
+			Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+			System.out.println(resultPage);
+			
+			// Model 과 View 연결
+			
+			ModelAndView modelAndView=new ModelAndView();
+			modelAndView.addObject("list", map.get("list"));
+			modelAndView.addObject("resultPage", resultPage);
+			modelAndView.addObject("search", search);
 			
 			
 			
-			model.addAttribute("apply", list);
+			modelAndView.setViewName("forward:/apply/sale.jsp");
 			
-			return "forward:/apply/sale.jsp";
-		}	
+			
+			return modelAndView;
+		}
 		
 		
 }
