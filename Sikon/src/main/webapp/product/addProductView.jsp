@@ -64,12 +64,6 @@ div.form-group{
 
 	function fncAddProduct() {
 		
-		var summernote=$("#summernote").val();
-		
-		if(id == null || id.length <1){
-			alert("아이디는 반드시 입력하셔야 합니다.");
-			return;
-		}
 		
 		$("form").attr("method", "POST").attr("enctype","multipart/form-data").attr("action", "/product/addProduct").submit();
 		
@@ -79,8 +73,7 @@ div.form-group{
 	$(function() {
 		$("button.btn.btn-warning").on("click", function() {
 			
-			console.log($('input[name=prodDisRate]').val());
-			alert($("button.btn.btn-primary").text());
+			alert('등록');
 			fncAddProduct();
 		})
 	})

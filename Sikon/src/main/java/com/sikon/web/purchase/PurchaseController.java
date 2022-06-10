@@ -405,13 +405,14 @@ public class PurchaseController {
 		// Business logic 수행
 		Map<String , Object> map=purchaseService.getPurchaseList(search, buyerId);
 		
+		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
 		// Model 과 View 연결
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/mypage/listPurchase.jsp");
+		modelAndView.setViewName("/purchase/listPurchase.jsp");
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);

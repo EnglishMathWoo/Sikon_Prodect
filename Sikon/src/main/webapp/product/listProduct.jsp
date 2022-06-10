@@ -324,10 +324,9 @@ div.emptyProd{
 				 });
 				
 				
-				$( "button.btn.btn-default:contains('조회')" ).on("click" , function() {
-					fncGetList(1);
-				 });
-					
+				$("#orderCondition").on( "change", function() { 
+			      	fncGetList(1);
+				  });
 				
 	 });
 			 
@@ -429,33 +428,36 @@ div.emptyProd{
 	   			
 	   			<input type="hidden" id=themeCondition name=themeCondition value="${search.themeCondition }">
 	   			
-			    <div class="text-right">
-			    
+	   			
+	 <div class="row">
+		<table width="100%">
+			<tr>
+	   			<td class="col-md-6 text-left"> 
+					  <div class="form-group">
+							<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
+							 	<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>--정렬하기--</option>
+								<option value="1"  ${ ! empty search.orderCondition && search.orderCondition==1 ? "selected" : "" }>낮은가격순</option>
+								<option value="2"  ${ ! empty search.orderCondition && search.orderCondition==2 ? "selected" : "" }>높은가격순</option>
+							</select>
+					  </div>
+				</td>
+				
+				<td class="col-md-6 text-right">
 					<input type="hidden" name="searchCondition" id="searchCondition" value="1">
+					<div class="form-group">
+					    <label class="sr-only" for="searchKeyword">검색</label>
+					    <input type="text" style="display: none;">
+					    <input type="text" class="form-control" id="prodname" name="searchKeyword"  placeholder="검색어를 입력하세요"
+					    		onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+					</div>
 				  
-				  <div class="form-group">
-				    <label class="sr-only" for="searchKeyword">검색</label>
-				    <input type="text" style="display: none;">
-				    <input type="text" class="form-control" id="prodname" name="searchKeyword"  placeholder="검색"
-				    		onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-				  </div>
-				  
-				  <button type="button" class="btn btn-default" id="search">검색</button>
-				</div>
+					<button type="button" class="btn btn-default" id="search">검색</button>
+				</td>
 				
-				  
-				 <div class=" text-left"> 
-				  <div class="form-group" align="left">
-						<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
-						 	<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>--정렬하기--</option>
-							<option value="1"  ${ ! empty search.orderCondition && search.orderCondition==1 ? "selected" : "" }>낮은가격순</option>
-							<option value="2"  ${ ! empty search.orderCondition && search.orderCondition==2 ? "selected" : "" }>높은가격순</option>
-						</select>
-				  </div>
-				  
-				  <button type="button" class="btn btn-default" id="sorting">조회</button>
-				  </div>
 				
+			</tr>
+		</table>
+	</div>		
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
 				  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
@@ -467,7 +469,7 @@ div.emptyProd{
  
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
-<div class="row">
+<div class="row" id="content">
 
 	<c:if test="${empty list}">
 		<br><br>
