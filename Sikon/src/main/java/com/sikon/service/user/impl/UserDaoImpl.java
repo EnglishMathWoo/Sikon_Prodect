@@ -1,6 +1,5 @@
 package com.sikon.service.user.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.Career;
-import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserDao;
 
@@ -70,6 +67,15 @@ public class UserDaoImpl implements UserDao{
 		System.out.println("userId="+userId);
 		return sqlSession.selectOne("UserMapper.getUser", userId);
 	}
+	public List getLicense(String userId) throws Exception {
+		System.out.println("userId="+userId);
+		return sqlSession.selectList("UserMapper.getLicense", userId);
+	}
+//	public Career getCareer(String userId) throws Exception {
+//		System.out.println("userId="+userId);
+//		return sqlSession.selectOne("UserMapper.getCareer", userId);
+//	}
+	
 	
 	public List getUCL(String userId) throws Exception {
 		System.out.println("userId="+userId);

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
+import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 
 
@@ -23,6 +24,9 @@ public interface UserDao {
 
 	// SELECT ONE
 	public User getUser(String userId) throws Exception ;
+	public List getLicense(String userId) throws Exception;
+//	public Career getCareer(String userId) throws Exception;
+	
 	public List getUCL(String userId) throws Exception;
 	// IDÃ£±â
 	public User findUserId(String userNickname) throws Exception ;
