@@ -123,7 +123,7 @@
 	<!--  拳搁备己 div Start /////////////////////////////////////-->
 	<div class="container">
 	<div class="soo">
-		<h1 class="text-center"  style="color:#bc8f8f">捻 迄 积 己</h1>
+		<h1 class="text-center" style="color:#bc8f8f">捻 迄 积 己</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" name="detailForm"  enctype="multipart/form-data" >
