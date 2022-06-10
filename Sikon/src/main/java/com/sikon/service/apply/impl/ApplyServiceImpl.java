@@ -12,6 +12,7 @@ import com.sikon.common.Search;
 import com.sikon.service.domain.Apply;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.Heart;
+import com.sikon.service.domain.Wish;
 import com.sikon.service.apply.ApplyDao;
 import com.sikon.service.apply.ApplyService;
 
@@ -68,10 +69,9 @@ public class ApplyServiceImpl implements ApplyService{
 		applyDao.cancel(cookStatus, cookNo);
 	}
 	
-	
-	public List<Apply>  sale  (Apply apply)  throws Exception {
+	public List<Apply> getTotalSales(String applierId) throws Exception {
 		
-		return applyDao.sale(apply);
+		return applyDao.getTotalSales(applierId);	
 	}
 
 	

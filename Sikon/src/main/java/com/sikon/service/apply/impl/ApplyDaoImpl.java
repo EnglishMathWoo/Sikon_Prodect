@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Apply;
 import com.sikon.service.domain.Heart;
+import com.sikon.service.domain.Wish;
 import com.sikon.service.apply.ApplyDao;
 
 
@@ -87,9 +88,9 @@ public class ApplyDaoImpl implements ApplyDao{
 		
 	}
 	
-	public List<Apply>  sale  (Apply apply)  throws Exception {
+	public List<Apply> getTotalSales(String applierId) throws Exception {
 		
-		return sqlSession.selectList("ApplyMapper.sale", apply);
+		return sqlSession.selectList("ApplyMapper.getTotalSales", applierId);
 	}	
 	
 

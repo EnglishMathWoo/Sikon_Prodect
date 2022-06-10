@@ -76,6 +76,14 @@ div.thumbnail {
 } 
 </style>
 
+<style>
+
+
+.container {
+	padding-top: 150px;
+} 
+</style>
+
 
 <style>
 .page-header.text-info {

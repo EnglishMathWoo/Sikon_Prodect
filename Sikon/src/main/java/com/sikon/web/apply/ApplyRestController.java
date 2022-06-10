@@ -87,16 +87,7 @@ public class ApplyRestController {
 	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;	
 	
-	@RequestMapping(value="json/sale",method=RequestMethod.GET)
-	public List<Apply> sale( @ModelAttribute("apply") Apply apply, Model model) throws Exception{
-		
-		List<Apply> list = applyService.sale(apply);
-		
-		
-		
-		model.addAttribute("apply", list);
-		return list ;
-	}		
+	
 	
 	
 	

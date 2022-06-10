@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ import com.sikon.service.domain.Apply;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.Review;
 import com.sikon.service.domain.User;
+import com.sikon.service.domain.Wish;
 import com.sikon.service.review.ReviewService;
 
 
@@ -196,10 +198,10 @@ public class ApplyController {
 			
 			ModelAndView modelAndView=new ModelAndView();
 			
-			if(applyStatus.equals("100")) {
-			modelAndView.setViewName("forward:/apply/listSale");
-			}else {
+			if(applyStatus.equals("000")) {
 			modelAndView.setViewName("forward:/apply/listApply");
+			}else {
+			modelAndView.setViewName("forward:/apply/listSale");
 			}
 			
 			return modelAndView;
@@ -336,7 +338,19 @@ public class ApplyController {
 			return modelAndView;
 		}
 		
-		
+		@RequestMapping("getTotalSales")
+		public String getTotalSales( @RequestParam("applierId") String applierId, Model model) throws Exception{
+			
+			System.out.println("/getTotalSales");
+			
+			List<Apply> list = applyService.getTotalSales(applierId);
+			
+			
+			
+			model.addAttribute("apply", list);
+			
+			return "forward:/apply/sale.jsp";
+		}	
 		
 		
 }
