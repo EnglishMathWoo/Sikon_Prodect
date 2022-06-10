@@ -146,7 +146,13 @@ p {
     margin-bottom: 1rem
 }
 
+.padding{
+padding-top:120px;
+}
 
+.col-md-8{
+padding-top:150px;
+}
 </style>
 
 

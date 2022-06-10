@@ -56,7 +56,7 @@
 }
 
 .container {
-	padding-top: 70px;
+	padding-top: 200px;
 	width: 652px;
  	font-family: 'NanumBarunGothic', sans-serif;
 }
@@ -76,7 +76,7 @@ div.row.thum {
 
 <style>
 #thum, hr {
-	width: 652px;
+	width: auto;
 }
 
 
@@ -188,8 +188,10 @@ margin-bottom: 10px;
 				<div class="col-xs-6 col-md-6 text-center image">
 					<c:forEach var="name" items="${recipe.recipeImg.split('/')[0]}">
 					<input type="hidden" name="image" value="${recipe.recipeImg}">
+					<div class="text-center">
 						<img id="thum" src="/resources/images/uploadFiles/${name}"
 							width="600" height="400" />
+							</div>
 					</c:forEach>
 				</div>
 
