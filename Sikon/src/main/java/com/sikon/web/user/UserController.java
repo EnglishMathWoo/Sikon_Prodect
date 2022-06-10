@@ -111,7 +111,7 @@ public class UserController {
 				user.setUserId(userE);
 				user.setUserName(userN);
 				user.setPassword("1234");
-				user.setUserNickname("kakaouser");
+				user.setUserNickname(userE);
 				user.setMentorApply("N");
 				System.out.println(user);
 				
