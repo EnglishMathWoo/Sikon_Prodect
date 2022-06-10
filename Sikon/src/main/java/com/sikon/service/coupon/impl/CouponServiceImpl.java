@@ -64,15 +64,26 @@ public class CouponServiceImpl implements CouponService{
 	}
 	
 	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½
-	public List<Coupon> getUsableCoupon(String userId) throws Exception {
+	public List<Coupon> getMyCoupon(String userId) throws Exception {
 		
-		List<Coupon> couponList = couponDao.findUsableCoupon(userId);
+		List<Coupon> couponList = couponDao.findMyCoupon(userId);
 		
 		System.out.println(couponList);
 		
 		return couponList;
 	}
 	
+	//¸¶ÀÌÄíÆù¸®½ºÆ® 
+	public Map<String , Object> getMyCouponList(Search search) throws Exception  {
+		List<Coupon> list= couponDao.getMyCouponList(search);
+		int totalCount = couponDao.getMyCouponCount(search);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list );
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
+	}
 	
 	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ë»ï¿½
 	public Map<String , Object > getCouponList(Search search) throws Exception {

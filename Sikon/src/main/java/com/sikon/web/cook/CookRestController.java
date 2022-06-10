@@ -242,7 +242,33 @@ public class CookRestController {
 		
 	}
 	
-
-
+	//좋아요 push 알림
+	@RequestMapping(value="/json/pushAlarm", method=RequestMethod.POST)
+	@ResponseBody
+	public Map pushAlram(@RequestParam("cookNo") int cookNo, @RequestParam("userNickname") String userNickname) {
+		
+		
+		
+		Map map = new HashMap();
+		
+		try {
+			
+			Cook cook = cookService.getCook(cookNo);
+			
+			map.put("userNickname", userNickname);
+			map.put("cookName", cook.getCookName());
+			map.put("mentorNickname", cook.getUserNickname());
+			map.put("responseCode", "success");
+			
+			System.out.println("들어와라!!!");
+			System.out.println(cook.getCookName());
+			
+		} catch (Exception e1) {
+			
+			e1.printStackTrace();
+		}
+		
+		return map;	
+	}
 
 }

@@ -219,7 +219,8 @@ CREATE TABLE cook (
 	cook_stock         			 NUMBER    not null,
 	heart_hit 					 NUMBER    default 0  not null,
 	cook_content 		                  VARCHAR2(2000)           NOT NULL,
-	mentor_nickname			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_nickname) ON DELETE CASCADE, 
+	mentor_nickname			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_nickname) ON DELETE CASCADE,
+	mentor_id 			 	VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_id) ON DELETE CASCADE, 
 	PRIMARY KEY(cook_no)
 );
 

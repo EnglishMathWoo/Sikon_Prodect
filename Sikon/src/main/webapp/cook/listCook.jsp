@@ -141,12 +141,35 @@ div.thumbnail {
 		});
 
 
-		
-	//
-
-		 
+		//좋아요 push 알림
+		/*
+		 function pushAlarm(pushData){
+				
+				data = new FormData();
+				data.append("pushData", pushData);
+				console.log(pushData);
+				
+				$.ajax({
+			        url : "/cook/json/pushAlarm",
+			        type : 'POST',
+			        dataType : "json",   
+		            data : {'pushData' : pushData},
+			        success : function(data){
+			        	
+			        	alert("알람 전송 완료!!");
+			        	      	          
+			           		if(socket){
+			           			console.log(data.noticeTitle)
+			        			let socketMsg = "heart,"+data.userId+","+data.noticeTitle;
+			        			console.log(socketMsg);
+			        			socket.send(socketMsg);
+			           		}
+			        }
+			    
+			    })
+		 };
+		 */
 	
-		
 		 
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -157,14 +180,10 @@ div.thumbnail {
 				//var cookNo = $(this).attr("value");
 				var userId = $("input[name='userId']").val();
 				var cookNo = $(this).attr("value");
-				var hearthit = $("input[name='hearthit']").val();
-				var heartCheck = $("input[name='heartCheck']").val();
-		
-				
+			
 				console.log(cookNo);
 				console.log(userId);
-				console.log(heartCheck);
-				console.log(hearthit);
+
 			     $.ajax({
 			            type : "POST",  
 			            url : "/heart/json/updateHeart",       
@@ -177,12 +196,41 @@ div.thumbnail {
 			                
 			                    if(heartCheck == 0){
 			                    	alert("추천완료.");
+			                    	
+			                    	var userNickname = $("input[name='userNickname']").val();
+
+			                    	console.log(userId);
+			                    	console.log(cookNo);
+			    					
+			    					$.ajax({
+			    				        url : "/cook/json/pushAlarm",
+			    				        type : 'POST',
+			    				        dataType : "json",   
+			    			            data : {'cookNo' : cookNo, 'userNickname' : userNickname },
+			    			            error : function(){
+			    				            alert("통신 에러");
+			    				        },
+			    				        success : function(data){
+			    				        	
+			    				        	alert("알람 전송 완료!!");
+			    				        	      	          
+			    				           		if(socket){
+			    				           			console.log(data.cookMentor)
+			    				        			let socketMsg = "heart,"+data.userNickname+","+data.mentorNickname+","+data.cookName;
+			    				        			console.log(socketMsg);
+			    				        			socket.send(socketMsg);
+			    				           		}
+			    				        }
+			    				    
+			    				    })
 						           
-			                    	$("#like_btn").removeClass('bi-heart');
-						            $("#like_btn").addClass('bi-heart-fill');
+			                    $("#like_btn").removeClass('bi-heart');
+						        $("#like_btn").addClass('bi-heart-fill');
 						           
-			                       
-			                    	location.reload();
+			                    location.reload();
+			                    	
+			                    	
+			    					
 			                    }
 			                    else if (heartCheck == 1){
 			                     alert("추천취소");
@@ -192,9 +240,9 @@ div.thumbnail {
 						         
 			                  
 			                    	location.reload();
-
-			                    
 			                }
+			                    
+			                    
 			            }
 			        })
 			 });
@@ -453,6 +501,7 @@ div.thumbnail {
 <c:forEach var="cook" items="${list}">
 <td align="left"><input type="checkbox" name="cookCheck" id="${cook.cookNo}"/></td>
  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
+ <input type="hidden" name="userNickname" value="${user.userNickname}">
   <input type="hidden" name="userId" value="${user.userId}">
   <input type="hidden" name="cookNo" value="${cook.cookNo}">
     <input type="hidden" name="cookNo" value="${cook.cookStock}">

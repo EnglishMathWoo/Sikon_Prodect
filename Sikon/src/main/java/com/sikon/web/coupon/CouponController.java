@@ -166,6 +166,28 @@ public class CouponController {
 		return "forward:/coupon/listIssuedCoupon.jsp";
 	}
 	
+	@RequestMapping( value="/listMyCoupon" )
+	public String listMyCoupon(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+		
+		
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		// Business logic 수행
+		Map<String , Object> resultMap = couponService.getMyCouponList(search);
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
+		
+		// Model 과 View 연결
+		model.addAttribute("list", resultMap.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+				
+		return "forward:/mypage/listMyCoupon.jsp";
+	}
+	
 	@RequestMapping( value="/updateIssueStatus", method=RequestMethod.GET )
 	public String updateIssueStatus(@RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList) throws Exception{
 

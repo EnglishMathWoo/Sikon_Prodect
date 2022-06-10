@@ -62,21 +62,23 @@ public class EchoHandler extends TextWebSocketHandler {
 		if (StringUtils.isNotEmpty(msg)) {
 			System.out.println("if문 들어옴?");
 			String[] strs = msg.split(",");
-			if(strs != null && strs.length == 3) {
+			if(strs != null && strs.length == 4) {
 				
 				String cmd = strs[0];
-				String replyWriter = strs[1];
-				String noticeTitle = strs[2];
+				String userNickname = strs[1];
+				String mentorNickname = strs[2];
+				String cookName = strs[3];
 				System.out.println("length 성공?"+cmd);
 				
-				WebSocketSession replyWriterSession = userSessionsMap.get(replyWriter);
-				WebSocketSession boardWriterSession = userSessionsMap.get("user@naver.com");
-				System.out.println("replyWriterSession="+userSessionsMap.get(replyWriter));
-				System.out.println("boardWriterSession"+boardWriterSession);
+				WebSocketSession userSession = userSessionsMap.get(userNickname);
+				WebSocketSession mentorSession = userSessionsMap.get(mentorNickname);
+				System.out.println("userSession="+userSessionsMap.get(userNickname));
+				System.out.println("mentorSession"+mentorSession);
 				
 				Alarm alarm = new Alarm();
 				
-				//댓글
+				//공지사항
+				/*
 				if ("reply".equals(cmd) && boardWriterSession != null) {
 					System.out.println("onmessage되나??");
 					TextMessage tmpMsg = new TextMessage(replyWriter + "님이 공지사항을 올렸습니다! : [제목 : '"
@@ -89,6 +91,23 @@ public class EchoHandler extends TextWebSocketHandler {
 					alarm.setAlarmTarget("user@naver.com");
 					alarm.setAlarmContent(replyWriter + "님이 공지사항을 올렸습니다! : [제목 : '"
 							+ noticeTitle+"']");
+					alarmService.addAlarm(alarm);
+				}
+				*/
+				
+				//좋아요
+				if ("heart".equals(cmd) && mentorSession != null) {
+					System.out.println("onmessage되나??");
+					TextMessage tmpMsg = new TextMessage(userNickname + "님이 멘토님의 게시글에 좋아요를 눌렀습니다! : [제목 : '"
+									+ cookName+"']");
+					mentorSession.sendMessage(tmpMsg);
+					alarm.setAlarmTarget(mentorNickname);
+					alarm.setAlarmContent(tmpMsg.toString());
+					alarmService.addAlarm(alarm);
+				} else if ("heart".equals(cmd)){
+					alarm.setAlarmTarget(mentorNickname);
+					alarm.setAlarmContent(userNickname + "님이 공지사항을 올렸습니다! : [제목 : '"
+							+ cookName+"']");
 					alarmService.addAlarm(alarm);
 				}
 			}

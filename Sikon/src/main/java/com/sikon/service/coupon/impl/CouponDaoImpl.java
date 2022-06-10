@@ -51,7 +51,7 @@ public class CouponDaoImpl implements CouponDao {
 	}
 	
 	/// findUsableCoupon Method
-	public List<Coupon> findUsableCoupon(String userId) throws Exception {
+	public List<Coupon> findMyCoupon(String userId) throws Exception {
 		return sqlSession.selectList("CouponHolderMapper.findUsableCoupon", userId);
 	}
 	
@@ -67,6 +67,15 @@ public class CouponDaoImpl implements CouponDao {
 	// �Խ��� Page ó���� ���� ��ü Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("CouponMapper.getTotalCount", search);
+	}
+	
+	public List<Coupon> getMyCouponList(Search search) throws Exception {
+		return sqlSession.selectList("CouponHolderMapper.getMyCouponList", search);
+	}
+	
+	// �Խ��� Page ó���� ���� ��ü Row(totalCount)  return
+	public int getMyCouponCount(Search search) throws Exception {
+		return sqlSession.selectOne("CouponHolderMapper.getMyCouponCount", search);
 	}
 	
 	public List<Coupon> getIssuedCouponList(Search search) throws Exception {
