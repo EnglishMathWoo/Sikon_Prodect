@@ -3,6 +3,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+<!--  ///////////////////////// 작성날짜 포맷  ////////////////////////// -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+
 <!DOCTYPE html>
 <html>
 
@@ -36,6 +40,9 @@
 
 
 <style>
+.btn-sm{
+background-color: red;
+}
 @font-face {
  font-family: 'NanumBarunGothic';
  font-style: normal;
@@ -92,7 +99,7 @@ margin-left: 0px;
 }
 
 
-.iEJcKG header{
+.iEJcKGheader{
 font-family: 'YeolrinMyeongjo-Medium';
 border-bottom: 2px solid rgb(147, 112, 98);
     font-size: 18px;
@@ -102,7 +109,7 @@ border-bottom: 2px solid rgb(147, 112, 98);
     border-bottom: 2px solid rgb(147, 112, 98);
     text-align: start;
     font-weight: bold;
-    color: red;
+    height:5;
 }
 
 .ingredientName{
@@ -314,15 +321,14 @@ body{
 					때 등장하는 요리라고 해요. 오늘은 정성이 가득한 라자냐를 한 번 만들어 볼게요! 정성이 들어가는 만큼 깊은 맛과 풍미는
 					인스턴트와 비교할 수 없어요. 라구소스를 끓여 놓으면 활용할 곳이 많으니 한 번에 많이 만들어 두고두고 먹어도 좋아요.
 					고급스럽고 예쁜 라자냐로 식탁을 빛내보세요.
+					<br/>
 			</div>
 
-		<hr />
 
 		
 		<div class="col-xs-12 col-md-12  col-lg-12">
-		<hr />
 				<div class="iEJcKG">
-						<header>기본 재료</header>
+						<h3 class="iEJcKGheader">기본 재료</h3>
 						<div class="table">
 						<table class="type09" style="width: 592px">
 						<c:set var="i" value="0" />
@@ -343,105 +349,92 @@ body{
 
 		<div class="col-xs-12 col-md-12  col-lg-12">
 		<div class="iEJcKG">
-			<header>레시피</header>
+			<h3 class="iEJcKGheader">레시피</h3>
 			<br/>
 			${recipe.recipeOrder }
 			</div>
 		<hr/>
 		</div>
-		
-		<div class="container bootdey">
-		<h4>
-							<strong style="font-family: 'YeolrinMyeongjo-Medium';">리뷰</strong>
-						</h4>
-						<form>
-		<div class="col-xs-12 col-md-12  col-lg-12">
-<div class="panel">
-  <div class="panel-body">
-    <textarea class="form-control" name="reviewContent" rows="2" placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
-    <div class="mar-top clearfix">
-      <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i>등록</button>
-      <input type="file" name="reviewImg" id="imgUpload" style="display:none;"></input>
-      <label for="imgUpload"><i class="fa-solid fa-camera"></i></label>
-    
-    </div>
-  </div>
-</div>
+
+				<form>
+			<div class="container bootdey">
+				<h3 class="iEJcKGheader">리뷰</h3>
+				
+				<div class="col-xs-12 col-md-12  col-lg-12">
+						<div class="panel">
+							<div class="panel-body">
+								<textarea class="form-control" name="reviewContent" rows="2"
+									placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
+								<div class="mar-top clearfix">
+									<button class="btn btn-sm btn-primary pull-right" type="submit">
+										<i class="fa fa-pencil fa-fw"></i>등록
+									</button>
+									<input type="file" name="reviewImg" id="imgUpload"
+										style="display: none;"></input> <label for="imgUpload"><i
+										class="fa-solid fa-camera"></i></label>
+
+								</div>
+							</div>
+						</div>
+				
+				<c:forEach var="review" items="${review}">
+					
 						<div class="panel">
 							<div class="panel-body">
 								<div class="media-block">
 									<a class="media-left" href="#"><img
 										class="img-circle img-sm" alt="Profile Picture"
-										src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
+										src="/resources/images/168939.jpg"></a>
 									<div class="media-body">
 										<div class="mar-btm">
 											<a href="#"
 												class="btn-link text-semibold media-heading box-inline">${review.writerNickname }</a>
 											<p class="text-muted text-sm">
-												<i class="fa fa-mobile fa-lg"></i>작성날짜
+												<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${review.reviewRegdate}"/>
+												
 											</p>
 										</div>
 										<p>${review.reviewContent }</p>
 									</div>
 								</div>
 							</div>
-
-							<!--===================================================-->
-
-							<div class="panel-body">
-								<div class="media-block">
-									<a class="media-left" href="#"><img
-										class="img-circle img-sm" alt="Profile Picture"
-										src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
-									<div class="media-body">
-										<div class="mar-btm">
-											<a href="#"
-												class="btn-link text-semibold media-heading box-inline">${review.writerNickname }</a>
-											<p class="text-muted text-sm">
-												<i class="fa fa-mobile fa-lg"></i>작성날짜
-											</p>
-										</div>
-										<p>${review.reviewContent }</p>
-									</div>
-								</div>
 							</div>
-							<!--===================================================-->
-							
+							</c:forEach>
 
+							<!--===================================================-->
+
+  
 
 							<!-- End Newsfeed Content -->
 
 						</div>
 					</div>
-</form>
-</div>
-</div>
+				</form>
+			</div>
+		</div>
 
-	</div>
 	<!--  화면구성 div Start /////////////////////////////////////-->
 </body>
 
 <script type="text/javascript">
-$(function() {
+	$(function() {
 
-	$("button:contains('등록')").on("click", function() {
-		fncAddReview();
+		$("button:contains('등록')").on("click", function() {
+			fncAddReview();
+
+		});
 
 	});
 
-});
+	function fncAddReview() {
+		var textNo = $("input:hidden[name='recipeNo']").val();
+		console.log(textNo);
+		$("form").attr("method", "POST").attr("action","/review/addReview?category=REC&textNo=" + textNo).submit();
+
+	}
+</script>
 
 
-function fncAddReview() {
-	var textNo = $("input:hidden[name='recipeNo']").val();
-	console.log(textNo);
-	  $("form").attr("method", "POST").attr("action","/review/addReview?category=REC&textNo="+textNo).submit();
-
-      }
-
-	</script>
-	
-	
 <!-- //////////////////////////////////공유하기////////////////////////////// -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
@@ -494,7 +487,6 @@ function fncAddReview() {
 					installTalk : true,
 				})
 	}
-	//*/	
 	//=====================공유하기====================================
 
 	$(document).ready(function() {
