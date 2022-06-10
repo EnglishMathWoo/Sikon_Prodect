@@ -432,7 +432,7 @@ div.addbar{
 
 header{
 background-color:#f7f7f7;
-position:fixed;
+position:absolute;
 width:100%;
 z-index: 10;
 border-bottom: 1px solid #dbd4d459;

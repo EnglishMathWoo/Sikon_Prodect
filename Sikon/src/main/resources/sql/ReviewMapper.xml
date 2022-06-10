@@ -14,46 +14,51 @@
 		<result property="reviewContent" 	column="review_content" 		 jdbcType="VARCHAR"  />
 		<result property="reviewImg" 			column="review_img" 			jdbcType="VARCHAR"/>
 		<result property="reviewRegdate" 	column="review_regdate" 		jdbcType="DATE" />
-		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
+		<result property="recipe.recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
 		<result property="product.prodNo" 			column="prod_no" 			jdbcType="NUMERIC"/>
 		<result property="cook.cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
 	</resultMap>
 	
-		<resultMap id="purchaseSelectMap" type="purchase">
-		<result property="tranNo" 					column="tran_no" 				jdbcType="NUMERIC"/>
-  		<result property="purchaseProd.prodNo" 		column="prod_no" 				jdbcType="NUMERIC"/>
-  		<result property="buyer.userId" 			column="user_id"				jdbcType="VARCHAR"/>
-  		<result property="serialNo" 				column="serial_no" 				jdbcType="VARCHAR"/>
-  		<result property="receiverName"				column="receiver_name" 			jdbcType="VARCHAR"/>
-  		<result property="receiverPhone" 			column="receiver_phone" 		jdbcType="VARCHAR"/>
-  		<result property="purchaseQuantity" 		column="quantity" 				jdbcType="NUMERIC"/>
-  		<result property="divyAddr" 				column="divy_addr" 				jdbcType="VARCHAR"/>
-  		<result property="divyMessage" 				column="divy_message" 			jdbcType="VARCHAR"/>
-  		<result property="receiverEmail" 			column="receiver_email" 		jdbcType="VARCHAR"/>
-  		<result property="usedCoupon" 				column="used_coupon" 			jdbcType="VARCHAR"/>
-  		<result property="usedPoint" 				column="used_point" 			jdbcType="NUMERIC"/>  		 
-  		<result property="earnPoint" 				column="earn_point"				jdbcType="NUMERIC"/>
-  		<result property="orderDate" 				column="orderdate" 				jdbcType="DATE"/>
-  		<result property="PaymentOpt" 				column="payment_opt" 			jdbcType="VARCHAR"/>
-  		<result property="divyStatus" 				column="divy_status" 			jdbcType="VARCHAR"/>
-  		<result property="invoiceNum" 				column="invoice_num" 			jdbcType="VARCHAR"/>
-  		<result property="divyFee" 					column="divy_fee" 				jdbcType="NUMERIC"/>
-  		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
+		<resultMap id="cookSelectMap" type="cook">
+	
+		<result property="cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
+		<result property="cookName"			column="cook_name" 		jdbcType="VARCHAR" />
+		<result property="cookFilename" 	column="cook_filename" 		jdbcType="VARCHAR" />
+		<result property="cookBrief"      column="cook_brief"           jdbcType="VARCHAR"/>
+		<result property="cookDifficuty" 				column="cook_difficuty" 					jdbcType="VARCHAR" />		
+		<result property="cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
+		<result property="cookTheme" 			column="cook_theme" 		jdbcType="VARCHAR" />
+		<result property="aplstarTime"      column="apl_startime"           jdbcType="VARCHAR"/>
+		<result property="aplendTime"      column="apl_endtime"           jdbcType="VARCHAR"/>	
+		<result property="cookRecruit" 				column="cook_recruit" 					jdbcType="NUMERIC" />
+		<result property="startTime"      column="start_time"           jdbcType="VARCHAR"/>		
+		<result property="endTime"      column="end_time"           jdbcType="VARCHAR"/>		
+		<result property="cookLocation"      column="cook_location"           jdbcType="VARCHAR"/>
+		<result property="cookRegdate"      column="cook_regdate"           jdbcType="DATE"/>
+		<result property="cookVideo"      column="cook_video"           jdbcType="VARCHAR"/>
+		<result property="cookStock"      column="cook_stock"           jdbcType="NUMERIC"/>
+		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
+		<result property="cookContent" 			column="cook_content" 			jdbcType="VARCHAR" />
+		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
+		
 		
 	</resultMap>
 	
-	<resultMap id="applySelectMap" type="apply">
-		<result property="applyNo" 			column="apply_no" 			jdbcType="NUMERIC"/>
-		<result property="classCook.cookNo" 				column="cook_no" 					jdbcType="NUMERIC" />
-		<result property="applier.userId" 		column="applier_id"		jdbcType="VARCHAR"/>
-		<result property="paymentOption" 		column="PAYMENT_OPTION" 					jdbcType="VARCHAR" />
-		<result property="applyStatus" 				column="apply_status" 					jdbcType="VARCHAR" />
-		<result property="cookStatus" 			column="cook_status" 		jdbcType="NUMERIC" />
-		<result property="checkDate" 				column="check_date" 			jdbcType="DATE"/>
-		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
-
+	<resultMap id="productSelectMap" type="product">
+		<result property="prodNo" 				column="prod_no" 				jdbcType="NUMERIC"/>
+		<result property="prodName"				column="prod_name" 				jdbcType="VARCHAR"/>
+		<result property="prodThumbnail" 		column="prod_thumbnail" 		jdbcType="VARCHAR"/>
+		<result property="prodContent" 			column="prod_content" 			jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="prodDetail" 			column="prod_detail" 			jdbcType="VARCHAR"/>
+		<result property="prodStock" 			column="prod_stock" 			jdbcType="NUMERIC"/>
+		<result property="prodTheme" 			column="prod_theme" 			jdbcType="VARCHAR"/>
+		<result property="prodPrice" 			column="prod_price" 			jdbcType="NUMERIC"/>
+		<result property="prodDisRate" 			column="prod_disrate" 			jdbcType="NUMERIC"/>
+		<result property="prodDisPrice" 		column="prod_disprice" 			jdbcType="NUMERIC"/>
+		<result property="prodStatus" 			column="prod_status" 			jdbcType="VARCHAR"/>
+		<result property="couponApply" 			column="coupon_apply" 			jdbcType="VARCHAR"/>
+		<result property="prodRegDate" 			column="prod_regdate" 			jdbcType="DATE"/>
 	</resultMap>
-	
 	<!-- SQL : INSERT -->
 	<insert 	id="addReview"		parameterType="review" >
 	 	INSERT
@@ -141,6 +146,39 @@
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 						
 	 </select>
+	 
+	  <select  id="getMyReviewList"  parameterType="map"	resultMap="reviewSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	select *
+	  					from review
+	  					WHERE writer_nickname = #{writerNickname}
+				 ) inner_table
+											
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+	 </select>
+	 
+	 
+	 <select  id="getTotalMyCount"  parameterType="map"	 resultType="int">
+	  SELECT COUNT(*)
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	select *
+	  					from review
+	  					WHERE writer_nickname = #{writerNickname}
+				 ) inner_table
+											
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+						
+	 </select>
+	 
+	   <delete id="deleteReview" parameterType="int" >
+	 DELETE
+	 FROM review 
+	 WHERE review_no= #{reviewNo} 
+	 </delete>
+	 
 	 
 	 
 </mapper>

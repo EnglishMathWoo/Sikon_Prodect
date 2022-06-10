@@ -151,7 +151,7 @@ padding-top:120px;
 }
 
 .col-md-8{
-padding-top:150px;
+padding-top:175px;
 }
 </style>
 
