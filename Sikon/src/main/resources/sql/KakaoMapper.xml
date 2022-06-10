@@ -19,6 +19,7 @@
 		<result property="phone" 	column="user_phone" 		jdbcType="VARCHAR" />
 		<result property="holdpoint" 	column="holdpoint" 		jdbcType="NUMERIC" />
 		<result property="mentorApply" 	column="mentor_apply" 		jdbcType="VARCHAR"  />
+		<result property="loginPath" 	column="login_path" 		jdbcType="VARCHAR"  />
 		<result property="regDate" 	column="user_regdate" 		jdbcType="DATE" />
 		<result property="quitDate" 	column="quit_date" 		jdbcType="DATE" />
 		<result property="quitStatus" 	column="quit_status" 		jdbcType="VARCHAR"  />
@@ -28,9 +29,9 @@
 
 	<insert  id="addKakaoUser"		parameterType="user" >
 		 INSERT
-		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , user_phone , mentor_apply , user_regdate , quit_date ) 
+		 INTO users( user_id , user_name , password , user_birth , user_nickname , user_image , user_addr , user_phone , mentor_apply , login_path , user_regdate , quit_date ) 
 		 VALUES	 ( #{userId} , #{userName} , #{password} , #{userBirth}, #{userNickname}, #{userImage}, #{addr}, #{phone}, 
-						#{mentorApply}, SYSDATE , #{quitDate:DATE} )
+						#{mentorApply}, #{loginPath}, SYSDATE , #{quitDate:DATE} )
 	</insert>
 
 

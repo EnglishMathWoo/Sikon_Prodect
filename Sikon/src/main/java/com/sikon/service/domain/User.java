@@ -18,6 +18,7 @@ public class User {
 	private String phone;
 	private int holdpoint;
 	private String mentorApply;
+	private String loginPath;
 	private Date regDate;
 	private Date quitDate;
 	private String quitStatus;
@@ -149,6 +150,13 @@ public class User {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	public String getLoginPath() {
+		return loginPath;
+	}
+	public void setLoginPath(String loginPath) {
+		this.loginPath = loginPath;
+	}
+
 	
 	
 //	public int getCareerNo() {
@@ -263,6 +271,9 @@ public class User {
 //	+ startDate + ", endDate=" + endDate + ", licenseNo=" + licenseNo + ", licenseName=" + licenseName
 //	+ ", licenseInstitution=" + licenseInstitution + ", licenseDate=" + licenseDate +
 	
+	
+
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", userBirth="

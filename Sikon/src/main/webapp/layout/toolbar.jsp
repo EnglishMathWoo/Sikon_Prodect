@@ -469,23 +469,14 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        
 	        
 	        <c:if test="${!empty sessionScope.user.role}">
+	        
+	        <c:if test="${user.loginPath == 'K'}">
 	        <li><a href="#">Logout</a></li>
-	        <li><a href="#" style="color:#B97D2D">Mypage</a></li>
-	        <c:if test="${sessionScope.alarm == 0}">
-	        <li><i class="bi bi-bell" id="vacantAlarm"></i></li>
 	        </c:if>
-	        <c:if test="${sessionScope.alarm != 0}">
-	        <li><i class="bi bi-bell-fill" id="filledAlarm"></i></li>
-	        </c:if>
-	        
-	        
-	        </c:if>
-
-
-
-
-	        <c:if test="${!empty sessionScope.user.role}">
+	        <c:if test="${user.loginPath == 'S'}">
 	        <li><a href="#">Logout2</a></li>
+	        </c:if>
+	        
 	        <li><a href="#" style="color:#B97D2D">Mypage</a></li>
 	        <c:if test="${sessionScope.alarm == 0}">
 	        <li><i class="bi bi-bell" id="vacantAlarm"></i></li>
@@ -494,8 +485,9 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        <li><i class="bi bi-bell-fill" id="filledAlarm"></i></li>
 	        </c:if>
 	        
-	        
-	        </c:if>	        
+	        </c:if>
+
+	         
 	        
 	      </ul>
 	    </div>
@@ -588,14 +580,11 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			$(self.location).attr("href","https://kauth.kakao.com/oauth/logout?client_id=07cd433423b8401d52fda5136624e099&logout_redirect_uri=http://localhost:8080/user/logout");
 			});
 
-			
-			
+						
 			$( "a:contains('Logout2')" ).on("click" , function() {
-				$(self.location).attr("href","/user/logout");
-				});
-			
-			
-			
+			$(self.location).attr("href","/user/logout");
+			});
+				
 			
 	 		$( "a:contains('Mypage')" ).on("click" , function() {
 			$(self.location).attr("href","/mypage/mymain.jsp");
