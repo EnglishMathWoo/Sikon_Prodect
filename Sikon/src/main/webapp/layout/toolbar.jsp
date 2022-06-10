@@ -432,7 +432,7 @@ div.addbar{
 
 header{
 background-color:#f7f7f7;
-position:fixed;
+position:absolute;
 width:100%;
 z-index: 10;
 border-bottom: 1px solid #dbd4d459;
@@ -465,8 +465,18 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        <c:if test="${empty sessionScope.user.role}">
 	        <li><a href="#">Login</a></li>
 	        </c:if>
+	        
+	        
+	        
 	        <c:if test="${!empty sessionScope.user.role}">
+	        
+	        <c:if test="${user.loginPath == 'K'}">
 	        <li><a href="#">Logout</a></li>
+	        </c:if>
+	        <c:if test="${user.loginPath == 'S'}">
+	        <li><a href="#">Logout2</a></li>
+	        </c:if>
+	        
 	        <li><a href="#" style="color:#B97D2D">Mypage</a></li>
 	        <c:if test="${sessionScope.alarm == 0}">
 	        <li><i class="bi bi-bell" id="vacantAlarm"></i></li>
@@ -474,7 +484,11 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        <c:if test="${sessionScope.alarm != 0}">
 	        <li><i class="bi bi-bell-fill" id="filledAlarm"></i></li>
 	        </c:if>
+	        
 	        </c:if>
+
+	         
+	        
 	      </ul>
 	    </div>
 	</div>
@@ -506,7 +520,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		                <li><a href="#">하바나</a></li>
 		                <li><a href="#">하트</a></li>
 		                <li><a href="#">수강예정목록</a></li>
-		                <li><a href="#">매출</a></li>
+		                <li><a href="#">쿠킹멘토채널</a></li>
               		</ul>
               		</c:if>
         </li>        
@@ -563,8 +577,14 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 			
 			$( "a:contains('Logout')" ).on("click" , function() {
+			$(self.location).attr("href","https://kauth.kakao.com/oauth/logout?client_id=07cd433423b8401d52fda5136624e099&logout_redirect_uri=http://localhost:8080/user/logout");
+			});
+
+						
+			$( "a:contains('Logout2')" ).on("click" , function() {
 			$(self.location).attr("href","/user/logout");
 			});
+				
 			
 	 		$( "a:contains('Mypage')" ).on("click" , function() {
 			$(self.location).attr("href","/mypage/mymain.jsp");
@@ -678,8 +698,8 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 				$(self.location).attr("href","/apply/listMyClass");
 			});
 	 		
-	 		$( "a:contains('매출')" ).on("click" , function() {
-				$(self.location).attr("href","/apply/sale.jsp");
+	 		$( "a:contains('쿠킹멘토채널')" ).on("click" , function() {
+				$(self.location).attr("href","/cook/mentor.jsp");
 			}); 
 	 		//====================================================
 		 });

@@ -56,10 +56,10 @@ public class ReviewDaoImpl implements ReviewDao {
 
 	}
 
-	public void deleteReview(Review review) throws Exception {
-		System.out.println("review=" + review);
+	public void deleteReview(int reviewNo) throws Exception {
+		System.out.println("review=" + reviewNo);
 
-		sqlSession.delete("ReviewMapper.deleteReview", review);
+		sqlSession.delete("ReviewMapper.deleteReview", reviewNo);
 
 	}
 
@@ -85,5 +85,40 @@ public class ReviewDaoImpl implements ReviewDao {
 
 		}
 	}
+
+	@Override
+	public List<Review> getMyReviewList(Search search, String writerNickname) throws Exception {
+		System.out.println("search=" + search);
+		System.out.println("writerNickname=" + writerNickname);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("writerNickname", writerNickname);
+
+		return sqlSession.selectList("ReviewMapper.getMyReviewList", map);
+	}
+
+	@Override
+	public int getTotalMyCount(Search search, String writerNickname) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("search=" + search);
+		System.out.println("writerNickname=" + writerNickname);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("writerNickname", writerNickname);
+		return sqlSession.selectOne("ReviewMapper.getTotalMyCount", map);
+	}
+
+	@Override
+	public void givePoint(int point, String userId) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("point", point);
+		map.put("userId", userId);
+		sqlSession.insert("ReviewMapper.givePoint", map);
+
+		
+	}
+	
 
 }

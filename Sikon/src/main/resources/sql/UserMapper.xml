@@ -19,6 +19,7 @@
 		<result property="phone" 	column="user_phone" 		jdbcType="VARCHAR" />
 		<result property="holdpoint" 	column="holdpoint" 		jdbcType="NUMERIC" />
 		<result property="mentorApply" 	column="mentor_apply" 		jdbcType="VARCHAR"  />
+		<result property="loginPath" 	column="login_path" 		jdbcType="VARCHAR"  />
 		<result property="regDate" 	column="user_regdate" 		jdbcType="DATE" />
 		<result property="quitDate" 	column="quit_date" 		jdbcType="DATE" />
 		<result property="quitStatus" 	column="quit_status" 		jdbcType="VARCHAR"  />
@@ -74,6 +75,8 @@
  -->
 	</insert>
 
+	
+						
 	<insert id="addLicense" parameterType="map">
         insert 
         into license(license_no , license_name , license_institution , license_date , user_id)
@@ -231,18 +234,24 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT user_id , user_name , user_nickname
 											FROM users
-											 <if test="searchCondition != null">
-												 <where>
-													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				user_id = #{searchKeyword}
-													</if>
-													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				user_name = #{searchKeyword}
-													</if>
-												</where>
+																						
+											 <if test="orderCondition != null ">
+											 
+											 <choose>
+											  <when test="orderCondition == 0 ">
+											   		ORDER BY user_id DESC
+											  </when>
+											  <when test="orderCondition == 1 ">
+											  		WHERE mentor_apply LIKE UPPER ('Y')
+											  		AND role LIKE 'user'
+											  </when>
+											  <when test="orderCondition == 2 ">
+											      	where role LIKE 'mentor'
+											  </when>
+											  
+											 </choose>
 											 </if>
-											
-											ORDER BY user_id ) inner_table
+								 ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
@@ -265,16 +274,23 @@
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT user_id , user_name , user_nickname
 						FROM users
-						<if test="searchCondition != null">
-							<where>
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			user_id = #{searchKeyword}
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		user_name = #{searchKeyword}
-								</if>
-							</where>
-						</if> ) countTable						
+						<if test="orderCondition != null ">
+											 
+											 <choose>
+											  <when test="orderCondition == 0 ">
+											   		ORDER BY user_id DESC
+											  </when>
+											  <when test="orderCondition == 1 ">
+											  		where mentor_apply LIKE UPPER ('Y')
+											  </when>
+											  <when test="orderCondition == 2 ">
+											      	where role LIKE 'mentor'
+											  </when>
+											  <otherwise>
+											  </otherwise>
+											 </choose>
+											 </if>
+						 ) countTable						
 	 </select>
 	 
 </mapper>
