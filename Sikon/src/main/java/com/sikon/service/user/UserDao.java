@@ -14,6 +14,7 @@ public interface UserDao {
 	
 	// INSERT
 	public void addUser(User user, Map map) throws Exception;
+	public void addKakaoUser(User user) throws Exception;
 //	public void addLicense(License license) throws Exception;
 //	public void addCareer(Career career) throws Exception;
 	

@@ -1,11 +1,10 @@
 package com.sikon.service.user;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.Career;
-import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 
 
@@ -14,8 +13,13 @@ public interface UserService {
 	
 	// 회원가입
 	public void addUser(User user, Map map) throws Exception;
+	public void addKakaoUser(User user) throws Exception;
 //	public void addLicense(License license) throws Exception;
 //	public void addCareer(Career career) throws Exception;
+	
+	// 카카오 로그인
+	public String getAccessToken (String authorize_code) throws Exception;
+	public HashMap<String, Object> getUserInfo(String access_Token) throws Exception;
 	
 	// 내정보확인 
 	public User getUser(String userId) throws Exception;
@@ -34,7 +38,7 @@ public interface UserService {
 	public void deleteUser(User user) throws Exception ;
 	
 	// 회원 ID 중복 확인
-//	public boolean checkDuplication(String userId) throws Exception;
+	public boolean checkDuplication(String userId) throws Exception;
 	
 	// id 중복체크
 	public int checkId(String userId) throws Exception;

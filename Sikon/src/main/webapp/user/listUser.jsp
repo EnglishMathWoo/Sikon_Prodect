@@ -39,6 +39,9 @@
 	  body {
             padding-top : 50px;
         }
+      .container {
+      		padding-top : 150px;
+      }
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -73,47 +76,7 @@
 		});	
 		
 		
-		//============= userId 에 회원정보보기  Event  처리 (double Click)=============
-		 $(function() {
-			 
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(  "td:nth-child(5) > i" ).on("click" , function() {
-
-					var userId = $(this).next().val();
-				
-					$.ajax( 
-							{
-								url : "/user/json/getUser/"+userId ,
-								method : "GET" ,
-								dataType : "json" ,
-								headers : {
-									"Accept" : "application/json",
-									"Content-Type" : "application/json"
-								},
-								success : function(JSONData , status) {
-
-									var displayValue = "<h6>"
-																+"아이디 : "+JSONData.userId+"<br/>"
-																+"이  름 : "+JSONData.userName+"<br/>"
-																+"닉네임 : "+JSONData.userNickname+"<br/>"
-																+"ROLE : "+JSONData.role+"<br/>"
-																+"등록일 : "+JSONData.regDateString+"<br/>"
-																+"</h6>";
-									$("h6").remove();
-									$( "#"+userId+"" ).html(displayValue);
-								}
-						});
-						////////////////////////////////////////////////////////////////////////////////////////////
-					
-			});
-			
-			//==> userId LINK Event End User 에게 보일수 있도록 
-		//	$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
-		//	$("h7").css("color" , "red");
-			
-			//==> 아래와 같이 정의한 이유는 ??
-			$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
-		});	
+		
 	
 	</script>
 	
@@ -129,8 +92,10 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>회원목록</h3>
+	       <h3>회원관리</h3>
 	    </div>
+	    
+	    
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row">
@@ -145,20 +110,21 @@
 			    <form class="form-inline" name="detailForm">
 			    
 				  <div class="form-group">
-				    <select class="form-control" name="searchCondition" >
-						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>회원ID</option>
-						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>회원명</option>
+				    <select class="form-control" name="orderCondition" id="orderCondition">
+						<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>회원목록</option>
+						<option value="1"  ${ ! empty search.orderCondition && search.orderCondition==1 ? "selected" : "" }>쿠킹멘토신청자목록</option>
+						<option value="2"  ${ ! empty search.orderCondition && search.orderCondition==2 ? "selected" : "" }>쿠킹멘토목록</option>
 					</select>
 				  </div>
 				  
-				  <div class="form-group">
+			<!--  	<div class="form-group">
 				    <label class="sr-only" for="searchKeyword">검색어</label>
 				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
 				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 				  </div>
-				  
+			-->		  
 				  <button type="button" class="btn btn-default">검색</button>
-				  
+			  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 				  
@@ -166,7 +132,7 @@
 	    	</div>
 	    	
 		</div>
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+		<!-- table 위쪽 검색 end /////////////////////////////////////-->
 		
 		
       <!--  table Start /////////////////////////////////////-->
@@ -188,7 +154,7 @@
 		  <c:forEach var="user" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
-			  <td align="center">${ i }</td>
+			  <td align="left">${ i }</td>
 			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
 			  <td align="left">${user.userName}</td>
 			  <td align="left">${user.userNickname}</td>

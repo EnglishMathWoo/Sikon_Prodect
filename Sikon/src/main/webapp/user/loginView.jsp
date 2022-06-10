@@ -124,6 +124,14 @@
              			  <button class="btn btn-info btn-lg btn-block" type="button">Login</button>
            			  </div>
            			  
+           			  <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?
+											client_id=07cd433423b8401d52fda5136624e099&
+											redirect_uri=http://localhost:8080/user/kakaoLogin
+											&response_type=code">
+				
+						<img src="/resources/images/kakao_login_medium_narrow.png" style="height:30px">
+					  </a>
+					  
            			  <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#">Forgot password?</a></p>
            			  <p>Don't have an account? <a href="#!" role="button" class="link-info">Register here</a></p>
            			  

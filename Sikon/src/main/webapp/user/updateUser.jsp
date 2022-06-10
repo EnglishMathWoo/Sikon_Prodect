@@ -178,6 +178,119 @@ div.container {
     		</div>
  	 	  </div>
 		  
+		   <hr style="border: solid 1px #d7d7d7;" width="650px;">	
+ 	 	  
+ 	 	  <p align="center"><label>경력사항</label> </p>
+ 	 	 
+ 	 	  
+ 	 	  <div class="form-group">
+		    <label for="career" class="col-sm-offset-1 col-sm-3 control-label">소속</label>
+		   	<div class="col-sm-4">
+		      <input type="text" class="form-control" id="company" name="company" placeholder="소속1">
+		      
+		    </div>
+		 </div>   
+ 	 	  
+ 	 	   <div class="form-group">
+    		<label for="startDate" class="col-sm-offset-1 col-sm-3 control-label" >근무시작날짜</label>
+   			<div class="col-sm-4">
+      	  	  <input type="text" class="form-control" id="startDate" name="startDate" placeholder="근무시작날짜1">
+      	  	  
+    		</div>
+ 	 	  </div>
+ 	 	  
+ 	 	   <div class="form-group">
+    		<label for="endDate" class="col-sm-offset-1 col-sm-3 control-label" >근무종료날짜</label>
+   			<div class="col-sm-4">
+      	 	  <input type="text" class="form-control" id="endDate" name="endDate" placeholder="근무종료날짜1">
+      	 	  
+    		</div>
+ 	 	  </div>
+ 	 	  
+ 	 	  <div class="form-group">
+		    <label for="careerExperience" class="col-sm-offset-1 col-sm-3 control-label">업무내용</label>
+		    <div class="col-sm-4">
+		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" placeholder="업무내용1"></textarea>
+		     <hr>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="career" class="col-sm-offset-1 col-sm-3 control-label">소속</label>
+		   	<div class="col-sm-4">
+		      <input type="text" class="form-control" id="company" name="company" placeholder="소속2">
+		    </div>
+		 </div>   
+ 	 	  
+ 	 	   <div class="form-group">
+    		<label for="startDate" class="col-sm-offset-1 col-sm-3 control-label" >근무시작날짜</label>
+   			<div class="col-sm-4">
+      	  	  <input type="text" class="form-control" id="startDate2" name="startDate" placeholder="근무시작날짜2">
+    		</div>
+ 	 	  </div>
+ 	 	  
+ 	 	   <div class="form-group">
+    		<label for="endDate" class="col-sm-offset-1 col-sm-3 control-label" >근무종료날짜</label>
+   			<div class="col-sm-4">
+      	 	  <input type="text" class="form-control" id="endDate2" name="endDate" placeholder="근무종료날짜2">
+    		</div>
+ 	 	  </div>
+ 	 	  
+ 	 	  <div class="form-group">
+		    <label for="careerExperience" class="col-sm-offset-1 col-sm-3 control-label">업무내용</label>
+		    <div class="col-sm-4">
+		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" placeholder="업무내용2"></textarea>		    
+		    </div>
+		  </div>
+ 	 	  
+ 	 	  <hr style="border: solid 1px #d7d7d7;" width="650px;">	
+ 	 	  
+ 	 	  <p align="center"><label>자격증</label> </p>
+ 	 	  
+ 	 	  <div class="form-group">
+		    <label for="licenseName" class="col-sm-offset-1 col-sm-3 control-label">자격증명</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="licenseName" name="licenseName" placeholder="자격증명1">
+		    </div>
+		  </div>
+ 	 	  
+ 	 	  <div class="form-group">
+		    <label for="licenseInstitution" class="col-sm-offset-1 col-sm-3 control-label">발급기관</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="licenseInstitution" name="licenseInstitution" placeholder="발급기관1">
+		    </div>
+		  </div>
+ 	 	  
+ 	 	  <div class="form-group">
+    		<label for="licenseDate" class="col-sm-offset-1 col-sm-3 control-label" >취득일자</label>
+   			<div class="col-sm-4">
+      	  	  <input type="text" class="form-control" id="licenseDate" name="licenseDate" placeholder="취득일자1">
+      	  	  <hr>
+      	  	</div>
+      	  </div>
+ 	 	  
+ 	 	  
+ 	 	   <div class="form-group">
+		    <label for="licenseName" class="col-sm-offset-1 col-sm-3 control-label">자격증명</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="licenseName" name="licenseName" placeholder="자격증명2">
+		    </div>
+		  </div>
+ 	 	  
+ 	 	  <div class="form-group">
+		    <label for="licenseInstitution" class="col-sm-offset-1 col-sm-3 control-label">발급기관</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="licenseInstitution" name="licenseInstitution" placeholder="발급기관2">
+		    </div>
+		  </div>
+ 	 	  
+ 	 	  <div class="form-group">
+    		<label for="licenseDate" class="col-sm-offset-1 col-sm-3 control-label" >취득일자</label>
+   			<div class="col-sm-4">
+      	  	  <input type="text" class="form-control" id="licenseDate2" name="licenseDate" placeholder="취득일자2">
+    		</div>
+ 	 	  </div>
+ 	 	  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >수 &nbsp;정</button>
