@@ -62,33 +62,52 @@ public class EchoHandler extends TextWebSocketHandler {
 		if (StringUtils.isNotEmpty(msg)) {
 			System.out.println("if문 들어옴?");
 			String[] strs = msg.split(",");
-			if(strs != null && strs.length == 3) {
+			if(strs != null && strs.length == 4) {
 				
 				String cmd = strs[0];
-				String replyWriter = strs[1];
-				String noticeTitle = strs[2];
+				String userId = strs[1];
+				String mentorId = strs[2];
+				String cookName = strs[3];
 				System.out.println("length 성공?"+cmd);
 				
-				WebSocketSession replyWriterSession = userSessionsMap.get(replyWriter);
-				WebSocketSession boardWriterSession = userSessionsMap.get("user@naver.com");
-				System.out.println("replyWriterSession="+userSessionsMap.get(replyWriter));
-				System.out.println("boardWriterSession"+boardWriterSession);
+				WebSocketSession userSession = userSessionsMap.get(userId);
+				WebSocketSession mentorSession = userSessionsMap.get(mentorId);
+				System.out.println("userSession="+userSessionsMap.get(userId));
+				System.out.println("mentorSession"+mentorSession);
 				
 				Alarm alarm = new Alarm();
 				
-				//댓글
+				//공지사항
+				/*
 				if ("reply".equals(cmd) && boardWriterSession != null) {
 					System.out.println("onmessage되나??");
-					TextMessage tmpMsg = new TextMessage(replyWriter + "님이 "
-									+ noticeTitle+"라는 제목의 공지사항을 올렸습니다!");
+					TextMessage tmpMsg = new TextMessage(replyWriter + "님이 공지사항을 올렸습니다! : [제목 : '"
+									+ noticeTitle+"']");
 					boardWriterSession.sendMessage(tmpMsg);
 					alarm.setAlarmTarget("user@naver.com");
 					alarm.setAlarmContent(tmpMsg.toString());
 					alarmService.addAlarm(alarm);
 				} else if ("reply".equals(cmd)){
 					alarm.setAlarmTarget("user@naver.com");
-					alarm.setAlarmContent(replyWriter + "님이 "
-							+ noticeTitle+"라는 제목의 공지사항을 올렸습니다!");
+					alarm.setAlarmContent(replyWriter + "님이 공지사항을 올렸습니다! : [제목 : '"
+							+ noticeTitle+"']");
+					alarmService.addAlarm(alarm);
+				}
+				*/
+				
+				//좋아요
+				if ("heart".equals(cmd) && mentorSession != null) {
+					System.out.println("onmessage되나??");
+					TextMessage tmpMsg = new TextMessage(userId + "님이 멘토님의 게시글에 좋아요를 눌렀습니다! : [제목 : '"
+									+ cookName+"']");
+					mentorSession.sendMessage(tmpMsg);
+					alarm.setAlarmTarget(mentorId);
+					alarm.setAlarmContent(tmpMsg.toString());
+					alarmService.addAlarm(alarm);
+				} else if ("heart".equals(cmd)){
+					alarm.setAlarmTarget(mentorId);
+					alarm.setAlarmContent(userId + "님이 공지사항을 올렸습니다! : [제목 : '"
+							+ cookName+"']");
 					alarmService.addAlarm(alarm);
 				}
 			}

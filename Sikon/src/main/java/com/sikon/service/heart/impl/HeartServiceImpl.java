@@ -94,25 +94,5 @@ public class HeartServiceImpl implements HeartService{
 		return map;
 	}		
 	
-	public Map<String, Object> getHeart2(int cookNo, String userId) throws Exception {
-
-		List<Heart> heart = heartDao.getHeart2(cookNo, userId);
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		if(heart.isEmpty()) {
-			System.out.println("여기냐??");
-			map.put("list", 0);
-			
-		} else {
-			System.out.println(heart.get(0).getHeartCheck());
-			System.out.println("아님 여기냐??");
-			map.put("list", heart.get(0).getHeartCheck());
-		}
-		
-		return map;
-		
-	}		
-
-	
 
 }

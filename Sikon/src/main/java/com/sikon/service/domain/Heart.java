@@ -53,8 +53,7 @@ public class Heart {
 
 	@Override
 	public String toString() {
-		return "Heart [heartNo=" + heartNo + ", cookNo=" + cookNo + ", userId=" + userId + ", heartCheck=" + heartCheck
-				+ ", cook=" + cook + "]";
+		return "Heart [heartNo=" + heartNo + ", cookNo=" + cookNo + ", userId=" + userId + ", heartCheck=" + heartCheck	+ ", cook=" + cook + "]";
 	}
 
 

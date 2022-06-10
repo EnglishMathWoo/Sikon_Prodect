@@ -107,12 +107,21 @@
 											
 	 </select>
 	 
+	 <select 	id="getTotalSales"	parameterType="string"	resultMap="applySelectMap">
+		SELECT c.cook_name, c.cook_filename, c.cook_price, a.*
+		FROM cook c, apply a 
+		WHERE c.cook_no=a.cook_no 
+		AND applier_id = #{applierId}
+		ORDER BY apply_no DESC
+	 </select>	 
 	 
-	 <select id="sale" resultMap="applySelectMap">
-        select * from apply 
-        where user_id=#{userId} and PAYMENT_OPTION=#{paymentOption} 
-        and check_date between DATE_SUB(NOW(), INTERVAL 7 DAY) and NOW() 
-        order by check_date;        
-    </select>
-	 
+	 <!--
+	<select id="getTotalSales" resultType="int">
+		
+			SELECT 
+				sum(cook_price) as cook_price
+			FROM apply WHERE apply_status = 200;
+	
+	</select>
+	 -->
 </mapper>

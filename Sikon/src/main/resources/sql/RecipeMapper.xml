@@ -89,7 +89,23 @@
 													</otherwise>
 													</choose>
 											</if>
-											
+											<if test="themeCondition != null">
+													<if test='themeCondition == "ko"'>
+										 				AND recipe_theme LIKE UPPER('KO')
+													</if>
+													<if test='themeCondition == "ch"'>
+										 				AND recipe_theme LIKE UPPER('CH')
+													</if>
+													<if test='themeCondition == "fr"'>
+										 				AND recipe_theme LIKE UPPER('FR')
+													</if>
+													<if test='themeCondition == "jp"'>
+										 				AND recipe_theme LIKE UPPER('JP')
+													</if>
+													<if test='themeCondition == "des"'>
+										 				AND recipe_theme LIKE UPPER('DES')
+													</if>
+											</if>
 													
 											<if test="orderCondition != null">
 											
@@ -133,7 +149,23 @@
 							</where>
 							
 						</if>  
-						
+						<if test="themeCondition != null">
+													<if test='themeCondition == "ko"'>
+										 				AND recipe_theme LIKE UPPER('KO')
+													</if>
+													<if test='themeCondition == "ch"'>
+										 				AND recipe_theme LIKE UPPER('CH')
+													</if>
+													<if test='themeCondition == "fr"'>
+										 				AND recipe_theme LIKE UPPER('FR')
+													</if>
+													<if test='themeCondition == "jp"'>
+										 				AND recipe_theme LIKE UPPER('JP')
+													</if>
+													<if test='themeCondition == "des"'>
+										 				AND recipe_theme LIKE UPPER('DES')
+													</if>
+											</if>
 						<if test="orderCondition != null">
 											<choose>
 													<when test="orderCondition == 0  ">

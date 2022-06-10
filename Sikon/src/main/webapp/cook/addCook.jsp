@@ -796,7 +796,14 @@ footer {
 			${user.userNickname}
 		    </div>
 		  </div>
-	    
+
+
+    <div class="form-group">
+		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">ÄíÅ·¸àÅä¾ÆÀÌµğ</label>
+		    <div class="col-sm-4">
+			${user.userId}
+		    </div>
+		  </div>	    
 	    <br>
 	    
 	    <div class="container">

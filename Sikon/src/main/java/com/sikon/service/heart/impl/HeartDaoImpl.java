@@ -97,17 +97,6 @@ public class HeartDaoImpl implements HeartDao{
 		return list;
 	}
 	
-	public List<Heart> getHeart2(int cookNo, String userId) throws Exception {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userId", userId);
-		map.put("cookNo", cookNo);
-		System.out.println("!@#$!@#!@#$@!");
-		
-		return sqlSession.selectList("HeartMapper.getHeart2", map);
-				
-	}
-	
 	public int getTotalCount(Search search, String userId) throws Exception {
 		System.out.println("userid="+userId+"search="+search);
 		Map<String, Object> map = new HashMap<String, Object>();

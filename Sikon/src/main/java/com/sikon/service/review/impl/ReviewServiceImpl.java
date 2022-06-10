@@ -60,9 +60,9 @@ public class ReviewServiceImpl implements ReviewService {
 
 	}
 
-	public void deleteReview(Review review) throws Exception {
-		System.out.println("review=" + review);
-		reviewDao.deleteReview(review);
+	public void deleteReview(int reviewNo) throws Exception {
+		System.out.println("review=" + reviewNo);
+		reviewDao.deleteReview(reviewNo);
 
 	}
 
@@ -70,6 +70,28 @@ public class ReviewServiceImpl implements ReviewService {
 	public void updateStatus(int textNo,String category) throws Exception {
 		reviewDao.updateStatus(textNo,category);
 		
+	}
+
+	@Override
+	public Map<String, Object> getMyReviewList(Search search, String writerNickname) throws Exception {
+		System.out.println("search=" + search);
+		System.out.println("writerNickname" + writerNickname);
+		
+		List<Review> list = reviewDao.getMyReviewList(search, writerNickname);
+		int totalCount = reviewDao.getTotalMyCount(search, writerNickname);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		System.out.println("list="+list);
+
+		return map;
+	}
+
+	@Override
+	public void givePoint(int point, String userId) throws Exception {
+		reviewDao.givePoint(point,userId);
+
 	}
 
 }

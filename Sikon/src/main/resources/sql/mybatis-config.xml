@@ -54,6 +54,7 @@
 		<mapper resource="sql/ApplyMapper.xml"/>
 		<mapper resource="sql/CartMapper.xml"/>
 		<mapper resource="sql/AlarmMapper.xml"/>
+		<mapper resource="sql/KakaoMapper.xml"/>
 	</mappers>
 
 </configuration>

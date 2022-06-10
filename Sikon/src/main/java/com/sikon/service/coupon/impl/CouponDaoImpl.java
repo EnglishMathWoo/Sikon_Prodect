@@ -1,5 +1,6 @@
 package com.sikon.service.coupon.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ public class CouponDaoImpl implements CouponDao {
 	}
 	
 	/// findUsableCoupon Method
-	public List<Coupon> findUsableCoupon(String userId) throws Exception {
+	public List<Coupon> findMyCoupon(String userId) throws Exception {
 		return sqlSession.selectList("CouponHolderMapper.findUsableCoupon", userId);
 	}
 	
@@ -69,11 +70,29 @@ public class CouponDaoImpl implements CouponDao {
 		return sqlSession.selectOne("CouponMapper.getTotalCount", search);
 	}
 	
+	public List<Coupon> getMyCouponList(Search search, String userId) throws Exception {
+		Map map = new HashMap();
+		
+		map.put("userId", userId);
+		map.put("search", search);
+		
+		System.out.println(userId);
+		
+		return sqlSession.selectList("CouponHolderMapper.getMyCouponList", map);
+	}
+	
+	// ¸¶ÀÌÄíÆù Count
+	public int getMyCouponCount(String userId) throws Exception {
+	
+		
+		return sqlSession.selectOne("CouponHolderMapper.getMyCouponCount", userId);
+	}
+	
 	public List<Coupon> getIssuedCouponList(Search search) throws Exception {
 		return sqlSession.selectList("CouponHolderMapper.getIssuedCouponList", search);
 	}
 	
-	// ï¿½Ô½ï¿½ï¿½ï¿½ Page Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ Row(totalCount)  return
+	//¹ß±Þ ÄíÆù Count
 	public int getIssuedTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("CouponHolderMapper.getTotalCount", search);
 	}

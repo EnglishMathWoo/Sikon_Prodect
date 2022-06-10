@@ -41,6 +41,10 @@ public class UserDaoImpl implements UserDao{
 		sqlSession.insert("UserMapper.addLicense", map.get("list"));
 		sqlSession.insert("UserMapper.addCareer", map.get("list2"));
 	}
+	public void addKakaoUser(User user) throws Exception {
+		System.out.println("user="+user);
+		sqlSession.insert("KakaoMapper.addKakaoUser", user);
+	}
 //	public void addLicense(License license) throws Exception {
 //		System.out.println("license="+license);
 //		List list = new ArrayList();

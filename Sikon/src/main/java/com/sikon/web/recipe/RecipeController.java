@@ -116,41 +116,33 @@ public class RecipeController {
 		return "forward:/recipe/readRecipe.jsp";
 	}
 
-	// @ModelAttribute("search") Search search,
 	@RequestMapping(value = "getRecipe")
-	public String getRecipe(@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
+	public String getRecipe(@ModelAttribute("search") Search search, @RequestParam("recipeNo") int recipeNo,
+			Model model) throws Exception {
 
 		System.out.println("/recipe/getRecipe : post / get");
 		System.out.println("recipeNo" + recipeNo);
+		System.out.println("search:" + search);
+
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+
+		search.setPageSize(pageSize);
 
 		// 레시피+재료를 list로 한 번에 받음
 		List list = recipeService.getRecipe(recipeNo);
-
-		System.out.println("list=" + list);
-
-		// 하나의 레시피에 재료는 여러개이므로 list에는 재료만 다른 recipe객체들이 담겨있음
-		// recipe에 대한 값은 모두 같으므로 첫번째 list의 값만을 recipe로 넘겨준다
+		String category="REC";
+		Map map=reviewService.getReviewList(search, category, recipeNo);
+		System.out.println("리뷰map결과"+map);
+		
+		System.out.println("레시피 list=" + list);
 		model.addAttribute("recipe", list.get(0));
-
-		// 재료는 list 묶음으로 넘겨 view에서 for문을 통해 나타낸다
 		model.addAttribute("list", list);
+		model.addAttribute("review", map.get("list"));
 
-		/*
-		 * 리뷰
-		 * 
-		 * model.addAttribute("resultPage", resultPage); model.addAttribute("search",
-		 * search);
-		 * 
-		 * if (search.getCurrentPage() == 0) { search.setCurrentPage(1); }
-		 * search.setPageSize(pageSize); System.out.println("모냐recipeNo" + recipeNo);
-		 * 
-		 * Map<String, Object> map = reviewService.getReviewList(search, 200, recipeNo);
-		 * System.out.println("map:" + map.get("list")); Page resultPage = new
-		 * Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(),
-		 * pageUnit, pageSize); System.out.println(resultPage);
-		 * 
-		 */
 
+		
 		return "forward:/recipe/getRecipe.jsp";
 	}
 
@@ -161,7 +153,7 @@ public class RecipeController {
 
 		List list = recipeService.getRecipe(recipeNo);
 		System.out.println(list);
-		
+
 		model.addAttribute("ingredient", list);
 		model.addAttribute("recipe", list.get(0));
 
@@ -171,14 +163,13 @@ public class RecipeController {
 	@RequestMapping(value = "updateRecipe", method = RequestMethod.POST)
 	public String updateRecipe(@ModelAttribute("recipe") Recipe recipe,
 			@RequestParam("multiImg") MultipartFile[] fileArray,
-			@RequestParam("ingredientName") String[] ingredientName,@RequestParam("ingredientNo") int[] ingredientNo,
+			@RequestParam("ingredientName") String[] ingredientName, @RequestParam("ingredientNo") int[] ingredientNo,
 			@RequestParam("ingredientAmount") String[] ingredientAmount, Model model, HttpServletRequest request)
 			throws Exception {
 
 		System.out.println("/recipe/updateRecipe :  POST");
 		// Business Logic
 
-		
 		String newFileName = "";
 
 		String FILE_SERVER_PATH = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
@@ -212,7 +203,6 @@ public class RecipeController {
 		}
 
 		System.out.println("list=" + list);
-		
 
 		Map map = new HashMap();
 		map.put("list", list);
@@ -233,11 +223,21 @@ public class RecipeController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
+		
+		if(search.getSearchCondition()==null) {
+			search.setSearchCondition("");
+		}
 		System.out.println("orderCondition=" + search.getOrderCondition());
 
 		if (search.getOrderCondition() == null) {
 			search.setOrderCondition("100");
 		}
+		
+		if(search.getThemeCondition() == "all") {
+			search.setThemeCondition(null);
+		}
+		
+		System.out.println("Theme: "+search.getThemeCondition());
 
 		System.out.println("orderCondition=" + search.getOrderCondition());
 
@@ -314,7 +314,7 @@ public class RecipeController {
 
 		return "redirect:/recipe/listMyRecipe";
 	}
-	
+
 	// 레시피 리뷰 많은 순 정렬
 //	@RequestMapping(value = "bestRecipeList")
 //	public String bestRecipeList(Model model) throws Exception {
