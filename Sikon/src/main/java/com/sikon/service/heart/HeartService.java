@@ -26,7 +26,5 @@ public void updateHeart (int cookNo) throws Exception;
 	public void updateHeartCheckCancel(int cookNo,String userId) throws Exception;
 		
 	public Map<String, Object> getHeart(Search search,String userId) throws Exception;
-	
-	public Heart getHeart2(int cookNo, String userId) throws Exception;
 
 }

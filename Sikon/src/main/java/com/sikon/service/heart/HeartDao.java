@@ -30,8 +30,4 @@ public interface HeartDao {
 	
 	public int getTotalCount(Search search,String userId) throws Exception ;
 	
-	public List<Heart> getHeart2(int cookNo, String userId) throws Exception;
-	
-	
-	
 }

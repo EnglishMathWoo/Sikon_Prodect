@@ -6,7 +6,6 @@ public class Heart {
 	private int cookNo;
 	private String userId;
 	private int heartCheck;
-	private int heartCount;
 	private Cook cook;
 
 	public Heart() {
@@ -44,14 +43,6 @@ public class Heart {
 		this.heartCheck = heartCheck;
 	}
 
-	public int getHeartCount() {
-		return heartCount;
-	}
-
-	public void setHeartCount(int heartCount) {
-		this.heartCount = heartCount;
-	}
-
 	public Cook getCook() {
 		return cook;
 	}
@@ -62,7 +53,7 @@ public class Heart {
 
 	@Override
 	public String toString() {
-		return "Heart [heartNo=" + heartNo + ", cookNo=" + cookNo + ", userId=" + userId + ", heartCheck=" + heartCheck	+ ", heartCount=" + heartCount + ", cook=" + cook + "]";
+		return "Heart [heartNo=" + heartNo + ", cookNo=" + cookNo + ", userId=" + userId + ", heartCheck=" + heartCheck	+ ", cook=" + cook + "]";
 	}
 
 

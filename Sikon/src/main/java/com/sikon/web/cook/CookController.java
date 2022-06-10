@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOError;
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -259,15 +260,14 @@ public class CookController {
 		Map<String, Object> map = cookService.getCookList(search);
 		
 		List<Cook> cookList = (List<Cook>) map.get("list");
-//		List<Heart> heartList = new ArrayList<>();
-//		Heart heart = new Heart();
-//		
-//		for(int i=0; i<cookList.size(); i++) {
-//			 heart = heartService.getHeart2(cookList.get(i).getCookNo(), user.getUserId());
-//			 heartList.add(heart);
-//		}
-				
-//		System.out.println(heartList);
+		
+		for(int i=0; i<cookList.size(); i++) {
+			 int heartCount = heartService.heartCheck(cookList.get(i).getCookNo(), user.getUserId());
+			 cookList.get(i).setHeartCount(heartCount);
+			 cookList.set(i, cookList.get(i));
+		}
+		
+		System.out.println(cookList);
 		System.out.println("±èÅÂÈ£");
 			
 
@@ -277,12 +277,11 @@ public class CookController {
 		System.out.println(map.get("list"));
 		System.out.println("^^^^^^^^^^^");
 					
-		model.addAttribute("list", map.get("list"));
+		model.addAttribute("list", cookList);
 		System.out.println(map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		model.addAttribute("user",user);
-//		model.addAttribute("heart", heartList);
 
 		return "forward:/cook/listCook.jsp?menu="+menu;
 	}

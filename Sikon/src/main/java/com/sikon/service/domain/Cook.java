@@ -21,6 +21,7 @@ public class Cook {
 	private String cookVideo;		//1분영상
 	private int cookStock  ; //모집인원재고 이거를 왜 해주냐! 우리의 cookRecruit는 모집인원 표시일뿐! 사실상 모집인원 재고는 cookStock입니다
 	private int hearthit;		//좋아요
+	private int heartCount;		//좋아요 수
 	private String cookContent;
 	private User mentor;
 	private String userNickname;
@@ -202,6 +203,16 @@ public class Cook {
 	}
 
 
+	public int getHeartCount() {
+		return heartCount;
+	}
+
+
+	public void setHeartCount(int heartCount) {
+		this.heartCount = heartCount;
+	}
+
+
 	public String getCookContent() {
 		return cookContent;
 	}
@@ -259,7 +270,7 @@ public class Cook {
 				+ cookTheme + ", aplstarTime=" + aplstarTime + ", aplendTime=" + aplendTime + ", cookRecruit="
 				+ cookRecruit + ", startTime=" + startTime + ", endTime=" + endTime + ", cookLocation=" + cookLocation
 				+ ", cookRegdate=" + cookRegdate + ", cookVideo=" + cookVideo + ", cookStock=" + cookStock
-				+ ", hearthit=" + hearthit + ", cookContent=" + cookContent + ", mentor=" + mentor + ", userNickname="
+				+ ", hearthit=" + hearthit + ", heartCount=" + heartCount + ", cookContent=" + cookContent + ", mentor=" + mentor + ", userNickname="
 				+ userNickname + ", recipe=" + recipe + ", userId=" + userId + "]";
 	}
 
