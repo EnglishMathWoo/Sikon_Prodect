@@ -76,6 +76,14 @@ div.thumbnail {
 } 
 </style>
 
+<style>
+
+
+.container {
+	padding-top: 150px;
+} 
+</style>
+
 
 <style>
 .page-header.text-info {
@@ -86,7 +94,7 @@ div.thumbnail {
 .text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
-	color: #75574B
+	color: #75574
 }
 .row {
 	font-family: 'Gowun Batang', serif;
@@ -134,7 +142,7 @@ div.thumbnail {
 
 
 		
-	
+	//
 
 		 
 	
@@ -543,16 +551,17 @@ div.thumbnail {
 				<button type="button" class="btn btn-primary delete" value="${cook.cookNo}" style="float: right;  margin-right: 10px;">»è&nbsp;Á¦</button>
 				<!-- <p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>  -->
 		
-		
+			
+		<c:forEach var="heart" items="${heart}">
 		<c:choose>
- 		<c:when test = "${heart == '0'}">
+ 		<c:when test = "${heart.heartCount == '0'}">
  			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
 		</c:when>    
  		<c:otherwise>
  			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
  		</c:otherwise>
  		</c:choose>
-
+		</c:forEach>
 
 		
 				

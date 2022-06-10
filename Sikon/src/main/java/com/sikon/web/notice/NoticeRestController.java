@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -94,14 +95,13 @@ public class NoticeRestController {
 	}
 	
 	
-	@PostMapping(value="/json/pushAlarm", produces = "application/json")
+	@RequestMapping(value="/json/pushAlarm", method=RequestMethod.POST)
 	@ResponseBody
 	public Map pushAlram(@RequestParam("pushData") String pushData) {
 		
 		Map map = new HashMap();
 		
 		System.out.println(pushData);
-		System.out.println("한글 드럽게 안들어가네");
 				
 		map.put("userId", "admin@naver.com");
 		map.put("noticeTitle", pushData);
@@ -109,17 +109,6 @@ public class NoticeRestController {
 				
 		return map;
 	}
-	
-//	@PostMapping(value="/json/insertAlarm", produces = "application/json")
-//	@ResponseBody
-//	public  int insertAlram (String toId , String fromId , String bno , String title , String categori,String bgno) throws Exception{
-//		
-//		System.out.println("알람insert"+categori+"//"+fromId+toId+bno+categori+title);
-//		int alram = 1;
-//		
-//		service.insertAlram(toId, fromId, bno, title, categori,bgno);
-//		
-//		return alram;
-//	}
+
 	
 }

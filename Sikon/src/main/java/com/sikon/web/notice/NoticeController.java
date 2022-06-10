@@ -90,16 +90,6 @@ public class NoticeController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-		
-		//------------------------------------------------------------------
-		
-		User user = (User)session.getAttribute("user");
-		System.out.println(user.getUserId());
-		
-		int alarmCount = alarmService.getAlarmCount(user.getUserId());
-		System.out.println("alarmCount="+alarmCount);
-		
-		//------------------------------------------------------------------
 	
 		// Business logic ผ๖วเ
 		Map<String , Object> map = noticeService.getNoticeList(search);

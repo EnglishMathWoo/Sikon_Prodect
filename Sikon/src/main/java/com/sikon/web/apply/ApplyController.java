@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ import com.sikon.service.domain.Apply;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.Review;
 import com.sikon.service.domain.User;
+import com.sikon.service.domain.Wish;
 import com.sikon.service.review.ReviewService;
 
 
@@ -139,6 +141,9 @@ public class ApplyController {
 			
 			Apply apply = applyService.getApply(applyNo);
 			Cook cook = cookService.getCook(apply.getClassCook().getCookNo());
+			
+			apply.setClassCook(cook);
+			
 			HttpSession session=request.getSession();
 			User user = (User)session.getAttribute("user");
 			apply.setApplier(user);
@@ -196,10 +201,10 @@ public class ApplyController {
 			
 			ModelAndView modelAndView=new ModelAndView();
 			
-			if(applyStatus.equals("100")) {
-			modelAndView.setViewName("forward:/apply/listSale");
-			}else {
+			if(applyStatus.equals("000")) {
 			modelAndView.setViewName("forward:/apply/listApply");
+			}else {
+			modelAndView.setViewName("forward:/apply/listSale");
 			}
 			
 			return modelAndView;
@@ -336,7 +341,41 @@ public class ApplyController {
 			return modelAndView;
 		}
 		
-		
+		@RequestMapping( value="sale" )
+
+		public ModelAndView sale( @ModelAttribute("search") Search search ,  HttpServletRequest request
+				) throws Exception{
+			
+			System.out.println("/apply/sale : GET,Post");
+			
+			if(search.getCurrentPage() ==0 ){
+				search.setCurrentPage(1);
+			}
+			search.setPageSize(pageSize);
+			
+			HttpSession session=request.getSession();
+			User user=(User)session.getAttribute("user");
+			
+			// Business logic 수행
+			Map<String , Object> map=applyService.getApplyList(search,user.getUserId());
+			
+			Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+			System.out.println(resultPage);
+			
+			// Model 과 View 연결
+			
+			ModelAndView modelAndView=new ModelAndView();
+			modelAndView.addObject("list", map.get("list"));
+			modelAndView.addObject("resultPage", resultPage);
+			modelAndView.addObject("search", search);
+			
+			
+			
+			modelAndView.setViewName("forward:/apply/sale.jsp");
+			
+			
+			return modelAndView;
+		}
 		
 		
 }

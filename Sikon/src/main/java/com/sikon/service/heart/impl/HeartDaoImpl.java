@@ -102,7 +102,6 @@ public class HeartDaoImpl implements HeartDao{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
 		map.put("cookNo", cookNo);
-		System.out.println("!@#$!@#!@#$@!");
 		
 		return sqlSession.selectList("HeartMapper.getHeart2", map);
 				

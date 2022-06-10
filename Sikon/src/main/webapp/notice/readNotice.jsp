@@ -55,7 +55,6 @@
 
 <body>
 
-
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -63,20 +62,14 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<div class="page-header">
-	       <h3 class=" text-info">공지사항 상세조회</h3>
-	    </div>
-	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>공지사항 제목</strong></div>
-			<div class="col-xs-8 col-md-4">${notice.noticeTitle}</div>
+			<div style="float:left"><h2>${notice.noticeTitle}</h2></div>
 		</div>
-		
+		 
 		<hr/>
 		
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>공지사항 내용</strong></div>
-			<div class="col-xs-8 col-md-4">${notice.noticeContent}</div>
+			<div><strong>${notice.noticeContent}</strong></div>
 		</div>
 		
 		<hr/>
@@ -90,7 +83,6 @@
 		</div>
 		
 		<br/>
-		
  	</div>
  	<!--  화면구성 div Start /////////////////////////////////////-->
 

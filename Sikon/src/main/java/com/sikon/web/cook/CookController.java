@@ -258,15 +258,23 @@ public class CookController {
 		// Business logic 수행
 		Map<String, Object> map = cookService.getCookList(search);
 		
-	
+		List<Cook> cookList = (List<Cook>) map.get("list");
+//		List<Heart> heartList = new ArrayList<>();
+//		Heart heart = new Heart();
+//		
+//		for(int i=0; i<cookList.size(); i++) {
+//			 heart = heartService.getHeart2(cookList.get(i).getCookNo(), user.getUserId());
+//			 heartList.add(heart);
+//		}
 				
+//		System.out.println(heartList);
+		System.out.println("김태호");
+			
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
-		
-		Map<String, Object> heartMap = heartService.getHeart2(10000, user.getUserId());
-		
-		System.out.println(heartMap.get("list"));
+				
+		System.out.println(map.get("list"));
 		System.out.println("^^^^^^^^^^^");
 					
 		model.addAttribute("list", map.get("list"));
@@ -274,7 +282,7 @@ public class CookController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		model.addAttribute("user",user);
-		model.addAttribute("heart", heartMap.get("list"));
+//		model.addAttribute("heart", heartList);
 
 		return "forward:/cook/listCook.jsp?menu="+menu;
 	}
@@ -295,18 +303,26 @@ public class CookController {
 		User user = (User) session.getAttribute("user");
 
 		// Business logic 수행
-		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());		
+		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
+		
 		
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
+		
+//		Page resultPage1 = new Page(search.getCurrentPage(), ((Integer) map1.get("totalCount")).intValue(), pageUnit,
+//				pageSize);
+		
 		System.out.println(resultPage);
 
 		// Model 과 View 연결
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", map.get("list"));
+//		modelAndView.addObject("list", map1.get("list"));
+		
 		modelAndView.addObject("resultPage", resultPage);
+//		modelAndView.addObject("resultPage", resultPage1);
 		modelAndView.addObject("search", search);
 
 		modelAndView.setViewName("forward:/cook/listMyCook.jsp");

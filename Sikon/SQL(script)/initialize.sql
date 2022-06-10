@@ -256,7 +256,7 @@ CREATE TABLE heart (
 
 CREATE TABLE review(
 	review_no  NUMBER 		 		NOT NULL,
-           review_category        VARCHAR2(20) NOT NULL,
+           review_category        VARCHAR2(20)  NOT NULL,
 	writer_nickname   VARCHAR2(50)   	REFERENCES  users(user_nickname) ,
 	review_content         VARCHAR2(400)   NOT NULL,
 	review_img    VARCHAR2(100),	

@@ -117,10 +117,8 @@
 										
 					var pushData = $("input[name='noticeTitle']").val();
 					console.log(pushData);
-					console.log("너임?");
 					commentInsert(pushData);
-					
-					//$("form").attr("method", "POST").attr("action", "/notice/addNotice").submit();
+
 				});
 			});
 		 
@@ -129,19 +127,16 @@
 				
 				data = new FormData();
 				data.append("pushData", pushData);
-				console.log("너냐고?");
 				console.log(pushData);
 				
 				$.ajax({
 			        url : "/notice/json/pushAlarm",
-			        type : 'post',
-			        data : data,
-			        processData: false, contentType: false,
-
-			        enctype : 'multipart/form-data', 
+			        type : 'POST',
+			        dataType : "json",   
+		            data : {'pushData' : pushData},
 			        success : function(data){
 			        	
-			        	alert("성공!!");
+			        	alert("알람 전송 완료!!");
 			        	
 			        	$("form").attr("method", "POST").attr("action", "/notice/addNotice").submit();
 			          
@@ -151,7 +146,6 @@
 			           		//소켓
 			           		//if(readWriter != writer){
 			           		if(socket){
-			           			console.log("너냐?");
 			           			console.log(data.noticeTitle)
 			        			let socketMsg = "reply,"+data.userId+","+data.noticeTitle;
 			        			console.log(socketMsg);
@@ -205,7 +199,7 @@
 		    </div>
 		  </div>
 		</form>
-		
+	</div>
 		
 </body>
 
