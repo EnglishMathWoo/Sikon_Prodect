@@ -434,8 +434,9 @@ header{
 background-color:#f7f7f7;
 position:fixed;
 width:100%;
-	z-index: 10;
-	
+z-index: 10;
+border-bottom: 1px solid #dbd4d459;
+height : 180px;
 }
 
 /*  주석 풀면 위에 있는 hr css랑 충돌
@@ -542,6 +543,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
         </c:if>
       </ul>
     </nav>
+
     
     <!-- ################################################################################################ -->
   
@@ -631,7 +633,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	 		*/
 	 			
 	 		$( "a:contains('상품목록')" ).on("click" , function() {
-			$(self.location).attr("href","/product/listProduct?menu=manage");
+			$(self.location).attr("href","/product/manageProduct");
 			});
 	 		
 	 		$( "a:contains('판매목록')" ).on("click" , function() {

@@ -46,7 +46,7 @@
 <style>
 
 div.container {
-	padding-top: 150px;
+	padding-top: 200px;
 	
 }
 
@@ -149,25 +149,6 @@ border-color:#D7D7D7;
 }
 
 
-/* 등록 버튼 css */
-.submit
- {
-  display: block;
-  border: none;
-  width: 150px;
-  height: 36px;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: #937062;
-  float: right;
-  font-family: 'Gowun Batang', serif;
-  
-}
-
 /* 등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
 hr {
     margin-top: 60px;
@@ -188,6 +169,7 @@ p {
 
 #themeAll{
 	color:#937062;
+	text-decoration-line: none;
 }
 
 
@@ -287,9 +269,6 @@ div.emptyProd{
 				                			status = "<p style='text-align:right;color:#d9534f'>*판매중지된 상품입니다.</p>";
 				                		}
 				                		
-				                		if(${user.role.equals('admin')}){
-				                			stock="<p style='text-align:right;'>재고량: "+JSONData.list[i].prodStock+" 개</p>";
-				                		}
 				                		
 					                     var displayValue = "<div class='col-sm-6 col-md-3'><br/><br/>"
 					                     					+"<div id='latest' class='group'>"
@@ -302,7 +281,6 @@ div.emptyProd{
 				                     						+"<p style='text-align:left;font-size:17px;font-weight: bold'><span style='color:#d9534f'>"+rate+"%&nbsp;</span>"
 				                     						+JSONData.list[i].prodDisPrice+"<span style='font-size:14px;font-weight:600'>원</span></p>"
 				                     						+status
-				                     						+stock
 				                     						+"</div><br></article></div></div>"
 				                     						
 				                     		
@@ -328,7 +306,10 @@ div.emptyProd{
 				 });
 
 		        $( "#themeAll" ).on("click" , function() {
-		        	fncGetList(1);
+		        	
+		        	console.log('theme: '+$(".theme").attr('value'));
+		        	
+		        	//fncGetList(1);
 				 });
 				
 				$( ".theme" ).on("click" , function() {
@@ -384,7 +365,7 @@ div.emptyProd{
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	
 <div class="container">
-<div class="page-header text-info text-left">
+<div class="text-info text-left">
 	    </div>
 		 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 	        <ol class="carousel-indicators">
@@ -429,16 +410,13 @@ div.emptyProd{
 		    <br/>
 		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">PRODUCT LIST</span></h3>
 		    </div>
-		    <c:if test="${user.role == 'admin' }">
-		    <button type="button" class="submit">상품등록</button>
-		    </c:if>
 		  
 		    
 		    <br/><hr id="hr"/><br/>
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li><a href="#" id="themeAll">모두보기</a></li>
+	        <li><a href="#" id="themeAll" class="theme" value="all">모두보기</a></li>
 	        <li><a href="#" class="theme" value="tw">식기류</a></li>
 	        <li><a href="#" class="theme" value="cw">조리도구</a></li>
 	        <li><a href="#" class="theme" value="mk">밀키트</a></li>
@@ -452,18 +430,8 @@ div.emptyProd{
 	   			<input type="hidden" id=themeCondition name=themeCondition value="${search.themeCondition }">
 	   			
 			    <div class="text-right">
-				  <div class="form-group">
-				    <c:if test="${ user.role.equals('admin')}">
-						<select name="searchCondition" id="searchCondition" class="form-control" style="width:110px">
-						 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
-							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
-							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
-						</select>
-					</c:if>
-					<c:if test="${ !user.role.equals('admin')}">
-						<input type="hidden" name="searchCondition" id="searchCondition" value="1">
-					</c:if>	
-				  </div>
+			    
+					<input type="hidden" name="searchCondition" id="searchCondition" value="1">
 				  
 				  <div class="form-group">
 				    <label class="sr-only" for="searchKeyword">검색</label>
@@ -478,23 +446,12 @@ div.emptyProd{
 				  
 				 <div class=" text-left"> 
 				  <div class="form-group" align="left">
-				    <c:if test="${ !user.role.equals('admin')}">
 						<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
 						 	<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>--정렬하기--</option>
 							<option value="1"  ${ ! empty search.orderCondition && search.orderCondition==1 ? "selected" : "" }>낮은가격순</option>
 							<option value="2"  ${ ! empty search.orderCondition && search.orderCondition==2 ? "selected" : "" }>높은가격순</option>
 						</select>
-					</c:if>
-					<c:if test="${ user.role.equals('admin')}">
-						<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
-							<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>--정렬하기--</option>
-							<option value="3"  ${ ! empty search.orderCondition && search.orderCondition==3 ? "selected" : "" }>판매중</option>
-							<option value="4"  ${ ! empty search.orderCondition && search.orderCondition==4 ? "selected" : "" }>판매중지</option>
-							<option value="5"  ${ ! empty search.orderCondition && search.orderCondition==5 ? "selected" : "" }>재고없음</option>
-						</select>
-					</c:if>
 				  </div>
-				  
 				  
 				  <button type="button" class="btn btn-default" id="sorting">조회</button>
 				  </div>
@@ -536,9 +493,6 @@ div.emptyProd{
 				
 				<c:if test="${product.prodStatus == 'N'}">
 					<p style="text-align:right;color:#d9534f">*판매중지된 상품입니다.</p>
-				</c:if>
-				<c:if test="${user.role == 'admin'}">
-					<p style="text-align:right;">재고량: ${product.prodStock} 개</p>
 				</c:if>
 				
 	        </div>
