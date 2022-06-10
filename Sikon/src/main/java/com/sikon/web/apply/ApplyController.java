@@ -222,6 +222,11 @@ public class ApplyController {
 				search.setCurrentPage(1);
 			}
 			search.setPageSize(pageSize);
+			System.out.println("applyCondition=" + search.getApplyCondition());
+			
+			System.out.println("applyCondition=" + search.getApplyCondition());
+			//search.setApplyCondition(search.getApplyCondition().replace(",", ""));
+			
 			
 			HttpSession session=request.getSession();
 			User user=(User)session.getAttribute("user");
@@ -238,6 +243,7 @@ public class ApplyController {
 			modelAndView.addObject("list", map.get("list"));
 			modelAndView.addObject("resultPage", resultPage);
 			modelAndView.addObject("search", search);
+			modelAndView.addObject("user", user);
 			
 			modelAndView.addObject("category", "COOK");
 			

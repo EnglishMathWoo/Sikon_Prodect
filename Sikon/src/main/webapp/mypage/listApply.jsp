@@ -37,7 +37,13 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- jQuery UI toolTip 사용 JS-->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
 
+
+.container {
+	padding-top: 150px;
+} 
+</style>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 body {
@@ -58,6 +64,12 @@ body {
 	}
 
 	$(function() {
+		
+		
+		 $( "#sorting" ).on("click" , function() {
+				console.log('조회');
+					fncGetList(1);
+			});
 
 		$("td.tran").on("click", function() {
 
@@ -112,40 +124,65 @@ body {
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
-
+	
 		<div class="page-header text-info">
-			<h3>구매이력</h3>
-		</div>
+	       <h3 style="color:#bc8f8f">구매이력</h3>
+	    </div>
+	    
+	    
+	    
+	    
+	    
+		
+		  <!-- Nav tabs -->
+		  <ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">배송</a></li>
+		    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">환불</a></li>
+		  </ul>
+		
+		  <!-- Tab panes -->
+		  <div class="tab-content">
+		    <div role="tabpanel" class="tab-pane active" id="home">
 
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-		<div class="row">
-
-			<div class="col-md-6 text-left">
-				<p class="text-primary">전체 ${resultPage.totalCount } 건수, 현재
-					${resultPage.currentPage} 페이지</p>
-			</div>
-
-			<div class="col-md-6 text-right">
-				<form class="form-inline" name="detailForm">
-
-
-
-
-
-
-
-
+			    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
+			    <br>
+			    <div class="row">
+			    
+				    <div class="col-md-6 text-left">
+				    	<p class="text-primary" style="color:gray">
+				    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+				    	</p>
+				    </div>
+				  </div>  
+				     <div class="row">
+					    <form class="form-inline " id="form"> 
+						 <div class="col-md-6 text-left"> 
+						  <div class="form-group" align="left">
+								<select name="applyCondition" class="form-control" style="width:125px">
+								 	<option value="0"  ${ ! empty search.applyCondition && search.applyCondition==0 ? "selected" : "" }>--정렬하기--</option>
+									<option value="5"  ${ ! empty search.applyCondition && search.applyCondition==5 ? "selected" : "" }>신청완료</option>
+									<option value="6"  ${ ! empty search.applyCondition && search.applyCondition==6 ? "selected" : "" }>수강완료</option>									
+								</select>
+						  </div>
+						  <button type="button" class="btn btn-default" id="sorting">조회</button>
+						  </div>
+					<input type="hidden" id="currentPage" name="currentPage" value="" />
+					
+						</form>
+					
+  </div>
 
 
 
 
 					<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-					<input type="hidden" id="currentPage" name="currentPage" value="" />
+					
 
-				</form>
+			
 			</div>
+			 <br/>
 
-		</div>
+	
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
 
@@ -185,13 +222,13 @@ body {
 
 
 						<c:choose>
-							<c:when test="${apply.applyStatus=='000'}">
+							<c:when test="${apply.applyStatus.equals('000')}">
 								<td align="left">현재 구매 취소된 상품입니다.</td>
 							</c:when>
-							<c:when test="${apply.applyStatus=='100' }">
+							<c:when test="${apply.applyStatus.equals('100')}">
 								<td align="left">현재 신청완료 상태 입니다.</td>
 							</c:when>
-							<c:when test="${apply.applyStatus=='200' }">
+							<c:when test="${apply.applyStatus.equals('200')}">
 								<td align="left">수강완료입니다.</td>
 							</c:when>
 
@@ -199,18 +236,18 @@ body {
 
 
 						<c:choose>
-							<c:when test="${apply.applyStatus=='200'}">
+							<c:when test="${apply.applyStatus.equals('200')}">
 								<td align="left" class="divy" value1="${apply.applyNo }"
 									value2="${apply.applyStatus}">수강완료 
 									<c:if test="${apply.reviewStatus=='001' }">
 					<a onclick="window.open('/review/addReview.jsp?category=COOK&textNo=${apply.applyNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">리뷰쓰기</a>					
 									</c:if></td>
 							</c:when>
-							<c:when test="${apply.applyStatus=='100'}">
+							<c:when test="${apply.applyStatus.equals('100')}">
 								<td align="left" class="cancel" value1="${apply.applyNo }"
 									value2="${apply.applyStatus}">신청취소</td>
 							</c:when>
-							<c:when test="${apply.applyStatus=='000'}">
+							<c:when test="${apply.applyStatus.equals('200')}">
 								<td align="left" class="complete">구매취소되었습니다</td>
 							</c:when>
 						</c:choose>
@@ -228,14 +265,16 @@ body {
 			</tbody>
 
 		</table>
-		<!--  table End /////////////////////////////////////-->
+			<jsp:include page="../common/pageNavigator_new.jsp" />
+		</div>
+		</div>
+			
 
-	</div>
 	<!--  화면구성 div End /////////////////////////////////////-->
 
 
 	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp" />
+
 	<!-- PageNavigation End... -->
 
 </body>

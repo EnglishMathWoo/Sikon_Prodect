@@ -79,12 +79,27 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT *
 											FROM apply
-											<if test="applierId!='admin@naver.com'">
-											<where>
-											applier_id=#{applierId}
-											</where>
+	
+												<if test="applyCondition == null">
+											ORDER BY apply_no DESC 
 											</if>
-											ORDER BY apply_no ) inner_table
+											<if test="applyCondition != null">
+												<choose>
+												<when test="applyCondition == 0">
+													ORDER BY apply_no DESC 
+												</when>
+												<when test="applyCondition == 5">
+													where NVL(apply_status,'000')='100' 
+													ORDER BY apply_no DESC 
+												</when>
+												<when test="applyCondition == 6">
+													where NVL(apply_status,'000')='200'  
+													 ORDER BY apply_no DESC 
+												</when>
+											</choose>
+										</if>										
+											
+										) inner_table
 											
 						WHERE ROWNUM &lt;= #{search.endRowNum} )
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
@@ -96,14 +111,26 @@
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM (	SELECT *
-	  					FROM		(	SELECT *
 											FROM apply
-											<if test="applierId!='admin@naver.com'">
-											<where>
-											applier_id=#{applierId}
-											</where>
+								<if test="applyCondition == null">
+											ORDER BY apply_no DESC 
 											</if>
-											ORDER BY apply_no ) countTable	)					
+											<if test="applyCondition != null">
+												<choose>
+												<when test="applyCondition == 0">
+													ORDER BY apply_no DESC 
+												</when>
+												<when test="applyCondition == 5">
+													where NVL(apply_status,'000')='100' 
+													ORDER BY apply_no DESC 
+												</when>
+												<when test="applyCondition == 6">
+													where NVL(apply_status,'000')='200'  
+													 ORDER BY apply_no DESC 
+												</when>
+											</choose>
+										</if>											
+										 ) countTable					
 											
 	 </select>
 	 
