@@ -76,7 +76,7 @@ body {
 .ref-sort li a{}
 /* References */
 .ref-sort li a{color:inherit;}
-.ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
+.ref-sort li a:hover, #references .ref-sort li.current a{color:#937062;text-decoration-line: none;}
 
 
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
@@ -175,6 +175,11 @@ p {
 .hoc{
 padding-top:0px;
 }
+
+#themeAll{
+	color:#937062;
+	text-decoration-line: none;
+}
 </style>
 
 
@@ -196,10 +201,19 @@ padding-top:0px;
 	      fncGetList(1);
 		  });
 			  
-		  $(".theme").on( "click", function() {
-			  console.log($(".theme").val());
-		      //fncGetList(1);
-			  });
+		  $( "#themeAll" ).on("click" , function() {
+	        	
+	        	console.log('theme: '+$(".theme").attr('value'));
+	        	
+	        	//fncGetList(1);
+			 });
+			
+			$( ".theme" ).on("click" , function() {
+				var theme = $(this).attr('value');
+				console.log(theme);
+				$("#themeCondition").val(theme);
+				fncGetList(1);
+			 });
 		  
 		});
 			  
@@ -227,6 +241,19 @@ padding-top:0px;
 		                	var cpage = $("#currentPage").val();
 		                	cpage = Number(cpage)+1;
 		                	console.log(cpage);
+		                	
+		                	var orderCon = $("#orderCondition").val();
+		        	   		console.log("order: "+orderCon);
+		                	
+		                	var keyword = $("#prodname").val();
+		        	   		console.log("keyword: "+keyword);
+		        	   		
+		        	   		var search = $("#searchCondition").val();
+		        	   		console.log("search: "+search);
+		        	   		
+		        	   		var themeCon = $("#themeCondition").val();
+		        	   		console.log("theme: "+themeCon);
+		        	   		
 		        	   		
 		        	   		
 					            $.ajax({
@@ -234,7 +261,11 @@ padding-top:0px;
 					                  url : "/recipe/json/listRecipe" ,
 					                  method : "POST" ,
 					                  data : JSON.stringify({
-					                	  currentPage : cpage
+					                	  currentPage : cpage,
+					                	  orderCondition : orderCon,
+					                	  searchKeyword : keyword,
+					                	  searchCondition : search,
+					                	  themeCondition : themeCon
 					                  }), 
 					                  dataType : "json" ,
 					                  headers : {
@@ -343,7 +374,8 @@ padding-top:0px;
 <br/>	     
 <!-- ################################################################################################ -->
 
-
+ 
+ 
 
 	<div class="wrapper row3">
 		  <section class="hoc container clear"> 
@@ -360,14 +392,17 @@ padding-top:0px;
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li class="current"><a href="#" class="theme" value="KO">한식</a></li>
-	        <li><a href="#" class="theme" value="CH">중식</a></li>
-	        <li><a href="#" class="theme" value="FR">양식</a></li>
-	        <li><a href="#" class="theme" value="JP">일식</a></li>
-	        <li><a href="#" class="theme" value="DES">간식</a></li>
+	        <li><a href="#" id="themeAll" class="theme" value="all">모두보기</a></li>
+	        <li><a href="#" class="theme" value="ko">한식</a></li>
+	        <li><a href="#" class="theme" value="ch">중식</a></li>
+	        <li><a href="#" class="theme" value="fr">양식</a></li>
+	        <li><a href="#" class="theme" value="jp">일식</a></li>
+	        <li><a href="#" class="theme" value="des">간식</a></li>
 	      </ul>
 	    </nav>
 	    
+ <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+ <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>
 		             
       <div class="center btmspace-50">
 	   <select class="condition" id="orderCondition" name="orderCondition">
@@ -385,8 +420,7 @@ padding-top:0px;
   	</form>
     	</section>
   	</div>
- 
- <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+
  
   <div class="row">
       <div class="col-sm-6 col-md-3 col-lg-3">
