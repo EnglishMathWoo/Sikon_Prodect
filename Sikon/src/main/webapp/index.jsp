@@ -48,10 +48,14 @@ body {
 	padding-top: 50px;
 	
 }
+
+
+
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
-	color: #75574B
+	color: #75574B;
+	border-bottom: none;
 }
 .text-info {
 	font-family: 'Gowun Batang', serif;
@@ -65,7 +69,7 @@ body {
 	font-family: 'Gowun Batang', serif;
 }
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
+.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
 }
 .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
 .ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
@@ -155,6 +159,19 @@ hr {
 /* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
     margin: 0 0 0px;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top:120px;
+}
+
+
+.hoc{
+padding-top:0px;
 }
 </style>
 
@@ -330,9 +347,8 @@ p {
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br> RECIPE LIST </h3>
+		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RECIPE LIST </h3>
 		    </div>
-		    <button type="button" class="submit">레시피등록</button>
 		  
     			    <form class="form-inline" name="detailForm">
 		    
