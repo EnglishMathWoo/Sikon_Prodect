@@ -132,12 +132,17 @@ public class RecipeController {
 
 		// 레시피+재료를 list로 한 번에 받음
 		List list = recipeService.getRecipe(recipeNo);
-	
+		String category="REC";
+		Map map=reviewService.getReviewList(search, category, recipeNo);
+		System.out.println("리뷰map결과"+map);
+		
 		System.out.println("레시피 list=" + list);
 		model.addAttribute("recipe", list.get(0));
 		model.addAttribute("list", list);
+		model.addAttribute("review", map.get("list"));
 
 
+		
 		return "forward:/recipe/getRecipe.jsp";
 	}
 

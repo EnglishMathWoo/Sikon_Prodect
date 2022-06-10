@@ -474,7 +474,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        <li><a href="#">Logout</a></li>
 	        </c:if>
 	        <c:if test="${user.loginPath == 'S'}">
-	        <li><a href="#">Logout2</a></li>
+	        <li><a href="#">&nbsp;Logout</a></li>
 	        </c:if>
 	        
 	        <li><a href="#" style="color:#B97D2D">Mypage</a></li>
@@ -581,7 +581,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 
 						
-			$( "a:contains('Logout2')" ).on("click" , function() {
+			$( "a:contains('&nbsp;Logout')" ).on("click" , function() {
 			$(self.location).attr("href","/user/logout");
 			});
 				

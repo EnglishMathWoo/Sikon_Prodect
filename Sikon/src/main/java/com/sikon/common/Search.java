@@ -9,6 +9,7 @@ public class Search {
 	private String searchCondition;
 	private String orderCondition;
 	private String themeCondition;
+	private String applyCondition;
 	private String searchKeyword;
 	private int pageSize;
 	//==> 리스트화면 currentPage에 해당하는 회원정보를 ROWNUM 사용 SELECT 위해 추가된 Field 
@@ -61,6 +62,14 @@ public class Search {
 		this.orderCondition = orderCondition;
 	}
 	
+	public String getApplyCondition() {
+		return applyCondition;
+	}
+
+	public void setApplyCondition(String applyCondition) {
+		this.applyCondition = applyCondition;
+	}
+
 	public String getSearchKeyword() {
 		return searchKeyword;
 	}
@@ -79,9 +88,11 @@ public class Search {
 
 	@Override
 	public String toString() {
-		return "Search [currentPage=" + currentPage + ", searchCondition="
-				+ searchCondition + ", searchKeyword=" + searchKeyword+ ", themeCondition=" + themeCondition
-				+ ", orderCondition=" + orderCondition +", pageSize=" + pageSize + ", endRowNum=" + endRowNum
+		return "Search [currentPage=" + currentPage + ", searchCondition=" + searchCondition + ", orderCondition="
+				+ orderCondition + ", themeCondition=" + themeCondition + ", applyCondition=" + applyCondition
+				+ ", searchKeyword=" + searchKeyword + ", pageSize=" + pageSize + ", endRowNum=" + endRowNum
 				+ ", startRowNum=" + startRowNum + "]";
 	}
+
+
 }

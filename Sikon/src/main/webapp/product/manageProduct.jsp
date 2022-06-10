@@ -54,15 +54,21 @@ div.row{
 table {
 	font-family: 'Nanum Myeongjo', serif;
 }
+.head{
+ 	background: #b19b92;
+ 
+}
+
 .head th{
  	text-align:center;
+ 	color : #f7f7f7;
+ 	font-weight: lighter;
 }
 .list{
 	padding-top : 200px;
 }
 
-.submit
- {
+.submit:hover {
   display: block;
   border: none;
   width: 150px;
@@ -79,8 +85,7 @@ table {
   
 }
 
-.reset
- {
+.submit{
   display: block;
   width: 150px;
   height: 36px;
@@ -95,6 +100,14 @@ table {
   float: right;
   font-family: 'Gowun Batang', serif;
   
+}
+
+div.emptyProd{
+	padding : 20px;
+	height: 100px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
 }
 
 </style>
@@ -126,10 +139,10 @@ table {
 			 });
 			
 			
-			$( "button.btn.btn-default:contains('조회')" ).on("click" , function() {
-				fncGetList(1);
-			 });
 			 
+			$("#orderCondition").on( "change", function() { 
+		      	fncGetList(1);
+			  });
 				
 		});	
 		 
@@ -154,27 +167,34 @@ table {
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container list">
 	
-		<div class="page-header text-info">
-	       <h3 style="color:#bc8f8f">상품목록관리</h3>
+		<div class="page-header text-info text-center">
+	       <h3 style="color:#333">[ 상품목록관리 ]</h3>
 	    </div>
 	    
-	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
-	    <div class="row">
 	    
-		    <div class="col-md-6 text-left">
-		    	<p class="text-primary" style="color:gray">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지
-		    	</p>
-		    </div>
-	    	
-		</div>
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 		
 		<form class="form-inline" name="detailForm">
 	   			
 	   			<input type="hidden" id=themeCondition name=themeCondition value="${search.themeCondition }">
 	   			
-			    <div class="text-right">
+	<div class="row">
+		<table width="100%">
+			<tr>
+			
+			
+				<td class="col-md-6 text-left"> 
+					  <div class="form-group">
+							<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
+								<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>전체보기</option>
+								<option value="3"  ${ ! empty search.orderCondition && search.orderCondition==3 ? "selected" : "" }>판매중</option>
+								<option value="4"  ${ ! empty search.orderCondition && search.orderCondition==4 ? "selected" : "" }>판매중지</option>
+								<option value="5"  ${ ! empty search.orderCondition && search.orderCondition==5 ? "selected" : "" }>재고없음</option>
+							</select>
+					  </div>
+					  
+				  </td>
+				  
+	   			<td class="col-md-6 text-right">
 				  <div class="form-group">
 						<select name="searchCondition" id="searchCondition" class="form-control" style="width:110px">
 						 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
@@ -190,32 +210,32 @@ table {
 				  </div>
 				  
 				  <button type="button" class="btn btn-default" id="search">검색</button>
-				</div>
+				  
+				</td>
 				
+				
+			</tr>
+		</table>
+	</div>				  
+					<div class="row">
+						<table width="100%">
+						<tr>
+							
+							<td class="col-md-6 text-left">
+						    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지
+							</td>
+							
+							<td class="col-md-6 text-right"><button type="button" class="submit">상품등록</button></td>
+							
+						</tr>
+						</table>
+					</div>
 				  
-				 <div class="text-left"> 
-					  <div class="form-group" align="left">
-							<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
-								<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>--정렬하기--</option>
-								<option value="3"  ${ ! empty search.orderCondition && search.orderCondition==3 ? "selected" : "" }>판매중</option>
-								<option value="4"  ${ ! empty search.orderCondition && search.orderCondition==4 ? "selected" : "" }>판매중지</option>
-								<option value="5"  ${ ! empty search.orderCondition && search.orderCondition==5 ? "selected" : "" }>재고없음</option>
-							</select>
-					  </div>
-					  
-					  <button type="button" class="btn btn-default" id="sorting">조회</button>
-				  </div>
-				  
-				  
-				  
-				  <div class="text-right"> 
-					  <button type="button" class="submit">상품등록</button>
-				  </div>
 					
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
 				  
-				  <br>
+				  
 				  
 				</form>
 		
@@ -234,6 +254,7 @@ table {
         </thead>
        
 		<tbody>
+
 		
 		  <c:set var="i" value="0" />
 		  <c:forEach var="product" items="${list}">
@@ -288,10 +309,17 @@ table {
       
       </table>
 	  <!--  table End /////////////////////////////////////-->
-	  
+	  <c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			판매중인 상품이 없습니다.
+		</div>
+		<br>
+	</c:if>
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
+	
  	
  	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>

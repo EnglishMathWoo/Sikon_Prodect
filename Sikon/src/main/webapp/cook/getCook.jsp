@@ -50,10 +50,16 @@
         }
 
     </style>
+<style>
+
+.container {
+	padding-top: 150px;
+} 
+</style> 
 
 <style>
 body>div.container{
-	padding-top : 150px;
+	padding-top : 200px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 div.row{
