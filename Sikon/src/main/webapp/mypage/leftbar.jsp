@@ -105,7 +105,7 @@
 	$(function() {
 
 		$("a:contains('내정보보기')").on("click", function() {
-			self.location = "/user/getUser"
+			self.location = "/user/getUser?userId="+$(this).text().trim();
 			
 		});
 		

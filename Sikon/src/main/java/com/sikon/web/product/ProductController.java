@@ -231,7 +231,7 @@ public class ProductController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(10);
 		
 		Map<String , Object> map=productService.getProductList(search);
 		Map<String , Object> mapName = productService.getProdNames(search);

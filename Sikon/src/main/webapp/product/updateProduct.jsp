@@ -218,7 +218,7 @@ div.form-group{
 			    <label for="prodContent" class="col-sm-3 control-label">상품상세내용</label>
 			    <div class="col-sm-8 text-center" height=100px>
 		      <textarea id="summernote" class="form-control col-sm-8" rows="5" name="prodContent"
-						placeholder="내용" style="resize: none"></textarea>
+						placeholder="내용" style="resize: none" value="${product.prodContent }"></textarea>
 		    </div>
 		</div>
 		  

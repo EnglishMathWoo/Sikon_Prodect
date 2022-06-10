@@ -55,8 +55,8 @@ div.row{
 table {
 	font-family: 'Nanum Myeongjo', serif;
 }
-th{
-	background: #d3c6c2;
+.jaewoong th{
+ 	text-align:center;
 }
 div.container{
 	padding-top : 200px;
@@ -104,10 +104,10 @@ div.container{
 			});
 			
 			
-//			$( "td:nth-child(2)" ).css("color" , "#ffb6c1");
-//			$( "td.divy" ).css("color" , "#f08080");
-//			$( "td.end" ).css("color" , "#87cefa");
-//			$( "td.complete" ).css("color" , "#708090");
+			$( "td:nth-child(2)" ).css("color" , "#ffb6c1");
+			$( "td.divy" ).css("color" , "#f08080");
+			$( "td.end" ).css("color" , "#87cefa");
+			$( "td.complete" ).css("color" , "#708090");
 			
 		});	
 	</script>		
@@ -124,68 +124,75 @@ div.container{
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3 style="color:#bc8f8f">구매목록조회(purchase)</h3>
+	       <h3 style="color:#bc8f8f">구매목록조회</h3>
 	    </div>
 	    
+	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
+	    <div class="row">
 	    
+		    <div class="col-md-6 text-left">
+		    	<p class="text-primary" style="color:gray">
+		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    	</p>
+		    </div>
+	    	
+		</div>
+		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 		<form>
 			<input type="hidden" id="currentPage" name="currentPage" value=""/>
 		</form>
       <!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped">
       
-      
+        <thead>
+          <tr class="jaewoong">
+            <th align="center">No</th>
+            <th align="center">주문일련번호</th>
+            <th align="center">구매내역</th>
+            <th align="center">배송현황</th>
+            <th align="center">정보수정</th>
+          </tr>
+        </thead>
        
 		<tbody>
 		
 		  <c:set var="i" value="0" />
-		  <c:forEach var="purchase" items="${list}" varStatus="status">
+		  <c:forEach var="purchase" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
-			
-			  <c:if test="${status.index eq 0 }">
-			  	<tr>
-			  		<th>${purchase.serialNo }</th>
-			  		
-			  	</tr>
-			  	<tr>
-					<td align="left" >${ purchase.tranNo }</td>	
-					<td align="left" >${ purchase.purchaseProd.prodName }</td>	
-					<td align="right" class="toget" value="${purchase.purchaseProd.prodNo }">
-						<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
-					</td>
-				</tr>	 
-					 
-			  </c:if>
+			  <td align="center">${ i }</td>
+			  <td align="center" class="view" value="${purchase.serialNo }">${purchase.serialNo }</td>	
+			  <td align="center" class="view" value="${purchase.tranNo }">상세보기</td>	
 			  
-			  <c:if test="${status.index ne 0 }">
-			  	<c:set var="before" value="${list[status.index- 1].serialNo}" />
-			  	<c:set var="after" value="${purchase.serialNo }" />
-			  	
-			  		<c:if test="${ before eq after }">
-					  	<tr>
-							<td align="left" >${ purchase.tranNo }</td>	
-							<td align="left" >${ purchase.purchaseProd.prodName }</td>	
-							<td align="right" class="toget" value="${purchase.purchaseProd.prodNo }">	
-								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
-							</td>
-						</tr>
-			  		</c:if>
-			  		
-					<c:if test="${ before ne after }">
-			  			<tr>
-					  		<th>${purchase.serialNo }</th>
-					  	</tr>
-					  	<tr>
-							<td align="left" >${ purchase.tranNo }</td>
-							<td align="left" >${ purchase.purchaseProd.prodName }</td>	
-							<td align="right" class="toget" value="${purchase.purchaseProd.prodNo }">
-								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
-							</td>
-						</tr>	
-			  		</c:if>
-				  	
-			  </c:if>
+			  <c:choose>
+				<c:when test="${purchase.divyStatus.equals('000')}">
+					<td align="center">구매 취소된 상품입니다.</td>
+				</c:when>
+				<c:when test="${purchase.divyStatus.equals('001')}">
+					<td align="center">현재 구매완료 상태입니다.</td>
+				</c:when>
+				<c:when test="${purchase.divyStatus.equals('002')}">
+					<td align="center">현재 배송중 상태입니다.</td>
+				</c:when>
+				<c:otherwise>
+					<td align="center">현재 배송완료 상태입니다.</td>
+				</c:otherwise>
+		      </c:choose>
+			  
+			  <c:choose>
+			  <c:when test="${purchase.divyStatus.equals('002')}">
+					<td align="center" class="divy"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">물건도착</td>
+				</c:when>
+				<c:when test="${purchase.divyStatus.equals('001')}">
+					<td align="center" class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</a>
+				</c:when>
+				<c:when test="${purchase.divyStatus.equals('000')}">
+					<td align="center" class="complete">구매취소완료</td>
+				</c:when>
+				<c:otherwise>
+					<td align="center" class="end">배송완료</td>
+				</c:otherwise>
+			  	</c:choose>
 			  	
 			</tr>
           </c:forEach>

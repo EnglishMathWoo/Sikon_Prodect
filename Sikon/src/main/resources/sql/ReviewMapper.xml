@@ -14,7 +14,7 @@
 		<result property="reviewContent" 	column="review_content" 		 jdbcType="VARCHAR"  />
 		<result property="reviewImg" 			column="review_img" 			jdbcType="VARCHAR"/>
 		<result property="reviewRegdate" 	column="review_regdate" 		jdbcType="DATE" />
-		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
+		<result property="recipe.recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
 		<result property="product.prodNo" 			column="prod_no" 			jdbcType="NUMERIC"/>
 		<result property="cook.cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
 	</resultMap>
@@ -51,8 +51,7 @@
 		<result property="cookStatus" 			column="cook_status" 		jdbcType="NUMERIC" />
 		<result property="checkDate" 				column="check_date" 			jdbcType="DATE"/>
 		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
-
-	</resultMap>
+	</resultMap>	
 	
 	<!-- SQL : INSERT -->
 	<insert 	id="addReview"		parameterType="review" >
@@ -99,13 +98,13 @@
 	  					from review
 	  					<if test="category !=null">
 	  					<choose>
-						<when test="category == PRD || category =='PRD' ">
+						<when test='category == "PRD"'>
 	  					where prod_no=#{textNo}
 	  					</when>
-	  					<when test="category == REC || category =='REC' ">
+						<when test='category == "REC"'>
 	  					where recipe_no=#{textNo}
 	  					</when>
-	  					<when test="category == COOK || category =='COOK' ">
+						<when test='category == "COOK"'>
 	  					where cook_no=#{textNo}
 	  					</when>
 	  					</choose>
@@ -124,13 +123,13 @@
 	  					from review
 	  					<if test="category !=null">
 	  					<choose>
-						<when test="category == PRD || category =='PRD' ">
+						<when test='category == "PRD"'>
 	  					where prod_no=#{textNo}
 	  					</when>
-	  					<when test="category == REC || category =='REC' ">
+						<when test='category == "REC"'>
 	  					where recipe_no=#{textNo}
 	  					</when>
-	  					<when test="category == COOK || category =='COOK' ">
+						<when test='category == "COOK"'>
 	  					where cook_no=#{textNo}
 	  					</when>
 	  					</choose>
@@ -141,6 +140,39 @@
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 						
 	 </select>
+	 
+	  <select  id="getMyReviewList"  parameterType="map"	resultMap="reviewSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	select *
+	  					from review
+	  					WHERE writer_nickname = #{writerNickname}
+				 ) inner_table
+											
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+	 </select>
+	 
+	 
+	 <select  id="getTotalMyCount"  parameterType="map"	 resultType="int">
+	  SELECT COUNT(*)
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	select *
+	  					from review
+	  					WHERE writer_nickname = #{writerNickname}
+				 ) inner_table
+											
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+						
+	 </select>
+	 
+	   <delete id="deleteReview" parameterType="int" >
+	 DELETE
+	 FROM review 
+	 WHERE review_no= #{reviewNo} 
+	 </delete>
+	 
 	 
 	 
 </mapper>

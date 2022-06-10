@@ -14,12 +14,16 @@ public interface ReviewService {
 	//¸®ºä ¸®½ºÆ® Á¶È¸
 	public Map<String, Object> getReviewList(Search search,String category, int textNo) throws Exception;
 
+	public Map<String, Object> getMyReviewList(Search search, String writerNickname) throws Exception;
+
 	//¸®ºä ¼öÁ¤
 	public void updateReview(Review review) throws Exception;
 
 	//¸®ºä »èÁ¦
-	public void deleteReview(Review review) throws Exception;
+	public void deleteReview(int reviewNo) throws Exception;
 
 	public void updateStatus(int textNo,String category) throws Exception;
+	
+	public void givePoint(int point,String userId) throws Exception;
 
 }

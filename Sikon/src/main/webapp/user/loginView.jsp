@@ -27,9 +27,12 @@
 	
     	 body >  div.container{ 
         	border: 3px solid #D6CDB7;
-            margin-top: 10px;
+            padding-top : 300px;
             
          }
+        .container{
+        	padding-top : 100px;
+        }
         
          .bg-image-vertical {
 			position: relative;

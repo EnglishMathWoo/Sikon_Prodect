@@ -21,8 +21,11 @@ public interface CouponService {
 	//발행쿠폰검색
 	public Coupon getIssuedCoupon(int issueNo) throws Exception;
 	
-	//가용쿠폰검색
-	public List<Coupon> getUsableCoupon(String userId) throws Exception;
+	//마이쿠폰검색
+	public List<Coupon> getMyCoupon(String userId) throws Exception;
+	
+	//마이쿠폰리스트 
+	public Map<String , Object> getMyCouponList(Search search, String userId) throws Exception;
 	
 	// 생성쿠폰리스트 
 	public Map<String , Object> getCouponList(Search search) throws Exception;
