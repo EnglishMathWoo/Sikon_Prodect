@@ -120,13 +120,20 @@
 	<select  id="getUser"		parameterType="string"	resultMap="userSelectMap">
 		SELECT *
 		FROM users
-		WHERE user_id = #{value}
+		WHERE user_id = #{userId}
         </select>
 
 	<!-- 자격증 조회 -->
 	<select  id="getLicense"	parameterType="string"	resultType="map">
 		SELECT *
 		FROM license
+		WHERE user_id = #{userId}
+	</select>
+	
+	<!-- 경력사항 조회 -->
+	<select  id="getCareer"		parameterType="string"	resultType="map">
+		SELECT *
+		FROM career
 		WHERE user_id = #{userId}
 	</select>
 	
@@ -241,11 +248,17 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT user_id , user_name , user_nickname
 											FROM users
-																						
+											 
+											 <if test="orderCondition == null ">
+												ORDER BY user_id DESC
+											 </if>
+																	
 											 <if test="orderCondition != null ">
 											 
 											 <choose>
 											  <when test="orderCondition == 0 ">
+											  		WHERE role LIKE 'user'
+											  		AND mentor_apply LIKE UPPER ('N')
 											   		ORDER BY user_id DESC
 											  </when>
 											  <when test="orderCondition == 1 ">
@@ -281,14 +294,21 @@
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT user_id , user_name , user_nickname
 						FROM users
-						<if test="orderCondition != null ">
+											<if test="orderCondition == null ">
+												ORDER BY user_id DESC
+											</if>
+											
+											<if test="orderCondition != null ">
 											 
 											 <choose>
 											  <when test="orderCondition == 0 ">
+											  		WHERE role LIKE 'user'
+											  		AND mentor_apply LIKE UPPER ('N')
 											   		ORDER BY user_id DESC
 											  </when>
 											  <when test="orderCondition == 1 ">
 											  		where mentor_apply LIKE UPPER ('Y')
+											  		AND role LIKE 'user'
 											  </when>
 											  <when test="orderCondition == 2 ">
 											      	where role LIKE 'mentor'

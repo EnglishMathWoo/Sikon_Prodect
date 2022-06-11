@@ -12,6 +12,14 @@
 <head>
 	<meta charset="EUC-KR">
 	
+	<!-- datepicker -->
+	<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+
+	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
+	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
+
+	<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
@@ -20,6 +28,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
    <link href="/css/animate.min.css" rel="stylesheet">
@@ -27,6 +36,11 @@
    
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   
+   <!-- jQuery UI toolTip 사용 CSS-->
+  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<!-- jQuery UI toolTip 사용 JS-->
+ 	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
@@ -38,6 +52,24 @@ div.container {
 }
 .h3{
 	height: 40px;
+}
+.id_ok{
+	color:#008000;
+	display: none;
+}
+.id_already{
+	color:#6A82FB; 
+	display: none;
+}
+		
+.id_ok2{
+	color:#008000;
+	display: none;
+}
+
+.id_already2{
+	color:#6A82FB; 
+	display: none;
 }
    </style>
     
@@ -66,12 +98,35 @@ div.container {
 		///////////////////////////////////////////////////////////////////////
 		function fncUpdateUser() {
 			var name=$("input[name='userName']").val();
+			var pw=$("input[name='password']").val();
+			var pw_confirm=$("input[name='password2']").val();
+			var nickname=$("input[name='userNickname']").val();
 			
 			if(name == null || name.length <1){
 				alert("이름은  반드시 입력하셔야 합니다.");
 				return;
 			}
-				
+			if(pw == null || pw.length <1){
+				alert("패스워드는  반드시 입력하셔야 합니다.");
+				return;
+			}
+			if(pw_confirm == null || pw_confirm.length <1){
+				alert("패스워드 확인은  반드시 입력하셔야 합니다.");
+				return;
+			}	
+			if(nickname == null || nickname.length <1){
+				alert("닉네임은 반드시 입력하셔야 합니다.");
+				return;
+			}
+			if( pw != pw_confirm ) {				
+				alert("비밀번호 확인이 일치하지 않습니다.");
+				$("input:text[name='password2']").focus();
+				return;
+			}
+			if ($("#phone").val() == "" || $("#phone").val().length != 11 || isNaN($("#phone").val())) {
+				alert("휴대폰번호를 정확히 입력해 주세요");
+				return;
+			}
 		
 			//Debug...
 			//alert("phone : "+value);
@@ -82,6 +137,106 @@ div.container {
 			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
 		}
 	
+		
+		 function checkNickname(){
+		        var userNickname = $('#userNickname').val(); //닉네임값이 "userNickname"인 입력란의 값을 저장
+		        console.log(userNickname);
+		        
+		        $.ajax({
+		            url:'./json/checkNickname', //Controller에서 요청 받을 주소
+		            type:'post', //POST 방식으로 전달
+		            data:{userNickname:userNickname},
+		            success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
+		                if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 닉네임
+		                    $('.id_ok2').css("display","inline-block"); 
+		                    $('.id_already2').css("display", "none");
+		                } else { // cnt가 1일 경우 -> 이미 존재하는 닉네임
+		                    $('.id_already2').css("display","inline-block");
+		                    $('.id_ok2').css("display", "none");
+		                    alert("닉네임을 다시 입력해주세요");
+		                  //  $('#userNickname').val('');
+		                }
+		            },
+		            error:function(){
+		                alert("에러입니다");
+		            }
+		        });
+		        };
+		
+		        
+		     // 생년월일
+				 $(function() {
+						$('#userBirth').datepicker({
+							dateFormat: "yy-mm-dd"
+						});
+				});
+				
+				// 근무시작날짜
+				 $(function() {
+						$('#startDate').datepicker({
+							dateFormat: "yy-mm-dd"
+						});
+				});
+				
+				// 근무시작날짜2
+				 $(function() {
+						$('#startDate2').datepicker({
+							dateFormat: "yy-mm-dd"
+						});
+				});
+				
+				// 근무종료날짜
+				 $(function() {
+						$('#endDate').datepicker({
+							dateFormat: "yy-mm-dd"
+						});
+				});
+				
+				// 근무종료날짜2
+				 $(function() {
+						$('#endDate2').datepicker({
+							dateFormat: "yy-mm-dd"
+						});
+				});
+				
+				// 취득일자
+				 $(function() {
+						$('#licenseDate').datepicker({
+							dateFormat: "yy-mm-dd"
+						});
+				});
+			   
+				// 취득일자2
+				 $(function() {
+						$('#licenseDate2').datepicker({
+							dateFormat: "yy-mm-dd"
+						});
+				});	  
+		        
+				// 도로명 주소
+				 function findAddr(){
+						new daum.Postcode({
+					        oncomplete: function(data) {
+					        	
+					        	console.log(data);
+					        	
+					            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+					            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+					            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					            var roadAddr = data.roadAddress; // 도로명 주소 변수
+					            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+					            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+					            document.getElementById('member_post').value = data.zonecode;
+					            if(roadAddr !== ''){
+					                document.getElementById("member_addr").value = roadAddr;
+					            } 
+					            else if(jibunAddr !== ''){
+					                document.getElementById("member_addr").value = jibunAddr;
+					            }
+					        }
+					    }).open();
+					}
+				
 	</script>
 	
 </head>
@@ -136,7 +291,9 @@ div.container {
 		  <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${user.userNickname}" placeholder="변경닉네임">
+		      <input type="text" class="form-control" id="userNickname" name="userNickname" value="${user.userNickname}" placeholder="변경닉네임" oninput = "checkNickname()">
+		      <span id="helpBlock" class="id_ok2">사용 가능한 닉네임입니다.</span>
+			  <span id="helpBlock" class="id_already2">누군가 이 닉네임을 사용하고 있어요.</span>
 		    </div>
 		  </div>
 		  
@@ -148,10 +305,14 @@ div.container {
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주소</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="addr" name="addr"  value="${user.addr}" placeholder="변경주소">
+		    <label for="addr" class="col-sm-offset-1 col-sm-3 control-label">주소</label>
+		    
+		      <div class="col-sm-4">
+		     <input id="member_post" class="form-control"  type="text" name="addr" value="${user.addr}" placeholder="우편번호" readonly onclick="findAddr()">
+  			 <input id="member_addr" class="form-control"  type="text" name="addr"  placeholder="주소" readonly>
+  			 <input type="text" class="form-control" name="addr"  placeholder="상세주소">
 		    </div>
+		   
 		  </div>
 		  
 		  <div class="form-group">
@@ -168,13 +329,13 @@ div.container {
  			</div>
  		  </div>
  		  
- 		  <hr style="border: solid 1px black;" width="650px;">	
+ 		  <hr style="border: solid 1px #d7d7d7;" width="650px;">
  	 	
  	 	   <div class="form-group">
     		<label for="mentorApply" class="col-sm-offset-1 col-sm-3 control-label" >쿠킹멘토 신청 여부</label>
    			<div class="col-sm-4">
-      	 	<input type="radio" name="mentorApply" value="N" checked="checked">미신청  &nbsp
-			<input type="radio" name="mentorApply" value="Y" >신청
+      	 	<input type="radio" name="mentorApply" value="N" >미신청  &nbsp
+			<input type="radio" name="mentorApply" value="Y" checked="checked">신청
     		</div>
  	 	  </div>
 		  
@@ -186,7 +347,11 @@ div.container {
  	 	  <div class="form-group">
 		    <label for="career" class="col-sm-offset-1 col-sm-3 control-label">소속</label>
 		   	<div class="col-sm-4">
-		      <input type="text" class="form-control" id="company" name="company" placeholder="소속1">
+		   	
+		   	 
+		   
+		      <input type="text" class="form-control" id="company" name="company" value="${career.COMPANY}" placeholder="소속1">
+		   
 		      
 		    </div>
 		 </div>   

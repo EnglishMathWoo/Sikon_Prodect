@@ -40,7 +40,7 @@
             padding-top : 50px;
         }
       .container {
-      		padding-top : 150px;
+      		padding-top : 180px;
       }
     </style>
     
@@ -91,10 +91,29 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<div class="page-header text-info">
+	<c:if test="${ empty search.orderCondition}">
+		<div class="page-header text">
 	       <h3>회원관리</h3>
+		</div>
+	</c:if>
+	
+	<c:if test="${search.orderCondition == 0 }">
+		<div class="page-header text">
+	       <h3>회원목록</h3>
 	    </div>
+	</c:if> 
 	    
+	<c:if test="${search.orderCondition == 1 }">
+	    <div class="page-header text">
+	       <h3>쿠킹멘토신청자목록</h3>
+	    </div>
+	</c:if>
+	
+	 <c:if test="${search.orderCondition == 2 }">   
+	     <div class="page-header text">
+	       <h3>쿠킹멘토목록</h3>
+	    </div>
+	 </c:if>   
 	    
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
@@ -155,7 +174,9 @@
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="left">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인">${user.userId}</td>
+			  <td align="left" value1="${user.role}"
+			  				   value2="${user.mentorApply}"
+			  		title="Click : 회원정보 확인">${user.userId}</td>
 			  <td align="left">${user.userName}</td>
 			  <td align="left">${user.userNickname}</td>
 			</tr>

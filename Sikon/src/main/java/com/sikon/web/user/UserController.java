@@ -229,12 +229,15 @@ public class UserController {
 		//Business Logic
 		User user = userService.getUser(userId);
 		List list = userService.getLicense(userId);
+		List list2 = userService.getCareer(userId);
 		System.out.println(list);
+		System.out.println(list2);
 	//	List list = userService.getUCL(userId);
 		
 		// Model 과 View 연결
 		model.addAttribute("user", user);
 		model.addAttribute("license", list);
+		model.addAttribute("career", list2);
 	//	model.addAttribute("ucl", list);
 		
 		return "forward:/user/getUser.jsp";
@@ -246,23 +249,74 @@ public class UserController {
 		System.out.println("/user/updateUser : GET");
 		//Business Logic
 		User user = userService.getUser(userId);
+		List license = userService.getLicense(userId);
+		List career = userService.getCareer(userId);
+		
 		// Model 과 View 연결
 		model.addAttribute("user", user);
+		model.addAttribute("license", license);
+		model.addAttribute("career", career);
 		
 		return "forward:/user/updateUser.jsp";
 	}
 	
 	@RequestMapping( value="updateUser", method=RequestMethod.POST )
-	public String updateUser( @ModelAttribute("user") User user , Model model , HttpSession session) throws Exception{
+	public String updateUser( @ModelAttribute("user") User user ,
+			@RequestParam("licenseName") String[] licenseName,
+			@RequestParam("licenseInstitution") String[] licenseInstitution,
+			@RequestParam("licenseDate") String[] licenseDate,
+			@RequestParam("company") String[] company,
+			@RequestParam("careerExperience") String[] careerExperience,
+			@RequestParam("startDate") String[] startDate,
+			@RequestParam("endDate") String[] endDate, User userId,
+			@RequestParam("uploadFile")  MultipartFile file, Model model , HttpSession session) throws Exception{
 
 		System.out.println("/user/updateUser : POST");
-		//Business Logic
+		
+		List list = new ArrayList();
+		for ( int j=0 ; j<licenseName.length ; j++) {
+			License license = new License();
+			license.setLicenseName(licenseName[j]);
+			license.setLicenseInstitution(licenseInstitution[j]);
+			license.setLicenseDate(licenseDate[j]);
+			license.setUserId(user.getUserId());
+			list.add(license);
+		}
+		
+		List list2 = new ArrayList();
+		for ( int m=0 ; m<company.length ; m++) {
+			Career career = new Career();
+			career.setCompany(company[m]);
+			career.setCareerExperience(careerExperience[m]);
+			career.setStartDate(startDate[m]);
+			career.setEndDate(endDate[m]);
+			career.setUserId(user.getUserId());
+			list2.add(career);
+		}
+
+		System.out.println("list=" + list);
+		System.out.println("list2=" + list2);
+		
+		Map map = new HashMap();
+		map.put("list", list);
+		map.put("list2", list2);
+		
+		
+		if(!file.getOriginalFilename().isEmpty()) {
+			file.transferTo(new File(FILE_SERVER_PATH, file.getOriginalFilename()));
+			model.addAttribute("msg", "File uploaded successfully.");
+		}else {
+			model.addAttribute("msg", "Please select a valid mediaFile..");
+		}
+		
+		user.setUserImage(file.getOriginalFilename());
+		user.setUserBirth(user.getUserBirth().replace("-",""));
+		
 		userService.updateUser(user);
-	
-//		String sessionId=((User)session.getAttribute("user")).getUserId();
-//		if(sessionId.equals(user.getUserId())){
-//			session.setAttribute("user", user);
-//		}
+		userService.updateLicense(map, userId);
+		userService.updateCareer(map, userId);
+		
+		
 		
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}

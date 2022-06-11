@@ -71,10 +71,10 @@ public class UserDaoImpl implements UserDao{
 		System.out.println("userId="+userId);
 		return sqlSession.selectList("UserMapper.getLicense", userId);
 	}
-//	public Career getCareer(String userId) throws Exception {
-//		System.out.println("userId="+userId);
-//		return sqlSession.selectOne("UserMapper.getCareer", userId);
-//	}
+	public List getCareer(String userId) throws Exception {
+		System.out.println("userId="+userId);
+		return sqlSession.selectList("UserMapper.getCareer", userId);
+	}
 	
 	
 	public List getUCL(String userId) throws Exception {
@@ -94,15 +94,15 @@ public class UserDaoImpl implements UserDao{
 		
 		
 	}	
-	public void updateLicense(List license, String userId) throws Exception {
+	public void updateLicense(Map license, User userId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", license);
+		map.put("list", license.get("list"));
 		map.put("userId", userId);
 		sqlSession.update("UserMapper.updateLicense", map);
 		}
-	public void updateCareer(List career, String userId) throws Exception {
+	public void updateCareer(Map career, User userId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", career);
+		map.put("list", career.get("list2"));
 		map.put("userId", userId);
 		sqlSession.update("UserMapper.updateCareer", map);
 	}

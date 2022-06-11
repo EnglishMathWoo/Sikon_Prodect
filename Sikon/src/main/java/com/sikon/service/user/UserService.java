@@ -25,7 +25,7 @@ public interface UserService {
 	// 내정보확인 
 	public User getUser(String userId) throws Exception;
 	public List getLicense(String userId) throws Exception;
-//	public Career getCareer(String userId) throws Exception;
+	public List getCareer(String userId) throws Exception;
 	
 	public List getUCL(String userId) throws Exception;
 	// ID찾기
@@ -33,8 +33,8 @@ public interface UserService {
 	
 	// 회원정보수정
 	public void updateUser(User user) throws Exception;
-	public void updateLicense(List license, String userId) throws Exception;
-	public void updateCareer(List career, String userId) throws Exception;
+	public void updateLicense(Map license, User userId) throws Exception;
+	public void updateCareer(Map career, User userId) throws Exception;
 	// 회원정보리스트 
 	public Map<String , Object> getUserList(Search search) throws Exception;
 	

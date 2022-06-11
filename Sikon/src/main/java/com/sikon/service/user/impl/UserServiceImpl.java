@@ -185,9 +185,9 @@ public class UserServiceImpl implements UserService{
 	public List getLicense(String userId) throws Exception {
 		return userDao.getLicense(userId);
 	}
-//	public Career getCareer(String userId) throws Exception {
-//		return userDao.getCareer(userId);
-//	}
+	public List getCareer(String userId) throws Exception {
+		return userDao.getCareer(userId);
+	}
 	public List getUCL(String userId) throws Exception {
 		return userDao.getUCL(userId);
 	}
@@ -202,10 +202,10 @@ public class UserServiceImpl implements UserService{
 		
 		userDao.updateUser(user);
 	}
-	public void updateLicense(List license, String userId) throws Exception {
+	public void updateLicense(Map license, User userId) throws Exception {
 		userDao.updateLicense(license, userId);
 	}
-	public void updateCareer(List career, String userId) throws Exception {
+	public void updateCareer(Map career, User userId) throws Exception {
 		userDao.updateCareer(career, userId);
 	}
 	public Map<String , Object > getUserList(Search search) throws Exception {

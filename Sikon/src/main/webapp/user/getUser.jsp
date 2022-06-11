@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -34,6 +35,14 @@
         .container{
         	padding-top : 150px;
         }
+        label {
+		   	display: inline-block;
+		   	font-size: 15pt; 
+		    max-width: 100%;
+		    margin-bottom: 6px;
+		    font-weight: 700;
+		   
+		}
      </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -59,6 +68,8 @@
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
+	
+	
 	
 		<div class="page-header">
 	       <h3 class=" text-info">회원정보조회</h3>
@@ -109,13 +120,19 @@
 			
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>쿠킹멘토 신청 여부</strong></div>
-			<div class="col-xs-8 col-md-4">
-			
-			
-			${user.mentorApply}</div>
+			<div class="col-xs-8 col-md-4">${user.mentorApply}</div>
 		</div>
 		
-		<hr/>	
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>가입일자</strong></div>
+			<div class="col-xs-8 col-md-4">${user.regDate}</div>
+		</div>
+		
+		<hr/>
+		
+
 		
 		<!--  		
 		<div class="form-group">
@@ -127,6 +144,60 @@
  	 	  </div>		
 		-->
 		
+		<c:if test="${user.mentorApply == 'Y' }">
+		
+		 <p align="center"><label>경력사항</label> </p>
+		 
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>소속</strong></div>
+	  		<c:set var="i" value="0" />
+		 	 <c:forEach var="career" items="${career}">
+		  				
+				<div class="col-xs-8 col-md-4">${career.COMPANY}</div>
+			</c:forEach>
+		</div>
+		
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>근무시작일</strong></div>
+	  		<c:set var="i" value="0" />
+		 	 <c:forEach var="career" items="${career}">
+		  				
+				<div class="col-xs-8 col-md-4">${career.START_DATE}</div>
+			</c:forEach>
+		</div>
+		
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>근무종료일</strong></div>
+	  		<c:set var="i" value="0" />
+		 	 <c:forEach var="career" items="${career}">
+		  				
+				<div class="col-xs-8 col-md-4">${career.END_DATE}</div>
+			</c:forEach>
+		</div>
+		
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>업무내용</strong></div>
+	  		<c:set var="i" value="0" />
+		 	 <c:forEach var="career" items="${career}">
+		  				
+				<div class="col-xs-8 col-md-4">${career.CAREER_EXPERIENCE}</div>
+			</c:forEach>
+		</div>
+		
+		
+		<hr/>
+		
+		 <p align="center"><label>자격증</label> </p>
+		 
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>자격증명</strong></div>
 	  		<c:set var="i" value="0" />
@@ -162,23 +233,31 @@
 		
 		
 		<hr/>
+			
 		
 		
 		
+		</c:if>
 		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>가입일자</strong></div>
-			<div class="col-xs-8 col-md-4">${user.regDate}</div>
-		</div>
-		
-		<hr/>
-		
+		<c:choose>
+		<c:when test="${user.mentorApply == 'Y' && user.role == 'user' }">
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
-	  			<button type="button" class="btn btn-primary" id="editUserInfo">회원정보수정</button>
-	  			<button type="button" class="btn btn-primary" id="editUserInfo">회원탈퇴</button>
+	  			<button type="button" class="btn btn-primary" id="">승인</button>
+	  			<button type="button" class="btn btn-primary" id="">거절</button>
 	  		</div>
 	  	</div>
+	  	</c:when>
+	  	<c:otherwise>
+	  	<div class="row">
+	  		<div class="col-md-12 text-center ">
+	  			<button type="button" class="btn btn-primary" id="editUserInfo">수정</button>
+	  			<button type="button" class="btn btn-primary" id="">탈퇴</button>
+	  		</div>
+	  		</div>
+	  	</c:otherwise>
+	  	</c:choose>
+	  		
 		
 		<br>
 		
