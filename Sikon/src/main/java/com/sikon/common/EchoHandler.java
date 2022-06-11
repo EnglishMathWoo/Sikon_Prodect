@@ -69,36 +69,19 @@ public class EchoHandler extends TextWebSocketHandler {
 				String mentorId = strs[2];
 				String cookName = strs[3];
 				System.out.println("length 성공?"+cmd);
+				System.out.println(userId);
 				
 				WebSocketSession userSession = userSessionsMap.get(userId);
 				WebSocketSession mentorSession = userSessionsMap.get(mentorId);
 				System.out.println("userSession="+userSessionsMap.get(userId));
-				System.out.println("mentorSession"+mentorSession);
+				System.out.println("mentorSession="+mentorSession);
 				
 				Alarm alarm = new Alarm();
-				
-				//공지사항
-				/*
-				if ("reply".equals(cmd) && boardWriterSession != null) {
-					System.out.println("onmessage되나??");
-					TextMessage tmpMsg = new TextMessage(replyWriter + "님이 공지사항을 올렸습니다! : [제목 : '"
-									+ noticeTitle+"']");
-					boardWriterSession.sendMessage(tmpMsg);
-					alarm.setAlarmTarget("user@naver.com");
-					alarm.setAlarmContent(tmpMsg.toString());
-					alarmService.addAlarm(alarm);
-				} else if ("reply".equals(cmd)){
-					alarm.setAlarmTarget("user@naver.com");
-					alarm.setAlarmContent(replyWriter + "님이 공지사항을 올렸습니다! : [제목 : '"
-							+ noticeTitle+"']");
-					alarmService.addAlarm(alarm);
-				}
-				*/
-				
+								
 				//좋아요
 				if ("heart".equals(cmd) && mentorSession != null) {
 					System.out.println("onmessage되나??");
-					TextMessage tmpMsg = new TextMessage(userId + "님이 멘토님의 게시글에 좋아요를 눌렀습니다! : [제목 : '"
+					TextMessage tmpMsg = new TextMessage(userId + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
 									+ cookName+"']");
 					mentorSession.sendMessage(tmpMsg);
 					alarm.setAlarmTarget(mentorId);
@@ -106,7 +89,23 @@ public class EchoHandler extends TextWebSocketHandler {
 					alarmService.addAlarm(alarm);
 				} else if ("heart".equals(cmd)){
 					alarm.setAlarmTarget(mentorId);
-					alarm.setAlarmContent(userId + "님이 공지사항을 올렸습니다! : [제목 : '"
+					alarm.setAlarmContent(userId + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
+							+ cookName+"']");
+					alarmService.addAlarm(alarm);
+				}
+				
+				//레시피 리뷰
+				if ("recipeReview".equals(cmd) && mentorSession != null) {
+					System.out.println("onmessage되나??");
+					TextMessage tmpMsg = new TextMessage(userId + "님이 레시피에 리뷰를 작성했습니다! : [제목 : '"
+									+ cookName+"']");
+					mentorSession.sendMessage(tmpMsg);
+					alarm.setAlarmTarget(mentorId);
+					alarm.setAlarmContent(tmpMsg.toString());
+					alarmService.addAlarm(alarm);
+				} else if ("recipeReview".equals(cmd)){
+					alarm.setAlarmTarget(mentorId);
+					alarm.setAlarmContent(userId + "님이 레시피에 리뷰를 작성했습니다! : [제목 : '"
 							+ cookName+"']");
 					alarmService.addAlarm(alarm);
 				}

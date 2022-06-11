@@ -15,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
+import com.sikon.service.domain.Cook;
+import com.sikon.service.domain.Recipe;
 import com.sikon.service.recipe.RecipeService;
 
 //레시피 RestController
@@ -120,6 +123,28 @@ public class RecipeRestController {
 	        System.out.println("4: "+map);
 	        
 	        return map;
+	}
+	
+	//좋아요 push 알림
+	@RequestMapping(value="/json/pushAlarm", method=RequestMethod.POST)
+	@ResponseBody
+	public Map pushAlram(@RequestParam("recipeNo") int recipeNo, @RequestParam("userId") String userId) {
+				
+		Map map = new HashMap();
+		
+		try{
+			Recipe recipe = recipeService.getRecipeName(recipeNo);
+			
+			map.put("userId", userId);
+			map.put("recipeName", recipe.getRecipeName());
+			map.put("writerId", recipe.getWriter().getUserId());
+			map.put("responseCode", "success");
+		
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return map;	
 	}
 
 }

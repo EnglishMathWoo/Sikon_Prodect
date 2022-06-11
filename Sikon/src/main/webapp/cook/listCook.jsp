@@ -144,7 +144,6 @@ div.thumbnail {
 
 
 		//좋아요 push 알림
-		
 		 function pushAlarm(userId, cookNo){
 												
 				$.ajax({
@@ -161,8 +160,7 @@ div.thumbnail {
 			        	alert("알람 전송 완료!!");
 			        	      	          
 			           		if(socket){
-			           			console.log(data.cookMentor)
-			        			let socketMsg = "heart,"+data.userNickname+","+data.mentorNickname+","+data.cookName;
+			        			let socketMsg = "heart,"+data.userId+","+data.mentorId+","+data.cookName;
 			        			console.log(socketMsg);
 			        			socket.send(socketMsg);
 			           		}

@@ -251,7 +251,8 @@ background-color: #fff;
 	<jsp:include page="/layout/toolbar.jsp" />
 
 	<div class="container">
-
+				
+				<input type="hidden" name="userId" value="${user.userId}">
 
 				<div class="col-xs-12 col-md-12  col-lg-12" style="text-align: center">
 					<c:forEach var="name" items="${recipe.recipeImg.split('/')[0]}">
@@ -431,8 +432,41 @@ background-color: #fff;
 		var textNo = $("input:hidden[name='recipeNo']").val();
 		console.log(textNo);
 		$("form").attr("method", "POST").attr("action","/review/addReview?category=REC&textNo=" + textNo).submit();
-
+		
+		var userId = $("input:hidden[name='userId']").val();
+		console.log(userId);
+		var recipeNo = $("input:hidden[name='recipeNo']").val();
+		console.log(recipeNo);
+		
+		pushAlarm(userId, recipeNo);
 	}
+	
+	//리뷰 push 알림
+	 function pushAlarm(userId, recipeNo){
+				 	
+											
+			$.ajax({
+		        url : "/recipe/json/pushAlarm",
+		        type : 'POST',
+		        dataType : "json",   
+	            data : {'recipeNo' : recipeNo, 'userId' : userId }, 
+	            async: false, 
+	            error : function(){
+		            alert("통신 에러");
+		        },
+		        success : function(data){
+		        	
+		        	alert("알람 전송 완료!!");
+		        	      	          
+		           		if(socket){
+		        			let socketMsg = "recipeReview,"+data.userId+","+data.writerId+","+data.recipeName;
+		        			console.log(socketMsg);
+		        			socket.send(socketMsg);
+		           		}
+		        }
+		    
+		    })
+	 };
 </script>
 
 

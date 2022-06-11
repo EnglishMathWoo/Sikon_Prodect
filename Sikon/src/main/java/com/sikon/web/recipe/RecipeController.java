@@ -118,7 +118,7 @@ public class RecipeController {
 
 	@RequestMapping(value = "getRecipe")
 	public String getRecipe(@ModelAttribute("search") Search search, @RequestParam("recipeNo") int recipeNo,
-			Model model) throws Exception {
+			Model model, HttpServletRequest request) throws Exception {
 
 		System.out.println("/recipe/getRecipe : post / get");
 		System.out.println("recipeNo" + recipeNo);
@@ -136,11 +136,14 @@ public class RecipeController {
 		Map map=reviewService.getReviewList(search, category, recipeNo);
 		System.out.println("리뷰map결과"+map);
 		
+		HttpSession session=request.getSession();
+		User user=(User)session.getAttribute("user");
+		
 		System.out.println("레시피 list=" + list);
 		model.addAttribute("recipe", list.get(0));
 		model.addAttribute("list", list);
 		model.addAttribute("review", map.get("list"));
-
+		model.addAttribute("user",user);
 
 		
 		return "forward:/recipe/getRecipe.jsp";
