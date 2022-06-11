@@ -108,8 +108,9 @@ public class ApplyRestController {
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
+		map.put("list", map.get("list"));
 		map.put("resultPage", resultPage);
-		
+		map.put("search", search);
 		
 		return map;
 	}	
