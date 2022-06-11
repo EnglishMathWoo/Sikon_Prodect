@@ -124,6 +124,15 @@ div.list{
   font-family: 'Gowun Batang', serif;
   
 }
+
+div.emptyProd{
+	padding : 20px;
+	height: 100px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
+}
+
 </style>
 	<script type="text/javascript">
 
@@ -199,6 +208,7 @@ div.list{
 		
 		  <c:set var="i" value="0" />
 		  <c:forEach var="purchase" items="${list}" varStatus="status">
+		  
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			
@@ -219,7 +229,7 @@ div.list{
 					</td>
 					<c:choose>
 					  <c:when test="${purchase.divyStatus.equals('002')}">
-							<td align="center" class="divy status"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">물건도착</td>
+							<td align="center" class="status">배송중</td>
 						</c:when>
 						<c:when test="${purchase.divyStatus.equals('001')}">
 							<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
@@ -264,7 +274,7 @@ div.list{
 							
 							<c:choose>
 							  <c:when test="${purchase.divyStatus.equals('002')}">
-									<td align="center" class="divy status"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">물건도착</td>
+									<td align="center" class="status">배송중</td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('001')}">
 									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
@@ -306,7 +316,7 @@ div.list{
 							</td>
 							<c:choose>
 							  <c:when test="${purchase.divyStatus.equals('002')}">
-									<td align="center" class="divy status"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">물건도착</td>
+									<td align="center" class="status">배송중</td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('001')}">
 									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
@@ -339,7 +349,13 @@ div.list{
       
       </table>
 	  <!--  table End /////////////////////////////////////-->
-	  
+	  <c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			구매한 상품이 없습니다.
+		</div>
+		<br>
+	</c:if>
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	

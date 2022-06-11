@@ -1,6 +1,7 @@
 package com.sikon.web.purchase;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,7 +124,7 @@ public class PurchaseController {
 		purchase.setPurchaseProd(product);
 		purchase.setDivyStatus("001");
 		purchase.setSerialNo(serialNo);
-		purchase.setPaymentOpt("KA");
+		//purchase.setPaymentOpt("KA");
 		purchase.setReviewStatus("001");
 				
 		int quantity = purchase.getPurchaseQuantity();
@@ -324,11 +325,23 @@ public class PurchaseController {
 		int tranNo = Integer.parseInt(request.getParameter("tranNo")); 
 		String divyStatus = request.getParameter("divyStatus");
 		
+		//==================================================================================
+		//송장번호 만들기
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+		String nowrandom = now.format(formatter);   
+		
+		String sub = "5";
+		String invoice = sub+nowrandom;	
+		System.out.println("송장번호: "+invoice);
+		//==================================================================================
+		
 		
 		if(divyStatus.equals("001")) {
 			divyStatus = "002";
 		}else if(divyStatus.equals("002")) {
 			divyStatus = "003";
+			purchase.setInvoiceNum(invoice);
 		}
 		
 		HttpSession session = request.getSession();

@@ -92,6 +92,16 @@ table {
 				
 				self.location ="/purchase/updatedivyStatus?tranNo="+message1+"&divyStatus="+message2;
 			});
+			
+			$( "td.arrival" ).on("click" , function() {
+				console.log('배송도착');
+				var message1 = $(this).attr("value1");
+				console.log(message1);
+				var message2 = $(this).attr("value2");
+				console.log(message2);
+				
+				self.location ="/purchase/updatedivyStatus?tranNo="+message1+"&divyStatus="+message2;
+			});
 
 			
 			$( "td.prodNum" ).on("click" , function() {
@@ -104,7 +114,6 @@ table {
 			});
 			
 
-			
 			
 			
 			$( "td.user" ).on("click" , function() {
@@ -231,7 +240,7 @@ table {
 							</c:when>
 							<c:when test="${purchase.divyStatus.equals('002') }">
 								
-								<td align="center" style="color:#87cefa"> 배송중</td>
+								<td align="center" style="color:#87cefa" class="arrival"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}"> 배송중</td>
 							</c:when>
 							<c:when test="${purchase.divyStatus.equals('003') }">
 								
