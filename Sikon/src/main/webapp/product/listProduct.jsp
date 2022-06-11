@@ -182,6 +182,21 @@ div.emptyProd{
 	color: #333;
 }
 
+.btn_gotop {
+	display:none;
+	position:fixed;
+	bottom:30px;
+	right:30px;
+	z-index:999;
+	outline:none;
+	background-color:#937062;
+	color:#f7f7f7;
+	padding:15px 20px;
+}
+.btn_gotop:hover{
+	color: #f7f7f7;
+}
+
 </style>
 
 
@@ -349,6 +364,21 @@ div.emptyProd{
 		}
 	} 
 	
+//===================== 상단으로 이동 ====================================
+	
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 300){
+			$('.btn_gotop').show();
+		} else{
+			$('.btn_gotop').hide();
+		}
+	});
+	
+	$('.btn_gotop').click(function(){
+		$('html, body').animate({scrollTop:0},400);
+		return false;
+	});
+		
 	
 </script>
 <!--  ///////////////////////// JavaScript End ////////////////////////// -->
@@ -510,6 +540,13 @@ div.emptyProd{
 </div>
 
 </div>	
+
+	<!-- 상단으로 이동하기 버튼 -->
+	<a href="#" class="btn_gotop">
+	  <span class="glyphicon glyphicon-chevron-up"></span>
+	</a>
+	
+		
 </body>
 
 </html>

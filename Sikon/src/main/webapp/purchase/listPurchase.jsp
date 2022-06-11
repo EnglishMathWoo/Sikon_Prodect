@@ -56,10 +56,35 @@ table {
 	font-family: 'Nanum Myeongjo', serif;
 }
 th{
-	background: #d3c6c2;
+	font-weight: lighter;
+	font-size: 15px;
+}
+.table>tbody>tr>td{
+	vertical-align: middle;
+}
+.table>tbody>tr>th{
+
+	border-top: 1px solid #333
 }
 div.container{
 	padding-top : 200px;
+}
+
+.cancel{
+	font-size: 14px;
+	text-decoration: underline;
+}
+.status{
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.prodname{
+	font-size: 15px;
+	font-weight: bold;
+}
+.reivew{
+	color: #937062;
 }
 </style>
 	<script type="text/javascript">
@@ -93,7 +118,7 @@ div.container{
 				self.location ="/purchase/updatedivyStatus?tranNo="+message1+"&divyStatus="+message2;
 			});
 			
-			$( "td.cancel" ).on("click" , function() {
+			$( ".cancel" ).on("click" , function() {
 				console.log('구매취소');
 				var message1 = $(this).attr("value1");
 				console.log(message1);
@@ -124,7 +149,7 @@ div.container{
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3 style="color:#bc8f8f">구매목록조회(purchase)</h3>
+	       <h3 style="color:#bc8f8f">주문배송조회</h3>
 	    </div>
 	    
 	    
@@ -145,15 +170,33 @@ div.container{
 			
 			  <c:if test="${status.index eq 0 }">
 			  	<tr>
-			  		<th>${purchase.serialNo }</th>
+			  		<th colspan="3">주문일자: <span style="font-weight: bold;">${purchase.orderDate }</span> &emsp;주문일련번호: <span style="font-weight: bold;">${purchase.serialNo }</span></th>
 			  		
 			  	</tr>
 			  	<tr>
-					<td align="left" >${ purchase.tranNo }</td>	
-					<td align="left" >${ purchase.purchaseProd.prodName }</td>	
-					<td align="right" class="toget" value="${purchase.purchaseProd.prodNo }">
+						
+					<td align="left" class="center" value="${purchase.purchaseProd.prodNo }">	
 						<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
 					</td>
+					<td align="left">
+						<p class="prodname">${ purchase.purchaseProd.prodName }</p>
+						<p>${ purchase.purchaseProd.prodDisPrice }</p>
+						<p>구매수량: ${ purchase.purchaseQuantity }</p>
+					</td>
+					<c:choose>
+					  <c:when test="${purchase.divyStatus.equals('002')}">
+							<td align="center" class="divy status"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">물건도착</td>
+						</c:when>
+						<c:when test="${purchase.divyStatus.equals('001')}">
+							<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
+						</c:when>
+						<c:when test="${purchase.divyStatus.equals('000')}">
+							<td align="center" class="complete status">취소완료</td>
+						</c:when>
+						<c:otherwise>
+							<td align="center" class="end status"><p>배송완료</p><p class="reivew">리뷰쓰기</p></td>
+						</c:otherwise>
+					 </c:choose>
 				</tr>	 
 					 
 			  </c:if>
@@ -164,24 +207,64 @@ div.container{
 			  	
 			  		<c:if test="${ before eq after }">
 					  	<tr>
-							<td align="left" >${ purchase.tranNo }</td>	
-							<td align="left" >${ purchase.purchaseProd.prodName }</td>	
-							<td align="right" class="toget" value="${purchase.purchaseProd.prodNo }">	
+							
+							<td align="left" class="toget" value="${purchase.purchaseProd.prodNo }">	
 								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
 							</td>
+							
+							<td align="left">
+								<p class="prodname">${ purchase.purchaseProd.prodName }</p>
+								<p>${ purchase.purchaseProd.prodDisPrice }</p>
+								<p>구매수량: ${ purchase.purchaseQuantity }</p>
+							</td>
+							
+							<c:choose>
+							  <c:when test="${purchase.divyStatus.equals('002')}">
+									<td align="center" class="divy status"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">물건도착</td>
+								</c:when>
+								<c:when test="${purchase.divyStatus.equals('001')}">
+									<td align="center"><p class="status">결제완료</p> <p class="cancel" value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
+								</c:when>
+								<c:when test="${purchase.divyStatus.equals('000')}">
+									<td align="center" class="complete status">취소완료</td>
+								</c:when>
+								<c:otherwise>
+									<td align="center" class="end status"><p>배송완료</p><p class="reivew">리뷰쓰기</p></td>
+								</c:otherwise>
+							 </c:choose>
+			  	
 						</tr>
 			  		</c:if>
 			  		
 					<c:if test="${ before ne after }">
 			  			<tr>
-					  		<th>${purchase.serialNo }</th>
+					  		<th colspan="3">주문일자: <span style="font-weight: bold;">${purchase.orderDate }</span> &emsp;주문일련번호: <span style="font-weight: bold;">${purchase.serialNo }</span></th>
+			  		
 					  	</tr>
 					  	<tr>
-							<td align="left" >${ purchase.tranNo }</td>
-							<td align="left" >${ purchase.purchaseProd.prodName }</td>	
-							<td align="right" class="toget" value="${purchase.purchaseProd.prodNo }">
+							
+							<td align="left" class="toget" value="${purchase.purchaseProd.prodNo }">	
 								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
 							</td>
+							<td align="left">
+								<p class="prodname">${ purchase.purchaseProd.prodName }</p>
+								<p>${ purchase.purchaseProd.prodDisPrice }</p>
+								<p>구매수량: ${ purchase.purchaseQuantity }</p>
+							</td>
+							<c:choose>
+							  <c:when test="${purchase.divyStatus.equals('002')}">
+									<td align="center" class="divy status"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">물건도착</td>
+								</c:when>
+								<c:when test="${purchase.divyStatus.equals('001')}">
+									<td align="center"><p class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
+								</c:when>
+								<c:when test="${purchase.divyStatus.equals('000')}">
+									<td align="center" class="complete status">취소완료</td>
+								</c:when>
+								<c:otherwise>
+									<td align="center" class="end status"><p>배송완료</p><p class="reivew">리뷰쓰기</p></td>
+								</c:otherwise>
+							 </c:choose>
 						</tr>	
 			  		</c:if>
 				  	

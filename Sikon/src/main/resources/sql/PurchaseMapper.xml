@@ -9,7 +9,7 @@
  	
 	<resultMap id="purchaseSelectMap" type="purchase">
 		<result property="tranNo" 					column="tran_no" 				jdbcType="NUMERIC"/>
-  		<result property="purchaseProd.prodNo" 		column="prod_no" 				jdbcType="NUMERIC"/>
+  		<!-- <result property="purchaseProd.prodNo" 		column="prod_no" 				jdbcType="NUMERIC"/> -->
   		<result property="buyer.userId" 			column="user_id"				jdbcType="VARCHAR"/>
   		<result property="serialNo" 				column="serial_no" 				jdbcType="VARCHAR"/>
   		<result property="receiverName"				column="receiver_name" 			jdbcType="VARCHAR"/>
@@ -28,6 +28,23 @@
   		<result property="divyFee" 					column="divy_fee" 				jdbcType="NUMERIC"/>
   		<result property="reviewStatus" 			column="review_status" 			jdbcType="VARCHAR"/>
 		
+		<collection property="purchaseProd" resultMap="productSelectMap"/>
+	</resultMap>
+	
+	<resultMap id="productSelectMap" type="product">
+		<result property="prodNo" 				column="prod_no" 				jdbcType="NUMERIC"/>
+		<result property="prodName"				column="prod_name" 				jdbcType="VARCHAR"/>
+		<result property="prodThumbnail" 		column="prod_thumbnail" 		jdbcType="VARCHAR"/>
+		<result property="prodContent" 			column="prod_content" 			jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="prodDetail" 			column="prod_detail" 			jdbcType="VARCHAR"/>
+		<result property="prodStock" 			column="prod_stock" 			jdbcType="NUMERIC"/>
+		<result property="prodTheme" 			column="prod_theme" 			jdbcType="VARCHAR"/>
+		<result property="prodPrice" 			column="prod_price" 			jdbcType="NUMERIC"/>
+		<result property="prodDisRate" 			column="prod_disrate" 			jdbcType="NUMERIC"/>
+		<result property="prodDisPrice" 		column="prod_disprice" 			jdbcType="NUMERIC"/>
+		<result property="prodStatus" 			column="prod_status" 			jdbcType="VARCHAR"/>
+		<result property="couponApply" 			column="coupon_apply" 			jdbcType="VARCHAR"/>
+		<result property="prodRegDate" 			column="prod_regdate" 			jdbcType="DATE"/>
 	</resultMap>
 	
 	
@@ -113,116 +130,107 @@
 		 
 		 
 	<!-- SQL : SELECT LIST -->
-	<select  id="getPurchaseList"  parameterType="map"	resultMap="purchaseSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT p.prod_name, t.* 
-											FROM product p, purchase t
-												<where>
-													p.prod_no=t.prod_no(+)
-													<choose>
-														<when test="buyerId == 'admin'">
-															AND t.tran_no IS NOT NULL
-														</when>
-														<otherwise>
-															AND t.user_id=#{buyerId}
-														</otherwise>
-													</choose>
-													</where>
-											ORDER BY t.tran_no ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	<select  id="getPurchaseList"  parameterType="map"	statementType="CALLABLE" resultMap="purchaseSelectMap">
+	  		SELECT p.*, t.* 
+			FROM product p, purchase t
+				<where>
+					p.prod_no=t.prod_no(+)
+					<choose>
+						<when test="buyerId == 'admin'">
+							AND t.tran_no IS NOT NULL
+						</when>
+						<otherwise>
+							AND t.user_id=#{buyerId}
+						</otherwise>
+					</choose>
+					</where>
+			ORDER BY t.tran_no
 	 </select>
 	 	
 	
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT p.prod_name, t.* 
-											FROM product p, purchase t
-												<where>
-													p.prod_no=t.prod_no(+)
-													<choose>
-														<when test="buyerId == 'admin'">
-															AND t.tran_no IS NOT NULL
-														</when>
-														<otherwise>
-															AND t.user_id=#{buyerId}
-														</otherwise>
-													</choose>
-													</where>
-											ORDER BY t.tran_no ) countTable						
+	  	FROM(	SELECT p.*, t.* 
+				FROM product p, purchase t
+					<where>
+						p.prod_no=t.prod_no(+)
+						<choose>
+							<when test="buyerId == 'admin'">
+								AND t.tran_no IS NOT NULL
+							</when>
+							<otherwise>
+								AND t.user_id=#{buyerId}
+							</otherwise>
+						</choose>
+						</where>
+				ORDER BY t.tran_no ) countTable						
 	 </select>
 	 
 	 <!-- ////////////////////////////////////////////////////////////////////////////// -->
 	 
 	 <!-- SQL : SELECT LIST -->
-	<select  id="getSalesList"  parameterType="search"	resultMap="purchaseSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT p.prod_name, t.* 
-										FROM product p, purchase t
-										WHERE p.prod_no=t.prod_no(+) 
-											AND t.tran_no IS NOT NULL 
-										<if test="orderCondition == null">
-											ORDER BY t.tran_no DESC 
-										</if>
-										<if test="orderCondition != null">
-											<choose>
-												<when test="orderCondition == 0">
-													ORDER BY t.tran_no DESC 
-												</when>
-												<when test="orderCondition == 5">
-													AND NVL(t.divy_status,'000')='001' 
-													ORDER BY t.tran_no DESC 
-												</when>
-												<when test="orderCondition == 6">
-													AND NVL(t.divy_status,'000')='002' 
-													ORDER BY t.tran_no DESC 
-												</when>
-												<otherwise>
-													AND NVL(t.divy_status,'000')='003' 
-													 ORDER BY t.tran_no DESC 
-												</otherwise>
-											</choose>
-										</if>
-									) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	<select  id="getSalesList"  parameterType="search"	statementType="CALLABLE" resultMap="purchaseSelectMap">
+	  	SELECT p.*, t.* 
+		FROM product p, purchase t
+		WHERE p.prod_no=t.prod_no(+) 
+			AND t.tran_no IS NOT NULL 
+		<if test="orderCondition == null">
+			ORDER BY t.tran_no DESC 
+		</if>
+		<if test="orderCondition != null">
+			<choose>
+				<when test="orderCondition == 0">
+					ORDER BY t.tran_no DESC 
+				</when>
+				<when test="orderCondition == 5">
+					AND NVL(t.divy_status,'000')='001' 
+					ORDER BY t.tran_no DESC 
+				</when>
+				<when test="orderCondition == 6">
+					AND NVL(t.divy_status,'000')='002' 
+					ORDER BY t.tran_no DESC 
+				</when>
+				<otherwise>
+					AND NVL(t.divy_status,'000')='003' 
+					 ORDER BY t.tran_no DESC 
+				</otherwise>
+			</choose>
+		</if>
 	 </select>
 	 	
 	
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount2"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(							SELECT p.prod_name, t.* 
-										FROM product p, purchase t
-										WHERE p.prod_no=t.prod_no(+) 
-											AND t.tran_no IS NOT NULL 
-										<if test="orderCondition == null">
-											ORDER BY t.tran_no DESC 
-										</if>
-										<if test="orderCondition != null">
-											<choose>
-												<when test="orderCondition == 0">
-													ORDER BY t.tran_no DESC 
-												</when>
-												<when test="orderCondition == 5">
-													AND NVL(t.divy_status,'000')='001' 
-													ORDER BY t.tran_no DESC 
-												</when>
-												<when test="orderCondition == 6">
-													AND NVL(t.divy_status,'000')='002' 
-													ORDER BY t.tran_no DESC 
-												</when>
-												<otherwise>
-													AND NVL(t.divy_status,'000')='003' 
-													 ORDER BY t.tran_no DESC 
-												</otherwise>
-											</choose>
-										</if>
-										
-											 ) countTable						
+	  	FROM(	SELECT p.*, t.* 
+				FROM product p, purchase t
+				WHERE p.prod_no=t.prod_no(+) 
+					AND t.tran_no IS NOT NULL 
+				<if test="orderCondition == null">
+					ORDER BY t.tran_no DESC 
+				</if>
+				<if test="orderCondition != null">
+					<choose>
+						<when test="orderCondition == 0">
+							ORDER BY t.tran_no DESC 
+						</when>
+						<when test="orderCondition == 5">
+							AND NVL(t.divy_status,'000')='001' 
+							ORDER BY t.tran_no DESC 
+						</when>
+						<when test="orderCondition == 6">
+							AND NVL(t.divy_status,'000')='002' 
+							ORDER BY t.tran_no DESC 
+						</when>
+						<otherwise>
+							AND NVL(t.divy_status,'000')='003' 
+							 ORDER BY t.tran_no DESC 
+						</otherwise>
+					</choose>
+				</if>
+				
+		) countTable						
 	 </select>
 	 
 </mapper>
