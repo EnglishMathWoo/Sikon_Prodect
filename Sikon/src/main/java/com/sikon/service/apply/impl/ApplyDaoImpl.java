@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Apply;
 import com.sikon.service.domain.Heart;
+import com.sikon.service.domain.Purchase;
 import com.sikon.service.domain.Wish;
 import com.sikon.service.apply.ApplyDao;
 
@@ -47,6 +48,17 @@ public class ApplyDaoImpl implements ApplyDao{
 		System.out.println("impl: "+search.getApplyCondition());
 		return sqlSession.selectList("ApplyMapper.getApplyList", map);
 	}
+
+	public List<Apply> getSaleList(Search search) throws Exception {
+		
+		return sqlSession.selectList("ApplyMapper.getSaleList", search);
+	}
+
+	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
+	public int getTotalCount2(Search search) throws Exception {		
+		
+		return sqlSession.selectOne("ApplyMapper.getTotalCount2", search);
+	}	
 
 	public Apply getApply(int applyNo) throws Exception {
 		return sqlSession.selectOne("ApplyMapper.getApply", applyNo);
@@ -89,11 +101,7 @@ public class ApplyDaoImpl implements ApplyDao{
 		sqlSession.update("ApplyMapper.cancel",map);
 		
 	}
-	
-	public List<Apply> getTotalSales(String applierId) throws Exception {
-		
-		return sqlSession.selectList("ApplyMapper.getTotalSales", applierId);
-	}	
+
 	
 
 }

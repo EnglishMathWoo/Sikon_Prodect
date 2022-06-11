@@ -12,6 +12,8 @@ public interface ApplyService {
 	public void addApply(Apply apply) throws Exception;
 
 	public Map<String, Object> getApplyList(Search search,String applierId) throws Exception;
+	
+	public Map<String , Object > getSaleList(Search search) throws Exception;
 
 	public Apply getApply(int applyNo) throws Exception;
 
@@ -25,7 +27,7 @@ public interface ApplyService {
 	
 	public void  cancel (int cookStatus, int applyNo ) throws Exception ;
 	
-	public List<Apply>  getTotalSales  (String applierId)  throws Exception ;
+
 	
 	
 }

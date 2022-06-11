@@ -306,7 +306,7 @@ public class ApplyController {
 			User user=(User)session.getAttribute("user");
 			
 			// Business logic ผ๖วเ
-			Map<String , Object> map=applyService.getApplyList(search,user.getUserId());
+			Map<String , Object> map=applyService.getSaleList(search);
 			
 			Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 			System.out.println(resultPage);

@@ -57,6 +57,14 @@ div.row{
  }
 
 </style>
+
+<style>
+
+
+.container {
+	padding-top: 150px;
+} 
+</style>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		 

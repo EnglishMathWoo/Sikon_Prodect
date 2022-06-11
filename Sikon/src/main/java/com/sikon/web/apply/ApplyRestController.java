@@ -19,6 +19,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -87,6 +88,31 @@ public class ApplyRestController {
 	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;	
 	
+	
+	@RequestMapping( value="json/listSale", method=RequestMethod.GET )
+
+	public  Map<String, Object> listSale( @RequestBody Search search  ,  HttpServletRequest request) throws Exception{
+		
+		System.out.println("/purchase/json/listSale : POST");
+		
+		//Business Logic
+		System.out.println(search);
+		search.setPageSize(pageSize);
+		
+		HttpSession session=request.getSession();
+		User user=(User)session.getAttribute("user");
+		
+		// Business logic ผ๖วเ
+		Map<String , Object> map=applyService.getSaleList(search);
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		System.out.println(resultPage);
+		
+		map.put("resultPage", resultPage);
+		
+		
+		return map;
+	}	
 	
 	
 	
