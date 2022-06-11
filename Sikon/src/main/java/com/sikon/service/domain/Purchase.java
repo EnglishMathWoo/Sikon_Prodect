@@ -24,7 +24,7 @@ public class Purchase {
 	private int usedPoint;
 	private int earnPoint;
 	private int divyFee;
-	private String PaymentOpt;
+	private String paymentOpt;
 	private String divyStatus;
 	private String reviewStatus;
 
@@ -215,17 +215,17 @@ public class Purchase {
 	}
 
 
-
 	public String getPaymentOpt() {
-		return PaymentOpt;
+		return paymentOpt;
 	}
 
 
 
 	public void setPaymentOpt(String paymentOpt) {
-		PaymentOpt = paymentOpt;
+		this.paymentOpt = paymentOpt;
 	}
 
+	
 
 
 	public String getDivyStatus() {
@@ -271,7 +271,7 @@ public class Purchase {
 				+ receiverPhone + ", receiverEmail=" + receiverEmail + ", divyAddr=" + divyAddr + ", divyMessage="
 				+ divyMessage + ", purchaseQuantity=" + purchaseQuantity + ", orderDate=" + orderDate + ", invoiceNum="
 				+ invoiceNum + ", usedPoint=" + usedPoint + ", earnPoint=" + earnPoint + ", divyFee=" + divyFee
-				+ ", PaymentOpt=" + PaymentOpt + ", divyStatus=" + divyStatus + ", reviewStatus=" + reviewStatus + "]";
+				+ ", paymentOpt=" + paymentOpt + ", divyStatus=" + divyStatus + ", reviewStatus=" + reviewStatus + "]";
 	}
 
 
