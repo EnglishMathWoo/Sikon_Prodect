@@ -9,20 +9,43 @@
  	
 	<resultMap id="applySelectMap" type="apply">
 		<result property="applyNo" 			column="apply_no" 			jdbcType="NUMERIC"/>
-		<result property="classCook.cookNo" 				column="cook_no" 					jdbcType="NUMERIC" />
+		<!--<result property="classCook.cookNo" 				column="cook_no" 					jdbcType="NUMERIC" />-->
 		<result property="applier.userId" 		column="applier_id"		jdbcType="VARCHAR"/>
 		<result property="paymentOption" 		column="PAYMENT_OPTION" 					jdbcType="VARCHAR" />
 		<result property="applyStatus" 				column="apply_status" 					jdbcType="VARCHAR" />
 		<result property="cookStatus" 			column="cook_status" 		jdbcType="NUMERIC" />
 		<result property="checkDate" 				column="check_date" 			jdbcType="DATE"/>
 		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
-
+	<collection property="classCook" resultMap="cookSelectMap"/>
 		
 		
 
 	</resultMap>	
 
-
+	<resultMap id="cookSelectMap" type="cook">
+	
+		<result property="cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
+		<result property="cookName"			column="cook_name" 		jdbcType="VARCHAR" />
+		<result property="cookFilename" 	column="cook_filename" 		jdbcType="VARCHAR" />
+		<result property="cookBrief"      column="cook_brief"           jdbcType="VARCHAR"/>
+		<result property="cookDifficuty" 				column="cook_difficuty" 					jdbcType="VARCHAR" />		
+		<result property="cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
+		<result property="cookTheme" 			column="cook_theme" 		jdbcType="VARCHAR" />
+		<result property="aplstarTime"      column="apl_startime"           jdbcType="VARCHAR"/>
+		<result property="aplendTime"      column="apl_endtime"           jdbcType="VARCHAR"/>	
+		<result property="cookRecruit" 				column="cook_recruit" 					jdbcType="NUMERIC" />
+		<result property="startTime"      column="start_time"           jdbcType="VARCHAR"/>		
+		<result property="endTime"      column="end_time"           jdbcType="VARCHAR"/>		
+		<result property="cookLocation"      column="cook_location"           jdbcType="VARCHAR"/>
+		<result property="cookRegdate"      column="cook_regdate"           jdbcType="DATE"/>
+		<result property="cookVideo"      column="cook_video"           jdbcType="VARCHAR"/>
+		<result property="cookStock"      column="cook_stock"           jdbcType="NUMERIC"/>
+		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
+		<result property="cookContent" 			column="cook_content" 			jdbcType="VARCHAR" />
+		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
+		<result property="mentor.userId" 	column="mentor_id" 		jdbcType="VARCHAR"/>
+		
+	</resultMap>
 
 
 	<!-- SQL : INSERT -->
@@ -74,7 +97,7 @@
 	 </update>	
 	 
 	 <!-- SQL : SELECT LIST -->
-	<select  id="getApplyList"  parameterType="map"	resultMap="applySelectMap">
+	<select  id="getApplyList"  parameterType="map" resultMap="applySelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT *
@@ -120,21 +143,45 @@
 											
 	 </select>
 	 
-	 <select 	id="getTotalSales"	parameterType="string"	resultMap="applySelectMap">
-		SELECT c.cook_name, c.cook_filename, c.cook_price, a.*
-		FROM cook c, apply a 
-		WHERE c.cook_no=a.cook_no 
-		AND applier_id = #{applierId}
-		ORDER BY apply_no DESC
-	 </select>	 
+	<select  id="getSaleList"  parameterType="search"	statementType="CALLABLE" resultMap="applySelectMap">
+	  	SELECT c.*, a.* 
+		FROM cook c, apply a
+		WHERE c.cook_no=a.cook_no(+) 
+			AND a.apply_no IS NOT NULL 
+											<if test="applyCondition != null">
+												<choose>
+												<when test="applyCondition == 5 ">
+													where apply_status = '100' 
+													</when>
+												<when test="applyCondition == 6  ">
+													where apply_status = '200'  
+														</when>
+														</choose>
+											</if>									
+											ORDER BY apply_no DESC 
+	 </select>
 	 
-	 <!--
-	<select id="getTotalSales" resultType="int">
-		
-			SELECT 
-				sum(cook_price) as cook_price
-			FROM apply WHERE apply_status = 200;
-	
-	</select>
-	 -->
+
+
+	 <select  id="getTotalCount2"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT c.*, a.* 
+		FROM cook c, apply a
+		WHERE c.cook_no=a.cook_no(+) 
+			AND a.apply_no IS NOT NULL 
+											<if test="applyCondition != null">
+												<choose>
+												<when test="applyCondition == 5 ">
+													where apply_status = '100' 
+													</when>
+												<when test="applyCondition == 6  ">
+													where apply_status = '200'  
+														</when>
+														</choose>
+											</if>									
+											ORDER BY apply_no DESC 
+				
+		) countTable						
+	 </select>
+
 </mapper>
