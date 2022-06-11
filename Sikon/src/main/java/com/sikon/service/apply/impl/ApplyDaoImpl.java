@@ -43,6 +43,8 @@ public class ApplyDaoImpl implements ApplyDao{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("applierId", applierId);
 		map.put("search", search);
+		System.out.println("search: "+map.get("search"));
+		System.out.println("impl: "+search.getApplyCondition());
 		return sqlSession.selectList("ApplyMapper.getApplyList", map);
 	}
 

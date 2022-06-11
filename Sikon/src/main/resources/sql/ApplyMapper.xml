@@ -79,26 +79,18 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT *
 											FROM apply
-	
-												<if test="applyCondition == null">
-											ORDER BY apply_no DESC 
-											</if>
-											<if test="applyCondition != null">
+
+											<if test="search.applyCondition != null">
 												<choose>
-												<when test="applyCondition == 0">
-													ORDER BY apply_no DESC 
-												</when>
-												<when test="applyCondition == 5">
-													where NVL(apply_status,'000')='100' 
-													ORDER BY apply_no DESC 
-												</when>
-												<when test="applyCondition == 6">
-													where NVL(apply_status,'000')='200'  
-													 ORDER BY apply_no DESC 
-												</when>
-											</choose>
-										</if>										
-											
+												<when test="search.applyCondition == 5 ">
+													where apply_status = '100' 
+													</when>
+												<when test="search.applyCondition == 6  ">
+													where apply_status = '200'  
+														</when>
+														</choose>
+											</if>									
+											ORDER BY apply_no DESC 
 										) inner_table
 											
 						WHERE ROWNUM &lt;= #{search.endRowNum} )
@@ -112,24 +104,18 @@
 	  	SELECT COUNT(*)
 	  	FROM (	SELECT *
 											FROM apply
-								<if test="applyCondition == null">
-											ORDER BY apply_no DESC 
-											</if>
-											<if test="applyCondition != null">
+											<if test="search.applyCondition != null">
 												<choose>
-												<when test="applyCondition == 0">
-													ORDER BY apply_no DESC 
-												</when>
-												<when test="applyCondition == 5">
-													where NVL(apply_status,'000')='100' 
-													ORDER BY apply_no DESC 
-												</when>
-												<when test="applyCondition == 6">
-													where NVL(apply_status,'000')='200'  
-													 ORDER BY apply_no DESC 
-												</when>
-											</choose>
-										</if>											
+												<when test="search.applyCondition == 5 ">
+													where apply_status = '100' 
+													</when>
+												<when test="search.applyCondition == 6  ">
+													where apply_status = '200'  
+														</when>
+														</choose>
+											</if>												
+													
+											ORDER BY apply_no DESC 							
 										 ) countTable					
 											
 	 </select>
