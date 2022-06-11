@@ -163,7 +163,7 @@ padding-top:150px;
 
 <!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-	<jsp:include page="/cook/leftBar.jsp" />
+	<!-- <jsp:include page="/cook/leftBar.jsp" />-->
 	<!-- ToolBar End /////////////////////////////////////-->
 
 
