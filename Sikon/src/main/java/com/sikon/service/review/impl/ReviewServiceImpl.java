@@ -94,4 +94,10 @@ public class ReviewServiceImpl implements ReviewService {
 
 	}
 
+	@Override
+	public Review getReview(int reviewNo) throws Exception {
+		return reviewDao.getReview(reviewNo);
+		
+	}
+
 }

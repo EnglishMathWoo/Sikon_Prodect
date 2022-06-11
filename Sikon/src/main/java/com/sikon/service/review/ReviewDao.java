@@ -15,6 +15,7 @@ public interface ReviewDao {
 	//SELECT LIST
 	public List<Review> getReviewList(Search search,String category, int textNo) throws Exception;
 	public List<Review> getMyReviewList(Search search, String writerNickname) throws Exception;
+	public Review getReview(int reviewNo) throws Exception;
 
 	//UPDATE
 	public void updateReview(Review review) throws Exception;

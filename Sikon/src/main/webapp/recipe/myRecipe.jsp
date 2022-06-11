@@ -19,6 +19,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap" rel="stylesheet">
 	
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -42,7 +44,6 @@
 
 
 <style>
-
 body {
 	padding-top: 50px;
 	
@@ -51,61 +52,49 @@ body {
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
-	color: #75574B
+	color: #75574B;
+	border-bottom: none;
 }
-
 .text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
 	color: #75574B
 }
-
 .row {
 	font-family: 'Gowun Batang', serif;
 }
-
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
 }
-
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
+.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
 }
 .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
 .ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
 .ref-sort li:last-child{margin:0; padding:0;}
 .ref-sort li:last-child::after{display:none;}
 .ref-sort li a{}
-
 /* References */
 .ref-sort li a{color:inherit;}
-.ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
+.ref-sort li a:hover, #references .ref-sort li.current a{color:#937062;text-decoration-line: none;}
+
 
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 .sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
 .sectiontitle .heading{margin:0; padding:0; line-height:1;}
-
 .sectiontitle{max-width:none; margin-bottom:50px;}
-
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 .imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
 .imgover, .imgover:hover::after{color:#333333;} 
-
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
-
 #latest article{max-width:348px;}
-
 #footer{padding-bottom:50px;}/* Not required, just looks a little better */
 .latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
 .latestimg > li img{width:auto;}
-
 * Latest
 --------------------------------------------------------------------------------------------------------------- */
 #latest{}
-
 #latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
 article{}
 article img{width:100%;}/* Force the image to have the full width of parent at all times */
@@ -119,36 +108,37 @@ article img{width:100%;}/* Force the image to have the full width of parent at a
 .excerpt .meta li:last-child::after{margin:0; content:"";}
 .excerpt p{}
 .excerpt footer{margin-top:30px;}
-
 .latestimg{}
 .latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
 .latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
 .latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
 .latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
 .latestimg > li a.imgover{display:block;}
-
 .carousel-inner > .item > img {
   top: 0;
   left: 0;
   min-width: 100%;
   max-height: 500px;
 } 
-
 /* [RECIPE LIST] 폰트 적용 */
 .wrapper{
-font-family: 'Gowun Batang', serif;
+font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-
-
-
+/* 검색, 정렬조건 css */
+.condition{
+font-family: 'Gowun Batang', serif;
+width: 100px;
+float:right;
+border-color:#D7D7D7;
+}
 /* 레시피 등록 버튼 css */
 .submit
  {
   display: block;
   border: none;
-  width: 80px;
-  height: 30px;
-  border-radius: 10px;
+  width: 150px;
+  height: 36px;
+  border-radius: 30px;
   color: #fff;
   font-size: 15px;
   cursor: pointer;
@@ -159,7 +149,6 @@ font-family: 'Gowun Batang', serif;
   	font-family: 'Gowun Batang', serif;
   
 }
-
 /* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
 hr {
     margin-top: 60px;
@@ -171,6 +160,97 @@ hr {
 /* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
     margin: 0 0 0px;
+    font-family: 'Gowun Batang', serif;
+    
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top:120px;
+    
+}
+
+.hoc{
+padding-top:0px;
+}
+
+#themeAll{
+	color:#937062;
+	text-decoration-line: none;
+}
+
+
+/* 검색창 css */
+
+.form{
+
+    position: relative;
+}
+
+.form .fa-search{
+
+    top:20px;
+    left: 20px;
+    color: #9ca3af;
+
+}
+
+.form span{
+
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+
+}
+
+.left-pan{
+    padding-left: 7px;
+}
+
+.left-pan i{
+   
+   padding-left: 10px;
+}
+
+.form-input{
+
+    border-radius: 10px;
+}
+
+.form-input:focus{
+
+    box-shadow: none;
+    border:none;
+}
+
+.form-control{
+border-radius: 10px;
+display: inline-block;
+vertical-align: middle;
+height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+}
+
+.col-md-6 {
+    width: 100%;
+}
+
+/* 폰트어썸 search */
+.search{
+font-family:FontAwesome;
+border: none;
+background-color: #f7f7f7;
 }
 
 </style>
@@ -225,7 +305,6 @@ p {
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	
-	<!--  화면구성 div Start /////////////////////////////////////-->
 	
 <div class="container">
 <!-- ################################################################################################ -->
@@ -234,7 +313,7 @@ p {
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br> 내가 쓴 레시피 </h3>
+		      <h3 class="font-x2 nospace" align="center" style="font-family: 'Gowun Batang', serif;"><br> 내가 쓴 레시피 </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		  		    <button type="button" class="submit">삭제</button>
@@ -255,9 +334,7 @@ p {
     <div id="latest" class="group">
        <input type="checkbox" name="ckRecipe" id="${recipe.recipeNo }" >
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#"> 
-      <ul>
-  <li>
-  <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></li></ul></a>
+  <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">
           <h4 class="heading" >${recipe.recipeName }</h4>
            <h6 >${recipe.recipeDetail }</h6>
