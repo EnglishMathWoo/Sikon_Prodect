@@ -119,7 +119,7 @@
 	    	  $.ajax({
 	    		  url : "/apply/json/listSale",
 	    		  type:"get",
-	    		  data:{'checkDate' : checkDate, 'totalprice' : totalprice },
+	    		  data:{'checkDate' : checkDate, 'cookPrice' : cookPrice },
 	    		  dataType:"json",
 	    		  success:function(data){
 	    			  // console.log(data[0].pos_count);

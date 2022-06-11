@@ -22,7 +22,7 @@
   		<result property="usedPoint" 				column="used_point" 			jdbcType="NUMERIC"/>  		 
   		<result property="earnPoint" 				column="earn_point"				jdbcType="NUMERIC"/>
   		<result property="orderDate" 				column="orderdate" 				jdbcType="DATE"/>
-  		<result property="PaymentOpt" 				column="payment_opt" 			jdbcType="VARCHAR"/>
+  		<result property="paymentOpt" 				column="payment_opt" 			jdbcType="VARCHAR"/>
   		<result property="divyStatus" 				column="divy_status" 			jdbcType="VARCHAR"/>
   		<result property="invoiceNum" 				column="invoice_num" 			jdbcType="VARCHAR"/>
   		<result property="divyFee" 					column="divy_fee" 				jdbcType="NUMERIC"/>
@@ -66,7 +66,7 @@
 				#{usedPoint}, 
 				#{earnPoint}, 
 				SYSDATE, 
-				#{PaymentOpt}, 
+				#{paymentOpt}, 
 				#{divyStatus}, 
 				#{invoiceNum}, 
 				#{divyFee},
@@ -144,7 +144,7 @@
 						</otherwise>
 					</choose>
 					</where>
-			ORDER BY t.tran_no
+			ORDER BY t.tran_no DESC 
 	 </select>
 	 	
 	
@@ -164,7 +164,7 @@
 							</otherwise>
 						</choose>
 						</where>
-				ORDER BY t.tran_no ) countTable						
+				ORDER BY t.tran_no  DESC ) countTable						
 	 </select>
 	 
 	 <!-- ////////////////////////////////////////////////////////////////////////////// -->

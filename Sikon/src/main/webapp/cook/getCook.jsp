@@ -34,7 +34,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
-
+ <!-- //////////////////////////////////공유하기////////////////////////////// -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
     <style>
 
         .bi-heart{
@@ -78,8 +79,51 @@ div.image{
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+	///*
+	Kakao.init('bdc66313a731d6cd370ddce26735db6a');
 
-	
+	  // SDK 초기화 여부를 판단합니다.
+	  console.log(Kakao.isInitialized());
+
+	  
+	  function kakaoShare() {
+		  
+		  var image = $("input:hidden[name='image']").val();
+		  console.log(image);
+		  var cookName = $("input:hidden[name='cookName']").val();
+		  console.log(name);
+		  var cookBrief = $("input:hidden[name='cookBrief']").val();
+		  console.log(detail);
+		  var cookNo = $("input:hidden[name='cookNo']").val();
+		 console.log(prodNo);
+		  
+	    Kakao.Link.sendDefault({
+	      objectType: 'feed',
+	      content: {
+	        title: cookName,
+	        description: cookBrief,
+	        imageUrl: 'http://192.168.0.50:8080/resources/images/uploadFiles/'+image ,
+	        link: {
+	          mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	          webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	        },
+	      },
+	      buttons: [
+	        {
+	          title: '웹으로 보기',
+	          link: {
+	            mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	            webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	          },
+	        },
+	      ],
+	      // 카카오톡 미설치 시 카카오톡 설치 경로이동
+	      installTalk: true,
+	    })
+	  }
+//*/	
+	//=====================공유하기====================================
+
 //=========================================================================================//	
 	$( document ).ready( function() {
 		 
@@ -183,24 +227,11 @@ $(function() {
 				
 				<div class="row">
 				
- <i class="bi bi-heart"></i>
-    
-    <script>
-    var i = 0;
-    $('.bi-heart').on('click',function(){
-        if(i==0){
-            $(this).removeClass('bi-heart');
-            $(this).addClass('bi-heart-fill');
-            i++;
-        }else if(i==1){
-            $(this).removeClass('bi-heart-fill');
-            $(this).addClass('bi-heart');
-            i--;
-        }
-        
-    });
-
-</script>
+					<div class="text-right">
+						<a id="kakao-link-btn" href="javascript:kakaoShare()">
+					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
+					    </a>
+					</div>
 				
 				
 					
