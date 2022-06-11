@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
+import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 
 
@@ -23,6 +24,9 @@ public interface UserService {
 	
 	// 내정보확인 
 	public User getUser(String userId) throws Exception;
+	public List getLicense(String userId) throws Exception;
+//	public Career getCareer(String userId) throws Exception;
+	
 	public List getUCL(String userId) throws Exception;
 	// ID찾기
 	public User findUserId(String userNickname) throws Exception ;

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -105,9 +106,62 @@
 		</div>
 		
 		<hr/>
-						
+			
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>쿠킹멘토 신청 여부</strong></div>
+			<div class="col-xs-8 col-md-4">
+			
+			
+			${user.mentorApply}</div>
+		</div>
+		
+		<hr/>	
+		
+		<!--  		
+		<div class="form-group">
+    		<label for="mentorApply" class="col-sm-offset-1 col-sm-3 control-label" >쿠킹멘토 신청 여부</label>
+   			<div class="col-sm-4">
+      	 	<input type="radio" name="mentorApply" value="N" checked="checked">미신청  &nbsp
+			<input type="radio" name="mentorApply" value="Y" >신청
+    		</div>
+ 	 	  </div>		
+		-->
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>자격증명</strong></div>
+	  		<c:set var="i" value="0" />
+		 	 <c:forEach var="license" items="${license}">
+		  				
+				<div class="col-xs-8 col-md-4">${license.LICENSE_NAME}</div>
+			</c:forEach>
+		</div>
 		
 		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>발급기관</strong></div>
+	  		<c:set var="i" value="0" />
+		 	 <c:forEach var="license" items="${license}">
+		  				
+				<div class="col-xs-8 col-md-4">${license.LICENSE_INSTITUTION}</div>
+			</c:forEach>
+		</div>
+		
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>취득기간</strong></div>
+	  		<c:set var="i" value="0" />
+		 	 <c:forEach var="license" items="${license}">
+		  				
+				<div class="col-xs-8 col-md-4">${license.LICENSE_DATE}</div>
+			</c:forEach>
+		</div>
+		
+		
+		<hr/>
 		
 		
 		

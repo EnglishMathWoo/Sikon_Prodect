@@ -19,6 +19,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sikon.common.Search;
+import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserDao;
 import com.sikon.service.user.UserService;;
@@ -181,6 +182,12 @@ public class UserServiceImpl implements UserService{
 	public User getUser(String userId) throws Exception {
 		return userDao.getUser(userId);
 	}
+	public List getLicense(String userId) throws Exception {
+		return userDao.getLicense(userId);
+	}
+//	public Career getCareer(String userId) throws Exception {
+//		return userDao.getCareer(userId);
+//	}
 	public List getUCL(String userId) throws Exception {
 		return userDao.getUCL(userId);
 	}

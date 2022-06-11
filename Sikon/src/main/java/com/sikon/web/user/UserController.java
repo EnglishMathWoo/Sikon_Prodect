@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
@@ -229,11 +228,14 @@ public class UserController {
 		System.out.println("/user/getUser : GET");
 		//Business Logic
 		User user = userService.getUser(userId);
-		List list = userService.getUCL(userId);
+		List list = userService.getLicense(userId);
+		System.out.println(list);
+	//	List list = userService.getUCL(userId);
 		
 		// Model °ú View ¿¬°á
 		model.addAttribute("user", user);
-		model.addAttribute("ucl", list);
+		model.addAttribute("license", list);
+	//	model.addAttribute("ucl", list);
 		
 		return "forward:/user/getUser.jsp";
 	}
