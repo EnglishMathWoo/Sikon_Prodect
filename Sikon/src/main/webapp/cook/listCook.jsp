@@ -139,6 +139,8 @@ div.thumbnail {
 			 console.log('수정하기');
 			 self.location = "/cook/updateCook?cookNo="+cookNo
 		});
+		 
+		 
 
 
 		//좋아요 push 알림
@@ -327,7 +329,7 @@ div.thumbnail {
 					                		var cancel;
 					                		var button;
 					                		var cookTheme;
-					                		var heart;
+					                		var heartCount;
 					                
 					                		if(JSONData.list[i].cookStock == '0'){
 				                				
@@ -358,8 +360,12 @@ div.thumbnail {
 				                				cookTheme = "<h5><strong>테마 : 간식</strong></h5>";
 				                			}
 					                		
-
-					                	
+					                		if(JSONData.list[i].heartCount == '0'){
+					                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</a>" ;
+					                		}else {
+					                			
+					                			heartCount= "<p align='right' class='bi bi-heart like_btn-fill' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</a>" ;
+					                		}
 					                	
 					                			button = "<a class='btn btn-defualt btn delete'  role='button' value='"+JSONData.list[i].cookNo+"'>삭&nbsp;제</a>" ;
 					                			heart= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</a>" ;
@@ -391,7 +397,7 @@ div.thumbnail {
 					                     						+"<div><h5><strong>수업시간: "+JSONData.list[i].startTime+"&emsp;~&emsp;"+JSONData.list[i].endTime+"</strong></h5></div>"
 					                     						+"</div>"
 					                     						+button
-					                     						+heart	
+					                     						+heartCount	
 					                     						+"</div>"
 					                     						+"<div class='col-xs-2 col-md-2'>"
 					                     						+"</div>"

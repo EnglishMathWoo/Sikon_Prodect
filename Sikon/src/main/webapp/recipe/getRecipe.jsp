@@ -26,11 +26,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <!-- Bootstrap Dropdown Hover CSS -->
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<link href="/resources/css/animate.min.css" rel="stylesheet">
+<link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 
 <!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+<script src="/resources/javascript/bootstrap-dropdownhover.min.js"></script>
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <!-- font -->
@@ -64,21 +64,20 @@ background-color: red;
 
 .container {
 	padding-top: 200px;
-	width: 652px;
- 	font-family: 'NanumBarunGothic', sans-serif;
+	margin-left: 50%;
+    width: 800px;
+     	font-family: 'NanumBarunGothic', sans-serif;
 }
 
 body {
  	font-family: 'NanumBarunGothic', sans-serif;
+ 	    width: 750px;
 }
 
 .image {
 	padding-top: 30px;
 }
 
-div.row.thum {
-	text-align: center;
-}
 
 .row{
 margin-right:0px;
@@ -87,11 +86,6 @@ margin-left: 0px;
 </style>
 
 <style>
-#thum{
-	width: auto;
-	margin-left: 130px;
-    margin-bottom: 20px;
-}
 
 
 .text-center {
@@ -242,6 +236,13 @@ body{
 .mar-top {
     margin-top: 15px;
 }
+
+/* 폰트어썸  */
+.deleteReview, .updateReview{
+font-family:FontAwesome;
+border: none;
+background-color: #fff;
+}
 </style>
 
 </head>
@@ -251,29 +252,26 @@ body{
 
 	<div class="container">
 
-		<div class="row main">
-			<div class="row thum">
 
-				<div class="col-xs-6 col-md-6 text-center image">
+				<div class="col-xs-12 col-md-12  col-lg-12" style="text-align: center">
 					<c:forEach var="name" items="${recipe.recipeImg.split('/')[0]}">
 					<input type="hidden" name="image" value="${recipe.recipeImg}">
-					<div class="text-center">
 						<img id="thum" src="/resources/images/uploadFiles/${name}"
 							width="600" height="400" style="text-align: center;"/>
-							</div>
 					</c:forEach>
 				</div>
 
-			</div>
 <br/>
 
 				<input type="hidden" name="recipeNo" id="recipeNo"
 					value="${recipe.recipeNo }" />
 
+
+
+
+
 				<div class="col-xs-12 col-md-12  col-lg-12">
-
-
-
+				<br/><br/>
 					<div style="font-family: 'YeolrinMyeongjo-Medium'; font-size:17px ">${recipe.recipeDetail }</div>
 					<div>
 					<div class="kgiNry" style="text-align: right;" align="right" >
@@ -290,7 +288,6 @@ body{
 					<input type="hidden" name="detail" value="${recipe.recipeDetail }" />
 					<input type="hidden" name="name" value="${recipe.recipeName}" />
 
-					<div>
 					
 						<h5>
 							난이도 <c:choose>
@@ -308,12 +305,9 @@ body{
 
 							&nbsp;소요시간 ${recipe.cookingTime }분 
 						</h5>
-					</div>
 					<hr/>
-				</div>
 
 			
-			<div class="col-xs-12 col-md-12  col-lg-12 ">
 
 				마치 오븐 스파게티처럼 보이는 라자냐는 이탈리아 파스타 요리 중 하나예요. 반죽을 얇게 밀어 넓적한 직사각형
 					모양으로 자른 파스타를 라구 알라 볼로네제, 베샤멜 소스, 파르미지아노 레지아노 치즈 등의 속 재료와 함께 층층이 쌓은
@@ -322,11 +316,9 @@ body{
 					인스턴트와 비교할 수 없어요. 라구소스를 끓여 놓으면 활용할 곳이 많으니 한 번에 많이 만들어 두고두고 먹어도 좋아요.
 					고급스럽고 예쁜 라자냐로 식탁을 빛내보세요.
 					<br/>
-			</div>
 
 
 		
-		<div class="col-xs-12 col-md-12  col-lg-12">
 				<div class="iEJcKG">
 						<h3 class="iEJcKGheader">기본 재료</h3>
 						<div class="table">
@@ -344,23 +336,18 @@ body{
 						
 
 <hr/>
-		</div>
 
 
-		<div class="col-xs-12 col-md-12  col-lg-12">
 		<div class="iEJcKG">
 			<h3 class="iEJcKGheader">레시피</h3>
 			<br/>
 			${recipe.recipeOrder }
 			</div>
 		<hr/>
-		</div>
-
 				<form>
-			<div class="container bootdey">
+				
 				<h3 class="iEJcKGheader">리뷰</h3>
 				
-				<div class="col-xs-12 col-md-12  col-lg-12">
 						<div class="panel">
 							<div class="panel-body">
 								<textarea class="form-control" name="reviewContent" rows="2"
@@ -375,7 +362,6 @@ body{
 
 								</div>
 							</div>
-						</div>
 				
 				<c:forEach var="review" items="${review}">
 					
@@ -395,6 +381,10 @@ body{
 											</p>
 										</div>
 										<p>${review.reviewContent }</p>
+										<c:if test="${review.writerNickname == user.userNickname }">
+										<input type="button" class="deleteReview"  value="&#xf2ed" id="${review.reviewNo }" style="float: right;margin-right: 17px">
+										<input type="button" class="updateReview"  value="&#xf304" style="float: right;margin-right: 5px">
+										</c:if>
 									</div>
 								</div>
 							</div>
@@ -408,10 +398,9 @@ body{
 							<!-- End Newsfeed Content -->
 
 						</div>
-					</div>
 				</form>
+					</div>
 			</div>
-		</div>
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 </body>
@@ -422,6 +411,18 @@ body{
 		$("button:contains('등록')").on("click", function() {
 			fncAddReview();
 
+		});
+		
+		$(".deleteReview").on("click", function() {
+		var array = new Array();
+		var textNo = $("input:hidden[name='recipeNo']").val();
+		array.push($(this).attr('id'));
+		alert("해당 리뷰를 삭제하시겠습니까?")	
+	//	self.location = "/review/deleteReview?textNo="+textNo+"checkList="+array;
+		});
+		
+		$(".deleteReview").on("click", function() {
+			
 		});
 
 	});

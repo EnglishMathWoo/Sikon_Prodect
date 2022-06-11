@@ -10,8 +10,6 @@
 	<meta charset="EUC-KR">
 	
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -21,11 +19,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link href="/css/animate.min.css" rel="stylesheet">
-<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-<!-- Bootstrap Dropdown Hover JS -->
-<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
 
 
 <!-- jQuery UI toolTip 사용 CSS-->
@@ -55,14 +48,16 @@ div.container {
 	
 	
 		//============= "구매"  Event 연결 =============
-		 $(function() {
+		
+		/*	
+		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "#iamportPayment" ).on("click" , function() {
 				alert('결제');
 				fncAddPurchase();
 			});
 		});	
-		
+		*/
 		
 		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
@@ -179,36 +174,91 @@ div.container {
 <script>
   
 
-/*	
+///*
+
+		$(function() {
+			
+			var d = new Date();
+			
+			var year = d.getFullYear();
+			var month = (d.getMonth()+1);
+			var date = d.getDate();
+			var hour = d.getHours();
+			var min = d.getMinutes();
+			var sec = d.getSeconds();
+			var day = d.getDay();
+			var now = "";
+			
+			var user = $("#receiverEmail").val();
+			
+			console.log("user: "+user);
+			
+			now = now+year+month+date+hour+min+sec+day+user;
+			
+			console.log("now: "+now);
+			
+		});	
+
+	
+	
 	$(function() {
+		
 		$("button.iamportPayment").on("click" , function() {
 			console.log("아임포트");		
+			
+			var payopt = $("button.iamportPayment").attr('value');
+			console.log("payopt: "+payopt);
+			$("#paymentOpt").val(payopt);
+			
 			payment();	
 		});
 	});	
 	
 function payment(data) {
 	
+	var payment = $("#paymentOpt").val();
+	console.log("payment: "+payment);
+	
+	var prodname = $("#prodname").val();
+	console.log("prodname: "+prodname);
+	
+	var prodprice = $("#prodprice").val();
+	console.log("prodprice: "+prodprice);
 
+	var buyeremail = $("#buyeremail").val();
+	console.log("buyeremail: "+buyeremail);
+
+	var buyername = $("#buyername").val();
+	console.log("buyername: "+buyername);
+
+	var buyerphone = $("#buyerphone").val();
+	console.log("buyerphone: "+buyerphone);
+	
+	var address = $("#sample6_address").val();
+	console.log("address: "+address);
+	
+	var postcode = $("#sample6_postcode").val();
+	console.log("postcode: "+postcode);
+	
+	
 	
 	IMP.init('imp05238113'); 
     
     IMP.request_pay({
-    	pg : "html5_inicis", 
-        pay_method : 'card',
-        merchant_uid : '1012',
-        name : '테스트',
-        amount : 100,
-        buyer_email : 'pjn39@naver.com',
-        buyer_name : 'pjw',
-        buyer_tel : '010-4242-4242',
-        buyer_addr : '서울특별시 강남구 신사동',
-        buyer_postcode : '구매자 주소',
-        m_redirect_url : '01181'
+    	pg : "kakaopay", 
+        pay_method : payment,
+        merchant_uid : '1202',
+        name : prodname ,
+        amount : prodprice ,
+        buyer_email : buyeremail ,
+        buyer_name : buyername ,
+        buyer_tel : buyerphone ,
+        buyer_addr : address ,
+        buyer_postcode : postcode 
     }, function(rsp) {
         if ( rsp.success ) {
             alert("성공! imp_uid: "+rsp.imp_uid+" / merchant_uid(orderkey): "+rsp.merchant_uid);
-            self.location = "/product/listProduct?menu=search";
+            fncAddPurchase();
         } else {
         	alert("실패.. 코드: "+rsp.error_code+" / 메시지: "+rsp.error_msg);
             
@@ -387,12 +437,25 @@ function payment(data) {
 		  
 		  </div>
 		  
+		  <input type="hidden" name="paymentOpt" id="paymentOpt" value="">
+		  
 		</form>
-		<!-- form Start /////////////////////////////////////-->
+<!-- 결제하기 /////////////////////////////////////-->		
+		
+	<input type="hidden" id="prodname" value="${product.prodName }"/>
+	<input type="hidden" id="prodprice" value="${product.prodDisPrice }"/>
+	<input type="hidden" id="buyeremail" value="${user.userId }"/>
+	<input type="hidden" id="buyername" value="${user.userName }"/>
+	<input type="hidden" id="buyerphone" value="${user.phone }"/>
+	
+	
+	<!-- 주소는 api input 이용 -->	
+	
 		<div class="text-center">
-			<button type="button" class="btn btn-default btn-block iamportPayment" id="iamportPayment">결제하기</button>	
+			<button type="button" class="btn btn-default btn-block iamportPayment" id="iamportPayment" value="KA">결제하기</button>	
 			<a class="btn btn-default btn-block" href="#" role="button">취 소</a>
 		</div>
+<!-- 결제하기 /////////////////////////////////////-->	
 		
 		<br/>
  	</div>

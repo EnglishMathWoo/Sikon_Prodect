@@ -151,7 +151,8 @@
 		});
 		
 		$("a:contains('ÄíÆùÁ¶È¸')").on("click", function() {
-			self.location = "/coupon/listMyCoupon"
+			
+			self.location = "/coupon/listMyCoupon?userId=${user.userId}"
 			
 		});
 		

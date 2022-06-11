@@ -225,7 +225,7 @@ public class RecipeController {
 		}
 		
 		if(search.getSearchCondition()==null) {
-			search.setSearchCondition("");
+			search.setSearchCondition("0");
 		}
 		System.out.println("orderCondition=" + search.getOrderCondition());
 

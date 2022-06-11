@@ -14,6 +14,7 @@ public interface RecipeDao {
 
 	// SELECT ONE
 	public List getRecipe(int recipeNo) throws Exception;
+	public Recipe getRecipeName(int recipeNo) throws Exception;
 
 	// SELECT LIST
 	public List<Recipe> getRecipeList(Search search) throws Exception;
@@ -23,8 +24,6 @@ public interface RecipeDao {
 
 	// UPDATE
 	public void updateRecipe(Recipe recipe, Map ingredient) throws Exception;
-
-//	public void updateIngredient(List ingredient, int recipeNo) throws Exception;
 
 	// DELETE
 	public void deleteRecipe(int recipeNo) throws Exception;

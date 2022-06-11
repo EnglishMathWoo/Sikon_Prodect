@@ -102,9 +102,26 @@
 													<if test="searchCondition == 2 and searchKeyword !='' ">
 										 				 WHERE cook_price like '%' || #{searchKeyword} || '%'
 													</if>
+											</if>		
+											<if test="themeCondition != null">
+													<if test='themeCondition == "ko"'>
+										 				AND cook_theme LIKE UPPER('KO')
+													</if>
+													<if test='themeCondition == "ja"'>
+										 				AND cook_theme LIKE UPPER('JA')
+													</if>
+													<if test='themeCondition == "am"'>
+										 				AND cook_theme LIKE UPPER('AM')
+													</if>
+													<if test='themeCondition == "ch"'>
+										 				AND cook_theme LIKE UPPER('CH')
+													</if>
+													<if test='themeCondition == "des"'>
+										 				AND recipe_theme LIKE UPPER('DE')
+													</if>
+											</if>												
 												
-												
-											</if>
+										
 										
 											ORDER BY  cook_no ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
@@ -140,6 +157,23 @@
 							</where>
 							
 						</if>  
+											<if test="themeCondition != null">
+													<if test='themeCondition == "ko"'>
+										 				AND cook_theme LIKE UPPER('KO')
+													</if>
+													<if test='themeCondition == "ja"'>
+										 				AND cook_theme LIKE UPPER('JA')
+													</if>
+													<if test='themeCondition == "am"'>
+										 				AND cook_theme LIKE UPPER('AM')
+													</if>
+													<if test='themeCondition == "ch"'>
+										 				AND cook_theme LIKE UPPER('CH')
+													</if>
+													<if test='themeCondition == "des"'>
+										 				AND recipe_theme LIKE UPPER('DE')
+													</if>
+											</if>							
 					
 									) countTable						
 	 </select>

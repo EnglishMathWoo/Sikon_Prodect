@@ -180,6 +180,78 @@ padding-top:0px;
 	color:#937062;
 	text-decoration-line: none;
 }
+
+
+/* 검색창 css */
+
+.form{
+
+    position: relative;
+}
+
+.form .fa-search{
+
+    top:20px;
+    left: 20px;
+    color: #9ca3af;
+
+}
+
+.form span{
+
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+
+}
+
+.left-pan{
+    padding-left: 7px;
+}
+
+.left-pan i{
+   
+   padding-left: 10px;
+}
+
+.form-input{
+
+    border-radius: 10px;
+}
+
+.form-input:focus{
+
+    box-shadow: none;
+    border:none;
+}
+
+.form-control{
+border-radius: 10px;
+display: inline-block;
+vertical-align: middle;
+height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+}
+
+.col-md-6 {
+    width: 100%;
+}
+
+/* 폰트어썸 search */
+.search{
+font-family:FontAwesome;
+border: none;
+background-color: #f7f7f7;
+}
+
 </style>
 
 
@@ -214,6 +286,11 @@ padding-top:0px;
 				$("#themeCondition").val(theme);
 				fncGetList(1);
 			 });
+			
+			$(".search").on("click", function() {
+				fncGetList(1);
+
+			});
 		  
 		});
 			  
@@ -403,6 +480,32 @@ padding-top:0px;
 	    
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>
+ 
+            
+            
+            
+            
+             <div class="row height d-flex justify-content-center align-items-center">
+              <div class="col-md-6 text-center">
+					<div class="form-group">
+					 
+						<select class="form-control" name="searchCondition">
+							<option value="1"
+								${!empty search.searchCondition && search.searchCondition==1 ? "selected" : ""}>레시피명</option>
+							<option value="2"
+								${!empty search.searchCondition && search.searchCondition==2 ? "selected" : ""}>작성자명</option>
+						</select>
+
+					</div>
+
+                  <input type="text" class="form-control form-input" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력하세요. ">&nbsp;
+                  <input type="submit" class="search"  value="&#xf002">
+                </div>
+					</div>
+            
+            
+            
+            
 		             
       <div class="center btmspace-50">
 	   <select class="condition" id="orderCondition" name="orderCondition">
@@ -422,81 +525,6 @@ padding-top:0px;
   	</div>
 
  
-  <div class="row">
-      <div class="col-sm-6 col-md-3 col-lg-3">
-  <br/> <br/>
-    <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" href="#"><img src="/resources/images/uploadFiles/karibi.PNG" width="320" height="300"></a>
-        <div class="excerpt">
-          <h4 class="heading" >가리비 칼국수</h4>
-           <h6 >담백하고 시원한 맛!</h6>
-          <ul class="meta">
-            <li >한식</li>
-            <li>중급</li>
-            <li>35분</li>
-            <li>Taeho</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-    </div>
-    
-    
-      <div class="col-sm-6 col-md-3 col-lg-3">
-  <br/> <br/>
-    <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" href="#"><img src="/resources/images/uploadFiles/썸.PNG" width="320" height="300"></a>
-        <div class="excerpt">
-          <h4 class="heading" >대패삼겹살된장찌개</h4>
-           <h6 >진한 고기육수</h6>
-          <ul class="meta">
-            <li >한식</li>
-            <li>고급</li>
-            <li>30분</li>
-            <li>Woong</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-        </div>
-    
-      <div class="col-sm-6 col-md-3 col-lg-3">
-  <br/> <br/>
-    <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" href="#"><img src="/resources/images/uploadFiles/7.PNG" width="320" height="300"></a>
-        <div class="excerpt">
-          <h4 class="heading" >오징어 동그랑땡</h4>
-           <h6 >다진 오징어살이 들어가요!</h6>
-          <ul class="meta">
-            <li >한식</li>
-            <li>중급</li>
-            <li>40분</li>
-            <li>Soo</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-        </div>
-    
-      <div class="col-sm-6 col-md-3 col-lg-3">
-  <br/> <br/>
-    <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" href="#"><img src="/resources/images/uploadFiles/rara.PNG" width="320" height="300"></a>
-        <div class="excerpt">
-          <h4 class="heading" >라자냐</h4>
-           <h6 >오랜 시간과 정성이 담긴</h6>
-          <ul class="meta">
-            <li >양식</li>
-            <li>고급</li>
-            <li>100분</li>
-            <li>Seyoon</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-        </div>
-    
-  </div> <!-- row 끝 -->
   
 <div class="row">
 	<c:set var="i" value="0" />
@@ -529,10 +557,6 @@ padding-top:0px;
      
 </div>
 	  </div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 	
- 	<!-- PageNavigation Start... -->
-	<!-- PageNavigation End... -->
 	
 </body>
 </html>

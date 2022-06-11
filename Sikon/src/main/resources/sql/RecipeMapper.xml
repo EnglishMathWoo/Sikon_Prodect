@@ -43,6 +43,13 @@
 		r.recipe_no= #{recipeNo}
 	</select>
 	
+	<select id="getRecipeName" parameterType="int"  resultMap="recipeSelectMap">
+		SELECT *
+		FROM recipe
+		WHERE
+		recipe_no= #{recipeNo}
+	</select>
+	
 	
 	 
 	 <!-- SQL : UPDATE -->
@@ -79,14 +86,14 @@
 											<if test="searchCondition != null">
 											<choose>
 													<when test="searchCondition == 0 and searchKeyword !='' ">
-										 				where recipe_NO LIKE '%'||#{searchKeyword}||'%'
+										 				where recipe_NO LIKE '%'|| ''||'%'
 													</when>
 													<when test="searchCondition == 1 and searchKeyword !='' ">
 										 				 where recipe_Name LIKE '%'||#{searchKeyword}||'%'
 													</when>
-													<otherwise>
-													  where recipe_NO LIKE '%'|| ''||'%'
-													</otherwise>
+													<when test="searchCondition == 2 and searchKeyword !='' ">
+										 				 where writer_nickname LIKE '%'||#{searchKeyword}||'%'
+													</when>
 													</choose>
 											</if>
 											<if test="themeCondition != null">
@@ -138,15 +145,17 @@
 	  	FROM(	SELECT recipe_no 
 						FROM recipe
 						<if test="searchCondition != null">
-							<where>
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			recipe_no LIKE '%'||#{searchKeyword}||'%'
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		recipe_name LIKE '%'||#{searchKeyword}||'%'
-								</if>
-								
-							</where>
+							<choose>
+													<when test="searchCondition == 0 and searchKeyword !='' ">
+										 				where recipe_NO LIKE '%'|| ''||'%'
+													</when>
+													<when test="searchCondition == 1 and searchKeyword !='' ">
+										 				 where recipe_Name LIKE '%'||#{searchKeyword}||'%'
+													</when>
+													<when test="searchCondition == 2 and searchKeyword !='' ">
+										 				 where writer_nickname LIKE '%'||#{searchKeyword}||'%'
+													</when>
+													</choose>
 							
 						</if>  
 						<if test="themeCondition != null">

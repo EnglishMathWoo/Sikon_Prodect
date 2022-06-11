@@ -77,22 +77,21 @@ public class RecipeServiceImpl implements RecipeService {
 		recipeDao.updateRecipe(recipe,ingredient);
 	}
 
-//	public void updateIngredient(List ingredient, int recipeNo) throws Exception {
-//		System.out.println("¶ì¿ë");
-//		recipeDao.updateIngredient(ingredient, recipeNo);
-//	}
-
 	public void deleteRecipe(int recipeNo) throws Exception{
 		System.out.println("recipe=" + recipeNo);
 		recipeDao.deleteRecipe(recipeNo);
 	}
 
-	@Override
 	public Map<String, Object> bestRecipeList() throws Exception {
 		List<Recipe> list = recipeDao.bestRecipeList();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		return map;
+	}
+
+	public Recipe getRecipeName(int recipeNo) throws Exception {
+		return recipeDao.getRecipeName(recipeNo);
+
 	}
 
 }

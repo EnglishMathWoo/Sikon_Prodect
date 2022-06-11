@@ -34,7 +34,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
-
+ <!-- //////////////////////////////////공유하기////////////////////////////// -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
     <style>
 
         .bi-heart{
@@ -78,8 +79,51 @@ div.image{
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+	///*
+	Kakao.init('bdc66313a731d6cd370ddce26735db6a');
 
-	
+	  // SDK 초기화 여부를 판단합니다.
+	  console.log(Kakao.isInitialized());
+
+	  
+	  function kakaoShare() {
+		  
+		  var image = $("input:hidden[name='image']").val();
+		  console.log(image);
+		  var cookName = $("input:hidden[name='cookName']").val();
+		  console.log(name);
+		  var cookBrief = $("input:hidden[name='cookBrief']").val();
+		  console.log(detail);
+		  var cookNo = $("input:hidden[name='cookNo']").val();
+		 console.log(prodNo);
+		  
+	    Kakao.Link.sendDefault({
+	      objectType: 'feed',
+	      content: {
+	        title: cookName,
+	        description: cookBrief,
+	        imageUrl: 'http://192.168.0.50:8080/resources/images/uploadFiles/'+image ,
+	        link: {
+	          mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	          webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	        },
+	      },
+	      buttons: [
+	        {
+	          title: '웹으로 보기',
+	          link: {
+	            mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	            webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	          },
+	        },
+	      ],
+	      // 카카오톡 미설치 시 카카오톡 설치 경로이동
+	      installTalk: true,
+	    })
+	  }
+//*/	
+	//=====================공유하기====================================
+
 //=========================================================================================//	
 	$( document ).ready( function() {
 		 
@@ -183,24 +227,11 @@ $(function() {
 				
 				<div class="row">
 				
- <i class="bi bi-heart"></i>
-    
-    <script>
-    var i = 0;
-    $('.bi-heart').on('click',function(){
-        if(i==0){
-            $(this).removeClass('bi-heart');
-            $(this).addClass('bi-heart-fill');
-            i++;
-        }else if(i==1){
-            $(this).removeClass('bi-heart-fill');
-            $(this).addClass('bi-heart');
-            i--;
-        }
-        
-    });
-
-</script>
+					<div class="text-right">
+						<a id="kakao-link-btn" href="javascript:kakaoShare()">
+					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
+					    </a>
+					</div>
 				
 				
 					
@@ -248,7 +279,7 @@ $(function() {
 
 				<div class="row">
 			
-					<div><h5><strong>장소 : ${cook.cookLocation}</strong></h5></div>
+					<div id="cookLocation" value="${cook.cookLocation}"><h5><strong>장소 : ${cook.cookLocation}</strong></h5></div>
 				</div>				
 				
 			
@@ -288,6 +319,55 @@ $(function() {
 		 	<hr/>
 
 		<div class="col-xs-10 col-md-10 text-center">
+		<p style="margin-top:-12px">
+    <em class="link">
+        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+          레쓰고
+        </a>
+    </em>
+</p>
+<div id="map" style="width:400px;height:400px;"></div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bdc66313a731d6cd370ddce26735db6a&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+var cookLocation = $("#cookLocation").attr('value');
+console.log(cookLocation);
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch(cookLocation, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">여기로 와주세요!</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+</script>
 			<div><strong>${cook.cookContent}</strong></div>
 		</div>
 		

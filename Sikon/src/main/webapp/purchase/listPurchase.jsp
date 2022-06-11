@@ -56,11 +56,83 @@ table {
 	font-family: 'Nanum Myeongjo', serif;
 }
 th{
-	background: #d3c6c2;
+	font-weight: lighter;
+	font-size: 15px;
 }
-div.container{
+.table>tbody>tr>td{
+	vertical-align: middle;
+	height: 120px;
+}
+.table>tbody>tr>th{
+
+	border-top: 2px solid #afa5a5
+}
+div.list{
 	padding-top : 200px;
 }
+
+.cancel{
+	font-size: 14px;
+	text-decoration: underline;
+}
+.status{
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.prodname{
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.image{
+	width: 105px;
+}
+.prodcontent{
+	width: 50%;
+}
+.rev{
+	width: 10%;
+}
+.review:hover {
+  display: block;
+  border: none;
+  width: 90px;
+  height: 36px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #937062;
+  float: right;
+  font-family: 'Gowun Batang', serif;
+  
+}
+.review {
+  display: block;
+  width: 90px;
+  height: 36px;
+  color: #937062;
+  border: 1px solid #937062;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #f7f7f7;
+  float: right;
+  font-family: 'Gowun Batang', serif;
+  
+}
+
+div.emptyProd{
+	padding : 20px;
+	height: 100px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
+}
+
 </style>
 	<script type="text/javascript">
 
@@ -93,7 +165,8 @@ div.container{
 				self.location ="/purchase/updatedivyStatus?tranNo="+message1+"&divyStatus="+message2;
 			});
 			
-			$( "td.cancel" ).on("click" , function() {
+			$( ".cancel" ).on("click" , function() {
+				alert('구매를 취소하시겠습니까?');
 				console.log('구매취소');
 				var message1 = $(this).attr("value1");
 				console.log(message1);
@@ -103,11 +176,6 @@ div.container{
 				self.location ="/purchase/cancelOrder?tranNo="+message1+"&divyStatus="+message2;
 			});
 			
-			
-//			$( "td:nth-child(2)" ).css("color" , "#ffb6c1");
-//			$( "td.divy" ).css("color" , "#f08080");
-//			$( "td.end" ).css("color" , "#87cefa");
-//			$( "td.complete" ).css("color" , "#708090");
 			
 		});	
 	</script>		
@@ -121,10 +189,10 @@ div.container{
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container list">
 	
-		<div class="page-header text-info">
-	       <h3 style="color:#bc8f8f">구매목록조회(purchase)</h3>
+		<div class="text-info">
+	       <h3 style="color:#bc8f8f">주문배송조회</h3><br>
 	    </div>
 	    
 	    
@@ -140,20 +208,49 @@ div.container{
 		
 		  <c:set var="i" value="0" />
 		  <c:forEach var="purchase" items="${list}" varStatus="status">
+		  
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			
 			  <c:if test="${status.index eq 0 }">
 			  	<tr>
-			  		<th>${purchase.serialNo }</th>
+			  		<th colspan="4">주문일자: <span style="font-weight: bold;">${purchase.orderDate }</span> &emsp;주문일련번호: <span style="font-weight: bold;">${purchase.serialNo }</span></th>
 			  		
 			  	</tr>
 			  	<tr>
-					<td align="left" >${ purchase.tranNo }</td>	
-					<td align="left" >${ purchase.purchaseProd.prodName }</td>	
-					<td align="right" class="toget" value="${purchase.purchaseProd.prodNo }">
-						<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
+						
+					<td align="left" class="image" value="${purchase.purchaseProd.prodNo }">	
+						<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}"  width="85" height="85">
 					</td>
+					<td align="left" class="prodcontent">
+						<p class="prodname">${ purchase.purchaseProd.prodName }</p>
+						<p>${ purchase.purchaseProd.prodDisPrice }원</p>
+						<p>구매수량 ${ purchase.purchaseQuantity }개</p>
+					</td>
+					<c:choose>
+					  <c:when test="${purchase.divyStatus.equals('002')}">
+							<td align="center" class="status">배송중</td>
+						</c:when>
+						<c:when test="${purchase.divyStatus.equals('001')}">
+							<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
+						</c:when>
+						<c:when test="${purchase.divyStatus.equals('000')}">
+							<td align="center" class="complete status">취소완료</td>
+						</c:when>
+						<c:otherwise>
+							<td align="center"><p class="end status">배송완료</p><p>CJ대한통운 <a href="#">${purchase.invoiceNum }</a></p></td>
+						</c:otherwise>
+					 </c:choose>
+					 
+					 <c:choose>
+					 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
+					 		<td class="rev"><button type="button" class="review">리뷰쓰기</button></td>
+					 	</c:when>
+					 	<c:otherwise>
+					 		<td class="rev"></td>
+					 	</c:otherwise>
+					 </c:choose>
+					 
 				</tr>	 
 					 
 			  </c:if>
@@ -164,24 +261,82 @@ div.container{
 			  	
 			  		<c:if test="${ before eq after }">
 					  	<tr>
-							<td align="left" >${ purchase.tranNo }</td>	
-							<td align="left" >${ purchase.purchaseProd.prodName }</td>	
-							<td align="right" class="toget" value="${purchase.purchaseProd.prodNo }">	
-								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
+							
+							<td align="left" class="image" value="${purchase.purchaseProd.prodNo }">	
+								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" width="85" height="85">
 							</td>
+							
+							<td align="left"  class="prodcontent">
+								<p class="prodname">${ purchase.purchaseProd.prodName }</p>
+								<p>${ purchase.purchaseProd.prodDisPrice }원</p>
+								<p>구매수량 ${ purchase.purchaseQuantity }개</p>
+							</td>
+							
+							<c:choose>
+							  <c:when test="${purchase.divyStatus.equals('002')}">
+									<td align="center" class="status">배송중</td>
+								</c:when>
+								<c:when test="${purchase.divyStatus.equals('001')}">
+									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
+								</c:when>
+								<c:when test="${purchase.divyStatus.equals('000')}">
+									<td align="center" class="complete status">취소완료</td>
+								</c:when>
+								<c:otherwise>
+									<td align="center"><p class="end status">배송완료</p><p>CJ대한통운 <a href="#">${purchase.invoiceNum }</a></p></td>
+								</c:otherwise>
+							 </c:choose>
+							 
+							 <c:choose>
+							 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
+							 		<td class="rev"><button class="review">리뷰쓰기</button></td>
+							 	</c:when>
+							 	<c:otherwise>
+							 		<td class="rev"></td>
+							 	</c:otherwise>
+							 </c:choose>
+			  	
 						</tr>
 			  		</c:if>
 			  		
 					<c:if test="${ before ne after }">
 			  			<tr>
-					  		<th>${purchase.serialNo }</th>
+					  		<th colspan="4">주문일자: <span style="font-weight: bold;">${purchase.orderDate }</span> &emsp;주문일련번호: <span style="font-weight: bold;">${purchase.serialNo }</span></th>
+			  		
 					  	</tr>
 					  	<tr>
-							<td align="left" >${ purchase.tranNo }</td>
-							<td align="left" >${ purchase.purchaseProd.prodName }</td>	
-							<td align="right" class="toget" value="${purchase.purchaseProd.prodNo }">
-								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
+							
+							<td align="left" class="image" value="${purchase.purchaseProd.prodNo }">	
+								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" width="85" height="85">
 							</td>
+							<td align="left"  class="prodcontent">
+								<p class="prodname">${ purchase.purchaseProd.prodName }</p>
+								<p>${ purchase.purchaseProd.prodDisPrice }원</p>
+								<p>구매수량 ${ purchase.purchaseQuantity }개</p>
+							</td>
+							<c:choose>
+							  <c:when test="${purchase.divyStatus.equals('002')}">
+									<td align="center" class="status">배송중</td>
+								</c:when>
+								<c:when test="${purchase.divyStatus.equals('001')}">
+									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
+								</c:when>
+								<c:when test="${purchase.divyStatus.equals('000')}">
+									<td align="center" class="complete status">취소완료</td>
+								</c:when>
+								<c:otherwise>
+									<td align="center"><p class="end status">배송완료</p><p>CJ대한통운 <a href="#">${purchase.invoiceNum }</a></p></td>
+								</c:otherwise>
+							 </c:choose>
+							 
+							 <c:choose>
+							 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
+							 		<td class="rev"><button class="review">리뷰쓰기</button></td>
+							 	</c:when>
+							 	<c:otherwise>
+							 		<td class="rev"></td>
+							 	</c:otherwise>
+							 </c:choose>
 						</tr>	
 			  		</c:if>
 				  	
@@ -194,7 +349,13 @@ div.container{
       
       </table>
 	  <!--  table End /////////////////////////////////////-->
-	  
+	  <c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			구매한 상품이 없습니다.
+		</div>
+		<br>
+	</c:if>
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
