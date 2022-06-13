@@ -136,6 +136,14 @@ public class PurchaseController {
 		String serialNo = sub+nowrandom;	
 		System.out.println("일련번호: "+serialNo);
 		//==================================================================================
+		// 쿠폰 사용하기
+		int issueNo = Integer.parseInt(purchase.getUsedCoupon());
+		System.out.println("issueNo: "+issueNo);
+		
+		Coupon coupon = couponService.getIssuedCoupon(issueNo);
+		coupon.setIssueStatus("002");
+		System.out.println("coupon: "+coupon);
+		//==================================================================================
 		
 		User user = userService.getUser(userId);
 		Product product = productService.getProduct(prodNo);

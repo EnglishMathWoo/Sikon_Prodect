@@ -54,10 +54,11 @@ div.container {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "#iamportPayment" ).on("click" , function() {
 				alert('결제');
+				console.log($("#usedCoupon").val());
 				fncAddPurchase();
 			});
 		});	
-		*/
+		//*/
 		
 		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
@@ -186,30 +187,6 @@ div.container {
 
 ///*
 
-		$(function() {
-			
-			var d = new Date();
-			
-			var year = d.getFullYear();
-			var month = (d.getMonth()+1);
-			var date = d.getDate();
-			var hour = d.getHours();
-			var min = d.getMinutes();
-			var sec = d.getSeconds();
-			var day = d.getDay();
-			var now = "";
-			
-			var user = $("#receiverEmail").val();
-			
-			console.log("user: "+user);
-			
-			now = now+year+month+date+hour+min+sec+day+user;
-			
-			console.log("now: "+now);
-			
-		});	
-
-	
 	
 	$(function() {
 		
@@ -429,7 +406,7 @@ function payment(data) {
 		    <label for="usedCoupon" class="col-sm-offset-1 col-sm-3 control-label">쿠폰 사용</label>
 		    <div class="col-sm-4">
 		   	  <c:if test="${product.couponApply == 'Y' }">
-		      		<select name="usedCoupon" >
+		      		<select name="usedCoupon" id="usedCoupon">
 			      		<option>사용할 쿠폰을 선택해주세요</option>
 				      		<c:forEach var="couponlist" items="${coupon}">
 				      		<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
