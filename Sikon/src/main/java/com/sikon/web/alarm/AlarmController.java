@@ -20,6 +20,7 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.alarm.AlarmService;
 import com.sikon.service.domain.Alarm;
+import com.sikon.service.domain.User;
 
 
 
@@ -68,6 +69,7 @@ public class AlarmController {
 		
 		session.removeAttribute("alarm");
 		session.setAttribute("alarm", 0);
+		User user=(User)session.getAttribute("user");
 				
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
 		
@@ -75,6 +77,7 @@ public class AlarmController {
 		model.addAttribute("list", resultMap.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
+		model.addAttribute("user", user);
 		
 		return "forward:/alarm/listAlarm.jsp";
 	}

@@ -97,7 +97,7 @@ public class EchoHandler extends TextWebSocketHandler {
 				//레시피 리뷰
 				if ("recipeReview".equals(cmd) && toUserSession != null) {
 					System.out.println("onmessage되나??");
-					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 레시피에 리뷰를 작성했습니다! : [제목 : '"
+					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 회원님의 레시피에 리뷰를 작성했습니다! : [제목 : '"
 									+ postName+"']");
 					toUserSession.sendMessage(tmpMsg);
 					alarm.setAlarmTarget(toUserId);
@@ -105,7 +105,7 @@ public class EchoHandler extends TextWebSocketHandler {
 					alarmService.addAlarm(alarm);
 				} else if ("recipeReview".equals(cmd)){
 					alarm.setAlarmTarget(toUserId);
-					alarm.setAlarmContent(fromUserNickname + "님이 레시피에 리뷰를 작성했습니다! : [제목 : '"
+					alarm.setAlarmContent(fromUserNickname + "님이 회원님의 레시피에 리뷰를 작성했습니다! : [제목 : '"
 							+ postName+"']");
 					alarmService.addAlarm(alarm);
 				}
