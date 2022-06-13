@@ -17,6 +17,7 @@
 		<result property="checkDate" 				column="check_date" 			jdbcType="DATE"/>
 		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
 		<result property="classCook.cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
+		<result property="classCook.cookFilename" 				column="cook_filename" 					jdbcType="VARCHAR" />	
 	<collection property="classCook" resultMap="cookSelectMap"/>
 		
 		
@@ -108,26 +109,22 @@
 	 
 	 <!-- SQL : SELECT LIST -->
 	<select  id="getApplyList"  parameterType="map" resultMap="applySelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *
-											FROM apply
+						SELECT *
+											FROM apply a, cook c
+											where a.cook_no=c.cook_no(+)
 
 											<if test="search.applyCondition != null">
 												<choose>
 												<when test="search.applyCondition == 5 ">
-													where apply_status = '100' 
+													and a.apply_status = '100' 
 													</when>
 												<when test="search.applyCondition == 6  ">
-													where apply_status = '200'  
+													and a.apply_status = '200'  
 														</when>
 														</choose>
 											</if>									
-											ORDER BY apply_no DESC 
-										) inner_table
-											
-						WHERE ROWNUM &lt;= #{search.endRowNum} )
-		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+											ORDER BY a.apply_no DESC 
+										
 		
 		
 	 </select>
@@ -136,19 +133,20 @@
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM (	SELECT *
-											FROM apply
+												FROM apply a, cook c
+											where a.cook_no=c.cook_no(+)
 											<if test="search.applyCondition != null">
 												<choose>
 												<when test="search.applyCondition == 5 ">
-													where apply_status = '100' 
+													and a.apply_status = '100' 
 													</when>
 												<when test="search.applyCondition == 6  ">
-													where apply_status = '200'  
+													and a.apply_status = '200'  
 														</when>
 														</choose>
 											</if>												
 													
-											ORDER BY apply_no DESC 							
+											ORDER BY a.apply_no DESC 							
 										 ) countTable					
 											
 	 </select>

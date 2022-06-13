@@ -586,9 +586,9 @@ div.emptyProd{
 	        <li><a href="#" id="themeAll" class="theme" value="all">모두보기</a></li>
 	        <li><a href="#" class="theme" value="ko">한식</a></li>
 	        <li><a href="#" class="theme" value="ch">중식</a></li>
-	        <li><a href="#" class="theme" value="fr">양식</a></li>
-	        <li><a href="#" class="theme" value="jp">일식</a></li>
-	        <li><a href="#" class="theme" value="des">간식</a></li>
+	        <li><a href="#" class="theme" value="am">양식</a></li>
+	        <li><a href="#" class="theme" value="ja">일식</a></li>
+	        <li><a href="#" class="theme" value="de">간식</a></li>
 	      </ul>
 	    </nav>
 <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>

@@ -88,7 +88,7 @@ div.list{
 .image{
 	width: 105px;
 }
-.prodcontent{
+.cookcontent{
 	width: 50%;
 }
 .rev{
@@ -155,7 +155,7 @@ div.emptyProd{
 					fncGetList(1);
 			});
 
-		$("td.tran").on("click", function() {
+		$("th.tran").on("click", function() {
 
 			var applyNo = $(this).attr("value");
 
@@ -213,15 +213,7 @@ div.emptyProd{
 	       <h3 style="color:#bc8f8f">신청내역조회</h3>
 	    </div>
 	    
-		<form>
-			<input type="hidden" id="currentPage" name="currentPage" value=""/>
-		</form>	    
-	    
-	    
 
-
-			    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
-			    <br>
 			    <div class="row">
 			    
 				    <div class="col-md-6 text-left">
@@ -250,14 +242,6 @@ div.emptyProd{
 
 
 
-
-					<!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-					
-
-			
-			</div>
-			 <br/>
-
 	
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
@@ -283,15 +267,15 @@ div.emptyProd{
 			
 			  <c:if test="${status.index eq 0 }">
 			  	<tr>
-			  		<th colspan="4">신청일자: <span style="font-weight: bold;">${apply.checkDate }</span> &emsp;신청번호: <span style="font-weight: bold;">${apply.applyNo }</span></th>
+			  		<th colspan="4" value="${apply.applyNo }"class="tran">신청일자: <span style="font-weight: bold;">${apply.checkDate }</span> &emsp;신청번호: <span style="font-weight: bold;">${apply.applyNo }</span></th>
 			  		
 			  	</tr>
 			  	<tr>
 						
 					<td align="left" class="image" value="${apply.classCook.cookNo }">	
-						<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename.split('/')[0]}"  width="85" height="85">
+						<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename.split('/')[0]}" width="85" height="85" align="absmiddle"/>
 					</td>
-					<td align="left" class="prodcontent">
+					<td align="left" class="cookcontent">
 						<p class="cookName">${ apply.classCook.cookName }</p>
 						<p>${ apply.classCook.cookPrice }원</p>
 						<p>구매수량 ${ apply.cookStatus }개</p>
@@ -338,11 +322,11 @@ div.emptyProd{
 					  	<tr>
 							
 							<td align="left" class="image" value="${apply.classCook.cookNo }">	
-								<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename.split('&')[0]}" width="85" height="85">
+									<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename.split('/')[0]}" width="85" height="85" align="absmiddle"/>
 							</td>
 							
-							<td align="left"  class="prodcontent">
-								<p class="cookName">${ apply.classCook.cookName }</p>
+							<td align="left"  class="cookcontent">
+								<p class="cookName">${ cook.cookName }</p>
 								<p>${ apply.classCook.cookPrice }원</p>
 								<p>구매수량 ${ apply.cookStatus }개</p>
 							</td>
@@ -382,15 +366,15 @@ div.emptyProd{
 			  		
 					<c:if test="${ before ne after }">
 			  			<tr>
-					  		<th colspan="4">신청일자: <span style="font-weight: bold;">${apply.checkDate }</span> &emsp;신청번호: <span style="font-weight: bold;">${apply.applyNo }</span></th>
+					  		<th colspan="4" value="${apply.applyNo }"class="tran">신청일자: <span style="font-weight: bold;">${apply.checkDate }</span> &emsp;신청번호: <span style="font-weight: bold;">${apply.applyNo }</span></th>
 			  		
 					  	</tr>
 					  	<tr>
 							
 							<td align="left" class="image" value="${apply.classCook.cookNo }">	
-								<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename.split('/')[0]}" width="85" height="85">
+									<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename.split('/')[0]}" width="85" height="85" align="absmiddle"/>
 							</td>
-							<td align="left"  class="prodcontent">
+							<td align="left"  class="cookcontent">
 								<p class="cookName">${ apply.classCook.cookName }</p>
 								<p>${ apply.classCook.cookPrice }원</p>
 								<p>구매수량 ${ apply.cookStatus }개</p>

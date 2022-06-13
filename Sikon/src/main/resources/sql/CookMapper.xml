@@ -105,19 +105,19 @@
 											</if>		
 											<if test="themeCondition != null">
 													<if test='themeCondition == "ko"'>
-										 				AND cook_theme LIKE UPPER('KO')
+										 				where cook_theme LIKE UPPER('KO')
 													</if>
 													<if test='themeCondition == "ja"'>
-										 				AND cook_theme LIKE UPPER('JA')
+										 				where cook_theme LIKE UPPER('JA')
 													</if>
 													<if test='themeCondition == "am"'>
-										 				AND cook_theme LIKE UPPER('AM')
+										 				where cook_theme LIKE UPPER('AM')
 													</if>
 													<if test='themeCondition == "ch"'>
-										 				AND cook_theme LIKE UPPER('CH')
+										 				where cook_theme LIKE UPPER('CH')
 													</if>
 													<if test='themeCondition == "des"'>
-										 				AND recipe_theme LIKE UPPER('DE')
+										 				where cook_theme LIKE UPPER('DE')
 													</if>
 											</if>												
 												
@@ -159,19 +159,19 @@
 						</if>  
 											<if test="themeCondition != null">
 													<if test='themeCondition == "ko"'>
-										 				AND cook_theme LIKE UPPER('KO')
+										 				where cook_theme LIKE UPPER('KO')
 													</if>
 													<if test='themeCondition == "ja"'>
-										 				AND cook_theme LIKE UPPER('JA')
+										 				where cook_theme LIKE UPPER('JA')
 													</if>
 													<if test='themeCondition == "am"'>
-										 				AND cook_theme LIKE UPPER('AM')
+										 				where cook_theme LIKE UPPER('AM')
 													</if>
 													<if test='themeCondition == "ch"'>
-										 				AND cook_theme LIKE UPPER('CH')
+										 				where cook_theme LIKE UPPER('CH')
 													</if>
 													<if test='themeCondition == "des"'>
-										 				AND recipe_theme LIKE UPPER('DE')
+										 				where cook_theme LIKE UPPER('DE')
 													</if>
 											</if>							
 					
