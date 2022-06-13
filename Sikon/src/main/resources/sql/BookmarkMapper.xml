@@ -32,7 +32,7 @@
 	<insert 	id="addBookmark"		parameterType="bookmark" >
 	 	INSERT
 		INTO bookmark( bookmark_no , recipe_no,user_id) 
-		VALUES	 (	seq_bookmark_no.nextval  ,  #{recipeNo},#{userId})
+		VALUES	 (	seq_bookmark_no.nextval  ,  #{recipe.recipeNo},#{userId})
 	 </insert>
 	 
 	 

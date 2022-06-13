@@ -76,6 +76,12 @@ public class RecipeServiceImpl implements RecipeService {
 		System.out.println("recipe=" + recipe);
 		recipeDao.updateRecipe(recipe,ingredient);
 	}
+	
+	public void updateRecipeOnly(Recipe recipe) throws Exception {
+		System.out.println("recipe=" + recipe);
+		recipeDao.updateRecipeOnly(recipe);
+	
+	}
 
 	public void deleteRecipe(int recipeNo) throws Exception{
 		System.out.println("recipe=" + recipeNo);
@@ -92,6 +98,22 @@ public class RecipeServiceImpl implements RecipeService {
 	public Recipe getRecipeName(int recipeNo) throws Exception {
 		return recipeDao.getRecipeName(recipeNo);
 
+	}
+
+	//포인트 이동
+	public Map<String, Object> getPointList(Search search, String userId) throws Exception {
+		System.out.println("search=" + search);
+		System.out.println("userId=" + userId);
+
+		List<Recipe> list = recipeDao.getPointList(search, userId);
+		int totalCount = recipeDao.pointTotalCount(search, userId);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		System.out.println(list);
+
+		return map;
 	}
 
 }

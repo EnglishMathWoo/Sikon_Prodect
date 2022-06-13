@@ -139,8 +139,17 @@ public class RecipeController {
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute("user");
 		
+		//레시피 조회수 +1
+		Recipe recipe = recipeService.getRecipeName(recipeNo);
+		
+		if(user.getUserId() != recipe.getWriter().getUserId()) {
+			recipe.setRecipeViews(recipe.getRecipeViews()+1);
+			recipeService.updateRecipeOnly(recipe);
+		}
+		
 		System.out.println("레시피 list=" + list);
 		model.addAttribute("recipe", list.get(0));
+		model.addAttribute("recipeViews", recipe.getRecipeViews());
 		model.addAttribute("list", list);
 		model.addAttribute("review", map.get("list"));
 		model.addAttribute("user",user);
@@ -328,4 +337,29 @@ public class RecipeController {
 //		return "forward:/main.jsp";
 //	}
 
+	
+	//포인트 (이동)
+	@RequestMapping(value = "listMyPoint")
+	public ModelAndView listMyPoint(@ModelAttribute("search") Search search,HttpServletRequest request) throws Exception {
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+
+		search.setPageSize(pageSize);
+		
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		Map map=recipeService.getPointList(search, user.getUserId());
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("list", map.get("list"));
+		modelAndView.addObject("resultPage", resultPage);
+		modelAndView.addObject("search", search);
+		modelAndView.setViewName("forward:/mypage/listMyPoint.jsp");
+
+		return modelAndView;
+	}
 }

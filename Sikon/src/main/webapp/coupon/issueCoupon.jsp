@@ -112,13 +112,30 @@
 				
 				var checkCount = $("input[name='userId']:checked").length;
 				
-				//Debug..
-				if(checkCount != 0) {
-					alert("쿠폰을 발급하시겠습니까?")
-					$("form").attr("method", "POST").attr("action", "/coupon/issueCoupon").submit();
-				} else {
-					alert("선택된 회원이 없습니다.")						
-				}	
+				//현재시간 구하기
+				var today = new Date();
+				var year = today.getFullYear();
+				var month = ('0' + (today.getMonth() + 1)).slice(-2);
+				var day = ('0' + today.getDate()).slice(-2);
+				var dateString = year + '-' + month  + '-' + day;
+
+				console.log(dateString);
+				
+				if(dateString <= startDate && dateString+1 <= endDate && startDate <= endDate) {
+					if(checkCount != 0) {
+						alert("쿠폰을 발급하시겠습니까?")
+						$("form").attr("method", "POST").attr("action", "/coupon/issueCoupon").submit();
+					} else {
+						alert("선택된 회원이 없습니다.")						
+					}
+				} else if(dateString > startDate) {
+					alert("쿠폰발급일자는 금일 이후로 설정하셔야 합니다.")
+				} else if(dateString+1 > endDate) {
+					alert("쿠폰만료일자는 익일 이후로 설정하셔야 합니다.")
+				} else if (startDate > endDate ) {
+					alert("쿠폰발급일자는 쿠폰만료일자 이후로 설정하셔야 합니다.")
+				}
+						
 			});
 		});
 		

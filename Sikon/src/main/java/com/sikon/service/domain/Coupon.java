@@ -1,13 +1,11 @@
 package com.sikon.service.domain;
 
 import java.sql.Date;
-import com.sikon.service.domain.User;
 
 public class Coupon {
  
 	private int couponNo;
 	private int issueNo;
-    private String couponStatus;
     private String issueStatus;
     private Date endDate;
 	private Date startDate;
@@ -29,12 +27,6 @@ public class Coupon {
 	}
 	public void setIssueNo(int issueNo) {
 		this.issueNo = issueNo;
-	}
-	public String getCouponStatus() {
-		return couponStatus;
-	}
-	public void setCouponStatus(String couponStatus) {
-		this.couponStatus = couponStatus;
 	}
 	public String getIssueStatus() {
 		return issueStatus;

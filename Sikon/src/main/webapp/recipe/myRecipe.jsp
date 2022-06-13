@@ -169,7 +169,7 @@ p {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    padding-top:120px;
+    padding-top:170px;
     
 }
 
@@ -177,81 +177,8 @@ p {
 padding-top:0px;
 }
 
-#themeAll{
-	color:#937062;
-	text-decoration-line: none;
-}
 
 
-/* 검색창 css */
-
-.form{
-
-    position: relative;
-}
-
-.form .fa-search{
-
-    top:20px;
-    left: 20px;
-    color: #9ca3af;
-
-}
-
-.form span{
-
-    position: absolute;
-    right: 17px;
-    top: 13px;
-    padding: 2px;
-    border-left: 1px solid #d1d5db;
-
-}
-
-.left-pan{
-    padding-left: 7px;
-}
-
-.left-pan i{
-   
-   padding-left: 10px;
-}
-
-.form-input{
-
-    border-radius: 10px;
-}
-
-.form-input:focus{
-
-    box-shadow: none;
-    border:none;
-}
-
-.form-control{
-border-radius: 10px;
-display: inline-block;
-vertical-align: middle;
-height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-}
-
-.col-md-6 {
-    width: 100%;
-}
-
-/* 폰트어썸 search */
-.search{
-font-family:FontAwesome;
-border: none;
-background-color: #f7f7f7;
-}
 
 </style>
 
@@ -314,12 +241,11 @@ background-color: #f7f7f7;
 		    <div class="center btmspace-50">
 		    <br/>
 		      <h3 class="font-x2 nospace" align="center" style="font-family: 'Gowun Batang', serif;"><br> 내가 쓴 레시피 </h3>
-		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		  		    <button type="button" class="submit">삭제</button>
 		  
 		    
-		    <br/><hr/><br/>
+		    <br/><br/>
     </section>
   	</div>
  

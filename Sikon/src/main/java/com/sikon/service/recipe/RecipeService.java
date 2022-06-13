@@ -26,10 +26,17 @@ public interface RecipeService {
 
 	// 레시피 수정
 	public void updateRecipe(Recipe recipe, Map ingredient) throws Exception;
+	
+	// 레시피 수정(Ingredient 제외)
+	public void updateRecipeOnly(Recipe recipe) throws Exception;
 
 	// 레시피 삭제
 	public void deleteRecipe(int recipeNo) throws Exception;
 
 	public Map<String, Object> bestRecipeList() throws Exception;
+	
+	
+	//포인트 이동
+	public Map<String, Object> getPointList(Search search, String userId) throws Exception;
 
 }

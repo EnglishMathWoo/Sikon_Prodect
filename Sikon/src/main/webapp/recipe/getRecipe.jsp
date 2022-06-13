@@ -280,7 +280,7 @@ background-color: #fff;
 						<a id="kakao-link-btn" href="javascript:kakaoShare()">
 					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
 					    </a>
-					<i class="fa-regular fa-bookmark fa-2x"></i>
+					<i id="addBookmark"  class="fa-regular fa-bookmark fa-2x"></i>
 					</div>
 						<h4>
 							<strong style="font-family: 'YeolrinMyeongjo-Medium';">${recipe.recipeName}</strong>
@@ -306,6 +306,7 @@ background-color: #fff;
 							
 
 							&nbsp;소요시간 ${recipe.cookingTime }분 
+							<div style="float:right">조회수: ${recipeViews}</div> 
 						</h5>
 					<hr/>
 
@@ -423,8 +424,13 @@ background-color: #fff;
 	//	self.location = "/review/deleteReview?textNo="+textNo+"checkList="+array;
 		});
 		
-		$(".deleteReview").on("click", function() {
-			
+		$("#addBookmark").on("click", function() {
+			var recipeNo = $("input:hidden[name='recipeNo']").val();
+			//console.log(recipeNo);
+				self.location = "/bookmark/addBookmark?recipeNo="+recipeNo;
+				
+
+
 		});
 
 	});
@@ -458,11 +464,12 @@ background-color: #fff;
 		            alert("통신 에러");
 		        },
 		        success : function(data){
-		        	
-		        	alert("알람 전송 완료!!");
-		        	    
+		        		        	       	    
 		        		if(data.userId != data.writerId) {
 			           		if(socket){
+			           			
+			           			alert("알람 전송 완료!!");
+			           			
 			        			let socketMsg = "recipeReview,"+data.userId+","+data.userNickname+","+data.writerId+","+data.recipeName;
 			        			console.log(socketMsg);
 			        			socket.send(socketMsg);
@@ -529,6 +536,8 @@ background-color: #fff;
 	//=====================공유하기====================================
 
 	$(document).ready(function() {
+		
+		
 
 	});
 </script>

@@ -68,6 +68,10 @@ INSERT
 INTO couponholder(issue_no, coupon_no, holder_id, start_date, end_date, issue_status) 
 VALUES (seq_couponhodler_issue_no.NEXTVAL, 10002, 'user@naver.com', '2022/05/12', '2022/07/30', '001');
 
+INSERT 
+INTO couponholder(issue_no, coupon_no, holder_id, start_date, end_date, issue_status) 
+VALUES (seq_couponhodler_issue_no.NEXTVAL, 10002, 'user@naver.com', '2022/05/12', '2022/06/11', '001');
+
 INSERT
 INTO product( prod_no , prod_name , prod_price, prod_detail, prod_disrate, prod_disprice, prod_thumbnail, prod_content, prod_stock, prod_theme, prod_status, coupon_apply, prod_regdate) 
 VALUES (seq_product_prod_no.NEXTVAL , '하남쭈꾸미', 10000, '[인기] 재구매율 1위', 0.31, 6900, '01jju00.jpg&', '<p><img src="/summernoteImage/d40fa4e6-b1e7-4a94-a550-294b81687f1f.jpg"><img src="/summernoteImage/e2f4fffc-5b6c-45fb-88ff-a39ea61530f8.gif" style=""><img src="/summernoteImage/a1ffd5b9-f496-473f-8740-94ffdec91ec9.jpg" style=""><img src="/summernoteImage/e0448c06-fe1d-4c65-950a-d807d72ad827.jpg" style=""><img src="/summernoteImage/276e8350-ad83-43f2-95f2-465a70e4e08b.jpg" style=""><img src="/summernoteImage/4d92c92a-1e1a-4ce2-a5ac-108ea40f69a7.jpg" style=""><img src="/summernoteImage/2db12210-5d4c-4bb7-87ad-18bddf483270.jpg" style=""></p>', 100, 'MK', 'Y', 'Y', SYSDATE );
@@ -102,12 +106,12 @@ VALUES (seq_cart_cart_no.NEXTVAL , 10004, 'user@naver.com', 5, '플라워 식기
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
-VALUES (seq_cook_cook_no.nextval, '예다의 고양이', '0a2bb178-ac96-4c04-85e9-bd424f4d849b.jpg', '진짜 쉬워요', '1', 14000, 'KO', '22/06/10',  '22/06/10', 5, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 20, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor', 'mentor@naver.com' );
+VALUES (seq_cook_cook_no.nextval, '예다의 고양이', '0a2bb178-ac96-4c04-85e9-bd424f4d849b.jpg', '진짜 쉬워요', '1', 14000, 'KO', '22/06/10',  '22/06/10', 5, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 20, 0, '<p><img src="/summernoteImage/back (2).jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor', 'mentor@naver.com' );
 
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
-VALUES (seq_cook_cook_no.nextval, '예다의 화이트초코케익 쿠킹클래스', '0a2bb178-ac96-4c04-85e9-bd424f4d849b.jpg', '진짜 쉬워요', '1', 14000, 'KO', '22/06/10',  '22/06/10', 5, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 20, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor', 'mentor@naver.com' );
+VALUES (seq_cook_cook_no.nextval, '예다의 화이트초코케익 쿠킹클래스', '0a2bb178-ac96-4c04-85e9-bd424f4d849b.jpg', '진짜 쉬워요', '1', 14000, 'KO', '22/06/10',  '22/06/10', 5, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 20, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor', 'mentor2@naver.com' );
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
@@ -131,7 +135,7 @@ VALUES (seq_cook_cook_no.nextval, '예다의 에그타르트 쿠킹클래스', '
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname , mentor_id )
-VALUES (seq_cook_cook_no.nextval, '예다의 김밥 쿠킹클래스', '0f4ee459-9c66-4d5a-9770-69c5af9f4d4c.jpg', '진짜 쉬워요', '1', 14000, 'KO', '22/06/10',  '22/06/10', 5, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 20, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor' , 'mentor@naver.com');
+VALUES (seq_cook_cook_no.nextval, '예다의 김밥 쿠킹클래스', '0f4ee459-9c66-4d5a-9770-69c5af9f4d4c.jpg', '진짜 쉬워요', '1', 14000, 'KO', '22/06/10',  '22/06/10', 5, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 20, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor' , 'mentor@naver.com');
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
@@ -140,7 +144,6 @@ VALUES (seq_cook_cook_no.nextval, '예다의 샌드위치 쿠킹클래스', '0e4
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
 VALUES (seq_cook_cook_no.nextval, '예다의 제육덮밥 쿠킹클래스', '0b1a8266-732c-48e6-82f1-25e64f7a2778.jpg', '진짜 쉬워요', '1', 14000, 'CH', '22/06/10',  '22/06/10', 5, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 20, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor' , 'mentor@naver.com' );
-
 
 
 INSERT 
@@ -165,7 +168,7 @@ INTO notice(notice_no, notice_title, notice_content, notice_image, notice_date)
 VALUES (seq_notice_notice_no.NEXTVAL, '식탁의 온도 코스닥 상장 안내', '<p><img src="/summernoteImage/a75e48e3-03d6-4712-9c5f-181e35560bf9.jpg" style="width: 800px;"><br></p>', NULL, SYSDATE);
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'user', '낙지 초무침', '싱싱한 낙지', '36fae4c4237f29668386889b1c772db5.jpg', null, '200', 'KO', 10, 'd' , SYSDATE, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'user', '낙지 초무침', '싱싱한 낙지', '36fae4c4237f29668386889b1c772db5.jpg', null, '200', 'KO', 10, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -175,7 +178,7 @@ SELECT '낙지' AS ingredientName , '1g' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '냉이 차돌박이 솥밥', '냉이는 별로예요', '987eb588939a8cb12033994139c0018e.jpg', null, '300', 'CH', 50, 'd' , SYSDATE, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '냉이 차돌박이 솥밥', '냉이는 별로예요', '987eb588939a8cb12033994139c0018e.jpg', null, '300', 'CH', 50, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -187,7 +190,7 @@ SELECT '냉이' AS ingredientName , '1개' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '달걀 만두', '만두에 달걀을', '6605dfaa474f5fb72d3ba125efe14db7.jpg', null, '100', 'DES', 40, 'd' , SYSDATE, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '달걀 만두', '만두에 달걀을', '6605dfaa474f5fb72d3ba125efe14db7.jpg', null, '100', 'DES', 40, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -197,7 +200,7 @@ SELECT '달걀' AS ingredientName , '3개' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '대패삼겹살된장찌개', '삼겹살+된장찌개 이즈 굿', '7.PNG', null, '300', 'JP', 85, 'd' , SYSDATE, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '대패삼겹살된장찌개', '삼겹살+된장찌개 이즈 굿', '7.PNG', null, '300', 'JP', 85, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
