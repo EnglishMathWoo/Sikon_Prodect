@@ -6,10 +6,8 @@
 
 <mapper namespace="RecipeMapper">
  	
- 	
-	<resultMap id="recipeSelectMap" type="recipe">
+ 	<resultMap   id="recipeSelectMap"  type="recipe">
 		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
-		<result property="writer.userNickname" 				column="writer_nickname" 					jdbcType="VARCHAR" />
 		<result property="recipeName"			column="recipe_name" 		jdbcType="VARCHAR" />
 		<result property="recipeDetail" 	column="recipe_detail" 		jdbcType="VARCHAR" />
 		<result property="recipeImg" 			column="recipe_img" 		jdbcType="VARCHAR" />
@@ -23,9 +21,29 @@
 		<result property="ingredientNo"      column="ingredient_no"           jdbcType="NUMERIC"/>
 		<result property="ingredientName"      column="ingredient_name"           jdbcType="VARCHAR"/>
 		<result property="ingredientAmount"      column="ingredient_amount"           jdbcType="VARCHAR"/>
+			<collection property="writer" resultMap="userSelectMap"/>
+	
 	</resultMap>
 	
-	
+	<resultMap id="userSelectMap" type="user">
+		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR"/>
+		<result property="userName"	column="user_name" 		jdbcType="VARCHAR" />
+		<result property="password" 	column="password" 		jdbcType="VARCHAR" />
+		<result property="userBirth" 	column="user_birth" 		jdbcType="VARCHAR" />
+		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
+		<result property="userImage" 	column="user_image" 		jdbcType="VARCHAR" />
+		<result property="addr" 	column="user_addr" 		jdbcType="VARCHAR" />
+		<result property="role" 	column="role" 			jdbcType="VARCHAR" />
+		<result property="phone" 	column="user_phone" 		jdbcType="VARCHAR" />
+		<result property="holdpoint" 	column="holdpoint" 		jdbcType="NUMERIC" />
+		<result property="mentorApply" 	column="mentor_apply" 		jdbcType="VARCHAR"  />
+		<result property="loginPath" 	column="login_path" 		jdbcType="VARCHAR"  />
+		<result property="regDate" 	column="user_regdate" 		jdbcType="DATE" />
+		<result property="quitDate" 	column="quit_date" 		jdbcType="DATE" />
+		<result property="quitStatus" 	column="quit_status" 		jdbcType="VARCHAR"  />
+</resultMap>
+
+
 	<!-- SQL : INSERT -->
 	 <insert 	id="addRecipe"		parameterType="recipe" >
 	 	INSERT
@@ -44,10 +62,12 @@
 	</select>
 	
 	<select id="getRecipeName" parameterType="int"  resultMap="recipeSelectMap">
-		SELECT *
-		FROM recipe
+		SELECT r.*,u.user_id
+		FROM recipe r, users u
 		WHERE
-		recipe_no= #{recipeNo}
+		r.writer_nickname=u.user_nickname
+		and
+		r.recipe_no= #{recipeNo}
 	</select>
 	
 	
@@ -135,15 +155,15 @@
 
  ) inner_table
 											
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+						WHERE ROWNUM &lt;= #{endRowNum} ) C
+		WHERE C.row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT recipe_no 
-						FROM recipe
+	  	FROM(	SELECT *
+											FROM recipe
 						<if test="searchCondition != null">
 							<choose>
 													<when test="searchCondition == 0 and searchKeyword !='' ">
