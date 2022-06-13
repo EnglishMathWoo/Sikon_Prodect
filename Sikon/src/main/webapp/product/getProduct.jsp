@@ -132,6 +132,12 @@ a.tocart{
   background-color: #e7e2e2;
 }
 
+.divyfee{
+	border-top: 1px solid #d7d7d7;
+	border-bottom: 1px solid #d7d7d7;
+	height: 80px;
+	padding:27px;
+}
 </style>
  <!-- //////////////////////////////////공유하기////////////////////////////// -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
@@ -377,15 +383,13 @@ $( document ).ready( function() {
 				
 				<br/><br/>
 				
-				<div class="row">
-					------------------<br/>
-					 배송비 : 3000원<br/>
-					------------------					
+				<div class="row divyfee">
+					 배송비 : 3000원				
 				</div>
 				
 				<br/>
 				
-				<hr/> 
+				
 				
 				
 				<div class="row">
@@ -408,6 +412,7 @@ $( document ).ready( function() {
 		 	</div>
 		 	
 		 	<hr/>
+		 	<br><br>
 		 	
 		 	<div class="col-xs-12 col-md-12 text-center">
 		 	

@@ -7,11 +7,8 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+<meta charset="EUC-KR">
 	
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -19,27 +16,267 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-<!-- jQuery UI toolTip 사용 CSS-->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- jQuery UI toolTip 사용 JS-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
  <!-- font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
-
 <style>
 
 
-div.container {
-	padding-top: 200px;
+.formall{
+	padding:220px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* Colors */
+/* ---------------------------------------- */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+.info-text {
+  text-align: left;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+h2.heading {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: left;
+  color: #937062;
+  border-bottom: 1px solid #937062;
+  padding-bottom: 3px;
+  margin-bottom: 20px;
+}
+
+.controls {
+  text-align: left;
+  position: relative;
+}
+.controls input[type=text],
+.controls input[type=email],
+.controls input[type=number],
+.controls input[type=date],
+.controls input[type=tel],
+.controls textarea,
+.controls button,
+.controls select {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #c6c6c6;
+  width: 100%;
+  margin-bottom: 18px;
+  color: #888;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 16px;
+  font-weight: 300;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.controls input[type=text]:focus, .controls input[type=text]:hover,
+.controls input[type=email]:focus,
+.controls input[type=email]:hover,
+.controls input[type=number]:focus,
+.controls input[type=number]:hover,
+.controls input[type=date]:focus,
+.controls input[type=date]:hover,
+.controls input[type=tel]:focus,
+.controls input[type=tel]:hover,
+.controls textarea:focus,
+.controls textarea:hover,
+.controls button:focus,
+.controls button:hover,
+.controls select:focus,
+.controls select:hover {
+  outline: none;
+  border-color: #937062;
+}
+
+.controls .fa-sort {
+  position: absolute;
+  right: 10px;
+  top: 17px;
+  color: #999;
+}
+.controls select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.controls textarea {
+  resize: none;
+  height: 200px;
+}
+
+input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0 1000px #fff inset;
+   -webkit-text-fill-color: #888;
+}
+
+.submit {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+}
+.submit:hover {
+  background-color: #937062d4;
+}
+
+.cancel {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+}
+.cancel:hover {
+  background-color: #e7e2e2;
+}
+
+.point {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+  width: 30%;
+}
+.point:hover {
+  background-color: #937062d4;
+}
+.DaumPostcode {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+  width:100%;
+}
+.DaumPostcode:hover {
+  background-color: #937062d4;
+}
+
+
+
+.clear:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.grid {
+  background: #f7f7f7;
+}
+.grid:after {
+  /* Or @extend clearfix */
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.grid [class*=col-]:last-of-type {
+  padding-right: 0;
+}
+
+.col-2-3 {
+  width: 66.66%;
+}
+
+.col-1-3 {
+  width: 33.33%;
+}
+
+.col-1-2 {
+  width: 50%;
+}
+
+.size {
+  width: 25%;
+}
+
+[class*=col-] {
+  float: left;
+  padding-right: 10px;
+}
+
+@media (max-width: 760px) {
+  .col-1-4-sm,
+.col-1-3,
+.col-2-3 {
+    width: 100%;
+  }
+
+  [class*=col-] {
+    padding-right: 0px;
+  }
+}
+.col-1-8 {
+  width: 12.5%;
+}
 
 </style>
     
@@ -185,7 +422,7 @@ div.container {
 <script>
   
 
-///*
+/*
 
 	
 	$(function() {
@@ -263,196 +500,147 @@ function payment(data) {
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-        <jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
+<div>
+	<jsp:include page="/layout/toolbar.jsp" />
+</div>
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	<br>
-		<h1 class="bg-defualt text-center" style="color:#bc8f8f">결제하기</h1>
-		
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
-		
-		  <input type="hidden" name="prodNo" value="${product.prodNo }" />
-		  <input type="hidden" name="userId" value="${user.userId }" />
-		  
-		  <div class="text-center">		  
-		  <hr/>
-		  <h4 align="center">주문상품</h4>
-		  <hr/>
+<div class="container">
+<div class="formall">
 
-		  <div class="form-group">
-		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
-		    <div class="col-sm-4">
-		      ${product.prodName}
-		    </div>
-		  </div>
-		  
-		
-		  <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
-		    <div class="col-sm-4">
-		      ${product.prodDisPrice} 원
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">배송비</label>
-		    <div class="col-sm-4">
-		      3000 원
-		      <input type="hidden" class="form-control" id="divyFee" name="divyFee" value="3000">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="purchaseQuantity" class="col-sm-offset-1 col-sm-3 control-label">구매수량</label>
-		    <div class="col-sm-4">
-		    ${quantity} 개
-		      <input type="hidden" min="0" class="form-control" id="purchaseQuantity" name="purchaseQuantity" value="${quantity}">
-		    </div>
-		  </div>
-		  
-		  <c:if test="${product.couponApply == 'N' }">
-			  <div class="form-group">
-			    *쿠폰적용불가
-			  </div>
-		  </c:if>
-		  
-		  <hr>
-		  
-		  <input type="hidden" id="price" value="${product.prodDisPrice}">
-		  
-		  <div class="form-group">
-		  <label for="purchaseQuantity" class="col-sm-offset-1 col-sm-3 control-label">총 결제금액</label>
-		    <div class="col-sm-4">
-		      <input type="text" id="totalprice" name="totalprice" value=""  style="border:none;width:50px"> 원
-		    </div>
-		  </div>
-		  
-		   <div class="form-group">
-		  <label for="purchaseQuantity" class="col-sm-offset-1 col-sm-3 control-label">적립 포인트</label>
-		    <div class="col-sm-4">+
-		      <input type="text" id="earnPoint" name="earnPoint" value=""  style="border:none;width:50px">P
-		    </div>
-		  </div>
-		 
-		  </div>
-		  
-		   <div class="text-center">	
-		  
-		  <hr/>
-		  <h4 align="center">배송정보</h4>
-		  <hr/>
-		  
-		  	  
-		  <div class="form-group">
-		    <label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">받는분 이름</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="receiverName" name="receiverName" value="${user.userName}"> 
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="divyAddr" class="col-sm-offset-1 col-sm-3 control-label">배송지</label>
-		    <div class="col-sm-4">
-		        <input type="text" id="sample6_postcode" name="postcode" placeholder="우편번호" value="">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="sample6_address" name="address" placeholder="주소" value=""><br>
-				<input type="text" id="sample6_detailAddress" name="detailAddress" placeholder="상세주소" value=""><br>
-				<input type="text" id="sample6_extraAddress" name="extraAddress" placeholder="참고항목" value="">
-		    </div>
-		    <input type="hidden" name="divyAddr" value="${user.addr}">
-		  </div>
-		  
-		    <div class="form-group">
-		    <label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label">연락처</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="receiverPhone" name="receiverPhone" value="${user.phone}">
-		    </div>
-		  </div>
-		  
-		  <c:if test="${!empty user}">
-		      <input type="hidden" class="form-control" id="receiverEmail" name="receiverEmail" value="${user.userId}">
-		  </c:if>
-		  
-		  <c:if test="${empty user}">
-		  <div class="form-group">
-		    <label for="receiverEmail" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="receiverEmail" name="receiverEmail" placeholder="비회원 구매" >
-		    </div>
-		  </div>
-		  </c:if>
-		  
-		  
-		   <div class="form-group">
-		    <label for="divyMessage" class="col-sm-offset-1 col-sm-3 control-label">배송메시지</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="divyMessage" name="divyMessage" placeholder="요청사항을 적어주세요."  >
-		    </div>
-		  </div>
+<h2>| PURCHASE |</h2>
 
-		
+<br><br><br>
+
+<form action="">
+  <!--  General -->
+  <div class="form-group">
+    <h2 class="heading">배송정보</h2>
+    
+    <div class="controls">
+    <label for="prodName">받는분 이름</label>
+      <input type="text" id="receiverName" class="floatLabel" name="receiverName" placeholder="${user.userName}">
+    </div>
+    
+	<div class="controls">
+	<label for="prodName">연락처</label>
+	     <input type="text" id="receiverPhone" class="floatLabel" name="receiverPhone" placeholder="${user.phone}">
+    </div>
+    
+	<c:if test="${!empty user}">
+	    <input type="hidden" class="form-control" id="receiverEmail" name="receiverEmail" value="${user.userId}">
+	</c:if>
+    
+   <c:if test="${empty user}"> 
+   <div class="controls">
+	<label for="prodName">이메일</label>
+	     <input type="text" id="receiverEmail" class="floatLabel" name="receiverEmail" placeholder="${user.phone}">
+    </div>
+    </c:if>
+    
+    <div class="controls">
+	<label for="prodName">배송지</label>
+	<div>
+	 <div class="grid">
+		<div class="col-2-3 col-2-3-sm">
+		<input type="text" id="sample6_postcode" name="postcode" placeholder="우편번호" value="">
 		</div>
-		 <div class="text-center">	  
-		  <hr/>
-		  <h4 align="center">쿠폰 / 포인트</h4>
-		  <hr/>
-		  
-		 
-		 <div class="form-group">
-		    <label for="usedCoupon" class="col-sm-offset-1 col-sm-3 control-label">쿠폰 사용</label>
-		    <div class="col-sm-4">
-		   	  <c:if test="${product.couponApply == 'Y' }">
-		      		<select name="usedCoupon" id="usedCoupon">
-			      		<option>사용할 쿠폰을 선택해주세요</option>
-				      		<c:forEach var="couponlist" items="${coupon}">
-				      		<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
-				      		</c:forEach>
-		      		</select>
-		      </c:if>
-		      <c:if test="${product.couponApply == 'N' }">
-		      	<input type="text" class="form-control" id="usedCoupon" name="usedCoupon" placeholder="쿠폰적용이 불가한 상품입니다." readonly >
-		      </c:if>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="usedPoint" class="col-sm-offset-1 col-sm-3 control-label">포인트 사용</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="usedPoint" name="usedPoint" value="0">
-		      <button type="button" class="point" id="point" value="${user.holdpoint }">모두 사용</button>
-		      <h5>보유 포인트 ${user.holdpoint } P</h5>	
-		    </div>
-		  </div>
-		  
-		  </div>
-		  
-		  <input type="hidden" name="paymentOpt" id="paymentOpt" value="">
-		  
-		</form>
-<!-- 결제하기 /////////////////////////////////////-->		
-		
-	<input type="hidden" id="prodname" value="${product.prodName }"/>
-	<input type="hidden" id="prodprice" value="${product.prodDisPrice }"/>
-	<input type="hidden" id="buyeremail" value="${user.userId }"/>
-	<input type="hidden" id="buyername" value="${user.userName }"/>
-	<input type="hidden" id="buyerphone" value="${user.phone }"/>
-	
-	
-	<!-- 주소는 api input 이용 -->	
-	
-		<div class="text-center">
-			<button type="button" class="btn btn-default btn-block iamportPayment" id="iamportPayment" value="KA">결제하기</button>	
-			<a class="btn btn-default btn-block" href="#" role="button">취 소</a>
+		<div class="col-1-3 col-1-3-sm">
+		<input type="button" onclick="sample6_execDaumPostcode()" class="DaumPostcode" value="우편번호 찾기"><br>
 		</div>
-<!-- 결제하기 /////////////////////////////////////-->	
+	</div>
+		<input type="text" id="sample6_address" name="address" placeholder="주소" value=""><br>
+		<input type="text" id="sample6_detailAddress" name="detailAddress" placeholder="상세주소" value=""><br>
+		<input type="text" id="sample6_extraAddress" name="extraAddress" placeholder="참고항목" value="">
+	    <input type="hidden" name="divyAddr" value="${user.addr}">
+    </div>
+    </div>
+    
+	<div class="controls">
+	<label for="prodName">배송메시지</label>
+	     <input type="text" id="divyMessage" class="floatLabel" name="divyMessage" placeholder="요청사항을 적어주세요.">
+    </div>
+   
+   <br>
+   
+  </div>
+  
+
+  <div class="form-group">
+    <h2 class="heading">주문상품</h2>
+    
+    <input type="hidden" name="prodNo" value="${product.prodNo }" />
+	<input type="hidden" name="userId" value="${user.userId }" />
+      
+	<div class="controls">
+	     <div style="border: 1px solid #937062; height:100px;"></div>
+    </div>
+    
+    <input type="hidden" id="price" value="${product.prodDisPrice}">
+    <input type="hidden" min="0" class="form-control" id="purchaseQuantity" name="purchaseQuantity" value="${quantity}">
 		
-		<br/>
- 	</div>
+ </div>
+ 
+ <br>
+  
+  <div class="form-group">
+    <h2 class="heading">쿠폰 / 포인트</h2>
+    
+    <div class="controls">
+        <i class="fa fa-sort"></i>
+        <c:if test="${product.couponApply == 'Y' }">
+      		<select name="usedCoupon" id="usedCoupon" class="floatLabel">
+	      		<option>사용할 쿠폰을 선택해주세요</option>
+		      		<c:forEach var="couponlist" items="${coupon}">
+		      		<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
+		      		</c:forEach>
+      		</select>
+      </c:if>
+      <c:if test="${product.couponApply == 'N' }">
+      	<input type="text" class="floatLabel" id="usedCoupon" name="usedCoupon" placeholder="쿠폰적용이 불가한 상품입니다." readonly >
+      </c:if>
+      </div>  
+    
+    <div class="grid">
+	    <div class="col-1-2 col-1-2-sm">
+	      <div class="controls">
+	        <input type="text" id="usedPoint" class="floatLabel" name="usedPoint" value="0">
+	      </div>      
+	    </div>
+	    <div class="col-1-2 col-1-2-sm">
+	      <button Type="button" class="point" id="point" value="${user.holdpoint }">모두 사용</button>&emsp;     
+	      보유 포인트 ${user.holdpoint } P
+	    </div>
+	    
 	
+	</div>
+    
+    
+  </div>
+  <div class="form-group">
+    <h2 class="heading">결제금액</h2>
+    
+    <div class="controls">
+    <label for="prodName">총 결제금액</label>
+      <input type="text" id="totalprice" class="floatLabel" name="totalprice" value="" style="border:none;width:10%;text-align:right;">원
+    </div>
+    <div class="controls">
+    <label for="prodName">적립 포인트</label>
+      <input type="text" id="earnPoint" class="floatLabel" name="earnPoint" value="" style="border:none;width:10%;text-align:right;">P
+    </div>
+    
+  </div>
+  
+  
+  <h2 class="heading"></h2>
+  
+  	<button type="submit" value="Submit" class="size submit">구매하기</button> &nbsp;
+	<button class="size cancel">취 소</button>
+  
+</form>
+
+
+	</div>
+</div>
 	
 </body>
 
