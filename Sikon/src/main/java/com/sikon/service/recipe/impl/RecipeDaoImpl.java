@@ -83,6 +83,10 @@ public class RecipeDaoImpl implements RecipeDao {
 
 		sqlSession.update("IngredientMapper.updateIngredient", map);
 	}
+	
+	public void updateRecipeOnly(Recipe recipe) throws Exception {
+		sqlSession.update("RecipeMapper.updateRecipe", recipe);
+	}
 
 	public void deleteRecipe(int recipeNo) throws Exception {
 		System.out.println("recipeNo" + recipeNo);

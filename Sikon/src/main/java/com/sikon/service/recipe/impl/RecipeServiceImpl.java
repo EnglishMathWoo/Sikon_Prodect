@@ -76,6 +76,12 @@ public class RecipeServiceImpl implements RecipeService {
 		System.out.println("recipe=" + recipe);
 		recipeDao.updateRecipe(recipe,ingredient);
 	}
+	
+	public void updateRecipeOnly(Recipe recipe) throws Exception {
+		System.out.println("recipe=" + recipe);
+		recipeDao.updateRecipeOnly(recipe);
+	
+	}
 
 	public void deleteRecipe(int recipeNo) throws Exception{
 		System.out.println("recipe=" + recipeNo);

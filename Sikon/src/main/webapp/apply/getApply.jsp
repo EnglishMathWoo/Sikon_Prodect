@@ -107,7 +107,7 @@
 			<div class="col-xs-4 col-md-2">
 				<strong>쿠킹클래스가격</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${cook.cookPrice}</div>
+			<div class="col-xs-8 col-md-4">${apply.classCook.cookPrice}</div>
 		</div>
 
 		<hr/>

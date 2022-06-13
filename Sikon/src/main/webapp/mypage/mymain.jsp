@@ -182,7 +182,7 @@ $(function() {
         <!-- Column -->
         <div class="card"> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
             <div class="card-body little-profile text-center">
-                <div class="pro-img"><img src="https://i.imgur.com/VKOeFyS.png"  alt="user"></div>
+                <div class="pro-img"><img src="https://i.imgur.com/8RKXAIV.jpg" alt="user"></div>
                 <h3 class="m-b-0">${user.userNickname }</h3>
                 <p>${user.role }</p> <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">내정보수정</a>
                 <div class="row text-center m-t-20">

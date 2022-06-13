@@ -53,9 +53,9 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <style>
-body>div.container {
-	border: 3px solid #D6CDB7;
-	margin-top: 30px;
+div.container {
+	padding-top: 200px;
+	font-family: 'Nanum Myeongjo', serif;
 }
 
 #all {
@@ -123,7 +123,15 @@ $(function() {
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	$("a[href='#' ]").on("click" , function() {
-		$("form")[0].reset();
+		history.go(-1);
+	});
+});	
+//============= "구매"  Event 연결 =============
+$(function() {
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	$( "#iamportPayment" ).on("click" , function() {
+		console.log('구매');
+		payment();
 	});
 });	
 
@@ -135,12 +143,7 @@ $(function() {
 </head>
 
 <body>
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
+        <jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
@@ -307,42 +310,68 @@ $(function() {
 <script>
   
 	
-	$(function() {
-		$("button.kakao").on("click" , function() {
-			console.log("시작");		
-			payment();	
-		});
-	});	
+$(function() {
 	
-function payment(data) {
+	$("button.iamportPayment").on("click" , function() {
+		console.log("아임포트");		
+		
+		var payopt = $("button.iamportPayment").attr('value');
+		console.log("payopt: "+payopt);
+		$("#paymentOpt").val(payopt);
+		
+		payment();	
+	});
+});	
 	
-	
-	IMP.init('imp21089180'); 
-    
-    IMP.request_pay({
-    	pg : "html5_inicis", 
-        pay_method : 'card',
-        merchant_uid : '8913',
-        name : '낭만',
-        amount : 100,
-        buyer_email : 'sweetcorn09@naver.com',
-        buyer_name : '김태호',
-        buyer_tel : '010-4242-4242',
-        buyer_addr : '서울특별시 강남구 신사동',
-        buyer_postcode : '구매자 주소',
-        m_redirect_url : '01181'
-    }, function(rsp) {
-        if ( rsp.success ) {
-            alert("성공! imp_uid: "+rsp.imp_uid+" / merchant_uid(orderkey): "+rsp.merchant_uid);
-            self.location = "/cook/listCook?menu=search";
-        } else {
-        	alert("실패.. 코드: "+rsp.error_code+" / 메시지: "+rsp.error_msg);
-            
-        }
-    });
-	
-}
-    
+	function payment(data) {
+		
+		var payment = $("#paymentOpt").val();
+		console.log("payment: "+payment);
+		
+		var cookName = $("#cookName").val();
+		console.log("cookName: "+cookName);
+		
+		var cookPrice = $("#cookPrice").val();
+		console.log("cookPrice: "+cookPrice);
+		
+		var phone = $("#phone").val();
+		console.log("phone: "+phone);
+
+
+		var userName = $("#userName").val();
+		console.log("userName: "+userName);
+
+		var cookLocation = $("#cookLocation").val();
+		console.log("cookLocation: "+cookLocation);
+		
+
+		
+		
+		
+		IMP.init('imp05238113'); 
+	    
+	    IMP.request_pay({
+	    	pg : "kakaopay", 
+	        pay_method : payment,
+	        merchant_uid : '1205',
+	        name : cookName ,
+	        amount : cookPrice ,
+	        buyer_name : userName ,
+	        buyer_tel : phone ,
+	        cookLocation : cookLocation ,
+
+	    }, function(rsp) {
+	        if ( rsp.success ) {
+	            alert("성공! imp_uid: "+rsp.imp_uid+" / merchant_uid(orderkey): "+rsp.merchant_uid);
+	            fncAddApply();
+	        } else {
+	        	alert("실패.. 코드: "+rsp.error_code+" / 메시지: "+rsp.error_msg);
+	            
+	        }
+	    });
+		
+	}
+	    //*/
     
     </script>
 		
@@ -351,29 +380,34 @@ function payment(data) {
 		  
 		  
 		
-		
-		<div class="text-left">
-			<button type="button" class="kakao" id="kakao">결제하기</button>	
-		</div>
-		
+
 		
 		  
 		  
-		  <div class="form-group">
+	
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button"  class="btn btn-primary"  >구&nbsp;매</button>
 		      <button type="button"  class="btn btn-warning"  >장바구니</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
-			  <form method="post" action="/kakao/kakaoPay">
-		    <button>카카오페이</button>
-		</form>
+
+		
+		
 		 </div>
-		  </div>
-		  
+
+<!-- 결제하기 /////////////////////////////////////-->		
+		
+	<input type="hidden" id="cookName" value="${cook.cookName }"/>
+	<input type="hidden" id="cookPrice" value="${cook.cookPrice }"/>
+	<input type="hidden" id="phone" value="${user.phone }"/>
+	<input type="hidden" id="userName" value="${user.userName }"/>
+	<input type="hidden" id="cookLocation" value="${cook.cookLocation }"/>		  
 
 			<div class="text-left">
-			<button type="button" class="kakao" id="kakao">결제하기</button>	
+		<button type="button" class="btn btn-default btn-block iamportPayment" id="iamportPayment" value="KA">결제하기</button>		
 		</div>
+		<!-- 결제하기 /////////////////////////////////////-->	
+		
+		<br/>
 			</div>
  
 	

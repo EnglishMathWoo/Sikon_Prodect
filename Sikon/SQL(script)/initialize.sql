@@ -131,6 +131,7 @@ CREATE TABLE recipe(
 	recipe_order  CLOB NOT NULL,
 	recipe_regdate  DATE NOT NULL,
 	review_num  NUMBER NOT NULL,
+	recipe_views  NUMBER NOT NULL,
 	PRIMARY KEY(recipe_no)
 );
 

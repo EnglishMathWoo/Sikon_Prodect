@@ -24,6 +24,9 @@ public interface RecipeDao {
 
 	// UPDATE
 	public void updateRecipe(Recipe recipe, Map ingredient) throws Exception;
+	
+	// UPDATE(Ingredient Á¦¿Ü)
+	public void updateRecipeOnly(Recipe recipe) throws Exception;
 
 	// DELETE
 	public void deleteRecipe(int recipeNo) throws Exception;

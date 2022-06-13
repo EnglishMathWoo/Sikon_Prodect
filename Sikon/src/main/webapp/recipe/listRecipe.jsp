@@ -533,6 +533,7 @@ background-color: #f7f7f7;
             <li>${recipe.recipeDifficulty }</li>
             <li>${recipe.cookingTime }분</li>
             <li> ${recipe.writer.userNickname}</li>
+            <li style="float:right">조회수: ${recipe.recipeViews }</li>
           </ul>
         </div>
       </article>

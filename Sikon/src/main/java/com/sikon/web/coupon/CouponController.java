@@ -203,16 +203,4 @@ public class CouponController {
 		return "redirect:/coupon/listIssuedCoupon";
 	}
 	
-	@RequestMapping( value="/useCoupon", method=RequestMethod.GET )
-	public void useCoupon(@RequestParam("issueNo") int issueNo) throws Exception{
-
-		System.out.println("/coupon/useCoupon : GET");
-		
-		//Business Logic
-		Coupon coupon = couponService.getIssuedCoupon(issueNo);
-		coupon.setIssueStatus("002");
-		couponService.updateIssueStatus(coupon);
-	
-	}
-	
 }
