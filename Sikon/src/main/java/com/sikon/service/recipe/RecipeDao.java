@@ -36,4 +36,7 @@ public interface RecipeDao {
 
 	public List<Recipe> bestRecipeList() throws Exception;
 
+	//포인트 이동
+	public List getPointList(Search search, String userId) throws Exception;
+	public int pointTotalCount(Search search, String userId) throws Exception;
 }

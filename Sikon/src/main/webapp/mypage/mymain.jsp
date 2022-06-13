@@ -182,18 +182,18 @@ $(function() {
         <!-- Column -->
         <div class="card"> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
             <div class="card-body little-profile text-center">
-                <div class="pro-img"><img src="https://i.imgur.com/8RKXAIV.jpg" alt="user"></div>
+                <div class="pro-img"><img src="https://i.imgur.com/VKOeFyS.png"  alt="user"></div>
                 <h3 class="m-b-0">${user.userNickname }</h3>
                 <p>${user.role }</p> <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">≥ª¡§∫∏ºˆ¡§</a>
                 <div class="row text-center m-t-20">
                     <div class="col-lg-4 col-md-4 m-t-20">
-                        <h3 class="m-b-0 font-light">10434</h3><small>Articles</small>
+                        <h3 class="m-b-0 font-light">10434</h3><small>∏Æ∫‰</small>
                     </div>
                     <div class="col-lg-4 col-md-4 m-t-20">
-                        <h3 class="m-b-0 font-light">434K</h3><small>Followers</small>
+                        <h3 class="m-b-0 font-light">434K</h3><small>¡Ò√£∏‡≈‰</small>
                     </div>
                     <div class="col-lg-4 col-md-4 m-t-20">
-                        <h3 class="m-b-0 font-light">5454</h3><small>Following</small>
+                        <h3 class="m-b-0 font-light">5454P</h3><small>¿˚∏≥±›</small>
                     </div>
                 </div>
             </div>

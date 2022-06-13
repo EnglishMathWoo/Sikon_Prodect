@@ -93,7 +93,7 @@ public class BookmarkController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 
-		return "forward:/bookmark/listBookmark.jsp";
+		return "forward:/mypage/listBookmark.jsp";
 	}
 
 	// 책갈피 선택 삭제
@@ -110,7 +110,7 @@ public class BookmarkController {
 			bookmarkService.deleteBookmark(bookmarkList[i]);
 		}
 
-		return "redirect:/bookmark/listBookmark";
+		return "redirect:/mypage/listBookmark";
 	}
 
 }
