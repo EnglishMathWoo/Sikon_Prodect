@@ -1,7 +1,6 @@
 package com.sikon.service.domain;
 
 import java.sql.Date;
-import com.sikon.service.domain.User;
 
 public class Coupon {
  

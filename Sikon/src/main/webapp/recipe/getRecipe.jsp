@@ -458,11 +458,12 @@ background-color: #fff;
 		            alert("통신 에러");
 		        },
 		        success : function(data){
-		        	
-		        	alert("알람 전송 완료!!");
-		        	    
+		        		        	       	    
 		        		if(data.userId != data.writerId) {
 			           		if(socket){
+			           			
+			           			alert("알람 전송 완료!!");
+			           			
 			        			let socketMsg = "recipeReview,"+data.userId+","+data.userNickname+","+data.writerId+","+data.recipeName;
 			        			console.log(socketMsg);
 			        			socket.send(socketMsg);
