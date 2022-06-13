@@ -44,7 +44,7 @@ public class CartController {
 	}
 	
 	
-	
+	/*
 	@RequestMapping("addCart")
 	public String addCart(@RequestParam("quantity") int quantity, @RequestParam("prodNo") int prodNo, HttpSession session) throws Exception {
 
@@ -66,7 +66,7 @@ public class CartController {
 		return "redirect:/product/getProduct?menu=search&prodNo="+prodNo;
 	}
 	
-	
+	*/
 	@RequestMapping("getCartList")
 	public String getCartList( HttpSession session, Model model) throws Exception{
 		

@@ -128,7 +128,7 @@ public class RecipeRestController {
 	//좋아요 push 알림
 	@RequestMapping(value="/json/pushAlarm", method=RequestMethod.POST)
 	@ResponseBody
-	public Map pushAlram(@RequestParam("recipeNo") int recipeNo, @RequestParam("userId") String userId) {
+	public Map pushAlram(@RequestParam("recipeNo") int recipeNo, @RequestParam("userId") String userId, @RequestParam("userNickname") String userNickname) {
 				
 		Map map = new HashMap();
 		
@@ -136,6 +136,7 @@ public class RecipeRestController {
 			Recipe recipe = recipeService.getRecipeName(recipeNo);
 			
 			map.put("userId", userId);
+			map.put("userNickname", userNickname);
 			map.put("recipeName", recipe.getRecipeName());
 			map.put("writerId", recipe.getWriter().getUserId());
 			map.put("responseCode", "success");

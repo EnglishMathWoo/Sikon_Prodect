@@ -253,6 +253,7 @@ background-color: #fff;
 	<div class="container">
 				
 				<input type="hidden" name="userId" value="${user.userId}">
+				<input type="hidden" name="userNickname" value="${user.userNickname}">
 
 				<div class="col-xs-12 col-md-12  col-lg-12" style="text-align: center">
 					<c:forEach var="name" items="${recipe.recipeImg.split('/')[0]}">
@@ -435,21 +436,23 @@ background-color: #fff;
 		
 		var userId = $("input:hidden[name='userId']").val();
 		console.log(userId);
+		var userNickname = $("input:hidden[name='userNickname']").val();
+		console.log(userNickname);
 		var recipeNo = $("input:hidden[name='recipeNo']").val();
 		console.log(recipeNo);
 		
-		pushAlarm(userId, recipeNo);
+		pushAlarm(userId, userNickname, recipeNo);
 	}
 	
 	//리뷰 push 알림
-	 function pushAlarm(userId, recipeNo){
+	 function pushAlarm(userId, userNickname, recipeNo){
 				 	
 											
 			$.ajax({
 		        url : "/recipe/json/pushAlarm",
 		        type : 'POST',
 		        dataType : "json",   
-	            data : {'recipeNo' : recipeNo, 'userId' : userId }, 
+	            data : {'recipeNo' : recipeNo, 'userId' : userId, 'userNickname' : userNickname }, 
 	            async: false, 
 	            error : function(){
 		            alert("통신 에러");
@@ -457,16 +460,17 @@ background-color: #fff;
 		        success : function(data){
 		        	
 		        	alert("알람 전송 완료!!");
-		        	      	          
-		           		if(socket){
-		        			let socketMsg = "recipeReview,"+data.userId+","+data.writerId+","+data.recipeName;
-		        			console.log(socketMsg);
-		        			socket.send(socketMsg);
-		           		}
-		        }
-		    
-		    })
-	 };
+		        	    
+		        		if(data.userId != data.writerId) {
+			           		if(socket){
+			        			let socketMsg = "recipeReview,"+data.userId+","+data.userNickname+","+data.writerId+","+data.recipeName;
+			        			console.log(socketMsg);
+			        			socket.send(socketMsg);
+		           			}
+		        		}
+		        	}
+		    	})
+	 		};
 </script>
 
 

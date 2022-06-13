@@ -65,7 +65,7 @@
 	function fncGetList(currentPage) {
 		
 		$("#currentPage").val(currentPage);
-	  	$("form").attr("method" , "POST").attr("action", "/notice/listNotice?menu=${menu}").submit();
+	  	$("form").attr("method" , "POST").attr("action", "/alarm/listAlarm?userId=${user.userId}").submit();
 	}
 
 	
@@ -112,6 +112,8 @@
 		
 		<input type="hidden" id="currentPage" name="currentPage" value=""/>
 		
+		</form>
+		
 		<!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped" >
       
@@ -146,12 +148,11 @@
 	  
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
-
  	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->
 
-	</form>
+	
 </body>
 
 </html>
