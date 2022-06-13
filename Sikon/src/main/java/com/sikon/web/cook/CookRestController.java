@@ -245,7 +245,7 @@ public class CookRestController {
 	//좋아요 push 알림
 	@RequestMapping(value="/json/pushAlarm", method=RequestMethod.POST)
 	@ResponseBody
-	public Map pushAlram(@RequestParam("cookNo") int cookNo, @RequestParam("userId") String userId) {
+	public Map pushAlram(@RequestParam("cookNo") int cookNo, @RequestParam("userId") String userId, @RequestParam("userNickname") String userNickname) {
 				
 		Map map = new HashMap();
 		
@@ -253,6 +253,7 @@ public class CookRestController {
 			Cook cook = cookService.getCook(cookNo);
 			
 			map.put("userId", userId);
+			map.put("userNickname", userNickname);
 			map.put("cookName", cook.getCookName());
 			map.put("mentorId", cook.getMentor().getUserId());
 			map.put("responseCode", "success");
