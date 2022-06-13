@@ -24,6 +24,9 @@ public interface RecipeDao {
 
 	// UPDATE
 	public void updateRecipe(Recipe recipe, Map ingredient) throws Exception;
+	
+	// UPDATE(Ingredient 제외)
+	public void updateRecipeOnly(Recipe recipe) throws Exception;
 
 	// DELETE
 	public void deleteRecipe(int recipeNo) throws Exception;
@@ -36,4 +39,7 @@ public interface RecipeDao {
 
 	public List<Recipe> bestRecipeList() throws Exception;
 
+	//포인트 이동
+	public List getPointList(Search search, String userId) throws Exception;
+	public int pointTotalCount(Search search, String userId) throws Exception;
 }

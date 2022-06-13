@@ -474,7 +474,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        <li><a href="#">Logout</a></li>
 	        </c:if>
 	        <c:if test="${user.loginPath == 'S'}">
-	        <li><a href="#">&nbsp;Logout</a></li>
+	        <li><a href="#">Logout.</a></li>
 	        </c:if>
 	        
 	        <li><a href="#" style="color:#B97D2D">Mypage</a></li>
@@ -523,9 +523,10 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		                <li><a href="#">쿠킹멘토채널</a></li>
               		</ul>
               		</c:if>
-        </li>        
+        </li>
+        <li><a class="drop" href="#">랭킹</a>      
         <li><a class="drop" href="#">공지사항</a>
-        
+                
         <c:if test="${sessionScope.user.role == 'admin'}">
         <li><a class="drop" href="#">관리</a>
       		<ul>
@@ -653,7 +654,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 
 						
-			$( "a:contains('&nbsp;Logout')" ).on("click" , function() {
+			$( "a:contains('Logout.')" ).on("click" , function() {
 			$(self.location).attr("href","/user/logout");
 			});
 				
@@ -672,6 +673,10 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	 		
 	 		$( "a:contains('쿠킹클래스')" ).on("click" , function() {
 			$(self.location).attr("href","/cook/listCook?menu=search");
+			});
+	 		
+	 		$( "a:contains('랭킹')" ).on("click" , function() {
+				$(self.location).attr("href","/ranking/listRecipe");
 			});
 
 	 		$( "a:contains('공지사항')" ).on("click" , function() {

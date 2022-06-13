@@ -175,12 +175,15 @@
 			  	<c:when test="${coupon.issueStatus.equals('001')}">
 					<td align="left">사용가능</td>
 				</c:when>
-				<c:when test="${purchase.divyStatus.equals('002')}">
+				<c:when test="${coupon.issueStatus.equals('002')}">
 					<td align="left">사용완료</td>
 				</c:when>
-				<c:otherwise>
+				<c:when test="${coupon.issueStatus.equals('003')}">
 					<td align="left">회수</td>
-				</c:otherwise>
+				</c:when>
+				<c:when test="${coupon.issueStatus.equals('004')}">
+					<td align="left">만료</td>
+				</c:when>
 				</c:choose>
 			</tr>
           </c:forEach>

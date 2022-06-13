@@ -19,6 +19,7 @@ private int reviewNum;
 private int ingredientNo;
 private String ingredientName;
 private String ingredientAmount;
+private int recipeViews;
 
 
 
@@ -199,6 +200,18 @@ public int getReviewNum() {
 
 
 
+public int getRecipeViews() {
+	return recipeViews;
+}
+
+
+
+public void setRecipeViews(int recipeViews) {
+	this.recipeViews = recipeViews;
+}
+
+
+
 public void setReviewNum(int reviewNum) {
 	this.reviewNum = reviewNum;
 }
@@ -211,7 +224,7 @@ public String toString() {
 			+ ", writer=" + writer + ", recipeRegDate=" + recipeRegDate + ", recipeImg=" + recipeImg + ", recipeVideo="
 			+ recipeVideo + ", recipeDifficulty=" + recipeDifficulty + ", cookingTime=" + cookingTime + ", recipeOrder="
 			+ recipeOrder + ", recipeTheme=" + recipeTheme + ", reviewNum=" + reviewNum + ", ingredientNo="
-			+ ingredientNo + ", ingredientName=" + ingredientName + ", ingredientAmount=" + ingredientAmount + "]";
+			+ ingredientNo + ", ingredientName=" + ingredientName + ", ingredientAmount=" + ingredientAmount + ",recipeViews=" + recipeViews + "]";
 }
 
 
