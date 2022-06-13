@@ -18,13 +18,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
  <!-- font -->
@@ -63,6 +57,53 @@ div.image{
 	color: #f7f7f7;
 }
 
+#my_modal {
+    display: none;
+    width: 330px;
+    padding: 20px 60px;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#my_modal .modal_close_btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+modal_close_btn{
+	text-decoration-line: none;
+	width:20px;
+	height: 20px;
+}
+
+div.message{
+	text-align: center;
+	font-size: 15px;
+}
+
+a.tocart{
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	height: 40px;
+	width : 160px;
+	padding: 10px;
+	text-decoration-line: none;
+	color: #333;
+}
+
+
+
+.bi-x::before {
+    font-size: xx-large;
+    color: black;
+}
+
+.link{
+	border: 1px solid #d7d7d7;
+}
 </style>
  <!-- //////////////////////////////////공유하기////////////////////////////// -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
@@ -127,13 +168,6 @@ div.image{
 			 console.log('구매수량: '+quantity);
 		 });
 		
-		 $( "#check" ).on("click" , function() {
-			 self.location = "/product/listProduct?menu=manage"
-		});
-		 
-		 $( "#cancel" ).on("click" , function() {
-			 self.location = "/product/listProduct?menu=search"
-		});
 		 
 		 $( "button.btn-warning" ).on("click" , function() {
 			 var quantity = $('#quantity').val();
@@ -145,10 +179,36 @@ div.image{
 			 self.location = "/product/updateProduct?prodNo="+prodNo
 		});
 		 
+
 		 $( "button.btn-default" ).on("click" , function() {
 			 var quantity = $('#quantity').val();
-			 self.location = "/cart/addCart?prodNo=${product.prodNo}&quantity="+quantity;
+			 
+			 $.ajax({
+	                  url : "/cart/json/addCart?prodNo=${product.prodNo}&quantity="+quantity ,
+	                  method : "GET" ,
+	                  dataType : "json" ,
+	                  headers : {
+	                     "Accept" : "application/json",
+	                     "Content-Type" : "application/json"
+	                  },
+	                  success : function(response) {
+	                	  console.log("[response] : " + response);
+	                	  modal('my_modal'); 
+	                  }
+	            });
+			 
 		});
+
+		 
+		 
+		 $( ".tocart" ).on("click" , function() {
+			 
+			 var quantity = $('#quantity').val();
+			 			 
+			 self.location = "/cart/getCartList"
+			 
+		});
+		 
 		 
 	});
 
@@ -167,6 +227,67 @@ div.image{
 		return false;
 	});
 		
+	
+	function CloseModal(){
+        var CloseModal = document.querySelector(".popup");
+        CloseModal.classList.add("CloseModal");
+     }
+	
+	
+//===================== 팝업창 띄우기 ====================================	
+
+	function modal(id) {
+    var zIndex = 9999;
+    var modal = $('#' + id);
+    var quantity = $('#quantity').val();
+
+    // 모달 div 뒤에 희끄무레한 레이어
+    var bg = $('<div>')
+        .css({
+            position: 'fixed',
+            zIndex: zIndex,
+            left: '0px',
+            top: '0px',
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            // 레이어 색갈은 여기서 바꾸면 됨
+            backgroundColor: 'rgba(0,0,0,0.4)'
+        })
+        .appendTo('body');
+
+    modal
+        .css({
+            position: 'fixed',
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+            // 시꺼먼 레이어 보다 한칸 위에 보이기
+            zIndex: zIndex + 1,
+
+            // div center 정렬
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            msTransform: 'translate(-50%, -50%)',
+            webkitTransform: 'translate(-50%, -50%)'
+        })
+        .show()
+        // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+        .find('.modal_close_btn')
+        .on('click', function() {
+            bg.remove();
+            modal.hide();
+        });
+}
+/*
+$( document ).ready( function() {
+		$('#popup_open_btn').on('click', function() {
+		    // 모달창 띄우기
+			console.log('모달창');
+		    modal('my_modal');
+		});
+	});
+*/	
 	
 	</script>
 </head>
@@ -238,19 +359,16 @@ div.image{
 				
 				<div class="row">
 			  		<div class="text-center">	
-			  				<button type="button" class="btn btn-default btn-lg" id="cancel">장바구니</button>&emsp;
+			  				<button type="button" class="btn btn-default btn-lg" id="popup_open_btn">장바구니</button>&emsp;
 			  				<button type="button" class="btn btn-warning btn-lg" id="buy" >구매하기</button>
 			  				<c:if test="${menu == 'manage' }">
-			  				&emsp;<button type="button" class="btn btn-primary btn-lg" id="buy" >수정하기</button>
+			  				&emsp;<button type="button" class="btn btn-primary btn-lg">수정하기</button>
 			  				</c:if>
 			  		</div>
-				</div>
-		
+				</div>	
 				
 		 	</div>
-		 	
-		 	<div class="col-xs-2 col-md-2">
-		 	</div>
+
 		 	
 		 	</div>
 		 	
@@ -263,7 +381,23 @@ div.image{
 		 	</div>
 		 	
 </div>
- 	<!--  화면구성 div Start /////////////////////////////////////-->
+ 	<!--  모달창 띄우기 /////////////////////////////////////-->
+ 
+ 	<div id="my_modal">
+ 		<a class="modal_close_btn"><i class="bi bi-x"></i></a>
+ 		<br>
+ 		<div class="message">
+	    장바구니에 상품이 담겼습니다.
+	    </div><br>
+	    <div class="forcenter">
+	    <a href="#" class="tocart">
+	    장바구니 바로가기 &nbsp;
+	    <i class="fa-solid fa-angle-right"></i>
+	    </a>
+	    </div>
+	    <br>
+	</div>
+ 	
  	
  	<!-- 상단으로 이동하기 버튼 -->
 	<a href="#" class="btn_gotop">
