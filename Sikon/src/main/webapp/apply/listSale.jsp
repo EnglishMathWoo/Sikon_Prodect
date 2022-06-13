@@ -67,7 +67,7 @@
 		
 		
 		$( "td.divy" ).on("click" , function() {
-			console.log('물건도착');
+			console.log('수강완료하심');
 			var message1 = $(this).attr("value1");
 			console.log(message1);
 			var message2 = $(this).attr("value2");
@@ -94,18 +94,21 @@
 			 var totalprice = 0;
 			 var cookPrice = $("td.cookPrice").attr("value");
 			 var cookStatus = $("td.cookStatus").attr("value");
+			
+			 
 			 console.log(cookPrice);
 			 console.log(cookStatus);
 			 var list = [];
+			
 		   		<c:forEach var="apply" items="${list}" >
 		   		totalprice += (Number(${apply.classCook.cookPrice})*Number(${apply.cookStatus}));
 		   		</c:forEach>
-		   		
+		
 			 console.log(totalprice);
 			
 			 $("#totalprice").val(totalprice); 
 		});	
-	  getGraph();
+
 	  
 	   function getGraph(){
 	       	  let timeList = [];
@@ -268,7 +271,9 @@
 
 	      	       
         </tbody>
-  	      <div align="right">
+        
+  	      <div class="sale" align="right">
+  	      
 	        총 매출 : <input type="text" id="totalprice" value="" name ="totalprice"style="border:none;width:100px;text-align:right;" min="0" readonly/> 원
 	      </div>	    
       </table>

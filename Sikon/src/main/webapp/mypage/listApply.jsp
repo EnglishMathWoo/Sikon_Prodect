@@ -223,7 +223,7 @@ body {
 
 						<c:choose>
 							<c:when test="${apply.applyStatus.equals('000')}">
-								<td align="left">현재 구매 취소된 상품입니다.</td>
+								<td align="left">수강취소한 쿠킹클래스 입니다.</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('100')}">
 								<td align="left">현재 신청완료 상태 입니다.</td>
@@ -248,7 +248,7 @@ body {
 									value2="${apply.applyStatus}">신청취소</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('200')}">
-								<td align="left" class="complete">구매취소되었습니다</td>
+								<td align="left" class="complete">수강완료한 클래스입니다</td>
 							</c:when>
 						</c:choose>
 

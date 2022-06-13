@@ -79,50 +79,7 @@ div.image{
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-	///*
-	Kakao.init('bdc66313a731d6cd370ddce26735db6a');
 
-	  // SDK 초기화 여부를 판단합니다.
-	  console.log(Kakao.isInitialized());
-
-	  
-	  function kakaoShare() {
-		  
-		  var image = $("input:hidden[name='image']").val();
-		  console.log(image);
-		  var cookName = $("input:hidden[name='cookName']").val();
-		  console.log(name);
-		  var cookBrief = $("input:hidden[name='cookBrief']").val();
-		  console.log(detail);
-		  var cookNo = $("input:hidden[name='cookNo']").val();
-		 console.log(prodNo);
-		  
-	    Kakao.Link.sendDefault({
-	      objectType: 'feed',
-	      content: {
-	        title: cookName,
-	        description: cookBrief,
-	        imageUrl: 'http://192.168.0.50:8080/resources/images/uploadFiles/'+image ,
-	        link: {
-	          mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
-	          webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
-	        },
-	      },
-	      buttons: [
-	        {
-	          title: '웹으로 보기',
-	          link: {
-	            mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
-	            webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
-	          },
-	        },
-	      ],
-	      // 카카오톡 미설치 시 카카오톡 설치 경로이동
-	      installTalk: true,
-	    })
-	  }
-//*/	
-	//=====================공유하기====================================
 
 //=========================================================================================//	
 	$( document ).ready( function() {
@@ -211,6 +168,7 @@ $(function() {
 	
 				<div class="col-xs-6 col-md-6 text-center image">				
 						<c:forEach var="name" items="${cook.cookFilename.split('/')[0]}">
+						<input type="hidden" name="image" value="${cook.cookFilename}">
 								<img src="/resources/images/uploadFiles/${name}" width="400" height="400"/>
 						</c:forEach>
 				</div>	
@@ -326,7 +284,7 @@ $(function() {
         </a>
     </em>
 </p>
-<div id="map" style="width:400px;height:400px;"></div>
+<div id="map" class="col-xs-10 col-md-10 text-center" style="width:400px;height:400px;"></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bdc66313a731d6cd370ddce26735db6a&libraries=services"></script>
 <script>
@@ -373,9 +331,56 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 		
 
 		 	</div>
-	
-		 	
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>		 	
+<script type="text/javascript">	
+		///*
+	Kakao.init('bdc66313a731d6cd370ddce26735db6a');
 
+	  // SDK 초기화 여부를 판단합니다.
+	  console.log(Kakao.isInitialized());
+
+	  
+	  function kakaoShare() {
+		  
+		  var image = $("input:hidden[name='image']").val();
+		  console.log(image);
+		  var cookName = $("input:hidden[name='cookName']").val();
+		  console.log(cookName);
+		  var cookBrief = $("input:hidden[name='cookBrief']").val();
+		  console.log(cookBrief);
+		  var cookNo = $("input:hidden[name='cookNo']").val();
+		 console.log(cookNo);
+		  
+	    Kakao.Link.sendDefault({
+	      objectType: 'feed',
+	      content: {
+	        title: cookName,
+	        description: cookBrief,
+	        imageUrl: 'http://192.168.0.50:8080/resources/images/uploadFiles/'+image ,
+	        link: {
+	          mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	          webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	        },
+	      },
+	      buttons: [
+	        {
+	          title: '웹으로 보기',
+	          link: {
+	            mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	            webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	          },
+	        },
+	      ],
+	      // 카카오톡 미설치 시 카카오톡 설치 경로이동
+	      installTalk: true,
+	    })
+	  }
+//*/	
+	//=====================공유하기====================================	 	
+	$(document).ready(function() {
+
+	});
+</script>
 
 </body>
 </html>

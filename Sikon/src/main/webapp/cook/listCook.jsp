@@ -144,13 +144,13 @@ div.thumbnail {
 
 
 		//좋아요 push 알림
-		 function pushAlarm(userId, cookNo){
+		 function pushAlarm(userId, userNickname, cookNo){
 												
 				$.ajax({
 			        url : "/cook/json/pushAlarm",
 			        type : 'POST',
 			        dataType : "json",   
-		            data : {'cookNo' : cookNo, 'userId' : userId }, 
+		            data : {'cookNo' : cookNo, 'userId' : userId, 'userNickname' : userNickname }, 
 		            async: false, 
 		            error : function(){
 			            alert("통신 에러");
@@ -160,7 +160,7 @@ div.thumbnail {
 			        	alert("알람 전송 완료!!");
 			        	      	          
 			           		if(socket){
-			        			let socketMsg = "heart,"+data.userId+","+data.mentorId+","+data.cookName;
+			        			let socketMsg = "heart,"+data.userId+","+data.userNickname+","+data.mentorId+","+data.cookName;
 			        			console.log(socketMsg);
 			        			socket.send(socketMsg);
 			           		}
@@ -179,6 +179,7 @@ div.thumbnail {
 			$( "p.like_btn" ).on("click" , function(){
 
 				var userId = $("input[name='userId']").val();
+				var userNickname = $("input[name='userNickname']").val();
 				var cookNo = $(this).attr("value");
 			
 				console.log(cookNo);
@@ -202,32 +203,10 @@ div.thumbnail {
 
 			                    	console.log(userId);
 			                    	console.log(cookNo);
+			                    	console.log(userNickname);
 			                    	
-			                    	pushAlarm(userId, cookNo);
-			                    	
-			    					/*
-			    					$.ajax({
-			    				        url : "/cook/json/pushAlarm",
-			    				        type : 'POST',
-			    				        dataType : "json",   
-			    			            data : {'cookNo' : cookNo, 'userNickname' : userNickname },
-			    			            error : function(){
-			    				            alert("통신 에러");
-			    				        },
-			    				        success : function(data){
-			    				        	
-			    				        	alert("알람 전송 완료!!");
-			    				        	      	          
-			    				           		if(socket){
-			    				           			console.log(data.cookMentor)
-			    				        			let socketMsg = "heart,"+data.userNickname+","+data.mentorNickname+","+data.cookName;
-			    				        			console.log(socketMsg);
-			    				        			socket.send(socketMsg);
-			    				           		}
-			    				        }
-			    				    
-			    				    })*/
-						           
+			                    	pushAlarm(userId, userNickname, cookNo);
+			                    							           
 			                    $("#like_btn").removeClass('bi-heart');
 						        $("#like_btn").addClass('bi-heart-fill');
 						           

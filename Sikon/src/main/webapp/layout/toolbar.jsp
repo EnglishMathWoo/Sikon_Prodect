@@ -555,6 +555,25 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
           	</ul>
         </li>
         </c:if>
+      <c:if test="${sessionScope.user.role == 'mentor'}">  
+          <li><a class="drop" href="#">관리</a>
+      		<ul>
+
+		        <li><a href="#">레시피관리</a></li>
+
+	            <li><a class="drop" href="#">쿠킹클래스관리</a>
+		      		<ul>
+		                <li><a href="#">쿠킹클래스등록</a></li>
+		                <li><a href="#">쿠킹클래스목록</a></li>
+		                <li><a href="#">쿠킹클래스판매목록</a></li>
+		               
+              		</ul>
+            	</li>     
+
+
+          	</ul>
+        </li>    
+       </c:if>
       </ul>
     </nav>
 
