@@ -38,5 +38,6 @@ public interface CouponService {
 	
 	// ÄíÆù»èÁ¦
 	public void deleteCoupon(int couponNo) throws Exception;
+
 		
 }
