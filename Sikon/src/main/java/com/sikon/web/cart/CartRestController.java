@@ -1,5 +1,8 @@
 package com.sikon.web.cart;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +14,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sikon.service.domain.User;
+import com.sikon.service.product.ProductService;
 import com.sikon.service.domain.Cart;
+import com.sikon.service.domain.Product;
 import com.sikon.service.cart.CartService;
 
 
-//==> 회원관리 RestController
+
 @RestController
 @RequestMapping("/cart/*")
 public class CartRestController {
 	
-	///Field
+	
 	@Autowired
 	@Qualifier("cartServiceImpl")
 	private CartService cartService;
-	//setter Method 구현 않음
+	@Autowired
+	@Qualifier("productServiceImpl")
+	private ProductService productService;
 		
 	public CartRestController(){
 		System.out.println(this.getClass());
@@ -36,7 +43,29 @@ public class CartRestController {
 	int pageSize;
 	
 	
+	@RequestMapping("json/addCart")
+	public Map addCart(@RequestParam("quantity") int quantity, @RequestParam("prodNo") int prodNo, HttpSession session) throws Exception {
+
+		System.out.println("json/addCart");
+		
+		User user = (User) session.getAttribute("user");
+		Product product = productService.getProduct(prodNo);
+		
+		
+		Cart cart = new Cart();
+		cart.setUserId(user.getUserId());
+		cart.setCartProd(product);
+		cart.setQuantity(quantity);
+		
+		System.out.println(cart);
 	
+		cartService.addCart(cart);
+		
+		Map map = new HashMap();
+		map.put("response", "success");
+		
+		return map;
+	}
 	
 	@RequestMapping( value="json/updateCart")
 	public String updateCart( @RequestParam("cartNo") int cartNo, @RequestParam("quantity") int quantity) throws Exception{
