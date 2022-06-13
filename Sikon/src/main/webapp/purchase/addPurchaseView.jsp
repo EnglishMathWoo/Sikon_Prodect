@@ -101,7 +101,7 @@ div.container {
 		}
 		
 
-
+		//======= 총결제금액 및 적립포인트 계산 =============================================
 		$(function() {
 			var price = $( "#price" ).val();
 			console.log("price: "+price);
@@ -116,6 +116,16 @@ div.container {
 			$("#totalprice").val(price*quantity);
 		});	
 		
+		
+		//======= 포인트 모두사용 =============================================	
+		$(function() {
+			$("#point" ).on("click" , function() {
+			var allpoint = $(this).val();
+			console.log("포인트 모두사용: "+allpoint);
+			
+			$( "#usedPoint" ).val(allpoint);
+			});
+		});	
 		 
 	</script>		
 <!-- 주소록 --> 
@@ -240,14 +250,15 @@ function payment(data) {
 	var postcode = $("#sample6_postcode").val();
 	console.log("postcode: "+postcode);
 	
-	
+	var uid="${uid }";
+	console.log("uid: "+uid);
 	
 	IMP.init('imp05238113'); 
     
     IMP.request_pay({
     	pg : "kakaopay", 
         pay_method : payment,
-        merchant_uid : '1202',
+        merchant_uid : uid ,
         name : prodname ,
         amount : prodprice ,
         buyer_email : buyeremail ,
@@ -257,10 +268,9 @@ function payment(data) {
         buyer_postcode : postcode 
     }, function(rsp) {
         if ( rsp.success ) {
-            alert("성공! imp_uid: "+rsp.imp_uid+" / merchant_uid(orderkey): "+rsp.merchant_uid);
             fncAddPurchase();
         } else {
-        	alert("실패.. 코드: "+rsp.error_code+" / 메시지: "+rsp.error_msg);
+        	alert("결제 실패");
             
         }
     });
@@ -389,6 +399,7 @@ function payment(data) {
 		  <c:if test="${!empty user}">
 		      <input type="hidden" class="form-control" id="receiverEmail" name="receiverEmail" value="${user.userId}">
 		  </c:if>
+		  
 		  <c:if test="${empty user}">
 		  <div class="form-group">
 		    <label for="receiverEmail" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
@@ -418,7 +429,12 @@ function payment(data) {
 		    <label for="usedCoupon" class="col-sm-offset-1 col-sm-3 control-label">쿠폰 사용</label>
 		    <div class="col-sm-4">
 		   	  <c:if test="${product.couponApply == 'Y' }">
-		      	<input type="text" class="form-control" id="usedCoupon" name="usedCoupon" placeholder="사용할 쿠폰을 선택해주세요" >
+		      		<select name="usedCoupon" >
+			      		<option>사용할 쿠폰을 선택해주세요</option>
+				      		<c:forEach var="couponlist" items="${coupon}">
+				      		<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
+				      		</c:forEach>
+		      		</select>
 		      </c:if>
 		      <c:if test="${product.couponApply == 'N' }">
 		      	<input type="text" class="form-control" id="usedCoupon" name="usedCoupon" placeholder="쿠폰적용이 불가한 상품입니다." readonly >
@@ -430,7 +446,7 @@ function payment(data) {
 		    <label for="usedPoint" class="col-sm-offset-1 col-sm-3 control-label">포인트 사용</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="usedPoint" name="usedPoint" value="0">
-		      <button type="button" class="point" id="point">모두 사용</button>
+		      <button type="button" class="point" id="point" value="${user.holdpoint }">모두 사용</button>
 		      <h5>보유 포인트 ${user.holdpoint } P</h5>	
 		    </div>
 		  </div>
