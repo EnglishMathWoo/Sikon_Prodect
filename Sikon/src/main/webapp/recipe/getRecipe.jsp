@@ -306,6 +306,7 @@ background-color: #fff;
 							
 
 							&nbsp;소요시간 ${recipe.cookingTime }분 
+							<div style="float:right">조회수: ${recipeViews}</div> 
 						</h5>
 					<hr/>
 

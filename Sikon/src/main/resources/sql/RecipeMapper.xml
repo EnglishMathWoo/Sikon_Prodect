@@ -21,6 +21,7 @@
 		<result property="ingredientNo"      column="ingredient_no"           jdbcType="NUMERIC"/>
 		<result property="ingredientName"      column="ingredient_name"           jdbcType="VARCHAR"/>
 		<result property="ingredientAmount"      column="ingredient_amount"           jdbcType="VARCHAR"/>
+		<result property="recipeViews"      column="recipe_views"           jdbcType="NUMERIC"/>
 		<collection property="writer" resultMap="userSelectMap"/>
 	</resultMap>
 	
@@ -46,7 +47,7 @@
 	<!-- SQL : INSERT -->
 	 <insert 	id="addRecipe"		parameterType="recipe" >
 	 	INSERT
-		INTO recipe VALUES	 (	seq_recipe_no.nextval ,#{writer.userNickname} , #{recipeName}, #{recipeDetail},#{recipeImg},#{recipeVideo},#{recipeDifficulty},#{recipeTheme},#{cookingTime},#{recipeOrder},SYSDATE,0)
+		INTO recipe VALUES	 (	seq_recipe_no.nextval ,#{writer.userNickname} , #{recipeName}, #{recipeDetail},#{recipeImg},#{recipeVideo},#{recipeDifficulty},#{recipeTheme},#{cookingTime},#{recipeOrder},SYSDATE,0,0)
 	 	
 	 </insert>
 	 
@@ -82,7 +83,8 @@
 			recipe_difficulty=#{recipeDifficulty},
 			cooking_time=#{cookingTime},
 			recipe_order=#{recipeOrder} ,
-			recipe_theme=#{recipeTheme} 
+			recipe_theme=#{recipeTheme}, 
+			recipe_views=#{recipeViews}
 		</set>
 		WHERE recipe_no = #{recipeNo}
 	</update>
@@ -147,6 +149,9 @@
 													</when>
 													<when test="orderCondition == 2  ">
 										 				ORDER BY r.cooking_time DESC
+													</when>
+													<when test="orderCondition == 3  ">
+										 				ORDER BY r.recipe_views DESC
 													</when>
 													<otherwise>
 														order by r.recipe_no
