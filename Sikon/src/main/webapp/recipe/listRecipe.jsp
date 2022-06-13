@@ -298,17 +298,17 @@ background-color: #f7f7f7;
 		 
 		 $(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-					$( ".imgover" ).on("click" , function() {
-					console.log($(this).attr("value"));
-					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
-					});
-			 
+				
 					$( ".submit" ).on("click" , function() {
 						self.location ="/recipe/addRecipe.jsp"
 						});
 		 });
 					
-				
+			$(document).on('click', '.imgover', function(){
+				console.log($(this).attr("value"));
+				self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
+				});
+		 
 			
 			   	//====================================================================
 			 $(function() {
@@ -356,32 +356,23 @@ background-color: #f7f7f7;
 					                	console.log(JSONData.list[0].recipeImg);
 						                	 
 					                	for(var i=0; i<JSONData.list.length-1; i++){
-					                		///*
-					                		var image;
 					                
-				                				
-				                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'>";
-					                			
-					                		
-					                		
-						                     var displayValue = 
-						                    	 				"<div class='col-sm-6 col-md-3'><br/> <br/>"
+						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
 						                     					+"<div id='latest' class='group'>"
 						                     					+"<article class='one_third first'>"
 						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
-						                     					+image
+						                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'></a>"
 					                     						+"<div class='excerpt'>"
-					                     						+"<h4 class='heading'>"+JSONData.list[i].recipeName+"</h4>"
+					                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
 					                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
 					                     						+"<ul class='meta'>"
 					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
 					                     			            +"<li>"+ JSONData.list[i].recipeDifficulty +"</li>"
-					                     			            +"<li>"+ JSONData.list[i].cookingTime +"</li>"
+					                     			            +"<li>"+ JSONData.list[i].cookingTime +"분</li>"
 					                     			            +"<li>"+ JSONData.list[i].writer.userNickname +"</li>"
 					                     						+"</ul></div></article></div></div>"
 					                     						
 					                     						
-					                     		//*/				
 						               	$( '#scrollList' ).append(displayValue);	
 					                     						
 					                     						 		
@@ -432,7 +423,7 @@ background-color: #f7f7f7;
 	          </div>
 	          
 	          <div class="item">
-	            <img src="/resources/images/uploadFiles/unnamed (15).jpg"  alt="Third slide">
+	            <img src="/resources/images/uploadFiles/dddaa6_4c4af2e3afae41b68a41494ff452f5e3_mv2_d_3000_1688_s_2 (1).jpg"  alt="Third slide">
 	          </div>
 	          
 	       </div> 
@@ -535,26 +526,23 @@ background-color: #f7f7f7;
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#"><img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">
-          <h4 class="heading" >${recipe.recipeName }</h4>
+          <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
            <h6 >${recipe.recipeDetail }</h6>
           <ul class="meta">
             <li > ${recipe.recipeTheme }</li>
             <li>${recipe.recipeDifficulty }</li>
             <li>${recipe.cookingTime }분</li>
-            <li> ${recipe.writer.userNickname }</li>
+            <li> ${recipe.writer.userNickname}</li>
           </ul>
         </div>
       </article>
-     
     </div>
     <!-- ################################################################################################ -->
   </div>
   </c:forEach>
   
- 
-  
-     <div  id="scrollList"></div>
      
+ <div  id="scrollList"></div>
 </div>
 	  </div>
 	

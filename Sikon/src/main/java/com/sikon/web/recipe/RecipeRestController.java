@@ -63,6 +63,13 @@ public class RecipeRestController {
 			search.setOrderCondition("100");
 		}
 
+		if (search.getSearchCondition() == null) {
+			search.setSearchCondition("0");
+		}
+
+		if(search.getThemeCondition() == "all") {
+			search.setThemeCondition(null);
+		}
 		System.out.println("orderCondition=" + search.getOrderCondition());
 		
 		search.setPageSize(pageSize);

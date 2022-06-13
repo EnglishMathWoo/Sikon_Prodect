@@ -21,8 +21,7 @@
 		<result property="ingredientNo"      column="ingredient_no"           jdbcType="NUMERIC"/>
 		<result property="ingredientName"      column="ingredient_name"           jdbcType="VARCHAR"/>
 		<result property="ingredientAmount"      column="ingredient_amount"           jdbcType="VARCHAR"/>
-			<collection property="writer" resultMap="userSelectMap"/>
-	
+		<collection property="writer" resultMap="userSelectMap"/>
 	</resultMap>
 	
 	<resultMap id="userSelectMap" type="user">
@@ -101,36 +100,39 @@
 	<select  id="getRecipeList"  parameterType="search"	resultMap="recipeSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *
-											FROM recipe
+	  					FROM		(	SELECT r.*, u.user_nickname
+											FROM recipe r, users u
 											<if test="searchCondition != null">
 											<choose>
 													<when test="searchCondition == 0 and searchKeyword !='' ">
-										 				where recipe_NO LIKE '%'|| ''||'%'
+										 				where r.writer_nickname=u.user_nickname 
+										 				and r.recipe_NO LIKE '%'|| ''||'%'
 													</when>
 													<when test="searchCondition == 1 and searchKeyword !='' ">
-										 				 where recipe_Name LIKE '%'||#{searchKeyword}||'%'
+										 				 where r.writer_nickname=u.user_nickname 
+										 				and  r.recipe_Name LIKE '%'||#{searchKeyword}||'%'
 													</when>
 													<when test="searchCondition == 2 and searchKeyword !='' ">
-										 				 where writer_nickname LIKE '%'||#{searchKeyword}||'%'
+										 				 where r.writer_nickname=u.user_nickname 
+										 				and  r.writer_nickname LIKE '%'||#{searchKeyword}||'%'
 													</when>
 													</choose>
 											</if>
 											<if test="themeCondition != null">
 													<if test='themeCondition == "ko"'>
-										 				AND recipe_theme LIKE UPPER('KO')
+										 				AND r.recipe_theme LIKE UPPER('KO')
 													</if>
 													<if test='themeCondition == "ch"'>
-										 				AND recipe_theme LIKE UPPER('CH')
+										 				AND r.recipe_theme LIKE UPPER('CH')
 													</if>
 													<if test='themeCondition == "fr"'>
-										 				AND recipe_theme LIKE UPPER('FR')
+										 				AND r.recipe_theme LIKE UPPER('FR')
 													</if>
 													<if test='themeCondition == "jp"'>
-										 				AND recipe_theme LIKE UPPER('JP')
+										 				AND r.recipe_theme LIKE UPPER('JP')
 													</if>
 													<if test='themeCondition == "des"'>
-										 				AND recipe_theme LIKE UPPER('DES')
+										 				AND r.recipe_theme LIKE UPPER('DES')
 													</if>
 											</if>
 													
@@ -138,23 +140,22 @@
 											
 											<choose>
 													<when test="orderCondition == 0  ">
-										 				ORDER BY review_num ASC
+										 				ORDER BY r.review_num ASC
 													</when>
 													<when test="orderCondition == 1 ">
-										 				ORDER BY recipe_difficulty DESC
+										 				ORDER BY r.recipe_difficulty DESC
 													</when>
 													<when test="orderCondition == 2  ">
-										 				ORDER BY cooking_time DESC
+										 				ORDER BY r.cooking_time DESC
 													</when>
 													<otherwise>
-														order by recipe_no
+														order by r.recipe_no
 													</otherwise>
 													</choose>
 													</if>
 
 
  ) inner_table
-											
 						WHERE ROWNUM &lt;= #{endRowNum} ) C
 		WHERE C.row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
@@ -162,52 +163,56 @@
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT *
-											FROM recipe
-						<if test="searchCondition != null">
-							<choose>
+	  	FROM(	SELECT r.*, u.user_nickname
+											FROM recipe r, users u
+											<if test="searchCondition != null">
+											<choose>
 													<when test="searchCondition == 0 and searchKeyword !='' ">
-										 				where recipe_NO LIKE '%'|| ''||'%'
+										 				where r.writer_nickname=u.user_nickname 
+										 				and r.recipe_NO LIKE '%'|| ''||'%'
 													</when>
 													<when test="searchCondition == 1 and searchKeyword !='' ">
-										 				 where recipe_Name LIKE '%'||#{searchKeyword}||'%'
+										 				 where r.writer_nickname=u.user_nickname 
+										 				and  r.recipe_Name LIKE '%'||#{searchKeyword}||'%'
 													</when>
 													<when test="searchCondition == 2 and searchKeyword !='' ">
-										 				 where writer_nickname LIKE '%'||#{searchKeyword}||'%'
+										 				 where r.writer_nickname=u.user_nickname 
+										 				and  r.writer_nickname LIKE '%'||#{searchKeyword}||'%'
 													</when>
 													</choose>
-							
-						</if>  
-						<if test="themeCondition != null">
+											</if>
+											<if test="themeCondition != null">
 													<if test='themeCondition == "ko"'>
-										 				AND recipe_theme LIKE UPPER('KO')
+										 				AND r.recipe_theme LIKE UPPER('KO')
 													</if>
 													<if test='themeCondition == "ch"'>
-										 				AND recipe_theme LIKE UPPER('CH')
+										 				AND r.recipe_theme LIKE UPPER('CH')
 													</if>
 													<if test='themeCondition == "fr"'>
-										 				AND recipe_theme LIKE UPPER('FR')
+										 				AND r.recipe_theme LIKE UPPER('FR')
 													</if>
 													<if test='themeCondition == "jp"'>
-										 				AND recipe_theme LIKE UPPER('JP')
+										 				AND r.recipe_theme LIKE UPPER('JP')
 													</if>
 													<if test='themeCondition == "des"'>
-										 				AND recipe_theme LIKE UPPER('DES')
+										 				AND r.recipe_theme LIKE UPPER('DES')
 													</if>
 											</if>
-						<if test="orderCondition != null">
+													
+											<if test="orderCondition != null">
+											
 											<choose>
 													<when test="orderCondition == 0  ">
-										 				ORDER BY review_num ASC
+										 				ORDER BY r.review_num ASC
 													</when>
 													<when test="orderCondition == 1 ">
-										 				ORDER BY recipe_difficulty DESC
+										 				ORDER BY r.recipe_difficulty DESC
 													</when>
 													<when test="orderCondition == 2  ">
-										 				ORDER BY cooking_time DESC
+										 				ORDER BY r.cooking_time DESC
 													</when>
 													<otherwise>
-														order by recipe_no
+														order by r.recipe_no
 													</otherwise>
 													</choose>
 													</if>
@@ -303,4 +308,20 @@
 			FROM recipe
 		ORDER BY review_num DESC
 	 </select>
+	 
+	 <select  id="getPointList"  parameterType="map"	resultType="map">
+	  	SELECT p.*,u.*
+											FROM purchase p, users u 
+											WHERE u.user_id=#{userId}
+ 
+	 </select>
+	 
+	 <select  id="pointTotalCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT p.*,u.*
+		FROM purchase p, users u
+						WHERE u.user_id=#{userId}
+													) countTable						
+	 </select>
+	 
 </mapper>

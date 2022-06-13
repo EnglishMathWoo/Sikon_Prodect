@@ -20,192 +20,94 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--  ///////////////////////// font ////////////////////////// -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+
+<!-- include css/js -->
+<link href="/resources/css/animate.min.css" rel="stylesheet">
+<link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+<script src="/resources/javascript/bootstrap-dropdownhover.min.js"></script>
+
 <!--  /////////////////////////summernote////////////////////////// -->
 
-	
-	<link href="/resources/css/style.css" rel="stylesheet" type="text/css" media="all">
-	
-
-
+<script src="/resources/javascript/summernote-lite.js"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
 	rel="stylesheet">
+<script src="/resources/javascript/lang/summernote-ko-KR.js"></script>
 <!--  -->
+
+
+
 <style>
-.drop-zone {
-  max-width: 200px;
-  height: 200px;
-  padding: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: "Quicksand", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-  cursor: pointer;
-  color: #cccccc;
-  border: 4px dashed #009578;
-  border-radius: 10px;
-  margin-bottom: 30px;
-}
-
-.drop-zone--over {
-  border-style: solid;
-}
-
-.drop-zone__input {
-  display: none !important;
-}
-
-.drop-zone__thumb {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #cccccc;
-  background-size: cover;
-  position: relative;
-}
-
-.drop-zone__thumb::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 5px 0;
-  color: #ffffff;
-  background: rgba(0, 0, 0, 0.75);
-  font-size: 14px;
-  text-align: center;
-}
-
-body{
-background-color: #f7f7f7
+body {
+	padding-top: 50px;
+	font-family: 'Gowun Batang', serif;
 }
 </style>
 
 
-
-</head>
-
-<body>
-
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<!-- ToolBar End /////////////////////////////////////-->
-
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	  <div class="main">
-
-        <div class="container">
-            <div class="signup-content">
-                <div class="signup-img">
-                    <img src="/resources/images/6729a7d086c3cc13de8de7e6823182eb.jpg" alt="">
-                    <div class="signup-img-content">
-                        <h2>레시피 등록 </h2>
-                        <p>당신의 레시피를 공유하세요!</p>
-                    </div>
-                </div>
-                <div class="signup-form">
-                    <form method="POST" class="register-form" id="register-form">
-                  
-
-                        <div class="drop-zone">
-                            <span class="drop-zone__prompt">이미지 업로드</span>
-                            <input type="file" name="myFile" class="drop-zone__input">
-                          </div>
-
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <div class="form-input">
-                                    <label for="first_name" class="required">레시피명</label>
-                                    <input type="text" name="first_name" id="first_name" />
-                                </div>
-                                <div class="form-input">
-                                    <label for="last_name" class="required">레시피간략설명</label>
-                                    <input type="text" name="last_name" id="last_name" />
-                                </div>
-                                <div class="form-input">
-                                    <label for="company" >레시피영상</label>
-                                    <input type="file" name="company" id="company" />
-                                </div>
-                               
-                            </div>
-                            <div class="form-group">
-                                 <div class="form-radio">
-                                    <div class="label-flex">
-                                        <label for="payment">난이도</label>
-                                    </div>
-                                    <div class="form-radio-group">            
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="payment" id="cash" checked>
-                                            <label for="cash">초급</label>
-                                            <span class="check"></span>
-                                        </div>
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="payment" id="cheque">
-                                            <label for="cheque">중급</label>
-                                            <span class="check"></span>
-                                        </div>
-                                        <div class="form-radio-item">
-                                            <input type="radio" name="payment" id="demand">
-                                            <label for="demand">고급</label>
-                                            <span class="check"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-input">
-                                    <label for="phone_number" class="required">소요시간</label>
-                                    <input type="text" name="phone_number" id="phone_number" />
-                                </div>
-                                 <div class="form-input">
-                                    <label for="company" class="required">테마</label>
-                                    <input type="text" name="company" id="company" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="donate-us">
-                            <label>조리순서</label>
-                                <textarea id="summernote" class="form-control" name="recipeOrder">
-      
-     </textarea>
-						<script>
-							$('#summernote').summernote({
-								placeholder : '레시피를 입력하세요',
-								tabsize : 2,
-								height : 300
-							});
-						</script>
-                        </div>
-                        <div class="form-submit">
-                            <input type="submit" value="Submit" class="submit" id="submit" name="submit" />
-                            <input type="submit" value="Reset" class="submit" id="reset" name="reset" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    </div>
+<style>
+.page-header {
+	font-family: 'Gowun Batang', serif;
+	font-weight: bold;
+	color: #75574B
+}
+.text-info {
+	font-family: 'Gowun Batang', serif;
+	font-weight: bold;
+	color: #75574B
+}
+.row {
+	font-family: 'Gowun Batang', serif;
+}
+table.type09 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+        width: 350px;
+                text-align: center;
     
-    <script src="/resources/vendor/nouislider/nouislider.min.js"></script>
-    <script src="/resources/vendor/wnumb/wNumb.js"></script>
-    <script src="/resources/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="/resources/vendor/jquery-validation/dist/additional-methods.min.js"></script>
-        <script src="/resources/javascript/jquery.min.js"></script>
-        
+}
+table.type09 thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #369;
+    border-bottom: 3px solid #036;
+        width: 350px;
+        text-align: center;
     
-			
+}
+table.type09 tbody th {
+    width: 350px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+}
+table.type09 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
-
-</body>
-
-<script src="/resources/javascript/summernote-lite.js"></script>
-<script src="/resources/javascript/lang/summernote-ko-KR.js"></script>
-
+.container{
+padding-top:200px;
+}
+</style>
 
 <script type="text/javascript">
 	$(function() {
@@ -307,78 +209,154 @@ function tableDelete(){
 	}
 	
 </script>
-<script>document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-    const dropZoneElement = inputElement.closest(".drop-zone");
-  
-    dropZoneElement.addEventListener("click", (e) => {
-      inputElement.click();
-    });
-  
-    inputElement.addEventListener("change", (e) => {
-      if (inputElement.files.length) {
-        updateThumbnail(dropZoneElement, inputElement.files[0]);
-      }
-    });
-  
-    dropZoneElement.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropZoneElement.classList.add("drop-zone--over");
-    });
-  
-    ["dragleave", "dragend"].forEach((type) => {
-      dropZoneElement.addEventListener(type, (e) => {
-        dropZoneElement.classList.remove("drop-zone--over");
-      });
-    });
-  
-    dropZoneElement.addEventListener("drop", (e) => {
-      e.preventDefault();
-  
-      if (e.dataTransfer.files.length) {
-        inputElement.files = e.dataTransfer.files;
-        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-      }
-  
-      dropZoneElement.classList.remove("drop-zone--over");
-    });
-  });
-  
-  /**
-   * Updates the thumbnail on a drop zone element.
-   *
-   * @param {HTMLElement} dropZoneElement
-   * @param {File} file
-   */
-  function updateThumbnail(dropZoneElement, file) {
-    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
-  
-    // First time - remove the prompt
-    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-      dropZoneElement.querySelector(".drop-zone__prompt").remove();
-    }
-  
-    // First time - there is no thumbnail element, so lets create it
-    if (!thumbnailElement) {
-      thumbnailElement = document.createElement("div");
-      thumbnailElement.classList.add("drop-zone__thumb");
-      dropZoneElement.appendChild(thumbnailElement);
-    }
-  
-    thumbnailElement.dataset.label = file.name;
-  
-    // Show thumbnail for image files
-    if (file.type.startsWith("image/")) {
-      const reader = new FileReader();
-  
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        thumbnailElement.style.backgroundImage = `url(${'${reader.result}'})`;
-       
-      };
-    } else {
-      thumbnailElement.style.backgroundImage = null;
-    }
-  }
-  
-</script>
+
+
+</head>
+
+<body>
+
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+	<!-- ToolBar End /////////////////////////////////////-->
+
+	<!--  화면구성 div Start /////////////////////////////////////-->
+	<div class="container">
+
+		<div class="page-header">
+
+			<h3 class=" text-info" style="color: #75574B;">레시피 등록</h3>
+		</div>
+
+
+
+		<div class="form-group" >
+			<form enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="recipeName"
+						class="col-lg-offset-1 col-lg-2 control-label ">제목</label>
+					<div class="col-lg-9">
+						<input type="text" class="form-control" id="recipeName"
+							name="recipeName" placeholder="제목">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="recipeDetail"
+						class="col-lg-offset-1 col-lg-2 control-label">간략정보</label>
+					<div class="col-lg-9">
+						<input type="text" class="form-control" id="recipeDetail"
+							name="recipeDetail" placeholder="50자 이내로 입력하세요.">
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="recipeImg"
+						class="col-lg-offset-1 col-lg-2 control-label">대표이미지</label>
+					<div class="col-lg-9">
+						<input type="file" multiple="multiple" class="form-control" id="recipeImg"
+							name="multiImg" placeholder="레시피이미지">
+
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="recipeDifficulty"
+						class="col-lg-offset-1 col-lg-2 control-label">난이도</label>
+					<div class="col-lg-9">
+						<select name="recipeDifficulty" class="form-control">
+							<option value="1" selected="selected">초급</option>
+							<option value="2">중급</option>
+							<option value="3">고급</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="cookingTime"
+						class="col-lg-offset-1 col-lg-2 control-label">소요시간</label>
+					<div class="col-lg-9">
+						<input type="number" class="form-control" id="cookingTime"
+							name="cookingTime" placeholder="소요시간">
+					</div>
+				</div>
+	
+	
+	
+				<div class="form-group">
+					<label for="ingredient"
+						class="col-lg-offset-1 col-lg-2 control-label">재료</label>
+
+			<div class="col-lg-9">
+				<table class="type09" style="border: 1px;" id="dynamicTable">
+					<thead>
+						<tr>
+							<th>재료명</th>
+							<th>재료양</th>
+						</tr>
+					</thead>
+					</tbody>
+				</table>
+				<button type="button" 
+							style="float: right; ">재료추가</button>
+				<button type="button" 
+							style="float: right; ">재료빼기</button>
+			</div>
+			</div>
+
+
+
+
+				<div class="form-group">
+					<label for="recipeTheme" class="col-lg-offset-1 col-lg-2 control-label">카테고리</label>
+					<div class="col-lg-9">
+						<select name="recipeTheme" class="form-control">
+							<option value="1" selected="selected">카테고리</option>
+							<option value="2">한식</option>
+							<option value="3">중식</option>
+							<option value="4">양식</option>
+							<option value="5">일식</option>
+							<option value="6">간식</option>
+						</select>
+					</div>
+				</div>
+				<br />
+				<div class="form-group">
+					<div class="col-lg-offset-1 col-lg-11">
+						<br />
+
+						<textarea id="summernote" class="form-control" name="recipeOrder">
+      
+     </textarea>
+						<script>
+							$('#summernote').summernote({
+								placeholder : '레시피를 입력하세요',
+								tabsize : 2,
+								height : 300
+							});
+						</script>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-lg-offset-1  col-lg-11 text-right">
+						<br />
+						<button type="button" class="btn btn-default"
+							style="float: right;">레시피등록</button>
+						<button type="button" class="btn btn-default"
+							style="float: right;">취소</button>
+					</div>
+				</div>
+
+
+			</form>
+			
+		</div>
+
+	</div>
+	<!--  화면구성 div Start /////////////////////////////////////-->
+
+</body>
+
 </html>
