@@ -104,6 +104,34 @@ a.tocart{
 .link{
 	border: 1px solid #d7d7d7;
 }
+
+
+.btn-b {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+  width:40%;
+  font-size: large;
+}
+.btn-b:hover {
+  background-color: #937062d4;
+}
+
+.btn-w {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+  width:40%;
+  font-size: large;
+}
+.btn-w:hover {
+  background-color: #e7e2e2;
+}
+
 </style>
  <!-- //////////////////////////////////공유하기////////////////////////////// -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
@@ -169,18 +197,21 @@ a.tocart{
 		 });
 		
 		 
-		 $( "button.btn-warning" ).on("click" , function() {
+		 $( ".addPurchase" ).on("click" , function() {
+			 console.log('구매하기');
 			 var quantity = $('#quantity').val();
 			 self.location = "/purchase/addPurchase?prodNo=${product.prodNo}&quantity="+quantity;
 		});
 		 
-		 $( "button.btn-primary" ).on("click" , function() {
+		 $( ".updateProd" ).on("click" , function() {
+			 console.log('업데이트');
 			 var prodNo = $('#prodNo').val();
 			 self.location = "/product/updateProduct?prodNo="+prodNo
 		});
 		 
 
-		 $( "button.btn-default" ).on("click" , function() {
+		 $( ".addcart" ).on("click" , function() {
+			 console.log('장바구니');
 			 var quantity = $('#quantity').val();
 			 
 			 $.ajax({
@@ -359,11 +390,15 @@ $( document ).ready( function() {
 				
 				<div class="row">
 			  		<div class="text-center">	
-			  				<button type="button" class="btn btn-default btn-lg" id="popup_open_btn">장바구니</button>&emsp;
-			  				<button type="button" class="btn btn-warning btn-lg" id="buy" >구매하기</button>
-			  				<c:if test="${menu == 'manage' }">
-			  				&emsp;<button type="button" class="btn btn-primary btn-lg">수정하기</button>
-			  				</c:if>
+			  			
+			  			<c:if test="${menu == 'search' }">
+			  				<button type="button" class="btn-w addcart" id="popup_open_btn">장바구니</button>&emsp;
+						</c:if>
+						<c:if test="${menu == 'manage' }">
+		  					<button type="button" class="btn-w updateProd">수정하기</button>&emsp;
+		  				</c:if>			  		
+			  				<button type="button" class="btn-b addPurchase" id="buy" >구매하기</button>
+			  				
 			  		</div>
 				</div>	
 				

@@ -139,8 +139,17 @@ public class RecipeController {
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute("user");
 		
+		//레시피 조회수 +1
+		Recipe recipe = recipeService.getRecipeName(recipeNo);
+		
+		if(user.getUserId() != recipe.getWriter().getUserId()) {
+			recipe.setRecipeViews(recipe.getRecipeViews()+1);
+			recipeService.updateRecipeOnly(recipe);
+		}
+		
 		System.out.println("레시피 list=" + list);
 		model.addAttribute("recipe", list.get(0));
+		model.addAttribute("recipeViews", recipe.getRecipeViews());
 		model.addAttribute("list", list);
 		model.addAttribute("review", map.get("list"));
 		model.addAttribute("user",user);

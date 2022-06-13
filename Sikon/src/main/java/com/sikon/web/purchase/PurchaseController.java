@@ -29,10 +29,12 @@ import com.sikon.service.domain.Product;
 import com.sikon.service.domain.Purchase;
 import com.sikon.service.domain.User;
 import com.sikon.service.domain.Cart;
+import com.sikon.service.domain.Coupon;
 import com.sikon.service.product.ProductService;
 import com.sikon.service.purchase.PurchaseService;
 import com.sikon.service.user.UserService;
 import com.sikon.service.cart.CartService;
+import com.sikon.service.coupon.CouponService;
 
 
 //==> 회원관리 Controller
@@ -53,6 +55,10 @@ public class PurchaseController {
 	@Autowired
 	@Qualifier("cartServiceImpl")
 	private CartService cartService;
+	@Autowired
+	@Qualifier("couponServiceImpl")
+	private CouponService couponService;
+	
 		
 	public PurchaseController(){
 		System.out.println(this.getClass());
@@ -84,12 +90,26 @@ public class PurchaseController {
 		
 		Product product = productService.getProduct(prodNo);
 		
+		List list = couponService.getMyCoupon(user.getUserId());
+		
+		//==================================================================================
+		//결제 uid 만들기
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss");
+		String nowrandom = now.format(formatter);   
+		
+		String userid = user.getUserId().replace("@", "");
+		String sub = userid.replace(userid.substring(userid.length()-4, userid.length()), "");
+		String uid = sub+nowrandom;	
+		System.out.println("uid: "+uid);
+		//==================================================================================
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/addPurchaseView.jsp");
 		modelAndView.addObject("product", product);
 		modelAndView.addObject("quantity", quantity);
-		
+		modelAndView.addObject("coupon", list);
+		modelAndView.addObject("uid", uid);
 		
 		return modelAndView;
 	}
@@ -116,6 +136,14 @@ public class PurchaseController {
 		String serialNo = sub+nowrandom;	
 		System.out.println("일련번호: "+serialNo);
 		//==================================================================================
+		// 쿠폰 사용하기
+		int issueNo = Integer.parseInt(purchase.getUsedCoupon());
+		System.out.println("issueNo: "+issueNo);
+		
+		Coupon coupon = couponService.getIssuedCoupon(issueNo);
+		coupon.setIssueStatus("002");
+		System.out.println("coupon: "+coupon);
+		//==================================================================================
 		
 		User user = userService.getUser(userId);
 		Product product = productService.getProduct(prodNo);
@@ -124,9 +152,8 @@ public class PurchaseController {
 		purchase.setPurchaseProd(product);
 		purchase.setDivyStatus("001");
 		purchase.setSerialNo(serialNo);
-		//purchase.setPaymentOpt("KA");
 		purchase.setReviewStatus("001");
-				
+		
 		int quantity = purchase.getPurchaseQuantity();
 		
 		System.out.println(purchase);
@@ -144,7 +171,7 @@ public class PurchaseController {
 		return modelAndView;
 	}
 
-//=============================================================================================================	
+
 //=== 장바구니 구매 ==============================================================================================
 //=============================================================================================================	
 	
@@ -250,7 +277,6 @@ public class PurchaseController {
 		return modelAndView;
 	}
 
-//=============================================================================================================	
 //=============================================================================================================	
 //=============================================================================================================	
 
