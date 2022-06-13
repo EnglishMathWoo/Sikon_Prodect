@@ -460,16 +460,17 @@ background-color: #fff;
 		        success : function(data){
 		        	
 		        	alert("알람 전송 완료!!");
-		        	      	          
-		           		if(socket){
-		        			let socketMsg = "recipeReview,"+data.userId+","+data.userNickname+","+data.writerId+","+data.recipeName;
-		        			console.log(socketMsg);
-		        			socket.send(socketMsg);
-		           		}
-		        }
-		    
-		    })
-	 };
+		        	    
+		        		if(data.userId != data.writerId) {
+			           		if(socket){
+			        			let socketMsg = "recipeReview,"+data.userId+","+data.userNickname+","+data.writerId+","+data.recipeName;
+			        			console.log(socketMsg);
+			        			socket.send(socketMsg);
+		           			}
+		        		}
+		        	}
+		    	})
+	 		};
 </script>
 
 
