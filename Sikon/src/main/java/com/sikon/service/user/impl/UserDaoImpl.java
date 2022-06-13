@@ -94,16 +94,19 @@ public class UserDaoImpl implements UserDao{
 		
 		
 	}	
-	public void updateLicense(Map license, User userId) throws Exception {
+	public void updateLicense(Map license, User user) throws Exception {
+		System.out.println("license="+license);
+		System.out.println("user="+user);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", license.get("list"));
-		map.put("userId", userId);
+		map.put("userId", user.getUserId());
 		sqlSession.update("UserMapper.updateLicense", map);
 		}
-	public void updateCareer(Map career, User userId) throws Exception {
+	public void updateCareer(Map career, User user) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", career.get("list2"));
-		map.put("userId", userId);
+		map.put("userId", user.getUserId());
 		sqlSession.update("UserMapper.updateCareer", map);
 	}
 	//	Map map = new HashMap();

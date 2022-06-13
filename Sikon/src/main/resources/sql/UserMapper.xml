@@ -181,60 +181,61 @@
 
 	<update	id="updateLicense" 	parameterType="map" >
 		UPDATE license
-		set	license_name=
-		case license_no
+		set
+		license_name=case
+		license_no
 		<foreach collection="list" item="item" separator=" ">
 		when #{item.licenseNo} then #{item.licenseName}
 		</foreach>
 		else license_name end
 		,
-		license_institution=
-		case license_no
+		license_institution=case
+		license_no
 		<foreach collection="list" item="item" separator=" ">
 		when #{item.licenseNo} then #{item.licenseInstitution}
 		</foreach>
 		else license_institution end
 		,
-		license_date=
-		case license_no
+		license_date=case
+	 	license_no
 		<foreach collection="list" item="item" separator=" ">
 		when #{item.licenseNo} then #{item.licenseDate:DATE}
 		</foreach>
 		else TO_CHAR(SYSDATE, 'yyyy-mm-dd') end
-		WHERE user_id = #{userId, jdbcType = VARCHAR}
+		WHERE user_id = #{userId}
 	</update>
 	
 	
 	<update	id="updateCareer" 	parameterType="map" >
 		UPDATE career
-		set	company=
-		case career_no
+		set	company=case
+		career_no
 		<foreach collection="list" item="item" separator=" ">
 		when #{item.careerNo} then #{item.company}
 		</foreach>
 		else company end
 		,
-		career_experience=
-		case career_no
+		career_experience=case
+		career_no
 		<foreach collection="list" item="item" separator=" ">
 		when #{item.careerNo} then #{item.careerExperience}
 		</foreach>
 		else career_experience end
 		,
-		start_date=
-		case career_no
+		start_date=case
+		career_no
 		<foreach collection="list" item="item" separator=" ">
 		when #{item.careerNo} then #{item.startDate:DATE}
 		</foreach>
 		else TO_CHAR(SYSDATE, 'yyyy-mm-dd') end
 		,
-		end_date=
-		case career_no
+		end_date=case
+		career_no
 		<foreach collection="list" item="item" separator=" ">
 		when #{item.careerNo} then #{item.endDate:DATE}
 		</foreach>
 		else TO_CHAR(SYSDATE, 'yyyy-mm-dd') end
-		WHERE user_id = #{userId, jdbcType = VARCHAR}
+		WHERE user_id = #{userId}
 	</update>
 
  
