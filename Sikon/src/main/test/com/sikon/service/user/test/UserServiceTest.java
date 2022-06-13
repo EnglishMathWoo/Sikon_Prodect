@@ -210,8 +210,8 @@ public class UserServiceTest {
 
 				
 		userService.updateUser(user);
-		userService.updateLicense(list,"test@naver.com");
-		userService.updateCareer(list2,"test@naver.com");
+	//	userService.updateLicense(list,"test@naver.com");
+	//	userService.updateCareer(list2,"test@naver.com");
 	//	user = userService.getUser("test@naver.com");
 	//	Assert.assertNotNull(user);
 		
