@@ -401,6 +401,8 @@ div.emptyProd{
 	          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 	          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
 	          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	          <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+	          <li data-target="#carousel-example-generic" data-slide-to="4"></li>
 	        </ol>
 	    
 	    
@@ -411,11 +413,19 @@ div.emptyProd{
 	          </div>
 	          
 	          <div class="item">
-	            <img src="/resources/images/uploadFiles/mk003.jpg" alt="Second slide">
+	            <img src="/resources/images/uploadFiles/mk004.jpg" alt="Second slide">
 	          </div>
 	          
 	          <div class="item">
-	            <img src="/resources/images/uploadFiles/mk001.jpg"  alt="Third slide">
+	            <img src="/resources/images/uploadFiles/mk003.jpg"  alt="Third slide">
+	          </div>
+	          
+	          <div class="item">
+	            <img src="/resources/images/uploadFiles/mk001.jpg"  alt="fourth slide">
+	          </div>
+	          
+	          <div class="item">
+	            <img src="/resources/images/uploadFiles/mk005.jpg"  alt="fifth slide">
 	          </div>
 	          
 	       </div> 
