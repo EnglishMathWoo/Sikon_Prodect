@@ -32,33 +32,22 @@
 	rel="stylesheet">
 <!--  -->
 <style>
-.drop-zone{
-width:837px;
-height:200px;
-margin-top:0px;
-margin-bottom: 10px;
-}
-
-.img{
-height:1373px;
-width:230px;
-}
-
 .drop-zone {
-  max-width: 620px;
-    height: 200px;
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    cursor: pointer;
-    color: #cccccc;
-    border: 2px dashed #eee;
-    border-radius: 10px;
+  max-width: 200px;
+  height: 200px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  color: #cccccc;
+  border: 4px dashed #009578;
+  border-radius: 10px;
+  margin-bottom: 30px;
 }
 
 .drop-zone--over {
@@ -66,7 +55,7 @@ width:230px;
 }
 
 .drop-zone__input {
-  display: none;
+  display: none !important;
 }
 
 .drop-zone__thumb {
@@ -92,6 +81,9 @@ width:230px;
   text-align: center;
 }
 
+body{
+background-color: #f7f7f7
+}
 </style>
 
 
@@ -101,7 +93,6 @@ width:230px;
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
@@ -120,10 +111,10 @@ width:230px;
                     <form method="POST" class="register-form" id="register-form">
                   
 
- <div class="drop-zone">
-    <span class="drop-zone__prompt">Drop file here or click to upload</span>
-    <input type="file" name="myFile" class="drop-zone__input">
-  </div>
+                        <div class="drop-zone">
+                            <span class="drop-zone__prompt">이미지 업로드</span>
+                            <input type="file" name="myFile" class="drop-zone__input">
+                          </div>
 
 
                         <div class="form-row">
@@ -214,80 +205,7 @@ width:230px;
 
 <script src="/resources/javascript/summernote-lite.js"></script>
 <script src="/resources/javascript/lang/summernote-ko-KR.js"></script>
-<script>
-document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-	  const dropZoneElement = inputElement.closest(".drop-zone");
 
-	  dropZoneElement.addEventListener("click", (e) => {
-	    inputElement.click();
-	  });
-
-	  inputElement.addEventListener("change", (e) => {
-	    if (inputElement.files.length) {
-	      updateThumbnail(dropZoneElement, inputElement.files[0]);
-	    }
-	  });
-
-	  dropZoneElement.addEventListener("dragover", (e) => {
-	    e.preventDefault();
-	    dropZoneElement.classList.add("drop-zone--over");
-	  });
-
-	  ["dragleave", "dragend"].forEach((type) => {
-	    dropZoneElement.addEventListener(type, (e) => {
-	      dropZoneElement.classList.remove("drop-zone--over");
-	    });
-	  });
-
-	  dropZoneElement.addEventListener("drop", (e) => {
-	    e.preventDefault();
-
-	    if (e.dataTransfer.files.length) {
-	      inputElement.files = e.dataTransfer.files;
-	      updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-	    }
-
-	    dropZoneElement.classList.remove("drop-zone--over");
-	  });
-	});
-
-	/**
-	 * Updates the thumbnail on a drop zone element.
-	 *
-	 * @param {HTMLElement} dropZoneElement
-	 * @param {File} file
-	 */
-	function updateThumbnail(dropZoneElement, file) {
-	  let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
-
-	  // First time - remove the prompt
-	  if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-	    dropZoneElement.querySelector(".drop-zone__prompt").remove();
-	  }
-
-	  // First time - there is no thumbnail element, so lets create it
-	  if (!thumbnailElement) {
-	    thumbnailElement = document.createElement("div");
-	    thumbnailElement.classList.add("drop-zone__thumb");
-	    dropZoneElement.appendChild(thumbnailElement);
-	  }
-
-	  thumbnailElement.dataset.label = file.name;
-
-	  // Show thumbnail for image files
-	  if (file.type.endsWith(".jpg")) {
-	    const reader = new FileReader();
-
-	    reader.readAsDataURL(file);
-	    reader.onload = () => {
-	      thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-	    };
-	  } else {
-	    thumbnailElement.style.backgroundImage = null;
-	  }
-	}
-
-</script>
 
 <script type="text/javascript">
 	$(function() {
@@ -388,5 +306,79 @@ function tableDelete(){
 	$('#dynamicTable tbody tr:last').remove();
 	}
 	
+</script>
+<script>document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+    const dropZoneElement = inputElement.closest(".drop-zone");
+  
+    dropZoneElement.addEventListener("click", (e) => {
+      inputElement.click();
+    });
+  
+    inputElement.addEventListener("change", (e) => {
+      if (inputElement.files.length) {
+        updateThumbnail(dropZoneElement, inputElement.files[0]);
+      }
+    });
+  
+    dropZoneElement.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZoneElement.classList.add("drop-zone--over");
+    });
+  
+    ["dragleave", "dragend"].forEach((type) => {
+      dropZoneElement.addEventListener(type, (e) => {
+        dropZoneElement.classList.remove("drop-zone--over");
+      });
+    });
+  
+    dropZoneElement.addEventListener("drop", (e) => {
+      e.preventDefault();
+  
+      if (e.dataTransfer.files.length) {
+        inputElement.files = e.dataTransfer.files;
+        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+      }
+  
+      dropZoneElement.classList.remove("drop-zone--over");
+    });
+  });
+  
+  /**
+   * Updates the thumbnail on a drop zone element.
+   *
+   * @param {HTMLElement} dropZoneElement
+   * @param {File} file
+   */
+  function updateThumbnail(dropZoneElement, file) {
+    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+  
+    // First time - remove the prompt
+    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+      dropZoneElement.querySelector(".drop-zone__prompt").remove();
+    }
+  
+    // First time - there is no thumbnail element, so lets create it
+    if (!thumbnailElement) {
+      thumbnailElement = document.createElement("div");
+      thumbnailElement.classList.add("drop-zone__thumb");
+      dropZoneElement.appendChild(thumbnailElement);
+    }
+  
+    thumbnailElement.dataset.label = file.name;
+  
+    // Show thumbnail for image files
+    if (file.type.startsWith("image/")) {
+      const reader = new FileReader();
+  
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        thumbnailElement.style.backgroundImage = `url(${'${reader.result}'})`;
+       
+      };
+    } else {
+      thumbnailElement.style.backgroundImage = null;
+    }
+  }
+  
 </script>
 </html>

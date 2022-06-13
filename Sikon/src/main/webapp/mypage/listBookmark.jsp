@@ -44,7 +44,6 @@
 
 
 <style>
-
 body {
 	padding-top: 50px;
 	
@@ -53,61 +52,49 @@ body {
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
-	color: #75574B
+	color: #75574B;
+	border-bottom: none;
 }
-
 .text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
 	color: #75574B
 }
-
 .row {
 	font-family: 'Gowun Batang', serif;
 }
-
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
 }
-
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
+.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
 }
 .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
 .ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
 .ref-sort li:last-child{margin:0; padding:0;}
 .ref-sort li:last-child::after{display:none;}
 .ref-sort li a{}
-
 /* References */
 .ref-sort li a{color:inherit;}
-.ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
+.ref-sort li a:hover, #references .ref-sort li.current a{color:#937062;text-decoration-line: none;}
+
 
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 .sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
 .sectiontitle .heading{margin:0; padding:0; line-height:1;}
-
 .sectiontitle{max-width:none; margin-bottom:50px;}
-
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 .imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
 .imgover, .imgover:hover::after{color:#333333;} 
-
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
-
 #latest article{max-width:348px;}
-
 #footer{padding-bottom:50px;}/* Not required, just looks a little better */
 .latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
 .latestimg > li img{width:auto;}
-
 * Latest
 --------------------------------------------------------------------------------------------------------------- */
 #latest{}
-
 #latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
 article{}
 article img{width:100%;}/* Force the image to have the full width of parent at all times */
@@ -121,26 +108,22 @@ article img{width:100%;}/* Force the image to have the full width of parent at a
 .excerpt .meta li:last-child::after{margin:0; content:"";}
 .excerpt p{}
 .excerpt footer{margin-top:30px;}
-
 .latestimg{}
 .latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
 .latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
 .latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
 .latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
 .latestimg > li a.imgover{display:block;}
-
 .carousel-inner > .item > img {
   top: 0;
   left: 0;
   min-width: 100%;
   max-height: 500px;
 } 
-
 /* [RECIPE LIST] 폰트 적용 */
 .wrapper{
 font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-
 /* 검색, 정렬조건 css */
 .condition{
 font-family: 'Gowun Batang', serif;
@@ -148,8 +131,6 @@ width: 100px;
 float:right;
 border-color:#D7D7D7;
 }
-
-
 /* 레시피 등록 버튼 css */
 .submit
  {
@@ -168,7 +149,6 @@ border-color:#D7D7D7;
   	font-family: 'Gowun Batang', serif;
   
 }
-
 /* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
 hr {
     margin-top: 60px;
@@ -180,7 +160,22 @@ hr {
 /* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
     margin: 0 0 0px;
+    font-family: 'Gowun Batang', serif;
+    
 }
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top:170px;
+}
+
+.hoc{
+padding-top:0px;
+}
+
 
 </style>
 
@@ -188,37 +183,36 @@ p {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		 
-		 $(function() {
+	 $(function() {
 			
-					$( ".imgover" ).on("click" , function() {
-					console.log($(this).attr("value"));
-					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
-					});
-					
-					$(".submit").on("click" , function() {
-						
-						
-						var checkCount = $("input[name='ckBookmark']:checked").length;
+			$( ".imgover" ).on("click" , function() {
+			console.log($(this).attr("value"));
+			self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
+			});
+			
+			$(".submit").on("click" , function() {
+				
+				
+				var checkCount = $("input[name='ckBookmark']:checked").length;
 
-					    var array = new Array();
-					    
-						$("input[name='ckBookmark']:checked").each(function() {
-							array.push($(this).attr('id'));
-					    });
-						
-						if(checkCount != 0) {
-							alert(checkCount+"개의 책갈피를 삭제하시겠습니까?")
+			    var array = new Array();
+			    
+				$("input[name='ckBookmark']:checked").each(function() {
+					array.push($(this).attr('id'));
+			    });
+				
+				if(checkCount != 0) {
+					alert(checkCount+"개의 책갈피를 삭제하시겠습니까?")
 
-						self.location = "/bookmark/deleteBookmark?bookmarkList="+array;
-						}
-						
-					});
-		 });
+				self.location = "/bookmark/deleteBookmark?bookmarkList="+array;
+				}
+				
+			});
+});
 		 
-					
-</script>
-			 </head>
+	</script>
+	
+</head>
 
 <body>
 
@@ -232,23 +226,26 @@ p {
 <div class="container">
 <!-- ################################################################################################ -->
 
+ 
+ 
+
 	<div class="wrapper row3">
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br> 책갈피 조회 </h3>
-		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
+		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> | BOOKMARK LIST |</h3>
+		      <p align="center" style="font-size:18px; "><br/>책갈피한 레시피를 확인해보세요. </p>
 		    </div>
-		    		    <button type="button" class="submit">선택삭제</button>
-		    
+		    		    <button type="button" class="submit">북마크삭제</button>
 		  
 		    
-		    <br/><hr/><br/>
-    </section>
+		   </section>
   	</div>
+    
+	     
+  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
- <input type="hidden" id="currentPage" name="currentPage" value="1"/>
- 
+  
 <div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="list" items="${list}">
@@ -270,21 +267,17 @@ p {
           </ul>
         </div>
       </article>
-     
-   <!-- ################################################################################################ -->
     </div>
+    <!-- ################################################################################################ -->
   </div>
-  
   </c:forEach>
   
-     
+          <c:if test="${empty list}">
+      	<h3 align="center" ><br/><br/><br/><br/>책갈피 내역이 없습니다.</h3>
+      	<br>
+     </c:if>
 </div>
 	  </div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 	
- 	<!-- PageNavigation Start... -->
-	<!-- PageNavigation End... -->
 	
 </body>
-
 </html>
