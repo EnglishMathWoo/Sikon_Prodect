@@ -76,13 +76,7 @@
 			self.location ="/apply/updateApplyStatus?menu=search&applyNo="+message1+"&applyStatus="+message2;
 		});
 		
-	$( "td.userid" ).on("click" , function() {
-		
-		
-		var userId = $(this).attr("value");
-	
-			self.location ="/user/getUser?userId="+userId;
-	}); 
+
 	
 		
 		
@@ -213,7 +207,7 @@
             <th align="center">수량</th>
             <th align="center">결제날짜</th>
             <th align="center">상품번호</th>
-            <th align="center">배송현황</th>
+            <th align="center">수강현황</th>
             <th align="center">현재상태</th>
             <th align="center">구매회원</th>
           </tr>

@@ -81,6 +81,7 @@ div.image{
 	<script type="text/javascript">
 
 
+
 //=========================================================================================//	
 	$( document ).ready( function() {
 		 
@@ -167,10 +168,27 @@ $(function() {
 		
 	
 				<div class="col-xs-6 col-md-6 text-center image">				
-						<c:forEach var="name" items="${cook.cookFilename.split('/')[0]}">
-						<input type="hidden" name="image" value="${cook.cookFilename}">
-								<img src="/resources/images/uploadFiles/${name}" width="400" height="400"/>
-						</c:forEach>
+   	<c:choose>
+		    	<c:when test="${cook.cookFilename.contains('/')}">
+						<c:choose>
+						<c:when test="${cook.cookFilename.contains('mp4')}">
+							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
+								<video width="400" height="400" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
+								<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+								<input type="hidden" name="image" value="${name }"/>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
+				</c:when>
+				<c:otherwise>
+					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle" class="image" value="${prodThumbnail}"/>
+				</c:otherwise>
+		    	</c:choose>
 				</div>	
 			
 
@@ -261,7 +279,7 @@ $(function() {
 			  			
 			  				<button type="button" class="btn btn-primary btn-lg" id="buy" >수정하기</button>
 			  				
-			  				<button type="button" class="btn btn-primary btn-lg" id="mentor" >멘토채널</button>
+			  			
 			  				
 			  		</div>
 				</div>
@@ -280,11 +298,11 @@ $(function() {
 		<p style="margin-top:-12px">
     <em class="link">
         <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
-          레쓰고
+    
         </a>
     </em>
 </p>
-<div id="map" class="col-xs-10 col-md-10 text-center" style="width:400px;height:400px;"></div>
+<div id="map" style="width:1100px;height:500px; text-align: center; margin:36px auto;" ></div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bdc66313a731d6cd370ddce26735db6a&libraries=services"></script>
 <script>
@@ -317,7 +335,7 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">여기로 와주세요!</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">만나는 장소!</div>'
         });
         infowindow.open(map, marker);
 
@@ -331,14 +349,13 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 		
 
 		 	</div>
+	
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>		 	
 <script type="text/javascript">	
 		///*
 	Kakao.init('bdc66313a731d6cd370ddce26735db6a');
-
 	  // SDK 초기화 여부를 판단합니다.
 	  console.log(Kakao.isInitialized());
-
 	  
 	  function kakaoShare() {
 		  
@@ -378,9 +395,17 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 //*/	
 	//=====================공유하기====================================	 	
 	$(document).ready(function() {
-
 	});
 </script>
+ 	<!--  모달창 띄우기 /////////////////////////////////////-->
+ 
+ 	<div id="my_modal">
+ 		<a class="modal_close_btn"><i class="bi bi-x"></i></a>
+ 		<br>
+
+	    <br>
+	</div>		 	
+
 
 </body>
 </html>

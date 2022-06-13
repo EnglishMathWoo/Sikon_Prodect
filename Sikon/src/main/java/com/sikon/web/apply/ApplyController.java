@@ -305,6 +305,8 @@ public class ApplyController {
 			HttpSession session=request.getSession();
 			User user=(User)session.getAttribute("user");
 			
+			
+			
 			// Business logic ผ๖วเ
 			Map<String , Object> map=applyService.getSaleList(search);
 			
