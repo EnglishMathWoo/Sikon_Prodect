@@ -206,7 +206,7 @@ public class CouponController {
 	@RequestMapping( value="/useCoupon", method=RequestMethod.GET )
 	public void useCoupon(@RequestParam("issueNo") int issueNo) throws Exception{
 
-		System.out.println("/coupon/updateIssueStatus : GET");
+		System.out.println("/coupon/useCoupon : GET");
 		
 		//Business Logic
 		Coupon coupon = couponService.getIssuedCoupon(issueNo);
