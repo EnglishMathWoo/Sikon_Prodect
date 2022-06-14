@@ -384,6 +384,8 @@ body>div.container {
 		  
 		  </div>
 		  
+		  <input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">
+		  
 		</form>
 		<!-- form Start /////////////////////////////////////-->
 		<div class="text-center">

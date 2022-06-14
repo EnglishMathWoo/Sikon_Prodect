@@ -49,7 +49,7 @@ div.container {
 	
 		//============= "구매"  Event 연결 =============
 		
-		/*	
+		///*	
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "#iamportPayment" ).on("click" , function() {
@@ -185,7 +185,7 @@ div.container {
 <script>
   
 
-///*
+/*
 
 	
 	$(function() {
@@ -406,15 +406,17 @@ function payment(data) {
 		    <label for="usedCoupon" class="col-sm-offset-1 col-sm-3 control-label">쿠폰 사용</label>
 		    <div class="col-sm-4">
 		   	  <c:if test="${product.couponApply == 'Y' }">
-		      		<select name="usedCoupon" id="usedCoupon">
-			      		<option value="">사용할 쿠폰을 선택해주세요</option>
+		   	  		
+		      		<select name="usedCoupon" class="form-control" id="usedCoupon">
+		      			<option value=""> 사용할 쿠폰을 선택해주세요 </option>
 				      		<c:forEach var="couponlist" items="${coupon}">
-				      		<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
+				      			<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
 				      		</c:forEach>
 		      		</select>
+		      		
 		      </c:if>
 		      <c:if test="${product.couponApply == 'N' }">
-		      	<input type="text" class="form-control" id="usedCoupon" name="usedCoupon" placeholder="쿠폰적용이 불가한 상품입니다." readonly >
+		      	<input type="text" class="form-control" id="usedCoupon"  placeholder="쿠폰적용이 불가한 상품입니다." readonly >
 		      </c:if>
 		    </div>
 		  </div>
@@ -430,7 +432,7 @@ function payment(data) {
 		  
 		  </div>
 		  
-		  <input type="hidden" name="paymentOpt" id="paymentOpt" value="">
+		  <input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">
 		  
 		</form>
 <!-- 결제하기 /////////////////////////////////////-->		
