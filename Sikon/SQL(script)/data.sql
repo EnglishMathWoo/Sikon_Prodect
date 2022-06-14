@@ -167,8 +167,6 @@ INSERT
 INTO notice(notice_no, notice_title, notice_content, notice_image, notice_date) 
 VALUES (seq_notice_notice_no.NEXTVAL, '식탁의 온도 코스닥 상장 안내', '<p><img src="/summernoteImage/a75e48e3-03d6-4712-9c5f-181e35560bf9.jpg" style="width: 800px;"><br></p>', NULL, SYSDATE);
 
-INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'user', '낙지 초무침', '싱싱한 낙지', '36fae4c4237f29668386889b1c772db5.jpg', null, '200', 'KO', 10, 'd' , SYSDATE, 0, 0);
 
 INSERT
 INTO recipe VALUES (seq_recipe_no.nextval ,'user', '생강', '노맛', 'htm_20150402190451608.jpg', null, '200', 'KO', 10, 'd' , SYSDATE, 0, 0);

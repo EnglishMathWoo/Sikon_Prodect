@@ -1,5 +1,7 @@
 package com.sikon.web.review;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
@@ -63,19 +66,41 @@ public class ReviewController {
 
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+	
+	@Value("#{commonProperties['filepath']}")
+	String filePath;
 
 	@RequestMapping(value = "addReview", method = RequestMethod.POST)
-	public ModelAndView addReview(@ModelAttribute("review") Review review, @RequestParam("category") String category,
-			@RequestParam("textNo") int textNo, HttpServletRequest request) throws Exception {
-
+	public ModelAndView addReview(@RequestParam("fileArray") MultipartFile[] fileArray, @ModelAttribute("review") Review review, @RequestParam("category") String category,
+			@RequestParam("textNo") int textNo, Model model, HttpServletRequest request) throws Exception {
+		
 		System.out.println("/review/addReview : POST");
 		System.out.println("review=" + review);
 		System.out.println("category=" + category);
 		System.out.println("textNo=" + textNo);
 
+		String FILE_SERVER_PATH = filePath;
+		String newFileName = "";
+
+		for (int i = 0; i < fileArray.length; i++) {
+
+			if (!fileArray[i].getOriginalFilename().isEmpty()) {
+				fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
+				model.addAttribute("msg", "File uploaded successfully.");
+
+			} else {
+				model.addAttribute("msg", "Please select a valid mediaFile..");
+			}
+
+			newFileName += fileArray[i].getOriginalFilename();
+
+		}
+
+		review.setReviewImg(newFileName);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
+		
 		if (category.equals("COOK")) {
 			Cook cook = cookService.getCook(textNo);
 			review.setCook(cook);
@@ -90,6 +115,7 @@ public class ReviewController {
 		review.setWriterNickname(user.getUserNickname());
 		review.setReviewCategory(category);
 
+		
 		System.out.println("¸®ºä:" + review);
 		reviewService.addReview(review);
 

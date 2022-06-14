@@ -382,6 +382,53 @@ public class CookController {
 		modelAndView.setViewName("forward:/cook/listCook3.jsp");
 
 		return modelAndView;
+	}
+	
+	
+	@RequestMapping( value="manageCook" )
+	public String manageCook(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
+			throws Exception {
+
+		
+	
+
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		
+	
+		search.setPageSize(pageSize);
+
+		HttpSession session=request.getSession();
+		User user=(User)session.getAttribute("user");
+		// Business logic ¼öÇà
+		Map<String, Object> map = cookService.getCookList(search);
+		
+		List<Cook> cookList = (List<Cook>) map.get("list");
+		
+		for(int i=0; i<cookList.size(); i++) {
+			 int heartCount = heartService.heartCheck(cookList.get(i).getCookNo(), user.getUserId());
+			 cookList.get(i).setHeartCount(heartCount);
+			 cookList.set(i, cookList.get(i));
+		}
+		
+		System.out.println(cookList);
+		System.out.println("±èÅÂÈ£");
+			
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+				
+		System.out.println(map.get("list"));
+		System.out.println("^^^^^^^^^^^");
+					
+		model.addAttribute("list", cookList);
+		System.out.println(map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+		model.addAttribute("user",user);
+
+		return "forward:/cook/manageCook.jsp";
 	}	
 }
 
