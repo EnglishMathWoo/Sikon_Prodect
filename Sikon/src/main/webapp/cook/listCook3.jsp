@@ -216,7 +216,7 @@ p {
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br> 내가 등록한 쿠킹클래스 </h3>
+		      <h3 class="font-x2 nospace" align="center"><br> 내가 등록한 쿠킹클래스tmtmtm </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		  		    <button type="button" class="submit">삭제</button>
