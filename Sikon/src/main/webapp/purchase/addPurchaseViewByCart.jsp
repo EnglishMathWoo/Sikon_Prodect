@@ -362,7 +362,12 @@ body>div.container {
 		    <div class="col-sm-4">
 		    <c:forEach var="cart" items="${cartlist}">
 		   	  <c:if test="${cart.cartProd.couponApply == 'Y' }">
-		      	<input type="text" class="form-control" name="coupon" placeholder="사용할 쿠폰을 선택해주세요" >
+		      		<select name="coupon" class="form-control" id="usedCoupon">
+		      			<option value=""> 사용할 쿠폰을 선택해주세요 </option>
+				      		<c:forEach var="couponlist" items="${coupon}">
+				      			<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
+				      		</c:forEach>
+		      		</select>
 		      </c:if>
 		      <c:if test="${cart.cartProd.couponApply == 'N' }">
 		      	<input type="text" class="form-control" name="coupon" placeholder="쿠폰적용이 불가한 상품입니다." readonly >

@@ -169,10 +169,10 @@ public class PurchaseController {
 		
 		Point point = new Point();
 		
-		if(purchase.getUsedPoint() > 0) {
-			
 		int usedpoint = purchase.getUsedPoint();
 		int totalpoint = user.getHoldpoint() - usedpoint;
+		
+		if(purchase.getUsedPoint() > 0) {
 		
 		System.out.println("usedpoint: "+usedpoint);
 		System.out.println("totalpoint: "+totalpoint);
@@ -184,6 +184,8 @@ public class PurchaseController {
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint, userId);
 		
+		}
+		
 		int earnpoint = purchase.getEarnPoint();
 		
 		point.setPointScore(earnpoint);
@@ -194,7 +196,6 @@ public class PurchaseController {
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint+earnpoint, userId);
 		
-		}
 		//==================================================================================
 		// 쿠폰 사용하기
 		
@@ -249,8 +250,11 @@ public class PurchaseController {
 		
 		System.out.println("cartlist: "+list);
 		
+		List couponlist = couponService.getMyCoupon(buyer.getUserId());
+		
 		model.addAttribute("cartlist", list);
 		model.addAttribute("user", buyer);
+		model.addAttribute("coupon", couponlist);
 		
 		
 		return "forward:/purchase/addPurchaseViewByCart.jsp";
@@ -329,11 +333,10 @@ public class PurchaseController {
 		//포인트 적용
 		
 		Point point = new Point();
-		
-		if(purchase.getUsedPoint() > 0) {
-			
 		int usedpoint = purchase.getUsedPoint();
 		int totalpoint = user.getHoldpoint() - usedpoint;
+		
+		if(purchase.getUsedPoint() > 0) {
 		
 		System.out.println("usedpoint: "+usedpoint);
 		System.out.println("totalpoint: "+totalpoint);
@@ -345,6 +348,8 @@ public class PurchaseController {
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint, userId);
 		
+		}
+		
 		int earnpoint = purchase.getEarnPoint();
 		
 		point.setPointScore(earnpoint);
@@ -355,7 +360,7 @@ public class PurchaseController {
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint+earnpoint, userId);
 		
-		}
+		
 		//==================================================================================
 		// 쿠폰 사용하기
 		
@@ -537,7 +542,7 @@ public class PurchaseController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(8);
 		
 		
 		HttpSession session = request.getSession();
@@ -576,7 +581,7 @@ public class PurchaseController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(10);
 		
 		// Business logic 수행
 		Map<String , Object> map=purchaseService.getSalesList(search);
