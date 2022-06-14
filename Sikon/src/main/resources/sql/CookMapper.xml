@@ -88,9 +88,6 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT *
 											FROM cook
-										
-											
-												
 												<if test="searchCondition != null">
 												
 													<if test="searchCondition == 0 and searchKeyword !='' ">
@@ -104,25 +101,24 @@
 													</if>
 											</if>		
 											<if test="themeCondition != null">
-													<if test='themeCondition == "ko"'>
-										 				where cook_theme LIKE UPPER('KO')
+													<if test='themeCondition == "cw"'>
+										 				AND prod_theme LIKE UPPER('cw')
 													</if>
-													<if test='themeCondition == "ja"'>
-										 				where cook_theme LIKE UPPER('JA')
+													<if test='themeCondition == "tw"'>
+										 				AND prod_theme LIKE UPPER('tw')
 													</if>
-													<if test='themeCondition == "am"'>
-										 				where cook_theme LIKE UPPER('AM')
+													<if test='themeCondition == "mk"'>
+										 				AND prod_theme LIKE UPPER('mk')
 													</if>
-													<if test='themeCondition == "ch"'>
-										 				where cook_theme LIKE UPPER('CH')
-													</if>
-													<if test='themeCondition == "des"'>
-										 				where cook_theme LIKE UPPER('DE')
-													</if>
-											</if>												
-												
-										
-										
+											</if>
+										<if test="orderCondition != null">
+											
+											<choose>
+													<when test="orderCondition == 0  ">
+										 				ORDER BY heart_hit DESC
+													</when>
+													</choose>
+													</if>												
 											ORDER BY  cook_no ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
@@ -186,7 +182,7 @@
 	 
 
 	 <!-- SQL : 마이페이지(내가 쓴 쿠킹클래스) LIST -->
-	 <select  id="listMyCook"  parameterType="search"	resultMap="cookSelectMap">
+	 <select  id="listMyCook"  parameterType="map"	resultMap="cookSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT *
