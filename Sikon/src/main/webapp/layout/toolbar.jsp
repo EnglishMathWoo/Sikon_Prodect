@@ -471,10 +471,10 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	        <c:if test="${!empty sessionScope.user.role}">
 	        
 	        <c:if test="${user.loginPath == 'K'}">
-	        <li><a href="#">Logout</a></li>
+	        <li><a href="#" id="kakaoout">Logout</a></li>
 	        </c:if>
 	        <c:if test="${user.loginPath == 'S'}">
-	        <li><a href="#">Logout.</a></li>
+	        <li><a href="#" id="logout">Logout</a></li>
 	        </c:if>
 	        
 	        <li><a href="#" style="color:#B97D2D">Mypage</a></li>
@@ -648,6 +648,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			$(self.location).attr("href","/user/loginView.jsp");
 			});
 			
+			/*
 			$( "a:contains('Logout')" ).on("click" , function() {
 			$(self.location).attr("href","https://kauth.kakao.com/oauth/logout?client_id=07cd433423b8401d52fda5136624e099&logout_redirect_uri=http://localhost:8080/user/logout");
 			});
@@ -656,7 +657,15 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			$( "a:contains('Logout.')" ).on("click" , function() {
 			$(self.location).attr("href","/user/logout");
 			});
-				
+			*/
+			
+			$("#kakaoout").on("click" , function() {
+				$(self.location).attr("href","https://kauth.kakao.com/oauth/logout?client_id=07cd433423b8401d52fda5136624e099&logout_redirect_uri=http://localhost:8080/user/logout");
+			});
+			
+			$("#logout").on("click" , function() {
+				$(self.location).attr("href","/user/logout");
+			});
 			
 	 		$( "a:contains('Mypage')" ).on("click" , function() {
 			$(self.location).attr("href","/mypage/mymain.jsp");

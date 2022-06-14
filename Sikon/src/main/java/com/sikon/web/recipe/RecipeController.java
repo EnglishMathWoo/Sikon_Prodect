@@ -52,6 +52,9 @@ public class RecipeController {
 
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+	
+	@Value("#{commonProperties['filepath']}")
+	String filePath;
 
 	@RequestMapping(value = "addRecipe", method = RequestMethod.POST)
 	public String addRecipe(@ModelAttribute("recipe") Recipe recipe,
@@ -68,8 +71,9 @@ public class RecipeController {
 			System.out.println(ingredientName[j]);
 			System.out.println(ingredientAmount[j]);
 		}
-
-		String FILE_SERVER_PATH = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+		
+		String FILE_SERVER_PATH = filePath;
+//		String FILE_SERVER_PATH = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 //		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 
 		String newFileName = "";

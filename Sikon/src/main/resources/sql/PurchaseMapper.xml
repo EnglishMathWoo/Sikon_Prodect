@@ -131,7 +131,9 @@
 		 
 	<!-- SQL : SELECT LIST -->
 	<select  id="getPurchaseList"  parameterType="map"	statementType="CALLABLE" resultMap="purchaseSelectMap">
-	  		SELECT p.*, t.* 
+	 SELECT *  
+	 FROM (	SELECT inner_table.* , ROWNUM AS row_seq 
+	 FROM (	SELECT p.prodName, p.prodThumbnail, p.prodStock, p.prodDisPrice, t.* 
 			FROM product p, purchase t
 				<where>
 					p.prod_no=t.prod_no(+)
@@ -144,14 +146,16 @@
 						</otherwise>
 					</choose>
 					</where>
-			ORDER BY t.tran_no DESC 
+			ORDER BY t.tran_no DESC  ) inner_table
+	WHERE ROWNUM &lt;= #{endRowNum} ) 
+	WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	 	
 	
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT p.*, t.* 
+	  	FROM(	SELECT p.prodName, p.prodThumbnail, p.prodStock, p.prodDisPrice, t.* 
 				FROM product p, purchase t
 					<where>
 						p.prod_no=t.prod_no(+)
@@ -171,39 +175,43 @@
 	 
 	 <!-- SQL : SELECT LIST -->
 	<select  id="getSalesList"  parameterType="search"	statementType="CALLABLE" resultMap="purchaseSelectMap">
-	  	SELECT p.*, t.* 
-		FROM product p, purchase t
-		WHERE p.prod_no=t.prod_no(+) 
-			AND t.tran_no IS NOT NULL 
-		<if test="orderCondition == null">
-			ORDER BY t.tran_no DESC 
-		</if>
-		<if test="orderCondition != null">
-			<choose>
-				<when test="orderCondition == 0">
-					ORDER BY t.tran_no DESC 
-				</when>
-				<when test="orderCondition == 5">
-					AND NVL(t.divy_status,'000')='001' 
-					ORDER BY t.tran_no DESC 
-				</when>
-				<when test="orderCondition == 6">
-					AND NVL(t.divy_status,'000')='002' 
-					ORDER BY t.tran_no DESC 
-				</when>
-				<otherwise>
-					AND NVL(t.divy_status,'000')='003' 
-					 ORDER BY t.tran_no DESC 
-				</otherwise>
-			</choose>
-		</if>
+  	SELECT *  
+ 	FROM (	SELECT inner_table.* , ROWNUM AS row_seq 
+	FROM (  SELECT p.prodName, p.prodThumbnail, p.prodStock, p.prodDisPrice, t.* 
+			FROM product p, purchase t
+			WHERE p.prod_no=t.prod_no(+) 
+				AND t.tran_no IS NOT NULL 
+			<if test="orderCondition == null">
+				ORDER BY t.tran_no DESC 
+			</if>
+			<if test="orderCondition != null">
+				<choose>
+					<when test="orderCondition == 0">
+						ORDER BY t.tran_no DESC 
+					</when>
+					<when test="orderCondition == 5">
+						AND NVL(t.divy_status,'000')='001' 
+						ORDER BY t.tran_no DESC 
+					</when>
+					<when test="orderCondition == 6">
+						AND NVL(t.divy_status,'000')='002' 
+						ORDER BY t.tran_no DESC 
+					</when>
+					<otherwise>
+						AND NVL(t.divy_status,'000')='003' 
+						 ORDER BY t.tran_no DESC 
+					</otherwise>
+				</choose>
+			</if> ) inner_table
+	WHERE ROWNUM &lt;= #{endRowNum} ) 
+	WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 		
 	 </select>
 	 	
 	
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount2"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT p.*, t.* 
+	  	FROM(	SELECT p.prodName, p.prodThumbnail, p.prodStock, p.prodDisPrice, t.* 
 				FROM product p, purchase t
 				WHERE p.prod_no=t.prod_no(+) 
 					AND t.tran_no IS NOT NULL 
