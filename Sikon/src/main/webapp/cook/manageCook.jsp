@@ -102,6 +102,23 @@ table {
   
 }
 
+.delete{
+  display: block;
+  width: 150px;
+  height: 36px;
+  border-radius: 30px;
+  color: #937062;
+  border: 1px solid #937062;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #f7f7f7;
+  float: right;
+  font-family: 'Gowun Batang', serif;
+  
+}
+
 div.emptyProd{
 	padding : 20px;
 	height: 100px;
@@ -137,13 +154,29 @@ div.emptyProd{
 			 $( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
 				fncGetList(1);
 			 });
-			
+				$(".delete").on("click" , function() {
+					
+					
+					var checkCount = $("input[name='cookCheck']:checked").length;
+
+				    var array = new Array();
+				    
+					$("input[name='cookCheck']:checked").each(function() {
+						array.push($(this).attr('id'));
+				    });
+					
+					if(checkCount != 0) {
+						alert(checkCount+"개의 쿠킹클래스를 삭제하시겠습니까?")
+
+						self.location = "/cook/deleteCook?checkCount="+checkCount+"&checkList="+array;
+					}			
 			
 
 				
 		});	
 		 
-		 
+			});		
+	 
 		 function enterkey() { 
 			if(window.event.keyCode == 13){
 				fncGetList(1);
@@ -211,7 +244,7 @@ div.emptyProd{
 						    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지
 							</td>
 							
-							<td class="col-md-6 text-right"><button type="button" class="submit">쿠킹클래스등록</button></td>
+							<td class="col-md-6 text-right"><button type="button" class="submit">쿠킹클래스등록</button> <button type="button" class="delete">삭제</button></td>
 							
 						</tr>
 						</table>
@@ -246,7 +279,10 @@ div.emptyProd{
 		  <c:forEach var="cook" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
-			  	<td align="center">${ i }</td>
+			  	<td align="center"><input type="checkbox" name="cookCheck" id="${cook.cookNo}"/>
+			  	
+			 
+			  	</td>
 			  
 			  
 			  	<td align="center" class="toget" value="${cook.cookNo }">${cook.cookNo }</td>	

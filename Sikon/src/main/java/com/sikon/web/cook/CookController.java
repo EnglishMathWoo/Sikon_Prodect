@@ -285,10 +285,10 @@ public class CookController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", map.get("list"));
-//		modelAndView.addObject("list", map1.get("list"));
+
 
 		modelAndView.addObject("resultPage", resultPage);
-//		modelAndView.addObject("resultPage", resultPage1);
+
 		modelAndView.addObject("search", search);
 
 		modelAndView.setViewName("forward:/cook/listMyCook.jsp");
@@ -311,7 +311,7 @@ public class CookController {
 	}
 
 	@RequestMapping(value = "mentor")
-	public ModelAndView mentor(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
+	public ModelAndView mentor(@RequestParam("mentorId") String mentorId,@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
 			throws Exception {
 
 		System.out.println("/cook/mentor :  POST/get");
@@ -322,8 +322,7 @@ public class CookController {
 
 		search.setPageSize(pageSize);
 
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+		User user = userService.getUser(mentorId);
 
 		// Business logic ผ๖วเ
 		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
@@ -334,6 +333,7 @@ public class CookController {
 		System.out.println(resultPage);
 
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("user", user);
 		modelAndView.addObject("list", map.get("list"));
 //		modelAndView.addObject("list", map1.get("list"));
 

@@ -234,7 +234,7 @@ div.image{
 		});
 		 
 		 $( "#listMyCook" ).on("click" , function() {
-			 self.location = "/cook/mentor.jsp"
+			 self.location = "/cook/mentor?mentorId=${cook.mentor.userId}"
 		}); 		 
 
 		 

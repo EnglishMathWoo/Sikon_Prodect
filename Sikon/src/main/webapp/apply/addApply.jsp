@@ -353,7 +353,7 @@ $(function() {
 	    IMP.request_pay({
 	    	pg : "kakaopay", 
 	        pay_method : payment,
-	        merchant_uid : '1205',
+	        merchant_uid : '19159',
 	        name : cookName ,
 	        amount : cookPrice ,
 	        buyer_name : userName ,

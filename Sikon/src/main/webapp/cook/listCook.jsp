@@ -213,6 +213,11 @@ div.emptyProd{
 	color: #f7f7f7;
 }
 
+.likes{
+	font-weight: bold;
+	font-size: large;
+}
+
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -445,7 +450,7 @@ div.emptyProd{
 						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</p>";
 						                		}
 						                
-						                			button = "<button type='button' class='btn btn-primary delete' value='"+JSONData.list[i].cookNo+"'>삭&nbsp;제</button>" ;
+						                			
 						                			
 						                		
 						                		
@@ -474,8 +479,7 @@ div.emptyProd{
 						                     						+"</div>"
 						                     						+"<div class='row'>"
 						                     						+"<div><h5><strong>수업시간: "+JSONData.list[i].startTime+"&emsp;~&emsp;"+JSONData.list[i].endTime+"</strong></h5></div>"
-						                     						+"</div>"
-						                     						+button
+						                     						+"</div>"						                     					
 						                     						+heartCount
 						                     						+"</div>"
 						                     						+"<div class='col-xs-2 col-md-2'>"
@@ -531,7 +535,7 @@ div.emptyProd{
 	          </div>
 	          
 	          <div class="item">
-	            <img src="/resources/images/uploadFiles/wow.jpg" alt="Second slide">
+	            <img src="/resources/images/uploadFiles/cooking.jpg" alt="Second slide">
 	          </div>
 	          
 	          <div class="item">
@@ -639,7 +643,7 @@ div.emptyProd{
 
 
 <c:forEach var="cook" items="${list}">
-<td align="left"><input type="checkbox" name="cookCheck" id="${cook.cookNo}"/></td>
+<td align="left"></td>
  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
  <input type="hidden" name="userNickname" value="${user.userNickname}">
   <input type="hidden" name="userId" value="${user.userId}">
@@ -673,7 +677,23 @@ div.emptyProd{
 				</c:otherwise>
 		    	</c:choose>
 		    	
-
+		    	<br><br>
+		    	
+		    	<table>
+		    		<tr class="liketable">
+						<td>
+							<c:choose>
+					 		<c:when test = "${cook.heartCount == '0'}">
+					 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn"></p>
+							</c:when>    
+					 		<c:otherwise>
+					 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn"></p>
+					 		</c:otherwise>
+					 		</c:choose>
+						</td>
+						<td class="likes">&nbsp; 좋아요 ${cook.hearthit}개</td>
+					</tr>
+				</table>
 				</div>	
 			
 
@@ -747,20 +767,9 @@ div.emptyProd{
 				<div><h5><strong>수업시간 : ${cook.startTime}&emsp;~&emsp;${cook.endTime}</strong></h5></div>				
 				</div>
 		
-				<button type="button" class="btn btn-primary delete" value="${cook.cookNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
-				<!-- <p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>  -->
-				
-		
-		<c:choose>
- 		<c:when test = "${cook.heartCount == '0'}">
- 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
-		</c:when>    
- 		<c:otherwise>
- 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
- 		</c:otherwise>
- 		</c:choose>
 
-		
+				<!-- <p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>  -->
+			
 				
 		 	</div>
 		 	

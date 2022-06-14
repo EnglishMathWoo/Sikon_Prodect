@@ -123,20 +123,13 @@ public class ApplyController {
 		
 		//@RequestMapping("/getPurchase.do")
 		@RequestMapping( value="getApply" )
-		public ModelAndView getApply(@ModelAttribute("search") Search search,HttpServletRequest request,@RequestParam("applyNo") int applyNo
+		public ModelAndView getApply(HttpServletRequest request,@RequestParam("applyNo") int applyNo
 		
 				) throws Exception {
 			
 			System.out.println("/apply/getApply : GET, POST");
 			//Business Logic
 			
-			System.out.println("search:" + search);
-
-			if (search.getCurrentPage() == 0) {
-				search.setCurrentPage(1);
-			}
-
-			search.setPageSize(pageSize);
 
 			
 			Apply apply = applyService.getApply(applyNo);
@@ -152,14 +145,12 @@ public class ApplyController {
 			
 			String category="COOK";
 			
-			Map map=reviewService.getReviewList(search, category, applyNo);
 			
 			ModelAndView modelAndView=new ModelAndView();
 			modelAndView.setViewName("forward:/apply/getApply.jsp");
 			modelAndView.addObject("apply", apply);
 			modelAndView.addObject("cook", cook);
 			modelAndView.addObject("user", user);
-			modelAndView.addObject("review", map.get("list"));
 
 			// 여기서는 value값만 넣어줬다
 			

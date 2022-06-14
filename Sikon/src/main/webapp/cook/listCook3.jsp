@@ -38,12 +38,128 @@
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+<style>
+body {
+    background-color: #F7F7F7;
+}
+
+#logo a{
+	font-family: 'Gowun Batang', serif;
+
+}
+
+.padding {
+    padding: 3rem !important;
+    margin-left: 200px;
+}
+
+.card-img-top{
+    height:300px;
+    width: 1140px;
+    
+}
+
+
+
+.card-no-border .card {
+    border-color: #d7dfe3;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+.pro-img {
+    margin-top: -80px;
+    margin-bottom: 20px
+}
+
+.little-profile .pro-img img {
+    width: 128px;
+    height: 128px;
+    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 100%
+}
+
+html body .m-b-0 {
+    margin-bottom: 0px
+}
+
+h3 {
+    line-height: 30px;
+    font-size: 21px
+}
+
+.btn-rounded.btn-md {
+    padding: 12px 35px;
+    font-size: 16px
+}
+
+html body .m-t-10 {
+    margin-top: 10px
+}
+
+.btn-primary,
+.btn-primary.disabled {
+    background: #7460ee;
+    border: 1px solid #7460ee;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+    -webkit-transition: 0.2s ease-in;
+    -o-transition: 0.2s ease-in;
+    transition: 0.2s ease-in
+}
+
+.btn-rounded {
+    border-radius: 60px;
+    padding: 7px 18px
+}
+
+.m-t-20 {
+    margin-top: 20px
+}
+
+.text-center {
+    text-align: center !important
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #455a64;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem
+}
+
+.padding{
+padding-top:120px;
+}
+
+.col-md-8{
+padding-top:100px;
+}
+</style>
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 
 
-.container {
-	padding-top: 150px;
+.channel {
+	padding-top: 200px;
 } 
 </style>
 
@@ -200,8 +316,13 @@ p {
 			
 					$( ".imgover" ).on("click" , function() {
 					console.log($(this).attr("value"));
-					self.location ="/cook/getCook?cookNo="+$(this).attr("value")
+					self.location ="/cook/getCook?cookNo="+$(this).attr("value")+"&menu=search"
 					});
+					
+					$( ".recipe" ).on("click" , function() {
+						console.log($(this).attr("value"));
+						self.location ="/recipe/listMyRecipe?mentorId=${recipe.writer.userId}"
+						});
 					
 		 });
 		 
@@ -215,22 +336,31 @@ p {
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
+
    	<!-- ToolBar End /////////////////////////////////////-->
-	
+<div class="container channel">	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	
-<div class="container">
+
+        <!-- Column -->
+        <div class="card "> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
+            <div class="card-body little-profile text-center">
+                <div class="pro-img"><img src="/resources/images/uploadFiles/kim3.jpg" alt="user"></div>
+                <h3 class="m-b-0">${user.userNickname}의 쿠킹클래스</h3>             
+
+            </div>
+        </div>
+
 <!-- ################################################################################################ -->
 
 	<div class="wrapper row3">
 	 <input type="hidden" id="currentPage" name="currentPage" value=""/>
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
-		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br> 내가 등록한 쿠킹클래스 </h3>
+
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		  		    <button type="button" class="submit">삭제</button>
+		  		
 		  
 		    
 		    <br/><hr/><br/>
@@ -248,7 +378,7 @@ p {
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${cook.cookNo }" href="#"> 
       <ul>
-  <li><input type="checkbox" value="${cook.cookNo }" />
+  <li>
   <img src="/resources/images/uploadFiles/${cook.cookFilename }" width="320" height="300"></li></ul></a>
         <div class="excerpt">
           <h4 class="heading" >${cook.cookName }</h4>
@@ -257,7 +387,7 @@ p {
             <li > ${cook.cookBrief }</li>
             <li>${cook.cookRecruit }</li>
             <li>${cook.cookTheme }</li>
-            <li> ${mentor.userNickname }</li>
+            <li> ${cook.mentor.userNickname }</li>
           </ul>
         </div>
       </article>
