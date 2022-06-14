@@ -355,7 +355,7 @@ background-color: #f7f7f7;
 					                	console.log(JSONData.list[0].recipeName);
 					                	console.log(JSONData.list[0].recipeImg);
 						                	 
-					                	for(var i=0; i<JSONData.list.length-1; i++){
+					                	for(var i=0; i<JSONData.list.length; i++){
 					                
 						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
 						                     					+"<div id='latest' class='group'>"
@@ -363,8 +363,8 @@ background-color: #f7f7f7;
 						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
 						                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'></a>"
 					                     						+"<div class='excerpt'>"
-					                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
 					                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
+					                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
 					                     						+"<ul class='meta'>"
 					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
 					                     			            +"<li>"+ JSONData.list[i].recipeDifficulty +"</li>"
@@ -384,10 +384,8 @@ background-color: #f7f7f7;
 					           
 		                }//if
 		            });//function
+			 });
 		           
-		           
-		   });
-		 
 	</script>
 	
 </head>
@@ -469,7 +467,6 @@ background-color: #f7f7f7;
 	      </ul>
 	    </nav>
 	    
- <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>
  
             
@@ -481,6 +478,8 @@ background-color: #f7f7f7;
 					<div class="form-group">
 					 
 						<select class="form-control" name="searchCondition">
+						<option value="0"
+								${!empty search.searchCondition && search.searchCondition==0 ? "selected" : ""}>검색조건</option>
 							<option value="1"
 								${!empty search.searchCondition && search.searchCondition==1 ? "selected" : ""}>레시피명</option>
 							<option value="2"
@@ -514,6 +513,7 @@ background-color: #f7f7f7;
   	</form>
     	</section>
   	</div>
+ <input type="hidden" id="currentPage" name="currentPage" value="1"/>
 
  
   
