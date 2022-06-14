@@ -185,7 +185,8 @@ background-color: #f7f7f7;
 			});
 		 
 			$(document).on('click', '#cook', function(){
-				 self.location = "/ranking/listCook";
+				 var cookNo =$(this).attr("value");
+				 self.location = "/cook/updateCook?cookNo="+cookNo
 			});
 		 
 			
@@ -297,25 +298,11 @@ background-color: #f7f7f7;
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;레시피&nbsp;</div></li>
-	        <li id="keyword"><div>&nbsp;검색어&nbsp;</div></li>
-	        <li id="cook"><div>&nbsp;쿠킹클래스&nbsp;</div></li>
+	        <li id="recipe">&nbsp;레시피&nbsp;</li>
+	        <li id="keyword">&nbsp;검색어&nbsp;</li>
+	        <li style="color:#DAA520;" id="cook">&nbsp;쿠킹클래스&nbsp;</li>
 	      </ul>
 	    </nav>
-	    
-	    <div class="center btmspace-50">
-	   <select class="condition" id="orderCondition" name="orderCondition">
-							<option value="0"
-								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
-							<option value="1"
-								${!empty search.orderCondition && search.orderCondition==1 ? "selected" : ""}>인기순</option>
-							<option value="2"
-								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
-								<option value="3"
-								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>소요시간순</option>
-								
-						</select>
-	     </div>
 
   	</form>
     	</section>
