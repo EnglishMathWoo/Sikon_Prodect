@@ -33,8 +33,8 @@ public interface UserService {
 	
 	// 회원정보수정
 	public void updateUser(User user) throws Exception;
-	public void updateLicense(Map license, User userId) throws Exception;
-	public void updateCareer(Map career, User userId) throws Exception;
+	public void updateLicense(Map license, User user) throws Exception;
+	public void updateCareer(Map career, User user) throws Exception;
 	// 회원정보리스트 
 	public Map<String , Object> getUserList(Search search) throws Exception;
 	

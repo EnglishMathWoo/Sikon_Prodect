@@ -63,6 +63,11 @@
 
 <style>
 
+div.container {
+	padding-top: 200px;
+	
+}
+
 body {
 	padding-top: 50px;
 	

@@ -202,11 +202,11 @@ public class UserServiceImpl implements UserService{
 		
 		userDao.updateUser(user);
 	}
-	public void updateLicense(Map license, User userId) throws Exception {
-		userDao.updateLicense(license, userId);
+	public void updateLicense(Map license, User user) throws Exception {
+		userDao.updateLicense(license, user);
 	}
-	public void updateCareer(Map career, User userId) throws Exception {
-		userDao.updateCareer(career, userId);
+	public void updateCareer(Map career, User user) throws Exception {
+		userDao.updateCareer(career, user);
 	}
 	public Map<String , Object > getUserList(Search search) throws Exception {
 		List<User> list= userDao.getUserList(search);

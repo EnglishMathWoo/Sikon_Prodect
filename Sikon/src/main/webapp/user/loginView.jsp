@@ -132,7 +132,7 @@
 											redirect_uri=http://localhost:8080/user/kakaoLogin
 											&response_type=code">
 				
-						<img src="/resources/images/kakao_login_medium_narrow.png" style="height:40px">
+						<img src="/resources/images/logo/kakao_login_medium_narrow.png" style="height:40px">
 					  </a>
 					  
            			  <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#">Forgot password?</a></p>

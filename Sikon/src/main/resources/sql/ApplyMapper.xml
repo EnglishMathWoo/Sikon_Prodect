@@ -16,6 +16,8 @@
 		<result property="cookStatus" 			column="cook_status" 		jdbcType="NUMERIC" />
 		<result property="checkDate" 				column="check_date" 			jdbcType="DATE"/>
 		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
+		<result property="classCook.cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
+		<result property="classCook.cookFilename" 				column="cook_filename" 					jdbcType="VARCHAR" />	
 	<collection property="classCook" resultMap="cookSelectMap"/>
 		
 		
@@ -52,8 +54,17 @@
 	<insert 	id="addApply"		parameterType="apply" >
 	
 	 	INSERT
-		into apply(apply_no , cook_no, applier_id  , payment_option, apply_status, cook_status,check_date, review_status ) 
-		VALUES	 (	seq_apply_apply_no.nextval , #{classCook.cookNo},#{applier.userId}, #{paymentOption} , #{applyStatus} , #{cookStatus} ,  #{checkDate}, #{reviewStatus})
+		into apply(apply_no , cook_no, applier_id  , payment_option, apply_status, cook_status,check_date, review_status,cook_price ) 
+		VALUES	 (	seq_apply_apply_no.nextval ,
+		 #{classCook.cookNo},
+		 #{applier.userId},
+		  #{paymentOption} ,
+		   #{applyStatus} ,
+		    #{cookStatus} ,
+		      #{checkDate},
+		       #{reviewStatus},
+		        #{classCook.cookPrice}
+		       )
 	 </insert>
 	 
 	  <!-- SQL : SELECT ONE -->
@@ -98,26 +109,22 @@
 	 
 	 <!-- SQL : SELECT LIST -->
 	<select  id="getApplyList"  parameterType="map" resultMap="applySelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *
-											FROM apply
+						SELECT *
+											FROM apply a, cook c
+											where a.cook_no=c.cook_no(+)
 
 											<if test="search.applyCondition != null">
 												<choose>
 												<when test="search.applyCondition == 5 ">
-													where apply_status = '100' 
+													and a.apply_status = '100' 
 													</when>
 												<when test="search.applyCondition == 6  ">
-													where apply_status = '200'  
+													and a.apply_status = '200'  
 														</when>
 														</choose>
 											</if>									
-											ORDER BY apply_no DESC 
-										) inner_table
-											
-						WHERE ROWNUM &lt;= #{search.endRowNum} )
-		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+											ORDER BY a.apply_no DESC 
+										
 		
 		
 	 </select>
@@ -126,19 +133,20 @@
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM (	SELECT *
-											FROM apply
+												FROM apply a, cook c
+											where a.cook_no=c.cook_no(+)
 											<if test="search.applyCondition != null">
 												<choose>
 												<when test="search.applyCondition == 5 ">
-													where apply_status = '100' 
+													and a.apply_status = '100' 
 													</when>
 												<when test="search.applyCondition == 6  ">
-													where apply_status = '200'  
+													and a.apply_status = '200'  
 														</when>
 														</choose>
 											</if>												
 													
-											ORDER BY apply_no DESC 							
+											ORDER BY a.apply_no DESC 							
 										 ) countTable					
 											
 	 </select>
@@ -157,7 +165,8 @@
 													where apply_status = '200'  
 														</when>
 														</choose>
-											</if>									
+											</if>
+											and apply_status !=  '000' 
 											ORDER BY apply_no DESC 
 	 </select>
 	 
@@ -178,10 +187,14 @@
 													where apply_status = '200'  
 														</when>
 														</choose>
-											</if>									
-											ORDER BY apply_no DESC 
-				
-		) countTable						
+											</if>
+											and apply_status !=  '000' 
+											ORDER BY apply_no DESC) countTable
 	 </select>
-
+	 <select id="saleCount" parameterType="string" resultMap="applySelectMap">
+	        select * from apply 
+        where applier_id= #{applier.userId} and apply_status=#{applyStatus}
+        and check_date >= TO_CHAR(SYSDATE-7,'YY/MM/DD')
+        order by check_date;   
+</select>
 </mapper>

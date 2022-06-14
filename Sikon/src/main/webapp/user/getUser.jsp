@@ -151,10 +151,12 @@
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>家加</strong></div>
 	  		<c:set var="i" value="0" />
-		 	 <c:forEach var="career" items="${career}">
+		 	 <c:forEach var="career" items="${career}" begin="0" end="1">
 		  				
 				<div class="col-xs-8 col-md-4">${career.COMPANY}</div>
-			</c:forEach>
+			  </c:forEach>	
+		
+			 
 		</div>
 		
 		
@@ -163,7 +165,7 @@
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>辟公矫累老</strong></div>
 	  		<c:set var="i" value="0" />
-		 	 <c:forEach var="career" items="${career}">
+		 	 <c:forEach var="career" items="${career}" begin="0" end="1">
 		  				
 				<div class="col-xs-8 col-md-4">${career.START_DATE}</div>
 			</c:forEach>
@@ -175,7 +177,7 @@
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>辟公辆丰老</strong></div>
 	  		<c:set var="i" value="0" />
-		 	 <c:forEach var="career" items="${career}">
+		 	 <c:forEach var="career" items="${career}" begin="0" end="1">
 		  				
 				<div class="col-xs-8 col-md-4">${career.END_DATE}</div>
 			</c:forEach>

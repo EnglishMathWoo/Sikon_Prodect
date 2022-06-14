@@ -3,7 +3,7 @@
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -237,6 +237,8 @@ div.container {
 					    }).open();
 					}
 				
+			
+				
 	</script>
 	
 </head>
@@ -255,7 +257,7 @@ div.container {
 	     </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+		<form class="form-horizontal" enctype="multipart/form-data">
 		
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
@@ -339,122 +341,223 @@ div.container {
     		</div>
  	 	  </div>
 		  
+		  
+		  
+		  
+		  
+ <!-- ////////////////////////////////// 경력사항 ///////////////////////////////////////////////// -->			  
+		  
 		   <hr style="border: solid 1px #d7d7d7;" width="650px;">	
  	 	  
- 	 	  <p align="center"><label>경력사항</label> </p>
  	 	 
- 	 	  
- 	 	  <div class="form-group">
+ 	 	 	   	 
+		   <c:set var="i" value="0" />
+		<c:forEach var="career" items="${career}" begin="0" end="1">
+			
+			
+			 <p align="center"><label>경력사항</label> </p>
+			 
+			 <div class="form-group">
 		    <label for="career" class="col-sm-offset-1 col-sm-3 control-label">소속</label>
 		   	<div class="col-sm-4">
-		   	
-		   	 
-		   
+							
+			
+			  <input type="hidden" name="careerNo" value="${career.CAREER_NO}">
 		      <input type="text" class="form-control" id="company" name="company" value="${career.COMPANY}" placeholder="소속1">
-		   
-		      
-		    </div>
-		 </div>   
- 	 	  
- 	 	   <div class="form-group">
+		   	 		   	 
+		   	</div>
+			</div>   
+ 	 	   
+		   	 
+		   	  <div class="form-group">
     		<label for="startDate" class="col-sm-offset-1 col-sm-3 control-label" >근무시작날짜</label>
    			<div class="col-sm-4">
-      	  	  <input type="text" class="form-control" id="startDate" name="startDate" placeholder="근무시작날짜1">
-      	  	  
+   			   					
+      	  	  <input type="text" class="form-control" id="startDate" name="startDate" value="${career.START_DATE}" placeholder="근무시작날짜1">
+      	  	 
     		</div>
- 	 	  </div>
- 	 	  
- 	 	   <div class="form-group">
+ 	 	    </div>
+		   	 
+		   	 
+		   	 <div class="form-group">
     		<label for="endDate" class="col-sm-offset-1 col-sm-3 control-label" >근무종료날짜</label>
    			<div class="col-sm-4">
-      	 	  <input type="text" class="form-control" id="endDate" name="endDate" placeholder="근무종료날짜1">
-      	 	  
+   			
+   			
+      	 	  <input type="text" class="form-control" id="endDate" name="endDate" value="${career.END_DATE}" placeholder="근무종료날짜1">
+      	 	 
     		</div>
- 	 	  </div>
- 	 	  
- 	 	  <div class="form-group">
+ 	 	    </div> 
+		   	 
+		   	
+		   	 <div class="form-group">
 		    <label for="careerExperience" class="col-sm-offset-1 col-sm-3 control-label">업무내용</label>
 		    <div class="col-sm-4">
-		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" placeholder="업무내용1"></textarea>
-		     <hr>
-		    </div>
-		  </div>
+		    		    
+		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" placeholder="업무내용1">
+		      ${career.CAREER_EXPERIENCE}
+		      </textarea>
 		  
+		      <hr>
+		    
+		    </div>
+		    </div> 
+		   	 
+		   	 
+		   	 
+		 </c:forEach>   
+		
+		   	 	  
+ 	 	  
+ 	 	  
+ 	 	  
+ 	 	 
+		  
+		  
+		  
+	<!--  	  
 		  <div class="form-group">
 		    <label for="career" class="col-sm-offset-1 col-sm-3 control-label">소속</label>
 		   	<div class="col-sm-4">
-		      <input type="text" class="form-control" id="company" name="company" placeholder="소속2">
+		   	
+		   	 <c:set var="i" value="0" />
+			<c:forEach var="career" items="${career}" begin="1" end="1">
+				<input type="hidden" name="careerNo" value="${career.CAREER_NO}">
+		      <input type="text" class="form-control" id="company" name="company" value="${career.COMPANY}" placeholder="소속2">
+		    </c:forEach>
 		    </div>
 		 </div>   
  	 	  
  	 	   <div class="form-group">
     		<label for="startDate" class="col-sm-offset-1 col-sm-3 control-label" >근무시작날짜</label>
    			<div class="col-sm-4">
-      	  	  <input type="text" class="form-control" id="startDate2" name="startDate" placeholder="근무시작날짜2">
+   			
+   			<c:set var="i" value="0" />
+			<c:forEach var="career" items="${career}" begin="1" end="1">
+      	  	  <input type="text" class="form-control" id="startDate2" name="startDate" value="${career.START_DATE}" placeholder="근무시작날짜2">
+      	  	</c:forEach>
     		</div>
  	 	  </div>
  	 	  
  	 	   <div class="form-group">
     		<label for="endDate" class="col-sm-offset-1 col-sm-3 control-label" >근무종료날짜</label>
    			<div class="col-sm-4">
-      	 	  <input type="text" class="form-control" id="endDate2" name="endDate" placeholder="근무종료날짜2">
+   			
+   			<c:set var="i" value="0" />
+			<c:forEach var="career" items="${career}" begin="1" end="1">
+      	 	  <input type="text" class="form-control" id="endDate2" name="endDate" value="${career.END_DATE}" placeholder="근무종료날짜2">
+    		</c:forEach>
     		</div>
  	 	  </div>
  	 	  
  	 	  <div class="form-group">
 		    <label for="careerExperience" class="col-sm-offset-1 col-sm-3 control-label">업무내용</label>
 		    <div class="col-sm-4">
-		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" placeholder="업무내용2"></textarea>		    
+		    
+		    <c:set var="i" value="0" />
+			<c:forEach var="career" items="${career}" begin="1" end="1">
+		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" value="${career.CAREER_EXPERIENCE}" placeholder="업무내용2">
+		      ${career.CAREER_EXPERIENCE}
+		      </textarea>		    
+		    </c:forEach>
 		    </div>
 		  </div>
  	 	  
- 	 	  <hr style="border: solid 1px #d7d7d7;" width="650px;">	
+ 	--> 	  
  	 	  
+ 	 	  
+ 	 	  
+ <!-- ////////////////////////////////// 자격증 ///////////////////////////////////////////////// -->	 	  
+ 	 	  
+ 	 	  <hr style="border: solid 1px #d7d7d7;" width="650px;">	
+ 	 	  	 	  
  	 	  <p align="center"><label>자격증</label> </p>
+ 	 	  
+ 	 	  <c:set var="i" value="0" />
+		<c:forEach var="license" items="${license}" begin="0" end="1">
+			
  	 	  
  	 	  <div class="form-group">
 		    <label for="licenseName" class="col-sm-offset-1 col-sm-3 control-label">자격증명</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="licenseName" name="licenseName" placeholder="자격증명1">
+		    
+		    
+			  <input type="hidden" name="licenseNo" value="${license.LICENSE_NO}">
+		      <input type="text" class="form-control" id="licenseName" name="licenseName" value="${license.LICENSE_NAME}" placeholder="자격증명1">
+		    
+		   
 		    </div>
-		  </div>
- 	 	  
- 	 	  <div class="form-group">
+		    </div>
+		  
+		  
+		   <div class="form-group">
 		    <label for="licenseInstitution" class="col-sm-offset-1 col-sm-3 control-label">발급기관</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="licenseInstitution" name="licenseInstitution" placeholder="발급기관1">
+		    
+		  
+		      <input type="text" class="form-control" id="licenseInstitution" name="licenseInstitution" value="${license.LICENSE_INSTITUTION}" placeholder="발급기관1">
+		    
 		    </div>
 		  </div>
- 	 	  
+		  
+		  
+		   
  	 	  <div class="form-group">
     		<label for="licenseDate" class="col-sm-offset-1 col-sm-3 control-label" >취득일자</label>
    			<div class="col-sm-4">
-      	  	  <input type="text" class="form-control" id="licenseDate" name="licenseDate" placeholder="취득일자1">
+   			
+   			
+      	  	  <input type="text" class="form-control" id="licenseDate" name="licenseDate" value="${license.LICENSE_DATE}" placeholder="취득일자1">
       	  	  <hr>
+      	  
       	  	</div>
       	  </div>
+		  
+ 	 	 </c:forEach> 
+ 	 	 
+ 	 	 
+ 	 	 
+ 	 	 
  	 	  
  	 	  
+ 	 	  
+ 	 	  
+ 	 	<!--    
  	 	   <div class="form-group">
 		    <label for="licenseName" class="col-sm-offset-1 col-sm-3 control-label">자격증명</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="licenseName" name="licenseName" placeholder="자격증명2">
+		    
+		     <c:set var="i" value="0" />
+			<c:forEach var="license" items="${license}" begin="1" end="1">
+				<input type="hidden" name="licenseNo" value="${license.LICENSE_NO}">
+		      <input type="text" class="form-control" id="licenseName" name="licenseName" value="${license.LICENSE_NAME}" placeholder="자격증명2">
+		    </c:forEach>
 		    </div>
 		  </div>
  	 	  
  	 	  <div class="form-group">
 		    <label for="licenseInstitution" class="col-sm-offset-1 col-sm-3 control-label">발급기관</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="licenseInstitution" name="licenseInstitution" placeholder="발급기관2">
+		    
+		    <c:set var="i" value="0" />
+			<c:forEach var="license" items="${license}" begin="1" end="1">
+		      <input type="text" class="form-control" id="licenseInstitution" name="licenseInstitution" value="${license.LICENSE_INSTITUTION}" placeholder="발급기관2">
+		    </c:forEach>
 		    </div>
 		  </div>
  	 	  
  	 	  <div class="form-group">
     		<label for="licenseDate" class="col-sm-offset-1 col-sm-3 control-label" >취득일자</label>
    			<div class="col-sm-4">
-      	  	  <input type="text" class="form-control" id="licenseDate2" name="licenseDate" placeholder="취득일자2">
+   			
+   			<c:set var="i" value="0" />
+			<c:forEach var="license" items="${license}" begin="1" end="1">
+      	  	  <input type="text" class="form-control" id="licenseDate2" name="licenseDate" value="${license.LICENSE_DATE}" placeholder="취득일자2">
+    		</c:forEach>
     		</div>
  	 	  </div>
+ 	 	  
+ 	 -->	  
  	 	  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
