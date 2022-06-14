@@ -411,14 +411,14 @@ background-color: #fff;
 									</button>
 									
 									
-  <div class="yes">
-    <span class="btn_upload">
-      <input  multiple="multiple" type="file"   id="reviewImg"  name="fileArray" class="input-img"/>
-      <i class="fa-solid fa-camera"></i>
-      </span>
-    <img id="ImgPreview" name="reviewImg" src="" class="preview1" />
-    <input type="button" id="removeImage1" value="x" class="btn-rmv1" />
-  </div>
+							  <div class="yes">
+							    <span class="btn_upload">
+							      <input  multiple="multiple" type="file"   id="reviewImg"  name="fileArray" class="input-img"/>
+							      <i class="fa-solid fa-camera"></i>
+							      </span>
+							    <img id="ImgPreview" name="reviewImg" src="" class="preview1" />
+							    <input type="button" id="removeImage1" value="x" class="btn-rmv1" />
+							  </div>
 									
 									
 
