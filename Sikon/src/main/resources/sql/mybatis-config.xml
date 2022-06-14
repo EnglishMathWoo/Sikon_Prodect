@@ -33,7 +33,7 @@
 		<typeAlias alias="cart" type="com.sikon.service.domain.Cart" />
 		<typeAlias alias="alarm" type="com.sikon.service.domain.Alarm" />
 		<typeAlias alias="point" type="com.sikon.service.domain.Point" />
-		<typeAlias alias="search" type="com.sikon.common.Search" />
+		<typeAlias alias="ranking" type="com.sikon.service.domain.Ranking" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
@@ -58,7 +58,7 @@
 		<mapper resource="sql/AlarmMapper.xml"/>
 		<mapper resource="sql/PointMapper.xml"/>
 		<mapper resource="sql/KakaoMapper.xml"/>
-		<mapper resource="sql/SearchMapper.xml"/>
+		<mapper resource="sql/RankingMapper.xml"/>
 	</mappers>
 
 </configuration>

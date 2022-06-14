@@ -1,27 +1,20 @@
 package com.sikon.web.ranking;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
-import com.sikon.service.domain.Recipe;
+import com.sikon.service.ranking.RankingService;
 import com.sikon.service.recipe.RecipeService;
 
 //·¹½ÃÇÇ RestController
@@ -30,6 +23,9 @@ import com.sikon.service.recipe.RecipeService;
 public class RankingRestController {
 
 	/// Field
+	@Autowired
+	@Qualifier("rankingServiceImpl")
+	private RankingService rankingService;
 
 	@Autowired
 	@Qualifier("recipeServiceImpl")
@@ -57,17 +53,13 @@ public class RankingRestController {
 			search.setCurrentPage(1);
 		}
 		
-		if(search.getSearchCondition()==null) {
-			search.setSearchCondition("0");
-		}
-
 		if (search.getOrderCondition() == null) {
-			search.setOrderCondition("4");
+			search.setOrderCondition("0");
 		}
 		
 		search.setPageSize(pageSize);
 
-		Map<String, Object> map = recipeService.getRecipeList(search);
+		Map<String, Object> map = rankingService.getRecipeList(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
@@ -80,6 +72,7 @@ public class RankingRestController {
 
 		System.out.println("map=" + map);
 		return map2;
+
 	}
 
 }

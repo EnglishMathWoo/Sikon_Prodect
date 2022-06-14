@@ -58,6 +58,32 @@ body {
   height: 25px;
   text-align: center;
   font-weight:bold;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.orderCondition{
+    width: 90%;
+    margin: 10px auto;
+    float:right;
+}
+
+.order {
+    border: 1px solid #937062;
+    color: #8B4513;
+    float: right;
+    height:40px;
+    width:8%;
+    box-sizing: border-box;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.order:hover {
+    background:	#937062;
+    color: #f7f7f7;
+    border: 1px solid #937062
 }
 
 .page-header.text-info {
@@ -81,7 +107,7 @@ body {
 .ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
 }
 .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
-.ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
+.ref-sort li::after{position:absolute; top:0; right:0; content:"|";}
 .ref-sort li:last-child{margin:0; padding:0;}
 .ref-sort li:last-child::after{display:none;}
 .ref-sort li a{}
@@ -185,10 +211,9 @@ background-color: #f7f7f7;
 			});
 		 
 			$(document).on('click', '#cook', function(){
-				 var cookNo =$(this).attr("value");
-				 self.location = "/cook/updateCook?cookNo="+cookNo
+				 self.location = "/ranking/listCook";
 			});
-		 
+				 
 			
 			   	//====================================================================
 			 $(function() {
@@ -298,12 +323,24 @@ background-color: #f7f7f7;
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li id="recipe">&nbsp;레시피&nbsp;</li>
-	        <li id="keyword">&nbsp;검색어&nbsp;</li>
-	        <li style="color:#DAA520;" id="cook">&nbsp;쿠킹클래스&nbsp;</li>
-	      </ul>
+	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;레시피&nbsp;</div></li>
+	        <li id="keyword"><div>&nbsp;검색어&nbsp;</div></li>
+	        <li id="cook"><div>&nbsp;쿠킹클래스&nbsp;</div></li>
+	      </ul>  
+	      
+	      <br>
+	      
+	      <div class="orderCondition" style="float:right">
+		  	  <div class="order" id="daily">일간</div>
+		      <div class="order" id="weekly">주간</div>
+		      <div class="order" id="monthly">월간</div>
+			</div>
+	      
+	      
 	    </nav>
-
+	    
+	   
+		
   	</form>
     	</section>
   	</div>

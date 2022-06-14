@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.cook.CookService;
+import com.sikon.service.ranking.RankingService;
 import com.sikon.service.recipe.RecipeService;
 
 //랭킹 Controller
@@ -23,6 +24,10 @@ import com.sikon.service.recipe.RecipeService;
 public class RankingController {
 
 	/// Field
+	@Autowired
+	@Qualifier("rankingServiceImpl")
+	private RankingService rankingService;
+	
 	@Autowired
 	@Qualifier("recipeServiceImpl")
 	private RecipeService recipeService;
@@ -53,19 +58,15 @@ public class RankingController {
 			search.setCurrentPage(1);
 		}
 		
-		if(search.getSearchCondition()==null) {
-			search.setSearchCondition("0");
-		}
-
 		if (search.getOrderCondition() == null) {
-			search.setOrderCondition("4");
+			search.setOrderCondition("0");
 		}
 		
 		search.setPageSize(pageSize);
 			
 
 		// Business logic 수행
-		Map<String, Object> map = recipeService.getRecipeList(search);
+		Map<String, Object> map = rankingService.getRecipeList(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
@@ -92,10 +93,6 @@ public class RankingController {
 			search.setCurrentPage(1);
 		}
 		
-		if(search.getSearchCondition()==null) {
-			search.setSearchCondition("0");
-		}
-
 		if (search.getOrderCondition() == null) {
 			search.setOrderCondition("0");
 		}
@@ -104,7 +101,7 @@ public class RankingController {
 			
 
 		// Business logic 수행
-		Map<String, Object> map = cookService.getCookList(search);
+		Map<String, Object> map = rankingService.getCookList(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
