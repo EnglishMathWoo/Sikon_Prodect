@@ -33,6 +33,7 @@ import com.sikon.common.Search;
 import com.sikon.service.domain.Product;
 import com.sikon.service.product.ProductService;
 import com.sikon.service.product.impl.ProductServiceImpl;
+import com.sikon.service.review.ReviewService;
 
 
 //==> 雀盔包府 Controller
@@ -45,9 +46,16 @@ public class ProductController {
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
 		
+	
+	@Autowired
+	@Qualifier("reviewServiceImpl")
+	private ReviewService reviewService;
+	
 	public ProductController(){
 		System.out.println(this.getClass());
 	}
+	
+	
 	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
@@ -96,16 +104,29 @@ public class ProductController {
 
 	
 	@RequestMapping(value="getProduct", method=RequestMethod.GET)
-	public String getProduct( @RequestParam("prodNo") int prodNo , @RequestParam("menu") String menu, @CookieValue(value="history", required=false) Cookie cookie,  
+	public String getProduct(@ModelAttribute("search") Search search, @RequestParam("prodNo") int prodNo , @RequestParam("menu") String menu, @CookieValue(value="history", required=false) Cookie cookie,  
 										HttpServletResponse response, Model model ) throws Exception {
 		
 		System.out.println("/product/getProduct : GET");
 		System.out.println("menu: "+menu);
 		
+		//府轰
+		System.out.println("search:" + search);
+
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+
+		search.setPageSize(pageSize);
+
+		Map map=reviewService.getReviewList(search, "PRD", prodNo);
+		System.out.println("府轰犬牢"+map.get("list"));
+		
 		Product product = productService.getProduct(prodNo);
 		
 		model.addAttribute("product", product);
 		model.addAttribute("menu", menu);
+		model.addAttribute("review", map.get("list"));
 		
 		
 		String img = product.getProdThumbnail();

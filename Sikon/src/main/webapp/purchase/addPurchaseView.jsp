@@ -407,7 +407,7 @@ function payment(data) {
 		    <div class="col-sm-4">
 		   	  <c:if test="${product.couponApply == 'Y' }">
 		      		<select name="usedCoupon" id="usedCoupon">
-			      		<option>사용할 쿠폰을 선택해주세요</option>
+			      		<option value="">사용할 쿠폰을 선택해주세요</option>
 				      		<c:forEach var="couponlist" items="${coupon}">
 				      		<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
 				      		</c:forEach>

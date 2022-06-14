@@ -28,8 +28,10 @@ import com.sikon.common.Search;
 import com.sikon.service.domain.Product;
 import com.sikon.service.domain.Purchase;
 import com.sikon.service.domain.User;
+import com.sikon.service.point.PointService;
 import com.sikon.service.domain.Cart;
 import com.sikon.service.domain.Coupon;
+import com.sikon.service.domain.Point;
 import com.sikon.service.product.ProductService;
 import com.sikon.service.purchase.PurchaseService;
 import com.sikon.service.user.UserService;
@@ -58,6 +60,9 @@ public class PurchaseController {
 	@Autowired
 	@Qualifier("couponServiceImpl")
 	private CouponService couponService;
+	@Autowired
+	@Qualifier("pointServiceImpl")
+	private PointService pointService;
 	
 		
 	public PurchaseController(){
@@ -136,17 +141,10 @@ public class PurchaseController {
 		String serialNo = sub+nowrandom;	
 		System.out.println("일련번호: "+serialNo);
 		//==================================================================================
-		// 쿠폰 사용하기
-		int issueNo = Integer.parseInt(purchase.getUsedCoupon());
-		System.out.println("issueNo: "+issueNo);
-		
-		Coupon coupon = couponService.getIssuedCoupon(issueNo);
-		coupon.setIssueStatus("002");
-		System.out.println("coupon: "+coupon);
-		//==================================================================================
 		
 		User user = userService.getUser(userId);
 		Product product = productService.getProduct(prodNo);
+		Point point = new Point();
 		
 		purchase.setBuyer(user);
 		purchase.setPurchaseProd(product);
@@ -155,14 +153,49 @@ public class PurchaseController {
 		purchase.setReviewStatus("001");
 		
 		int quantity = purchase.getPurchaseQuantity();
+		int usedpoint = purchase.getUsedPoint();
+		int totalpoint = user.getHoldpoint() - usedpoint;
 		
-		System.out.println(purchase);
+		System.out.println("purchase: "+purchase);
 		purchaseService.addPurchase(purchase);
 		
-		
-		System.out.println(quantity);
-		System.out.println(prodNo);
+		System.out.println("quantity: "+quantity);
+		System.out.println("prodNo: "+prodNo);
 		purchaseService.updateStock(quantity, prodNo);
+		
+		System.out.println("usedpoint: "+usedpoint);
+		System.out.println("totalpoint: "+totalpoint);
+		point.setPointScore(usedpoint);
+		point.setTotalPoint(totalpoint);
+		point.setUserId(userId);
+		point.setPointType("use");
+		point.setPointCategory("str");
+		pointService.addPoint(point);
+		pointService.updateHoldPoint(totalpoint, userId);
+		
+		int earnpoint = purchase.getEarnPoint();
+		
+		point.setPointScore(earnpoint);
+		point.setTotalPoint(totalpoint+earnpoint);
+		point.setUserId(userId);
+		point.setPointType("earn");
+		point.setPointCategory("str");
+		pointService.addPoint(point);
+		pointService.updateHoldPoint(totalpoint, userId);
+
+		//==================================================================================
+		// 쿠폰 사용하기
+		if(purchase.getUsedCoupon() != null) {
+			int issueNo = Integer.parseInt(purchase.getUsedCoupon());
+			System.out.println("issueNo: "+issueNo);
+			
+			Coupon coupon = couponService.getIssuedCoupon(issueNo);
+			coupon.setIssueStatus("002");
+			System.out.println("coupon: "+coupon);
+			
+			couponService.updateIssueStatus(coupon);
+		}
+		//==================================================================================		
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchase.jsp");

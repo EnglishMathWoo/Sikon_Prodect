@@ -49,6 +49,17 @@ body {
 	
 }
 
+.shape1 {
+  border-width: 1px;
+  background-color: white;
+  border-color:	#C0C0C0;
+  border-style: solid;
+  width: 35px;
+  height: 25px;
+  text-align: center;
+  font-weight:bold;
+}
+
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
@@ -131,46 +142,13 @@ width: 100px;
 float:right;
 border-color:#D7D7D7;
 }
-/* 레시피 등록 버튼 css */
-.submit
- {
-  display: block;
-  border: none;
-  width: 150px;
-  height: 36px;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: #d4af7a;
-  float: right;
-  	font-family: 'Gowun Batang', serif;
-  
-}
-/* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
-hr {
-    margin-top: 60px;
-    margin-bottom: 20px;
-    border: 0;
-    border-top: 1px solid #eee;
-}
-
-/* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
-p {
-    margin: 0 0 0px;
-    font-family: 'Gowun Batang', serif;
-    
-}
 
 .container {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    padding-top:170px;
-    
+    padding-top:120px;
 }
 
 .hoc{
@@ -178,112 +156,192 @@ padding-top:0px;
 }
 
 
-
+/* 폰트어썸 search */
+.search{
+font-family:FontAwesome;
+border: none;
+background-color: #f7f7f7;
+}
 
 </style>
 
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-	
-		 
-		 $(function() {
+		
+					
+			$(document).on('click', '.imgover', function(){
+				console.log($(this).attr("value"));
+				self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
+			});
 			
-					$( ".imgover" ).on("click" , function() {
-					console.log($(this).attr("value"));
-					self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
-					});
-					
-					$( ".update" ).on("click" , function() {
-						self.location ="/recipe/updateRecipe?recipeNo="+$(this).attr("value")
-						});
-					
-					$(".submit").on("click" , function() {
-						
-						
-						var checkCount = $("input[name='ckRecipe']:checked").length;
-
-					    var array = new Array();
-					    
-						$("input[name='ckRecipe']:checked").each(function() {
-							array.push($(this).attr('id'));
-					    });
-						
-						if(checkCount != 0) {
-							alert(checkCount+"개의 레시피를 삭제하시겠습니까?")
-
-						self.location = "/recipe/deleteRecipe?recipeList="+array;
-						}
-						
-					});
-						
-					
-		 });
+			$(document).on('click', '#recipe', function(){
+				 self.location = "/ranking/listRecipe";
+			});
+		
+			$(document).on('click', '#keyword', function(){
+				 var cookNo =$(this).attr("value");
+				 self.location = "/cook/updateCook?cookNo="+cookNo
+			});
 		 
+			$(document).on('click', '#cook', function(){
+				 var cookNo =$(this).attr("value");
+				 self.location = "/cook/updateCook?cookNo="+cookNo
+			});
 		 
-					
-</script>
-			 </head>
+			
+			   	//====================================================================
+			 $(function() {
+			   	 $(window).scroll(function() {
+		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
+		                	
+		                	var cpage = $("#currentPage").val();
+		                	cpage = Number(cpage)+1;
+		                	console.log(cpage);
+		                	
+		                	var orderCon = $("#orderCondition").val();
+		        	   		console.log("order: "+orderCon);
+		                	
+		                	var keyword = $("#prodname").val();
+		        	   		console.log("keyword: "+keyword);
+		        	   		
+		        	   		var search = $("#searchCondition").val();
+		        	   		console.log("search: "+search);
+		        	   		
+		        	   		var themeCon = $("#themeCondition").val();
+		        	   		console.log("theme: "+themeCon);
+		        	   		
+		        	   		
+		        	   		
+					            $.ajax({
+					                
+					                  url : "/ranking/json/listRecipe" ,
+					                  method : "POST" ,
+					                  data : JSON.stringify({
+					                	  currentPage : cpage,
+					                	  orderCondition : orderCon,
+					                	  searchKeyword : keyword,
+					                	  searchCondition : search,
+					                	  themeCondition : themeCon
+					                  }), 
+					                  dataType : "json" ,
+					                  headers : {
+					                     "Accept" : "application/json",
+					                     "Content-Type" : "application/json"
+					                  },
+					                success : function(JSONData , status) {
+					                	 
+					                	$("#currentPage").val(cpage)
+					                	console.log(JSONData.list[0].recipeName);
+					                	console.log(JSONData.list[0].recipeImg);
+						                	 
+					                	for(var i=0; i<JSONData.list.length; i++){
+					                
+						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
+						                     					+"<div id='latest' class='group'>"
+						                     					+"<article class='one_third first'>"
+						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
+						                     					+"<div class='shape1'>"+[i+5]+"</div>"
+						                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'></a>"
+					                     						+"<div class='excerpt'>"
+					                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
+					                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
+					                     						+"<ul class='meta'>"
+					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
+					                     			            +"<li>"+ JSONData.list[i].recipeDifficulty +"</li>"
+					                     			            +"<li>"+ JSONData.list[i].cookingTime +"분</li>"
+					                     			            +"<li>"+ JSONData.list[i].writer.userNickname +"</li>"
+					                     			          	+"<li style='float:right'>조회수: "+ JSONData.list[i].recipeViews +"</li>"
+					                     						+"</ul></div></article></div></div>"
+					                     						
+					                     						
+						               	$( '#scrollList' ).append(displayValue);	
+					                     						
+					                     						 		
+					                    						
+					                     						
+					                	}//for 
+					                 }
+					            });//ajax
+					           
+		                }//if
+		            });//function
+			 });
+		           
+	</script>
+	
+</head>
 
 <body>
 
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-	<jsp:include page="/mypage/leftbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	
+	<!--  화면구성 div Start /////////////////////////////////////-->
 	
 <div class="container">
-<!-- ################################################################################################ -->
-
+<div class="page-header text-info text-left">
+	    </div>
+	
 	<div class="wrapper row3">
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center" style="font-family: 'Gowun Batang', serif;"><br> 내가 쓴 레시피 </h3>
+		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RANKING </h3>
 		    </div>
-		  		    <button type="button" class="submit">삭제</button>
 		  
+    		<form class="form-inline" name="detailForm">
 		    
-		    <br/><br/>
-    </section>
+		    <br/><hr/><br/>
+    
+	      <nav class="ref-sort" >
+	      <ul>
+	        <li id="recipe">&nbsp;레시피&nbsp;</li>
+	        <li id="keyword">&nbsp;검색어&nbsp;</li>
+	        <li style="color:#DAA520;" id="cook">&nbsp;쿠킹클래스&nbsp;</li>
+	      </ul>
+	    </nav>
+
+  	</form>
+    	</section>
   	</div>
- 
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
+  
 <div class="row">
-	<c:set var="i" value="0" />
+	
 	<c:forEach var="recipe" items="${list}">
+	<c:set var="i" value="${i+1}" />
   <div class="col-sm-6 col-md-3">
   <br/> <br/>
   
     <div id="latest" class="group">
-       <input type="checkbox" name="ckRecipe" id="${recipe.recipeNo }" >
-      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#"> 
-  <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
+      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#">
+      <div class="shape1">${i}</div>
+      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">
-          <h4 class="heading" >${recipe.recipeName }</h4>
+          <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
            <h6 >${recipe.recipeDetail }</h6>
           <ul class="meta">
             <li > ${recipe.recipeTheme }</li>
             <li>${recipe.recipeDifficulty }</li>
             <li>${recipe.cookingTime }분</li>
-            <li> ${recipe.writer.userNickname }</li>
+            <li> ${recipe.writer.userNickname}</li>
+            <li style="float:right">조회수: ${recipe.recipeViews }</li>
           </ul>
-          <button type="button" class="update"  value="${recipe.recipeNo }">수정하기</button>
-          
         </div>
       </article>
-     
     </div>
     <!-- ################################################################################################ -->
   </div>
   </c:forEach>
   
      
+ <div  id="scrollList"></div>
 </div>
 	  </div>
+	
 </body>
-
 </html>

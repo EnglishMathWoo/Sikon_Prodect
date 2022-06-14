@@ -23,10 +23,10 @@
 	
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   <link href="/resources/css/animate.min.css" rel="stylesheet">
+   <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
     <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   <script src="/resources/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
    <!-- jQuery UI toolTip »ç¿ë CSS-->
@@ -244,7 +244,7 @@ div.emptyProd{
 					 
 					 <c:choose>
 					 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
-					 		<td class="rev"><button type="button" class="review">¸®ºä¾²±â</button></td>
+					 		<td class="rev"><button type="button" class="review"  onclick="window.open('/review/addReview.jsp?category=PRD&textNo=${purchase.purchaseProd.prodNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">¸®ºä¾²±â</button></td>
 					 	</c:when>
 					 	<c:otherwise>
 					 		<td class="rev"></td>
@@ -289,7 +289,7 @@ div.emptyProd{
 							 
 							 <c:choose>
 							 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
-							 		<td class="rev"><button class="review">¸®ºä¾²±â</button></td>
+							 		<td class="rev"><button class="review"  onclick="window.open('/review/addReview.jsp?category=PRD&textNo=${purchase.purchaseProd.prodNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">¸®ºä¾²±â</button></td>
 							 	</c:when>
 							 	<c:otherwise>
 							 		<td class="rev"></td>

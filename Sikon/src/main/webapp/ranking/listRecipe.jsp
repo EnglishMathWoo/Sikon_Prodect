@@ -57,6 +57,7 @@ body {
   width: 35px;
   height: 25px;
   text-align: center;
+  font-weight:bold;
 }
 
 .page-header.text-info {
@@ -154,74 +155,6 @@ border-color:#D7D7D7;
 padding-top:0px;
 }
 
-#themeAll{
-	color:#937062;
-	text-decoration-line: none;
-}
-
-
-/* 검색창 css */
-
-.form{
-
-    position: relative;
-}
-
-.form .fa-search{
-
-    top:20px;
-    left: 20px;
-    color: #9ca3af;
-
-}
-
-.form span{
-
-    position: absolute;
-    right: 17px;
-    top: 13px;
-    padding: 2px;
-    border-left: 1px solid #d1d5db;
-
-}
-
-.left-pan{
-    padding-left: 7px;
-}
-
-.left-pan i{
-   
-   padding-left: 10px;
-}
-
-.form-input{
-
-    border-radius: 10px;
-}
-
-.form-input:focus{
-
-    box-shadow: none;
-    border:none;
-}
-
-.form-control{
-border-radius: 10px;
-display: inline-block;
-vertical-align: middle;
-height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-}
-
-.col-md-6 {
-    width: 100%;
-}
 
 /* 폰트어썸 search */
 .search{
@@ -235,48 +168,25 @@ background-color: #f7f7f7;
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-	
-		 
-	
-		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-		function fncGetList(currentPage) {
-			$("#currentPage").val(currentPage);
-			$("form").attr("method" , "POST").attr("action" , "/recipe/listRecipe").submit();
-		}
 		
-		$(function() {
-			
-		  $("#orderCondition").on( "change", function() {
-		  console.log($("#orderCondition").val());
-	      fncGetList(1);
-		  });
-			  
-		  $( "#themeAll" ).on("click" , function() {
-	        	
-	        	console.log('theme: '+$(".theme").attr('value'));
-	        	
-	        	//fncGetList(1);
-			 });
-			
-			$( ".theme" ).on("click" , function() {
-				var theme = $(this).attr('value');
-				console.log(theme);
-				$("#themeCondition").val(theme);
-				fncGetList(1);
-			 });
-			
-			$(".search").on("click", function() {
-				fncGetList(1);
-
-			});
-		  
-		});
-			
 					
 			$(document).on('click', '.imgover', function(){
 				console.log($(this).attr("value"));
 				self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
-				});
+			});
+			
+			$(document).on('click', '#recipe', function(){
+				 self.location = "/ranking/listRecipe";
+			});
+		
+			$(document).on('click', '#keyword', function(){
+				 var cookNo =$(this).attr("value");
+				 self.location = "/cook/updateCook?cookNo="+cookNo
+			});
+		 
+			$(document).on('click', '#cook', function(){
+				 self.location = "/ranking/listCook";
+			});
 		 
 			
 			   	//====================================================================
@@ -387,11 +297,25 @@ background-color: #f7f7f7;
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li><a href="#" class="theme" value="all" style="color:#DAA520;">레시피</a></li>
-	        <li><a href="#" class="theme" value="ko">검색어</a></li>
-	        <li><a href="#" class="theme" value="ch">쿠킹클래스</a></li>
+	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;레시피&nbsp;</div></li>
+	        <li id="keyword"><div>&nbsp;검색어&nbsp;</div></li>
+	        <li id="cook"><div>&nbsp;쿠킹클래스&nbsp;</div></li>
 	      </ul>
 	    </nav>
+	    
+	    <div class="center btmspace-50">
+	   <select class="condition" id="orderCondition" name="orderCondition">
+							<option value="0"
+								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
+							<option value="1"
+								${!empty search.orderCondition && search.orderCondition==1 ? "selected" : ""}>인기순</option>
+							<option value="2"
+								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
+								<option value="3"
+								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>소요시간순</option>
+								
+						</select>
+	     </div>
 
   	</form>
     	</section>
