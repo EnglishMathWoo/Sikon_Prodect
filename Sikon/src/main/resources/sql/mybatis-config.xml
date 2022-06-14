@@ -32,7 +32,6 @@
 		<typeAlias alias="heart" type="com.sikon.service.domain.Heart" />
 		<typeAlias alias="cart" type="com.sikon.service.domain.Cart" />
 		<typeAlias alias="alarm" type="com.sikon.service.domain.Alarm" />
-		<typeAlias alias="search" type="com.sikon.common.Search" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
@@ -56,7 +55,6 @@
 		<mapper resource="sql/CartMapper.xml"/>
 		<mapper resource="sql/AlarmMapper.xml"/>
 		<mapper resource="sql/KakaoMapper.xml"/>
-		<mapper resource="sql/SearchMapper.xml"/>
 	</mappers>
 
 </configuration>
