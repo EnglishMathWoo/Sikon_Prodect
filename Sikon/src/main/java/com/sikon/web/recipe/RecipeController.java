@@ -188,7 +188,7 @@ public class RecipeController {
 
 		String newFileName = "";
 
-		String FILE_SERVER_PATH = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+		String FILE_SERVER_PATH = filePath;
 //		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 
 		for (int i = 0; i < fileArray.length; i++) {

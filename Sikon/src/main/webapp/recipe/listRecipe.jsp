@@ -421,7 +421,7 @@ background-color: #f7f7f7;
 	          </div>
 	          
 	          <div class="item">
-	            <img src="/resources/images/uploadFiles/dddaa6_4c4af2e3afae41b68a41494ff452f5e3_mv2_d_3000_1688_s_2 (1).jpg"  alt="Third slide">
+	            <img src="/resources/images/uploadFiles/pasta-1181189_960_720.jpg"  alt="Third slide">
 	          </div>
 	          
 	       </div> 

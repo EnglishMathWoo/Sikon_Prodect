@@ -639,16 +639,7 @@ padding:10px;
   position:relative;
 }
 
-.five>:first-child{
-width:800px;
-  height:300px;
-   background: url('https://www.giordano.co.kr/_data/banner/e1fb56b59685c7f8a5cd6ac7408c1b48.jpg') no-repeat;
-  background-size: cover;
-  background-position: 70% 30%;
-  position: relative;
-  cursor:pointer;
-  filter:brightness(70%);
-}
+
 
 .five>:nth-child(2){
   text-align:right;
@@ -761,17 +752,17 @@ footer img:hover{
         <section>
           <div class="swiper-container1">
 	<div class="swiper-wrapper">
-		<div class="swiper-slide"><img src="/resources/images/uploadFiles/f491891d-300d-44f3-8e9a-b19936145eb6.jpg">
+		<div class="swiper-slide"><img src="/resources/images/uploadFiles/index/KakaoTalk_20220614_122332552.jpg">
       <div class="word">
           </div>
 		</div>
 		
-		<div class="swiper-slide"><img src="/resources/images/uploadFiles/400e0c54-cb87-421b-9122-c35484007ddd.jpg">
+		<div class="swiper-slide"><img src="/resources/images/uploadFiles/index/KakaoTalk_20220614_122332552_01.jpg">
 		  <div class="word">
         </div>
 		    </div>
         
-		<div class="swiper-slide"><img src="/resources/images/uploadFiles/0441c614-9dc0-4d77-b6ca-7c48e497a92d.jpg">
+		<div class="swiper-slide"><img src="/resources/images/uploadFiles/index/KakaoTalk_20220614_122332552_02.jpg">
 		  <div class="word">
         </div>
 		</div>
@@ -904,15 +895,6 @@ footer img:hover{
       </div>
     </article>
     
-    <article class="five">
-      <div></div>
-      <div>
-        <h3>SIKON</h3>
-          <h2>텍스트/포토 리뷰 혜택</h2>
-        <p>상품, 쿠킹클래스 후 느낀 점을<br>
-        사진과 함께 남겨주세요!</p>
-        </div>
-      </article>
       
       <footer>
         <div>

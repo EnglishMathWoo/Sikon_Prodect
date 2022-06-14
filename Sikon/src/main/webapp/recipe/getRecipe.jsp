@@ -243,6 +243,57 @@ font-family:FontAwesome;
 border: none;
 background-color: #fff;
 }
+
+.btn_upload {
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  padding: 5px 10px;
+}
+
+
+.yes {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 10px !important;
+}
+
+.btn_upload input {
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  filter: alpha(opacity=1);
+  -moz-opacity: 0;
+  opacity: 0;
+}
+
+.it {
+  height: 100px;
+  margin-left: 10px;
+}
+
+.btn-rmv1,
+.btn-rmv2,
+.btn-rmv3,
+.btn-rmv4,
+.btn-rmv5 {
+  display: none;
+}
+
+.rmv {
+  cursor: pointer;
+  color: #fff;
+  border-radius: 30px;
+  border: 1px solid #fff;
+  display: inline-block;
+  background: rgba(255, 0, 0, 1);
+  margin: -5px -10px;
+}
+
+.rmv:hover {
+  background: rgba(255, 0, 0, 0.5);
+}
 </style>
 
 </head>
@@ -347,8 +398,7 @@ background-color: #fff;
 			${recipe.recipeOrder }
 			</div>
 		<hr/>
-				<form>
-				
+				<form enctype="multipart/form-data">
 				<h3 class="iEJcKGheader">¸®ºä</h3>
 				
 						<div class="panel">
@@ -359,9 +409,18 @@ background-color: #fff;
 									<button class="btn btn-sm btn-primary pull-right" type="submit">
 										<i class="fa fa-pencil fa-fw"></i>µî·Ï
 									</button>
-									<input type="file" name="reviewImg" id="imgUpload"
-										style="display: none;"></input> <label for="imgUpload"><i
-										class="fa-solid fa-camera"></i></label>
+									
+									
+  <div class="yes">
+    <span class="btn_upload">
+      <input  multiple="multiple" type="file"   id="reviewImg"  name="fileArray" class="input-img"/>
+      <i class="fa-solid fa-camera"></i>
+      </span>
+    <img id="ImgPreview" name="reviewImg" src="" class="preview1" />
+    <input type="button" id="removeImage1" value="x" class="btn-rmv1" />
+  </div>
+									
+									
 
 								</div>
 							</div>
@@ -383,6 +442,11 @@ background-color: #fff;
 												
 											</p>
 										</div>
+										
+										<br/><br/>
+										<c:if test="${review.reviewImg != null }">
+										  <img src="/resources/images/uploadFiles/${review.reviewImg }" width="200" height="200">
+										</c:if>
 										<p>${review.reviewContent }</p>
 										<c:if test="${review.writerNickname == user.userNickname }">
 										<input type="button" class="deleteReview"  value="&#xf2ed" id="${review.reviewNo }" style="float: right;margin-right: 17px">
@@ -398,7 +462,6 @@ background-color: #fff;
 
   
 
-							<!-- End Newsfeed Content -->
 
 						</div>
 				</form>
@@ -438,7 +501,7 @@ background-color: #fff;
 	function fncAddReview() {
 		var textNo = $("input:hidden[name='recipeNo']").val();
 		console.log(textNo);
-		$("form").attr("method", "POST").attr("action","/review/addReview?category=REC&textNo=" + textNo).submit();
+		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action","/review/addReview?category=REC&textNo=" + textNo).submit();
 		
 		var userId = $("input:hidden[name='userId']").val();
 		console.log(userId);
@@ -450,6 +513,32 @@ background-color: #fff;
 		pushAlarm(userId, userNickname, recipeNo);
 	}
 	
+	function readURL(input, imgControlName) {
+		  if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		      $(imgControlName).attr('src', e.target.result);
+		    }
+		    reader.readAsDataURL(input.files[0]);
+		  }
+		}
+
+		$("#reviewImg").change(function() {
+		  // add your logic to decide which image control you'll use
+		  var imgControlName = "#ImgPreview";
+		  readURL(this, imgControlName);
+		  $('.preview1').addClass('it');
+		  $('.btn-rmv1').addClass('rmv');
+		});
+	
+		$("#removeImage1").click(function(e) {
+			  e.preventDefault();
+			  $("#imag").val("");
+			  $("#ImgPreview").attr("src", "");
+			  $('.preview1').removeClass('it');
+			  $('.btn-rmv1').removeClass('rmv');
+			});
+		
 	//¸®ºä push ¾Ë¸²
 	 function pushAlarm(userId, userNickname, recipeNo){
 				 	

@@ -230,6 +230,7 @@ padding-top:0px;
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
+	<jsp:include page="/mypage/leftbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	
