@@ -67,7 +67,6 @@ public class ProductController {
 		String temDir = filePath;
 		
 		String fileName = "";
-	
 		
 		for(int i=0; i<fileArray.length;i++) {
 		
