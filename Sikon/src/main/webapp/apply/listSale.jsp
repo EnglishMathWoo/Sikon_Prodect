@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>	
 	
@@ -86,12 +87,7 @@
 	
 	  $(document).ready(function(){ 
 			 var totalprice = 0;
-			 var cookPrice = $("td.cookPrice").attr("value");
-			 var cookStatus = $("td.cookStatus").attr("value");
-			
-			 
-			 console.log(cookPrice);
-			 console.log(cookStatus);
+
 			 var list = [];
 			
 		   		<c:forEach var="apply" items="${list}" >
@@ -104,57 +100,59 @@
 		});	
 
 	  
-	   function getGraph(){
-	       	  let timeList = [];
-	    	  let posList = [];
-	    	  
-	    	  var cookPrice = $("#cookPrice").attr("value");
-	    	  console.log(cookPrice);
-	    	  var checkDate = $("#checkDate").attr("value");
-	    	  var totalprice = $("input[name='totalprice']").val();
-	    	  console.log(totalprice);
-	    	  $.ajax({
-	    		  url : "/apply/json/listSale",
-	    		  type:"get",
-	    		  data:{'checkDate' : checkDate, 'cookPrice' : cookPrice },
-	    		  dataType:"json",
-	    		  success:function(data){
-	    			  // console.log(data[0].pos_count);
-	    			  // 그래프로 나타낼 자료 리스트에 담기
-	    			  for (let i = 0; i<data.length;i++){    				  
-							timeList.push(data[i].check_date);    				  
-							posList.push(data[i].totalprice);    				  
-	    			  }
-	    			  console.log(timeList);
-	    			   console.log(posList);  	
-					  // 그래프
-	    			  new Chart(document.getElementById("line-chart"), {
-	    		    	  type: 'line',
-	    		    	  data: {
-	    		    	    labels: timeList, // X축 
-	    		    	    datasets: [{ 
-	    		    	        data: posList, // 값
-	    		    	        label: "거북목",
-	    		    	        borderColor: "#3e95cd",
-	    		    	        fill: false
-	    		    	      }
-	    		    	    ]
-	    		    	  },
-	    		    	  options: {
-	    		    	    title: {
-	    		    	      display: true,
-	    		    	      text: '주간 거북목'
-	    		    	    }
-	    		    	  }
-	    		    	}); //그래프
-	    		  },
-	    		  error:function(){
-	    			  alert("실패");
-	    		  }  
-		     		  
-	    	  }) // ajax	  
-	      } // getGraph
-	      	  
+	    $(document).ready(function(){ 
+	  		getGraph();
+	  		
+	  	});
+		  
+		   function getGraph(){
+		       	  let timeList = [];
+		    	  let posList = [];
+		    	  var cookPrice = $(this).attr("value"); 	 
+		    	  var checkDate = $(this).attr("value");	
+		   
+		    	  $.ajax({
+		    		  url : "/apply/json/saleCount",
+		    		  type:"get",
+		    		  data:{'cookPrice' : cookPrice, 'checkDate' : checkDate},
+		    		  dataType:"json",
+		    		  success:function(data){
+		    			   console.log(data[0].cook_price);
+		    			  // 그래프로 나타낼 자료 리스트에 담기
+		    			  for (let i = 0; i<data.length;i++){    				  
+								timeList.push(data[i].check_date);    				  
+								posList.push(data[i].cook_price);    				  
+		    			  }
+		    			  console.log(timeList);
+		    			   console.log(posList);  	
+						  // 그래프
+		    			  new Chart(document.getElementById("line-chart"), {
+		    		    	  type: 'line',
+		    		    	  data: {
+		    		    	    labels: timeList, // X축 
+		    		    	    datasets: [{ 
+		    		    	        data: posList, // 값
+		    		    	        label: "checkDate",
+		    		    	        borderColor: "#3e95cd",
+		    		    	        fill: false
+		    		    	      }
+		    		    	    ]
+		    		    	  },
+		    		    	  options: {
+		    		    	    title: {
+		    		    	      display: true,
+		    		    	      text: '매출'
+		    		    	    }
+		    		    	  }
+		    		    	}); //그래프
+		    		  },
+		    		  error:function(){
+		    			  alert("실패");
+		    		  }  
+			     		  
+		    	  }) // ajax	  
+		      } // getGraph
+		      	  
 			 
 </script>	
 	
@@ -220,9 +218,9 @@
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="center" value="${apply.classCook.cookPrice }" id="cookPrice">${apply.classCook.cookPrice}</td>
+			  <td align="center" value="${apply.classCook.cookPrice }" name="cookPrice" id="cookPrice">${apply.classCook.cookPrice}</td>
 			   <td align="center"value="${apply.cookStatus}" id="cookStatus">${apply.cookStatus}</td>
-			    <td align="center"value="${apply.checkDate}" id="checkDate">${apply.checkDate}</td>
+			    <td align="center"value="${apply.checkDate}" name="checkDate" id="checkDate">${apply.checkDate}</td>
 			  <td align="center" class="prodNum" value1="${apply.classCook.cookNo }" value2="${param.menu}" >
 				${apply.classCook.cookNo }
 			  
