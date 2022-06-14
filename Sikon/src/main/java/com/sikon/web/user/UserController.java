@@ -291,28 +291,28 @@ public class UserController {
 		System.out.println("======================");
 	//	session.setAttribute("user", userService.getUser(user.getUserId()));
 		
-/*		
+		
 		List list = new ArrayList();
 		for ( int j=0 ; j<licenseName.length ; j++) {
 			License license = new License();
-//			license.setLicenseName(licenseName[j]);
-//			license.setLicenseInstitution(licenseInstitution[j]);
-//			System.out.println("아아아"+licenseDate[j].substring(0,10));
-//			license.setLicenseDate(licenseDate[j].substring(0,10));
+			license.setLicenseName(licenseName[j]);
+			license.setLicenseInstitution(licenseInstitution[j]);
+			System.out.println("아아아"+licenseDate[j].substring(0,10));
+			license.setLicenseDate(licenseDate[j].substring(0,10));
 			license.setLicenseNo(licenseNo[j]);
-		//	license.setUserId(user.getUserId());
+			license.setUserId(user.getUserId());
 			list.add(license);
 		}
 		
 		List list2 = new ArrayList();
 		for ( int m=0 ; m<company.length ; m++) {
 			Career career = new Career();
-//			career.setCompany(company[m]);
-//			career.setCareerExperience(careerExperience[m]);
-//			career.setStartDate(startDate[m].substring(0,10));
-//			career.setEndDate(endDate[m].substring(0,10));
+			career.setCompany(company[m]);
+			career.setCareerExperience(careerExperience[m]);
+			career.setStartDate(startDate[m].substring(0,10));
+			career.setEndDate(endDate[m].substring(0,10));
 			career.setCareerNo(careerNo[m]);
-		//	career.setUserId(user.getUserId());
+			career.setUserId(user.getUserId());
 			list2.add(career);
 		}
 
@@ -334,11 +334,11 @@ public class UserController {
 		user.setUserImage(file.getOriginalFilename());
 		user.setUserBirth(user.getUserBirth().replace("-",""));
 		
-		//userService.updateUser(user);
-		//userService.updateLicense(map, user);
-		//userService.updateCareer(map, user);
+		userService.updateUser(user);
+		userService.updateLicense(map, user);
+		userService.updateCareer(map, user);
 		
-	//*/	
+		
 		
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
