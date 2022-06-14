@@ -349,14 +349,13 @@ div.container {
 		  
 		   <hr style="border: solid 1px #d7d7d7;" width="650px;">	
  	 	  
- 	 	 
+ 	 	 	<p align="center"><label>경력사항</label> </p>
+ 	 	 	
  	 	 	   	 
 		   <c:set var="i" value="0" />
 		<c:forEach var="career" items="${career}" begin="0" end="1">
 			
-			
-			 <p align="center"><label>경력사항</label> </p>
-			 
+					 
 			 <div class="form-group">
 		    <label for="career" class="col-sm-offset-1 col-sm-3 control-label">소속</label>
 		   	<div class="col-sm-4">
