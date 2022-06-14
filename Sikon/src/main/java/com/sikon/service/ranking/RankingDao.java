@@ -15,6 +15,12 @@ public interface RankingDao{
 	public List<Recipe> getRecipeList(Search search) throws Exception;
 	
 	// SELECT ROW Count
-	public int getTotalCount(Search search) throws Exception;
+	public int getRecipeCount(Search search) throws Exception;
+	
+	// SELECT LIST
+	public List<Recipe> getCookList(Search search) throws Exception;
+	
+	// SELECT ROW Count
+	public int getCookCount(Search search) throws Exception;
 	
 }

@@ -93,10 +93,6 @@ public class RankingController {
 			search.setCurrentPage(1);
 		}
 		
-		if(search.getSearchCondition()==null) {
-			search.setSearchCondition("0");
-		}
-
 		if (search.getOrderCondition() == null) {
 			search.setOrderCondition("0");
 		}
@@ -105,7 +101,7 @@ public class RankingController {
 			
 
 		// Business logic ผ๖วเ
-		Map<String, Object> map = cookService.getCookList(search);
+		Map<String, Object> map = rankingService.getCookList(search);
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
