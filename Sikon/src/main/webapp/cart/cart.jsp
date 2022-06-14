@@ -57,6 +57,15 @@ div.row{
  	background: #bc8f8f;
  }
 
+#totalprice{
+	border:none;
+	width:100px;
+	text-align:right;
+	background: #f7f7f7;
+	font-weight: bold;
+	font-size: x-large;
+}
+
 </style>
 	<script type="text/javascript">
 
@@ -154,14 +163,49 @@ div.row{
 		 
 			 //*/
 			 
-			 $( "button:contains('구매')" ).on("click" , function() {
+			$( "button:contains('구매')" ).on("click" , function() {
 				 console.log('구매');
 				 
 				 $("form").attr("method" , "GET").attr("action" , "/purchase/addPurchaseByCart").submit();
 				 
-				});
+			});
+			 
+			 
+			 
+			 
+			 <!-- ------------- 일괄선택 --------------- -->
+			 
+			$("#checkall").click(function(){
+				
+				if($("#checkall").prop("checked")){
+					
+					$("input[name=cartNo]").prop("checked",true);
+					
+				}else{
+					
+					$("input[name=cartNo]").prop("checked",false);
+					
+				}
+				
+			})
+			 
+			 
+			$("input[name=cartNo]").click(function(){
+				
+				if($("#checkall").prop("checked")){
+					
+					$("#checkall").prop("checked",false);
+					
+				}
+				
+			})
+						
+			
+			<!-- ------------------------------------ -->
+			 
 			 
 		});	
+	
 	</script>		
 
 </head>
@@ -182,7 +226,7 @@ div.row{
 		
       
         <div class="row">
-            <div class="col-md-1 text-center"><input type="checkbox" id="cbx_chkAll" checked/></div>
+            <div class="col-md-1 text-center"><input type="checkbox" id="checkall" /></div>
             <div class="col-md-6 text-center">상품정보</div>
             <div class="col-md-2 text-center">상품수량</div>
             <div class="col-md-2 text-center">소 계</div>
@@ -242,7 +286,7 @@ div.row{
         
 	      </form>
 	      <div align="right">
-	        총 결제금액 : <input type="text" id="totalprice" value="" style="border:none;width:100px;text-align:right;" min="0" readonly/> 원
+	        총 결제금액 : <input type="text" id="totalprice" value="" min="0" readonly/> 원
 	      </div>
      
       

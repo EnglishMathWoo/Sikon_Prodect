@@ -45,6 +45,8 @@ q:before, q:after, blockquote:before, blockquote:after {
   content: none;
 }
 
+
+
 a img {
   border: none;
 }
@@ -244,6 +246,8 @@ input:-webkit-autofill {
 .formall{
 	padding:220px;
 }
+
+/* ---------------------------------------- */
 </style>
 <script>
 
