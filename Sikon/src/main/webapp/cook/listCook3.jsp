@@ -184,7 +184,17 @@ p {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+	function fncGetList(currentPage) {
+		$("#currentPage").val(currentPage);
+		$("form").attr("method" , "POST").attr("action" , "/cook/mentor").submit();
+		
+	}
 	
+	 $(function() {
+			$( "button.btn.btn-default" ).on("click" , function() {
+				fncGetList(1); 
+			});
+		 });	
 		 
 		 $(function() {
 			
@@ -213,10 +223,11 @@ p {
 <!-- ################################################################################################ -->
 
 	<div class="wrapper row3">
+	 <input type="hidden" id="currentPage" name="currentPage" value=""/>
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br> 내가 등록한 쿠킹클래스tmtmtm </h3>
+		      <h3 class="font-x2 nospace" align="center"><br> 내가 등록한 쿠킹클래스 </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		  		    <button type="button" class="submit">삭제</button>
@@ -226,7 +237,7 @@ p {
     </section>
   	</div>
  
- <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+
  
 <div class="row">
 	<c:set var="i" value="0" />
@@ -256,7 +267,7 @@ p {
   </div>
   </c:forEach>
   
-     
+     <jsp:include page="../common/pageNavigator_new.jsp"/>
 </div>
 	  </div>
 	  

@@ -110,6 +110,9 @@ div.image{
 			 self.location = "/apply/addApply?menu=${param.menu}&cookNo=${cook.cookNo}"
 		});
 		 
+		 $( "#listMyCook" ).on("click" , function() {
+			 self.location = "/cook/mentor.jsp"
+		}); 		 
 
 		 
 		 $( "button.btn-primary" ).on("click" , function() {
@@ -214,6 +217,8 @@ $(function() {
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
 				
 					<div>${cook.cookBrief }</div>
+					<br/>
+					<div  id="listMyCook"><h5><strong>ƒÌ≈∑∏‡≈‰ ${cook.mentor.userNickname }</strong></h5></div>
 					
 					
 					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>

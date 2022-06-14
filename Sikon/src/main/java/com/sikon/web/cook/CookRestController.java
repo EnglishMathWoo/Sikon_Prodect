@@ -44,6 +44,7 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.User;
+import com.sikon.service.heart.HeartService;
 import com.sikon.service.cook.CookService;
 
 
@@ -58,7 +59,9 @@ public class CookRestController {
 	@Qualifier("cookServiceImpl")
 	private CookService cookService;
 	
-	
+	@Autowired
+	@Qualifier("heartServiceImpl")
+	private HeartService heartService;
 
 
 	public CookRestController() {
@@ -229,12 +232,19 @@ public class CookRestController {
 		// Business logic 수행
 		Map<String , Object> map=cookService.getCookList(search);
 		
+		List<Cook> cookList = (List<Cook>) map.get("list");
+		
+		for(int i=0; i<cookList.size(); i++) {
+			 int heartCount = heartService.heartCheck(cookList.get(i).getCookNo(), user.getUserId());
+			 cookList.get(i).setHeartCount(heartCount);
+			 cookList.set(i, cookList.get(i));
+		}
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(),pageUnit , pageSize);
 		System.out.println(resultPage);
 		
 		// Model 과 View 연결
-		map.put("list", map.get("list"));
+		map.put("list", cookList);
 		map.put("resultPage", resultPage);
 		map.put("search", search);
 		

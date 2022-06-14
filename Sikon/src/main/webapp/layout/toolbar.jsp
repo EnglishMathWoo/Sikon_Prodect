@@ -516,11 +516,9 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
         			<c:if test="${! empty sessionScope.user.role}">
         			<ul>
 		                <li><a href="#">쿠킹클래스신청목록</a></li>
-		                <li><a href="#">쿠킹클래스장바구니</a></li>
-		                <li><a href="#">하바나</a></li>
-		                <li><a href="#">하트</a></li>
-		                <li><a href="#">수강예정목록</a></li>
-		                <li><a href="#">쿠킹멘토채널</a></li>
+		                <li><a href="#">쿠킹클래스장바구니</a></li>		               
+		                <li><a href="#">좋아요한쿠킹클래스</a></li>	               
+		                
               		</ul>
               		</c:if>
         </li>
@@ -567,6 +565,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		                <li><a href="#">쿠킹클래스등록</a></li>
 		                <li><a href="#">쿠킹클래스목록</a></li>
 		                <li><a href="#">쿠킹클래스판매목록</a></li>
+		                <li><a href="#">등록한쿠킹클래스</a></li>
 		               
               		</ul>
             	</li>     
@@ -764,15 +763,12 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			$(self.location).attr("href","/wish/getWish?userId=${sessionScope.user.userId}");
 			});
 	 		
-	 		$( "a:contains('하바나')" ).on("click" , function() {
+	 		$( "a:contains('등록한쿠킹클래스')" ).on("click" , function() {
 				$(self.location).attr("href","/cook/listMyCook");
 			}); 
 	 		
-	 		$( "a:contains('하트')" ).on("click" , function() {
+	 		$( "a:contains('좋아요한쿠킹클래스')" ).on("click" , function() {
 				$(self.location).attr("href","/heart/getHeart?userId=${sessionScope.user.userId}");
-			});
-	 		$( "a:contains('수강예정목록')" ).on("click" , function() {
-				$(self.location).attr("href","/apply/listMyClass");
 			});
 	 		
 	 		$( "a:contains('쿠킹멘토채널')" ).on("click" , function() {

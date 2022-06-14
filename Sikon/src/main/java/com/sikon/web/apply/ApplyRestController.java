@@ -119,29 +119,13 @@ public class ApplyRestController {
 	
 	@RequestMapping( value="json/saleCount", method=RequestMethod.GET )
 
-	public Map saleCount( 
-			@RequestParam("cookPrice") int cookPrice,
-			@RequestParam("checkDate") Date checkDate,
-			
-			Model model) throws Exception{
+	public List<Apply> saleCount( 
+			Model model, Apply apply) throws Exception {
 		
 		System.out.println("/apply/json/saleCount : POST");
-		Map map = new HashMap();
-		
-		try{
-			
-			
-			map.put("cookPrice", cookPrice);
-			map.put("checkDate", checkDate);
-
-			
-		
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	
-	
-			return map;	
+		List<Apply> list = applyService.saleCount(apply);
+		model.addAttribute("list", list);
+		return list;
 }
 	
 	

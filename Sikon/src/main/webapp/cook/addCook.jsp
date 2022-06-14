@@ -48,10 +48,10 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 30px;
-        }
+div.container {
+	padding-top: 200px;
+	
+}
     </style>
 	<script type="text/javascript">
 	
@@ -599,12 +599,7 @@ footer {
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand">식탁의 온도</a>
-   		</div>
-   	</div>
+	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
