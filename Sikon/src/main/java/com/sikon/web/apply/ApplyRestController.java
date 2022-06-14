@@ -1,6 +1,7 @@
 package com.sikon.web.apply;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,6 +117,32 @@ public class ApplyRestController {
 	}	
 	
 	
+	@RequestMapping( value="json/saleCount", method=RequestMethod.GET )
+
+	public Map saleCount( 
+			@RequestParam("cookPrice") int cookPrice,
+			@RequestParam("checkDate") Date checkDate,
+			
+			Model model) throws Exception{
+		
+		System.out.println("/apply/json/saleCount : POST");
+		Map map = new HashMap();
+		
+		try{
+			
+			
+			map.put("cookPrice", cookPrice);
+			map.put("checkDate", checkDate);
+
+			
+		
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	
+	
+			return map;	
+}
 	
 	
 
