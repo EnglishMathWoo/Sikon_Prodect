@@ -118,8 +118,8 @@ body {
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
+	<jsp:include page="/mypage/leftbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
-	<div class="container soo">
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 		

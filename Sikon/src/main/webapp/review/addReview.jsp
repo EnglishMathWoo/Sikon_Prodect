@@ -186,7 +186,7 @@ margin-bottom: 10px;
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
-                <form id="algin-form">
+                <form id="algin-form" enctype="multipart/form-data">
                 
                     <div class="form-group">
                         <h4>리뷰작성</h4>
@@ -196,7 +196,8 @@ margin-bottom: 10px;
                     <div class="form-group">
                     
                         <label for="reviewImg">이미지</label>
-                        <div><input type="file" name="reviewImg" /></div>
+                        <div>      <input  multiple="multiple" type="file"   id="reviewImg"  name="fileArray" class="input-img"/>
+</div>
                          
                         
                         <!-- 
@@ -241,7 +242,7 @@ margin-bottom: 10px;
 	function fncAddReview() {
 		//$("form").attr("method", "POST").attr("action","/review/addReview").submit();
 		
-		  $("form").attr("method", "POST").attr("action","/review/addReview").submit();
+		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action","/review/addReview?category="+category+"&textNo=" + textNo).submit();
 	         setTimeout(function() {   
 	             window.close();
 
@@ -249,6 +250,31 @@ margin-bottom: 10px;
 
 	      }
 	
+	function readURL(input, imgControlName) {
+		  if (input.files && input.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		      $(imgControlName).attr('src', e.target.result);
+		    }
+		    reader.readAsDataURL(input.files[0]);
+		  }
+		}
+
+		$("#reviewImg").change(function() {
+		  // add your logic to decide which image control you'll use
+		  var imgControlName = "#ImgPreview";
+		  readURL(this, imgControlName);
+		  $('.preview1').addClass('it');
+		  $('.btn-rmv1').addClass('rmv');
+		});
+	
+		$("#removeImage1").click(function(e) {
+			  e.preventDefault();
+			  $("#imag").val("");
+			  $("#ImgPreview").attr("src", "");
+			  $('.preview1').removeClass('it');
+			  $('.btn-rmv1').removeClass('rmv');
+			});
 	// 이미지 미리보기
 	$(document).ready(function () {
 		var fileTypes = ['jpg', 'jpeg', 'png'];  //acceptable file types
