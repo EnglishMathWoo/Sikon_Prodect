@@ -80,8 +80,11 @@ public class ApplyServiceImpl implements ApplyService{
 	}
 	
 
-
 	
+	public List<Apply> saleCount(Apply apply) throws Exception {
+		
+		return applyDao.saleCount(apply);	
+	}
 
 	
 

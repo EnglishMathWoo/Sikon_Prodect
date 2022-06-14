@@ -30,7 +30,7 @@ public interface ApplyDao {
 	
 	public void  cancel (int cookStatus, int applyNo ) throws Exception ;
 	
-	
+	public List<Apply> saleCount(Apply apply) throws Exception;
 	
 
 

@@ -102,6 +102,9 @@ public class ApplyDaoImpl implements ApplyDao{
 		
 	}
 
-	
+	public List<Apply> saleCount(Apply apply) throws Exception {
+		
+		return sqlSession.selectList("ApplyMapper.saleCount", apply);
+	}	
 
 }
