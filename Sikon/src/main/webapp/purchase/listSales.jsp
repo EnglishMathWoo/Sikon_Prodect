@@ -46,7 +46,7 @@ body{
 	font-family: 'Nanum Myeongjo', serif;
 	font-family: 'Open Sans', sans-serif;
 }
-div.container{
+.listsale{
 	padding-top : 170px;
 }
 .jaewoong th{
@@ -140,26 +140,13 @@ table {
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container listsale">
 	
 		<div class="page-header text-info">
 	       <h3 style="color:#bc8f8f">판매목록조회</h3>
 	    </div>
 	    
-	    
-	    
-	    
 	    <div>
-		
-		  <!-- Nav tabs -->
-		  <ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">배송</a></li>
-		    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">환불</a></li>
-		  </ul>
-		
-		  <!-- Tab panes -->
-		  <div class="tab-content">
-		    <div role="tabpanel" class="tab-pane active" id="home">
 
 			    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 			    <br>
@@ -211,7 +198,6 @@ table {
 				
 				  <c:set var="i" value="0" />
 				  <c:forEach var="purchase" items="${list}">
-				  <c:if test="${!purchase.divyStatus.equals('000')}">
 					<c:set var="i" value="${ i+1 }" />
 					
 					<tr>
@@ -223,6 +209,9 @@ table {
 					  	<input type="hidden" value="${purchase.purchaseProd.prodNo}">
 					 	 </td>
 					  <c:choose>
+					  	<c:when test="${purchase.divyStatus.equals('000')}">
+							<td align="center">현재 <b>구매취소</b> 상태입니다.</td>
+						</c:when>
 						<c:when test="${purchase.divyStatus.equals('001')}">
 							<td align="center">현재 <b>구매완료</b> 상태입니다.</td>
 						</c:when>
@@ -235,6 +224,9 @@ table {
 					  </c:choose>
 					  
 					  <c:choose>
+					  		<c:when test="${purchase.divyStatus.equals('000') }">
+								<td align="center"> 구매취소</td>	
+							</c:when>
 							<c:when test="${purchase.divyStatus.equals('001') }">
 								<td align="center" class="divy" value1="${purchase.tranNo }" value2="${purchase.divyStatus}">배송하기</td>			
 							</c:when>
@@ -254,93 +246,12 @@ table {
 					  	<td align="center" class="user" value="${purchase.buyer.userId}">${purchase.buyer.userId}</td>
 						
 						</tr>
-						</c:if>
 		          </c:forEach>
 		        
 		        </tbody>
 		      
 		      </table>
-			  <!--  table1 End /////////////////////////////////////-->
-			  	<jsp:include page="../common/pageNavigator_new.jsp"/>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="profile">
-			    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
-			    <div class="row">
-			    
-				    <div class="col-md-6 text-left">
-				    	<p class="text-primary" style="color:gray">
-				    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
-				    	</p>
-				    </div>
-				  </div>  
-				     <div class="row">
-					    <form class="form-inline" name="form"> 
-						 <div class="col-md-6 text-left"> 
-						  <div class="form-group" align="left">
-								<select name="orderCondition" class="form-control" style="width:125px">
-								 	<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>--정렬하기--</option>
-									<option value="5"  ${ ! empty search.orderCondition && search.orderCondition==5 ? "selected" : "" }>배송하기</option>
-									<option value="6"  ${ ! empty search.orderCondition && search.orderCondition==6 ? "selected" : "" }>배송중</option>
-									<option value="7"  ${ ! empty search.orderCondition && search.orderCondition==7 ? "selected" : "" }>배송완료</option>
-								</select>
-						  </div>
-						  <button type="button" class="btn btn-default" id="sorting">조회</button>
-						  </div>
-						  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-						  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-						 
-						</form>
-			    </div>
-			    	
-				<!-- table 위쪽 검색 Start /////////////////////////////////////-->
-				 <br/>
-				  
-			  <!--  table2 Start /////////////////////////////////////-->
-		      <table class="table table-hover table-striped">
-		      
-		        <thead>
-		          <tr class="jaewoong">
-		            <th align="center">No</th>
-		            <th align="center">주문번호</th>
-		            <th align="center">상품번호</th>
-		            <th align="center">배송현황</th>
-		            <th align="center">현재상태</th>
-		            <th align="center">구매회원</th>
-		          </tr>
-		        </thead>
-		       
-				<tbody>
-				
-				  <c:set var="i" value="0" />
-				  <c:forEach var="purchase" items="${list}">
-				  <c:if test="${purchase.divyStatus.equals('000')}">
-					<c:set var="i" value="${ i+1 }" />
-					
-					<tr>
-					  <td align="center">${ i }</td>
-					  <td align="center">${purchase.tranNo}</td>
-					  <td align="center" class="prodNum" value1="${purchase.purchaseProd.prodNo }" value2="${param.menu}" >
-						${purchase.purchaseProd.prodNo }
-					  	<i class="glyphicon glyphicon-ok" id= "${purchase.purchaseProd.prodNo}"></i>
-					  	<input type="hidden" value="${purchase.purchaseProd.prodNo}">
-					 	 </td>
-					 	 
-						<td align="center">현재 <b>구매취소</b> 상태입니다.</td>
-						<td></td>
-						
-					  	<td align="center" class="user" value="${purchase.buyer.userId}">${purchase.buyer.userId}</td>
-						
-						</tr>
-						</c:if>
-		          </c:forEach>
-		        
-		        </tbody>
-		      
-		      </table>
-			  <!--  table2 End /////////////////////////////////////-->
-				  	<jsp:include page="../common/pageNavigator_new.jsp"/>
-		  </div>
-		</div>
+			 
 			
 	</div>
 	  
@@ -349,7 +260,7 @@ table {
  	
  	
  	<!-- PageNavigation Start... -->
-
+	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->
 	
 </body>

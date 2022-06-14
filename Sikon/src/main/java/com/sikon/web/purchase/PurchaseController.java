@@ -91,11 +91,14 @@ public class PurchaseController {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 		
-		System.out.println(user.getHoldpoint());
+		User buyer = userService.getUser(user.getUserId());
+		
+		
+		System.out.println(buyer.getHoldpoint());
 		
 		Product product = productService.getProduct(prodNo);
 		
-		List list = couponService.getMyCoupon(user.getUserId());
+		List list = couponService.getMyCoupon(buyer.getUserId());
 		
 		//==================================================================================
 		//결제 uid 만들기
@@ -103,7 +106,7 @@ public class PurchaseController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss");
 		String nowrandom = now.format(formatter);   
 		
-		String userid = user.getUserId().replace("@", "");
+		String userid = buyer.getUserId().replace("@", "");
 		String sub = userid.replace(userid.substring(userid.length()-4, userid.length()), "");
 		String uid = sub+nowrandom;	
 		System.out.println("uid: "+uid);
@@ -115,6 +118,7 @@ public class PurchaseController {
 		modelAndView.addObject("quantity", quantity);
 		modelAndView.addObject("coupon", list);
 		modelAndView.addObject("uid", uid);
+		modelAndView.addObject("user", buyer);
 		
 		return modelAndView;
 	}
@@ -144,7 +148,6 @@ public class PurchaseController {
 		
 		User user = userService.getUser(userId);
 		Product product = productService.getProduct(prodNo);
-		Point point = new Point();
 		
 		purchase.setBuyer(user);
 		purchase.setPurchaseProd(product);
@@ -153,8 +156,6 @@ public class PurchaseController {
 		purchase.setReviewStatus("001");
 		
 		int quantity = purchase.getPurchaseQuantity();
-		int usedpoint = purchase.getUsedPoint();
-		int totalpoint = user.getHoldpoint() - usedpoint;
 		
 		System.out.println("purchase: "+purchase);
 		purchaseService.addPurchase(purchase);
@@ -162,6 +163,16 @@ public class PurchaseController {
 		System.out.println("quantity: "+quantity);
 		System.out.println("prodNo: "+prodNo);
 		purchaseService.updateStock(quantity, prodNo);
+		
+		//==================================================================================
+		//포인트 적용
+		
+		Point point = new Point();
+		
+		int usedpoint = purchase.getUsedPoint();
+		int totalpoint = user.getHoldpoint() - usedpoint;
+		
+		if(purchase.getUsedPoint() > 0) {
 		
 		System.out.println("usedpoint: "+usedpoint);
 		System.out.println("totalpoint: "+totalpoint);
@@ -173,6 +184,8 @@ public class PurchaseController {
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint, userId);
 		
+		}
+		
 		int earnpoint = purchase.getEarnPoint();
 		
 		point.setPointScore(earnpoint);
@@ -181,10 +194,15 @@ public class PurchaseController {
 		point.setPointType("earn");
 		point.setPointCategory("str");
 		pointService.addPoint(point);
-		pointService.updateHoldPoint(totalpoint, userId);
-
+		pointService.updateHoldPoint(totalpoint+earnpoint, userId);
+		
 		//==================================================================================
 		// 쿠폰 사용하기
+		
+		if(purchase.getUsedCoupon().equals("")) {
+			purchase.setUsedCoupon(null);			
+		}
+		
 		if(purchase.getUsedCoupon() != null) {
 			int issueNo = Integer.parseInt(purchase.getUsedCoupon());
 			System.out.println("issueNo: "+issueNo);
@@ -209,10 +227,15 @@ public class PurchaseController {
 //=============================================================================================================	
 	
 	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.GET)
-	public String addPurchaseByCart(@RequestParam("cartNo") int[] cartNo,  Model model) throws Exception {
+	public String addPurchaseByCart(@RequestParam("cartNo") int[] cartNo,  Model model, HttpServletRequest request) throws Exception {
 
 		System.out.println("/addPurchaseByCart : GET");
 	
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		
+		User buyer = userService.getUser(user.getUserId());
+		
 		List list = new ArrayList();
 		
 		for(int cartnum : cartNo) {
@@ -227,7 +250,11 @@ public class PurchaseController {
 		
 		System.out.println("cartlist: "+list);
 		
+		List couponlist = couponService.getMyCoupon(buyer.getUserId());
+		
 		model.addAttribute("cartlist", list);
+		model.addAttribute("user", buyer);
+		model.addAttribute("coupon", couponlist);
 		
 		
 		return "forward:/purchase/addPurchaseViewByCart.jsp";
@@ -300,8 +327,59 @@ public class PurchaseController {
 		}
 		
 		System.out.println("========================================================================");
+
+
+		//==================================================================================
+		//포인트 적용
 		
-		System.out.println("list: "+list);
+		Point point = new Point();
+		int usedpoint = purchase.getUsedPoint();
+		int totalpoint = user.getHoldpoint() - usedpoint;
+		
+		if(purchase.getUsedPoint() > 0) {
+		
+		System.out.println("usedpoint: "+usedpoint);
+		System.out.println("totalpoint: "+totalpoint);
+		point.setPointScore(usedpoint);
+		point.setTotalPoint(totalpoint);
+		point.setUserId(userId);
+		point.setPointType("use");
+		point.setPointCategory("str");
+		pointService.addPoint(point);
+		pointService.updateHoldPoint(totalpoint, userId);
+		
+		}
+		
+		int earnpoint = purchase.getEarnPoint();
+		
+		point.setPointScore(earnpoint);
+		point.setTotalPoint(totalpoint+earnpoint);
+		point.setUserId(userId);
+		point.setPointType("earn");
+		point.setPointCategory("str");
+		pointService.addPoint(point);
+		pointService.updateHoldPoint(totalpoint+earnpoint, userId);
+		
+		
+		//==================================================================================
+		// 쿠폰 사용하기
+		
+		for(String cou : coupon) {
+			
+			if(cou.equals("")) {
+				cou = null;	
+			}
+			
+			if(cou != null) {
+				int issueNo = Integer.parseInt(cou);
+				Coupon usedcoupon = couponService.getIssuedCoupon(issueNo);
+				usedcoupon.setIssueStatus("002");
+				couponService.updateIssueStatus(usedcoupon);
+			}
+		}
+
+		//==================================================================================		
+		
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");
@@ -464,7 +542,7 @@ public class PurchaseController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(8);
 		
 		
 		HttpSession session = request.getSession();
@@ -503,7 +581,7 @@ public class PurchaseController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(10);
 		
 		// Business logic 수행
 		Map<String , Object> map=purchaseService.getSalesList(search);

@@ -242,7 +242,7 @@ margin-bottom: 10px;
 	function fncAddReview() {
 		//$("form").attr("method", "POST").attr("action","/review/addReview").submit();
 		
-		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action","/review/addReview?category="+category+"&textNo=" + textNo).submit();
+		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action","/review/addReview").submit();
 	         setTimeout(function() {   
 	             window.close();
 

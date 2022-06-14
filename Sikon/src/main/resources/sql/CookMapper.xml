@@ -100,25 +100,8 @@
 										 				 WHERE cook_price like '%' || #{searchKeyword} || '%'
 													</if>
 											</if>		
-											<if test="themeCondition != null">
-													<if test='themeCondition == "cw"'>
-										 				AND prod_theme LIKE UPPER('cw')
-													</if>
-													<if test='themeCondition == "tw"'>
-										 				AND prod_theme LIKE UPPER('tw')
-													</if>
-													<if test='themeCondition == "mk"'>
-										 				AND prod_theme LIKE UPPER('mk')
-													</if>
-											</if>
-										<if test="orderCondition != null">
+
 											
-											<choose>
-													<when test="orderCondition == 0  ">
-										 				ORDER BY heart_hit DESC
-													</when>
-													</choose>
-													</if>												
 											ORDER BY  cook_no ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
