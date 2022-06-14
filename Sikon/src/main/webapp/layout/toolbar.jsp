@@ -761,7 +761,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 	 		
 	 		$( "a:contains('쿠킹클래스목록')" ).on("click" , function() {
-				$(self.location).attr("href","/cook/listCook?menu=manage");
+				$(self.location).attr("href","/cook/manageCook");
 				});
 	 		
 	 		$( "a:contains('쿠킹클래스판매목록')" ).on("click" , function() {

@@ -187,16 +187,7 @@ div.container {
 		}
 		
 		
-		//if (stock == null || stock.length < 1) {
-			
-			
-		//	$("input[name='stock']").val('0');
-		//	return;
-		//}
-		
 
-		//document.detailForm.action = '/product/addProduct';
-		//document.detailForm.submit();
 		$("form").attr("method", "POST").attr("enctype","multipart/form-data").attr("action", "/cook/addCook").submit();	
 		
 	}

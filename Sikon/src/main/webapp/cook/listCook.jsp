@@ -364,24 +364,7 @@ div.emptyProd{
 				 
 				 
 				 
-				  $(document).on('click' ,'#themeAll' function() {
-			        	
-			        	console.log('theme: '+$(".theme").attr('value'));
-			        	
-			        	//fncGetList(1);
-					 });
-					
-					$(document).on("click" , '.theme',function() {
-						var theme = $(this).attr('value');
-						console.log(theme);
-						$("#themeCondition").val(theme);
-						fncGetList(1);
-					 });
-					
-					$(".search").on("click", function() {
-						fncGetList(1);
 
-					});
 			
 
 			   		
