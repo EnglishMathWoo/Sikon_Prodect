@@ -76,12 +76,56 @@
 	
 	
 	<!-- SQL : INSERT -->
-	<insert 	id="addRecipeView"		parameterType="search" >
+	<insert 	id="addRecipeView"		parameterType="int" >
 	 	INSERT
-		INTO search 
-		VALUES (seq_search_search_no.NEXTVAL, 
-				#{searchKeyword}, 
+		INTO ranking ( ranking_no, recipe_no, view_date) 
+		VALUES (seq_ranking_ranking_no.NEXTVAL, 
+				#{recipeNo}, 
 				SYSDATE)
 	 </insert>
+	 
+	 <!-- SQL : SELECT LIST -->
+	<select  id="getRecipeList"  parameterType="search"	resultMap="recipeSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT r.*, u.user_nickname 
+											FROM recipe r, users u  
+											WHERE r.writer_nickname=u.user_nickname 
+																						
+											<if test="orderCondition != null">
+											
+											<choose>
+													<when test="orderCondition == 0  ">
+										 				ORDER BY r.recipe_views DESC
+													</when>
+													<when test="orderCondition == 1  ">
+										 				ORDER BY r.review_num ASC
+													</when>
+													</choose>
+													</if>
+
+
+ ) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} ) 
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	 </select>
+	 
+	  <!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT r.*, u.user_nickname
+											FROM recipe r, users u
+											where r.writer_nickname=u.user_nickname
+																								
+											<if test="orderCondition != null">
+											
+											<choose>
+											<when test="orderCondition == 0  ">
+										 				ORDER BY r.recipe_views DESC
+													</when>
+													</choose>
+													</if>
+													) countTable						
+	 </select>
 	 
 </mapper>

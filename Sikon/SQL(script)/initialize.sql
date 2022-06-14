@@ -15,7 +15,8 @@ DROP TABLE cook CASCADE CONSTRAINTS;
 DROP TABLE heart CASCADE CONSTRAINTS;
 DROP TABLE wish CASCADE CONSTRAINTS;
 DROP TABLE apply CASCADE CONSTRAINTS;
-DROP table alarm CASCADE CONSTRAINTS;
+DROP TABLE alarm CASCADE CONSTRAINTS;
+DROP TABLE ranking CASCADE CONSTRAINTS;
 
 DROP SEQUENCE seq_coupon_coupon_no;
 DROP SEQUENCE seq_couponhodler_issue_no;
@@ -34,6 +35,8 @@ DROP SEQUENCE seq_wish_wish_no;
 DROP SEQUENCE seq_heart_heart_no;
 DROP SEQUENCE seq_apply_apply_no;
 DROP SEQUENCE seq_alarm_alarm_no;
+DROP SEQUENCE seq_ranking_ranking_no;
+
 
 CREATE SEQUENCE seq_coupon_coupon_no INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_couponhodler_issue_no INCREMENT BY 1 START WITH 10000;
@@ -52,6 +55,7 @@ CREATE SEQUENCE seq_wish_wish_no	  INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_heart_heart_no	  INCREMENT BY 1 START WITH 1;
 CREATE  SEQUENCE  seq_apply_apply_no	 INCREMENT  BY  1  START  WITH  10000;
 CREATE  SEQUENCE  seq_alarm_alarm_no	 INCREMENT  BY  1  START  WITH  10000;
+CREATE  SEQUENCE  seq_ranking_ranking_no INCREMENT  BY  1  START  WITH  10000;
 
 CREATE TABLE users ( 
 	user_id 	VARCHAR2(50)	NOT NULL,
@@ -131,7 +135,7 @@ CREATE TABLE recipe(
 	recipe_order  CLOB NOT NULL,
 	recipe_regdate  DATE NOT NULL,
 	review_num  NUMBER NOT NULL,
-	recipe_views  NUMBER NOT NULL,
+	recipe_views  NUMBER NOT NULL, 
 	PRIMARY KEY(recipe_no)
 );
 
@@ -234,7 +238,8 @@ CREATE TABLE apply (
 	apply_status 	VARCHAR(20),
 	cook_status         			 NUMBER  not null,
 	check_date 		 	DATE,
-	review_status 		VARCHAR2(20) 	NOT NULL, 	
+	review_status 		VARCHAR2(20) 	NOT NULL,
+	cook_price 		NUMBER(10)  NOT NULL ,	
 	PRIMARY KEY(apply_no)
 );
 
@@ -279,5 +284,17 @@ CREATE TABLE alarm (
 	alarm_date 	DATE 		NOT NULL,	
 	PRIMARY KEY(alarm_no)
 );
+
+CREATE TABLE ranking ( 
+	ranking_no NUMBER NOT NULL,
+	recipe_no NUMBER, 
+	view_date DATE, 
+	cook_no NUMBER, 
+	heart_date DATE, 
+	search_keyword VARCHAR2(200), 
+	search_date DATE, 
+	PRIMARY KEY(ranking_no) 
+);
+
 
 commit;
