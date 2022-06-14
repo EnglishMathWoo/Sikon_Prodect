@@ -60,7 +60,7 @@ public class RecipeRestController {
 		System.out.println("orderCondition=" + search.getOrderCondition());
 
 		if (search.getOrderCondition() == null) {
-			search.setOrderCondition("100");
+			search.setOrderCondition("0");
 		}
 
 		if (search.getSearchCondition() == null) {
