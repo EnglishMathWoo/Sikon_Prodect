@@ -176,6 +176,11 @@ div.emptyProd{
 				self.location ="/purchase/cancelOrder?tranNo="+message1+"&divyStatus="+message2;
 			});
 			
+			$( ".review" ).on("click" , function() {
+				var textNo=$(this).attr("value");
+				var category='PRD';
+				window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
+			});
 			
 		});	
 	</script>		
@@ -244,7 +249,7 @@ div.emptyProd{
 					 
 					 <c:choose>
 					 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
-					 		<td class="rev"><button type="button" class="review"  onclick="window.open('/review/addReview.jsp?category=PRD&textNo=${purchase.purchaseProd.prodNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">¸®ºä¾²±â</button></td>
+					 		<td class="rev"><button type="button" class="review" value="${purchase.purchaseProd.prodNo }">¸®ºä¾²±â</button></td>
 					 	</c:when>
 					 	<c:otherwise>
 					 		<td class="rev"></td>
@@ -289,7 +294,7 @@ div.emptyProd{
 							 
 							 <c:choose>
 							 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
-							 		<td class="rev"><button class="review"  onclick="window.open('/review/addReview.jsp?category=PRD&textNo=${purchase.purchaseProd.prodNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">¸®ºä¾²±â</button></td>
+							 		<td class="rev"><button class="review" value="${purchase.purchaseProd.prodNo }">¸®ºä¾²±â</button></td>
 							 	</c:when>
 							 	<c:otherwise>
 							 		<td class="rev"></td>
@@ -331,7 +336,7 @@ div.emptyProd{
 							 
 							 <c:choose>
 							 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
-							 		<td class="rev"><button class="review">¸®ºä¾²±â</button></td>
+							 		<td class="rev"><button class="review" value="${purchase.purchaseProd.prodNo }">¸®ºä¾²±â</button></td>
 							 	</c:when>
 							 	<c:otherwise>
 							 		<td class="rev"></td>

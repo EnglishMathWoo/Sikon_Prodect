@@ -118,14 +118,18 @@ public class ReviewController {
 		
 		System.out.println("리뷰:" + review);
 		reviewService.addReview(review);
-
+		
+		System.out.println("가나");
+		reviewService.updateStatus(textNo, category);
+		System.out.println("가나");
+		
 		// 리뷰 작성시 일반리뷰: 100원, 포토리뷰: 500원 적립금
-		if (!category.equals("REC") && (review.getReviewImg() != null || review.getReviewImg() != "")) {
+		if ((!category.equals("REC") )&& (review.getReviewImg() != null || review.getReviewImg() != "")) {
 			reviewService.givePoint(500, user.getUserId());
-		} else if (!category.equals("REC") && (review.getReviewImg() == null || review.getReviewImg() == "")) {
+		} else if ((!category.equals("REC") ) && (review.getReviewImg() == null || review.getReviewImg() == "")) {
 			reviewService.givePoint(100, user.getUserId());
 		}
-		reviewService.updateStatus(textNo, category);
+		
 
 		ModelAndView modelAndView = new ModelAndView();
 		if (category.equals("REC")) {
