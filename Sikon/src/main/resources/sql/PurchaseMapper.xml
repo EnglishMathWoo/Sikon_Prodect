@@ -133,7 +133,7 @@
 	<select  id="getPurchaseList"  parameterType="map"	statementType="CALLABLE" resultMap="purchaseSelectMap">
 	 SELECT *  
 	 FROM (	SELECT inner_table.* , ROWNUM AS row_seq 
-	 FROM (	SELECT p.prodName, p.prodThumbnail, p.prodStock, p.prodDisPrice, t.* 
+	 FROM (	SELECT p.prod_name, p.prod_thumbnail, p.prod_stock, p.prod_disprice, t.* 
 			FROM product p, purchase t
 				<where>
 					p.prod_no=t.prod_no(+)
@@ -155,7 +155,7 @@
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT p.prodName, p.prodThumbnail, p.prodStock, p.prodDisPrice, t.* 
+	  	FROM(	SELECT p.prod_name, p.prod_thumbnail, p.prod_stock, p.prod_disprice, t.* 
 				FROM product p, purchase t
 					<where>
 						p.prod_no=t.prod_no(+)
@@ -177,7 +177,7 @@
 	<select  id="getSalesList"  parameterType="search"	statementType="CALLABLE" resultMap="purchaseSelectMap">
   	SELECT *  
  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq 
-	FROM (  SELECT p.prodName, p.prodThumbnail, p.prodStock, p.prodDisPrice, t.* 
+	FROM (  SELECT p.prod_name, p.prod_thumbnail, p.prod_stock, p.prod_disprice, t.* 
 			FROM product p, purchase t
 			WHERE p.prod_no=t.prod_no(+) 
 				AND t.tran_no IS NOT NULL 
@@ -211,7 +211,7 @@
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount2"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT p.prodName, p.prodThumbnail, p.prodStock, p.prodDisPrice, t.* 
+	  	FROM(	SELECT p.prod_name, p.prod_thumbnail, p.prod_stock, p.prod_disprice, t.* 
 				FROM product p, purchase t
 				WHERE p.prod_no=t.prod_no(+) 
 					AND t.tran_no IS NOT NULL 
