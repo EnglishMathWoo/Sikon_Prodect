@@ -170,6 +170,9 @@ VALUES (seq_notice_notice_no.NEXTVAL, '식탁의 온도 코스닥 상장 안내'
 INSERT
 INTO recipe VALUES (seq_recipe_no.nextval ,'user', '낙지 초무침', '싱싱한 낙지', '36fae4c4237f29668386889b1c772db5.jpg', null, '200', 'KO', 10, 'd' , SYSDATE, 0, 0);
 
+INSERT
+INTO recipe VALUES (seq_recipe_no.nextval ,'user', '생강', '노맛', 'htm_20150402190451608.jpg', null, '200', 'KO', 10, 'd' , SYSDATE, 0, 0);
+
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
 select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )

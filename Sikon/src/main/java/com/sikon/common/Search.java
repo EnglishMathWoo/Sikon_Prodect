@@ -1,16 +1,19 @@
 package com.sikon.common;
 
+import java.sql.Date;
 
 //==>리스트화면을 모델링(추상화/캡슐화)한 Bean 
 public class Search {
 	
 	///Field
+	private int searchNo;
 	private int currentPage;
 	private String searchCondition;
 	private String orderCondition;
 	private String themeCondition;
 	private String applyCondition;
 	private String searchKeyword;
+	private Date searchDate;
 	private int pageSize;
 	//==> 리스트화면 currentPage에 해당하는 회원정보를 ROWNUM 사용 SELECT 위해 추가된 Field 
 	//==> UserMapper.xml 의 
@@ -34,6 +37,14 @@ public class Search {
 	public int getCurrentPage() {
 		return currentPage;
 	}
+	public int getSearchNo() {
+		return searchNo;
+	}
+
+	public void setSearchNo(int searchNo) {
+		this.searchNo = searchNo;
+	}
+
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
@@ -77,6 +88,14 @@ public class Search {
 		this.searchKeyword = searchKeyword;
 	}
 	
+	public Date getSearchDate() {
+		return searchDate;
+	}
+
+	public void setSearchDate(Date searchDate) {
+		this.searchDate = searchDate;
+	}
+
 	//==> Select Query 시 ROWNUM 마지막 값 
 	public int getEndRowNum() {
 		return getCurrentPage()*getPageSize();

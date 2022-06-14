@@ -43,11 +43,18 @@
 	 </delete>
 	 
 	<select  id="getBookmarkList"  parameterType="map"	statementType="CALLABLE"  resultMap="bookmarkSelectMap">
-	  	select b.*,r.*
+	  	SELECT *
+	  	FROM (	SELECT A.* , ROWNUM AS row_seq
+	  					FROM		
+	  					(	
+	  	select b.bookmark_No, b.user_Id,b.recipe_no brecipe_no, r.*
 		from bookmark b,  recipe r
 		where 
 		r.recipe_no=b.recipe_no
 		and b.user_id=#{userId}
+		 ) A
+						WHERE ROWNUM &lt;= #{endRowNum} )  C
+		WHERE C.row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
