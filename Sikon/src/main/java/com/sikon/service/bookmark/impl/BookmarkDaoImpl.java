@@ -32,9 +32,13 @@ public class BookmarkDaoImpl implements BookmarkDao {
 	}
 
 	/// Method
-	public void addBookmark(Bookmark bookmark) throws Exception {
-		System.out.println("bookmark="+bookmark);
-		sqlSession.insert("BookmarkMapper.addBookmark", bookmark);
+	public void addBookmark(int recipeNo, String userId) throws Exception {
+		System.out.println("recipeNo="+recipeNo);
+		System.out.println("userId="+userId);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("recipeNo", recipeNo);
+		map.put("userId", userId);
+		sqlSession.insert("BookmarkMapper.addBookmark", map);
 	}
 
 
@@ -49,9 +53,11 @@ public class BookmarkDaoImpl implements BookmarkDao {
 		return list;
 	}
 
-	public void deleteBookmark(int bookmarkNo) throws Exception {
-		System.out.println("bookmarkNo="+bookmarkNo);
-		sqlSession.delete("BookmarkMapper.deleteBookmark", bookmarkNo);
+	public void deleteBookmark(int recipeNo, String userId) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("recipeNo", recipeNo);
+		map.put("userId", userId);
+		sqlSession.delete("BookmarkMapper.deleteBookmark", map);
 	}
 
 	public int getTotalCount(Search search, String userId) throws Exception {
@@ -61,6 +67,14 @@ public class BookmarkDaoImpl implements BookmarkDao {
 		map.put("userId", userId);
 		return sqlSession.selectOne("BookmarkMapper.getTotalCount", map);
 
+	}
+
+	@Override
+	public int checkDuplicate(int recipeNo, String userId) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("recipeNo", recipeNo);
+		map.put("userId", userId);
+		return sqlSession.selectOne("BookmarkMapper.checkDuplicate", map);
 	}
 
 }

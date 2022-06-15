@@ -100,6 +100,7 @@ h3 {
 .btn-rounded.btn-md {
     padding: 12px 35px;
     font-size: 16px
+    
 }
 
 html body .m-t-10 {
@@ -108,8 +109,9 @@ html body .m-t-10 {
 
 .btn-primary,
 .btn-primary.disabled {
-    background: #7460ee;
-    border: 1px solid #7460ee;
+/*    background: #997a5d; */
+    background: #9abcd0;
+    border: 1px solid rgb(255 255 255 / 15%);
     -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
     box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
     -webkit-transition: 0.2s ease-in;
@@ -180,11 +182,14 @@ $(function() {
 <div class="padding">
     <div class="col-md-8">
         <!-- Column -->
-        <div class="card"> <img class="card-img-top" src="/resources/images/homedeco/main30.jpg" alt="Card image cap" width="100%">
+         <div class="card"> <img class="card-img-top" src="/resources/images/uploadFiles/index/KakaoTalk_20210116_134002939.jpg" alt="Card image cap" width="100%">
+       <!-- <div class="card"> <img class="card-img-top" src="/resources/images/homedeco/main30.jpg" alt="Card image cap" width="100%">-->
             <div class="card-body little-profile text-center">
-                <div class="pro-img"><img src="/resources/images/168939.jpg" alt="user"></div>
+                <div class="pro-img"><img src="/resources/images/168939.jpg" alt="user">
+                </div>
+                <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">내정보수정</a>
                 <h3 class="m-b-0">${user.userNickname }</h3>
-                <p>${user.role }</p> <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">내정보수정</a>
+                <p>${user.role }</p> 
                 <div class="row text-center m-t-20">
                     <div class="col-lg-4 col-md-4 m-t-20">
                         <h3 class="m-b-0 font-light">10434</h3><small>리뷰</small>

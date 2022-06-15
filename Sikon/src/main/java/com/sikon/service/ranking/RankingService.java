@@ -13,7 +13,7 @@ public interface RankingService {
 	// 레시피 리스트 조회
 	public Map<String, Object> getRecipeList(Search search) throws Exception;
 	
-	// 쿠킹클래스 리스트 조회
-	public Map<String, Object> getCookList(Search search) throws Exception;
+	//즐겨찾는 멘토 날짜 저장
+	public void addLoveMentor(String userNickname) throws Exception;
 			
 }

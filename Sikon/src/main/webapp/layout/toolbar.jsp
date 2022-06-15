@@ -362,6 +362,7 @@ address {
 --------------------------------------------------------------------------------------------------------------- */
 #topbar {
 	padding: 15px 0;
+	padding-top: 30px;
 	font-size: .8rem;
 	text-transform: uppercase;
 	padding-right: 375px;
@@ -445,6 +446,24 @@ height : 180px;
 hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 ";}
 */
 
+.user-td{
+	width: 25%;
+	text-align: left;
+}
+
+.login-td{
+	width: 70px;
+}
+.logout-td{
+	width: 70px;
+}
+.mypage-td{
+	width: 70px;
+}
+.alarm-td{
+	width: 40px;
+}
+
 </style> 
 
 <!-- /////////////////////// ToolBar Start ////////////////////////////-->
@@ -464,35 +483,65 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 
 	<div id="topbar" class="hoc clear"> 
 	    <div class="fl_right">
-	      <ul class="nospace">
+	    
+	    <ul class="nospace">
+	    
+	    <table>
+		        <tr>
+	    
+	    <c:if test="${!empty sessionScope.user.role}">
+	    	
+			        <td>
+			        <img src="/resources/images/168939.jpg" width="25px" height="25px"> 
+			        </td>
+			        
+			        <td class="user-td">
+			        &emsp;${user.userNickname}&nbsp;ดิ&nbsp;
+					</td>
+					  
+	    </c:if>
+	    
+	      
 	        <c:if test="${empty sessionScope.user.role}">
+			<td class="login-td">	       
 	        <li><a href="#">Login</a></li>
+	        </td>
 	        </c:if>
 	        
 	        
 	        
 	        <c:if test="${!empty sessionScope.user.role}">
 	        
+			<td class="logout-td">
 	        <c:if test="${user.loginPath == 'K'}">
 	        <li><a href="#" id="kakaoout">Logout</a></li>
 	        </c:if>
 	        <c:if test="${user.loginPath == 'S'}">
 	        <li><a href="#" id="logout">Logout</a></li>
 	        </c:if>
+	        </td>
 	        
+	        <td class="mypage-td">
 	        <li><a href="#" style="color:#B97D2D">Mypage</a></li>
+	        </td>
+	        
+	        <td class="alarm-td">
 	        <c:if test="${sessionScope.alarm == 0}">
 	        <li><i class="bi bi-bell" id="vacantAlarm"></i></li>
 	        </c:if>
 	        <c:if test="${sessionScope.alarm != 0}">
 	        <li><i class="bi bi-bell-fill" id="filledAlarm"></i></li>
 	        </c:if>
+	        </td>
 	        
 	        </c:if>
 
 	         
 	        
-	      </ul>
+	     
+	      </tr>
+			</table>
+	       </ul>
 	    </div>
 	</div>
 
