@@ -87,6 +87,14 @@
 			});
 		});
 		
+		
+		//============= 회원아이디찾기화면이동 =============
+		$( function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$("a[href='#1' ]").on("click" , function() {
+				self.location = "/user/findUser"
+			});
+		});
 	</script>		
 	
 	
@@ -135,7 +143,9 @@
 						<img src="/resources/images/logo/kakao_login_medium_narrow.png" style="height:40px">
 					  </a>
 					  
+					  <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#1">Forgot ID?</a></p>
            			  <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#">Forgot password?</a></p>
+           			  
            			  <p>Don't have an account? <a href="#!" role="button" class="link-info">Register here</a></p>
            			  
            			  

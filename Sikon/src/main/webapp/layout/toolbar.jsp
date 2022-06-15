@@ -411,7 +411,9 @@ address {
 	 font-size: 18px;
 }
 
-
+td{
+	text-align: center;
+}
 
 div.addbar{
 	height : 32px;
@@ -447,8 +449,9 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 
 <!-- /////////////////////// ToolBar Start ////////////////////////////-->
 
-
-
+<head><link href="/resources/images/logo/sikon_icon.ico" rel="icon" >
+<title>식탁의 온도</title>
+</head>
 
 <header id="header" class="hoc clear">
 
@@ -555,10 +558,10 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
         </li>
         </c:if>
       <c:if test="${sessionScope.user.role == 'mentor'}">  
-          <li><a class="drop" href="#">관리</a>
+          <li><a class="drop" href="#">멘토</a>
       		<ul>
 
-		        <li><a href="#">레시피관리</a></li>
+		      
 
 	            <li><a class="drop" href="#">쿠킹클래스관리</a>
 		      		<ul>
@@ -641,7 +644,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		 $(function() {
 
 			$( "#usik" ).on("click" , function() {
-			$(self.location).attr("href","/recipe/listRecipe");
+			$(self.location).attr("href","../index.jsp");
 			});
 			
 			$( "a:contains('Login')" ).on("click" , function() {

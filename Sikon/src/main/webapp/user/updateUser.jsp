@@ -88,8 +88,8 @@ div.container {
 		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a[href='#' ]").on("click" , function() {
-				$("form")[0].reset();
+			$("#previous").on("click" , function() {
+				history.go(-1);
 			});
 		});	
 		
@@ -170,14 +170,23 @@ div.container {
 							dateFormat: "yy-mm-dd"
 						});
 				});
-				
-				// 근무시작날짜
+		     
+				// 근무시작날짜2
 				 $(function() {
-						$('#startDate').datepicker({
+						$('#startDate1').datepicker({
 							dateFormat: "yy-mm-dd"
 						});
 				});
 				
+						
+				// 근무종료날짜2
+				 $(function() {
+						$('#endDate1').datepicker({
+							dateFormat: "yy-mm-dd"
+						});
+				});
+				
+					
 				// 근무시작날짜2
 				 $(function() {
 						$('#startDate2').datepicker({
@@ -185,13 +194,7 @@ div.container {
 						});
 				});
 				
-				// 근무종료날짜
-				 $(function() {
-						$('#endDate').datepicker({
-							dateFormat: "yy-mm-dd"
-						});
-				});
-				
+						
 				// 근무종료날짜2
 				 $(function() {
 						$('#endDate2').datepicker({
@@ -201,17 +204,43 @@ div.container {
 				
 				// 취득일자
 				 $(function() {
-						$('#licenseDate').datepicker({
+						$('#licenseDate3').datepicker({
 							dateFormat: "yy-mm-dd"
 						});
 				});
 			   
 				// 취득일자2
 				 $(function() {
-						$('#licenseDate2').datepicker({
+						$('#licenseDate4').datepicker({
 							dateFormat: "yy-mm-dd"
 						});
 				});	  
+				
+				
+				 $(function() {
+					 $( "input[name=licenseName]" ).on("click" , function() {
+			        	
+						 var licenseName = $(this).val();
+						 
+			        	console.log('licenseName: '+licenseName);
+			        	
+					 });
+				 });
+				 
+				 
+				 $(function() {
+					 $( "input[name=startDate]" ).on("click" , function() {
+			        	
+						 var startDate = $(this).val();
+						 
+			        	console.log('startDate: '+startDate);
+			        	
+					 });
+				 });	
+				
+				
+				
+				
 		        
 				// 도로명 주소
 				 function findAddr(){
@@ -259,6 +288,8 @@ div.container {
 	    <!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" enctype="multipart/form-data">
 		
+		 <input type="hidden" name="role" value="${user.role}">
+		
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
@@ -272,7 +303,7 @@ div.container {
 		  <div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" value="${user.password}" placeholder="변경비밀번호">
+		      <input type="password" class="form-control " id="password" name="password" value="${user.password}" placeholder="변경비밀번호">
 		    </div>
 		  </div>
 		  
@@ -352,8 +383,9 @@ div.container {
  	 	 	<p align="center"><label>경력사항</label> </p>
  	 	 	
  	 	 	   	 
-		   <c:set var="i" value="0" />
+		   
 		<c:forEach var="career" items="${career}" begin="0" end="1">
+		<c:set var="i" value="${i+1}" />
 			
 					 
 			 <div class="form-group">
@@ -372,7 +404,7 @@ div.container {
     		<label for="startDate" class="col-sm-offset-1 col-sm-3 control-label" >근무시작날짜</label>
    			<div class="col-sm-4">
    			   					
-      	  	  <input type="text" class="form-control" id="startDate" name="startDate" value="${career.START_DATE}" placeholder="근무시작날짜1">
+      	  	  <input type="text" class="form-control startDate" id="startDate${i}" name="startDate" value="${career.START_DATE}" placeholder="근무시작날짜1">
       	  	 
     		</div>
  	 	    </div>
@@ -383,7 +415,7 @@ div.container {
    			<div class="col-sm-4">
    			
    			
-      	 	  <input type="text" class="form-control" id="endDate" name="endDate" value="${career.END_DATE}" placeholder="근무종료날짜1">
+      	 	  <input type="text" class="form-control endDate" id="endDate${i}" name="endDate" value="${career.END_DATE}" placeholder="근무종료날짜1">
       	 	 
     		</div>
  	 	    </div> 
@@ -393,77 +425,17 @@ div.container {
 		    <label for="careerExperience" class="col-sm-offset-1 col-sm-3 control-label">업무내용</label>
 		    <div class="col-sm-4">
 		    		    
-		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" placeholder="업무내용1">
-		      ${career.CAREER_EXPERIENCE}
-		      </textarea>
-		  
+		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" placeholder="업무내용1">${career.CAREER_EXPERIENCE}</textarea>
+		      
 		      <hr>
-		    
+		      
 		    </div>
 		    </div> 
-		   	 
-		   	 
-		   	 
-		 </c:forEach>   
-		
-		   	 	  
- 	 	  
- 	 	  
- 	 	  
- 	 	 
-		  
-		  
-		  
-	<!--  	  
-		  <div class="form-group">
-		    <label for="career" class="col-sm-offset-1 col-sm-3 control-label">소속</label>
-		   	<div class="col-sm-4">
-		   	
-		   	 <c:set var="i" value="0" />
-			<c:forEach var="career" items="${career}" begin="1" end="1">
-				<input type="hidden" name="careerNo" value="${career.CAREER_NO}">
-		      <input type="text" class="form-control" id="company" name="company" value="${career.COMPANY}" placeholder="소속2">
-		    </c:forEach>
-		    </div>
-		 </div>   
- 	 	  
- 	 	   <div class="form-group">
-    		<label for="startDate" class="col-sm-offset-1 col-sm-3 control-label" >근무시작날짜</label>
-   			<div class="col-sm-4">
-   			
-   			<c:set var="i" value="0" />
-			<c:forEach var="career" items="${career}" begin="1" end="1">
-      	  	  <input type="text" class="form-control" id="startDate2" name="startDate" value="${career.START_DATE}" placeholder="근무시작날짜2">
-      	  	</c:forEach>
-    		</div>
- 	 	  </div>
- 	 	  
- 	 	   <div class="form-group">
-    		<label for="endDate" class="col-sm-offset-1 col-sm-3 control-label" >근무종료날짜</label>
-   			<div class="col-sm-4">
-   			
-   			<c:set var="i" value="0" />
-			<c:forEach var="career" items="${career}" begin="1" end="1">
-      	 	  <input type="text" class="form-control" id="endDate2" name="endDate" value="${career.END_DATE}" placeholder="근무종료날짜2">
-    		</c:forEach>
-    		</div>
- 	 	  </div>
- 	 	  
- 	 	  <div class="form-group">
-		    <label for="careerExperience" class="col-sm-offset-1 col-sm-3 control-label">업무내용</label>
-		    <div class="col-sm-4">
-		    
-		    <c:set var="i" value="0" />
-			<c:forEach var="career" items="${career}" begin="1" end="1">
-		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" value="${career.CAREER_EXPERIENCE}" placeholder="업무내용2">
-		      ${career.CAREER_EXPERIENCE}
-		      </textarea>		    
-		    </c:forEach>
-		    </div>
-		  </div>
- 	 	  
- 	--> 	  
- 	 	  
+		   			   	 
+		 </c:forEach> 
+		 
+		 
+	  
  	 	  
  	 	  
  <!-- ////////////////////////////////// 자격증 ///////////////////////////////////////////////// -->	 	  
@@ -472,9 +444,9 @@ div.container {
  	 	  	 	  
  	 	  <p align="center"><label>자격증</label> </p>
  	 	  
- 	 	  <c:set var="i" value="0" />
+ 	 	  
 		<c:forEach var="license" items="${license}" begin="0" end="1">
-			
+			<c:set var="i" value="${i+1}" />
  	 	  
  	 	  <div class="form-group">
 		    <label for="licenseName" class="col-sm-offset-1 col-sm-3 control-label">자격증명</label>
@@ -505,8 +477,8 @@ div.container {
     		<label for="licenseDate" class="col-sm-offset-1 col-sm-3 control-label" >취득일자</label>
    			<div class="col-sm-4">
    			
-   			
-      	  	  <input type="text" class="form-control" id="licenseDate" name="licenseDate" value="${license.LICENSE_DATE}" placeholder="취득일자1">
+   			  <input type="text" class="form-control" id="licenseDate${i}" name="licenseDate" value="${license.LICENSE_DATE}" placeholder="취득일자1">
+      	  
       	  	  <hr>
       	  
       	  	</div>
@@ -515,53 +487,14 @@ div.container {
  	 	 </c:forEach> 
  	 	 
  	 	 
- 	 	 
- 	 	 
- 	 	  
- 	 	  
- 	 	  
- 	 	  
- 	 	<!--    
- 	 	   <div class="form-group">
-		    <label for="licenseName" class="col-sm-offset-1 col-sm-3 control-label">자격증명</label>
-		    <div class="col-sm-4">
-		    
-		     <c:set var="i" value="0" />
-			<c:forEach var="license" items="${license}" begin="1" end="1">
-				<input type="hidden" name="licenseNo" value="${license.LICENSE_NO}">
-		      <input type="text" class="form-control" id="licenseName" name="licenseName" value="${license.LICENSE_NAME}" placeholder="자격증명2">
-		    </c:forEach>
-		    </div>
-		  </div>
- 	 	  
- 	 	  <div class="form-group">
-		    <label for="licenseInstitution" class="col-sm-offset-1 col-sm-3 control-label">발급기관</label>
-		    <div class="col-sm-4">
-		    
-		    <c:set var="i" value="0" />
-			<c:forEach var="license" items="${license}" begin="1" end="1">
-		      <input type="text" class="form-control" id="licenseInstitution" name="licenseInstitution" value="${license.LICENSE_INSTITUTION}" placeholder="발급기관2">
-		    </c:forEach>
-		    </div>
-		  </div>
- 	 	  
- 	 	  <div class="form-group">
-    		<label for="licenseDate" class="col-sm-offset-1 col-sm-3 control-label" >취득일자</label>
-   			<div class="col-sm-4">
-   			
-   			<c:set var="i" value="0" />
-			<c:forEach var="license" items="${license}" begin="1" end="1">
-      	  	  <input type="text" class="form-control" id="licenseDate2" name="licenseDate" value="${license.LICENSE_DATE}" placeholder="취득일자2">
-    		</c:forEach>
-    		</div>
- 	 	  </div>
- 	 	  
- 	 -->	  
+ 	 	  	 	   	 	 
+ 	 	 	 	  
+ 	 	
  	 	  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >수 &nbsp;정</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취 &nbsp;소</a>
+			  <a class="btn btn-primary btn" id="previous" role="button">취 &nbsp;소</a>
 		    </div>
 		  </div>
 		</form>
