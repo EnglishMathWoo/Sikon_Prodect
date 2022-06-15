@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.love.LoveService;
+import com.sikon.service.ranking.RankingService;
 import com.sikon.service.domain.Love;
 
 import com.sikon.service.domain.User;
@@ -37,6 +38,10 @@ public class LoveController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
+	@Autowired
+	@Qualifier("rankingServiceImpl")
+	private RankingService rankingService;
 
 	public LoveController() {
 		System.out.println("loveΩ√¿€~");
@@ -61,6 +66,7 @@ public class LoveController {
 		love.setUserId(user.getUserId());
 
 		loveService.addLove(love);
+		rankingService.addLoveMentor(userNickname);
 
 		return "forward:/mypage/listLove.jsp";
 	}

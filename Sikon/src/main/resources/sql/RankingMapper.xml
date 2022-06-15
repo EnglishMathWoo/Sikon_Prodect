@@ -49,30 +49,6 @@
 		<result property="quitStatus" 	column="quit_status" 		jdbcType="VARCHAR"  />
 	</resultMap>
 	
-	<resultMap id="cookSelectMap" type="cook">
-	
-		<result property="cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
-		<result property="cookName"			column="cook_name" 		jdbcType="VARCHAR" />
-		<result property="cookFilename" 	column="cook_filename" 		jdbcType="VARCHAR" />
-		<result property="cookBrief"      column="cook_brief"           jdbcType="VARCHAR"/>
-		<result property="cookDifficuty" 				column="cook_difficuty" 					jdbcType="VARCHAR" />		
-		<result property="cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
-		<result property="cookTheme" 			column="cook_theme" 		jdbcType="VARCHAR" />
-		<result property="aplstarTime"      column="apl_startime"           jdbcType="VARCHAR"/>
-		<result property="aplendTime"      column="apl_endtime"           jdbcType="VARCHAR"/>	
-		<result property="cookRecruit" 				column="cook_recruit" 					jdbcType="NUMERIC" />
-		<result property="startTime"      column="start_time"           jdbcType="VARCHAR"/>		
-		<result property="endTime"      column="end_time"           jdbcType="VARCHAR"/>		
-		<result property="cookLocation"      column="cook_location"           jdbcType="VARCHAR"/>
-		<result property="cookRegdate"      column="cook_regdate"           jdbcType="DATE"/>
-		<result property="cookVideo"      column="cook_video"           jdbcType="VARCHAR"/>
-		<result property="cookStock"      column="cook_stock"           jdbcType="NUMERIC"/>
-		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
-		<result property="cookContent" 			column="cook_content" 			jdbcType="VARCHAR" />
-		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
-		<result property="mentor.userId" 	column="mentor_id" 		jdbcType="VARCHAR"/>
-		
-	</resultMap>
 	
 	
 	<!-- SQL : INSERT -->
@@ -81,6 +57,14 @@
 		INTO ranking ( ranking_no, recipe_no, view_date) 
 		VALUES (seq_ranking_ranking_no.NEXTVAL, 
 				#{recipeNo}, 
+				SYSDATE)
+	 </insert>
+	 
+	 <insert 	id="addLoveMentor"		parameterType="String" >
+	 	INSERT
+		INTO ranking ( ranking_no, user_nickname, love_date) 
+		VALUES (seq_ranking_ranking_no.NEXTVAL, 
+				#{userNickname}, 
 				SYSDATE)
 	 </insert>
 	 
@@ -109,37 +93,26 @@
 	 
 	 
 	 <!-- SQL : SELECT LIST -->
-	<select  id="getCookList"  parameterType="search"	resultMap="cookSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *
-											FROM cook
+	<select  id="getLoveList"  parameterType="search"	resultMap="recipeSelectMap">
+	  	SELECT r.*, ranking_table.count, u.user_nickname 
+										FROM recipe r, (SELECT recipe_no, count(*) count FROM ranking 
+																			
 											<if test="orderCondition != null">
-											<choose>
-													<when test="orderCondition == 0  ">
-										 				ORDER BY heart_hit DESC
+												<choose>
+													<when test="orderCondition == 0 ">
+										 			 WHERE view_date &gt;= CURRENT_DATE-1 
 													</when>
-													</choose>
-													</if> 								
-													 ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
-	 </select>
-	 	
-	
-	<!-- SQL : SELECT ROW Count -->	 
-	 <select  id="getCookCount"  parameterType="search"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(	SELECT cook_no , cook_name ,cook_price
-						FROM cook		
-					<if test="orderCondition != null">
-											<choose>
-													<when test="orderCondition == 0  ">
-										 				ORDER BY heart_hit DESC
+													<when test="orderCondition == 1 ">
+										 			 WHERE view_date &gt;= CURRENT_DATE-8 
 													</when>
-													</choose>
-													</if> 
-									) countTable						
+													<when test="orderCondition == 2 ">
+										 			 WHERE view_date &gt;= CURRENT_DATE-31 
+													</when>				
+												</choose>
+											</if>
+											GROUP BY recipe_no) ranking_table, users u 
+											WHERE ROWNUM &lt;= 20 AND r.recipe_no = ranking_table.recipe_no AND r.writer_nickname = u.user_nickname  
+											ORDER BY ranking_table.count DESC
 	 </select>
 	 
 </mapper>

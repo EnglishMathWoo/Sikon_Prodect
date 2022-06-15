@@ -73,38 +73,5 @@ public class RankingController {
 		return "forward:/ranking/listRecipeRanking.jsp";
 	}
 	
-	@RequestMapping(value = "listCook")
-	public String listCook(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
 
-		System.out.println("/ranking/listCook :  POST/get");
-
-		System.out.println("search:" + search);
-		
-		if (search.getCurrentPage() == 0) {
-			search.setCurrentPage(1);
-		}
-		
-		if (search.getOrderCondition() == null) {
-			search.setOrderCondition("0");
-		}
-		
-		search.setPageSize(pageSize);
-			
-
-		// Business logic 수행
-		Map<String, Object> map = rankingService.getCookList(search);
-
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
-
-		System.out.println("cook=" + map.get("list"));
-		System.out.println("resultPage=" + resultPage);
-
-		// Model 과 View 연결
-		model.addAttribute("list", map.get("list"));
-		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("search", search);
-
-		return "forward:/ranking/listCook.jsp";
-	}
 }

@@ -192,7 +192,6 @@ padding-top:0px;
 			
 			$(".submit").on("click" , function() {
 				
-				
 				var checkCount = $("input[name='ckBookmark']:checked").length;
 
 			    var array = new Array();
@@ -204,7 +203,7 @@ padding-top:0px;
 				if(checkCount != 0) {
 					alert(checkCount+"개의 책갈피를 삭제하시겠습니까?")
 
-				self.location = "/bookmark/deleteBookmark?bookmarkList="+array;
+				self.location = "/bookmark/deleteBookmark?recipeList="+array;
 				}
 				
 			});
@@ -252,7 +251,7 @@ padding-top:0px;
   <br/> <br/>
   
     <div id="latest" class="group">
-      <input type="checkbox" name="ckBookmark" id="${list.bookmarkNo }" >
+      <input type="checkbox" name="ckBookmark" id="${list.recipe.recipeNo }" >
       <article class="one_third first">
       <a class="imgover" value="${list.recipe.recipeNo }" href="#"><img src="/resources/images/uploadFiles/${list.recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">

@@ -364,7 +364,7 @@ background-color: #f7f7f7;
 	      <ul>
 	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;레시피&nbsp;</div></li>
 	        <li id="keyword"><div>&nbsp;검색어&nbsp;</div></li>
-	        <li id="cook"><div>&nbsp;쿠킹클래스&nbsp;</div></li>
+	        <li id="cook"><div>&nbsp;쿠킹멘토&nbsp;</div></li>
 	      </ul>  
 	      
 	      <br>
@@ -389,6 +389,7 @@ background-color: #f7f7f7;
   
 <div class="row">
 	
+	<c:if test="${!empty list}">
 	<c:forEach var="recipe" items="${list}">
 	<c:set var="i" value="${i+1}" />
   <div class="col-sm-6 col-md-3">
@@ -414,6 +415,16 @@ background-color: #f7f7f7;
     <!-- ################################################################################################ -->
   </div>
   </c:forEach>
+  </c:if>
+  
+  <c:if test="${empty list}">
+  <br>
+  <br>
+  <br>
+  <br>
+  	<h2 id="noRanking" style="text-align:center; font-weight:bold;">랭킹 정보가 없습니다.</h2>
+    <br>
+  </c:if>
   
      
  <div  id="scrollList"></div>

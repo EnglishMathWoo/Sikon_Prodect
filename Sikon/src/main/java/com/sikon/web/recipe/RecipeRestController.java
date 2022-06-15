@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
-import com.sikon.service.domain.Cook;
+import com.sikon.service.bookmark.BookmarkService;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.recipe.RecipeService;
 
@@ -35,13 +35,15 @@ public class RecipeRestController {
 	@Autowired
 	@Qualifier("recipeServiceImpl")
 	private RecipeService recipeService;
+	
+	@Autowired
+	@Qualifier("bookmarkServiceImpl")
+	private BookmarkService bookmarkService;
 
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
-	
-	
 
 	public RecipeRestController() {
 		System.out.println(this.getClass());
@@ -67,11 +69,11 @@ public class RecipeRestController {
 			search.setSearchCondition("0");
 		}
 
-		if(search.getThemeCondition() == "all") {
+		if (search.getThemeCondition() == "all") {
 			search.setThemeCondition(null);
 		}
 		System.out.println("orderCondition=" + search.getOrderCondition());
-		
+
 		search.setPageSize(pageSize);
 
 		Map<String, Object> map = recipeService.getRecipeList(search);
@@ -94,65 +96,87 @@ public class RecipeRestController {
 
 		System.out.println("썸머노트 json/imageUpload");
 
-		 Map map = new HashMap();
-			
-			
-			String fileRoot = "C:\\summernote_image\\"; // 저장될 외부 파일 경로
-	        String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-	        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-
-	        // 랜덤 UUID+확장자로 저장될 savedFileName
-	        String savedFileName = UUID.randomUUID() + extension;	
-	        
-	        System.out.println("2: "+savedFileName);
-	        
-	        File targetFile = new File(fileRoot + savedFileName);
-	        
-	        System.out.println("3: "+targetFile);
-
-	        try {
-	            InputStream fileStream = multipartFile.getInputStream();
-	            FileUtils.copyInputStreamToFile(fileStream,targetFile);	//파일 저장
-	            //jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
-	            map.put("url", "/summernoteImage/"+savedFileName);
-	            //jsonObject.addProperty("responseCode", "success");
-	            map.put("responseCode", "success");
-
-	        } catch (IOException e) {
-	            FileUtils.deleteQuietly(targetFile);	// 실패시 저장된 파일 삭제
-	            //jsonObject.addProperty("responseCode", "error");
-	            map.put("responseCode", "error");
-	            e.printStackTrace();
-	        }
-
-	        
-	        
-	        System.out.println("4: "+map);
-	        
-	        return map;
-	}
-	
-	//좋아요 push 알림
-	@RequestMapping(value="/json/pushAlarm", method=RequestMethod.POST)
-	@ResponseBody
-	public Map pushAlram(@RequestParam("recipeNo") int recipeNo, @RequestParam("userId") String userId, @RequestParam("userNickname") String userNickname) {
-				
 		Map map = new HashMap();
-		
-		try{
+
+		String fileRoot = "C:\\summernote_image\\"; // 저장될 외부 파일 경로
+		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
+
+		// 랜덤 UUID+확장자로 저장될 savedFileName
+		String savedFileName = UUID.randomUUID() + extension;
+
+		System.out.println("2: " + savedFileName);
+
+		File targetFile = new File(fileRoot + savedFileName);
+
+		System.out.println("3: " + targetFile);
+
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
+			// jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
+			map.put("url", "/summernoteImage/" + savedFileName);
+			// jsonObject.addProperty("responseCode", "success");
+			map.put("responseCode", "success");
+
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile); // 실패시 저장된 파일 삭제
+			// jsonObject.addProperty("responseCode", "error");
+			map.put("responseCode", "error");
+			e.printStackTrace();
+		}
+
+		System.out.println("4: " + map);
+
+		return map;
+	}
+
+	// 좋아요 push 알림
+	@RequestMapping(value = "/json/pushAlarm", method = RequestMethod.POST)
+	@ResponseBody
+	public Map pushAlram(@RequestParam("recipeNo") int recipeNo, @RequestParam("userId") String userId,
+			@RequestParam("userNickname") String userNickname) {
+
+		Map map = new HashMap();
+
+		try {
 			Recipe recipe = recipeService.getRecipeName(recipeNo);
-			
+
 			map.put("userId", userId);
 			map.put("userNickname", userNickname);
 			map.put("recipeName", recipe.getRecipeName());
 			map.put("writerId", recipe.getWriter().getUserId());
 			map.put("responseCode", "success");
-		
-		}catch (Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		return map;
+	}
+
+	@RequestMapping(value = "json/updateBookmark", method = RequestMethod.POST)
+	public int updateHeart(@RequestParam("recipeNo") int recipeNo, @RequestParam("userId") String userId)
+			throws Exception {
+
+		System.out.println(recipeNo);
+		System.out.println(userId);
 		
-		return map;	
+		int bookmarkStatus = bookmarkService.checkDuplicate(recipeNo, userId);
+		System.out.println(bookmarkStatus);
+		
+		if (bookmarkStatus == 0) {
+
+			bookmarkService.addBookmark(recipeNo, userId); 
+			bookmarkService.checkDuplicate(recipeNo, userId);
+		} else {
+
+			bookmarkService.deleteBookmark(recipeNo, userId); // 좋아요 삭제
+			bookmarkService.checkDuplicate(recipeNo, userId);
+
+		}
+		return bookmarkStatus;
+
 	}
 
 }
