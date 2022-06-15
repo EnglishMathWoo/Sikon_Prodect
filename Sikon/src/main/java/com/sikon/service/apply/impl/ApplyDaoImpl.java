@@ -17,12 +17,12 @@ import com.sikon.service.domain.Wish;
 import com.sikon.service.apply.ApplyDao;
 
 
-//==> 회원관리 Dao CRUD 구현
+
 @Repository("applyDaoImpl")
 public class ApplyDaoImpl implements ApplyDao{
 	
 	
-	///Field
+	
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
@@ -30,12 +30,12 @@ public class ApplyDaoImpl implements ApplyDao{
 		this.sqlSession = sqlSession;
 	}
 	
-	///Constructor
+	
 	public ApplyDaoImpl() {
 		System.out.println(this.getClass());
 	}
 
-	///Method
+	
 	public void addApply(Apply apply) throws Exception {
 		sqlSession.insert("ApplyMapper.addApply", apply);
 	}
@@ -54,7 +54,7 @@ public class ApplyDaoImpl implements ApplyDao{
 		return sqlSession.selectList("ApplyMapper.getSaleList", search);
 	}
 
-	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
+
 	public int getTotalCount2(Search search) throws Exception {		
 		
 		return sqlSession.selectOne("ApplyMapper.getTotalCount2", search);
@@ -68,9 +68,9 @@ public class ApplyDaoImpl implements ApplyDao{
 	public void updateApplyStatus(Apply apply) throws Exception{
 		sqlSession.update("ApplyMapper.updateApplyStatus",apply);
 	}
-//
-	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
-	public int getTotalCount(Search search,String applierId) throws Exception {
+
+	
+		public int getTotalCount(Search search,String applierId) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("applierId", applierId);
 		map.put("search", search);

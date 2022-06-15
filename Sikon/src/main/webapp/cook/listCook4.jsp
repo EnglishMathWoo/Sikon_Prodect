@@ -213,6 +213,11 @@ div.emptyProd{
 	color: #f7f7f7;
 }
 
+.likes{
+	font-weight: bold;
+	font-size: large;
+}
+
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -245,11 +250,8 @@ div.emptyProd{
 			});		
 
 		
-		 $(document).on('click', 'a.update', function(){
-			 var cookNo =$(this).attr("value");
-			 console.log('수정하기');
-			 self.location = "/cook/updateCook?cookNo="+cookNo
-		});
+
+	
 		 
 		 
 
@@ -285,9 +287,9 @@ div.emptyProd{
 		 $( document ).ready(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			
-			
-			 
-			$( "p.like_btn" ).on("click" , function(){
+
+		
+			$(document).on("click" ,"p.like_btn", function(){
 
 				var userId = $("input[name='userId']").val();
 				var userNickname = $("input[name='userNickname']").val();
@@ -365,19 +367,11 @@ div.emptyProd{
 					 self.location = "/cook/getCook?menu=search&cookNo="+cookNo
 				});
 				 
-
-				 //=========autoComplete=================================================
 				 
-				 var list = [];
-			   		<c:forEach var="names" items="${autocook }" >
-			   		list.push("${names.cookName}");
-			   		</c:forEach>
-			   		
-		   		    
-			   		$( "#cookName" ).autocomplete({
-			   		      source: list,
-			   		      
-			   		});
+				 
+
+			
+
 			   		
 				   	//====================================================================
 					 
@@ -388,6 +382,8 @@ div.emptyProd{
 			                	console.log(cpage);
 			                	cpage = Number(cpage)+1;
 			                	console.log(cpage);
+			                	
+				                	
 			        	   		
 			        	   		
 						            $.ajax({
@@ -410,7 +406,7 @@ div.emptyProd{
 						                	//alert(JSONData.list.length);
 						                	console.log(JSONData.list[0].cookName);
 							                	 
-						                	for(var i=0; i<JSONData.list.length-1; i++){
+						                	for(var i=0; i<JSONData.list.length; i++){
 						                		///*
 						                		var image;
 						                		var message;
@@ -448,18 +444,19 @@ div.emptyProd{
 					                			}
 						                		
 						                		if(JSONData.list[i].heartCount == '0'){
-						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</a>" ;
-						                		}else {
+						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</p>";
+						                		}else{
 						                			
-						                			heartCount= "<p align='right' class='bi bi-heart like_btn-fill' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</a>" ;
+						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</p>";
 						                		}
-						                	
-						                			button = "<a class='btn btn-defualt btn delete'  role='button' value='"+JSONData.list[i].cookNo+"'>삭&nbsp;제</a>" ;
-						                			heart= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</a>" ;
+						                
+						                			
+						                			
 						                		
 						                		
 							                     var displayValue = "<div class='container'>"
 							                    	 				+"<div class='row'>"
+							                    	 				+"<td align='left'><input type='checkbox' name='cookCheck' id='"+JSONData.list[i].cookNo+"'/></td>"
 							                     					+"<div class='col-xs-4 col-md-6 text-left image' value='"+JSONData.list[i].cookNo+"'>"
 							                     					+image
 							                     					+"<br/></div>"
@@ -482,16 +479,14 @@ div.emptyProd{
 						                     						+"</div>"
 						                     						+"<div class='row'>"
 						                     						+"<div><h5><strong>수업시간: "+JSONData.list[i].startTime+"&emsp;~&emsp;"+JSONData.list[i].endTime+"</strong></h5></div>"
-						                     						+"</div>"
-						                     						+button
-						                     						+"<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</a>"
+						                     						+"</div>"						                     					
+						                     						+heartCount
 						                     						+"</div>"
 						                     						+"<div class='col-xs-2 col-md-2'>"
 						                     						+"</div>"
 						                     						+"</div>"
 						                     						+"<hr/>"
-						                     						+"</div>"
-						                     						+"</div>"
+
 						                     		//*/				
 							               	$( '#scrollList' ).append(displayValue);	
 						                     						
@@ -540,7 +535,7 @@ div.emptyProd{
 	          </div>
 	          
 	          <div class="item">
-	            <img src="/resources/images/uploadFiles/wow.jpg" alt="Second slide">
+	            <img src="/resources/images/uploadFiles/cooking.jpg" alt="Second slide">
 	          </div>
 	          
 	          <div class="item">
@@ -578,20 +573,20 @@ div.emptyProd{
 	
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
-	<form class="form-inline" name="detailForm">
+
 		    <br/><hr/><br/>
-    
+    	<form class="form-inline" name="detailForm">
 	      <nav class="ref-sort" >
 	      <ul>
 	        <li><a href="#" id="themeAll" class="theme" value="all">모두보기</a></li>
-	        <li><a href="#" class="theme" value="ko">한식</a></li>
-	        <li><a href="#" class="theme" value="ch">중식</a></li>
-	        <li><a href="#" class="theme" value="am">양식</a></li>
-	        <li><a href="#" class="theme" value="ja">일식</a></li>
-	        <li><a href="#" class="theme" value="de">간식</a></li>
+	        <li><a href="#" class="theme" value="KO">한식</a></li>
+	        <li><a href="#" class="theme" value="JA">일식</a></li>
+	        <li><a href="#" class="theme" value="AM">양식</a></li>	        
+	        <li><a href="#" class="theme" value="CH">중식</a></li>
+	        <li><a href="#" class="theme" value="DE">간식</a></li>
 	      </ul>
 	    </nav>
-<input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>
+<input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition}"/>
  
 
 			
@@ -648,7 +643,7 @@ div.emptyProd{
 
 
 <c:forEach var="cook" items="${list}">
-<td align="left"><input type="checkbox" name="cookCheck" id="${cook.cookNo}"/></td>
+<td align="left"></td>
  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
  <input type="hidden" name="userNickname" value="${user.userNickname}">
   <input type="hidden" name="userId" value="${user.userId}">
@@ -682,7 +677,23 @@ div.emptyProd{
 				</c:otherwise>
 		    	</c:choose>
 		    	
-
+		    	<br><br>
+		    	
+		    	<table>
+		    		<tr class="liketable">
+						<td>
+							<c:choose>
+					 		<c:when test = "${cook.heartCount == '0'}">
+					 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn"></p>
+							</c:when>    
+					 		<c:otherwise>
+					 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn"></p>
+					 		</c:otherwise>
+					 		</c:choose>
+						</td>
+						<td class="likes">&nbsp; 좋아요 ${cook.hearthit}개</td>
+					</tr>
+				</table>
 				</div>	
 			
 
@@ -756,20 +767,9 @@ div.emptyProd{
 				<div><h5><strong>수업시간 : ${cook.startTime}&emsp;~&emsp;${cook.endTime}</strong></h5></div>				
 				</div>
 		
-				<button type="button" class="btn btn-primary delete" value="${cook.cookNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
-				<!-- <p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>  -->
-				
-		
-		<c:choose>
- 		<c:when test = "${cook.heartCount == '0'}">
- 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
-		</c:when>    
- 		<c:otherwise>
- 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>
- 		</c:otherwise>
- 		</c:choose>
 
-		
+				<!-- <p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">${cook.hearthit}</p>  -->
+			
 				
 		 	</div>
 		 	

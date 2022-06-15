@@ -191,9 +191,10 @@
 											and apply_status !=  '000' 
 											ORDER BY apply_no DESC) countTable
 	 </select>
-	 <select id="saleCount" parameterType="string" resultMap="applySelectMap">
-	        select * from apply 
-        where applier_id= #{applier.userId} and apply_status=#{applyStatus}
+	 <select id="saleCount" parameterType="apply" resultMap="applySelectMap">
+
+		select sum(cook_price) from apply
+        where applier_id=#{applier.userId}
         and check_date >= TO_CHAR(SYSDATE-7,'YY/MM/DD')
         order by check_date;   
 </select>
