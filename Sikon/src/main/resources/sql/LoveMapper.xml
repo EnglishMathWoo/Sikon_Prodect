@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LoveMapper">
+ 	
+ 	
+	<resultMap id="loveSelectMap" type="love">
+		<result property="loveNo" 			column="love_no" 			jdbcType="NUMERIC"/>
+		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
+		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR" />
+		<collection property="user" resultMap="userSelectMap"/>
+		
+		
+	</resultMap>
+
+<resultMap id="userSelectMap" type="user">
+		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR"/>
+		<result property="userName"	column="user_name" 		jdbcType="VARCHAR" />
+		<result property="password" 	column="password" 		jdbcType="VARCHAR" />
+		<result property="userBirth" 	column="user_birth" 		jdbcType="VARCHAR" />
+		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
+		<result property="userImage" 	column="user_image" 		jdbcType="VARCHAR" />
+		<result property="addr" 	column="user_addr" 		jdbcType="VARCHAR" />
+		<result property="role" 	column="role" 			jdbcType="VARCHAR" />
+		<result property="phone" 	column="user_phone" 		jdbcType="VARCHAR" />
+		<result property="holdpoint" 	column="holdpoint" 		jdbcType="NUMERIC" />
+		<result property="mentorApply" 	column="mentor_apply" 		jdbcType="VARCHAR"  />
+		<result property="loginPath" 	column="login_path" 		jdbcType="VARCHAR"  />
+		<result property="regDate" 	column="user_regdate" 		jdbcType="DATE" />
+		<result property="quitDate" 	column="quit_date" 		jdbcType="DATE" />
+		<result property="quitStatus" 	column="quit_status" 		jdbcType="VARCHAR"  />
+		
+</resultMap>	
+
+	
+	<!-- SQL : INSERT -->
+	<insert 	id="addLove"		parameterType="love" >
+	 	INSERT
+		INTO love( love_no , user_nickname, user_id) 
+		VALUES	 (	seq_love_love_no.nextval,  #{userNickname}, #{userId})
+	 </insert>
+	 
+	 
+	 <delete id="deletelove" parameterType="int" >
+	 DELETE
+	 FROM love 
+	 WHERE love_no= #{loveNo} 
+	 </delete>
+	 
+	<select  id="getLoveList"  parameterType="map"	statementType="CALLABLE" resultMap="loveSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT A.* , ROWNUM AS row_seq
+	  					FROM		
+	  					(	
+select l.love_No, l.user_Id luser_id ,l.user_nickname luser_nickname , u.*
+               from love l,  users u
+               where
+               u.user_nickname=l.user_nickname
+            and l.user_id=#{userId}
+		 ) A
+						WHERE ROWNUM &lt;= #{search.endRowNum} )  C
+		WHERE C.row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+	 </select>
+	 
+	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	select l.love_No, l.user_Id luser_id ,l.user_nickname luser_nickname , u.*
+               from love l,  users u
+               where
+               u.user_nickname=l.user_nickname
+            and l.user_id=#{userId}
+						) countTable
+	 </select>
+	 
+</mapper>

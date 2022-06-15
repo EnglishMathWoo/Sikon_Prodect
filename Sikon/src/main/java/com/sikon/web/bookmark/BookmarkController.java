@@ -75,6 +75,13 @@ public class BookmarkController {
 			search.setCurrentPage(1);
 		}
 
+		if (search.getOrderCondition() == null) {
+			search.setOrderCondition("0");
+		}
+		
+		if(search.getSearchCondition()==null) {
+			search.setSearchCondition("0");
+		}
 		search.setPageSize(pageSize);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");

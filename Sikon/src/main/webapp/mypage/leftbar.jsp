@@ -158,7 +158,7 @@ color: #937062;
 		});
 		
 		$("a:contains('¡Ò∞‹√£¥¬∏‡≈‰')").on("click", function() {
-			self.location = "/cook/listMyMentor"
+			self.location = "/love/listLove"
 			
 		});
 		

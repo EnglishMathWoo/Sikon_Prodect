@@ -324,6 +324,15 @@ p {
 						self.location ="/recipe/listMyRecipe?mentorId=${recipe.writer.userId}"
 						});
 					
+					$("#addLove").on("click", function() {
+						var userNickname = $("input:hidden[name='userNickname']").val();
+						//console.log(recipeNo);
+							self.location = "/love/addLove?userNickname="+userNickname;
+							
+
+
+					});					
+					
 		 });
 		 
 		 
@@ -349,7 +358,8 @@ p {
 
             </div>
         </div>
-
+				<input type="hidden" name="userNickname" id="userNickname"
+					value="${user.userNickname }" />
 <!-- ################################################################################################ -->
 
 	<div class="wrapper row3">
@@ -359,6 +369,8 @@ p {
 
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
+		    
+		    <i id="addLove"  class="fa-regular fa-bookmark fa-2x"></i>
 		  		    <button type="button" class="submit">삭제</button>
 		  		
 		  

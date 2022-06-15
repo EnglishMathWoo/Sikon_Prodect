@@ -62,6 +62,7 @@ body {
 }
 .row {
 	font-family: 'Gowun Batang', serif;
+	margin-top: 87px;
 }
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
@@ -176,7 +177,6 @@ p {
 padding-top:0px;
 }
 
-
 </style>
 
 
@@ -235,8 +235,9 @@ padding-top:0px;
 				<br> | B O O K M A R K | <br>
 			</h3>
 		</div>
+			   <button type="button" class="submit">合付农昏力</button>
  
-		    		    <button type="button" class="submit">合付农昏力</button>
+		    		 
 		  
 		    
     
