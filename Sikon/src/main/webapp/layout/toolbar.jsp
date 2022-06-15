@@ -449,8 +449,9 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 
 <!-- /////////////////////// ToolBar Start ////////////////////////////-->
 
-
-
+<head><link href="/resources/images/logo/sikon_icon.ico" rel="icon" >
+<title>식탁의 온도</title>
+</head>
 
 <header id="header" class="hoc clear">
 
