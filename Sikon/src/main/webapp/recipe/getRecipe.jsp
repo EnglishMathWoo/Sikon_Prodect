@@ -623,11 +623,5 @@ background-color: #fff;
 				})
 	}
 	//=====================공유하기====================================
-
-	$(document).ready(function() {
-		
-		
-
-	});
 </script>
 </html>

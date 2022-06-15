@@ -49,7 +49,7 @@ div.container {
 	
 		//============= "구매"  Event 연결 =============
 		
-		///*	
+		/*	
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "#iamportPayment" ).on("click" , function() {
@@ -187,12 +187,12 @@ div.container {
 <script>
   
 
-/*
+///*
 
 	
 	$(function() {
 		
-		$("button.iamportPayment").on("click" , function() {
+		$("#iamportPayment").on("click" , function() {
 			console.log("아임포트");		
 			
 			var payopt = $("button.iamportPayment").attr('value');
@@ -246,12 +246,22 @@ function payment(data) {
         buyer_addr : address ,
         buyer_postcode : postcode 
     }, function(rsp) {
-        if ( rsp.success ) {
-            fncAddPurchase();
-        } else {
-        	alert("결제 실패");
-            
-        }
+    	console.log(rsp);
+    	$.ajax({
+
+        	type : "POST",
+        	url : "/purchase/json/verifyIamport?imp_uid=" + rsp.imp_uid 
+        	
+        }).done(function(data) {
+        	
+        	console.log(data);
+        	
+        	if(rsp.paid_amount == data.response.amount){
+	        	alert("결제 및 결제검증완료");
+        	} else {
+        		alert("결제 실패");
+        	}
+        });
     });
 	
 }

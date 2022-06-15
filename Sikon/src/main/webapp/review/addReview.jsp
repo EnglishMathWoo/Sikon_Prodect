@@ -171,6 +171,59 @@ margin-bottom: 10px;
   text-align: center;
 }
 
+
+.btn_upload {
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  padding: 5px 10px;
+}
+
+
+.yes {
+  display: flex;
+  color:black;
+  align-items: flex-start;
+  margin-top: 10px !important;
+}
+
+.btn_upload input {
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  filter: alpha(opacity=1);
+  -moz-opacity: 0;
+  opacity: 0;
+}
+
+.it {
+  height: 100px;
+  margin-left: 10px;
+}
+
+.btn-rmv1,
+.btn-rmv2,
+.btn-rmv3,
+.btn-rmv4,
+.btn-rmv5 {
+  display: none;
+}
+
+.rmv {
+  cursor: pointer;
+  color: #fff;
+  border-radius: 30px;
+  border: 1px solid #fff;
+  display: inline-block;
+  background: rgba(255, 0, 0, 1);
+  margin: -5px -10px;
+}
+
+.rmv:hover {
+  background: rgba(255, 0, 0, 0.5);
+}
+
 </style>
 
 
@@ -193,18 +246,15 @@ margin-bottom: 10px;
                         <label for="message">후기를 남겨주세요!</label>
                         <textarea name="reviewContent" id="reviewContent" cols="30" rows="5" class="form-control" placeholder="최소 15자 이상 입력해주세요." style="background-color: #F7F7F7;"></textarea>
                     </div>
-                    <div class="form-group">
                     
-                        <label for="reviewImg">이미지</label>
-                        <div>      <input  multiple="multiple" type="file"   id="reviewImg"  name="fileArray" class="input-img"/>
-</div>
+                    <div class="yes">
+							    <span class="btn_upload">
+							      <input  multiple="multiple" type="file"   id="reviewImg"  name="fileArray" class="input-img"/>
+							      <i class="fa-solid fa-camera"></i>
+							      </span>
+							    <img id="ImgPreview" src="" class="preview1" />
+							    <input type="button" id="removeImage1" value="x" class="btn-rmv1" />
                          
-                        
-                        <!-- 
-                        <div class="drop-zone">
-    						<span class="drop-zone__prompt">Drop file here or click to upload</span>
- 						 </div>
-                        -->
                         
                     </div>
                     
@@ -230,7 +280,7 @@ margin-bottom: 10px;
 </body>
 <script type="text/javascript">
 	$(function() {
-
+	
 		$("button:contains('리뷰등록')").on("click", function() {
 			fncAddReview();
 
@@ -240,13 +290,10 @@ margin-bottom: 10px;
 
 
 	function fncAddReview() {
-		//$("form").attr("method", "POST").attr("action","/review/addReview").submit();
-		
 		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action","/review/addReview").submit();
-	         setTimeout(function() {   
-	             window.close();
-
-	          }, 3);
+		setTimeout(function() {   
+            window.close();
+         }, 3);
 
 	      }
 	
@@ -275,30 +322,6 @@ margin-bottom: 10px;
 			  $('.preview1').removeClass('it');
 			  $('.btn-rmv1').removeClass('rmv');
 			});
-	// 이미지 미리보기
-	$(document).ready(function () {
-		var fileTypes = ['jpg', 'jpeg', 'png'];  //acceptable file types
-		$("input:file").change(function (evt) {
-		    var parentEl = $(this).parent();
-		    var tgt = evt.target || window.event.srcElement,
-		                    files = tgt.files;
-
-		    // FileReader support
-		    if (FileReader && files && files.length) {
-		        var fr = new FileReader();
-		        var extension = files[0].name.split('.').pop().toLowerCase(); 
-		        fr.onload = function (e) {
-		        	success = fileTypes.indexOf(extension) > -1;
-		        	if(success)
-			        	$(parentEl).append('<img src="' + fr.result + '" class="preview"/>');
-		        }
-		        fr.onloadend = function(e){
-		            console.debug("Load End");
-		        }
-		        fr.readAsDataURL(files[0]);
-		    }   
-		});
-	});
 </script>
 
 </html>
