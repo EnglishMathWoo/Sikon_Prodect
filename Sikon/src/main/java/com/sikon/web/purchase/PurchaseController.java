@@ -113,7 +113,7 @@ public class PurchaseController {
 		//==================================================================================
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/addPurchaseView3.jsp");
+		modelAndView.setViewName("/purchase/addPurchaseView.jsp");
 		modelAndView.addObject("product", product);
 		modelAndView.addObject("quantity", quantity);
 		modelAndView.addObject("coupon", list);
