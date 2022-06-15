@@ -13,6 +13,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
+
+h3{
+    	font-family: 'Gowun Batang', serif;
+
+}
 .leftBarNav {
     width: 170px;
     float: left;
@@ -110,6 +115,11 @@ color: #937062;
 </style>
 <script type="text/javascript">
 	$(function() {
+		
+		$("h3:contains('마이페이지')").on("click", function() {
+			self.location = "/mypage/mymain.jsp";
+			
+		});
 
 		$("a:contains('내정보보기')").on("click", function() {
 			self.location = "/user/getUser?userId="+$(this).text().trim();
@@ -122,7 +132,7 @@ color: #937062;
 		});
 		
 		
-		$("a:contains('마이쿠킹클래스')").on("click", function() {
+		$("a:contains('쿠킹클래스신청조회')").on("click", function() {
 			self.location = "/apply/listApply"
 			
 		});
@@ -186,18 +196,18 @@ color: #937062;
 	</div>
 </div>
 
-
-<div class="leftBarListShow">
-	<div class="leftBarListArray">
-		<span class="leftBarList"><a>마이쿠킹클래스</a></span>
-	</div>
-</div>
-
 <div class="leftBarListShow">
 	<div class="leftBarListArray">
 		<span class="leftBarList"><a>마이리뷰</a></span>
 	</div>
 </div>
+
+<div class="leftBarListShow">
+	<div class="leftBarListArray">
+		<span class="leftBarList"><a>쿠킹클래스신청조회</a></span>
+	</div>
+</div>
+
 
 <div class="leftBarListShow">
 	<div class="leftBarListArray">

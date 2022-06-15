@@ -224,24 +224,21 @@ padding-top:0px;
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	
-<div class="container mt-5 px-2">
 <!-- ################################################################################################ -->
 
+ <div class="container mt-5 px-2">
+     <br>
+     
+     <div class="center btmspace-50">
+			<br />
+			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
+				<br> | B O O K M A R K | <br>
+			</h3>
+		</div>
  
- 
-
-	<div class="wrapper row3">
-		  <section class="hoc container clear"> 
-		    <div class="center btmspace-50">
-		    <br/>
-		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> | BOOKMARK LIST |</h3>
-		      <p align="center" style="font-size:18px; "><br/>책갈피한 레시피를 확인해보세요. </p>
-		    </div>
 		    		    <button type="button" class="submit">북마크삭제</button>
 		  
 		    
-		   </section>
-  	</div>
     
 	     
   <input type="hidden" id="currentPage" name="currentPage" value="1"/>
@@ -272,12 +269,13 @@ padding-top:0px;
     <!-- ################################################################################################ -->
   </div>
   </c:forEach>
+  </div>
   
           <c:if test="${empty list}">
-      	<h3 align="center" ><br/><br/><br/><br/>책갈피 내역이 없습니다.</h3>
+      	<h3 align="center" >책갈피 내역이 없습니다.</h3>
       	<br>
      </c:if>
-</div>
+
 	  </div>
 	
 </body>

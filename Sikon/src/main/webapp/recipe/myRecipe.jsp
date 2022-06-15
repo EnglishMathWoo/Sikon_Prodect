@@ -3,6 +3,7 @@
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
@@ -120,18 +121,13 @@ article img{width:100%;}/* Force the image to have the full width of parent at a
   min-width: 100%;
   max-height: 500px;
 } 
+
 /* [RECIPE LIST] 폰트 적용 */
 .wrapper{
 font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-/* 검색, 정렬조건 css */
-.condition{
-font-family: 'Gowun Batang', serif;
-width: 100px;
-float:right;
-border-color:#D7D7D7;
-}
-/* 레시피 등록 버튼 css */
+
+/* 레시피 삭제 버튼 css */
 .submit
  {
   display: block;
@@ -149,20 +145,7 @@ border-color:#D7D7D7;
   	font-family: 'Gowun Batang', serif;
   
 }
-/* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
-hr {
-    margin-top: 60px;
-    margin-bottom: 20px;
-    border: 0;
-    border-top: 1px solid #eee;
-}
 
-/* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
-p {
-    margin: 0 0 0px;
-    font-family: 'Gowun Batang', serif;
-    
-}
 
 .container {
     padding-right: 15px;
@@ -178,7 +161,10 @@ padding-top:0px;
 }
 
 
-
+.update{
+    color: #2e8eb3;
+    font-size: 20px;
+}
 
 </style>
 
@@ -234,21 +220,19 @@ padding-top:0px;
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	
-<div class="container">
+<div class="container mt-5 px-2">
 <!-- ################################################################################################ -->
-
-	<div class="wrapper row3">
-		  <section class="hoc container clear"> 
-		    <div class="center btmspace-50">
-		    <br/>
-		      <h3 class="font-x2 nospace" align="center" style="font-family: 'Gowun Batang', serif;"><br> 내가 쓴 레시피 </h3>
-		    </div>
+<div class="center btmspace-50">
+			<br />
+			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
+				<br> | M Y R E C I P E | <br><br><br><br>
+			</h3>
+		</div>
+		
 		  		    <button type="button" class="submit">삭제</button>
 		  
 		    
 		    <br/><br/>
-    </section>
-  	</div>
  
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
@@ -269,9 +253,10 @@ padding-top:0px;
             <li > ${recipe.recipeTheme }</li>
             <li>${recipe.recipeDifficulty }</li>
             <li>${recipe.cookingTime }분</li>
-            <li> ${recipe.writer.userNickname }</li>
+            <li><fmt:formatDate pattern="yyyy-MM-dd"
+											value="${recipe.recipeRegDate }" /></li>
+			<li class="update" value="${recipe.recipeNo }"><b>수정하기</b></li>
           </ul>
-          <button type="button" class="update"  value="${recipe.recipeNo }">수정하기</button>
           
         </div>
       </article>
