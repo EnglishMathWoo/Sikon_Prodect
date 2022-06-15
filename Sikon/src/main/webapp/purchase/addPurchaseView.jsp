@@ -258,6 +258,7 @@ function payment(data) {
         	
         	if(rsp.paid_amount == data.response.amount){
 	        	alert("결제 및 결제검증완료");
+	        	fncAddPurchase();
         	} else {
         		alert("결제 실패");
         	}

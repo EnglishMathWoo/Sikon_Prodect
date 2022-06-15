@@ -411,23 +411,29 @@ address {
 	 font-size: 18px;
 }
 
-
+td{
+	text-align: center;
+}
 
 div.addbar{
 	height : 32px;
 	text-align: center;
 	background-color: #937062;
 	color: #F7F7F7;
-	padding: 5px;
 	font-weight: bold;
     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
     font-size: 12px;
     z-index: 20;
+    padding: 5px;
+    display: flex;
+  justify-content: center;
 }
 
 #addbar{
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	text-decoration-line: none;
 	color:#f7f7f7;
+	 margin: 0 auto;
 }
 
 header{
@@ -453,10 +459,12 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 <header id="header" class="hoc clear">
 
 	<div class="addbar">
-		<a href="/user/addUser" id="addbar">
-			<img src="/resources/images/logo/logo.png" width="24px" height="24px" id="logo"> 
-		 	&nbsp;회원가입 시 5000원 할인쿠폰 증정!
-		 </a>
+		<table>
+			<tr>
+				<td><img src="/resources/images/logo/logo.png" width="24px" height="24px" id="logo"> </td>
+				<td><a href="/user/addUser" id="addbar">&nbsp;회원가입 시 5000원 할인쿠폰 증정!</a></td>
+			 </tr>
+		 </table>
 	</div> 
 
 	<div id="topbar" class="hoc clear"> 
@@ -555,10 +563,10 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
         </li>
         </c:if>
       <c:if test="${sessionScope.user.role == 'mentor'}">  
-          <li><a class="drop" href="#">관리</a>
+          <li><a class="drop" href="#">멘토</a>
       		<ul>
 
-		        <li><a href="#">레시피관리</a></li>
+		      
 
 	            <li><a class="drop" href="#">쿠킹클래스관리</a>
 		      		<ul>
@@ -641,7 +649,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		 $(function() {
 
 			$( "#usik" ).on("click" , function() {
-			$(self.location).attr("href","/recipe/listRecipe");
+			$(self.location).attr("href","../index.jsp");
 			});
 			
 			$( "a:contains('Login')" ).on("click" , function() {
