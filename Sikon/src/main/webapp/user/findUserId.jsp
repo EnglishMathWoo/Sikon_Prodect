@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ include file="./Modal.jsp" %>
+    
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,6 +22,7 @@
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
     <title>아이디 찾기</title>
+    <!--  
     <style>
         @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
 	
@@ -79,6 +80,7 @@
     	color : red;
     }
     </style>
+    -->
     
     <style>
     #modal.modal-overlay {
@@ -176,6 +178,11 @@
 	     });
   	*/	
   		
+  	
+  	
+  	
+  	
+  	
   		
 		//ID 찾기 
 	//	$("#findUser").on("click",function(){
@@ -189,7 +196,7 @@
              type:'POST',
              url:'./json/findUser',
              data:{'userName':name, 'phone':phone},
-             success:function(data){ console.log(data);
+             success:function(data){  console.log(data);
                if(data == 0){
             	   $('#id_value').text("회원 정보를 확인해주세요!");
 				   $('#userName').val('');
@@ -198,6 +205,7 @@
             	   $('#id_value').text(data);
             	   console.log(data);
 			 	   $('#userName').val('');
+			 	  console.log(userName);
 				   $('#phone').val('');
                }
             },   
@@ -209,13 +217,14 @@
             };
             
          //    alert("아이디는 " + response.data + "입니다.");
-//  	window.onload=function(){
+  //  	window.onload=function(){
   		
   	
         
- //     };
+   //     };
   	 
-         
+  		       
+ 
          
   		$(function() {
   			  		
@@ -229,7 +238,7 @@
    
    
   <body>
-  
+  <%@ include file="Modal.jsp" %>
 
 	<div class="card align-middle" style="width:26rem;">
 		<div class="card-title" style="margin-top:30px;">
@@ -246,7 +255,7 @@
         <p class="checks" id="checks">${findpw_checkf}</p><br/>
     -->
         <button type="button" id="findUser" onclick="findUser_click()"  class="btn btn-lg btn-primary btn-block" >아이디 찾기</button>
-      
+     
       
 		</div>
         <div class="links">
@@ -261,17 +270,18 @@
   </body>
    
   <script>
-  	 const modal = document.getElementById("modal")
+  const modal = document.getElementById("modal")
 	 const btnModal = document.getElementById("findUser")
-		
+	const closeBtn = modal.querySelector(".close-area")
+	
 		btnModal.addEventListener("click", e => {
 			console.log('aaaaa');
 			modal.style.display = "flex"
-			console.log('qqq');
+			console.log('modal.style.display');
 		});
 		
 		    
-		const closeBtn = modal.querySelector(".close-area")
+		
 		closeBtn.addEventListener("click", e => {
 			console.log('bbbbb');
 		    modal.style.display = "none"
@@ -284,6 +294,23 @@
 		        modal.style.display = "none"
 		    }
 		});
+		
+		
+	/*	
+		$(document).ready(function() {
+			$('#findUser').click(function() {
+				$('#modal-dialog').show();
+				console.log("finduser");
+			});
+			
+			
+			
+			
+			
+		});
+	*/	
+		
+		
   </script> 
   
 

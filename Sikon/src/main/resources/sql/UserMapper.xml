@@ -150,12 +150,13 @@
 		
 	
 	<!-- ID찾기 -->
-	<select  id="findUserId"	parameterType="string"	resultMap="userSelectMap">
-		SELECT user_id
+	<select  id="findUserId"	parameterType="user"	resultType="string">
+		SELECT NVL(user_id, 0)
 		FROM users
-		WHERE user_nickname = #{userNickname}
+		WHERE user_name = #{userName}
+		AND user_phone = #{phone}
 	<!--  	     AND user_birth = #{userBirth}
-		    		 AND user_phone = #{phone}
+		    		 
 	-->
 	</select>
 

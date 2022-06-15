@@ -1,19 +1,26 @@
 package com.sikon.web.user;
 
-import java.util.HashMap;
 import java.util.Map;
 
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.mail.internet.MimeMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
@@ -30,11 +37,15 @@ public class UserRestController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	private JavaMailSenderImpl mailSender;
+	
 	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+
+	
 		
 	public UserRestController(){
 		System.out.println(this.getClass());
@@ -77,6 +88,21 @@ public class UserRestController {
 		return userService.getUser(user.getUserId());
 	}
 	
+	@RequestMapping( value= "json/findUser", method=RequestMethod.POST )
+	@ResponseBody
+	public String findUserId(@RequestParam("userName") String userName, @RequestParam("phone") String phone,
+			Model model, HttpServletRequest request) throws Exception {
+		
+		System.out.println("/user/json/findUser : POST");
+		
+		model.addAttribute("userId", "아이디 찾음");
+		model.addAttribute("url", "/user/findUserId.jsp");
+		
+		 userService.findUserId(userName, phone);
+	//	 return "redirect:/user/Modal.jsp";
+		 return userService.findUserId(userName, phone);
+	}
+	
 	// id 중복체크
 	@RequestMapping( value="json/checkId", method=RequestMethod.POST )
 	public int checkId( @RequestParam("userId") String userId) throws Exception{
@@ -84,13 +110,46 @@ public class UserRestController {
 			return cnt;
 	}
 	
-	// id 중복체크
+	// 닉네임 중복체크
 	@RequestMapping( value="json/checkNickname", method=RequestMethod.POST )
 	public int checkNickname( @RequestParam("userNickname") String userNickname) throws Exception{
 			int cnt = userService.checkNickname(userNickname);
 			return cnt;
 	}
+	
+	// 이메일 인증
+	@RequestMapping(value = "json/mailCheck", method = RequestMethod.GET)
+	public String mailCheck(@RequestParam("userId") String userId) throws Exception{
 		
+		System.out.println("json/mailCheck: GET");
+		
+	    int serti = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+	    
+	    String from = "se981106@naver.com";//보내는 이 메일주소
+	    String to = userId;
+	    String title = "회원가입시 필요한 인증번호 입니다.";
+	    String content = "[인증번호] "+ serti +" 입니다. <br/> 인증번호 확인란에 기입해주십시오.";
+	    String num = "";
+	    try {
+	    	
+	    	
+			MimeMessage mail = mailSender.createMimeMessage();
+	        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8"); // true는 멀티파트 메세지를 사용하겠다는 뜻?
+	        
+	        mailHelper.setFrom(from); // 보내는 사람 이메일주소 표기, 생략하면 작동안한다
+	        mailHelper.setTo(to); // 받는 사람 이메일
+	        mailHelper.setSubject(title); // 메일제목
+	        mailHelper.setText(content, true); // 메일내용      
+	        
+	        mailSender.send(mail);
+	        num = Integer.toString(serti);
+	        
+	    } catch(Exception e) {
+	        num = "error";
+	    }
+	    return num;
+	}
+	
 	@RequestMapping( value="json/updateUser", method=RequestMethod.POST )
 	public User updateUser( @RequestBody User user, Map license, Map career ) throws Exception{
 

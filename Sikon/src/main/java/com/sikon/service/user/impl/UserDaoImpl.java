@@ -82,8 +82,14 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectList("UserMapper.getUCL", userId);
 	}
 	
-	public User findUserId(String userNickname) throws Exception {
-		return sqlSession.selectOne("UserMapper.findUserId", userNickname);
+	public String findUserId(String userName, String phone) throws Exception {
+		System.out.println("userName="+userName);
+		System.out.println("phone="+phone);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userName", userName);
+		map.put("phone", phone);
+		return sqlSession.selectOne("UserMapper.findUserId", map);
 	}
 	
 	public void updateUser(User user) throws Exception {

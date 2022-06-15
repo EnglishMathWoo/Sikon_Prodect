@@ -192,9 +192,20 @@ public class UserServiceImpl implements UserService{
 		return userDao.getUCL(userId);
 	}
 	
-	public User findUserId(String userNickname) throws Exception {
-		return userDao.findUserId(userNickname);
+	public String findUserId(String userName, String phone) throws Exception {
+		
+		String result = "";
+		
+		try {
+			result = userDao.findUserId(userName, phone);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
 	}
+
 
 	public void updateUser(User user) throws Exception {
 		System.out.println("user="+user);

@@ -139,6 +139,28 @@ public class UserController {
 		
 		return "redirect:/index.jsp";
 	}
+	
+	@RequestMapping( value="findUser", method=RequestMethod.GET )
+	public String findUserId() throws Exception {
+
+		System.out.println("/user/findUserId : GET");
+		
+		return "redirect:/user/findUserId.jsp";
+	}
+	
+//	@RequestMapping( value="findUser", method=RequestMethod.POST )
+//	public String findUserId(@RequestParam("userName") String userName,
+//			@RequestParam("phone") String phone, Model model, HttpServletRequest request ) throws Exception {
+//		
+//		System.out.println("/user/findUserId : POST");
+//		
+//		model.addAttribute("userId", "아이디 찾음");
+//		model.addAttribute("url", "/user/findUserId.jsp");
+//		
+//		
+//		return "redirect:/user/findUserId.jsp";
+//	}
+	
 	@RequestMapping( value="addUser", method=RequestMethod.GET )
 	public String addUserView() throws Exception {
 

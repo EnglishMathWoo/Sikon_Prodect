@@ -29,7 +29,7 @@ public interface UserDao {
 	
 	public List getUCL(String userId) throws Exception;
 	// ID찾기
-	public User findUserId(String userNickname) throws Exception ;
+	public String findUserId(String userName, String phone) throws Exception ;
 
 	// 회원정보수정
 	public void updateUser(User user) throws Exception ;

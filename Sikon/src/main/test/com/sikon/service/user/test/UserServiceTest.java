@@ -145,7 +145,7 @@ public class UserServiceTest {
 	//	user.setUserBirth("19991111");
 	//	user.setPhone("01033334444");
 		
-		user = userService.findUserId("testddd");
+	//	user = userService.findUserId("testddd");
 		
 		System.out.println(user);
 	}

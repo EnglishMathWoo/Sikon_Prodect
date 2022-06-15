@@ -76,6 +76,12 @@
 	 <!--  <h5 class="text-muted">내 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5> --> 
 	    </div>
 	
+	<img id="thum" src="/resources/images/uploadFiles/${user.userImage}"
+							width="500" height="400" style="text-align: center;"/>
+	
+		
+		
+		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>아 이 디</strong></div>
 			<div class="col-xs-8 col-md-4">${user.userId}</div>
