@@ -17,6 +17,8 @@
     width: 170px;
     float: left;
     margin: 14px 40px 0px 200px;
+    	font-family: 'Gowun Batang', serif;
+    
   /*   font-family: Musinsa, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; */
     font-size: 14px;
     padding: 60px 10px 10px 30px;
@@ -45,6 +47,10 @@
     font-size: 16px;
     line-height: 20px;
     color: rgb(20, 170, 255);
+}
+
+a{
+color: #937062;
 }
 
 .leftBarNav.on ul {
@@ -86,6 +92,7 @@
 	
 .leftBarListShow{
 	cursor:pointer;
+	    
 }	
 	
 .leftBarListShow ul {

@@ -266,9 +266,9 @@ function tableDelete(){
 						class="col-lg-offset-1 col-lg-2 control-label">난이도</label>
 					<div class="col-lg-9">
 						<select name="recipeDifficulty" class="form-control">
-							<option value="1" selected="selected">초급</option>
-							<option value="2">중급</option>
-							<option value="3">고급</option>
+							<option value="100" selected="selected">초급</option>
+							<option value="200">중급</option>
+							<option value="300">고급</option>
 						</select>
 					</div>
 				</div>
@@ -312,12 +312,12 @@ function tableDelete(){
 					<label for="recipeTheme" class="col-lg-offset-1 col-lg-2 control-label">카테고리</label>
 					<div class="col-lg-9">
 						<select name="recipeTheme" class="form-control">
-							<option value="1" selected="selected">카테고리</option>
-							<option value="2">한식</option>
-							<option value="3">중식</option>
-							<option value="4">양식</option>
-							<option value="5">일식</option>
-							<option value="6">간식</option>
+							<option value="0" selected="selected">카테고리</option>
+							<option value="KO">한식</option>
+							<option value="CH">중식</option>
+							<option value="FR">양식</option>
+							<option value="JP">일식</option>
+							<option value="DES">간식</option>
 						</select>
 					</div>
 				</div>
