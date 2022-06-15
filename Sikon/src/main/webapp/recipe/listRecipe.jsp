@@ -144,11 +144,19 @@ border-color:#D7D7D7;
   cursor: pointer;
   margin-top: 20px;
   margin-bottom: 20px;
-  background: #d4af7a;
+  background: #937062;
   float: right;
   	font-family: 'Gowun Batang', serif;
   
 }
+
+.submit:hover{
+	background: #f7f7f7;
+	color: #937062;
+	border: 1px solid #937062;
+}
+
+
 /* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
 hr {
     margin-top: 60px;
@@ -174,11 +182,6 @@ p {
 
 .hoc{
 padding-top:0px;
-}
-
-#themeAll{
-	color:#937062;
-	text-decoration-line: none;
 }
 
 
@@ -252,6 +255,37 @@ border: none;
 background-color: #f7f7f7;
 }
 
+.theme:hover {
+  border: none;
+  width: 100px;
+  height: 36px;
+  color: #fff;
+  font-size: 15px;
+  background: #937062;
+  font-family: 'Gowun Batang', serif;
+  
+}
+
+.theme{
+  width: 100px;
+  height: 36px;
+  color: #937062;
+  border: 1px solid #937062;
+  font-size: 15px;
+  background: #f7f7f7;
+  font-family: 'Gowun Batang', serif;
+}
+
+.act{
+  border: none;
+  width: 100px;
+  height: 36px;
+  color: #fff;
+  font-size: 15px;
+  background: #937062;
+  font-family: 'Gowun Batang', serif;
+}
+
 </style>
 
 
@@ -267,6 +301,47 @@ background-color: #f7f7f7;
 		}
 		
 		$(function() {
+			
+			
+			var themeCondition = $("#themeCondition").val();
+			 console.log(themeCondition);
+			 ///* 
+			 if(themeCondition == 'des'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themedes").addClass('act');
+				 
+			 }else if(themeCondition == 'ko'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themeko").addClass('act');
+				 
+			 }else if(themeCondition == 'ch'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themech").addClass('act');
+				 
+			 }else if(themeCondition == 'fr'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themefr").addClass('act');
+				 
+			 }else if(themeCondition == 'jp'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themejp").addClass('act');
+				 
+			 }else{
+				 
+				 $(".theme").removeClass('act');
+				 $(".themeAll").addClass('act');
+				 
+			 }
+			 
+			//*/ 
+			
+			
+			
 			
 		  $("#orderCondition").on( "change", function() {
 		  console.log($("#orderCondition").val());
@@ -450,22 +525,22 @@ background-color: #f7f7f7;
 		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RECIPE LIST </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
-		    <button type="button" class="submit">레시피등록</button>
+		    <button type="button" class="submit">레시피 등록</button>
 		  
     			    <form class="form-inline" name="detailForm">
 		    
 		    <br/><hr/><br/>
     
-	      <nav class="ref-sort" >
-	      <ul>
-	        <li><a href="#" id="themeAll" class="theme" value="all">모두보기</a></li>
-	        <li><a href="#" class="theme" value="ko">한식</a></li>
-	        <li><a href="#" class="theme" value="ch">중식</a></li>
-	        <li><a href="#" class="theme" value="fr">양식</a></li>
-	        <li><a href="#" class="theme" value="jp">일식</a></li>
-	        <li><a href="#" class="theme" value="des">간식</a></li>
-	      </ul>
+    	<nav class="ref-sort" >
+	      <button class="theme themeAll" id="themeAll" value="all">모두보기</button>
+	      <button class="theme themeko" value="ko">한식</button>
+	      <button class="theme themech" value="ch">중식</button>
+	      <button class="theme themefr" value="fr">양식</button>
+	      <button class="theme themejp" value="jp">일식</button>
+	      <button class="theme themedes" value="des">간식</button>
 	    </nav>
+    
+
 	    
  <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>
  
