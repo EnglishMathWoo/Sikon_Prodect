@@ -279,7 +279,7 @@ div.emptyProd{
 				                		
 				                		var status="";
 				                		var stock="";
-				                		var rate = Number(JSONData.list[i].prodDisRate)*100;
+				                		var rate = parseInt(Number(JSONData.list[i].prodDisRate)*100);
 				                		
 				                		if(JSONData.list[i].prodStatus == 'N'){
 				                			status = "<p style='text-align:right;color:#d9534f'>*판매중지된 상품입니다.</p>";
