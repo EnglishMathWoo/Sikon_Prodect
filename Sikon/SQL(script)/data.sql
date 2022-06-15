@@ -33,7 +33,7 @@ select *from dual;
 
 INSERT all
 INTO users
-VALUES ( 'mentor@naver.com', 'mentor', '1234', '19941111', 'mentor', 'ee.jpg', '서울시 서초구', 'mentor', '01023341000', 100000, 'Y', default, SYSDATE, to_date('2013/01/14', 'YYYY/MM/DD'), 'Y')
+VALUES ( 'mentor@naver.com', 'mentor', '1234', '19941111', 'mentor', 'kim3.jpg', '서울시 서초구', 'mentor', '01023341000', 100000, 'Y', default, SYSDATE, to_date('2013/01/14', 'YYYY/MM/DD'), 'Y')
 INTO license
 VALUES ( seq_license_license_no.nextval, '1종보통', '강동구청', to_date('2018/05/24', 'YYYY/MM/DD'), 'mentor@naver.com' )
 INTO career
@@ -151,6 +151,10 @@ INTO apply(apply_no, cook_no, applier_id, payment_option, apply_status, cook_sta
 VALUES (seq_apply_apply_no.nextval, '10000', 'mentor@naver.com', '카카오페이', '100', 10, '2022/06/30','001',100);
 
 
+INSERT
+INTO love(love_no, user_nickname,user_id)
+VALUES (seq_love_love_no.nextval ,'mentor' , 'user@naver.com');
+
 INSERT 
 INTO notice(notice_no, notice_title, notice_content, notice_image, notice_date) 
 VALUES (seq_notice_notice_no.NEXTVAL, '공지합니다', '<p><img src="/summernoteImage/432a9674-4268-4dae-ae14-11eb08d1977d.png" style="width: 1148px;"><br></p>', NULL, SYSDATE);
@@ -170,17 +174,17 @@ VALUES (seq_notice_notice_no.NEXTVAL, '식탁의 온도 코스닥 상장 안내'
 
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'user', '생강', '노맛', 'htm_20150402190451608.jpg', null, '200', 'KO', 10, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'user', '생강', '노맛', 'htm_20150402190451608.jpg', null, '중급', 'KO', 10, 'd' , SYSDATE, 0, 0);
 
-INSERT 
-INTO ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
-SELECT seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
-FROM(
+insert 
+into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
+select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
+from(
 SELECT '낙지' AS ingredientName , '1g' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '냉이 차돌박이 솥밥', '냉이는 별로예요', '987eb588939a8cb12033994139c0018e.jpg', null, '300', 'CH', 50, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '냉이 차돌박이 솥밥', '냉이는 별로예요', '987eb588939a8cb12033994139c0018e.jpg', null, '고급', 'CH', 50, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -192,7 +196,7 @@ SELECT '냉이' AS ingredientName , '1개' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '달걀 만두', '만두에 달걀을', '6605dfaa474f5fb72d3ba125efe14db7.jpg', null, '100', 'DES', 40, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '달걀 만두', '만두에 달걀을', '6605dfaa474f5fb72d3ba125efe14db7.jpg', null, '초급', 'DES', 40, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -202,7 +206,7 @@ SELECT '달걀' AS ingredientName , '3개' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '대패삼겹살된장찌개', '삼겹살+된장찌개 이즈 굿', '7.PNG', null, '300', 'JP', 85, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '대패삼겹살된장찌개', '삼겹살+된장찌개 이즈 굿', '7.PNG', null, '고급', 'JP', 85, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
