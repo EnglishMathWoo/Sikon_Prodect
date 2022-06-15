@@ -320,9 +320,6 @@ div.emptyProd{
 				                	
 				                	console.log(JSONData.list[0].prodThumbnail.split('&')[0]); 
 					                	 
-				                	
-				                
-				                	
 				                	for(var i=0; i<JSONData.list.length; i++){
 				                		
 				                		var status="";
@@ -348,7 +345,6 @@ div.emptyProd{
 				                     						+"</div><br></article></div></div>"
 				                     						
 				                     		
-				                     	
 				                     		
 				                     	$( '#scrollList' ).append(displayValue);	
 				                     						
