@@ -529,8 +529,20 @@ background-color: #f7f7f7;
           <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
            <h6 >${recipe.recipeDetail }</h6>
           <ul class="meta">
-            <li > ${recipe.recipeTheme }</li>
-            <li>${recipe.recipeDifficulty }</li>
+            <li >${recipe.recipeTheme} </li>
+            <li>
+            <c:choose>
+           	<c:when test="${recipe.recipeDifficulty =='100'}"> 
+           초급
+           </c:when>
+           <c:when test="${recipe.recipeDifficulty =='200'}"> 
+           중급
+           </c:when>
+           <c:otherwise> 
+           고급
+           </c:otherwise>
+           </c:choose>
+           </li>
             <li>${recipe.cookingTime }분</li>
             <li> ${recipe.writer.userNickname}</li>
             <li style="float:right">조회수: ${recipe.recipeViews }</li>
