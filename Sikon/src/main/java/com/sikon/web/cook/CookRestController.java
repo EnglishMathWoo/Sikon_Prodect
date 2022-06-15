@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
@@ -45,6 +46,7 @@ import com.sikon.common.Search;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.User;
 import com.sikon.service.heart.HeartService;
+import com.sikon.service.user.UserService;
 import com.sikon.service.cook.CookService;
 
 
@@ -62,6 +64,9 @@ public class CookRestController {
 	@Autowired
 	@Qualifier("heartServiceImpl")
 	private HeartService heartService;
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
 
 
 	public CookRestController() {
@@ -186,38 +191,7 @@ public class CookRestController {
 		return cook;
 	}
 	
-	@RequestMapping( value="json/updateCook", method=RequestMethod.POST )
-	public Cook updateCook(  @RequestBody Cook cook 
-			, Model model, HttpSession session,
-			@RequestParam("uploadfile") MultipartFile[] fileArray) throws Exception{
-	
-		
-		String fileName = "";
-		//String FILE_SERVER_PATH = "C:/workspace(1)/11.Model2MVCShop/src/main/webapp/images/uploadFiles";
-		String FILE_SERVER_PATH = "C:\\Users\\sweet\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\images\\uploadFiles";
-		for(int i=0; i<fileArray.length;i++) {
-			
-			if(!fileArray[i].getOriginalFilename().isEmpty()) {
-				fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
-				model.addAttribute("msg", "File uploaded successfully.");
-				
-			}else {
-				model.addAttribute("msg", "Please select a valid mediaFile..");
-			}
-		
-			fileName+=fileArray[i].getOriginalFilename()+"/";
-			
-			
-		}
-		cook.setCookFilename(fileName);
-	 System.out.println(cook);
-		
-		cookService.updateCook(cook);
-		
-	
-		return cookService.getCook(cook.getCookNo());
-		
-	}
+
 	@RequestMapping( value="json/listCook", method=RequestMethod.POST )
 	public Map  listCook(  @RequestBody Search search , HttpServletRequest request) throws Exception{
 		if(search.getCurrentPage() ==0 ){
@@ -273,5 +247,39 @@ public class CookRestController {
 		}
 		
 		return map;	
+	}
+	
+	@RequestMapping(value = "json/listMyCook")
+	public Map listMyCook(@RequestParam("mentorId") String mentorId,@RequestBody Search search, Model model, HttpServletRequest request)
+			throws Exception {
+		
+		System.out.println("¿Ö ¾È´ë!!!!!!!!"+search.getCurrentPage());
+
+		search.setPageSize(pageSize);
+		System.out.println("search:" + search);
+		User user = userService.getUser(mentorId);
+		
+		System.out.println("´Ğ³×ÀÓ: "+user.getUserNickname());
+		
+		
+		// Business logic ¼öÇà
+		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+
+		System.out.println(resultPage);
+		System.out.println("ÄíÄíÄíÄíÄíÄíÄíÄíÄ¼Ä¼Ä¼Ä¼Ä¼Ä¼Ä¼ÄíÄíÄíÄíÄí");
+		System.out.println(resultPage);
+		System.out.println("////////////////////////////////////////"+map.get("list"));
+		
+		
+		map.put("user", user);
+		map.put("list", map.get("list"));
+		map.put("resultPage", resultPage);
+		map.put("search", search);
+
+		System.out.println("ÄíÄíÄíÄíÄíÄíÄíÄíÄ¼Ä¼Ä¼Ä¼Ä¼Ä¼Ä¼ÄíÄíÄíÄíÄí");
+		return map;
 	}
 }

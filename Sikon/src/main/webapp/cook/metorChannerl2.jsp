@@ -302,13 +302,13 @@ p {
 	<script type="text/javascript">
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage);
-	
+		console.log(currentPage);
 		$("form").attr("method" , "POST").attr("action" , "/cook/mentor").submit();
 		
 	}
 
 		 
-	 $( document ).ready(function() {
+		 $(function() {
 			
 					$( ".imgover" ).on("click" , function() {
 					console.log($(this).attr("value"));
@@ -323,25 +323,25 @@ p {
 							self.location = "/love/addLove?userNickname="+userNickname;
 						});					
 					
-		
+		 });
 		 
-	
+		 $(function() {
 		   	 $(window).scroll(function() {
 	                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 	                	
 	                	var cpage = $("#currentPage").val();
-	                	console.log("cpage1: "+cpage);
 	                	cpage = Number(cpage)+1;
-	                	console.log("cpage2: "+cpage);
+	                	console.log(cpage);
 
 	        	   		
 	        	   		
 				            $.ajax({
 				                
-				                  url : "/cook/json/listMyCook?mentorId=${user.userId}",
+				                  url : "/cook/json/listMyCook" ,
 				                  method : "POST" ,
 				                  data : JSON.stringify({
 				                	  currentPage : cpage
+
 				                  }), 
 				                  dataType : "json" ,
 				                  headers : {
@@ -351,26 +351,26 @@ p {
 				                success : function(JSONData , status) {
 				                	 
 				                	$("#currentPage").val(cpage)
-								
-					               
+				                	console.log(JSONData.list[0].recipeName);
+				                	console.log(JSONData.list[0].recipeImg);
+					                	 
 				                	for(var i=0; i<JSONData.list.length; i++){
-				                		
-				                		
-				                		
-		
 				                
 					                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
 					                     					+"<div id='latest' class='group'>"
 					                     					+"<article class='one_third first'>"
-					                     					+"<a class='imgover' value='"+JSONData.list[i].cookNo+"' >"					                     				
-					                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' id='image' width='320' height='300'></a>"
+					                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
+					                     					+"<div class='shape1'>"+[i+5]+"</div>"
+					                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'></a>"
 				                     						+"<div class='excerpt'>"
-				                     						+"<h4 class='heading' >"+JSONData.list[i].cookName+"</h4>"
-				                     						+"<h6>"+JSONData.list[i].cookBrief+"</h6>"				                     						
+				                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
+				                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
 				                     						+"<ul class='meta'>"
-				                     			            +"<li>"+ JSONData.list[i].cookBrief +"</li>"
-				                     			            +"<li>&nbsp;"+ JSONData.list[i].cookRecruit +"</li>"
-				                     			            +"<li>&nbsp;"+ JSONData.list[i].cookTheme +"</li>"				                     			           				                     			          	
+				                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
+				                     			            +"<li>&nbsp;"+ JSONData.list[i].recipeDifficulty +"</li>"
+				                     			            +"<li>&nbsp;"+ JSONData.list[i].cookingTime +"분</li>"
+				                     			            +"<li>&nbsp;"+ JSONData.list[i].writer.userNickname +"</li>"
+				                     			          	+"<li style='float:right'>조회수: "+ JSONData.list[i].recipeViews +"</li>"
 				                     						+"</ul></div></article></div></div>"
 				                     						
 				                     						
@@ -385,9 +385,7 @@ p {
 				           
 	                }//if
 	            });//function
-	 
-	   });
-	 		 
+		 });		 
 					
 </script>
 			 </head>
@@ -401,7 +399,7 @@ p {
 
 <div class="container channel">	
 
-
+	 <input type="hidden" id="currentPage" name="currentPage" value=""/>
 
         <div class="card "> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
             <div class="card-body little-profile text-center">
@@ -430,7 +428,7 @@ p {
     </section>
   	</div>
  
-	 <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+
  
 <div class="row">
 	<c:set var="i" value="0" />
@@ -455,7 +453,8 @@ p {
         </div>
       </article>
      
-    </div>  
+    </div>
+    <!-- ################################################################################################ -->
   </div>
   </c:forEach>
   
@@ -463,9 +462,12 @@ p {
 </div>
 	  
 	  
-
+<c:if test="${empty list}">
+      	<h3 align="center" >등록한 쿠킹클래스가 없습니다.</h3>
+      	<br>
+     </c:if>	
      </div>  
-	
+	     <jsp:include page="../common/pageNavigator_new.jsp"/>
 	  
 </body>
 

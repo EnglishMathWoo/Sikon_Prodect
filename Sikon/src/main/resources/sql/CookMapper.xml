@@ -106,16 +106,8 @@
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
-	 	<!--  위 두번째 subQuery 의  
-	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
-	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
-	 			< 는 keyword 로 &lt; 를	사용.
-	 			
-	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
-	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
 
-				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
-		-->
+
 	
 	<!-- SQL : SELECT ROW Count -->	 
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
@@ -168,8 +160,7 @@
 	 <select  id="listMyCook"  parameterType="map"	resultMap="cookSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *
-											FROM cook
+	  					FROM		(	SELECT *	FROM cook
 											WHERE mentor_nickname=#{userNickname}
 											<if test="searchCondition != null">
 											<choose>
@@ -184,16 +175,11 @@
 													</otherwise>
 													</choose>
 											</if>
-											
-													
-								
-
-
- )  inner_table
-											
+					 )  inner_table
 						WHERE ROWNUM &lt;= #{search.endRowNum} )
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>	 
+	 
 	 <select  id="getTotalMyCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT cook_no 
@@ -206,12 +192,8 @@
 								<if test="searchCondition == 1 and searchKeyword !='' ">
 						 		and cook_name LIKE '%'||#{searchKeyword}||'%'
 								</if>
-								
-							
-						</if>  
-						
-
-													) countTable						
+						</if> 
+						 ) countTable						
 	 </select> 
 	 
 

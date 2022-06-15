@@ -27,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -338,10 +339,7 @@ public class CookController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("user", user);
 		modelAndView.addObject("list", map.get("list"));
-//		modelAndView.addObject("list", map1.get("list"));
-
 		modelAndView.addObject("resultPage", resultPage);
-//		modelAndView.addObject("resultPage", resultPage1);
 		modelAndView.addObject("search", search);
 
 		modelAndView.setViewName("forward:/cook/metorChannerl.jsp");
@@ -389,4 +387,6 @@ public class CookController {
 
 		return "forward:/cook/manageCook.jsp";
 	}
+	
+
 }
