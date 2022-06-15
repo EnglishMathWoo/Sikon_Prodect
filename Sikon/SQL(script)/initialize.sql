@@ -301,8 +301,8 @@ CREATE TABLE ranking (
 	ranking_no NUMBER NOT NULL,
 	recipe_no NUMBER, 
 	view_date DATE, 
-	cook_no NUMBER, 
-	heart_date DATE, 
+	user_nickname VARCHAR2(200), 
+	love_date DATE, 
 	search_keyword VARCHAR2(200), 
 	search_date DATE, 
 	PRIMARY KEY(ranking_no) 
