@@ -331,9 +331,9 @@ background-color: #f7f7f7;
 	      <br>
 	      
 	      <div class="orderCondition" style="float:right">
-		  	  <div class="order" id="daily">일간</div>
+		  	  <div class="order" id="monthly">월간</div>
 		      <div class="order" id="weekly">주간</div>
-		      <div class="order" id="monthly">월간</div>
+		      <div class="order" id="daily">일간</div>
 			</div>
 	      
 	      

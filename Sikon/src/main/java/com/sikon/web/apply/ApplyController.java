@@ -281,7 +281,6 @@ public class ApplyController {
 			return modelAndView;
 		}		
 		
-		//@RequestMapping("/listSale.do")
 		@RequestMapping( value="listSale" )
 
 		public ModelAndView listSale( @ModelAttribute("search") Search search ,  HttpServletRequest request) throws Exception{
@@ -341,8 +340,7 @@ public class ApplyController {
 		}
 		
 		@RequestMapping( value="saleCount", method=RequestMethod.GET )
-		public String saleCount(@ModelAttribute("apply") Apply apply
-				, HttpServletRequest request,HttpSession session,Model model) throws Exception {
+		public String saleCount(@ModelAttribute("apply") Apply apply, Model model) throws Exception {
 			
 			System.out.println("/apply/addApply : POST");
 
@@ -352,7 +350,6 @@ public class ApplyController {
 		
 			
 			model.addAttribute(apply);
-
 
 			
 			return "forward:/apply/listSale.jsp";

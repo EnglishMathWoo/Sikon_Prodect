@@ -152,10 +152,12 @@
 	 </select>
 	 
 	<select  id="getSaleList"  parameterType="search"	statementType="CALLABLE" resultMap="applySelectMap">
-	  	SELECT c.*, a.* 
-		FROM cook c, apply a
-		WHERE c.cook_no=a.cook_no(+) 
-			AND a.apply_no IS NOT NULL 
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM (SELECT c.cook_name, a.* 
+											FROM cook c, apply a
+											WHERE c.cook_no=a.cook_no(+) 
+												AND a.apply_no IS NOT NULL 
 											<if test="applyCondition != null">
 												<choose>
 												<when test="applyCondition == 5 ">
@@ -167,14 +169,16 @@
 														</choose>
 											</if>
 											and apply_status !=  '000' 
-											ORDER BY apply_no DESC 
+											ORDER BY apply_no DESC) inner_table
+						WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
 	 </select>
 	 
 
 
 	 <select  id="getTotalCount2"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT c.*, a.* 
+	  	FROM(	SELECT c.cook_name, a.* 
 		FROM cook c, apply a
 		WHERE c.cook_no=a.cook_no(+) 
 			AND a.apply_no IS NOT NULL 
@@ -191,6 +195,7 @@
 											and apply_status !=  '000' 
 											ORDER BY apply_no DESC) countTable
 	 </select>
+	 
 	 <select id="saleCount" parameterType="apply" resultMap="applySelectMap">
 
 		select sum(cook_price) from apply

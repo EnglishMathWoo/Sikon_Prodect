@@ -26,6 +26,7 @@ import com.sikon.common.Search;
 import com.sikon.service.domain.Ingredient;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
+import com.sikon.service.ranking.RankingService;
 import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.review.ReviewService;
 
@@ -42,6 +43,10 @@ public class RecipeController {
 	@Autowired
 	@Qualifier("reviewServiceImpl")
 	private ReviewService reviewService;
+	
+	@Autowired
+	@Qualifier("rankingServiceImpl")
+	private RankingService rankingService;
 
 	public RecipeController() {
 		System.out.println(this.getClass());
@@ -149,6 +154,8 @@ public class RecipeController {
 		if(user.getUserId() != recipe.getWriter().getUserId()) {
 			recipe.setRecipeViews(recipe.getRecipeViews()+1);
 			recipeService.updateRecipeOnly(recipe);
+			
+			rankingService.addRecipeView(recipeNo);
 		}
 		
 		System.out.println("·¹½ÃÇÇ list=" + list);
