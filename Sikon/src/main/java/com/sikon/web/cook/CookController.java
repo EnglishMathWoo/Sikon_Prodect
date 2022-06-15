@@ -321,6 +321,9 @@ public class CookController {
 		}
 
 		search.setPageSize(pageSize);
+		
+		System.out.println("!$#@%%%@!");
+		System.out.println(mentorId);
 
 		User user = userService.getUser(mentorId);
 
@@ -341,7 +344,7 @@ public class CookController {
 //		modelAndView.addObject("resultPage", resultPage1);
 		modelAndView.addObject("search", search);
 
-		modelAndView.setViewName("forward:/cook/listCook3.jsp");
+		modelAndView.setViewName("forward:/cook/metorChannerl.jsp");
 
 		return modelAndView;
 	}

@@ -344,7 +344,8 @@ $(function() {
 		var cookLocation = $("#cookLocation").val();
 		console.log("cookLocation: "+cookLocation);
 		
-
+		var uid="${uid }";
+		console.log("uid: "+uid);
 		
 		
 		
@@ -353,23 +354,32 @@ $(function() {
 	    IMP.request_pay({
 	    	pg : "kakaopay", 
 	        pay_method : payment,
-	        merchant_uid : '19159',
+	        merchant_uid : uid ,
 	        name : cookName ,
 	        amount : cookPrice ,
 	        buyer_name : userName ,
 	        buyer_tel : phone ,
-	        cookLocation : cookLocation ,
+	        cookLocation : cookLocation
 
 	    }, function(rsp) {
-	        if ( rsp.success ) {
-	            alert("성공! imp_uid: "+rsp.imp_uid+" / merchant_uid(orderkey): "+rsp.merchant_uid);
-	            fncAddApply();
-	        } else {
-	        	alert("실패.. 코드: "+rsp.error_code+" / 메시지: "+rsp.error_msg);
-	            
-	        }
+	    	console.log(rsp);
+	    	$.ajax({
+
+	        	type : "POST",
+	        	url : "/apply/json/verifyIamport?imp_uid=" + rsp.imp_uid 
+	        	
+	        }).done(function(data) {
+	        	
+	        	console.log(data);
+	        	
+	        	if(rsp.paid_amount == data.response.amount){
+		        	alert("결제 및 결제검증완료");
+		        	fncAddApply();
+	        	} else {
+	        		alert("결제 실패");
+	        	}
+	        });
 	    });
-		
 	}
 	    //*/
     
@@ -395,7 +405,7 @@ $(function() {
 		 </div>
 
 <!-- 결제하기 /////////////////////////////////////-->		
-		
+	  <input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">	
 	<input type="hidden" id="cookName" value="${cook.cookName }"/>
 	<input type="hidden" id="cookPrice" value="${cook.cookPrice }"/>
 	<input type="hidden" id="phone" value="${user.phone }"/>
