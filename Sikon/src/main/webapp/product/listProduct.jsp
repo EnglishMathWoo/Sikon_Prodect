@@ -196,7 +196,7 @@ div.emptyProd{
 
 .theme:hover {
   border: none;
-  width: 150px;
+  width: 100px;
   height: 36px;
   color: #fff;
   font-size: 15px;
@@ -206,7 +206,7 @@ div.emptyProd{
 }
 
 .theme{
-  width: 150px;
+  width: 100px;
   height: 36px;
   color: #937062;
   border: 1px solid #937062;
@@ -217,7 +217,7 @@ div.emptyProd{
 
 .act{
   border: none;
-  width: 150px;
+  width: 100px;
   height: 36px;
   color: #fff;
   font-size: 15px;
@@ -244,9 +244,9 @@ div.emptyProd{
 				 var themeCondition = $("#themeCondition").val();
 				 console.log(themeCondition);
 				 ///* 
-				 if(themeCondition == 'all'){
+				 if(themeCondition == 'mk'){
 					 $(".theme").removeClass('act');
-					 $(".themeAll").addClass('act');
+					 $(".themeMk").addClass('act');
 				 }else if(themeCondition == 'tw'){
 					 $(".theme").removeClass('act');
 					 $(".themeTw").addClass('act');
@@ -255,7 +255,7 @@ div.emptyProd{
 					 $(".themeCw").addClass('act');
 				 }else{
 					 $(".theme").removeClass('act');
-					 $(".themeMk").addClass('act');
+					 $(".themeAll").addClass('act');
 				 }
 				//*/ 
 				 
