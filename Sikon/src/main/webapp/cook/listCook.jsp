@@ -45,14 +45,14 @@
       <style>
 
         .bi-heart{
-            font-size: 30px;
-            line-height: 30px;
+            font-size: 20px;
+            line-height: 20px;
             color:crimson;
         }
 
         .bi-heart-fill{
-            font-size: 30px;
-            line-height: 30px;
+            font-size: 20px;
+            line-height: 20px;
             color:crimson;
         }
 
@@ -62,9 +62,13 @@
 <style>
 
 div.container {
-	padding-top: 10px;
+	padding-top: 200px;
 	
 }
+
+div.channel {
+	padding-top: 10px;
+} 
 
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
@@ -183,12 +187,6 @@ p {
 	height:300px;
 } 
 
-#themeAll{
-	color:#937062;
-	text-decoration-line: none;
-}
-
-
 div.emptyProd{
 	border: 1px solid #937062;
 	padding : 90px;
@@ -217,6 +215,39 @@ div.emptyProd{
 	font-weight: bold;
 	font-size: large;
 }
+
+
+.theme:hover {
+  border: none;
+  width: 100px;
+  height: 36px;
+  color: #fff;
+  font-size: 15px;
+  background: #937062;
+  font-family: 'Gowun Batang', serif;
+  
+}
+
+.theme{
+  width: 100px;
+  height: 36px;
+  color: #937062;
+  border: 1px solid #937062;
+  font-size: 15px;
+  background: #f7f7f7;
+  font-family: 'Gowun Batang', serif;
+}
+
+.act{
+  border: none;
+  width: 100px;
+  height: 36px;
+  color: #fff;
+  font-size: 15px;
+  background: #937062;
+  font-family: 'Gowun Batang', serif;
+}
+
 
 </style>
 
@@ -252,6 +283,47 @@ div.emptyProd{
 		
 
 	
+		 
+		 $(function() {
+			 
+			 var themeCondition = $("#themeCondition").val();
+			 console.log(themeCondition);
+			 ///* 
+			 if(themeCondition == 'de'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themede").addClass('act');
+				 
+			 }else if(themeCondition == 'ko'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themeko").addClass('act');
+				 
+			 }else if(themeCondition == 'ch'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themech").addClass('act');
+				 
+			 }else if(themeCondition == 'an'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themean").addClass('act');
+				 
+			 }else if(themeCondition == 'jp'){
+				 
+				 $(".theme").removeClass('act');
+				 $(".themejp").addClass('act');
+				 
+			 }else{
+				 
+				 $(".theme").removeClass('act');
+				 $(".themeAll").addClass('act');
+				 
+			 }
+			 
+			//*/ 
+			
+		 });
 		 
 		 
 
@@ -444,17 +516,17 @@ div.emptyProd{
 					                			}
 						                		
 						                		if(JSONData.list[i].heartCount == '0'){
-						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</p>";
+						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' ></p>";
 						                		}else{
 						                			
-						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</p>";
+						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' ></p>";
 						                		}
 						                
 						                			
 						                			
 						                		
 						                		
-							                     var displayValue = "<div class='container'>"
+							                     var displayValue = "<div class='container channel'>"
 							                    	 				+"<div class='row' id='target'>"
 							                    	 				+"<td align='left'></td>"
 							                    	 				+"<div class='row'>"
@@ -464,7 +536,7 @@ div.emptyProd{
 							                     					+"<table><tr class='liketable'>"
 							                     					+"<td>"
 							                     					+heartCount
-							                     					+"</td><td class='likes'>&nbsp;좋아요 "+JSONData.list[i].hearthit+"</td></tr>	</table></div>"
+							                     					+"</td><td class='likes'>&nbsp;좋아요 "+JSONData.list[i].hearthit+"개</td></tr>	</table></div>"
 							                     					+"<div class='col-xs-4 col-md-4'>"
 						                     						+"<div class='row'>"
 						                     						+"<div><h4><strong>"+JSONData.list[i].cookName+"</strong></h4></div><br>"   
@@ -580,16 +652,17 @@ div.emptyProd{
 
 		    <br/><hr/><br/>
     	<form class="form-inline" name="detailForm">
-	      <nav class="ref-sort" >
-	      <ul>
-	        <li><a href="#" id="themeAll" class="theme" value="all">모두보기</a></li>
-	        <li><a href="#" class="theme" value="KO">한식</a></li>
-	        <li><a href="#" class="theme" value="JA">일식</a></li>
-	        <li><a href="#" class="theme" value="AM">양식</a></li>	        
-	        <li><a href="#" class="theme" value="CH">중식</a></li>
-	        <li><a href="#" class="theme" value="DE">간식</a></li>
-	      </ul>
+    	
+    	<nav class="ref-sort" >
+	      <button class="theme themeAll" id="themeAll" value="all">모두보기</button>
+	      <button class="theme themeko" value="ko">한식</button>
+	      <button class="theme themeja" value="ja">일식</button>
+	      <button class="theme themean" value="an">양식</button>
+	      <button class="theme themech" value="ch">중식</button>
+	      <button class="theme themede" value="de">간식</button>
 	    </nav>
+    	
+
 <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition}"/>
  
 

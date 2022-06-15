@@ -44,28 +44,18 @@ public class RankingServiceImpl implements RankingService{
 	public Map<String, Object> getRecipeList(Search search) throws Exception {
 		System.out.println("search=" + search);
 		List<Recipe> list = rankingDao.getRecipeList(search);
-		int totalCount = rankingDao.getRecipeCount(search);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		map.put("totalCount", new Integer(totalCount));
 		System.out.println("list=" + list);
 
 		return map;
 	}
 	
-	// 쿠킹클래스 리스트 조회
-	public Map<String, Object> getCookList(Search search) throws Exception {
-		System.out.println("search=" + search);
-		List<Recipe> list = rankingDao.getCookList(search);
-		int totalCount = rankingDao.getCookCount(search);
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list);
-		map.put("totalCount", new Integer(totalCount));
-		System.out.println("list=" + list);
-
-		return map;
+	//즐겨찾는 멘토 날짜 저장
+	public void addLoveMentor(String userNickname) throws Exception{
+		rankingDao.insertLoveMentor(userNickname);
 	}
+	
 
 }

@@ -20,8 +20,21 @@ private int ingredientNo;
 private String ingredientName;
 private String ingredientAmount;
 private int recipeViews;
+private int bookmarkStatus;
 
 
+
+
+
+public int getBookmarkStatus() {
+	return bookmarkStatus;
+}
+
+
+
+public void setBookmarkStatus(int bookmarkStatus) {
+	this.bookmarkStatus = bookmarkStatus;
+}
 
 
 

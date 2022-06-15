@@ -75,6 +75,10 @@ body{
     
     color:green;
 }
+
+th{
+text-align: center;
+}
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->

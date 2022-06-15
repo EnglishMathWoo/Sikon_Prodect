@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
+import com.sikon.service.bookmark.BookmarkService;
 import com.sikon.service.domain.Ingredient;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
@@ -42,6 +43,10 @@ public class RecipeController {
 	@Autowired
 	@Qualifier("reviewServiceImpl")
 	private ReviewService reviewService;
+	
+	@Autowired
+	@Qualifier("bookmarkServiceImpl")
+	private BookmarkService bookmarkService;
 
 	public RecipeController() {
 		System.out.println(this.getClass());
@@ -131,17 +136,22 @@ public class RecipeController {
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
-
-		search.setPageSize(pageSize);
+		
+		
+			
+			search.setPageSize(pageSize);
 
 		// 레시피+재료를 list로 한 번에 받음
-		List list = recipeService.getRecipe(recipeNo);
+		List<Recipe> list = recipeService.getRecipe(recipeNo);
 		String category="REC";
 		Map map=reviewService.getReviewList(search, category, recipeNo);
 		System.out.println("리뷰map결과"+map);
 		
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute("user");
+		
+		int bookmarkStatus = bookmarkService.checkDuplicate(recipeNo, user.getUserId());
+		list.get(0).setBookmarkStatus(bookmarkStatus);
 		
 		//레시피 조회수 +1
 		Recipe recipe = recipeService.getRecipeName(recipeNo);
@@ -234,7 +244,6 @@ public class RecipeController {
 
 		System.out.println("/recipe/listRecipe :  POST/get");
 
-		System.out.println("search:" + search);
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -243,7 +252,6 @@ public class RecipeController {
 		if(search.getSearchCondition()==null) {
 			search.setSearchCondition("0");
 		}
-		System.out.println("orderCondition=" + search.getOrderCondition());
 
 		if (search.getOrderCondition() == null) {
 			search.setOrderCondition("0");
@@ -253,14 +261,14 @@ public class RecipeController {
 			search.setThemeCondition(null);
 		}
 		
-		System.out.println("Theme: "+search.getThemeCondition());
-		System.out.println("orderCondition=" + search.getOrderCondition());
 
 		search.setPageSize(pageSize);
+
 
 		// Business logic 수행
 		Map<String, Object> map = recipeService.getRecipeList(search);
 
+		
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 

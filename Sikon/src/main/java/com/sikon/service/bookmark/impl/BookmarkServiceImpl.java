@@ -32,9 +32,10 @@ public class BookmarkServiceImpl implements BookmarkService {
 	}
 
 	/// Method
-	public void addBookmark(Bookmark bookmark) throws Exception {
-		System.out.println("bookmark=" + bookmark);
-		bookmarkDao.addBookmark(bookmark);
+	public void addBookmark(int recipeNo, String userId) throws Exception {
+		System.out.println("recipeNo=" + recipeNo);
+		System.out.println("userId=" + userId);
+		bookmarkDao.addBookmark(recipeNo,userId);
 	}
 
 	public Map<String, Object> getBookmarkList(Search search, String userId) throws Exception {
@@ -53,10 +54,14 @@ public class BookmarkServiceImpl implements BookmarkService {
 		return map;
 	}
 
-	public void deleteBookmark(int bookmarkNo) throws Exception {
-		System.out.println("bookmarkNo=" + bookmarkNo);
-		bookmarkDao.deleteBookmark(bookmarkNo);
+	public void deleteBookmark(int recipeNo, String userId) throws Exception {
+		bookmarkDao.deleteBookmark(recipeNo,userId);
 
+	}
+
+	@Override
+	public int checkDuplicate(int recipeNo, String userId) throws Exception {
+		return bookmarkDao.checkDuplicate(recipeNo,userId);
 	}
 
 

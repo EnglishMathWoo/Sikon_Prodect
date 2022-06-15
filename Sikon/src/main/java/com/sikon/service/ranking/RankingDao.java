@@ -14,13 +14,7 @@ public interface RankingDao{
 	// SELECT LIST
 	public List<Recipe> getRecipeList(Search search) throws Exception;
 	
-	// SELECT ROW Count
-	public int getRecipeCount(Search search) throws Exception;
-	
-	// SELECT LIST
-	public List<Recipe> getCookList(Search search) throws Exception;
-	
-	// SELECT ROW Count
-	public int getCookCount(Search search) throws Exception;
-	
+	//즐겨찾는 멘토 날짜 저장
+	public void insertLoveMentor(String userNickname) throws Exception;
+		
 }

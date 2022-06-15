@@ -9,7 +9,6 @@
 <!DOCTYPE html>
 
 <html lang="ko">
-	
 <head>
 	<meta charset="EUC-KR">
 	
@@ -63,6 +62,7 @@ body {
 }
 .row {
 	font-family: 'Gowun Batang', serif;
+	margin-top: 87px;
 }
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
@@ -121,13 +121,18 @@ article img{width:100%;}/* Force the image to have the full width of parent at a
   min-width: 100%;
   max-height: 500px;
 } 
-
 /* [RECIPE LIST] 폰트 적용 */
 .wrapper{
 font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-
-/* 레시피 삭제 버튼 css */
+/* 검색, 정렬조건 css */
+.condition{
+font-family: 'Gowun Batang', serif;
+width: 100px;
+float:right;
+border-color:#D7D7D7;
+}
+/* 레시피 등록 버튼 css */
 .submit
  {
   display: block;
@@ -145,7 +150,20 @@ font-family: 'Tiro Devanagari Sanskrit', serif;
   	font-family: 'Gowun Batang', serif;
   
 }
+/* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
+hr {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
 
+/* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
+p {
+    margin: 0 0 0px;
+    font-family: 'Gowun Batang', serif;
+    
+}
 
 .container {
     padding-right: 15px;
@@ -153,18 +171,12 @@ font-family: 'Tiro Devanagari Sanskrit', serif;
     margin-right: auto;
     margin-left: auto;
     padding-top:170px;
-    
 }
 
 .hoc{
 padding-top:0px;
 }
 
-
-.update{
-    color: #2e8eb3;
-    font-size: 20px;
-}
 
 </style>
 
@@ -221,18 +233,18 @@ padding-top:0px;
 	
 	
 <div class="container mt-5 px-2">
-<!-- ################################################################################################ -->
+<br>
+
 <div class="center btmspace-50">
 			<br />
 			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
-				<br> | M Y R E C I P E | <br><br><br><br>
+				<br> | M Y R E C I P E | <br>
 			</h3>
 		</div>
 		
 		  		    <button type="button" class="submit">삭제</button>
 		  
 		    
-		    <br/><br/>
  
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
@@ -268,6 +280,12 @@ padding-top:0px;
   
      
 </div>
+
+<c:if test="${empty list}">
+      	<h3 align="center" >등록한 레시피가 없습니다.</h3>
+      	<br>
+     </c:if>
+     
 	  </div>
 </body>
 

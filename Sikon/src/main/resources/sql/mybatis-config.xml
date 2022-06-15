@@ -34,6 +34,7 @@
 		<typeAlias alias="alarm" type="com.sikon.service.domain.Alarm" />
 		<typeAlias alias="point" type="com.sikon.service.domain.Point" />
 		<typeAlias alias="ranking" type="com.sikon.service.domain.Ranking" />
+		<typeAlias alias="love" type="com.sikon.service.domain.Love" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
@@ -59,6 +60,7 @@
 		<mapper resource="sql/PointMapper.xml"/>
 		<mapper resource="sql/KakaoMapper.xml"/>
 		<mapper resource="sql/RankingMapper.xml"/>
+		<mapper resource="sql/LoveMapper.xml"/>
 	</mappers>
 
 </configuration>

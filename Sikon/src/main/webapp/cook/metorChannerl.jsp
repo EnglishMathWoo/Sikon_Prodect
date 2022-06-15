@@ -302,31 +302,92 @@ p {
 	<script type="text/javascript">
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage);
+	
 		$("form").attr("method" , "POST").attr("action" , "/cook/mentor").submit();
 		
 	}
-	
-	 $(function() {
-			$( "button.btn.btn-default" ).on("click" , function() {
-				fncGetList(1); 
-			});
-		 });	
+
 		 
-		 $(function() {
+	 $( document ).ready(function() {
 			
 					$( ".imgover" ).on("click" , function() {
 					console.log($(this).attr("value"));
 					self.location ="/cook/getCook?cookNo="+$(this).attr("value")+"&menu=search"
 					});
 					
-					$( ".recipe" ).on("click" , function() {
-						console.log($(this).attr("value"));
-						self.location ="/recipe/listMyRecipe?mentorId=${recipe.writer.userId}"
-						});
+
 					
-		 });
+					$("#addLove").on("click", function() {
+						var userNickname = $("input:hidden[name='userNickname']").val();
+						//console.log(recipeNo);
+							self.location = "/love/addLove?userNickname="+userNickname;
+						});					
+					
+		
 		 
-		 
+	
+		   	 $(window).scroll(function() {
+	                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
+	                	
+	                	var cpage = $("#currentPage").val();
+	                	console.log("cpage1: "+cpage);
+	                	cpage = Number(cpage)+1;
+	                	console.log("cpage2: "+cpage);
+
+	        	   		
+	        	   		
+				            $.ajax({
+				                
+				                  url : "/cook/json/listMyCook?mentorId=${user.userId}",
+				                  method : "POST" ,
+				                  data : JSON.stringify({
+				                	  currentPage : cpage
+				                  }), 
+				                  dataType : "json" ,
+				                  headers : {
+				                     "Accept" : "application/json",
+				                     "Content-Type" : "application/json"
+				                  },
+				                success : function(JSONData , status) {
+				                	 
+				                	$("#currentPage").val(cpage)
+								
+					               
+				                	for(var i=0; i<JSONData.list.length; i++){
+				                		
+				                		
+				                		
+		
+				                
+					                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
+					                     					+"<div id='latest' class='group'>"
+					                     					+"<article class='one_third first'>"
+					                     					+"<a class='imgover' value='"+JSONData.list[i].cookNo+"' >"					                     				
+					                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' id='image' width='320' height='300'></a>"
+				                     						+"<div class='excerpt'>"
+				                     						+"<h4 class='heading' >"+JSONData.list[i].cookName+"</h4>"
+				                     						+"<h6>"+JSONData.list[i].cookBrief+"</h6>"				                     						
+				                     						+"<ul class='meta'>"
+				                     			            +"<li>"+ JSONData.list[i].cookBrief +"</li>"
+				                     			            +"<li>&nbsp;"+ JSONData.list[i].cookRecruit +"</li>"
+				                     			            +"<li>&nbsp;"+ JSONData.list[i].cookTheme +"</li>"				                     			           				                     			          	
+				                     						+"</ul></div></article></div></div>"
+				                     						
+				                     						
+					               	$( '#scrollList' ).append(displayValue);	
+				                     						
+				                     						 		
+				                    						
+				                     						
+				                	}//for 
+				                 }
+				            });//ajax
+				           
+	                }//if
+	            });//function
+	 
+	   });
+	 		 
 					
 </script>
 			 </head>
@@ -334,14 +395,14 @@ p {
 <body>
 
 	
-	<!-- ToolBar Start /////////////////////////////////////-->
+
 	<jsp:include page="/layout/toolbar.jsp" />
 
-   	<!-- ToolBar End /////////////////////////////////////-->
-<div class="container channel">	
-	<!--  화면구성 div Start /////////////////////////////////////-->
 
-        <!-- Column -->
+<div class="container channel">	
+
+
+
         <div class="card "> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
             <div class="card-body little-profile text-center">
                 <div class="pro-img"><img src="/resources/images/uploadFiles/kim3.jpg" alt="user"></div>
@@ -349,16 +410,18 @@ p {
 
             </div>
         </div>
+				<input type="hidden" name="userNickname" id="userNickname" value="${user.userNickname }" />
 
-<!-- ################################################################################################ -->
 
 	<div class="wrapper row3">
-	 <input type="hidden" id="currentPage" name="currentPage" value=""/>
+
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
+		    
+		    <i id="addLove"  class="fa-regular fa-bookmark fa-2x"></i>
 		  		    <button type="button" class="submit">삭제</button>
 		  		
 		  
@@ -367,7 +430,7 @@ p {
     </section>
   	</div>
  
-
+	 <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
 <div class="row">
 	<c:set var="i" value="0" />
@@ -392,17 +455,17 @@ p {
         </div>
       </article>
      
-    </div>
-    <!-- ################################################################################################ -->
+    </div>  
   </div>
   </c:forEach>
   
-     <jsp:include page="../common/pageNavigator_new.jsp"/>
+   <div  id="scrollList"></div>
 </div>
-	  </div>
 	  
 	  
-	  
+
+     </div>  
+	
 	  
 </body>
 

@@ -50,13 +50,15 @@ div.container{
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 			 $( "button.btn.btn-default" ).on("click" , function() {
-				 self.location = "/purchase/listPurchase"
+				 history.go(-1);
 			});
 			
 			 $( "#update" ).on("click" , function() {
 					self.location = "/purchase/updatePurchase?tranNo=${purchase.tranNo}"
 					
 			});
+			 
+			
 			 
 		});
 		
@@ -85,32 +87,15 @@ div.container{
 		 <div class="row">
 		<div class="col-xs-12 col-md-12" align="center">
 		
-		<c:choose>
 		
-		<c:when test="${purchase.purchaseProd.prodThumbnail.contains('&')}">
+		<td class="ct_write01">
+				
+			<c:forEach var="name" items="${purchase.purchaseProd.prodThumbnail.split('&')}">
+				<img src="/resources/images/uploadFiles/${name}" width="300" height="300"/>
+			</c:forEach>
 		
-			<td class="ct_write01">
-				<c:choose>
-				<c:when test="${purchase.purchaseProd.prodThumbnail.contains('mp4')}">
-					<c:forEach var="name" items="${purchase.purchaseProd.prodThumbnail.split('&')}">
-						<video width="400" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"></video>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="name" items="${purchase.purchaseProd.prodThumbnail.split('&')}">
-						<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
-					</c:forEach>
-				</c:otherwise>
-				</c:choose>		
+		</td>
 		
-			</td>
-		
-		</c:when>
-		
-		<c:otherwise>
-			<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail}" width="300" height="300" align="absmiddle"/>
-		</c:otherwise>
-		</c:choose>
 
 		</div>
 		</div>

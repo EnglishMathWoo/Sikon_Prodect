@@ -85,6 +85,10 @@ div.list{
 	font-weight: bold;
 }
 
+.prodcontent{
+	text-align: left;
+}
+
 .image{
 	width: 105px;
 }

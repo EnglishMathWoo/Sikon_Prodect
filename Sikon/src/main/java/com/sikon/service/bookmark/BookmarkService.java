@@ -10,12 +10,14 @@ import com.sikon.service.domain.Bookmark;
 public interface BookmarkService {
 
 	//책갈피 등록
-	public void addBookmark(Bookmark bookmark) throws Exception;
+	public void addBookmark(int recipeNo, String userId) throws Exception;
 
 	//책갈피 리스트 조회
 	public Map<String, Object> getBookmarkList(Search search,String userId) throws Exception;
 
 	//책갈피 삭제
-	public void deleteBookmark(int bookmarkNo) throws Exception;
+	public void deleteBookmark(int recipeNo, String userId) throws Exception;
+
+	public int checkDuplicate(int recipeNo,String userId) throws Exception;
 
 }

@@ -1,5 +1,7 @@
 package com.sikon.web.apply;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +23,7 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.apply.ApplyService;
 import com.sikon.service.cook.CookService;
+import com.sikon.service.user.UserService;
 import com.sikon.service.domain.Apply;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.Review;
@@ -47,6 +50,10 @@ public class ApplyController {
 		@Qualifier("reviewServiceImpl")
 		private ReviewService reviewService;
 		
+		@Autowired
+		@Qualifier("userServiceImpl")
+		private UserService userService;
+		
 		//setter Method 구현 않음
 			
 		public ApplyController() {
@@ -71,9 +78,25 @@ public class ApplyController {
 			Cook cook=cookService.getCook(cookNo);
 			User user = (User)session.getAttribute("user");
 			
+			User applier = userService.getUser(user.getUserId());
+			
+			//==================================================================================
+			//결제 uid 만들기
+			LocalDateTime now = LocalDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss");
+			String nowrandom = now.format(formatter);   
+			
+			String userid = applier.getUserId().replace("@", "");
+			String sub = userid.replace(userid.substring(userid.length()-4, userid.length()), "");
+			String uid = sub+nowrandom;	
+			System.out.println("uid: "+uid);
+			//==================================================================================			
+						
+			
 			ModelAndView modelAndView=new ModelAndView();
 			modelAndView.addObject("cook", cook);
-			modelAndView.addObject("user", user);
+			modelAndView.addObject("uid", uid);
+			modelAndView.addObject("user", applier);
 			//addObject : key와 value를 담아 보낼 수 있는 메서드
 
 
@@ -83,7 +106,7 @@ public class ApplyController {
 			return modelAndView;
 		}
 		
-		//@RequestMapping("/addPurchase.do")
+		
 		@RequestMapping( value="addApply", method=RequestMethod.POST )
 		public ModelAndView addApply(@ModelAttribute("apply") Apply apply
 				,@RequestParam("cookNo") int cookNo, HttpServletRequest request,HttpSession session) throws Exception {
@@ -94,8 +117,7 @@ public class ApplyController {
 			
 			User user = (User)session.getAttribute("user");
 			
-			
-			
+		
 		
 			
 			
@@ -103,13 +125,13 @@ public class ApplyController {
 			apply.setApplier(user);  
 			apply.setApplyStatus("100"); 
 			apply.setReviewStatus("001"); 
-			 //purchase 객체를  @ModelAttribute로 가져왔으니 trancode를 set해줍니다
+			
 		
-			int buy= apply.getCookStatus();   //사는 상품수를 가져와 buy에 넣어줍니다
-			int cookNoo=cook.getCookNo(); //상품번호를 가져와 prodNo에 넣어줍니다
+			int buy= apply.getCookStatus();   //사는 신청자수를 가져와 buy에 넣어줍니다
+			int cookNoo=cook.getCookNo(); //쿠킹클래스번호를 가져와 cookNo에 넣어줍니다
 					
 			System.out.println(apply);
-			applyService.buyCook(buy, cookNoo); //buyProd에 넣어줍니다
+			applyService.buyCook(buy, cookNoo); //buyCook에 넣어줍니다
 			applyService.addApply(apply);
 			
 			
@@ -121,7 +143,7 @@ public class ApplyController {
 			return modelAndView;
 		}
 		
-		//@RequestMapping("/getPurchase.do")
+
 		@RequestMapping( value="getApply" )
 		public ModelAndView getApply(HttpServletRequest request,@RequestParam("applyNo") int applyNo
 		
@@ -139,8 +161,7 @@ public class ApplyController {
 			
 			HttpSession session=request.getSession();
 			User user = (User)session.getAttribute("user");
-			apply.setApplier(user);
-			// Model 과 View 연결
+			apply.setApplier(user);		
 			apply.setClassCook(cook);
 			
 			String category="COOK";
@@ -281,7 +302,6 @@ public class ApplyController {
 			return modelAndView;
 		}		
 		
-		//@RequestMapping("/listSale.do")
 		@RequestMapping( value="listSale" )
 
 		public ModelAndView listSale( @ModelAttribute("search") Search search ,  HttpServletRequest request) throws Exception{
@@ -341,8 +361,7 @@ public class ApplyController {
 		}
 		
 		@RequestMapping( value="saleCount", method=RequestMethod.GET )
-		public String saleCount(@ModelAttribute("apply") Apply apply
-				, HttpServletRequest request,HttpSession session,Model model) throws Exception {
+		public String saleCount(@ModelAttribute("apply") Apply apply, Model model) throws Exception {
 			
 			System.out.println("/apply/addApply : POST");
 
@@ -352,7 +371,6 @@ public class ApplyController {
 		
 			
 			model.addAttribute(apply);
-
 
 			
 			return "forward:/apply/listSale.jsp";

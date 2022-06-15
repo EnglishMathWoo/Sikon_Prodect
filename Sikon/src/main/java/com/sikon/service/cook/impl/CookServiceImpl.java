@@ -93,6 +93,7 @@ public class CookServiceImpl implements CookService{
 		map.put("list", list);
 		map.put("totalCount", new Integer(totalCount));
 		System.out.println(list);
+		System.out.println("Á»¿Í¶ó");
 
 		return map;
 	}

@@ -18,6 +18,7 @@ DROP TABLE apply CASCADE CONSTRAINTS;
 DROP TABLE alarm CASCADE CONSTRAINTS;
 DROP TABLE ranking CASCADE CONSTRAINTS;
 DROP table point CASCADE CONSTRAINTS; 
+DROP table love  CASCADE CONSTRAINTS; 
 
 DROP SEQUENCE seq_coupon_coupon_no;
 DROP SEQUENCE seq_couponhodler_issue_no;
@@ -38,6 +39,7 @@ DROP SEQUENCE seq_apply_apply_no;
 DROP SEQUENCE seq_alarm_alarm_no;
 DROP SEQUENCE seq_ranking_ranking_no;
 DROP SEQUENCE seq_point_point_no;
+DROP SEQUENCE seq_love_love_no;
 
 CREATE SEQUENCE seq_coupon_coupon_no INCREMENT BY 1 START WITH 10000;
 CREATE SEQUENCE seq_couponhodler_issue_no INCREMENT BY 1 START WITH 10000;
@@ -57,7 +59,8 @@ CREATE SEQUENCE seq_heart_heart_no	  INCREMENT BY 1 START WITH 1;
 CREATE  SEQUENCE  seq_apply_apply_no	 INCREMENT  BY  1  START  WITH  10000;
 CREATE  SEQUENCE  seq_alarm_alarm_no	 INCREMENT  BY  1  START  WITH  10000;
 CREATE  SEQUENCE  seq_ranking_ranking_no INCREMENT  BY  1  START  WITH  10000;
-CREATE SEQUENCE seq_point_point_no INCREMENT BY 1 START WITH 10000; 
+CREATE SEQUENCE seq_point_point_no INCREMENT BY 1 START WITH 10000;
+CREATE SEQUENCE seq_love_love_no    INCREMENT BY 1 START WITH 10000;  
 
 CREATE TABLE users ( 
 	user_id 	VARCHAR2(50)	NOT NULL,
@@ -264,6 +267,13 @@ CREATE TABLE heart (
 	PRIMARY KEY(heart_no)
 );
 
+CREATE TABLE love(
+love_no                 NUMBER NOT NULL,
+user_nickName      VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_nickname) ON DELETE CASCADE,
+user_id              VARCHAR2(50)   	REFERENCES  users(user_id) ON DELETE CASCADE,
+PRIMARY KEY(love_no)
+);
+
 CREATE TABLE review(
 	review_no  NUMBER 		 		NOT NULL,
            review_category        VARCHAR2(20)  NOT NULL,
@@ -291,8 +301,8 @@ CREATE TABLE ranking (
 	ranking_no NUMBER NOT NULL,
 	recipe_no NUMBER, 
 	view_date DATE, 
-	cook_no NUMBER, 
-	heart_date DATE, 
+	user_nickname VARCHAR2(200), 
+	love_date DATE, 
 	search_keyword VARCHAR2(200), 
 	search_date DATE, 
 	PRIMARY KEY(ranking_no) 

@@ -42,25 +42,46 @@
 
 <style>
 body{
-	padding-top : 50px;
 	font-family: 'Nanum Myeongjo', serif;
-	font-family: 'Open Sans', sans-serif;
 }
 .listsale{
 	padding-top : 170px;
+	padding-bottom: 200px;
 }
-.jaewoong th{
+.subtitle th{
 	text-align:center;
 }
+
+.subtitle{
+	border-bottom: 1px solid #937062;
+	border-top: 2px solid #937062;
+}
+
  div.row{
 	font-family: 'Nanum Myeongjo', serif;
 }
- div.page-header{
-	font-family: 'Nanum Myeongjo', serif;
-}  
+ 
 table {
 	font-family: 'Nanum Myeongjo', serif;
-}       
+}    
+th{
+	height: 50px;
+	font-size: 15px
+}
+td{
+	height: 50px;
+	border-bottom:  1px solid #D7D7D7;
+}
+.status{
+	font-weight: bold;
+}
+.cancel{
+	color: #898989;
+}
+h3{
+	font-family: 'Nanum Myeongjo', serif;
+	color: #5a443b;
+}
 </style>
 	<script type="text/javascript">
 
@@ -102,21 +123,9 @@ table {
 				
 				self.location ="/purchase/updatedivyStatus?tranNo="+message1+"&divyStatus="+message2;
 			});
-
-			
-			$( "td.prodNum" ).on("click" , function() {
-				console.log('상세보기');
-				var message1 = $(this).attr("value1");
-				console.log(message1);
-				var message2 = $(this).attr("value2");
-				console.log(message2);
-				self.location ="/product/getProduct?prodNo="+message1+"&menu="+message2;
-			});
-			
-
 			
 			
-			$( "td.user" ).on("click" , function() {
+			$( ".user" ).on("click" , function() {
 				console.log('유저정보');
 				var message = $(this).attr("value");
 				console.log(message);
@@ -124,9 +133,17 @@ table {
 				self.location ="/user/getUser?userId="+message;
 			});
 
-			$( "td.prodNum" ).css("color" , "#f08080");
-			$( "td.divy" ).css("color" , "#ffb6c1");
-			$( "td.user" ).css("color" , "#708090");
+			$( ".tran" ).on("click" , function() {
+				var tranNo = $(this).attr("value");
+				console.log(tranNo);
+				
+				self.location ="/purchase/getPurchase?tranNo="+tranNo;
+			});
+			
+			
+			
+			
+			$( "td.divy" ).css("color" , "#f0445c");
 			
 		});	
 	</script>		
@@ -141,9 +158,9 @@ table {
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container listsale">
-	
-		<div class="page-header text-info">
-	       <h3 style="color:#bc8f8f">판매목록조회</h3>
+	<br>
+		<div class="text-info text-center">
+	       <h3>| <span style="font-size: 25px">판매목록관리</span> |</h3>
 	    </div>
 	    
 	    <div>
@@ -181,15 +198,15 @@ table {
 				 <br/>
 				
 		      <!--  table1 Start /////////////////////////////////////-->
-		      <table class="table table-hover table-striped">
+		      <table style="width: 100%">
 		      
 		        <thead>
-		          <tr class="jaewoong">
+		          <tr class="subtitle">
 		            <th align="center">No</th>
+		            <th align="center">주문일자</th>
+		            <th align="center">주문일련번호</th>
 		            <th align="center">주문번호</th>
-		            <th align="center">상품번호</th>
 		            <th align="center">배송현황</th>
-		            <th align="center">현재상태</th>
 		            <th align="center">구매회원</th>
 		          </tr>
 		        </thead>
@@ -202,48 +219,32 @@ table {
 					
 					<tr>
 					  <td align="center">${ i }</td>
-					  <td align="center">${purchase.tranNo}</td>
-					  <td align="center" class="prodNum" value1="${purchase.purchaseProd.prodNo }" value2="${param.menu}" >
-						${purchase.purchaseProd.prodNo }
-					  	
-					  	<input type="hidden" value="${purchase.purchaseProd.prodNo}">
-					 	 </td>
-					  <c:choose>
-					  	<c:when test="${purchase.divyStatus.equals('000')}">
-							<td align="center">현재 <b>구매취소</b> 상태입니다.</td>
-						</c:when>
-						<c:when test="${purchase.divyStatus.equals('001')}">
-							<td align="center">현재 <b>구매완료</b> 상태입니다.</td>
-						</c:when>
-						<c:when test="${purchase.divyStatus.equals('002')}">
-							<td align="center">현재 <b>배송중</b> 상태입니다.</td>
-						</c:when>
-						<c:otherwise>
-							<td align="center">현재 <b>배송완료</b> 상태입니다.</td>
-						</c:otherwise>
-					  </c:choose>
 					  
+					  <td align="center">${purchase.orderDate}</td>
+					  <td align="center">${purchase.serialNo}</td>
+					  <td align="center" class="tran" value="${purchase.tranNo}">${purchase.tranNo}</td>
+					 	 
 					  <c:choose>
 					  		<c:when test="${purchase.divyStatus.equals('000') }">
-								<td align="center"> 구매취소</td>	
+								<td align="center" class="status cancel"> 구매취소</td>	
 							</c:when>
 							<c:when test="${purchase.divyStatus.equals('001') }">
-								<td align="center" class="divy" value1="${purchase.tranNo }" value2="${purchase.divyStatus}">배송하기</td>			
+								<td align="center" class="divy status" value1="${purchase.tranNo }" value2="${purchase.divyStatus}">배송하기</td>			
 							</c:when>
 							<c:when test="${purchase.divyStatus.equals('002') }">
 								
-								<td align="center" style="color:#87cefa" class="arrival"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}"> 배송중</td>
+								<td align="center" style="color:#2990e9" class="arrival status"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">배 송 중</td>
 							</c:when>
 							<c:when test="${purchase.divyStatus.equals('003') }">
 								
-								<td align="center"> 배송완료</td>
+								<td align="center" class="status"> 배송완료</td>
 							</c:when>
 							<c:otherwise>
 								<td></td>
 							</c:otherwise>
 					
 						</c:choose>
-					  	<td align="center" class="user" value="${purchase.buyer.userId}">${purchase.buyer.userId}</td>
+					  	<td align="center"><a href="#" class="user" style="text-decoration: none;color:#708090;" value="${purchase.buyer.userId}">${purchase.buyer.userId}</a></td>
 						
 						</tr>
 		          </c:forEach>
@@ -254,14 +255,15 @@ table {
 			 
 			
 	</div>
-	  
-</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 	
- 	
- 	<!-- PageNavigation Start... -->
+	<br>
+	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->
+	  
+</div>
+ 	
+ 	
+
 	
 </body>
 </html>

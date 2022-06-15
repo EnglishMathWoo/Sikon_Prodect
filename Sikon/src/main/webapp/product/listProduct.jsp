@@ -168,11 +168,6 @@ p {
 	height:250px;
 } 
 
-#themeAll{
-	color:#937062;
-	text-decoration-line: none;
-}
-
 
 div.emptyProd{
 	border: 1px solid #937062;
@@ -198,6 +193,38 @@ div.emptyProd{
 	color: #f7f7f7;
 }
 
+
+.theme:hover {
+  border: none;
+  width: 100px;
+  height: 36px;
+  color: #fff;
+  font-size: 15px;
+  background: #937062;
+  font-family: 'Gowun Batang', serif;
+  
+}
+
+.theme{
+  width: 100px;
+  height: 36px;
+  color: #937062;
+  border: 1px solid #937062;
+  font-size: 15px;
+  background: #f7f7f7;
+  font-family: 'Gowun Batang', serif;
+}
+
+.act{
+  border: none;
+  width: 100px;
+  height: 36px;
+  color: #fff;
+  font-size: 15px;
+  background: #937062;
+  font-family: 'Gowun Batang', serif;
+}
+
 </style>
 
 
@@ -213,6 +240,24 @@ div.emptyProd{
 		 
 			 $(function() {
 	
+				 
+				 var themeCondition = $("#themeCondition").val();
+				 console.log(themeCondition);
+				 ///* 
+				 if(themeCondition == 'mk'){
+					 $(".theme").removeClass('act');
+					 $(".themeMk").addClass('act');
+				 }else if(themeCondition == 'tw'){
+					 $(".theme").removeClass('act');
+					 $(".themeTw").addClass('act');
+				 }else if(themeCondition == 'cw'){
+					 $(".theme").removeClass('act');
+					 $(".themeCw").addClass('act');
+				 }else{
+					 $(".theme").removeClass('act');
+					 $(".themeAll").addClass('act');
+				 }
+				//*/ 
 				 
 				
 				//=========autoComplete=================================================
@@ -275,6 +320,9 @@ div.emptyProd{
 				                	
 				                	console.log(JSONData.list[0].prodThumbnail.split('&')[0]); 
 					                	 
+				                	
+				                
+				                	
 				                	for(var i=0; i<JSONData.list.length; i++){
 				                		
 				                		var status="";
@@ -300,6 +348,7 @@ div.emptyProd{
 				                     						+"</div><br></article></div></div>"
 				                     						
 				                     		
+				                     	
 				                     		
 				                     	$( '#scrollList' ).append(displayValue);	
 				                     						
@@ -382,6 +431,7 @@ div.emptyProd{
 		
 	
 </script>
+
 <!--  ///////////////////////// JavaScript End ////////////////////////// -->
 	
 </head>
@@ -454,13 +504,11 @@ div.emptyProd{
 		    
 		    <br/><hr id="hr"/><br/>
     
-	      <nav class="ref-sort" >
-	      <ul>
-	        <li><a href="#" id="themeAll" class="theme" value="all">모두보기</a></li>
-	        <li><a href="#" class="theme" value="tw">식기류</a></li>
-	        <li><a href="#" class="theme" value="cw">조리도구</a></li>
-	        <li><a href="#" class="theme" value="mk">밀키트</a></li>
-	      </ul>
+    	<nav class="ref-sort" >
+	      <button class="theme themeAll" id="themeAll" value="all">모두보기</button>
+	      <button class="theme themeTw" value="tw">식기류</button>
+	      <button class="theme themeCw" value="cw">조리도구</button>
+	      <button class="theme themeMk" value="mk">밀키트</button>
 	    </nav>
 	    
           

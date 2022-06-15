@@ -80,11 +80,6 @@ body {
     align-items: center;
 }
 
-.order:hover {
-    background:	#937062;
-    color: #f7f7f7;
-    border: 1px solid #937062
-}
 
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
@@ -189,6 +184,11 @@ border: none;
 background-color: #f7f7f7;
 }
 
+.act{
+	background-color: #937062;
+	color: #f7f7f7;
+}
+
 </style>
 
 
@@ -204,6 +204,21 @@ background-color: #f7f7f7;
 			$(document).on('click', '#recipe', function(){
 				 self.location = "/ranking/listRecipe";
 			});
+			
+			$(document).on('click', '#daily', function(){
+				 var orderCondition = $(this).attr('value');
+				 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
+			});
+			
+			$(document).on('click', '#weekly', function(){
+				 var orderCondition = $(this).attr('value');
+				 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
+			});
+			
+			$(document).on('click', '#monthly', function(){
+				 var orderCondition = $(this).attr('value');
+				self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
+			});
 		
 			$(document).on('click', '#keyword', function(){
 				 var cookNo =$(this).attr("value");
@@ -213,9 +228,32 @@ background-color: #f7f7f7;
 			$(document).on('click', '#cook', function(){
 				 self.location = "/ranking/listCook";
 			});
-				 
 			
-			   	//====================================================================
+			$(document).on('click', '.order', function(){
+				 $(".order").removeClass('act');
+				 $(this).addClass('act');
+			});
+			
+			$(function() {
+							
+				var odc = $("#orderCon").val();
+				console.log("odc: "+odc);
+				
+				if(odc == 0){
+					$(".order").removeClass('act');
+					$("#daily").addClass('act');
+				} else if(odc == 1){
+					$(".order").removeClass('act');
+					$("#weekly").addClass('act');
+				} else {
+					$(".order").removeClass('act');
+					$("#monthly").addClass('act');
+				}
+			
+			});
+			 
+			
+			/*
 			 $(function() {
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
@@ -273,9 +311,9 @@ background-color: #f7f7f7;
 					                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
 					                     						+"<ul class='meta'>"
 					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
-					                     			            +"<li>"+ JSONData.list[i].recipeDifficulty +"</li>"
-					                     			            +"<li>"+ JSONData.list[i].cookingTime +"분</li>"
-					                     			            +"<li>"+ JSONData.list[i].writer.userNickname +"</li>"
+					                     			            +"<li>&nbsp;"+ JSONData.list[i].recipeDifficulty +"</li>"
+					                     			            +"<li>&nbsp;"+ JSONData.list[i].cookingTime +"분</li>"
+					                     			            +"<li>&nbsp;"+ JSONData.list[i].writer.userNickname +"</li>"
 					                     			          	+"<li style='float:right'>조회수: "+ JSONData.list[i].recipeViews +"</li>"
 					                     						+"</ul></div></article></div></div>"
 					                     						
@@ -291,7 +329,7 @@ background-color: #f7f7f7;
 					           
 		                }//if
 		            });//function
-			 });
+			 }); */
 		           
 	</script>
 	
@@ -315,6 +353,7 @@ background-color: #f7f7f7;
 		    <div class="center btmspace-50">
 		    <br/>
 		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RANKING </h3>
+		      <div align="center" style="color:#937062; font-size:18px;"><br> TOP 20 </div>
 		    </div>
 		  
     		<form class="form-inline" name="detailForm">
@@ -325,18 +364,19 @@ background-color: #f7f7f7;
 	      <ul>
 	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;레시피&nbsp;</div></li>
 	        <li id="keyword"><div>&nbsp;검색어&nbsp;</div></li>
-	        <li id="cook"><div>&nbsp;쿠킹클래스&nbsp;</div></li>
+	        <li id="cook"><div>&nbsp;쿠킹멘토&nbsp;</div></li>
 	      </ul>  
 	      
 	      <br>
 	      
-	      <div class="orderCondition" style="float:right">
-		  	  <div class="order" id="daily">일간</div>
-		      <div class="order" id="weekly">주간</div>
-		      <div class="order" id="monthly">월간</div>
-			</div>
-	      
-	      
+			<div class="orderCondition" style="float:right">
+		  	  <div class="order" id="monthly" value="2">월간</div>
+		      <div class="order" id="weekly" value="1">주간</div>
+		      <div class="order" id="daily" value="0">일간</div>
+		    </div>
+	  
+	  		<input type="hidden" id="orderCon" value="${search.orderCondition}"/>
+	  
 	    </nav>
 	    
 	   
@@ -349,6 +389,7 @@ background-color: #f7f7f7;
   
 <div class="row">
 	
+	<c:if test="${!empty list}">
 	<c:forEach var="recipe" items="${list}">
 	<c:set var="i" value="${i+1}" />
   <div class="col-sm-6 col-md-3">
@@ -374,6 +415,16 @@ background-color: #f7f7f7;
     <!-- ################################################################################################ -->
   </div>
   </c:forEach>
+  </c:if>
+  
+  <c:if test="${empty list}">
+  <br>
+  <br>
+  <br>
+  <br>
+  	<h2 id="noRanking" style="text-align:center; font-weight:bold;">랭킹 정보가 없습니다.</h2>
+    <br>
+  </c:if>
   
      
  <div  id="scrollList"></div>

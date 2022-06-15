@@ -266,9 +266,9 @@ function tableDelete(){
 						class="col-lg-offset-1 col-lg-2 control-label">난이도</label>
 					<div class="col-lg-9">
 						<select name="recipeDifficulty" class="form-control">
-							<option value="100" selected="selected">초급</option>
-							<option value="200">중급</option>
-							<option value="300">고급</option>
+							<option value="초급" selected="selected">초급</option>
+							<option value="중급">중급</option>
+							<option value="고급">고급</option>
 						</select>
 					</div>
 				</div>
