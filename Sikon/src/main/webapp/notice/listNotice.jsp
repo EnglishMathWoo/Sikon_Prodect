@@ -176,11 +176,11 @@
           	<th align="center"></th>
           	</c:if>
           	<th align="center"></th>
-            <th align="center">공지번호</th>
+            <th align="center"  style="text-align:center">공지번호</th>
             <th align="center"></th>
-            <th align="left" >공지제목</th>
+            <th align="left"  style="text-align:center">공지제목</th>
             <th align="center"></th>
-            <th align="left">공지시간</th>
+            <th align="left" style="text-align:center">공지시간</th>
           </tr>
          </thead>
        

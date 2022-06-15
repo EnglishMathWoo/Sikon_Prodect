@@ -44,11 +44,9 @@ public class RankingServiceImpl implements RankingService{
 	public Map<String, Object> getRecipeList(Search search) throws Exception {
 		System.out.println("search=" + search);
 		List<Recipe> list = rankingDao.getRecipeList(search);
-		int totalCount = rankingDao.getRecipeCount(search);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		map.put("totalCount", new Integer(totalCount));
 		System.out.println("list=" + list);
 
 		return map;

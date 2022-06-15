@@ -86,44 +86,27 @@
 	 
 	 <!-- SQL : SELECT LIST -->
 	<select  id="getRecipeList"  parameterType="search"	resultMap="recipeSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT r.*, u.user_nickname 
-											FROM recipe r, users u  
-											WHERE r.writer_nickname=u.user_nickname 
-																						
+	  	SELECT r.*, ranking_table.count, u.user_nickname 
+										FROM recipe r, (SELECT recipe_no, count(*) count FROM ranking 
+																			
 											<if test="orderCondition != null">
-											
-											<choose>
-													<when test="orderCondition == 0  ">
-										 				ORDER BY r.recipe_views DESC
+												<choose>
+													<when test="orderCondition == 0 ">
+										 			 WHERE view_date &gt;= CURRENT_DATE-1 
 													</when>
-													</choose>
-													</if>
-
-
- ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} ) 
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+													<when test="orderCondition == 1 ">
+										 			 WHERE view_date &gt;= CURRENT_DATE-8 
+													</when>
+													<when test="orderCondition == 2 ">
+										 			 WHERE view_date &gt;= CURRENT_DATE-31 
+													</when>				
+												</choose>
+											</if>
+											GROUP BY recipe_no) ranking_table, users u 
+											WHERE ROWNUM &lt;= 20 AND r.recipe_no = ranking_table.recipe_no AND r.writer_nickname = u.user_nickname  
+											ORDER BY ranking_table.count DESC
 	 </select>
 	 
-	  <!-- SQL : SELECT ROW Count -->	 
-	 <select  id="getRecipeCount"  parameterType="search"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(	SELECT r.*, u.user_nickname
-											FROM recipe r, users u
-											where r.writer_nickname=u.user_nickname
-																								
-											<if test="orderCondition != null">
-											
-											<choose>
-											<when test="orderCondition == 0  ">
-										 				ORDER BY r.recipe_views DESC
-													</when>
-													</choose>
-													</if>
-													) countTable						
-	 </select>
 	 
 	 <!-- SQL : SELECT LIST -->
 	<select  id="getCookList"  parameterType="search"	resultMap="cookSelectMap">

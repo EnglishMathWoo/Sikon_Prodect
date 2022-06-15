@@ -323,9 +323,9 @@ background-color: #f7f7f7;
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;레시피&nbsp;</div></li>
+	        <li id="recipe"><div>&nbsp;레시피&nbsp;</div></li>
 	        <li id="keyword"><div>&nbsp;검색어&nbsp;</div></li>
-	        <li id="cook"><div>&nbsp;쿠킹클래스&nbsp;</div></li>
+	        <li id="cook"><div style="color:#DAA520;" >&nbsp;쿠킹클래스&nbsp;</div></li>
 	      </ul>  
 	      
 	      <br>
@@ -349,24 +349,22 @@ background-color: #f7f7f7;
   
 <div class="row">
 	
-	<c:forEach var="recipe" items="${list}">
+	<c:forEach var="cook" items="${list}">
 	<c:set var="i" value="${i+1}" />
   <div class="col-sm-6 col-md-3">
   <br/> <br/>
   
     <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#">
+      <article class="one_third first"><a class="imgover" value="${cook.cookNo }" href="#">
       <div class="shape1">${i}</div>
-      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
+      <img src="/resources/images/uploadFiles/${cook.cookFilename }" width="320" height="300"></a>
         <div class="excerpt">
-          <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
-           <h6 >${recipe.recipeDetail }</h6>
+          <h4 class="heading" ><b>${cook.cookName }</b></h4>
+          <h6 >${cook.cookBrief }</h6>
           <ul class="meta">
-            <li > ${recipe.recipeTheme }</li>
-            <li>${recipe.recipeDifficulty }</li>
-            <li>${recipe.cookingTime }분</li>
-            <li> ${recipe.writer.userNickname}</li>
-            <li style="float:right">조회수: ${recipe.recipeViews }</li>
+            <li> ${cook.cookTheme }</li>
+            <li> ${cook.mentor.userNickname}</li>
+            <li style="float:right">&nbsp; 좋아요 ${cook.hearthit}개</li>
           </ul>
         </div>
       </article>

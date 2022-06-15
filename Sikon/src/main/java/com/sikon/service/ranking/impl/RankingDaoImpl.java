@@ -42,11 +42,6 @@ public class RankingDaoImpl implements RankingDao {
 		return sqlSession.selectList("RankingMapper.getRecipeList", search);
 	}
 	
-	public int getRecipeCount(Search search) throws Exception {
-		System.out.println("search=" + search);
-		return sqlSession.selectOne("RankingMapper.getRecipeCount", search);
-	}
-	
 	public List<Recipe> getCookList(Search search) throws Exception {
 		System.out.println("search=" + search);
 		return sqlSession.selectList("RankingMapper.getCookList", search);
