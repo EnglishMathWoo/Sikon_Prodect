@@ -45,21 +45,46 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-body {
-	font-family: 'Gowun Batang', serif;
+	.container{
+	padding-top: 200px
+	}
+	         
+
+body{
+   	font-family: 'Gowun Batang', serif;
+    
+}
+.search{
+  
+  top:6px;
+  left:10px;
+}
+
+.form-control{
+    
+    border:none;
+    padding-left:32px;
+}
+
+.form-control:focus{
+    
+    border:none;
+    box-shadow:none;
+}
+
+.green{
+    
+    color:green;
 }
 
 .table {
-	margin-top: 70px;
+	margin-top: 20px;
 }
 
 #noCoupon {
 	text-align: center;
 }
 
-.soo {
-	padding-top: 170px;
-}
 
 /* 리뷰 삭제 버튼 css */
 .submit {
@@ -76,6 +101,10 @@ body {
 	background: #d4af7a;
 	float: right;
 	font-family: 'Gowun Batang', serif;
+}
+
+th{
+text-align: center
 }
 </style>
     
@@ -122,41 +151,30 @@ body {
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-		
-		<div class="center btmspace-50">
+<div class="container mt-5 px-2">
+     <br>
+     
+     <div class="center btmspace-50">
 			<br />
 			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
 				<br> | R E V I E W | <br><br><br><br>
 			</h3>
+		<button type="button" class="submit" style="float: right;  margin-right: 10px;" >삭&nbsp;제</button>
 		</div>
 		
-				
-		<form class="form-inline" name="detailForm">
-      	    
-	    <input type="hidden" id="currentPage" name="currentPage" value=""/>
-	    
-	    </form>
-		 <p class="text-primary" align="left" style="color:gray">
-		 <br>
+	
+        
+        <div class="table-responsive">
+        <p class="text-primary"  style="color:gray">
 		 전체  ${resultPage.totalCount} 건수, 현재 ${resultPage.currentPage} 페이지
 		 </p>
-		
-		<button type="button" class="submit" style="float: right;  margin-right: 10px;" >삭&nbsp;제</button>
-	
-	
-	
-	<i class="fa fa-tasks"></i>&nbsp;내가 쓴 리뷰<br />
-	
-       
-        <div class="table-responsive">
     <table class="table table-responsive table-borderless">
         
       <thead>
         <tr class="bg-light">
           <th scope="col" width="10%"></th>
-          <th scope="col" width="10%">번호</th>
-          <th scope="col" width="20%">리뷰구분</th>
-          <th scope="col" width="30%">리뷰항목</th>
+          <th scope="col" width="30%">리뷰구분</th>
+          <th scope="col" width="30%" >리뷰항목</th>
           <th scope="col" width="30%">작성날짜</th>
         </tr>
       </thead>
@@ -169,7 +187,6 @@ body {
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="left"><input type="checkbox" name="deleteCheck" id="${review.reviewNo}"></td>
-			  <td align="left">${i }</td>
 			  <td align="left">
 			  <c:choose>
 			  <c:when test="${review.reviewCategory=='COOK'}">
@@ -198,6 +215,7 @@ body {
       	<br>
      </c:if>
                          
+     </div>
      </div>
                 
       <jsp:include page="../common/pageNavigator_new.jsp"/>

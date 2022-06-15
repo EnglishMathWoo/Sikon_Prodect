@@ -496,20 +496,28 @@ background-color: #fff;
 		var reviewNo = $("input:hidden[name='reviewNo']").val();
 
 			$('#acontent').html(
-					"<textarea class='form-control' name='reviewContent' rows='2'>"+reviewContent+"</textarea>"
-		);
-			
-			$('#abt').html(
-					"<input type='button'   value='수정' id='"+reviewNo+"'>"+
-					"<input type='button'   value='취소' >"
+					"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+reviewContent+"</textarea>"
 		);
 			
 		
 			
 			
+			$('#abt').html(
+					"<input type='button'  onclick='answerEditSave()' value='수정' id='"+reviewNo+"'>"+
+					"<input type='button'   value='취소' >"
+		);
+			
+		
+		
 	});
 
-		 
+			function answerEditSave(){
+				console.log('이에옹');
+				var content = $("#updatecontent").val();
+				var reviewNo = $("input:hidden[name='reviewNo']").val();
+				location.href='/review/updateReview?reviewNo='+reviewNo;
+			}
+			
 		 $("button:contains('수정')").on("click", function() {
 			 console.log($(this).attr('id'));
 
