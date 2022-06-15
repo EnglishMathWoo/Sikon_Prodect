@@ -45,14 +45,14 @@
       <style>
 
         .bi-heart{
-            font-size: 30px;
-            line-height: 30px;
+            font-size: 20px;
+            line-height: 20px;
             color:crimson;
         }
 
         .bi-heart-fill{
-            font-size: 30px;
-            line-height: 30px;
+            font-size: 20px;
+            line-height: 20px;
             color:crimson;
         }
 
@@ -62,9 +62,13 @@
 <style>
 
 div.container {
-	padding-top: 10px;
+	padding-top: 200px;
 	
 }
+
+div.channel {
+	padding-top: 10px;
+} 
 
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
@@ -444,17 +448,17 @@ div.emptyProd{
 					                			}
 						                		
 						                		if(JSONData.list[i].heartCount == '0'){
-						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</p>";
+						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' ></p>";
 						                		}else{
 						                			
-						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</p>";
+						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' ></p>";
 						                		}
 						                
 						                			
 						                			
 						                		
 						                		
-							                     var displayValue = "<div class='container'>"
+							                     var displayValue = "<div class='container channel'>"
 							                    	 				+"<div class='row' id='target'>"
 							                    	 				+"<td align='left'></td>"
 							                    	 				+"<div class='row'>"
@@ -464,7 +468,7 @@ div.emptyProd{
 							                     					+"<table><tr class='liketable'>"
 							                     					+"<td>"
 							                     					+heartCount
-							                     					+"</td><td class='likes'>&nbsp;좋아요 "+JSONData.list[i].hearthit+"</td></tr>	</table></div>"
+							                     					+"</td><td class='likes'>&nbsp;좋아요 "+JSONData.list[i].hearthit+"개</td></tr>	</table></div>"
 							                     					+"<div class='col-xs-4 col-md-4'>"
 						                     						+"<div class='row'>"
 						                     						+"<div><h4><strong>"+JSONData.list[i].cookName+"</strong></h4></div><br>"   

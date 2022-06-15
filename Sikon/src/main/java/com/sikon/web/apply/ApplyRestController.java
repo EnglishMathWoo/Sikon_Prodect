@@ -10,6 +10,7 @@ import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -48,6 +49,10 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.User;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 import com.sikon.service.domain.Apply;
 import com.sikon.service.cook.CookService;
 import com.sikon.service.apply.ApplyService;
@@ -56,7 +61,7 @@ import com.sikon.service.apply.ApplyService;
 
 
 
-@Controller
+@RestController
 @RequestMapping("/apply/*")
 
 
@@ -77,10 +82,6 @@ public class ApplyRestController {
 	@Qualifier("cookServiceImpl")
 	private CookService cookService;
 	
-	public ApplyRestController() {
-		System.out.println(this.getClass());
-	}	
-	
 	@Value("#{commonProperties['pageUnit']}")
 	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
@@ -88,6 +89,16 @@ public class ApplyRestController {
 	@Value("#{commonProperties['pageSize']}")
 	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;	
+	
+	
+	private IamportClient api;
+	
+	public ApplyRestController() {
+		System.out.println(this.getClass());
+		this.api = new IamportClient("4668929381650236","e848ead2dbda804f8abf3d4ea329e8a3017b9c2c47a690b805418cae52fade5c59608e28e4230dc3");
+	}	
+	
+
 	
 	
 	@RequestMapping( value="json/listSale", method=RequestMethod.GET )
@@ -128,6 +139,11 @@ public class ApplyRestController {
 		return list;
 }
 	
-	
+	@RequestMapping(value="json/verifyIamport")
+	public IamportResponse<Payment> paymentByImpUid(Model model, Locale locale, HttpSession session, @RequestParam("imp_uid") String imp_uid) throws IamportResponseException, IOException{	
+		
+			return api.paymentByImpUid(imp_uid);
+			
+	}
 
 }

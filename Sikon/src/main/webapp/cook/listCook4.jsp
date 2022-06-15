@@ -45,14 +45,14 @@
       <style>
 
         .bi-heart{
-            font-size: 30px;
-            line-height: 30px;
+            font-size: 20px;
+            line-height: 20px;
             color:crimson;
         }
 
         .bi-heart-fill{
-            font-size: 30px;
-            line-height: 30px;
+            font-size: 20px;
+            line-height: 20px;
             color:crimson;
         }
 
@@ -179,8 +179,8 @@ p {
 }
 
 #image {
-	width: 400px;
-	height:400px;
+	width: 300px;
+	height:300px;
 } 
 
 #themeAll{
@@ -417,12 +417,12 @@ div.emptyProd{
 						                
 						                		if(JSONData.list[i].cookStock == '0'){
 					                				
-					                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='500' height='500' id='image'>";
+					                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='300' height='300' id='image'>";
 					                				
 						                			
 						                		}else{
 						                			
-					                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='500' height='500' id='image'>";
+					                					image = "<img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' width='300' height='300' id='image'>";
 					                				
 						                		}
 						                		
@@ -444,10 +444,10 @@ div.emptyProd{
 					                			}
 						                		
 						                		if(JSONData.list[i].heartCount == '0'){
-						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</p>";
+						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' ></p>";
 						                		}else{
 						                			
-						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >"+JSONData.list[i].hearthit+"</p>";
+						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' ></p>";
 						                		}
 						                
 						                			
@@ -455,11 +455,16 @@ div.emptyProd{
 						                		
 						                		
 							                     var displayValue = "<div class='container'>"
+							                    	 				+"<div class='row' id='target'>"
+							                    	 				+"<td align='left'></td>"
 							                    	 				+"<div class='row'>"
-							                    	 				+"<td align='left'><input type='checkbox' name='cookCheck' id='"+JSONData.list[i].cookNo+"'/></td>"
 							                     					+"<div class='col-xs-4 col-md-6 text-left image' value='"+JSONData.list[i].cookNo+"'>"
 							                     					+image
-							                     					+"<br/></div>"
+							                     					+"<br/><br/>"
+							                     					+"<table><tr class='liketable'>"
+							                     					+"<td>"
+							                     					+heartCount
+							                     					+"</td><td class='likes'>&nbsp;좋아요 "+JSONData.list[i].hearthit+"개</td></tr>	</table></div>"
 							                     					+"<div class='col-xs-4 col-md-4'>"
 						                     						+"<div class='row'>"
 						                     						+"<div><h4><strong>"+JSONData.list[i].cookName+"</strong></h4></div><br>"   
@@ -479,8 +484,7 @@ div.emptyProd{
 						                     						+"</div>"
 						                     						+"<div class='row'>"
 						                     						+"<div><h5><strong>수업시간: "+JSONData.list[i].startTime+"&emsp;~&emsp;"+JSONData.list[i].endTime+"</strong></h5></div>"
-						                     						+"</div>"						                     					
-						                     						+heartCount
+						                     						+"</div>"	
 						                     						+"</div>"
 						                     						+"<div class='col-xs-2 col-md-2'>"
 						                     						+"</div>"

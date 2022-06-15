@@ -51,7 +51,7 @@ $(function() {
 	 $( "button:contains('확인')" ).on("click" , function() {
 		 
 		 
-		 self.location = "/cook/listCook.jsp?menu=manage"
+		 self.location = "/cook/listCook.jsp?menu=search"
 	});
 	
 	 $( "button:contains('추가등록')" ).on("click" , function() {
@@ -67,17 +67,13 @@ $(function() {
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand">식탁의 온도</a>
-   		</div>
-   	</div>
+<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-default text-center">쿠 킹 클 래 스 등 록</h1>
+		<h1 class="bg-default text-center">쿠킹클래스 등록확인</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" enctype="multipart/form-data">

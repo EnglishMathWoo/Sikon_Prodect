@@ -23,10 +23,10 @@
 	
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   <link href="/resources/css/animate.min.css" rel="stylesheet">
+   <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
     <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   <script src="/resources/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -39,10 +39,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
+
+.container{
+	padding-top: 200px
+	}
+	
 body{
-	 padding-top : 50px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 
@@ -204,24 +209,28 @@ div.emptyProd{
 
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
+		<jsp:include page="/mypage/leftbar.jsp" />
+	
 	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
-		<div class="container list">
+	<div class="container mt-5 px-2">
 	
-			<div class="text-info">
-	       <h3 style="color:#bc8f8f">신청내역조회</h3>
-	    </div>
-	    
-
-			    <div class="row">
+	<div class="center btmspace-50">
+			<br />
+			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
+				<br> | M Y A P P L Y | <br>
+			</h3>
+			<br>
+		</div>
+		
 			    
 				    <div class="col-md-6 text-left">
 				    	<p class="text-primary" style="color:gray">
 				    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 				    	</p>
 				    </div>
-				  </div>  
+				    
 				     <div class="row">
 					    <form class="form-inline " id="form"> 
 						 <div class="col-md-6 text-left"> 
@@ -235,10 +244,9 @@ div.emptyProd{
 						  <button type="button" class="btn btn-default" id="sorting">조회</button>
 						  </div>
 					<input type="hidden" id="currentPage" name="currentPage" value="" />
-					
 						</form>
+					</div>
 					
-  </div>
 
 
 
@@ -250,9 +258,6 @@ div.emptyProd{
 
 		<table class="table table-hover table-striped">
 
-
-
-			<tbody>
 
 
 
@@ -428,10 +433,9 @@ div.emptyProd{
 		</div>
 		<br>
 	</c:if>
- 
  	<!--  화면구성 div End /////////////////////////////////////-->
  	
- 	
+ 	</div>
  	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->

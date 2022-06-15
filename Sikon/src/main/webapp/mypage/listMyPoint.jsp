@@ -129,7 +129,7 @@ text-align: center
 		<div class="iEJcKG">
 			<h3 class="iEJcKGheader">
 				보유포인트
-				<p style="float: right">5500P</p>
+				<p style="float: right">${user.holdpoint }P</p>
 			</h3>
 			<hr/>
 			

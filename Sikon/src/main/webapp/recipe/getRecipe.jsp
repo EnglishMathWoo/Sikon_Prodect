@@ -442,16 +442,19 @@ background-color: #fff;
 												
 											</p>
 										</div>
+										<input type="hidden" name="reviewNo" value="${review.reviewNo }">
 										
 										<br/><br/>
 										<c:if test="${review.reviewImg != null }">
 										  <img src="/resources/images/uploadFiles/${review.reviewImg }" width="200" height="200">
 										</c:if>
-										<p>${review.reviewContent }</p>
+										<p id="acontent" >${review.reviewContent }</p>
+										<div id="abt">
 										<c:if test="${review.writerNickname == user.userNickname }">
 										<input type="button" class="deleteReview"  value="&#xf2ed" id="${review.reviewNo }" style="float: right;margin-right: 17px">
-										<input type="button" class="updateReview"  value="&#xf304" style="float: right;margin-right: 5px">
+										<input type="button" class="updateReview" id="${review.reviewContent }" value="&#xf304" style="float: right;margin-right: 5px">
 										</c:if>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -487,9 +490,43 @@ background-color: #fff;
 	//	self.location = "/review/deleteReview?textNo="+textNo+"checkList="+array;
 		});
 		
+		 $(document).on('click', '.updateReview', function(){  
+		//alert($(this).attr('id'))	
+		var reviewContent=$(this).attr('id');
+		var reviewNo = $("input:hidden[name='reviewNo']").val();
+
+			$('#acontent').html(
+					"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+reviewContent+"</textarea>"
+		);
+			
+		
+			
+			
+			$('#abt').html(
+					"<input type='button'  onclick='answerEditSave()' value='수정' id='"+reviewNo+"'>"+
+					"<input type='button'   value='취소' >"
+		);
+			
+		
+		
+	});
+
+			function answerEditSave(){
+				console.log('이에옹');
+				var content = $("#updatecontent").val();
+				var reviewNo = $("input:hidden[name='reviewNo']").val();
+				location.href='/review/updateReview?reviewNo='+reviewNo;
+			}
+			
+		 $("button:contains('수정')").on("click", function() {
+			 console.log($(this).attr('id'));
+
+			});
+		 
+		 
 		$("#addBookmark").on("click", function() {
 			var recipeNo = $("input:hidden[name='recipeNo']").val();
-			//console.log(recipeNo);
+			console.log(recipeNo);
 				self.location = "/bookmark/addBookmark?recipeNo="+recipeNo;
 				
 

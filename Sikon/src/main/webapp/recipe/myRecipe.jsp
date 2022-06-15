@@ -3,12 +3,12 @@
 
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!DOCTYPE html>
 
 <html lang="ko">
-	
 <head>
 	<meta charset="EUC-KR">
 	
@@ -62,6 +62,7 @@ body {
 }
 .row {
 	font-family: 'Gowun Batang', serif;
+	margin-top: 87px;
 }
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
@@ -170,14 +171,11 @@ p {
     margin-right: auto;
     margin-left: auto;
     padding-top:170px;
-    
 }
 
 .hoc{
 padding-top:0px;
 }
-
-
 
 
 </style>
@@ -234,21 +232,19 @@ padding-top:0px;
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	
-<div class="container">
-<!-- ################################################################################################ -->
+<div class="container mt-5 px-2">
+<br>
 
-	<div class="wrapper row3">
-		  <section class="hoc container clear"> 
-		    <div class="center btmspace-50">
-		    <br/>
-		      <h3 class="font-x2 nospace" align="center" style="font-family: 'Gowun Batang', serif;"><br> 내가 쓴 레시피 </h3>
-		    </div>
+<div class="center btmspace-50">
+			<br />
+			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
+				<br> | M Y R E C I P E | <br>
+			</h3>
+		</div>
+		
 		  		    <button type="button" class="submit">삭제</button>
 		  
 		    
-		    <br/><br/>
-    </section>
-  	</div>
  
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
@@ -269,9 +265,10 @@ padding-top:0px;
             <li > ${recipe.recipeTheme }</li>
             <li>${recipe.recipeDifficulty }</li>
             <li>${recipe.cookingTime }분</li>
-            <li> ${recipe.writer.userNickname }</li>
+            <li><fmt:formatDate pattern="yyyy-MM-dd"
+											value="${recipe.recipeRegDate }" /></li>
+			<li class="update" value="${recipe.recipeNo }"><b>수정하기</b></li>
           </ul>
-          <button type="button" class="update"  value="${recipe.recipeNo }">수정하기</button>
           
         </div>
       </article>
@@ -283,6 +280,12 @@ padding-top:0px;
   
      
 </div>
+
+<c:if test="${empty list}">
+      	<h3 align="center" >등록한 레시피가 없습니다.</h3>
+      	<br>
+     </c:if>
+     
 	  </div>
 </body>
 

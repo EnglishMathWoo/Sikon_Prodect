@@ -51,7 +51,7 @@ public class BookmarkController {
 	@RequestMapping(value = "addBookmark")
 	public String addBookmark(@ModelAttribute("bookmark") Bookmark bookmark, @ModelAttribute("recipe") Recipe recipe,
 			HttpServletRequest request) throws Exception {
-
+		System.out.println("¿Í¸»¾Æ");
 		System.out.println("/bookmark/addBookmark : POST");
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
@@ -75,6 +75,13 @@ public class BookmarkController {
 			search.setCurrentPage(1);
 		}
 
+		if (search.getOrderCondition() == null) {
+			search.setOrderCondition("0");
+		}
+		
+		if(search.getSearchCondition()==null) {
+			search.setSearchCondition("0");
+		}
 		search.setPageSize(pageSize);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
