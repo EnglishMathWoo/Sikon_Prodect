@@ -57,7 +57,8 @@
 	;
 
 body {
-	font-family: 'Gowun Batang', serif;}
+	font-family: 'Gowun Batang', serif;
+	}
 
 .search {
 	top: 6px;

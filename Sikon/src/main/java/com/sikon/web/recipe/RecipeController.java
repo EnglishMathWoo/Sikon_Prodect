@@ -254,11 +254,8 @@ public class RecipeController {
 		}
 		
 		System.out.println("Theme: "+search.getThemeCondition());
-
 		System.out.println("orderCondition=" + search.getOrderCondition());
 
-		// 으음 오류 안나면 삭제
-		search.setOrderCondition(search.getOrderCondition().replace(",", ""));
 		search.setPageSize(pageSize);
 
 		// Business logic 수행
