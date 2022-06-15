@@ -49,7 +49,7 @@ public class BookmarkController {
 	int pageSize;
 
 	@RequestMapping(value = "addBookmark")
-	public String addBookmark(@ModelAttribute("bookmark") Bookmark bookmark, @ModelAttribute("recipe") Recipe recipe,
+	public String addBookmark(@ModelAttribute("recipe") Recipe recipe,
 			HttpServletRequest request) throws Exception {
 		System.out.println("와말아");
 		System.out.println("/bookmark/addBookmark : POST");
@@ -57,10 +57,8 @@ public class BookmarkController {
 		User user = (User) session.getAttribute("user");
 		System.out.println(user);
 
-		bookmark.setRecipe(recipe);
-		bookmark.setUserId(user.getUserId());
 
-		bookmarkService.addBookmark(bookmark);
+		bookmarkService.addBookmark(recipe.getRecipeNo(),user.getUserId());
 
 		return "forward:/recipe/getRecipe?recipeNo=" + recipe.getRecipeNo();
 	}
@@ -88,7 +86,8 @@ public class BookmarkController {
 
 		// Business logic 수행
 		Map<String, Object> map = bookmarkService.getBookmarkList(search, user.getUserId());
-
+	
+		
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 		System.out.println("resultPage=" + resultPage);
@@ -103,21 +102,25 @@ public class BookmarkController {
 		return "forward:/mypage/listBookmark.jsp";
 	}
 
+	
 	// 책갈피 선택 삭제
 	@RequestMapping(value = "deleteBookmark")
-	public String deleteBookmark(@RequestParam("bookmarkList") int[] bookmarkList) throws Exception {
+	public String deleteBookmarkArray(@RequestParam("recipeList") int[] recipeList,HttpServletRequest request) throws Exception {
 
-		System.out.println("/bookmark/deleteBookmark : POST");
+		System.out.println("/bookmark/deleteBookmarkArray : POST");
 
-		for (int i = 0; i < bookmarkList.length; i++) {
-			System.out.println(bookmarkList[i]);
+		for (int i = 0; i < recipeList.length; i++) {
+			System.out.println(recipeList[i]);
 		}
 
-		for (int i = 0; i < bookmarkList.length; i++) {
-			bookmarkService.deleteBookmark(bookmarkList[i]);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		for (int i = 0; i < recipeList.length; i++) {
+			bookmarkService.deleteBookmark(recipeList[i],user.getUserId());
 		}
 
-		return "redirect:/mypage/listBookmark";
+		return "redirect:/bookmark/listBookmark";
 	}
 
 }
