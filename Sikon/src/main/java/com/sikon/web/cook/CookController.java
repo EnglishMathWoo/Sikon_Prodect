@@ -285,6 +285,8 @@ public class CookController {
 		System.out.println(resultPage);
 
 		ModelAndView modelAndView = new ModelAndView();
+		
+		
 		modelAndView.addObject("list", map.get("list"));
 
 

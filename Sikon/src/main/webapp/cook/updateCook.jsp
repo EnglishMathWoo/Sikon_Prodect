@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>상품수정</title>
+<title>쿠킹클래스수정</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -42,11 +42,15 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
 <style>
 
-</style>
-
-<style>
+div.container {
+	padding-top: 200px;
+	
+}
 
 #usik{
 width:38px;

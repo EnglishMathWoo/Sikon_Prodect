@@ -90,13 +90,13 @@
 											FROM cook
 												<if test="searchCondition != null">
 												
-													<if test="searchCondition == 0 and searchKeyword !='' ">
+													<if test="searchCondition == 0 ">
 										 				WHERE cook_no like '%' || #{searchKeyword} || '%'
 													</if>
-													<if test="searchCondition == 1 and searchKeyword !='' ">
+													<if test="searchCondition == 1 ">
 										 				WHERE cook_name like '%' || #{searchKeyword} || '%'
 													</if>
-													<if test="searchCondition == 2 and searchKeyword !='' ">
+													<if test="searchCondition == 2 ">
 										 				 WHERE cook_price like '%' || #{searchKeyword} || '%'
 													</if>
 											</if>		
@@ -119,7 +119,7 @@
 													</if>
 											</if>		
 											
-											ORDER BY  cook_no ) inner_table
+											) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
