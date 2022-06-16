@@ -248,6 +248,15 @@ function tableDelete(){
 							name="recipeDetail" placeholder="50자 이내로 입력하세요.">
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label for="detail"
+						class="col-lg-offset-1 col-lg-2 control-label">상세정보</label>
+					<div class="col-lg-9">
+						<input type="text" class="form-control" id="detail" style="height:100px"
+							name="detail" placeholder="상세 정보를 입력하세요.">
+					</div>
+				</div>
 
 
 				<div class="form-group">
