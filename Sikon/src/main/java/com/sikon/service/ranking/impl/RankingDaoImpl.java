@@ -44,13 +44,23 @@ public class RankingDaoImpl implements RankingDao {
 	}
 	
 	//즐겨찾는 멘토 날짜 저장
-	public void insertLoveMentor(User user) throws Exception {
-		sqlSession.insert("RankingMapper.addLoveMentor", user);
+	public void insertLoveMentor(String userNickname, String userId) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNickname", userNickname);
+		map.put("userId", userId);
+		
+		sqlSession.insert("RankingMapper.addLoveMentor", map);
 	}
 	
 	//즐겨찾는 멘토 날짜 삭제
-	public void deleteLoveMentor(User user) throws Exception {
-		sqlSession.insert("RankingMapper.deleteLoveMentor", user);
+	public void deleteLoveMentor(String userNickname, String userId) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNickname", userNickname);
+		map.put("userId", userId);
+		
+		sqlSession.insert("RankingMapper.deleteLoveMentor", map);
 	}
 	
 	

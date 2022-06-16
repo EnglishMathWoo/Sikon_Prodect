@@ -54,13 +54,13 @@ public class RankingServiceImpl implements RankingService{
 	}
 	
 	//즐겨찾는 멘토 날짜 저장
-	public void addLoveMentor(User user) throws Exception{
-		rankingDao.insertLoveMentor(user);
+	public void addLoveMentor(String userNickname, String userId) throws Exception{
+		rankingDao.insertLoveMentor(userNickname, userId);
 	}
 	
 	//즐겨찾는 멘토 날짜 삭제
-	public void deleteLoveMentor(User user) throws Exception{
-		rankingDao.deleteLoveMentor(user);
+	public void deleteLoveMentor(String userNickname, String userId) throws Exception{
+		rankingDao.deleteLoveMentor(userNickname, userId);
 	}
 	
 

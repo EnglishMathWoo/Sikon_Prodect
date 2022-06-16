@@ -16,9 +16,9 @@ public interface RankingDao{
 	public List<Recipe> getRecipeList(Search search) throws Exception;
 	
 	//즐겨찾는 멘토 날짜 저장
-	public void insertLoveMentor(User user) throws Exception;
+	public void insertLoveMentor(String userNickname, String userId) throws Exception;
 	
 	//즐겨찾는 멘토 날짜 삭제
-	public void deleteLoveMentor(User user) throws Exception;
+	public void deleteLoveMentor(String userNickname, String userId) throws Exception;
 		
 }

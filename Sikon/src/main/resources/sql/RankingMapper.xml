@@ -60,7 +60,7 @@
 				SYSDATE)
 	 </insert>
 	 
-	 <insert 	id="addLoveMentor"		parameterType="user" >
+	 <insert 	id="addLoveMentor"		parameterType="map" >
 	 	INSERT
 		INTO ranking ( ranking_no, user_nickname, user_id love_date) 
 		VALUES (seq_ranking_ranking_no.NEXTVAL, 
@@ -68,7 +68,7 @@
 	 </insert>
 	 
 	 <!-- 즐겨찾기 삭제 -->	
-	 <select  id="deleteLoveMentor"  parameterType="user">
+	 <select  id="deleteLoveMentor"  parameterType="map">
 	  	DELETE FROM ranking 
 	  	<where>
 			user_nickname = {userNickname} AND user_id = {userId}

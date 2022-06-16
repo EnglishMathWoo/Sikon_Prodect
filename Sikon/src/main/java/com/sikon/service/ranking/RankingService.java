@@ -15,9 +15,9 @@ public interface RankingService {
 	public Map<String, Object> getRecipeList(Search search) throws Exception;
 	
 	//즐겨찾는 멘토 날짜 저장
-	public void addLoveMentor(User user) throws Exception;
+	public void addLoveMentor(String userNickname, String userId) throws Exception;
 	
 	//즐겨찾는 멘토 날짜 삭제
-	public void deleteLoveMentor(User user) throws Exception;
+	public void deleteLoveMentor(String userNickname, String userId) throws Exception;
 			
 }

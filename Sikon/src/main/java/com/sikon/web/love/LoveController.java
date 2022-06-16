@@ -66,7 +66,7 @@ public class LoveController {
 		love.setUserId(user.getUserId());
 
 		loveService.addLove(love.getUserNickname(),love.getUserId());
-		rankingService.addLoveMentor(userNickname);
+		rankingService.addLoveMentor(love.getUserNickname(),love.getUserId());
 
 		return "forward:/mypage/listLove.jsp";
 	}
