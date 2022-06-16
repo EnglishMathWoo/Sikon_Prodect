@@ -69,31 +69,26 @@ public class RankingController {
 	}
 	
 	
-//	@RequestMapping(value = "listLove")
-//	public String listLove(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
-//
-//		System.out.println("/ranking/listLove : POST/get");
-//
-//		System.out.println("search:" + search);
-//		
-//		if (search.getOrderCondition() == null) {
-//			search.setOrderCondition("0");
-//		}
-//		
-//		search.setPageSize(pageSize);
-//			
-//
-//		// Business logic 수행
-//		Map<String, Object> map = rankingService.get(search);
-//
-//		System.out.println("list=" + map.get("list"));
-//
-//		// Model 과 View 연결
-//		model.addAttribute("list", map.get("list"));
-//		model.addAttribute("search", search);
-//
-//		return "forward:/ranking/listLoveRanking.jsp";
-//	}
+	@RequestMapping(value = "listLove")
+	public String listLove(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
+
+		System.out.println("/ranking/listLove : POST/get");
+
+		System.out.println("search:" + search);
+			
+		search.setPageSize(pageSize);
+			
+		// Business logic 수행
+		Map<String, Object> map = rankingService.getLoveList(search);
+
+		System.out.println("list=" + map.get("list"));
+
+		// Model 과 View 연결
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("search", search);
+
+		return "forward:/ranking/listLoveRanking.jsp";
+	}
 	
 
 }

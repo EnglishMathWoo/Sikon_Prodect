@@ -13,8 +13,6 @@
 		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR" />
 		<result property="loveCheck" 			column="love_check" 		jdbcType="NUMERIC" />
 		<collection property="user" resultMap="userSelectMap"/>
-		
-		
 	</resultMap>
 
 <resultMap id="userSelectMap" type="user">

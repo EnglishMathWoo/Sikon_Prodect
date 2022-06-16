@@ -194,16 +194,7 @@ background-color: #f7f7f7;
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	
-	$(function() {
-		
-		$("#mentor").on("click" , function() {	
-			self.location = "/ranking/listLove";
-		});
-		
-	});
-		
-					
+						
 	$(document).on('click', '.imgover', function(){
 		console.log($(this).attr("value"));
 		self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
@@ -218,12 +209,7 @@ background-color: #f7f7f7;
 		 var orderCondition = $(this).attr('value');
 		 self.location = "/ranking/listRecipe";
 	});
-	
-	$(document).on('click', '#daily', function(){
-		 var orderCondition = $(this).attr('value');
-		 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
-	});
-		
+			
 	$(document).on('click', '#daily', function(){
 		 var orderCondition = $(this).attr('value');
 		 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
@@ -249,6 +235,7 @@ background-color: #f7f7f7;
 	$(document).on('click', '#mentor', function(){
 		 self.location = "/ranking/listLove";
 	});
+
 									
 	$(function() {
 						

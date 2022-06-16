@@ -73,7 +73,7 @@ body {
     color: #8B4513;
     float: right;
     height:40px;
-    width:8%;
+    width:6%;
     box-sizing: border-box;
     justify-content: center;
     display: flex;
@@ -193,47 +193,75 @@ background-color: #f7f7f7;
 
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
+<script type="text/javascript">
+						
+	$(document).on('click', '.imgover', function(){
+		console.log($(this).attr("value"));
+		self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
+	});
+	
+	//·¹½ÃÇÇ ·©Å·
+	$(document).on('click', '#recipe', function(){
+		 self.location = "/ranking/listRecipe";
+	});
+	
+	//°Ë»ö¾î ·©Å·
+	$(document).on('click', '#keyword', function(){
+		 var cookNo =$(this).attr("value");
+		 self.location = "/cook/updateCook?cookNo="+cookNo
+	});
+	
+	//ÄíÅ·¸àÅä ·©Å·
+	$(document).on('click', '#mentor', function(){
+		 self.location = "/ranking/listLove";
+	});
+	
+	$(document).on('click', '#all', function(){
+		 var orderCondition = $(this).attr('value');
+		 self.location = "/ranking/listLove";
+	});
+	
+	$(document).on('click', '#daily', function(){
+		 var orderCondition = $(this).attr('value');
+		 self.location = "/ranking/listLove?orderCondition="+orderCondition;
+	});
 		
-					
-			$(document).on('click', '.imgover', function(){
-				console.log($(this).attr("value"));
-				self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
-			});
+	$(document).on('click', '#daily', function(){
+		 var orderCondition = $(this).attr('value');
+		 self.location = "/ranking/listLove?orderCondition="+orderCondition;
+	});
 			
-			$(document).on('click', '#recipe', function(){
-				 self.location = "/ranking/listRecipe";
-			});
-			
-			$(document).on('click', '#daily', function(){
-				 var orderCondition = $(this).attr('value');
-				 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
-			});
-			
-			$(document).on('click', '#weekly', function(){
-				 var orderCondition = $(this).attr('value');
-				 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
-			});
-			
-			$(document).on('click', '#monthly', function(){
-				 var orderCondition = $(this).attr('value');
-				self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
-			});
+	$(document).on('click', '#weekly', function(){
+		 var orderCondition = $(this).attr('value');
+		 self.location = "/ranking/listLove?orderCondition="+orderCondition;
+	});
 		
-			$(document).on('click', '#keyword', function(){
-				 var cookNo =$(this).attr("value");
-				 self.location = "/cook/updateCook?cookNo="+cookNo
-			});
-		 
-			$(document).on('click', '#cook', function(){
-				 self.location = "/ranking/listCook";
-			});
-			
-			$(document).on('click', '.order', function(){
-				 $(".order").removeClass('act');
-				 $(this).addClass('act');
-			});
-		           
+	$(document).on('click', '#monthly', function(){
+		 var orderCondition = $(this).attr('value');
+		self.location = "/ranking/listLove?orderCondition="+orderCondition;
+	});
+									
+	$(function() {
+						
+		var odc = $("#orderCon").val();
+		console.log("odc: "+odc);
+		
+		if(odc == ""){
+			$(".order").removeClass('act');
+			$("#all").addClass('act');
+		} else if(odc == 0){
+			$(".order").removeClass('act');
+			$("#daily").addClass('act');
+		} else if(odc == 1){
+			$(".order").removeClass('act');
+			$("#weekly").addClass('act');
+		} else {
+			$(".order").removeClass('act');
+			$("#monthly").addClass('act');
+			}
+		
+	});
+			            
 	</script>
 	
 </head>
@@ -265,9 +293,9 @@ background-color: #f7f7f7;
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;·¹½ÃÇÇ&nbsp;</div></li>
+	        <li id="recipe"><div>&nbsp;·¹½ÃÇÇ&nbsp;</div></li>
 	        <li id="keyword"><div>&nbsp;°Ë»ö¾î&nbsp;</div></li>
-	        <li id="cook"><div>&nbsp;ÄíÅ·¸àÅä&nbsp;</div></li>
+	        <li id="mentor"><div style="color:#DAA520;">&nbsp;ÄíÅ·¸àÅä&nbsp;</div></li>
 	      </ul>  
 	      
 	      <br>
@@ -276,6 +304,7 @@ background-color: #f7f7f7;
 		  	  <div class="order" id="monthly" value="2">¿ù°£</div>
 		      <div class="order" id="weekly" value="1">ÁÖ°£</div>
 		      <div class="order" id="daily" value="0">ÀÏ°£</div>
+		      <div class="order" id="all" value=null>ÀüÃ¼</div>
 		    </div>
 	  
 	  		<input type="hidden" id="orderCon" value="${search.orderCondition}"/>
@@ -293,25 +322,17 @@ background-color: #f7f7f7;
 <div class="row">
 	
 	<c:if test="${!empty list}">
-	<c:forEach var="recipe" items="${list}">
+	<c:forEach var="love" items="${list}">
 	<c:set var="i" value="${i+1}" />
   <div class="col-sm-6 col-md-3">
   <br/> <br/>
   
     <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#">
+      <article class="one_third first"><a class="imgover" value="${love.user.userId }" href="#">
       <div class="shape1">${i}</div>
-      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
+      <img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300"></a>
         <div class="excerpt">
-          <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
-           <h6 >${recipe.recipeDetail }</h6>
-          <ul class="meta">
-            <li > ${recipe.recipeTheme }</li>
-            <li>${recipe.recipeDifficulty }</li>
-            <li>${recipe.cookingTime }ºÐ</li>
-            <li> ${recipe.writer.userNickname}</li>
-            <li style="float:right">Á¶È¸¼ö: ${recipe.recipeViews }</li>
-          </ul>
+          <h4 class="heading" ><b>${love.user.userName }</b></h4>
         </div>
       </article>
     </div>

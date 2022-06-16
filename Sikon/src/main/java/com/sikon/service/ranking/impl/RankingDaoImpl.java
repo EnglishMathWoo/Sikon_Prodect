@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Love;
 import com.sikon.service.domain.Recipe;
-import com.sikon.service.domain.User;
 import com.sikon.service.ranking.RankingDao;
 
 

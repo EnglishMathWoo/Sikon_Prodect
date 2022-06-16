@@ -16,6 +16,7 @@
 		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
 		<result property="recipeName"			column="recipe_name" 		jdbcType="VARCHAR" />
 		<result property="recipeDetail" 	column="recipe_detail" 		jdbcType="VARCHAR" />
+		<result property="detail" 			column="detail" 		jdbcType="VARCHAR" />
 		<result property="recipeImg" 			column="recipe_img" 		jdbcType="VARCHAR" />
 		<result property="recipeVideo" 			column="recipe_video" 		jdbcType="VARCHAR" />
 		<result property="recipeDifficulty" 				column="recipe_difficulty" 					jdbcType="VARCHAR" />
@@ -29,6 +30,14 @@
 		<result property="ingredientAmount"      column="ingredient_amount"           jdbcType="VARCHAR"/>
 		<result property="recipeViews"      column="recipe_views"           jdbcType="NUMERIC"/>
 		<collection property="writer" resultMap="userSelectMap"/>
+	</resultMap>
+	
+	<resultMap id="loveSelectMap" type="love">
+		<result property="loveNo" 			column="love_no" 			jdbcType="NUMERIC"/>
+		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
+		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR" />
+		<result property="loveCheck" 			column="love_check" 		jdbcType="NUMERIC" />
+		<collection property="user" resultMap="userSelectMap"/>
 	</resultMap>
 	
 	<resultMap id="userSelectMap" type="user">
@@ -53,7 +62,7 @@
 	 
 	 <insert 	id="addLoveMentor"		parameterType="map" >
 	 	INSERT
-		INTO ranking ( ranking_no, user_nickname, user_id love_date) 
+		INTO ranking ( ranking_no, user_nickname, user_id, love_date) 
 		VALUES (seq_ranking_ranking_no.NEXTVAL, 
 				#{userNickname}, #{userId}, SYSDATE)
 	 </insert>
@@ -91,25 +100,26 @@
 	 
 	 
 	 <!-- SQL : SELECT LIST -->
-	<select  id="getLoveList"  parameterType="search"	resultMap="recipeSelectMap">
-	  	SELECT r.*, ranking_table.count, u.user_nickname 
-										FROM recipe r, (SELECT recipe_no, count(*) count FROM ranking 
+	<select  id="getLoveList"  parameterType="search" statementType="CALLABLE"	resultMap="loveSelectMap">
+	  	SELECT l.user_nickname, ranking_table.count 
+					FROM love l, (SELECT user_nickname, count(*) count FROM ranking 
 																			
 											<if test="orderCondition != null">
 												<choose>
 													<when test="orderCondition == 0 ">
-										 			 WHERE view_date &gt;= CURRENT_DATE-1 
+										 			 WHERE love_date &gt;= CURRENT_DATE-1 
 													</when>
 													<when test="orderCondition == 1 ">
-										 			 WHERE view_date &gt;= CURRENT_DATE-8 
+										 			 WHERE love_date &gt;= CURRENT_DATE-8 
 													</when>
 													<when test="orderCondition == 2 ">
-										 			 WHERE view_date &gt;= CURRENT_DATE-31 
+										 			 WHERE love_date &gt;= CURRENT_DATE-31 
 													</when>				
 												</choose>
 											</if>
-											GROUP BY recipe_no) ranking_table, users u 
-											WHERE ROWNUM &lt;= 20 AND r.recipe_no = ranking_table.recipe_no AND r.writer_nickname = u.user_nickname  
+											GROUP BY user_nickname) ranking_table 
+											WHERE ROWNUM &lt;= 20 AND l.user_nickname = ranking_table.user_nickname 
+											GROUP BY l.user_nickname, ranking_table.count 
 											ORDER BY ranking_table.count DESC
 	 </select>
 	 

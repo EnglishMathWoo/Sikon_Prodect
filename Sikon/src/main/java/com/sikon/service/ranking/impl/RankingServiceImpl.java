@@ -1,7 +1,5 @@
 package com.sikon.service.ranking.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.sikon.common.Search;
-import com.sikon.service.coupon.CouponDao;
-import com.sikon.service.coupon.CouponService;
-import com.sikon.service.domain.Coupon;
 import com.sikon.service.domain.Love;
 import com.sikon.service.domain.Recipe;
-import com.sikon.service.domain.User;
 import com.sikon.service.ranking.RankingDao;
 import com.sikon.service.ranking.RankingService;
 

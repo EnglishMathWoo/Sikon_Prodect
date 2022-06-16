@@ -5,7 +5,6 @@ import java.util.List;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Love;
 import com.sikon.service.domain.Recipe;
-import com.sikon.service.domain.User;
 
 
 public interface RankingDao{
