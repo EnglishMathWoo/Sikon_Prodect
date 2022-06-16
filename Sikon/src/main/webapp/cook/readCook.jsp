@@ -84,7 +84,7 @@ $(function() {
 		  <div class="form-group">
 		    <label for="cookName" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스명</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookName" name="cookName" value="${cook.cookName}" placeholder="쿠킹클래스명">
+		    ${cook.cookName}
 		      
 		    </div>
 		  
@@ -93,21 +93,21 @@ $(function() {
 		   <div class="form-group">
 		    <label for="cookStock" class="col-sm-offset-1 col-sm-3 control-label">모집인원재고</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookStock" name="cookStock"value="${cook.cookStock}" placeholder="모집인원재고">
+		      ${cook.cookStock}"
 		    </div>
 		  </div>
 		  
 		   <div class="form-group">
 		    <label for="cookRecruit" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스모집인원</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookRecruit" name="cookRecruit"value="${cook.cookRecruit}" placeholder="쿠킹클래스모집인원">
+		      ${cook.cookRecruit}
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="cookBrief" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스간략설명</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookBrief" name="cookBrief" value="${cook.cookBrief}" placeholder="쿠킹클래스간략설명">
+		     ${cook.cookBrief}
 		    </div>
 		  </div>
 		  
@@ -115,22 +115,22 @@ $(function() {
 		  <div class="form-group">
 		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">모집기간</label>
 		    <div class="col-sm-2">
-		      <input type="DATE" class="form-control" id="aplstarTime"  name="aplstarTime" value="${cook.aplstarTime}" placeholder="모집시작기간">
+		   ${cook.aplstarTime}
 		    </div>
 		    
 		     <div class="col-sm-2">
-		      <input type="DATE" class="form-control" id="aplendTime"  name="aplendTime" value="${cook.aplendTime}" placeholder="모집종료기간">
+		    ${cook.aplendTime}
 		    </div>
 		  </div>
 		  		  
 		    <div class="form-group">
 		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">수업시간</label>
 		    <div class="col-sm-2">
-		      <input type="TIME" class="form-control" id="startTime"  name="startTime"  value="${cook.startTime}" placeholder="수업시작시간">
+		      ${cook.startTime}
 		    </div>
 		    
 		      <div class="col-sm-2">
-		      <input type="TIME" class="form-control" id="endTime"  name="endTime" value="${cook.endTime}"  placeholder="수업종료시간">
+		      ${cook.endTime}
 		    </div>
 		  </div>
 		  
@@ -142,7 +142,7 @@ $(function() {
 		  <div class="form-group">
 		    <label for="cookPrice" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스가격</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookPrice" name="cookPrice"value="${cook.cookPrice}" placeholder="쿠킹클래스가격">
+		    ${cook.cookPrice}
 		    </div>
 		  </div>
 		  
@@ -227,7 +227,7 @@ $(function() {
 		    <div class="form-group">
 		    <label for="cookLocation" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스장소</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookLocation" name="cookLocation" value="${cook.cookLocation}" placeholder="쿠킹클래스장소">
+		      ${cook.cookLocation}
 		      
 		    </div>
     

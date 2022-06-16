@@ -48,7 +48,7 @@
 	 <delete id="deletelove" parameterType="map" >
 	 DELETE
 	 FROM love 
-	 WHERE love_no= #{loveNo} and user_id = #{userId}
+	 WHERE user_nickname= #{userNickname} and user_id = #{userId}
 	 </delete>
 	 
 	 

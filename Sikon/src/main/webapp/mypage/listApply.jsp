@@ -354,7 +354,7 @@ div.emptyProd{
 								<td align="left" class="divy" value1="${apply.applyNo }"
 									value2="${apply.applyStatus}">수강완료 
 									<c:if test="${apply.reviewStatus.equals('001') }">
-					<a onclick="window.open('/review/addReview.jsp?category=COOK&textNo=${apply.applyNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">리뷰쓰기</a>					
+					<a onclick="window.open('/review/addReview.jsp?category=COOK&textNo=${apply.classCook.cookNo }', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">리뷰쓰기</a>					
 									</c:if></td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('100')}">

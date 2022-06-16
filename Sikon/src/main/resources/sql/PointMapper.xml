@@ -42,4 +42,26 @@
 	   		WHERE user_id= #{userId}
 	 </update>	
 	 
+	 <!-- SQL : SELECT LIST -->
+	<select  id="getPointList"  parameterType="map"	resultMap="PointSelectMap">
+	  	SELECT *
+	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+	  					FROM		(	SELECT *
+											FROM point
+											WHERE user_id=#{userId}
+											ORDER BY point_regdate DESC) inner_table
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+	 </select>
+	 
+	 <!-- SQL : SELECT ROW Count -->	 
+	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT *
+											FROM point
+											WHERE user_id=#{userId}) countTable						
+	 </select>
+	 
+	 
+	 
 </mapper>
