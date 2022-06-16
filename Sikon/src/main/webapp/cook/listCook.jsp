@@ -279,11 +279,8 @@ div.emptyProd{
 					}
 				});
 			});		
-
-		
-
 	
-		 
+		 //테마버튼 상태 유지
 		 $(function() {
 			 
 			 var themeCondition = $("#themeCondition").val();
@@ -304,15 +301,15 @@ div.emptyProd{
 				 $(".theme").removeClass('act');
 				 $(".themech").addClass('act');
 				 
-			 }else if(themeCondition == 'an'){
+			 }else if(themeCondition == 'am'){
 				 
 				 $(".theme").removeClass('act');
-				 $(".themean").addClass('act');
+				 $(".themeam").addClass('act');
 				 
-			 }else if(themeCondition == 'jp'){
+			 }else if(themeCondition == 'ja'){
 				 
 				 $(".theme").removeClass('act');
-				 $(".themejp").addClass('act');
+				 $(".themeja").addClass('act');
 				 
 			 }else{
 				 
@@ -320,13 +317,39 @@ div.emptyProd{
 				 $(".themeAll").addClass('act');
 				 
 			 }
-			 
-			//*/ 
 			
 		 });
 		 
-		 
-
+		//테마로 정렬
+		$(document).on('click', '#themeAll', function(){
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+		
+		$(document).on('click', '#themeko', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+			
+		$(document).on('click', '#themeja', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+		
+		$(document).on('click', '#themech', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+		
+		$(document).on('click', '#themeam', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+		
+		$(document).on('click', '#themede', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+		
 
 		//좋아요 push 알림
 		 function pushAlarm(userId, userNickname, cookNo){
@@ -654,12 +677,12 @@ div.emptyProd{
     	<form class="form-inline" name="detailForm">
     	
     	<nav class="ref-sort" >
-	      <button class="theme themeAll" id="themeAll" value="all">모두보기</button>
-	      <button class="theme themeko" value="ko">한식</button>
-	      <button class="theme themeja" value="ja">일식</button>
-	      <button class="theme themean" value="an">양식</button>
-	      <button class="theme themech" value="ch">중식</button>
-	      <button class="theme themede" value="de">간식</button>
+	      <button type="button" class="theme themeAll" id="themeAll" value="all">모두보기</button>
+	      <button type="button" class="theme themeko" id="themeko" value="ko">한식</button>
+	      <button type="button" class="theme themeja" id="themeja" value="ja">일식</button>
+	      <button type="button" class="theme themeam" id="themeam" value="am">양식</button>
+	      <button type="button" class="theme themech" id="themech" value="ch">중식</button>
+	      <button type="button" class="theme themede" id="themede" value="de">간식</button>
 	    </nav>
     	
 

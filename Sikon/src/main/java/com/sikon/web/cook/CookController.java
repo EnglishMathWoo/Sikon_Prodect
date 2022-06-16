@@ -224,9 +224,7 @@ public class CookController {
 	}
 
 	@RequestMapping(value = "listCook")
-	public String listCook(@ModelAttribute("search") Search search,
-
-			@RequestParam("menu") String menu, Model model, HttpServletRequest request) throws Exception {
+	public String listCook(@ModelAttribute("search") Search search,	@RequestParam("menu") String menu, Model model, HttpServletRequest request) throws Exception {
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -248,13 +246,11 @@ public class CookController {
 		}
 
 		System.out.println(cookList);
-		System.out.println("±Ë≈¬»£");
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 
 		System.out.println(map.get("list"));
-		System.out.println("^^^^^^^^^^^");
 
 		model.addAttribute("list", cookList);
 		System.out.println(map.get("list"));

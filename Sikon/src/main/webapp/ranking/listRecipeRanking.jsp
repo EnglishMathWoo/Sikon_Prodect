@@ -228,12 +228,7 @@ background-color: #f7f7f7;
 			$(document).on('click', '#cook', function(){
 				 self.location = "/ranking/listCook";
 			});
-			
-			$(document).on('click', '.order', function(){
-				 $(".order").removeClass('act');
-				 $(this).addClass('act');
-			});
-			
+									
 			$(function() {
 							
 				var odc = $("#orderCon").val();
