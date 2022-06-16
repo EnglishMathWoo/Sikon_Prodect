@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
+import com.sikon.service.domain.Love;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
 import com.sikon.service.ranking.RankingDao;
@@ -38,6 +39,7 @@ public class RankingDaoImpl implements RankingDao {
 		sqlSession.insert("RankingMapper.addRecipeView", recipeNo);
 	}
 	
+	//∑πΩ√«« ∑©≈∑ ∏ÆΩ∫∆Æ
 	public List<Recipe> getRecipeList(Search search) throws Exception {
 		System.out.println("search=" + search);
 		return sqlSession.selectList("RankingMapper.getRecipeList", search);
@@ -63,6 +65,10 @@ public class RankingDaoImpl implements RankingDao {
 		sqlSession.insert("RankingMapper.deleteLoveMentor", map);
 	}
 	
-	
+	//¡Ò∞‹√£¥¬ ∏‡≈‰ ∑©≈∑ ∏ÆΩ∫∆Æ
+	public List<Love> getLoveList(Search search) throws Exception {
+		System.out.println("search=" + search);
+		return sqlSession.selectList("RankingMapper.getLoveList", search);
+	}
 	
 }
