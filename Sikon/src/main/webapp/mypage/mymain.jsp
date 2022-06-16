@@ -98,9 +98,9 @@ h3 {
 }
 
 .btn-rounded.btn-md {
-    padding: 12px 35px;
-    font-size: 16px
-    
+    padding: 4px 35px;
+    font-size: 15px;
+    margin-top: -120px;
 }
 
 html body .m-t-10 {
@@ -155,6 +155,14 @@ padding-top:120px;
 .col-md-8{
 padding-top:175px;
 }
+
+
+.myupdate{
+	width:100%;
+	text-align: right;
+}
+
+
 </style>
 
 <script type="text/javascript">
@@ -187,7 +195,9 @@ $(function() {
             <div class="card-body little-profile text-center">
                 <div class="pro-img"><img src="/resources/images/168939.jpg" alt="user">
                 </div>
+                <div class="myupdate">
                 <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">내정보수정</a>
+                </div>
                 <h3 class="m-b-0">${user.userNickname }</h3>
                 <p>${user.role }</p> 
                 <div class="row text-center m-t-20">
