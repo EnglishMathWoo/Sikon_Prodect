@@ -299,9 +299,9 @@ table.type09 td {
 					<div class="col-lg-offset-1 col-lg-11">
 						<br />
 
-						<textarea id="summernote" class="form-control" name="recipeOrder"  >
-      
-     </textarea>
+						<textarea id="summernote" class="form-control" name="recipeOrder">
+      					${recipe.recipeOrder}
+     					</textarea>
 						<script>
 							$('#summernote').summernote({
 								tabsize : 2,

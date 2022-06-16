@@ -545,11 +545,31 @@ background-color: #f7f7f7;
  <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>
  
             
+     <table style="width: 100%;">
+        <tr>
+        <td style="text-align: left;">  
+		             
+    		<div class="row height">
+    		<div class="col-md-6">
+	   					<select class="form-control" id="orderCondition" name="orderCondition">
+							<option value="0"
+								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
+							<option value="1"
+								${!empty search.orderCondition && search.orderCondition==1 ? "selected" : ""}>인기순</option>
+							<option value="2"
+								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
+								<option value="3"
+								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>소요시간순</option>
+								
+						</select>
+			</div>
+			</div>
+			</td>
+			
+        	<td style="text-align: right;">
             
-            
-            
-             <div class="row height d-flex justify-content-center align-items-center">
-              <div class="col-md-6 text-center">
+             <div class="row height">
+              <div class="col-md-6">
 					<div class="form-group">
 					 
 						<select class="form-control" name="searchCondition">
@@ -570,24 +590,17 @@ background-color: #f7f7f7;
             
             
             
-            
-		             
-      <div class="center btmspace-50">
-	   <select class="condition" id="orderCondition" name="orderCondition">
-							<option value="0"
-								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
-							<option value="1"
-								${!empty search.orderCondition && search.orderCondition==1 ? "selected" : ""}>인기순</option>
-							<option value="2"
-								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
-								<option value="3"
-								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>소요시간순</option>
-								
-						</select>
-	     </div>
+          </td>
+          
+	     	</tr>
+	     </table>
+	     
   	</form>
     	</section>
   	</div>
+  	
+  	
+  	
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
 
  

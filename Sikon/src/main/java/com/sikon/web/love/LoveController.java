@@ -53,23 +53,23 @@ public class LoveController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 
-	@RequestMapping(value = "addLove")
-	public String addlove(@ModelAttribute("love") Love love, 
-			HttpServletRequest request,@RequestParam("userNickname") String userNickname) throws Exception {
-
-		System.out.println("/love/addlove : POST");
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		System.out.println(user);
-
-		love.setUserNickname(userNickname);
-		love.setUserId(user.getUserId());
-
-		loveService.addLove(love);
-		rankingService.addLoveMentor(userNickname);
-
-		return "forward:/mypage/listLove.jsp";
-	}
+//	@RequestMapping(value = "addLove")
+//	public String addlove(@ModelAttribute("love") Love love, 
+//			HttpServletRequest request,@RequestParam("userNickname") String userNickname) throws Exception {
+//
+//		System.out.println("/love/addlove : POST");
+//		HttpSession session = request.getSession();
+//		User user = (User) session.getAttribute("user");
+//		System.out.println(user);
+//
+//		love.setUserNickname(userNickname);
+//		love.setUserId(user.getUserId());
+//
+//		loveService.addLove(love.getUserNickname(),love.getUserId());
+//		rankingService.addLoveMentor(love.getUserNickname(),love.getUserId());
+//
+//		return "forward:/mypage/listLove.jsp";
+//	}
 
 	@RequestMapping(value = "listLove")
 	public String listlove(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
@@ -102,21 +102,24 @@ public class LoveController {
 		return "forward:/mypage/listLove.jsp";
 	}
 
-	// 책갈피 선택 삭제
-	@RequestMapping(value = "deleteLove")
-	public String deletelove(@RequestParam("loveList") int[] loveList) throws Exception {
 
-		System.out.println("/love/deletelove : POST");
-
-		for (int i = 0; i < loveList.length; i++) {
-			System.out.println(loveList[i]);
-		}
-
-		for (int i = 0; i < loveList.length; i++) {
-			loveService.deleteLove(loveList[i]);
-		}
-
-		return "redirect:/mypage/listlove";
-	}
+//	@RequestMapping(value = "deleteLove")
+//	public String deletelove(@RequestParam("loveList") int[] loveList,HttpServletRequest request) throws Exception {
+//
+//		System.out.println("/love/deletelove : POST");
+//		
+//		HttpSession session = request.getSession();
+//		User user = (User) session.getAttribute("user");
+//
+//		for (int i = 0; i < loveList.length; i++) {
+//			System.out.println(loveList[i]);
+//		}
+//
+//		for (int i = 0; i < loveList.length; i++) {
+//			loveService.deleteLove(loveList[i],user.getUserId());
+//		}
+//
+//		return "redirect:/mypage/listlove";
+//	}
 
 }

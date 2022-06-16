@@ -192,7 +192,9 @@ public class ApplyController {
 		@RequestMapping( value="updateApplyStatus" )
 		public ModelAndView updateApplyStatus( @ModelAttribute("apply") Apply apply,
 				@RequestParam("menu") String menu,
-				@RequestParam("applyNo") int applyNo) throws Exception{
+				@RequestParam("applyNo") int applyNo,
+				HttpServletRequest request
+				) throws Exception{
 
 			System.out.println("/apply/updateApplyStatus : GET,Post");
 			//Business Logic
@@ -203,6 +205,8 @@ public class ApplyController {
 			
 			if(applyStatus.equals("100")) {
 				applyStatus="200";
+			}else if(applyStatus.equals("200")) {
+				applyStatus = "300";
 			}
 			
 			System.out.println("applyStatusÈÄ:"+applyStatus);
@@ -211,13 +215,21 @@ public class ApplyController {
 
 			applyService.updateApplyStatus(apply1);
 			
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			
+			apply.setApplier(user);
+			user = userService.getUser(user.getUserId());
+			
 			ModelAndView modelAndView=new ModelAndView();
 			
-			if(applyStatus.equals("000")) {
+			if(user.getRole().equals("user")) {
 			modelAndView.setViewName("forward:/apply/listApply");
-			}else {
+			}else{
 			modelAndView.setViewName("forward:/apply/listSale");
 			}
+			
+			
 			
 			return modelAndView;
 		}

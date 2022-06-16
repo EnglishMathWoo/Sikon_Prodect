@@ -179,7 +179,7 @@ public class PurchaseController {
 		point.setPointScore(usedpoint);
 		point.setTotalPoint(totalpoint);
 		point.setUserId(userId);
-		point.setPointType("use");
+		point.setPointType("USE");
 		point.setPointCategory("str");
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint, userId);
@@ -191,7 +191,7 @@ public class PurchaseController {
 		point.setPointScore(earnpoint);
 		point.setTotalPoint(totalpoint+earnpoint);
 		point.setUserId(userId);
-		point.setPointType("earn");
+		point.setPointType("EARN");
 		point.setPointCategory("str");
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint+earnpoint, userId);
@@ -267,6 +267,17 @@ public class PurchaseController {
 
 		System.out.println("========================================================================");
 		System.out.println("/purchase/addPurchaseByCart : POST");
+		System.out.println("========================================================================");
+		for(String str : coupon) {
+			System.out.println("str");
+			System.out.println(str);
+		}
+		System.out.println("========================================================================");
+		for(int carts : cartNo) {
+			System.out.println("carts");
+			System.out.println(carts);
+		}
+		System.out.println("========================================================================");
 		
 		User user = userService.getUser(userId);
 		
@@ -294,7 +305,6 @@ public class PurchaseController {
 			Cart cart = cartService.getCart(cartNo[i]);
 			
 			Product product = productService.getProduct(cart.getCartProd().getProdNo());
-			
 			Purchase purchaseByCart = new Purchase();
 			purchaseByCart.setReceiverName(purchase.getReceiverName());
 			purchaseByCart.setReceiverPhone(purchase.getReceiverPhone());
@@ -306,7 +316,11 @@ public class PurchaseController {
 			purchaseByCart.setEarnPoint(purchase.getEarnPoint());
 			purchaseByCart.setBuyer(user);
 			purchaseByCart.setPurchaseProd(product);
-			purchaseByCart.setUsedCoupon(coupon[i]);
+			if(coupon[i].equals("none")) {
+				purchaseByCart.setUsedCoupon(null);
+			}else {
+				purchaseByCart.setUsedCoupon(coupon[i]);
+			}
 			purchaseByCart.setPurchaseQuantity(cart.getQuantity());
 			purchaseByCart.setDivyStatus("001");
 			purchaseByCart.setPaymentOpt("KA");
@@ -315,7 +329,6 @@ public class PurchaseController {
 			
 			list.add(purchaseByCart);
 			
-			System.out.println(purchaseByCart);
 			purchaseService.addPurchase(purchaseByCart);
 			
 			System.out.println(cart.getQuantity());
@@ -327,7 +340,7 @@ public class PurchaseController {
 		}
 		
 		System.out.println("========================================================================");
-
+//*
 
 		//==================================================================================
 		//포인트 적용
@@ -343,7 +356,7 @@ public class PurchaseController {
 		point.setPointScore(usedpoint);
 		point.setTotalPoint(totalpoint);
 		point.setUserId(userId);
-		point.setPointType("use");
+		point.setPointType("USE");
 		point.setPointCategory("str");
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint, userId);
@@ -355,7 +368,7 @@ public class PurchaseController {
 		point.setPointScore(earnpoint);
 		point.setTotalPoint(totalpoint+earnpoint);
 		point.setUserId(userId);
-		point.setPointType("earn");
+		point.setPointType("EARN");
 		point.setPointCategory("str");
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint+earnpoint, userId);
@@ -363,10 +376,11 @@ public class PurchaseController {
 		
 		//==================================================================================
 		// 쿠폰 사용하기
+		System.out.println("쿠폰사용 시작");
 		
 		for(String cou : coupon) {
 			
-			if(cou.equals("")) {
+			if(cou.equals("none")) {
 				cou = null;	
 			}
 			
@@ -377,9 +391,11 @@ public class PurchaseController {
 				couponService.updateIssueStatus(usedcoupon);
 			}
 		}
-
+		System.out.println("쿠폰사용 끝");
 		//==================================================================================		
 		
+//*/		
+		System.out.println("장바구니 구매완료");
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");
@@ -412,14 +428,72 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
+	
+	@RequestMapping( value="getPurchaseBySerial", method=RequestMethod.GET)
+	public ModelAndView getPurchaseBySerial( @RequestParam("serialNo") String serialNo) throws Exception {
+		
+		System.out.println("/purchase/getPurchaseBySerial : GET ");
+		
+		List purchaselist = new ArrayList();
+		
+		List list = purchaseService.getPurchaseBySerial(serialNo);
+		Map map = new HashMap();
+		
+		String serial = "";
+		int totalprice = 0;
+		int divyfee = 0;
+		int couponpay = 0;
+		int pointpay = 0;
+		
+		for(int i=0; i<list.size();i++) {
+			
+			Purchase purchase = purchaseService.getPurchase(((Purchase)list.get(i)).getTranNo());
+			User user = userService.getUser(((Purchase)list.get(i)).getBuyer().getUserId());
+			Product product = productService.getProduct(((Purchase)list.get(i)).getPurchaseProd().getProdNo());			
+			purchase.setBuyer(user);
+			purchase.setPurchaseProd(product);
+			
+			purchaselist.add(purchase);
+			
+			totalprice += product.getProdDisPrice();
+			divyfee += purchase.getDivyFee();
+			pointpay += purchase.getUsedPoint();
+			
+			serial = purchase.getSerialNo();
+			
+			System.out.println(list.get(i));
+		}	
+		
+		map.put("totalprice", totalprice);
+		map.put("divyfee", divyfee);
+		map.put("couponpay", couponpay);
+		map.put("pointpay", pointpay);
+		map.put("serial", serial);
+
+		System.out.println("================================================================================");
+		System.out.println("totalprice: "+totalprice);
+		System.out.println("divyfee: "+divyfee);
+		System.out.println("couponpay: "+couponpay);
+		System.out.println("pointpay: "+pointpay);
+		System.out.println("serial: "+serial);
+		System.out.println("map: "+map);
+		System.out.println("================================================================================");
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/getPurchaseBySerial.jsp");
+		modelAndView.addObject("purchaselist", purchaselist);
+		modelAndView.addObject("purchaseinfo", map);
+		
+		return modelAndView;
+	}
+	
 
 	@RequestMapping(value="updatePurchase", method=RequestMethod.GET)
 	public ModelAndView updatePurchase( @RequestParam("tranNo") int tranNo) throws Exception{
 
 		System.out.println("/purchase/updatePurchase : GET ");
 		//Business Logic
-		
-
+	
 		Purchase purchase = purchaseService.getPurchase(tranNo);
 		
 		int prodNo = purchase.getPurchaseProd().getProdNo();
@@ -439,6 +513,65 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="updatePurchaseBySerial", method=RequestMethod.GET)
+	public ModelAndView updatePurchaseBySerial( @RequestParam("serialNo") String serialNo) throws Exception{
+
+		System.out.println("/purchase/updatePurchaseBySerial : GET ");
+
+		List list = purchaseService.getPurchaseBySerial(serialNo);
+		
+		List purchaselist = new ArrayList();
+		Map map = new HashMap();
+		
+		String serial = "";
+		int totalprice = 0;
+		int divyfee = 0;
+		int couponpay = 0;
+		int pointpay = 0;
+		
+		for(int i=0; i<list.size();i++) {
+			
+			Purchase purchase = purchaseService.getPurchase(((Purchase)list.get(i)).getTranNo());
+			User user = userService.getUser(((Purchase)list.get(i)).getBuyer().getUserId());
+			Product product = productService.getProduct(((Purchase)list.get(i)).getPurchaseProd().getProdNo());			
+			purchase.setBuyer(user);
+			purchase.setPurchaseProd(product);
+			
+			purchaselist.add(purchase);
+			
+			totalprice += product.getProdDisPrice();
+			divyfee += purchase.getDivyFee();
+			pointpay += purchase.getUsedPoint();
+			
+			serial = purchase.getSerialNo();
+			
+			System.out.println(list.get(i));
+		}	
+		
+		map.put("totalprice", totalprice);
+		map.put("divyfee", divyfee);
+		map.put("couponpay", couponpay);
+		map.put("pointpay", pointpay);
+		map.put("serial", serial);
+
+		System.out.println("================================================================================");
+		System.out.println("totalprice: "+totalprice);
+		System.out.println("divyfee: "+divyfee);
+		System.out.println("couponpay: "+couponpay);
+		System.out.println("pointpay: "+pointpay);
+		System.out.println("serial: "+serial);
+		System.out.println("map: "+map);
+		System.out.println("================================================================================");
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/updatePurchaseBySerial.jsp");
+		modelAndView.addObject("purchaselist", purchaselist);
+		modelAndView.addObject("purchaseinfo", map);
+		
+		return modelAndView;
+				
+	}
+	
 	@RequestMapping(value="updatePurchase", method=RequestMethod.POST)
 	public ModelAndView updatePurchase( @ModelAttribute("purchase") Purchase purchase, @RequestParam("tranNo") int tranNo) throws Exception{
 
@@ -449,6 +582,27 @@ public class PurchaseController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/purchase/getPurchase?tranNo="+tranNo);		
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="updatePurchaseBySerial", method=RequestMethod.POST)
+	public ModelAndView updatePurchaseBySerial( @ModelAttribute("purchase") Purchase purchase, @RequestParam("tranlist") int[] tranlist) throws Exception{
+
+		System.out.println("/purchase/updatePurchaseBySerial : POST ");
+		
+		System.out.println("1번 Purchase: "+purchase);
+		System.out.println("-----------------------------------------------------------------------------");
+		
+		for(int i=0; i<tranlist.length; i++) {
+			
+			purchase.setTranNo(tranlist[i]);
+			purchaseService.updatePurchase(purchase);
+			
+		}
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/purchase/getPurchaseBySerial?serialNo="+purchase.getSerialNo());		
 		
 		return modelAndView;
 	}

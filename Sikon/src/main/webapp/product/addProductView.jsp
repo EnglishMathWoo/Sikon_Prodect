@@ -20,6 +20,9 @@
 
 html {
   line-height: 1;
+  font-family: 'Nanum Myeongjo', serif;
+  
+  
 }
 
 ol, ul {
@@ -65,7 +68,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 
 body {
   text-align: center;
-  font-family: "Lato", "sans-serif";
+  font-family: 'Nanum Myeongjo', serif;
   font-weight: 400;
 }
 
@@ -112,7 +115,7 @@ h2.heading {
   width: 100%;
   margin-bottom: 18px;
   color: #888;
-  font-family: "Lato", "sans-serif";
+  font-family: 'Nanum Myeongjo', serif;
   font-size: 16px;
   font-weight: 300;
   -webkit-border-radius: 2px;
@@ -246,7 +249,11 @@ input:-webkit-autofill {
 .formall{
 	padding:220px;
 }
-
+.pltitle{
+	text-align: center;
+	color: #937062;
+	padding-top: 35px;
+}
 /* ---------------------------------------- */
 </style>
 <script>
@@ -282,6 +289,10 @@ input:-webkit-autofill {
 <div class="formall">
 <form action="">
   <!--  General -->
+  
+  <h3 class="pltitle">| ADD PRODUCT |</h3>
+  <br><br>
+  
   <div class="form-group">
     <h2 class="heading">상품기본정보</h2>
     

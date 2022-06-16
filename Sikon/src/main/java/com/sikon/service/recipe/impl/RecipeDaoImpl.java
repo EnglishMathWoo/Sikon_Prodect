@@ -101,20 +101,6 @@ public class RecipeDaoImpl implements RecipeDao {
 		return sqlSession.selectOne("RecipeMapper.getRecipeName", recipeNo);
 	}
 
-	//포인트 이동
-	public List getPointList(Search search, String userId) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("search", search);
-		map.put("userId",userId);
-		return sqlSession.selectList("RecipeMapper.getPointList",map);
-	}
-	//포인트 이동
-	@Override
-	public int pointTotalCount(Search search, String userId) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("search", search);
-		map.put("userId",userId);
-		return sqlSession.selectOne("RecipeMapper.pointTotalCount", map);
-	}
+	
 
 }

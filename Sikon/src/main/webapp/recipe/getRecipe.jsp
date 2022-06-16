@@ -44,7 +44,7 @@
 
 <style>
 .btn-sm {
-	background-color: red;
+	color: #000;
 }
 
 @font-face {
@@ -315,11 +315,10 @@ body {
   border: none;
   width: 40px;
   height: 30px;
-  color: #fff;
+  color: #000;
   font-size: 15px;
   cursor: pointer;
   margin-bottom: 10px;
-  background: #d4af7a;
   float: right;
   	font-family: 'Gowun Batang', serif;
   
@@ -367,7 +366,7 @@ body {
 			</c:forEach>
 		</div>
 
-		<br /> <input type="hidden" name="recipeNo" id="recipeNo"
+		<br/> <input type="hidden" name="recipeNo" id="recipeNo"
 			value="${recipe.recipeNo }" />
 
 
@@ -419,22 +418,15 @@ body {
 				<div style="float: right">조회수: ${recipeViews}</div>
 			</h5>
 			<hr />
-
-
-
-			마치 오븐 스파게티처럼 보이는 라자냐는 이탈리아 파스타 요리 중 하나예요. 반죽을 얇게 밀어 넓적한 직사각형 모양으로 자른
-			파스타를 라구 알라 볼로네제, 베샤멜 소스, 파르미지아노 레지아노 치즈 등의 속 재료와 함께 층층이 쌓은 후 오븐에 구운
-			요리랍니다. 이처럼 오랜 시간과 정성이 들어가는 라자냐는 이탈리아에서 축제 또는 결혼식, 손님을 대접할 때 등장하는 요리라고
-			해요. 오늘은 정성이 가득한 라자냐를 한 번 만들어 볼게요! 정성이 들어가는 만큼 깊은 맛과 풍미는 인스턴트와 비교할 수
-			없어요. 라구소스를 끓여 놓으면 활용할 곳이 많으니 한 번에 많이 만들어 두고두고 먹어도 좋아요. 고급스럽고 예쁜 라자냐로
-			식탁을 빛내보세요. <br />
+			${recipe.detail }
+			 <br />
 
 
 
 			<div class="iEJcKG">
 				<h3 class="iEJcKGheader">기본 재료</h3>
 				<div class="table">
-					<table class="type09" style="width: 592px">
+					<table class="type09" style="width: 740px">
 						<c:set var="i" value="0" />
 						<c:forEach var="ingredient" items="${list}">
 							<tr>
@@ -455,18 +447,19 @@ body {
 				<br /> ${recipe.recipeOrder }
 			</div>
 			<hr />
-			<form enctype="multipart/form-data">
+		
 				<h3 class="iEJcKGheader">리뷰</h3>
+			<form id="comment" name="comment" method="post" enctype="multipart/form-data">
 
 				<div class="panel">
 					<div class="panel-body">
-						<textarea class="form-control" name="reviewContent" rows="2"
-							placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
+						<textarea class="form-control" name="reviewContent"
+							id="reviewContent" rows="2" placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
 						<div class="mar-top clearfix">
-							<button class="btn btn-sm btn-primary pull-right" type="submit">
-								<i class="fa fa-pencil fa-fw"></i>등록
+							<button class="btn btn-sm  pull-right" type="submit">
+								등록
 							</button>
-
+							<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
 
 							<div class="yes">
 								<span class="btn_upload"> <input multiple="multiple"
@@ -481,8 +474,11 @@ body {
 
 						</div>
 					</div>
-
-					<c:forEach var="review" items="${review}">
+				</div>
+			</form>
+			
+			
+			<c:forEach var="review" items="${review}">
 
 						<div class="panel">
 							<div class="panel-body">
@@ -530,13 +526,12 @@ body {
 
 
 				</div>
-			</form>
 		</div>
-	</div>
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 </body>
 
+<script>history.scrollRestoration = "auto"</script>
 <script type="text/javascript">
 	$(function() {
 
@@ -562,64 +557,95 @@ body {
 			
 		});
 
-		$(".deleteReview").on("click", function() {
-			var array = new Array();
-			var textNo = $("input:hidden[name='recipeNo']").val();
-			array.push($(this).attr('id'));
-			alert("해당 리뷰를 삭제하시겠습니까?")
-			self.location = "/review/deleteReview?textNo="+textNo+"checkList="+array;
-		});
-
-		$(document)
-				.on('click','.updateReview',function() {
-							//alert($(this).attr('id'))	
-							var reviewContent = $(this).attr('id');
-							var reviewNo = $("input:hidden[name='reviewNo']").val();
-							var imgreview = $("#imgreview").attr('id');
-							
-							if(imgreview=='undefined'){
-							$('#acontent').html(
-											"<img src='/resources/images/uploadFiles/"+imgreview+"' width='100' height='100'>"+
-											"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
-							}
-							else{
-								$('#acontent').html(
-										
-										"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
-								
-							}
-							
-							$('#abt').html("<div class='updateButton'> <input type='button'  value='수정' id='"+reviewNo+"'>"
-													+ "<input type='button' value='취소' ></div>");
-
-						});
-
-		function answerEditSave() {
-			console.log('이에옹');
-			var content = $("#updatecontent").val();
-			var reviewNo = $("input:hidden[name='reviewNo']").val();
-			location.href = '/review/updateReview?reviewNo=' + reviewNo;
-		}
-
+	
 
 	});
 
 	function fncAddReview() {
-		var textNo = $("input:hidden[name='recipeNo']").val();
-		console.log(textNo);
-		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action",	"/review/addReview?category=REC&textNo=" + textNo)
-				.submit();
-
+		event.preventDefault();
+		 var form = $('#comment')[0];  	    
+		    // Create an FormData object          
+		    var data = new FormData(form);  	   
+		    // disabled the submit button         
+		
+		var recipeNo = $("input:hidden[name='recipeNo']").val();
+		var reviewContent=$('#reviewContent').val();
 		var userId = $("input:hidden[name='userId']").val();
-		console.log(userId);
 		var userNickname = $("input:hidden[name='userNickname']").val();
 		console.log(userNickname);
-		var recipeNo = $("input:hidden[name='recipeNo']").val();
 		console.log(recipeNo);
+		console.log(userId);
+
+	     $.ajax({
+	            type : "POST",  
+	            url : "/review/json/addReview", 
+	            data : data,
+	            processData: false,    
+	            contentType: false,      
+	            cache: false,  
+	            error : function(request,status,error){
+	            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	            },
+	            success : function(request) {
+						alert("등록 성공");				           
+	                    location.reload();
+	    					
+	                    }
+	     
+	     });
+
 
 		pushAlarm(userId, userNickname, recipeNo);
 	}
 
+	$(".deleteReview").on("click", function() {
+		var reviewNo = $("input:hidden[name='reviewNo']").val();
+		alert("해당 리뷰를 삭제하시겠습니까?")
+
+		$.ajax({
+            type : "POST",  
+            url : "/review/json/deleteReview",       
+            data : {'reviewNo' : reviewNo },
+            error : function(request,status,error){
+            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success : function(request) {
+                
+					alert("삭제 성공~");				           
+                    location.reload();
+                    	
+    					
+                    }
+		
+	});
+	});
+	
+
+
+
+	$(document).on('click','.updateReview',function() {
+				//alert($(this).attr('id'))	
+				var reviewContent = $(this).attr('id');
+				var reviewNo = $("input:hidden[name='reviewNo']").val();
+				var imgreview = $("#imgreview").attr('id');
+				
+				if(imgreview=='undefined'){
+				$('#acontent').replaceWith(
+								"<img src='/resources/images/uploadFiles/"+imgreview+"' width='100' height='100'>"+
+								"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
+				}
+				else{
+					$('#acontent').replaceWith(
+							
+							"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
+					
+				}
+				
+				$('#abt').replaceWith("<div class='updateButton'> <input type='button'  value='수정' id='"+reviewNo+"'>"
+										+ "<input type='button' value='취소' ></div>");
+
+			});
+	
 	function readURL(input, imgControlName) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -645,6 +671,8 @@ body {
 		$('.preview1').removeClass('it');
 		$('.btn-rmv1').removeClass('rmv');
 	});
+	
+	
 
 	//리뷰 push 알림
 	function pushAlarm(userId, userNickname, recipeNo) {

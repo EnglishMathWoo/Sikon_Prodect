@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-
+import com.sikon.service.domain.Cart;
 import com.sikon.service.domain.Wish;
 import com.sikon.service.wish.WishDao;
 
@@ -47,16 +47,16 @@ public class WishDaoImpl implements WishDao{
 	}
 
 	@Override
-	public void updateWish(int wishNo, int cookStatus) throws Exception {
+	public void updateWish(Wish wish) throws Exception {
 		
-		String cookStatusNumber = cookStatus+"";
-		String wishNumber = wishNo+"";
+
 		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("cookStatus", cookStatusNumber);
-		map.put("wishNo",  wishNumber );
-		
-		sqlSession.update("WishMapper.updateWish",map);
+		sqlSession.update("WishMapper.updateWish",wish);
+	}
+	
+	@Override
+	public Wish getWishList(int wishNo) throws Exception {
+		return sqlSession.selectOne("WishMapper.getWishList", wishNo);
 	}
 
 }

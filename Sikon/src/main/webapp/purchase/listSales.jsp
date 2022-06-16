@@ -82,6 +82,10 @@ h3{
 	font-family: 'Nanum Myeongjo', serif;
 	color: #5a443b;
 }
+.pltitle{
+	padding-top: 35PX;
+	text-align: center;
+}
 </style>
 	<script type="text/javascript">
 
@@ -159,9 +163,7 @@ h3{
 	<!--  拳搁备己 div Start /////////////////////////////////////-->
 	<div class="container listsale">
 	<br>
-		<div class="text-info text-center">
-	       <h3>| <span style="font-size: 25px">魄概格废包府</span> |</h3>
-	    </div>
+		<h3 class="pltitle" style="color:#333">| SALES LIST |</h3>
 	    
 	    <div>
 

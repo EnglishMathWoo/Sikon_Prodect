@@ -40,6 +40,10 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		return sqlSession.selectOne("PurchaseMapper.getPurchase", tranNo);
 	}
 	
+	public List<Purchase> getPurchaseBySerial(String serialNo) throws Exception {
+		return sqlSession.selectList("PurchaseMapper.getPurchaseBySerial", serialNo);
+	}
+	
 	public void updatePurchase(Purchase purchase) throws Exception {
 		sqlSession.update("PurchaseMapper.updatePurchase", purchase);
 	}

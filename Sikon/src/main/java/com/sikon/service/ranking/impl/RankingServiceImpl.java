@@ -1,7 +1,5 @@
 package com.sikon.service.ranking.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.sikon.common.Search;
-import com.sikon.service.coupon.CouponDao;
-import com.sikon.service.coupon.CouponService;
-import com.sikon.service.domain.Coupon;
+import com.sikon.service.domain.Love;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.ranking.RankingDao;
 import com.sikon.service.ranking.RankingService;
@@ -53,9 +49,25 @@ public class RankingServiceImpl implements RankingService{
 	}
 	
 	//즐겨찾는 멘토 날짜 저장
-	public void addLoveMentor(String userNickname) throws Exception{
-		rankingDao.insertLoveMentor(userNickname);
+	public void addLoveMentor(String userNickname, String userId) throws Exception{
+		rankingDao.insertLoveMentor(userNickname, userId);
 	}
 	
+	//즐겨찾는 멘토 날짜 삭제
+	public void deleteLoveMentor(String userNickname, String userId) throws Exception{
+		rankingDao.deleteLoveMentor(userNickname, userId);
+	}
+	
+	// 즐겨찾기 리스트 조회
+	public Map<String, Object> getLoveList(Search search) throws Exception {
+		System.out.println("search=" + search);
+		List<Love> list = rankingDao.getLoveList(search);
 
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		System.out.println("list=" + list);
+
+		return map;
+	}
+	
 }

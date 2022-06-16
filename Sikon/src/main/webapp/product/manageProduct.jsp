@@ -110,6 +110,11 @@ div.emptyProd{
 	color: #333;
 }
 
+.pltitle{
+	padding-top: 35px;
+	text-align: center;
+}
+
 </style>
 	<script type="text/javascript">
 
@@ -167,10 +172,8 @@ div.emptyProd{
 	<!--  拳搁备己 div Start /////////////////////////////////////-->
 	<div class="container list">
 	
-		<div class="page-header text-info text-center">
-	       <h3 style="color:#333">[ 惑前格废包府 ]</h3>
-	    </div>
-	    
+	       <h3 class="pltitle" style="color:#333">| PRODUCT LIST |</h3>
+	    <br><br><br>
 	    
 		
 		<form class="form-inline" name="detailForm">

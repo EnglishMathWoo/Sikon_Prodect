@@ -58,7 +58,20 @@ body {
     width: 1140px;
     
 }
-
+.bi-bookmark-plus::before,.bi-bookmark-plus-fill::before  {
+	color:#d4af7a;
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size:33px;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 
 .card-no-border .card {
@@ -317,13 +330,64 @@ p {
 					
 
 					
-					$("#addLove").on("click", function() {
+		/*		$("#addLove").on("click", function() {
 						var userNickname = $("input:hidden[name='userNickname']").val();
 						//console.log(recipeNo);
 							self.location = "/love/addLove?userNickname="+userNickname;
-						});					
+						});		*/		
+  //=======================================즐겨찾기===========================================///					
+					$(document).on("click" ,"#bookmarkBtn", function(){
+
+						var userId = $("input[name='userId']").val();
+						var userNickname = $("input[name='userNickname']").val();
+						
 					
-		
+						console.log(userNickname);
+						console.log(userId);
+
+					     $.ajax({
+					            type : "POST",  
+					            url : "/love/json/updateLove",       
+					            dataType : "json",   
+					            data : {'userNickname' : userNickname, 'userId' : userId },
+					            error : function(){
+					               alert("통신 에러");
+					            },
+					            success : function(loveCheck) {
+					                
+					                    if(loveCheck == 0){
+					                    	alert("즐겨찾기완료.");
+					                    	                    	
+					                    	
+					                    	var userNickname = $("input[name='userNickname']").val();
+
+					                    	console.log(userId);
+					                
+					                    	console.log(userNickname);
+					                    	
+					                    	
+
+
+								           
+					                    location.reload();
+					                    	
+					                    	
+					    					
+					                    }
+					                    else if (loveCheck == 1){
+					                     alert("즐겨찾기취소");
+					                     
+
+								         
+					                  
+					                    	location.reload();
+					                }
+					                    
+					                    
+					            }
+					        })
+					 });
+        //==================================================================================///	
 		 
 	
 		   	 $(window).scroll(function() {
@@ -338,7 +402,7 @@ p {
 	        	   		
 				            $.ajax({
 				                
-				                  url : "/cook/json/listMyCook?mentorId=${user.userId}",
+				                  url : "/cook/json/listMyCook?mentorId=${mentor.userId}",
 				                  method : "POST" ,
 				                  data : JSON.stringify({
 				                	  currentPage : cpage
@@ -406,13 +470,13 @@ p {
         <div class="card "> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
             <div class="card-body little-profile text-center">
                 <div class="pro-img"><img src="/resources/images/uploadFiles/kim3.jpg" alt="user"></div>
-                <h3 class="m-b-0">${user.userNickname}의 쿠킹클래스</h3>             
+                <h3 class="m-b-0">${mentor.userNickname}/${user.userId}의 쿠킹클래스</h3>             
 
             </div>
         </div>
-				<input type="hidden" name="userNickname" id="userNickname" value="${user.userNickname }" />
+				<input type="hidden" name="userNickname" id="userNickname" value="${mentor.userNickname }" />
 
-
+				<input type="hidden" name="userId" id="userId" value="${user.userId }" />
 	<div class="wrapper row3">
 
 		  <section class="hoc container clear"> 
@@ -420,8 +484,12 @@ p {
 
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
-		    
-		    <i id="addLove"  class="fa-regular fa-bookmark fa-2x"></i>
+		    		
+		  		
+					<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
+		
+					
+				
 		  		    <button type="button" class="submit">삭제</button>
 		  		
 		  

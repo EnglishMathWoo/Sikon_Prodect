@@ -32,9 +32,14 @@ public class LoveDaoImpl implements LoveDao {
 	}
 
 	/// Method
-	public void addLove(Love love) throws Exception {
-		System.out.println("love="+love);
-		sqlSession.insert("LoveMapper.addLove", love);
+	public void addLove(String userNickname,String userId) throws Exception {
+		System.out.println("userNickname="+userNickname);
+		System.out.println("userId="+userId);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNickname", userNickname);
+		map.put("userId", userId);
+		sqlSession.insert("LoveMapper.addLove", map);
 	}
 
 
@@ -50,9 +55,13 @@ public class LoveDaoImpl implements LoveDao {
 		return list;
 	}
 
-	public void deleteLove(int loveNo) throws Exception {
-		System.out.println("loveNo="+loveNo);
-		sqlSession.delete("LoveMapper.deleteLove", loveNo);
+	public void deleteLove(String userNickname,String userId) throws Exception {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("userNickname", userNickname);
+		System.out.println("userNickname="+userNickname);
+		System.out.println("userId="+userId);
+		sqlSession.delete("LoveMapper.deleteLove", map);
 	}
 
 	public int getTotalCount(Search search, String userId) throws Exception {
@@ -63,5 +72,15 @@ public class LoveDaoImpl implements LoveDao {
 		return sqlSession.selectOne("LoveMapper.getTotalCount", map);
 
 	}
+	
+	@Override
+	public int loveCheck(String userNickname,String userId) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("userNickname", userNickname);
+		return sqlSession.selectOne("LoveMapper.loveCheck", map);
+	}
+	
+
 
 }

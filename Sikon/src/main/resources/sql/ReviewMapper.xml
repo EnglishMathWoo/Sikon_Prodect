@@ -24,6 +24,7 @@
 		<result property="writer.userNickname" 				column="writer_nickname" 					jdbcType="VARCHAR" />
 		<result property="recipeName"			column="recipe_name" 		jdbcType="VARCHAR" />
 		<result property="recipeDetail" 	column="recipe_detail" 		jdbcType="VARCHAR" />
+		<result property="detail" 	column="detail" 		jdbcType="VARCHAR" />
 		<result property="recipeImg" 			column="recipe_img" 		jdbcType="VARCHAR" />
 		<result property="recipeVideo" 			column="recipe_video" 		jdbcType="VARCHAR" />
 		<result property="recipeDifficulty" 				column="recipe_difficulty" 					jdbcType="VARCHAR" />

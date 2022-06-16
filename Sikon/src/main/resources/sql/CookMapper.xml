@@ -90,19 +90,36 @@
 											FROM cook
 												<if test="searchCondition != null">
 												
-													<if test="searchCondition == 0 and searchKeyword !='' ">
+													<if test="searchCondition == 0 ">
 										 				WHERE cook_no like '%' || #{searchKeyword} || '%'
 													</if>
-													<if test="searchCondition == 1 and searchKeyword !='' ">
+													<if test="searchCondition == 1 ">
 										 				WHERE cook_name like '%' || #{searchKeyword} || '%'
 													</if>
-													<if test="searchCondition == 2 and searchKeyword !='' ">
+													<if test="searchCondition == 2 ">
 										 				 WHERE cook_price like '%' || #{searchKeyword} || '%'
 													</if>
 											</if>		
-
 											
-											ORDER BY  cook_no ) inner_table
+											<if test="themeCondition != null">
+													<if test='themeCondition == "ko"'>
+										 				where cook_theme LIKE UPPER('KO')
+													</if>
+													<if test='themeCondition == "ja"'>
+										 				where cook_theme LIKE UPPER('JA')
+													</if>
+													<if test='themeCondition == "am"'>
+										 				where cook_theme LIKE UPPER('AM')
+													</if>
+													<if test='themeCondition == "ch"'>
+										 				where cook_theme LIKE UPPER('CH')
+													</if>
+													<if test='themeCondition == "de"'>
+										 				where cook_theme LIKE UPPER('DE')
+													</if>
+											</if>		
+											
+											) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
@@ -141,7 +158,7 @@
 													<if test='themeCondition == "ch"'>
 										 				where cook_theme LIKE UPPER('CH')
 													</if>
-													<if test='themeCondition == "des"'>
+													<if test='themeCondition == "de"'>
 										 				where cook_theme LIKE UPPER('DE')
 													</if>
 											</if>							

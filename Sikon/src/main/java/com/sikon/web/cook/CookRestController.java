@@ -249,8 +249,8 @@ public class CookRestController {
 		return map;	
 	}
 	
-	@RequestMapping(value = "json/listMyCook")
-	public Map listMyCook(@RequestParam("mentorId") String mentorId,@RequestBody Search search, Model model, HttpServletRequest request)
+	@RequestMapping(value = "json/mentor")
+	public Map mentor(@RequestParam("mentorId") String mentorId,@RequestBody Search search, Model model, HttpServletRequest request)
 			throws Exception {
 		
 		System.out.println("¿Ö ¾È´ë!!!!!!!!"+search.getCurrentPage());
@@ -258,6 +258,41 @@ public class CookRestController {
 		search.setPageSize(pageSize);
 		System.out.println("search:" + search);
 		User user = userService.getUser(mentorId);
+		
+		System.out.println("´Ğ³×ÀÓ: "+user.getUserNickname());
+		
+		
+		// Business logic ¼öÇà
+		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+
+		System.out.println(resultPage);
+		System.out.println("ÄíÄíÄíÄíÄíÄíÄíÄíÄ¼Ä¼Ä¼Ä¼Ä¼Ä¼Ä¼ÄíÄíÄíÄíÄí");
+		System.out.println(resultPage);
+		System.out.println("////////////////////////////////////////"+map.get("list"));
+		
+		
+		map.put("user", user);
+		map.put("list", map.get("list"));
+		map.put("resultPage", resultPage);
+		map.put("search", search);
+
+		System.out.println("ÄíÄíÄíÄíÄíÄíÄíÄíÄ¼Ä¼Ä¼Ä¼Ä¼Ä¼Ä¼ÄíÄíÄíÄíÄí");
+		return map;
+	}
+	
+	@RequestMapping(value = "json/listMyCook")
+	public Map listMyCook(@RequestBody Search search, Model model, HttpServletRequest request)
+			throws Exception {
+		
+		System.out.println("¿Ö ¾È´ë!!!!!!!!"+search.getCurrentPage());
+
+		search.setPageSize(pageSize);
+		System.out.println("search:" + search);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
 		
 		System.out.println("´Ğ³×ÀÓ: "+user.getUserNickname());
 		

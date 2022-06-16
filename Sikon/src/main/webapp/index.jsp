@@ -34,10 +34,8 @@
 
 
     body {
-      font-family: 'Noto Sans KR', sans-serif;
       font-size: 0.9rem;
       line-height: 1rem;
-      color: #666;
       letter-spacing: 0.1px;
     }
 
@@ -508,7 +506,6 @@ opacity:1;
 .img1,.img2,.img3,.img4,.img5,.img6,.img7,.img8{
   
   position: relative;
-  margin-bottom:10px;
   cursor:pointer;
 }
 
@@ -569,11 +566,11 @@ footer img:hover{
 		<div class="swiper-slide"></div>
 	</div>
   
-  <div class="swiper-button-next0"><i class="fa-solid fa-angle-right"></i></div></div>
+  <div class="swiper-button-next0"><i class="fa-solid fa-angle-right"></i></div>
    <div class="swiper-button-prev0"><i class="fa-solid fa-angle-left"></i></div>
   
   
-
+</div>
    
     
     <article class="top">▲</article>
@@ -632,23 +629,32 @@ footer img:hover{
         </div>
 		</div>
 		
-		<div class="swiper-slide"><img src="https://www.giordano.co.kr/_data/attach/202007/13/a9cdad1657662c4cce30d62aa050dc92.jpg#addimg">
-		  <div class="word">
-            <h5>푸코 로즈골드 파스타집게</h5>
+		<div class="swiper-slide">            
+                <img src="/resources/images/uploadFiles/index/KakaoTalk_20220616_104729158.jpg" data-deferred="1" class="rg_i Q4LuWd" jsname="Q4LuWd" width="271" height="180" alt="마켓컬리 :: 내일의 장보기, 마켓컬리" data-atf="true" data-iml="919.9000000953674">
+		  <div class="word"  id="zzuggu">
+            <h5>하남 쭈꾸미</h5>
         </div>
 		</div>
         
-    <div class="swiper-slide"><img src="https://www.giordano.co.kr/_data/attach/202007/13/67ba636f4e9fbc0505fecaa36420904e.jpg#addimg">
-       <div class="word">
+    <div class="swiper-slide">            
+                <img src="/resources/images/uploadFiles/index/KakaoTalk_20220616_104729158_01.jpg" data-deferred="1" class="rg_i Q4LuWd" jsname="Q4LuWd" width="271" height="180" alt="마켓컬리 :: 내일의 장보기, 마켓컬리" data-atf="true" data-iml="919.9000000953674">
+		  <div class="word" >
+            <h5>프리미엄 함박카츠</h5>
         </div>
-    </div>
+		</div>
+		
+		<div class="swiper-slide">            
+                <img src="/resources/images/uploadFiles/index/KakaoTalk_20220616_104729158_02.jpg" data-deferred="1" class="rg_i Q4LuWd" jsname="Q4LuWd" width="271" height="180" alt="마켓컬리 :: 내일의 장보기, 마켓컬리" data-atf="true" data-iml="919.9000000953674">
+		  <div class="word" >
+            <h5>더캔버스 밀키트 3종</h5>
+        </div>
+		</div>
         
 
 	</div>
             <!-- 페이징 -->
 	<div class="swiper-pagination1"></div>
 </div>
-         
         </section>
       
       </div>
@@ -678,7 +684,7 @@ footer img:hover{
           <div class="topp">
             <div class="img2"></div>
             <div>
-            <img src="/resources/images/uploadFiles/index/KakaoTalk_20220613_175909763_01.jpg" height="180px;">
+            <img src="/resources/images/uploadFiles/index/KakaoTalk_20220613_175909763_01.jpg" height="200px;">
               <h5>생일케이크 원데이클래스</h5>
               <p>★★★</p>
               <p>따라하기 어려웠지만 결과물이 귀여워서 만족합니다</p>
@@ -701,7 +707,7 @@ footer img:hover{
           <div class="topp">
             <div class="img4"></div>
             <div>
-              <img src="/resources/images/uploadFiles/index/KakaoTalk_20220613_175909763_02.jpg" height="180px;">
+              <img src="/resources/images/uploadFiles/index/KakaoTalk_20220613_175909763_02.jpg" height="200px;">
               <h5>특별한 날을 위한 디너 클래스</h5>
               <p>★★</p>
               <p>야채 안좋아하는데 조금 실망입니다.</p>
@@ -749,7 +755,7 @@ footer img:hover{
           <div class="topp">
             <div class="img8"></div>
               <div>
-              <img src="/resources/images/uploadFiles/index/KakaoTalk_20220613_182827637_01.jpg" height="180px;">
+              <img src="/resources/images/uploadFiles/index/KakaoTalk_20220613_182827637_01.jpg" height="200px;">
               <h5>진수성찬 집밥 원데이클래스</h5>
               <p>★★★★★</p>
               <p>혼자 사는데 이렇게 잘 해먹은 거 처음이에요!만족합니다.</p>
@@ -766,9 +772,6 @@ footer img:hover{
         <div>
           <p>서울특별시 강남구 역삼동 819-3 삼오빌딩 5-9층</p>
           <div>
-          <img src="https://www.pngkit.com/png/full/213-2133577_facebook-logo-white-copy3-icono-de-facebook-animado.png">
-          <img src="https://img.pngio.com/hd-twitter-icon-white-transparent-transparent-background-twitter-twitter-logo-white-png-2076_2077.png">
-          <img src="https://cdn131.picsart.com/284792851018211.png?type=webp&to=min&r=640">
           </div>
           
           <p>COPYRIGHT(C) 2022 SIKON KOREA LTD.</p>
@@ -789,6 +792,9 @@ footer img:hover{
 		});
 		$(document).on("click" ,"#pasta", function(){
 			self.location = "/product/getProduct?prodNo=10002&menu=search";
+		});
+		$(document).on("click" ,"#zzuggu", function(){
+			self.location = "/product/getProduct?prodNo=10000&menu=search";
 		});
 	});
   

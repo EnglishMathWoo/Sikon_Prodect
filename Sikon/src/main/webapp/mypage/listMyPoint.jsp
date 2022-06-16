@@ -142,17 +142,49 @@ text-align: center
 
 				<thead>
 					<tr class="bg-light">
-						<th scope="col" width="10%" >적용일자</th>
-						<th scope="col" width="30%"  >사용/적립</th>
-						<th scope="col" width="30%"  >포인트</th>
-						<th scope="col" width="30%"  >주문번호</th>
+						<th scope="col" width="25%" >적용일자</th>
+						<th scope="col" width="25%"  >사용/적립</th>
+						<th scope="col" width="25%"  >적용항목</th>
+						<th scope="col" width="25%"  >포인트</th>
 					</tr>
 				</thead>
 
 				<tbody>
 
-					
-    
+					<c:if test="${!empty list}">
+						<c:set var="i" value="0" />
+						<c:forEach var="point" items="${list}">
+							<c:set var="i" value="${ i+1 }" />
+							<tr>
+								<td>${point.pointRegDate}</td>
+								<td>
+								<c:if test="${point.pointType=='EARN'}">
+								적립
+								</c:if>
+								<c:if test="${point.pointType=='USE'}">
+								사용
+								</c:if>
+								</td>
+								<td>
+								<c:if test="${point.pointCategory=='STR'}">
+								상품 구매
+								</c:if>
+								<c:if test="${point.pointCategory=='RE'&&point.pointScore=='500'}">
+								포토 리뷰 작성
+								</c:if>
+								<c:if test="${point.pointCategory=='RE'&&point.pointScore=='100'}">
+								일반 리뷰 작성
+								</c:if>
+								<c:if test="${point.pointCategory=='REC'}">
+								레시피 작성
+								</c:if>
+								</td>
+								<td>${point.pointScore}</td>
+							</tr>
+
+						</c:forEach>
+					</c:if>
+
 				</tbody>
 			</table>
 

@@ -20,13 +20,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/resources/css/animate.min.css" rel="stylesheet">
-   <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/resources/javascript/bootstrap-dropdownhover.min.js"></script>
+
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -65,10 +59,10 @@ th{
 }
 .table>tbody>tr>th{
 
-	border-top: 2px solid #afa5a5
+	border-top: 2px solid #957777;
 }
 div.list{
-	padding-top : 200px;
+	padding-top : 210px;
 }
 
 .cancel{
@@ -137,6 +131,11 @@ div.emptyProd{
 	color: #333;
 }
 
+.orderlist{
+	padding: 35px;
+	text-align: center;
+}
+
 </style>
 	<script type="text/javascript">
 
@@ -150,8 +149,26 @@ div.emptyProd{
 		
 
 		 $(function() {
+			 
+			 $(".getpurchase").on("click" , function() {
 				 
-			
+				var serialNo = $(this).attr('value');
+				console.log('serialNo: '+serialNo);
+				
+				self.location ="/purchase/getPurchaseBySerial?serialNo="+serialNo;
+				
+			});
+			 
+				 
+			$(".getprod").on("click" , function() {
+			 
+				var prodNo = $(this).attr('value');
+				console.log('상품상세보기: '+prodNo);
+				
+				self.location ="/product/getProduct?menu=search&prodNo="+prodNo;
+				
+			});
+			 
 			$( "td.view" ).on("click" , function() {
 				console.log('상세보기');
 				var message = $(this).attr("value");
@@ -200,10 +217,8 @@ div.emptyProd{
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container list">
 	
-		<div class="text-info">
-	       <h3 style="color:#bc8f8f">주문배송조회</h3><br>
-	    </div>
-	    
+		<h3 class="orderlist">| ORDER LIST |</h3>
+	    <br>
 	    
 		<form>
 			<input type="hidden" id="currentPage" name="currentPage" value=""/>
@@ -223,15 +238,20 @@ div.emptyProd{
 			
 			  <c:if test="${status.index eq 0 }">
 			  	<tr>
-			  		<th colspan="4">주문일자: <span style="font-weight: bold;">${purchase.orderDate }</span> &emsp;주문일련번호: <span style="font-weight: bold;">${purchase.serialNo }</span></th>
+			  		<th colspan="4" class="getpurchase" value="${purchase.serialNo }">
+			  			<a href="#" class="deco" style="color: #333;text-decoration: none;">
+			  			주문일자: <span style="font-weight: bold;">${purchase.orderDate }</span> &emsp;
+			  			주문일련번호: <span style="font-weight: bold;">${purchase.serialNo }</span>&ensp;<i class="fa-solid fa-angle-right"></i>
+			  			</a>
+			  		</th>
 			  		
 			  	</tr>
 			  	<tr>
 						
-					<td align="left" class="image" value="${purchase.purchaseProd.prodNo }">	
+					<td align="left" class="image getprod" value="${purchase.purchaseProd.prodNo }">	
 						<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}"  width="85" height="85">
 					</td>
-					<td align="left" class="prodcontent">
+					<td align="left" class="prodcontent getprod"  value="${purchase.purchaseProd.prodNo }">
 						<p class="prodname">${ purchase.purchaseProd.prodName }</p>
 						<p>${ purchase.purchaseProd.prodDisPrice }원</p>
 						<p>구매수량 ${ purchase.purchaseQuantity }개</p>
@@ -271,11 +291,11 @@ div.emptyProd{
 			  		<c:if test="${ before eq after }">
 					  	<tr>
 							
-							<td align="left" class="image" value="${purchase.purchaseProd.prodNo }">	
+							<td align="left" class="image getprod" value="${purchase.purchaseProd.prodNo }">	
 								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" width="85" height="85">
 							</td>
 							
-							<td align="left"  class="prodcontent">
+							<td align="left"  class="prodcontent getprod" value="${purchase.purchaseProd.prodNo }">
 								<p class="prodname">${ purchase.purchaseProd.prodName }</p>
 								<p>${ purchase.purchaseProd.prodDisPrice }원</p>
 								<p>구매수량 ${ purchase.purchaseQuantity }개</p>
@@ -310,15 +330,20 @@ div.emptyProd{
 			  		
 					<c:if test="${ before ne after }">
 			  			<tr>
-					  		<th colspan="4">주문일자: <span style="font-weight: bold;">${purchase.orderDate }</span> &emsp;주문일련번호: <span style="font-weight: bold;">${purchase.serialNo }</span></th>
+					  		<th colspan="4" class="getpurchase" value="${purchase.serialNo }">
+					  			<a href="#" class="deco" style="color: #333;text-decoration: none;">
+					  			주문일자: <span style="font-weight: bold;">${purchase.orderDate }</span> &emsp;
+					  			주문일련번호: <span style="font-weight: bold;">${purchase.serialNo }</span>&ensp;<i class="fa-solid fa-angle-right"></i>
+					  			</a>
+					  		</th>
 			  		
 					  	</tr>
 					  	<tr>
 							
-							<td align="left" class="image" value="${purchase.purchaseProd.prodNo }">	
+							<td align="left" class="image getprod" value="${purchase.purchaseProd.prodNo }">	
 								<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" width="85" height="85">
 							</td>
-							<td align="left"  class="prodcontent">
+							<td align="left"  class="prodcontent getprod" value="${purchase.purchaseProd.prodNo }">
 								<p class="prodname">${ purchase.purchaseProd.prodName }</p>
 								<p>${ purchase.purchaseProd.prodDisPrice }원</p>
 								<p>구매수량 ${ purchase.purchaseQuantity }개</p>

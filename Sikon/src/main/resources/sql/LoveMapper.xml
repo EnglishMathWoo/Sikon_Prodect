@@ -11,9 +11,8 @@
 		<result property="loveNo" 			column="love_no" 			jdbcType="NUMERIC"/>
 		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
 		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR" />
+		<result property="loveCheck" 			column="love_check" 		jdbcType="NUMERIC" />
 		<collection property="user" resultMap="userSelectMap"/>
-		
-		
 	</resultMap>
 
 <resultMap id="userSelectMap" type="user">
@@ -37,32 +36,37 @@
 
 	
 	<!-- SQL : INSERT -->
-	<insert 	id="addLove"		parameterType="love" >
+	<insert 	id="addLove"	parameterType="map" >
 	 	INSERT
 		INTO love( love_no , user_nickname, user_id) 
 		VALUES	 (	seq_love_love_no.nextval,  #{userNickname}, #{userId})
 	 </insert>
 	 
 	 
-	 <delete id="deletelove" parameterType="int" >
-	 DELETE
-	 FROM love 
-	 WHERE love_no= #{loveNo} 
+	 <delete id="deleteLove" parameterType="map" >
+	 	DELETE
+	 	FROM love 
+	 	WHERE user_nickname= #{userNickname} AND user_id = #{userId}
 	 </delete>
 	 
+	<select id="loveCheck" resultType="int">
+		SELECT COUNT(*) FROM love
+		WHERE user_nickname = #{userNickname} AND user_id = #{userId} 
+	</select> 
+		 
 	<select  id="getLoveList"  parameterType="map"	statementType="CALLABLE" resultMap="loveSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT A.* , ROWNUM AS row_seq
-	  					FROM		
-	  					(	
-select l.love_No, l.user_Id luser_id ,l.user_nickname luser_nickname , u.*
-               from love l,  users u
-               where
-               u.user_nickname=l.user_nickname
-            and l.user_id=#{userId}
-		 ) A
-						WHERE ROWNUM &lt;= #{search.endRowNum} )  C
-		WHERE C.row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+		  	SELECT *
+		  	FROM (	SELECT A.* , ROWNUM AS row_seq
+		  					FROM		
+		  					(	
+				select l.love_No, l.user_Id luser_id ,l.user_nickname luser_nickname , u.*
+	               from love l,  users u
+	               where
+	               u.user_nickname=l.user_nickname
+	            and l.user_id=#{userId}
+			 ) A
+							WHERE ROWNUM &lt;= #{search.endRowNum} )  C
+			WHERE C.row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>
 	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">

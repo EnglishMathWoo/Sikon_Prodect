@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
+import com.sikon.service.domain.Love;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.ranking.RankingDao;
 
@@ -37,16 +38,36 @@ public class RankingDaoImpl implements RankingDao {
 		sqlSession.insert("RankingMapper.addRecipeView", recipeNo);
 	}
 	
+	//레시피 랭킹 리스트
 	public List<Recipe> getRecipeList(Search search) throws Exception {
 		System.out.println("search=" + search);
 		return sqlSession.selectList("RankingMapper.getRecipeList", search);
 	}
 	
 	//즐겨찾는 멘토 날짜 저장
-	public void insertLoveMentor(String userNickname) throws Exception {
-		sqlSession.insert("RankingMapper.addLoveMentor", userNickname);
+	public void insertLoveMentor(String userNickname, String userId) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNickname", userNickname);
+		map.put("userId", userId);
+		
+		sqlSession.insert("RankingMapper.addLoveMentor", map);
 	}
 	
-	
+	//즐겨찾는 멘토 날짜 삭제
+	public void deleteLoveMentor(String userNickname, String userId) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userNickname", userNickname);
+		map.put("userId", userId);
+		
+		sqlSession.delete("RankingMapper.deleteLoveMentor", map);
+	}
+		
+	//즐겨찾는 멘토 랭킹 리스트
+	public List<Love> getLoveList(Search search) throws Exception {
+		System.out.println("search=" + search);
+		return sqlSession.selectList("RankingMapper.getLoveList", search);
+	}
 	
 }

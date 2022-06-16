@@ -37,10 +37,10 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <style>
-       body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 30px;
-        }
+div.container {
+	padding-top: 200px;
+	
+}
     </style>
 	<script type="text/javascript">
 
@@ -73,84 +73,24 @@ $(function() {
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
+	<div class="page-header">
 		<h1 class="bg-default text-center">쿠킹클래스 등록확인</h1>
+		  </div>
+		
+			<div class="row">
+	  		<div class="col-md-12 text-right">
+	  			<button type="button" class="btn btn-default">확인</button>
+	  			<button type="button" class="btn btn-default">추가등록</button>
+	  		</div>
+		</div>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" enctype="multipart/form-data">
 		
 		 <input type="hidden" name="cookNo" value="${cook.cookNo}"/>
 		 <input type="hidden" name="menu"  value="${param.menu}">
-		      
-		  <div class="form-group">
-		    <label for="cookName" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스명</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookName" name="cookName" value="${cook.cookName}" placeholder="쿠킹클래스명">
-		      
-		    </div>
-		  
-		  </div>
-		  
-		   <div class="form-group">
-		    <label for="cookStock" class="col-sm-offset-1 col-sm-3 control-label">모집인원재고</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookStock" name="cookStock"value="${cook.cookStock}" placeholder="모집인원재고">
-		    </div>
-		  </div>
-		  
-		   <div class="form-group">
-		    <label for="cookRecruit" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스모집인원</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookRecruit" name="cookRecruit"value="${cook.cookRecruit}" placeholder="쿠킹클래스모집인원">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="cookBrief" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스간략설명</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookBrief" name="cookBrief" value="${cook.cookBrief}" placeholder="쿠킹클래스간략설명">
-		    </div>
-		  </div>
-		  
-
-		  <div class="form-group">
-		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">모집기간</label>
-		    <div class="col-sm-2">
-		      <input type="DATE" class="form-control" id="aplstarTime"  name="aplstarTime" value="${cook.aplstarTime}" placeholder="모집시작기간">
-		    </div>
-		    
-		     <div class="col-sm-2">
-		      <input type="DATE" class="form-control" id="aplendTime"  name="aplendTime" value="${cook.aplendTime}" placeholder="모집종료기간">
-		    </div>
-		  </div>
-		  		  
-		    <div class="form-group">
-		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">수업시간</label>
-		    <div class="col-sm-2">
-		      <input type="TIME" class="form-control" id="startTime"  name="startTime"  value="${cook.startTime}" placeholder="수업시작시간">
-		    </div>
-		    
-		      <div class="col-sm-2">
-		      <input type="TIME" class="form-control" id="endTime"  name="endTime" value="${cook.endTime}"  placeholder="수업종료시간">
-		    </div>
-		  </div>
-		  
-		  
-
-		  
-		  
-		  
-		  <div class="form-group">
-		    <label for="cookPrice" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스가격</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookPrice" name="cookPrice"value="${cook.cookPrice}" placeholder="쿠킹클래스가격">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="uploadfile" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스이미지</label>
-		    <div class="col-sm-4">
-		   
-		    	
+			<div class="row">
+		<div class="col-xs-12 col-md-12" align="center">
 		<c:choose>	    
 		
 		<c:when test="${cook.cookFilename.contains('/')}">
@@ -179,14 +119,63 @@ $(function() {
 		</c:otherwise>
 		</c:choose>
 		
-	
-
-		    </div>
-		  </div>
+		</div>
+		</div>
+		
+		<hr/>	      
+		  	<div class="row">
+		  	<div class="col-xs-4 col-md-4"><strong>쿠킹클래스명</strong></div>
+		    <div class="col-xs-8 col-md-8">  ${cook.cookName}</div>
 		  
-		  <div class="form-group">
-		    <label for="cookTheme" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스테마</label>
-		    <div class="col-sm-4">
+		  </div>
+			<hr/>
+		  
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>모집인원가능인원</strong></div>
+			<div class="col-xs-8 col-md-8">${cook.cookStock }</div>
+		</div>	
+			<hr/>  
+		  
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>쿠킹클래스모집인원</strong></div>
+			<div class="col-xs-8 col-md-8">${cook.cookRecruit }</div>
+		</div>	
+			<hr/> 		  
+
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>쿠킹클래스간략설명</strong></div>
+			<div class="col-xs-8 col-md-8">${cook.cookBrief }</div>
+		</div>	
+			<hr/> 		  
+
+		  
+
+		  
+		<div class="row">
+	  		<div class="col-xs-2 col-md-4"><strong>모집기간</strong></div>
+			 <div class="col-sm-2 col-md-2">
+		   ${cook.aplstarTime}~  ${cook.aplendTime}
+		    </div>
+
+		</div>	
+			<hr/>
+		<div class="row">
+	  	<div class="col-xs-2 col-md-4"><strong>수업시간</strong></div>
+			 <div class="col-sm-2 col-md-2">
+		     ${cook.startTime}~ ${cook.endTime}
+		    </div>
+		</div>	 
+		  			<hr/>  
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>쿠킹클래스가격</strong></div>
+			<div class="col-xs-8 col-md-8">${cook.cookPrice }</div>
+		</div>	 	
+		  
+
+		  	<hr/>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>쿠킹클래스테마</strong></div>
+			<div class="col-xs-8 col-md-8">
 			<c:if test = "${cook.cookTheme =='KO'}">
 			한식 
 			</c:if>
@@ -202,12 +191,13 @@ $(function() {
 			<c:if test = "${cook.cookTheme == 'DE'}">
 			간식
 			</c:if>						
-		    </div>
-		  
-		  </div>
-		  <div class="form-group">
-		    <label for="cookDifficuty" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스난이도</label>
-		    <div class="col-sm-4">
+
+			</div>
+		</div>	
+		  	<hr/>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>쿠킹클래스난이도</strong></div>
+			<div class="col-xs-8 col-md-8">
 		    <c:if test = "${cook.cookDifficuty =='1'}">
 			초급
 			</c:if>
@@ -217,45 +207,27 @@ $(function() {
 			<c:if test = "${cook.cookDifficuty == '3'}">
 			고급
 			</c:if>
-
-
-					
-		    </div>
+			</div>
+		</div>	
+			<hr/>
+		<div class="row">
+	  		<div class="col-xs-4 col-md-4"><strong>쿠킹클래스장소</strong></div>
+			<div class="col-xs-8 col-md-8">${cook.cookLocation }</div>
+		</div>		  
 		  
-		  </div>		  
-		  
-		    <div class="form-group">
-		    <label for="cookLocation" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스장소</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookLocation" name="cookLocation" value="${cook.cookLocation}" placeholder="쿠킹클래스장소">
-		      
-		    </div>
+	<hr/>
     
 <br/><br/>
 <br/><br/>
- 	<div class="form-group">
-		<div class="col-xs-10 col-md-10 text-center">
-			<div><strong>${cook.cookContent}</strong></div>
+
+
+		<div class="row">
+	 
+			<div class="col-xs-8 col-md-8">${cook.cookContent }</div>
 		</div>
-	   </div>	  
-		  		  
-		  </div>
+
 		  
-	<div class="row">
-	  		<div class="col-md-12 text-center ">
-	  	
-	  		
-	  			<button type="button" class="btn btn-default">확인</button>
-	  		
-			
-			
-		
-		<button type="button" class="btn btn-default">추가등록</button>
-				
-				
-				
-	  		</div>
-		</div>
+
 		
 	
 		</form>
