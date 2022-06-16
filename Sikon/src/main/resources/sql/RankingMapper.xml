@@ -60,13 +60,20 @@
 				SYSDATE)
 	 </insert>
 	 
-	 <insert 	id="addLoveMentor"		parameterType="String" >
+	 <insert 	id="addLoveMentor"		parameterType="user" >
 	 	INSERT
-		INTO ranking ( ranking_no, user_nickname, love_date) 
+		INTO ranking ( ranking_no, user_nickname, user_id love_date) 
 		VALUES (seq_ranking_ranking_no.NEXTVAL, 
-				#{userNickname}, 
-				SYSDATE)
+				#{userNickname}, #{userId}, SYSDATE)
 	 </insert>
+	 
+	 <!-- 즐겨찾기 삭제 -->	
+	 <select  id="deleteLoveMentor"  parameterType="user">
+	  	DELETE FROM ranking 
+	  	<where>
+			user_nickname = {userNickname} AND user_id = {userId}
+		</where>		
+	 </select>
 	 
 	 <!-- SQL : SELECT LIST -->
 	<select  id="getRecipeList"  parameterType="search"	resultMap="recipeSelectMap">

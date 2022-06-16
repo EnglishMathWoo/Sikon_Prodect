@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
 import com.sikon.service.domain.Recipe;
+import com.sikon.service.domain.User;
 import com.sikon.service.ranking.RankingDao;
 
 
@@ -43,8 +44,13 @@ public class RankingDaoImpl implements RankingDao {
 	}
 	
 	//즐겨찾는 멘토 날짜 저장
-	public void insertLoveMentor(String userNickname) throws Exception {
-		sqlSession.insert("RankingMapper.addLoveMentor", userNickname);
+	public void insertLoveMentor(User user) throws Exception {
+		sqlSession.insert("RankingMapper.addLoveMentor", user);
+	}
+	
+	//즐겨찾는 멘토 날짜 삭제
+	public void deleteLoveMentor(User user) throws Exception {
+		sqlSession.insert("RankingMapper.deleteLoveMentor", user);
 	}
 	
 	

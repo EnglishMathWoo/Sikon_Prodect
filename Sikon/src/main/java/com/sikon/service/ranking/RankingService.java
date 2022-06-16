@@ -1,6 +1,7 @@
 package com.sikon.service.ranking;
 
 import com.sikon.common.Search;
+import com.sikon.service.domain.User;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,9 @@ public interface RankingService {
 	public Map<String, Object> getRecipeList(Search search) throws Exception;
 	
 	//즐겨찾는 멘토 날짜 저장
-	public void addLoveMentor(String userNickname) throws Exception;
+	public void addLoveMentor(User user) throws Exception;
+	
+	//즐겨찾는 멘토 날짜 삭제
+	public void deleteLoveMentor(User user) throws Exception;
 			
 }

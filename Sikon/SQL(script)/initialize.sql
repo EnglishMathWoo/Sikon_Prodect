@@ -271,6 +271,7 @@ CREATE TABLE love(
 love_no                 NUMBER NOT NULL,
 user_nickName      VARCHAR2(50)	 NOT  NULL  REFERENCES  users(user_nickname) ON DELETE CASCADE,
 user_id              VARCHAR2(50)   	REFERENCES  users(user_id) ON DELETE CASCADE,
+love_check                           NUMBER(20)         DEFAULT 0              NOT NULL,	
 PRIMARY KEY(love_no)
 );
 
@@ -302,6 +303,7 @@ CREATE TABLE ranking (
 	recipe_no NUMBER, 
 	view_date DATE, 
 	user_nickname VARCHAR2(200), 
+	user_id VARCHAR2(200), 
 	love_date DATE, 
 	search_keyword VARCHAR2(200), 
 	search_date DATE, 
