@@ -166,6 +166,43 @@ label{
 	color: #FF4800;
 }
 
+.update {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  font-size: large;
+  padding: 12px 0;
+  width: 49.3%;
+}
+.update:hover {
+  background-color: #937062d4;
+}
+
+.check {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  font-size: large;
+  padding: 11px 0;
+  width: 49.3%;
+}
+.check:hover {
+  background-color: #e7e2e2;
+}
+.golist {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  font-size: large;
+  padding: 11px 0;
+  width: 49.3%;
+}
+.golist:hover {
+  background-color: #e7e2e2;
+}
 </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -184,7 +221,7 @@ label{
 			});
 			
 			$(".update").on("click" , function() {
-				self.location = "/purchase/updatePurchase?tranNo=${purchase.tranNo}"
+				self.location = "/purchase/updatePurchaseBySerial?serialNo=${purchaseinfo.serial}"
 			});
 			
 		});	
@@ -210,10 +247,10 @@ label{
 				<!-- form Start /////////////////////////////////////-->
 
 
-		
+				
 			  
 			<div>
-				  
+			<c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	  
 				  <div class="subtitle">
 				  <p>배송정보</p>
 				  </div><br>
@@ -248,15 +285,16 @@ label{
 				    <label for="divyMessage">배송메시지</label>
 				      ${purchase.divyMessage }
 				  </div>
-				
+			</c:forEach>	
 			</div>
 				  
 				  
 			<div><br>
+			
 				  <div class="subtitle">
 				  <p>주문상품</p>
 				  </div><br>
-				  
+			<c:forEach var="purchase" items="${purchaselist}">	  
 				  <div class="form-group">
 				  <table style="width: 100%">
 					  <tr>
@@ -267,18 +305,21 @@ label{
 							<p style="font-weight: bold;font-size: 15px">${purchase.purchaseProd.prodName}</p>
 							<p>${purchase.purchaseProd.prodDisPrice} 원</p>
 							<p>배송비: 3000 원</p><input type="hidden" class="form-control" id="divyFee" name="divyFee" value="3000">
-							<p>구매수량: ${purchase.purchaseQuantity} 개</p><input type="hidden" min="0" class="form-control" id="purchaseQuantity" name="purchaseQuantity" />
+							<p>구매수량: ${purchase.purchaseQuantity} 개</p><input type="hidden" min="0" class="form-control" name="purchaseQuantity" />
 							<c:if test="${purchase.purchaseProd.couponApply == 'N' }">
 								<p style="color:#F0445C">*쿠폰 적용이 불가능한 상품입니다.</p>
 							</c:if>
-						  	<input type="hidden" id="price" value="${purchase.purchaseProd.prodDisPrice}">
 					  	
 					  	</td>
 					  </tr>
 				 </table>		 
 				</div>
+				
+				<input type="hidden" class="quantity" value="${purchase.purchaseQuantity}" />
+				<input type="hidden" class="price" value="${purchase.purchaseProd.prodDisPrice}" />
+				
+			</c:forEach>	
 			</div>	  
-			
 			
 			<br>
 				  
@@ -286,33 +327,32 @@ label{
 				  
 				  <div class="sectd">
 				  	<h5>총 상품금액</h5>
-				  	<div class="payment">${purchase.purchaseProd.prodDisPrice * purchase.purchaseQuantity}원</div>
+				  	<div class="payment">${purchaseinfo.totalprice}원</div>
 				  </div>
 				  
 				  <div class="sectd">
 				  	<h5>쿠폰 사용</h5>
-				  	<div class="payment">
-				  		<c:if test="${!empty purchase.usedCoupon}">- ${purchase.usedCoupon}원</c:if>
-				  		<c:if test="${empty purchase.usedCoupon}">- 0원</c:if>
-				  	</div>
+				  	<div class="payment">- ${purchaseinfo.couponpay}원</div>
 				  </div>
 				  
 				  <div class="sectd">
 				  	<h5>포인트 사용</h5>
-				  	<div class="payment">- ${purchase.usedPoint}P</div>
+				  	<div class="payment">- ${purchaseinfo.pointpay}P</div>
 				  </div>
 				  
 				  <div class="sectd">
 				  	<h5>배송비</h5>
-				  	<div class="payment">+ ${purchase.divyFee}원</div>
+				  	<div class="payment">+ ${purchaseinfo.divyfee}원</div>
 				  </div>
 				  
 				  <br>
 				  
 				  <div class="sectd">
 				  	<h5>총 결제금액</h5>
-				  	<div class="payment totals"><strong class="totalpay">${purchase.purchaseProd.prodDisPrice * purchase.purchaseQuantity - purchase.usedPoint + purchase.divyFee }</strong>원</div>
+				  	<div class="payment totals"><strong class="totalpay">${purchaseinfo.totalprice - purchaseinfo.couponpay - purchaseinfo.pointpay + purchaseinfo.divyfee }</strong>원</div>
 				  </div>
+				  
+			  <c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	
 				  
 				  <div class="sectd">
 				  	<h6>적립 포인트</h6>
@@ -331,11 +371,15 @@ label{
 				  	</div>
 				  </div>
 				  
+			</c:forEach>	  
 				  
 			</section>
 			
 
 			<br><br>
+			
+			<c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	
+			
 			<div class="text-center">
 			
 				<c:if test="${purchase.divyStatus.equals('001') && user.role != 'admin'}">	
@@ -348,6 +392,8 @@ label{
 				<button type="button" class="golist" >확&emsp;인</button>
 				</c:if>
 			</div>
+			
+			</c:forEach>	
 				
 			<br>
  	</div>

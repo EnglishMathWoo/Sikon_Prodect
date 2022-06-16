@@ -79,9 +79,10 @@ public class RecipeController {
 			@RequestParam("ingredientAmount") String[] ingredientAmount, Model model, HttpServletRequest request)
 			throws Exception {
 
+		
 		System.out.println("/recipe/addRecipe : post");
 		System.out.println("recipe=" + recipe);
-
+		System.out.println("detail모냐"+recipe.getDetail());
 		// <td>에서 ingredientName, ingredientAmount이 String array로 넘어옴
 		for (int j = 0; j < ingredientName.length; j++) {
 			System.out.println(ingredientName[j]);
