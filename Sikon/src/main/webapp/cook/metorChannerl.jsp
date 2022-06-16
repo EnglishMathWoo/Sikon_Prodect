@@ -356,7 +356,7 @@ p {
 					            success : function(loveCheck) {
 					                
 					                    if(loveCheck == 0){
-					                    	alert("추천완료.");
+					                    	alert("즐겨찾기완료.");
 					                    	                    	
 					                    	
 					                    	var userNickname = $("input[name='userNickname']").val();
@@ -375,7 +375,7 @@ p {
 					    					
 					                    }
 					                    else if (loveCheck == 1){
-					                     alert("추천취소");
+					                     alert("즐겨찾기취소");
 					                     
 
 								         
@@ -485,7 +485,9 @@ p {
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		    		
-		  			<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
+		  		
+					<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
+		
 					
 				
 		  		    <button type="button" class="submit">삭제</button>
