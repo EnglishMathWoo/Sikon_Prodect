@@ -76,8 +76,7 @@ public class LoveRestController {
 		System.out.println(loveCheck);
 		if(loveCheck == 0) {
 			//좋아요 처음누름
-			loveService.addLove(userNickname,userId); //heart테이블 삽입
-			
+			loveService.addLove(userNickname,userId); //heart테이블 삽입			
 			loveService.loveCheck(userNickname, userId);//좋아요 check 1
 			System.out.println("사랑해");
 

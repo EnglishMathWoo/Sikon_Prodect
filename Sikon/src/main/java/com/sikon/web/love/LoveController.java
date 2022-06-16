@@ -53,23 +53,23 @@ public class LoveController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 
-	@RequestMapping(value = "addLove")
-	public String addlove(@ModelAttribute("love") Love love, 
-			HttpServletRequest request,@RequestParam("userNickname") String userNickname) throws Exception {
-
-		System.out.println("/love/addlove : POST");
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		System.out.println(user);
-
-		love.setUserNickname(userNickname);
-		love.setUserId(user.getUserId());
-
-		loveService.addLove(love.getUserNickname(),love.getUserId());
-		rankingService.addLoveMentor(love.getUserNickname(),love.getUserId());
-
-		return "forward:/mypage/listLove.jsp";
-	}
+//	@RequestMapping(value = "addLove")
+//	public String addlove(@ModelAttribute("love") Love love, 
+//			HttpServletRequest request,@RequestParam("userNickname") String userNickname) throws Exception {
+//
+//		System.out.println("/love/addlove : POST");
+//		HttpSession session = request.getSession();
+//		User user = (User) session.getAttribute("user");
+//		System.out.println(user);
+//
+//		love.setUserNickname(userNickname);
+//		love.setUserId(user.getUserId());
+//
+//		loveService.addLove(love.getUserNickname(),love.getUserId());
+//		rankingService.addLoveMentor(love.getUserNickname(),love.getUserId());
+//
+//		return "forward:/mypage/listLove.jsp";
+//	}
 
 	@RequestMapping(value = "listLove")
 	public String listlove(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)

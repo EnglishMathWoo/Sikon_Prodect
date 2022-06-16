@@ -332,7 +332,7 @@ public class CookController {
 
 		User mentor = userService.getUser(mentorId);
 		
-
+		
 	
 		// Business logic ผ๖วเ
 		Map<String, Object> map = cookService.listMyCook(search, mentor.getUserNickname());
