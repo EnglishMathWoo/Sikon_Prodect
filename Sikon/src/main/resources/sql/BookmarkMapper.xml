@@ -10,11 +10,13 @@
 	<resultMap id="bookmarkSelectMap" type="bookmark">
 		<result property="bookmarkNo" 			column="bookmark_no" 			jdbcType="NUMERIC"/>
 		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR" />
+		<result property="bookmarkStatus" 	column="bookmark_status" 		jdbcType="VARCHAR" />
 		<collection property="recipe" resultMap="recipeSelectMap"/>
 	</resultMap>
 	
 <resultMap   id="recipeSelectMap"  type="recipe">
 		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
+		<result property="writer.userNickname"      column="writer_nickname"           jdbcType="VARCHAR"/>
 		<result property="recipeName"			column="recipe_name" 		jdbcType="VARCHAR" />
 		<result property="recipeDetail" 	column="recipe_detail" 		jdbcType="VARCHAR" />
 		<result property="recipeImg" 			column="recipe_img" 		jdbcType="VARCHAR" />
@@ -29,40 +31,30 @@
 		<result property="ingredientName"      column="ingredient_name"           jdbcType="VARCHAR"/>
 		<result property="ingredientAmount"      column="ingredient_amount"           jdbcType="VARCHAR"/>
 		<result property="recipeViews"      column="recipe_views"           jdbcType="NUMERIC"/>
-		<collection property="writer" resultMap="userSelectMap"/>
 	</resultMap>
 	
-	<resultMap id="userSelectMap" type="user">
-		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR"/>
-		<result property="userName"	column="user_name" 		jdbcType="VARCHAR" />
-		<result property="password" 	column="password" 		jdbcType="VARCHAR" />
-		<result property="userBirth" 	column="user_birth" 		jdbcType="VARCHAR" />
-		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
-		<result property="userImage" 	column="user_image" 		jdbcType="VARCHAR" />
-		<result property="addr" 	column="user_addr" 		jdbcType="VARCHAR" />
-		<result property="role" 	column="role" 			jdbcType="VARCHAR" />
-		<result property="phone" 	column="user_phone" 		jdbcType="VARCHAR" />
-		<result property="holdpoint" 	column="holdpoint" 		jdbcType="NUMERIC" />
-		<result property="mentorApply" 	column="mentor_apply" 		jdbcType="VARCHAR"  />
-		<result property="loginPath" 	column="login_path" 		jdbcType="VARCHAR"  />
-		<result property="regDate" 	column="user_regdate" 		jdbcType="DATE" />
-		<result property="quitDate" 	column="quit_date" 		jdbcType="DATE" />
-		<result property="quitStatus" 	column="quit_status" 		jdbcType="VARCHAR"  />
-</resultMap>
 	
 	<!-- SQL : INSERT -->
-	<insert 	id="addBookmark"		parameterType="bookmark" >
+	<insert 	id="addBookmark"		parameterType="map" >
 	 	INSERT
 		INTO bookmark( bookmark_no , recipe_no,user_id) 
-		VALUES	 (	seq_bookmark_no.nextval  ,  #{recipe.recipeNo},#{userId})
+		VALUES	 (	seq_bookmark_no.nextval  ,  #{recipeNo},#{userId})
 	 </insert>
 	 
 	 
-	 <delete id="deleteBookmark" parameterType="int" >
+	 <delete id="deleteBookmark" parameterType="map" >
 	 DELETE
 	 FROM bookmark 
-	 WHERE bookmark_no= #{bookmarkNo} 
+	 WHERE recipe_no= #{recipeNo}
+	 and user_id=#{userId} 
 	 </delete>
+	 
+	 <!-- 게시글 추천 중복방지 select문 -->
+	<select id="checkDuplicate" resultType="int">
+	select count(*) from bookmark
+	 where recipe_no = #{recipeNo} and user_id = #{userId} 
+	</select>
+
 	 
 	<select  id="getBookmarkList"  parameterType="map"	statementType="CALLABLE"  resultMap="bookmarkSelectMap">
 	  	SELECT *

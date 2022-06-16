@@ -142,17 +142,30 @@ text-align: center
 
 				<thead>
 					<tr class="bg-light">
-						<th scope="col" width="10%" >적용일자</th>
-						<th scope="col" width="30%"  >사용/적립</th>
+						<th scope="col" width="30%" >적용일자</th>
+						<th scope="col" width="10%"  >사용/적립</th>
+						<th scope="col" width="30%"  >적용항목</th>
 						<th scope="col" width="30%"  >포인트</th>
-						<th scope="col" width="30%"  >주문번호</th>
 					</tr>
 				</thead>
 
 				<tbody>
 
-					
-    
+					<c:if test="${!empty list}">
+						<c:set var="i" value="0" />
+						<c:forEach var="point" items="${list}">
+							<c:set var="i" value="${ i+1 }" />
+							<tr>
+								<th scope="row">${i}</th>
+								<td>${point.pointRegDate}</td>
+								<td>${point.startDate}</td>
+								<td>${point.pointCategory}</td>
+								<td>${point.pointScore}</td>
+							</tr>
+
+						</c:forEach>
+					</c:if>
+
 				</tbody>
 			</table>
 
