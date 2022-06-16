@@ -101,8 +101,8 @@
 	 
 	 <!-- SQL : SELECT LIST -->
 	<select  id="getLoveList"  parameterType="search" statementType="CALLABLE"	resultMap="loveSelectMap">
-	  	SELECT l.user_nickname, ranking_table.count 
-					FROM love l, (SELECT user_nickname, count(*) count FROM ranking 
+	  	SELECT l.user_nickname, ranking_table.count, u.user_id, u.user_image  
+					FROM love l, (SELECT user_nickname, count(*) count FROM ranking  
 																			
 											<if test="orderCondition != null">
 												<choose>
@@ -117,9 +117,9 @@
 													</when>				
 												</choose>
 											</if>
-											GROUP BY user_nickname) ranking_table 
-											WHERE ROWNUM &lt;= 20 AND l.user_nickname = ranking_table.user_nickname 
-											GROUP BY l.user_nickname, ranking_table.count 
+											GROUP BY user_nickname) ranking_table, users u 
+											WHERE ROWNUM &lt;= 20 AND l.user_nickname = ranking_table.user_nickname AND l.user_nickname = u.user_nickname
+											GROUP BY l.user_nickname, ranking_table.count, u.user_id, u.user_image 
 											ORDER BY ranking_table.count DESC
 	 </select>
 	 

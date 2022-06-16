@@ -54,12 +54,13 @@ body {
   background-color: white;
   border-color:	#C0C0C0;
   border-style: solid;
-  width: 35px;
+  width: 40px;
   height: 25px;
   text-align: center;
   font-weight:bold;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  margin-left: 20px;
 }
 
 .orderCondition{
@@ -172,6 +173,10 @@ border-color:#D7D7D7;
     padding-top:120px;
 }
 
+img {
+    border-radius: 50%;
+}
+
 .hoc{
 padding-top:0px;
 }
@@ -189,17 +194,35 @@ background-color: #f7f7f7;
 	color: #f7f7f7;
 }
 
+article img {
+    width: 200px;
+    height: 190px;
+    margin-left: 35px;
+}
+
+.fa-arrow-up:before {
+    content: "\f062";
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+#num {
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 19px;
+}
+
 </style>
 
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-						
+
 	$(document).on('click', '.imgover', function(){
 		console.log($(this).attr("value"));
-		self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
+		self.location ="/cook/mentor?mentorId="+$(this).attr("value")
 	});
-	
+					
 	//레시피 랭킹
 	$(document).on('click', '#recipe', function(){
 		 self.location = "/ranking/listRecipe";
@@ -240,7 +263,12 @@ background-color: #f7f7f7;
 		 var orderCondition = $(this).attr('value');
 		self.location = "/ranking/listLove?orderCondition="+orderCondition;
 	});
-									
+	
+	
+	
+	
+			
+	//버튼 클릭시 색 유지
 	$(function() {
 						
 		var odc = $("#orderCon").val();
@@ -299,7 +327,6 @@ background-color: #f7f7f7;
 	      </ul>  
 	      
 	      <br>
-	      
 			<div class="orderCondition" style="float:right">
 		  	  <div class="order" id="monthly" value="2">월간</div>
 		      <div class="order" id="weekly" value="1">주간</div>
@@ -328,11 +355,15 @@ background-color: #f7f7f7;
   <br/> <br/>
   
     <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" value="${love.user.userId }" href="#">
-      <div class="shape1">${i}</div>
-      <img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300"></a>
+      <article class="one_third first"><a class="imgover" value="${love.user.userId}" href="#">
+      <div class="shape1" style="float:left;">${i}</div>
+	  <div style="float:right;" id="num">10</div> 
+	  <i class="fa-solid fa-arrow-up" style="float:right;"></i>
+      <img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300" style="box-shadow:5px 5px 10px grey;"></a>
+      <input type="hidden" id="mentorId" name="mentorId" value="${love.user.userId }"/>
         <div class="excerpt">
-          <h4 class="heading" ><b>${love.user.userName }</b></h4>
+          <h4 class="heading" style="text-align:center;"><b>${love.userNickname }</b></h4>
+        <br>
         </div>
       </article>
     </div>
