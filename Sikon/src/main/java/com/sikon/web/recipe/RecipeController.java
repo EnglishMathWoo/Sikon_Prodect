@@ -29,6 +29,7 @@ import com.sikon.service.domain.Point;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
 import com.sikon.service.point.PointService;
+import com.sikon.service.ranking.RankingService;
 import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.review.ReviewService;
 
@@ -49,6 +50,10 @@ public class RecipeController {
 	@Autowired
 	@Qualifier("bookmarkServiceImpl")
 	private BookmarkService bookmarkService;
+	
+	@Autowired
+	@Qualifier("rankingServiceImpl")
+	private RankingService rankingService;
 	
 	@Autowired
 	@Qualifier("pointServiceImpl")
@@ -150,9 +155,7 @@ public class RecipeController {
 			search.setCurrentPage(1);
 		}
 		
-		
-			
-			search.setPageSize(pageSize);
+		search.setPageSize(pageSize);
 
 		// 레시피+재료를 list로 한 번에 받음
 		List<Recipe> list = recipeService.getRecipe(recipeNo);
@@ -172,6 +175,7 @@ public class RecipeController {
 		if(user.getUserId() != recipe.getWriter().getUserId()) {
 			recipe.setRecipeViews(recipe.getRecipeViews()+1);
 			recipeService.updateRecipeOnly(recipe);
+			rankingService.addRecipeView(recipeNo);
 		}
 		
 		System.out.println("레시피 list=" + list);

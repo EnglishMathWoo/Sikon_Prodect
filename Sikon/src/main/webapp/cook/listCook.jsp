@@ -322,7 +322,7 @@ div.emptyProd{
 		 
 		//테마로 정렬
 		$(document).on('click', '#themeAll', function(){
-			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+			self.location = "/cook/listCook?themeCondition="+null+"&menu=${param.menu}";
 		});
 		
 		$(document).on('click', '#themeko', function(){
