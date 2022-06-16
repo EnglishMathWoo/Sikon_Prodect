@@ -85,6 +85,25 @@ public class ReviewController {
 		System.out.println("category=" + category);
 		System.out.println("textNo=" + textNo);
 
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		// 리뷰 작성시 일반리뷰: 100원, 포토리뷰: 500원 적립금
+		Point point = new Point();
+		point.setUserId(user.getUserId());
+		point.setPointType("EARN");
+		point.setPointCategory("RE");
+		
+		if (category.equals("COOK") || category.equals("PRD")) {
+			if (review.getReviewImg() == null ||review.getReviewImg()=="") {
+				point.setPointScore(100);
+			} else {
+				point.setPointScore(500);
+			}
+			pointService.addPoint(point);
+
+		}
+		
 		String FILE_SERVER_PATH = filePath;
 		String newFileName = "";
 
@@ -103,8 +122,7 @@ public class ReviewController {
 		}
 
 		review.setReviewImg(newFileName);
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
+		
 
 		if (category.equals("COOK")) {
 			Cook cook = cookService.getCook(textNo);
@@ -127,21 +145,6 @@ public class ReviewController {
 		reviewService.updateStatus(textNo, category);
 		System.out.println("가나");
 
-		// 리뷰 작성시 일반리뷰: 100원, 포토리뷰: 500원 적립금
-		Point point = new Point();
-		point.setUserId(user.getUserId());
-		point.setPointType("earn");
-		point.setPointCategory(category);
-		
-		if (category.equals("COOK") || category.equals("PRD")) {
-			if (review.getReviewImg() != null) {
-				point.setPointScore(500);
-			} else {
-				point.setPointScore(100);
-			}
-			pointService.addPoint(point);
-
-		}
 
 		ModelAndView modelAndView = new ModelAndView();
 		if (category.equals("REC")) {

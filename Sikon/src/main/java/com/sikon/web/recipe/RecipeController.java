@@ -25,8 +25,10 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.bookmark.BookmarkService;
 import com.sikon.service.domain.Ingredient;
+import com.sikon.service.domain.Point;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
+import com.sikon.service.point.PointService;
 import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.review.ReviewService;
 
@@ -47,6 +49,10 @@ public class RecipeController {
 	@Autowired
 	@Qualifier("bookmarkServiceImpl")
 	private BookmarkService bookmarkService;
+	
+	@Autowired
+	@Qualifier("pointServiceImpl")
+	private PointService pointService;
 
 	public RecipeController() {
 		System.out.println(this.getClass());
@@ -118,6 +124,13 @@ public class RecipeController {
 		map.put("list", list);
 
 		recipeService.addRecipe(recipe, map);
+		
+		Point point=new Point();
+		point.setPointCategory("REC");
+		point.setUserId(user.getUserId());
+		point.setPointType("EARN");
+		point.setPointScore(1000);
+		pointService.addPoint(point);
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("ingredient", list);
@@ -347,28 +360,4 @@ public class RecipeController {
 //	}
 
 	
-	//포인트 (이동)
-	@RequestMapping(value = "listMyPoint")
-	public ModelAndView listMyPoint(@ModelAttribute("search") Search search,HttpServletRequest request) throws Exception {
-		if (search.getCurrentPage() == 0) {
-			search.setCurrentPage(1);
-		}
-
-		search.setPageSize(pageSize);
-		
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		
-		Map map=recipeService.getPointList(search, user.getUserId());
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", map.get("list"));
-		modelAndView.addObject("resultPage", resultPage);
-		modelAndView.addObject("search", search);
-		modelAndView.setViewName("forward:/mypage/listMyPoint.jsp");
-
-		return modelAndView;
-	}
 }
