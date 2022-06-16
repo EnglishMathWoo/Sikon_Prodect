@@ -456,6 +456,20 @@ $(function() {
 		 	<hr/>
 
 		<div class="col-xs-10 col-md-10 text-center">
+
+			<div><h4><strong>클래스 정보</strong></h4> 
+			
+				
+				</br>
+					</br>
+			<div>
+			
+			${cook.cookContent}
+			</div>
+			
+			</div>
+</br>
+					</br>					 
 		<p style="margin-top:-12px">
     <em class="link">
         <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
@@ -465,7 +479,7 @@ $(function() {
 </p>
 
 <div class="row text-center"><h5><strong>쿠킹클래스 장소</strong></h5>
-<div id="map" style="width:1100px;height:500px; text-align: center; margin:36px auto;" ></div>
+<div id="map" style="width:700px;height:500px; text-align: center; margin:36px auto;" ></div>
 </div>
 	<hr/>
 	<br/>
@@ -509,20 +523,7 @@ geocoder.addressSearch(cookLocation, function(result, status) {
         map.setCenter(coords);
     } 
 });    
-</script>
-			<div><h4><strong>클래스 정보</strong></h4> 
-			
-				
-				</br>
-					</br>
-			<div>
-			
-			${cook.cookContent}
-			</div>
-			
-			</div>
-					 
-	
+</script>	
 				
 			<h4 class="reviewHeader">리뷰</h4>
 			

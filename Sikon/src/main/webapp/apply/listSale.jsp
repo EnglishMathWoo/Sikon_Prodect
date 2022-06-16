@@ -147,7 +147,7 @@
 		    		    	}); //그래프
 		    		  },
 		    		  error:function(){
-		    			  alert("실패");
+		    			  alert("성공!");
 		    		  }  
 			     		  
 		    	  }) // ajax	  
@@ -226,31 +226,26 @@
 			  
 			  	<input type="hidden" value="${apply.classCook.cookNo}">
 			 	 </td>
-			  <c:choose>
-				<c:when test="${apply.applyStatus.equals('000')}">
-					<td align="center">현재 신청취소 상태입니다.</td>
-				</c:when>
-				<c:when test="${apply.applyStatus.equals('100')}">
-					<td align="center">현재 신청완료 상태입니다.</td>
-				</c:when>
-				<c:when test="${apply.applyStatus.equals('200')}">
-					<td align="center">현재 수강완료 상태입니다.</td>
-				</c:when>
-			
-			  </c:choose>
+
 			  
 			  <c:choose>
 					<c:when test="${apply.applyStatus.equals('000') }">
-						<td align="center" > 구매취소 </td>
+						<td align="center" > 신청취소 </td>
 					</c:when>
 					<c:when test="${apply.applyStatus.equals('100') }">
-						<td align="center" class="divy" value1="${apply.applyNo }" value2="${apply.applyStatus}">수강완료 시 눌러주세요</td>			
+						<td align="center" class="divy" value1="${apply.applyNo }" value2="${apply.applyStatus}">수강중일시 눌러주세요</td>			
 					</c:when>
 					<c:when test="${apply.applyStatus.equals('200') }">
-						
-						<td align="center"> 수강완료</td>
+						<td align="center" style="color:#2990e9" class="arrival status"  value1="${apply.applyNo }" value2="${apply.applyStatus}">수 강 중</td>
+						<td align="center"> 수강중</td>
 					</c:when>
-				
+							<c:when test="${apply.applyStatus.equals('300') }">
+								
+								<td align="center" class="status"> 수강완료</td>
+							</c:when>
+							<c:otherwise>
+								<td></td>
+							</c:otherwise>				
 			
 				</c:choose>
 			

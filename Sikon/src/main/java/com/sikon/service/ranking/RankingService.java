@@ -1,9 +1,7 @@
 package com.sikon.service.ranking;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.User;
 
-import java.util.List;
 import java.util.Map;
 
 public interface RankingService {
