@@ -32,9 +32,10 @@ public class LoveServiceImpl implements LoveService {
 	}
 
 	/// Method
-	public void addLove(Love love) throws Exception {
-		System.out.println("love=" + love);
-		loveDao.addLove(love);
+	public void addLove(String userNickname,String userId) throws Exception {
+		System.out.println("userNickname=" + userNickname);
+		System.out.println("userId=" + userId);
+		loveDao.addLove(userNickname,userId);
 	}
 
 	public Map<String, Object> getLoveList(Search search, String userId) throws Exception {
@@ -53,11 +54,21 @@ public class LoveServiceImpl implements LoveService {
 		return map;
 	}
 
-	public void deleteLove(int loveNo) throws Exception {
-		System.out.println("loveNo=" + loveNo);
-		loveDao.deleteLove(loveNo);
+	public void deleteLove(String userNickname,String userId) throws Exception {
+		System.out.println("userNickname=" + userNickname);
+		System.out.println("userId=" + userId);
+		
+		loveDao.deleteLove(userNickname,userId);
 
 	}
+
+
+	public int loveCheck(String userNickname,String userId) throws Exception{
+		return loveDao.loveCheck(userNickname, userId);
+	}
+	
+	
+
 
 
 }
