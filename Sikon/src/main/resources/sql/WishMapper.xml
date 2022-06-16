@@ -54,6 +54,10 @@
 	   	FROM wish
 	   	WHERE wish_no = #{wishNo}
 	 </delete>
-	 
+	 	 <select 	id="getWishList"	parameterType="int"	resultMap="wishSelectMap">
+		SELECT * 	
+		FROM wish
+		WHERE wish_no = #{wishNo}
+	 </select>
 	 
 </mapper>

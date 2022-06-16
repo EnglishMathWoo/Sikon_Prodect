@@ -73,7 +73,7 @@ body {
     color: #8B4513;
     float: right;
     height:40px;
-    width:8%;
+    width:6%;
     box-sizing: border-box;
     justify-content: center;
     display: flex;
@@ -193,144 +193,71 @@ background-color: #f7f7f7;
 
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
+<script type="text/javascript">
+						
+	$(document).on('click', '.imgover', function(){
+		console.log($(this).attr("value"));
+		self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
+	});
+	
+	//·¹½ÃÇÇ ·©Å·
+	$(document).on('click', '#recipe', function(){
+		 self.location = "/ranking/listRecipe";
+	});
+	
+	$(document).on('click', '#all', function(){
+		 var orderCondition = $(this).attr('value');
+		 self.location = "/ranking/listRecipe";
+	});
+			
+	$(document).on('click', '#daily', function(){
+		 var orderCondition = $(this).attr('value');
+		 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
+	});
+			
+	$(document).on('click', '#weekly', function(){
+		 var orderCondition = $(this).attr('value');
+		 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
+	});
 		
-					
-			$(document).on('click', '.imgover', function(){
-				console.log($(this).attr("value"));
-				self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
-			});
-			
-			$(document).on('click', '#recipe', function(){
-				 self.location = "/ranking/listRecipe";
-			});
-			
-			$(document).on('click', '#daily', function(){
-				 var orderCondition = $(this).attr('value');
-				 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
-			});
-			
-			$(document).on('click', '#weekly', function(){
-				 var orderCondition = $(this).attr('value');
-				 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
-			});
-			
-			$(document).on('click', '#monthly', function(){
-				 var orderCondition = $(this).attr('value');
-				self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
-			});
+	$(document).on('click', '#monthly', function(){
+		 var orderCondition = $(this).attr('value');
+		self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
+	});
+	
+	//°Ë»ö¾î ·©Å·
+	$(document).on('click', '#keyword', function(){
+		 var cookNo =$(this).attr("value");
+		 self.location = "/cook/updateCook?cookNo="+cookNo
+	});
+	
+	//ÄíÅ·¸àÅä ·©Å·
+	$(document).on('click', '#mentor', function(){
+		 self.location = "/ranking/listLove";
+	});
+
+									
+	$(function() {
+						
+		var odc = $("#orderCon").val();
+		console.log("odc: "+odc);
 		
-			$(document).on('click', '#keyword', function(){
-				 var cookNo =$(this).attr("value");
-				 self.location = "/cook/updateCook?cookNo="+cookNo
-			});
-		 
-			$(document).on('click', '#cook', function(){
-				 self.location = "/ranking/listCook";
-			});
-			
-			$(document).on('click', '.order', function(){
-				 $(".order").removeClass('act');
-				 $(this).addClass('act');
-			});
-			
-			$(function() {
-							
-				var odc = $("#orderCon").val();
-				console.log("odc: "+odc);
-				
-				if(odc == 0){
-					$(".order").removeClass('act');
-					$("#daily").addClass('act');
-				} else if(odc == 1){
-					$(".order").removeClass('act');
-					$("#weekly").addClass('act');
-				} else {
-					$(".order").removeClass('act');
-					$("#monthly").addClass('act');
-				}
-			
-			});
-			 
-			
-			/*
-			 $(function() {
-			   	 $(window).scroll(function() {
-		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
-		                	
-		                	var cpage = $("#currentPage").val();
-		                	cpage = Number(cpage)+1;
-		                	console.log(cpage);
-		                	
-		                	var orderCon = $("#orderCondition").val();
-		        	   		console.log("order: "+orderCon);
-		                	
-		                	var keyword = $("#prodname").val();
-		        	   		console.log("keyword: "+keyword);
-		        	   		
-		        	   		var search = $("#searchCondition").val();
-		        	   		console.log("search: "+search);
-		        	   		
-		        	   		var themeCon = $("#themeCondition").val();
-		        	   		console.log("theme: "+themeCon);
-		        	   		
-		        	   		
-		        	   		
-					            $.ajax({
-					                
-					                  url : "/ranking/json/listRecipe" ,
-					                  method : "POST" ,
-					                  data : JSON.stringify({
-					                	  currentPage : cpage,
-					                	  orderCondition : orderCon,
-					                	  searchKeyword : keyword,
-					                	  searchCondition : search,
-					                	  themeCondition : themeCon
-					                  }), 
-					                  dataType : "json" ,
-					                  headers : {
-					                     "Accept" : "application/json",
-					                     "Content-Type" : "application/json"
-					                  },
-					                success : function(JSONData , status) {
-					                	 
-					                	$("#currentPage").val(cpage)
-					                	console.log(JSONData.list[0].recipeName);
-					                	console.log(JSONData.list[0].recipeImg);
-						                	 
-					                	for(var i=0; i<JSONData.list.length; i++){
-					                
-						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
-						                     					+"<div id='latest' class='group'>"
-						                     					+"<article class='one_third first'>"
-						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
-						                     					+"<div class='shape1'>"+[i+5]+"</div>"
-						                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'></a>"
-					                     						+"<div class='excerpt'>"
-					                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
-					                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
-					                     						+"<ul class='meta'>"
-					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
-					                     			            +"<li>&nbsp;"+ JSONData.list[i].recipeDifficulty +"</li>"
-					                     			            +"<li>&nbsp;"+ JSONData.list[i].cookingTime +"ºÐ</li>"
-					                     			            +"<li>&nbsp;"+ JSONData.list[i].writer.userNickname +"</li>"
-					                     			          	+"<li style='float:right'>Á¶È¸¼ö: "+ JSONData.list[i].recipeViews +"</li>"
-					                     						+"</ul></div></article></div></div>"
-					                     						
-					                     						
-						               	$( '#scrollList' ).append(displayValue);	
-					                     						
-					                     						 		
-					                    						
-					                     						
-					                	}//for 
-					                 }
-					            });//ajax
-					           
-		                }//if
-		            });//function
-			 }); */
-		           
+		if(odc == ""){
+			$(".order").removeClass('act');
+			$("#all").addClass('act');
+		} else if(odc == 0){
+			$(".order").removeClass('act');
+			$("#daily").addClass('act');
+		} else if(odc == 1){
+			$(".order").removeClass('act');
+			$("#weekly").addClass('act');
+		} else {
+			$(".order").removeClass('act');
+			$("#monthly").addClass('act');
+			}
+		
+	});
+			            
 	</script>
 	
 </head>
@@ -364,7 +291,7 @@ background-color: #f7f7f7;
 	      <ul>
 	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;·¹½ÃÇÇ&nbsp;</div></li>
 	        <li id="keyword"><div>&nbsp;°Ë»ö¾î&nbsp;</div></li>
-	        <li id="cook"><div>&nbsp;ÄíÅ·¸àÅä&nbsp;</div></li>
+	        <li id="mentor"><div>&nbsp;ÄíÅ·¸àÅä&nbsp;</div></li>
 	      </ul>  
 	      
 	      <br>
@@ -373,6 +300,7 @@ background-color: #f7f7f7;
 		  	  <div class="order" id="monthly" value="2">¿ù°£</div>
 		      <div class="order" id="weekly" value="1">ÁÖ°£</div>
 		      <div class="order" id="daily" value="0">ÀÏ°£</div>
+		      <div class="order" id="all" value=null>ÀüÃ¼</div>
 		    </div>
 	  
 	  		<input type="hidden" id="orderCon" value="${search.orderCondition}"/>

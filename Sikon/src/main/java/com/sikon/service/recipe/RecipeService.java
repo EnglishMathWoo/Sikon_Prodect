@@ -36,7 +36,4 @@ public interface RecipeService {
 	public Map<String, Object> bestRecipeList() throws Exception;
 	
 	
-	//포인트 이동
-	public Map<String, Object> getPointList(Search search, String userId) throws Exception;
-
 }

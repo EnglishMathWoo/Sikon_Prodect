@@ -7,6 +7,7 @@ public class Love {
 	private String userNickname;
 	private String userId;
 	private User user;
+	private int loveCheck;
 	
 	
 	public int getLoveNo() {
@@ -33,11 +34,19 @@ public class Love {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public int getLoveCheck() {
+		return loveCheck;
+	}
+	public void setLoveCheck(int loveCheck) {
+		this.loveCheck = loveCheck;
+	}
 	@Override
 	public String toString() {
 		return "Love [loveNo=" + loveNo + ", userNickname=" + userNickname + ", userId=" + userId + ", user=" + user
-				+ "]";
+				+ ", loveCheck=" + loveCheck + "]";
 	}
+	
+	
 	
 
 }

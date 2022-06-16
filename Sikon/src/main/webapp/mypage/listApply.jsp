@@ -42,7 +42,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
-
+.container:before{
+    display: table;
+}
 .container{
 	padding-top: 200px
 	}
@@ -225,15 +227,15 @@ div.emptyProd{
 		</div>
 		
 			    
-				    <div class="col-md-6 text-left">
+				    <div class="btmspace-50">
 				    	<p class="text-primary" style="color:gray">
 				    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 				    	</p>
 				    </div>
 				    
-				     <div class="row">
+				    <div class="btmspace-50">
 					    <form class="form-inline " id="form"> 
-						 <div class="col-md-6 text-left"> 
+				    <div class="btmspace-50">
 						  <div class="form-group" align="left">
 								<select name="applyCondition" class="form-control" style="width:125px">
 								 	<option value="0"  ${ ! empty search.applyCondition && search.applyCondition==0 ? "selected" : "" }>--정렬하기--</option>
@@ -242,6 +244,7 @@ div.emptyProd{
 								</select>
 						  </div>
 						  <button type="button" class="btn btn-default" id="sorting">조회</button>
+						  <br/><br/>
 						  </div>
 					<input type="hidden" id="currentPage" name="currentPage" value="" />
 						</form>
@@ -255,7 +258,7 @@ div.emptyProd{
 
 
 		<!--  table Start /////////////////////////////////////-->
-
+<div class="btmspace-50">
 		<table class="table table-hover table-striped">
 
 
@@ -354,7 +357,7 @@ div.emptyProd{
 								<td align="left" class="divy" value1="${apply.applyNo }"
 									value2="${apply.applyStatus}">수강완료 
 									<c:if test="${apply.reviewStatus.equals('001') }">
-					<a onclick="window.open('/review/addReview.jsp?category=COOK&textNo=${apply.applyNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">리뷰쓰기</a>					
+					<a onclick="window.open('/review/addReview.jsp?category=COOK&textNo=${apply.classCook.cookNo }', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">리뷰쓰기</a>					
 									</c:if></td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('100')}">
@@ -434,7 +437,7 @@ div.emptyProd{
 		<br>
 	</c:if>
  	<!--  화면구성 div End /////////////////////////////////////-->
- 	
+ 	</div>
  	</div>
  	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>

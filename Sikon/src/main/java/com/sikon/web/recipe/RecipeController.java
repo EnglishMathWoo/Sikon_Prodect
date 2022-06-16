@@ -25,8 +25,11 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.bookmark.BookmarkService;
 import com.sikon.service.domain.Ingredient;
+import com.sikon.service.domain.Point;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
+import com.sikon.service.point.PointService;
+import com.sikon.service.ranking.RankingService;
 import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.review.ReviewService;
 
@@ -47,6 +50,14 @@ public class RecipeController {
 	@Autowired
 	@Qualifier("bookmarkServiceImpl")
 	private BookmarkService bookmarkService;
+	
+	@Autowired
+	@Qualifier("rankingServiceImpl")
+	private RankingService rankingService;
+	
+	@Autowired
+	@Qualifier("pointServiceImpl")
+	private PointService pointService;
 
 	public RecipeController() {
 		System.out.println(this.getClass());
@@ -68,9 +79,10 @@ public class RecipeController {
 			@RequestParam("ingredientAmount") String[] ingredientAmount, Model model, HttpServletRequest request)
 			throws Exception {
 
+		
 		System.out.println("/recipe/addRecipe : post");
 		System.out.println("recipe=" + recipe);
-
+		System.out.println("detail모냐"+recipe.getDetail());
 		// <td>에서 ingredientName, ingredientAmount이 String array로 넘어옴
 		for (int j = 0; j < ingredientName.length; j++) {
 			System.out.println(ingredientName[j]);
@@ -118,6 +130,13 @@ public class RecipeController {
 		map.put("list", list);
 
 		recipeService.addRecipe(recipe, map);
+		
+		Point point=new Point();
+		point.setPointCategory("REC");
+		point.setUserId(user.getUserId());
+		point.setPointType("EARN");
+		point.setPointScore(1000);
+		pointService.addPoint(point);
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("ingredient", list);
@@ -137,9 +156,7 @@ public class RecipeController {
 			search.setCurrentPage(1);
 		}
 		
-		
-			
-			search.setPageSize(pageSize);
+		search.setPageSize(pageSize);
 
 		// 레시피+재료를 list로 한 번에 받음
 		List<Recipe> list = recipeService.getRecipe(recipeNo);
@@ -159,6 +176,7 @@ public class RecipeController {
 		if(user.getUserId() != recipe.getWriter().getUserId()) {
 			recipe.setRecipeViews(recipe.getRecipeViews()+1);
 			recipeService.updateRecipeOnly(recipe);
+			rankingService.addRecipeView(recipeNo);
 		}
 		
 		System.out.println("레시피 list=" + list);
@@ -272,9 +290,6 @@ public class RecipeController {
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 
-		System.out.println("list=" + map.get("list"));
-		System.out.println("resultPage=" + resultPage);
-
 		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
@@ -290,7 +305,7 @@ public class RecipeController {
 
 		System.out.println("/recipe/listMyRecipe :  POST/get");
 
-		System.out.println("search:" + search);
+		//System.out.println("search:" + search);
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -306,8 +321,8 @@ public class RecipeController {
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 
-		System.out.println("list=" + map.get("list"));
-		System.out.println("resultPage=" + resultPage);
+//		System.out.println("list=" + map.get("list"));
+//		System.out.println("resultPage=" + resultPage);
 
 		// Model 과 View 연결
 		ModelAndView modelAndView = new ModelAndView();
@@ -347,28 +362,4 @@ public class RecipeController {
 //	}
 
 	
-	//포인트 (이동)
-	@RequestMapping(value = "listMyPoint")
-	public ModelAndView listMyPoint(@ModelAttribute("search") Search search,HttpServletRequest request) throws Exception {
-		if (search.getCurrentPage() == 0) {
-			search.setCurrentPage(1);
-		}
-
-		search.setPageSize(pageSize);
-		
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		
-		Map map=recipeService.getPointList(search, user.getUserId());
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-				pageSize);
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", map.get("list"));
-		modelAndView.addObject("resultPage", resultPage);
-		modelAndView.addObject("search", search);
-		modelAndView.setViewName("forward:/mypage/listMyPoint.jsp");
-
-		return modelAndView;
-	}
 }

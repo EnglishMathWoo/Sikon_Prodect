@@ -30,6 +30,11 @@
  		body {
             padding-top : 30px;
         }
+        
+        div.container {
+	padding-top: 200px;
+	
+}
      </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -58,7 +63,7 @@
 	<div class="container">
 	
 	<div class="page-header">
-	        <h3 class=" text-info" >내가신청한쿠킹클래스목록조회</h3>
+	        <h3 class=" text-info" >신청한 쿠킹클래스</h3>
 	      
 	    </div>
 	

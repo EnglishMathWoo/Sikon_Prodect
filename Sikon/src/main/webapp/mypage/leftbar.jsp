@@ -164,7 +164,7 @@ color: #937062;
 		
 		$("a:contains('포인트조회')").on("click", function() {
 //			self.location = "/user/listMyPoint"
-			self.location = "/recipe/listMyPoint"
+			self.location = "/point/listMyPoint"
 			
 		});
 		

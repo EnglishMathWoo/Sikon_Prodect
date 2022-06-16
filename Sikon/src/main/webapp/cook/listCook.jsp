@@ -279,11 +279,8 @@ div.emptyProd{
 					}
 				});
 			});		
-
-		
-
 	
-		 
+		 //테마버튼 상태 유지
 		 $(function() {
 			 
 			 var themeCondition = $("#themeCondition").val();
@@ -304,15 +301,15 @@ div.emptyProd{
 				 $(".theme").removeClass('act');
 				 $(".themech").addClass('act');
 				 
-			 }else if(themeCondition == 'an'){
+			 }else if(themeCondition == 'am'){
 				 
 				 $(".theme").removeClass('act');
-				 $(".themean").addClass('act');
+				 $(".themeam").addClass('act');
 				 
-			 }else if(themeCondition == 'jp'){
+			 }else if(themeCondition == 'ja'){
 				 
 				 $(".theme").removeClass('act');
-				 $(".themejp").addClass('act');
+				 $(".themeja").addClass('act');
 				 
 			 }else{
 				 
@@ -320,13 +317,39 @@ div.emptyProd{
 				 $(".themeAll").addClass('act');
 				 
 			 }
-			 
-			//*/ 
 			
 		 });
 		 
-		 
-
+		//테마로 정렬
+		$(document).on('click', '#themeAll', function(){
+			self.location = "/cook/listCook?themeCondition="+null+"&menu=${param.menu}";
+		});
+		
+		$(document).on('click', '#themeko', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+			
+		$(document).on('click', '#themeja', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+		
+		$(document).on('click', '#themech', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+		
+		$(document).on('click', '#themeam', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+		
+		$(document).on('click', '#themede', function(){
+			var themeCondition = $(this).attr('value');
+			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
+		});
+		
 
 		//좋아요 push 알림
 		 function pushAlarm(userId, userNickname, cookNo){
@@ -455,6 +478,14 @@ div.emptyProd{
 			                	cpage = Number(cpage)+1;
 			                	console.log(cpage);
 			                	
+			                	var keyword = $("#cookname").val();
+			        	   		console.log("keyword: "+keyword);
+			        	   		
+			        	   		var search = $("#searchCondition").val();
+			        	   		console.log("search: "+search);
+			        	   		
+			        	   		var themeCon = $("#themeCondition").val();
+			        	   		console.log("theme: "+themeCon);			                	
 				                	
 			        	   		
 			        	   		
@@ -463,7 +494,10 @@ div.emptyProd{
 						                  url : "/cook/json/listCook?&menu=${param.menu }" ,
 						                  method : "POST" ,
 						                  data : JSON.stringify({
-						                	  currentPage : cpage
+						                	  currentPage : cpage,						                	 
+						                	  searchKeyword : keyword,
+						                	  searchCondition : search,
+						                	  themeCondition : themeCon						                	  
 						                  }), 
 						                  dataType : "json" ,
 						                  headers : {
@@ -486,6 +520,8 @@ div.emptyProd{
 						                		var button;
 						                		var cookTheme;
 						                		var heartCount;
+						                		
+
 						                
 						                		if(JSONData.list[i].cookStock == '0'){
 					                				
@@ -638,11 +674,11 @@ div.emptyProd{
 		    <div class="center btmspace-50">
 		    <br/>
 		    <c:if test="${param.menu.contains('manage') }">
-		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">COOKINGCLASS</span></h3>
+		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">COOKING&nbsp;CLASS</span></h3>
 		        <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		      </c:if>
 		      		    <c:if test="${param.menu.contains('search') }">
-		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">COOKINGCLASS</span></h3>
+		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">COOKING&nbsp;CLASS</span></h3>
 		        <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		      </c:if>
 		      </div>		  	
@@ -654,12 +690,12 @@ div.emptyProd{
     	<form class="form-inline" name="detailForm">
     	
     	<nav class="ref-sort" >
-	      <button class="theme themeAll" id="themeAll" value="all">모두보기</button>
-	      <button class="theme themeko" value="ko">한식</button>
-	      <button class="theme themeja" value="ja">일식</button>
-	      <button class="theme themean" value="an">양식</button>
-	      <button class="theme themech" value="ch">중식</button>
-	      <button class="theme themede" value="de">간식</button>
+	      <button type="button" class="theme themeAll" id="themeAll" value="all">모두보기</button>
+	      <button type="button" class="theme themeko" id="themeko" value="ko">한식</button>
+	      <button type="button" class="theme themeja" id="themeja" value="ja">일식</button>
+	      <button type="button" class="theme themeam" id="themeam" value="am">양식</button>
+	      <button type="button" class="theme themech" id="themech" value="ch">중식</button>
+	      <button type="button" class="theme themede" id="themede" value="de">간식</button>
 	    </nav>
     	
 
@@ -667,30 +703,22 @@ div.emptyProd{
  
 
 			
-	
-				<div class="col-md-6 text-right">
+		<table width="100%">
+			<tr>
+				<td class="col-md-6 text-right">
+					<input type="hidden" name="searchCondition" id="searchCondition" value="1">
 					<div class="form-group">
-						<select class="form-control" name="searchCondition">
-							<option value="0"
-								${!empty search.searchCondition && search.searchCondition==0 ? "selected" : ""}>쿠킹클래스번호</option>
-							<option value="1"
-								${!empty search.searchCondition && search.searchCondition==1 ? "selected" : ""}>쿠킹클래스명</option>
-							<option value="2"
-								${!empty search.searchCondition && search.searchCondition==2 ? "selected" : ""}>쿠킹클래스가격</option>
-						</select>
-
+					    <label class="sr-only" for="searchKeyword">검색</label>
+					    <input type="text" style="display: none;">
+					    <input type="text" class="form-control" id="cookname" name="searchKeyword"  placeholder="검색어를 입력하세요"
+					    		onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 					</div>
+				  
+					<button type="button" class="btn btn-default" id="search">검색</button>
+				</td>
+		</tr>
+		</table>
 
-					<div class="form-group">
-						<label class="sr-only" for="searchKeyword">검색어</label> <input
-							type="text" class="form-control" id="cookName"
-							name="searchKeyword" placeholder="검색어"
-							value="${! empty search.searchKeyword ? search.searchKeyword : '' }">
-							
-					<button type="button" class="btn btn-default">검색</button>
-					</div>
-					
-				</div>
 	
 					
 				
@@ -788,7 +816,7 @@ div.emptyProd{
 				
 					
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
-					<div>${cook.cookBrief }</div>
+					<div><strong>${cook.cookBrief }</strong></div>
 					
 					
 					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>
