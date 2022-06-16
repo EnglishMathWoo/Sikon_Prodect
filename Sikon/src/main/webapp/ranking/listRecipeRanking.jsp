@@ -73,7 +73,7 @@ body {
     color: #8B4513;
     float: right;
     height:40px;
-    width:8%;
+    width:6%;
     box-sizing: border-box;
     justify-content: center;
     display: flex;
@@ -197,10 +197,10 @@ background-color: #f7f7f7;
 	
 	$(function() {
 		
-		$("#addCoupon").on("click" , function() {
-					
-			self.location = "/coupon/addCoupon.jsp";
+		$("#mentor").on("click" , function() {	
+			self.location = "/ranking/listLove";
 		});
+		
 	});
 		
 					
@@ -209,8 +209,19 @@ background-color: #f7f7f7;
 		self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
 	});
 	
+	//·¹½ÃÇÇ ·©Å·
 	$(document).on('click', '#recipe', function(){
 		 self.location = "/ranking/listRecipe";
+	});
+	
+	$(document).on('click', '#all', function(){
+		 var orderCondition = $(this).attr('value');
+		 self.location = "/ranking/listRecipe";
+	});
+	
+	$(document).on('click', '#daily', function(){
+		 var orderCondition = $(this).attr('value');
+		 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
 	});
 		
 	$(document).on('click', '#daily', function(){
@@ -227,22 +238,27 @@ background-color: #f7f7f7;
 		 var orderCondition = $(this).attr('value');
 		self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
 	});
-		
+	
+	//°Ë»ö¾î ·©Å·
 	$(document).on('click', '#keyword', function(){
 		 var cookNo =$(this).attr("value");
 		 self.location = "/cook/updateCook?cookNo="+cookNo
 	});
-		 
-	$(document).on('click', '#cook', function(){
-		 self.location = "/ranking/listCook";
+	
+	//ÄíÅ·¸àÅä ·©Å·
+	$(document).on('click', '#mentor', function(){
+		 self.location = "/ranking/listLove";
 	});
 									
 	$(function() {
 						
 		var odc = $("#orderCon").val();
 		console.log("odc: "+odc);
-				
-		if(odc == 0){
+		
+		if(odc == ""){
+			$(".order").removeClass('act');
+			$("#all").addClass('act');
+		} else if(odc == 0){
 			$(".order").removeClass('act');
 			$("#daily").addClass('act');
 		} else if(odc == 1){
@@ -288,7 +304,7 @@ background-color: #f7f7f7;
 	      <ul>
 	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;·¹½ÃÇÇ&nbsp;</div></li>
 	        <li id="keyword"><div>&nbsp;°Ë»ö¾î&nbsp;</div></li>
-	        <li id="cook"><div>&nbsp;ÄíÅ·¸àÅä&nbsp;</div></li>
+	        <li id="mentor"><div>&nbsp;ÄíÅ·¸àÅä&nbsp;</div></li>
 	      </ul>  
 	      
 	      <br>
@@ -297,6 +313,7 @@ background-color: #f7f7f7;
 		  	  <div class="order" id="monthly" value="2">¿ù°£</div>
 		      <div class="order" id="weekly" value="1">ÁÖ°£</div>
 		      <div class="order" id="daily" value="0">ÀÏ°£</div>
+		      <div class="order" id="all" value=null>ÀüÃ¼</div>
 		    </div>
 	  
 	  		<input type="hidden" id="orderCon" value="${search.orderCondition}"/>

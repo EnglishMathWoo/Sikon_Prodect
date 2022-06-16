@@ -14,6 +14,7 @@ import com.sikon.common.Search;
 import com.sikon.service.coupon.CouponDao;
 import com.sikon.service.coupon.CouponService;
 import com.sikon.service.domain.Coupon;
+import com.sikon.service.domain.Love;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
 import com.sikon.service.ranking.RankingDao;
@@ -63,5 +64,16 @@ public class RankingServiceImpl implements RankingService{
 		rankingDao.deleteLoveMentor(userNickname, userId);
 	}
 	
+	// 즐겨찾기 리스트 조회
+	public Map<String, Object> getLoveList(Search search) throws Exception {
+		System.out.println("search=" + search);
+		List<Love> list = rankingDao.getLoveList(search);
 
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		System.out.println("list=" + list);
+
+		return map;
+	}
+	
 }

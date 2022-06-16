@@ -235,14 +235,11 @@ public void setReviewNum(int reviewNum) {
 public String toString() {
 	return "Recipe [recipeNo=" + recipeNo + ", recipeName=" + recipeName + ", recipeDetail=" + recipeDetail
 			+ ", writer=" + writer + ", recipeRegDate=" + recipeRegDate + ", recipeImg=" + recipeImg + ", recipeVideo="
-			+ recipeVideo + ", recipeDifficulty=" + recipeDifficulty + ", cookingTime=" + cookingTime + ", recipeOrder="
-			+ recipeOrder + ", recipeTheme=" + recipeTheme + ", reviewNum=" + reviewNum + ", ingredientNo="
-			+ ingredientNo + ", ingredientName=" + ingredientName + ", ingredientAmount=" + ingredientAmount + ",recipeViews=" + recipeViews + "]";
+			+ recipeVideo + ", recipeDifficulty=" + recipeDifficulty + ", cookingTime=" + cookingTime + ", recipeTheme=" + recipeTheme + ", reviewNum=" + reviewNum +"";
+		
+
+
+
 }
-
-
-
-
-
 
 }
