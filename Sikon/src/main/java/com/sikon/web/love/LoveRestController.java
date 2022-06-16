@@ -42,6 +42,7 @@ import com.sikon.service.heart.HeartService;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.Heart;
 import com.sikon.service.love.LoveService;
+import com.sikon.service.ranking.RankingService;
 
 
 @RestController
@@ -53,46 +54,42 @@ public class LoveRestController {
 	@Qualifier("loveServiceImpl")
 	private LoveService loveService;
 	
+	@Autowired
+	@Qualifier("rankingServiceImpl")
+	private RankingService rankingService;
+	
 	public LoveRestController() {
 		System.out.println(this.getClass());
 	}	
 
 	
 	@RequestMapping( value="json/updateLove", method=RequestMethod.POST )
-	public int updateHeart(@ModelAttribute("love") Love love,
-			@RequestParam("userNickname") String userNickname,
-			@RequestParam("userId") String userId,
-			@RequestParam("loveNo") int loveNo,
-			HttpServletRequest request
-			
-			) throws Exception {
+	public int updateHeart(@ModelAttribute("love") Love love, @RequestParam("userNickname") String userNickname, 
+			@RequestParam("userId") String userId, HttpServletRequest request ) throws Exception {
 
 		System.out.println(userNickname);
 		System.out.println(userId);
-		System.out.println("!$!@!#%#@%#@@#%!@%#!#%@!@%#!%@#@%!");
-
 		
 		int loveCheck = loveService.loveCheck(userNickname, userId);
+
 		System.out.println(loveCheck);
+		
 		if(loveCheck == 0) {
 			//좋아요 처음누름
 			loveService.addLove(userNickname,userId); //heart테이블 삽입			
 			loveService.loveCheck(userNickname, userId);//좋아요 check 1
+			rankingService.addLoveMentor(userNickname, userId);
 			System.out.println("사랑해");
 
 			
-		}else  {
+		} else{
 			loveService.deleteLove(userNickname,userId); //좋아요 삭제
 			loveService.loveCheck(userNickname, userId);//좋아요 check 1
-			
-			
+			rankingService.deleteLoveMentor(userNickname, userId);
+				
 			System.out.println("싫어해");
-
-		
 		}
-		return loveCheck;
-	
+			return loveCheck;
 	}
-		
 	
 }

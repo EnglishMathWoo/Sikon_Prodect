@@ -61,9 +61,9 @@ public class RankingDaoImpl implements RankingDao {
 		map.put("userNickname", userNickname);
 		map.put("userId", userId);
 		
-		sqlSession.insert("RankingMapper.deleteLoveMentor", map);
+		sqlSession.delete("RankingMapper.deleteLoveMentor", map);
 	}
-	
+		
 	//¡Ò∞‹√£¥¬ ∏‡≈‰ ∑©≈∑ ∏ÆΩ∫∆Æ
 	public List<Love> getLoveList(Search search) throws Exception {
 		System.out.println("search=" + search);

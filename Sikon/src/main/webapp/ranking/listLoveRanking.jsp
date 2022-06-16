@@ -58,8 +58,7 @@ body {
   height: 25px;
   text-align: center;
   font-weight:bold;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
   margin-left: 20px;
 }
 
@@ -202,14 +201,17 @@ article img {
 
 .fa-arrow-up:before {
     content: "\f062";
-    margin-right: 8px;
-    font-size: 20px;
+    margin-right: 7px;
+    font-size: 19px;
+    color: #a93f0d94;
+    margin-top: 3px;
 }
 
-#num {
+#increase {
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 25px;
     font-size: 19px;
+    color: #a93f0d94;
 }
 
 </style>
@@ -311,7 +313,7 @@ article img {
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RANKING </h3>
+		       <div class="font-x2 nospace" align="center" style="color:#937062; font-size:35px"><br> RANKING </div>
 		      <div align="center" style="color:#937062; font-size:18px;"><br> TOP 20 </div>
 		    </div>
 		  
@@ -357,9 +359,11 @@ article img {
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${love.user.userId}" href="#">
       <div class="shape1" style="float:left;">${i}</div>
-	  <div style="float:right;" id="num">10</div> 
+      <c:if test= "${search.orderCondition != null}">
+	  <div style="float:right;" id="increase">${love.loveIncrease}</div> 
 	  <i class="fa-solid fa-arrow-up" style="float:right;"></i>
-      <img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300" style="box-shadow:5px 5px 10px grey;"></a>
+	  </c:if>
+      <img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300" style="border: 1px solid #d7d7d7"></a>
       <input type="hidden" id="mentorId" name="mentorId" value="${love.user.userId }"/>
         <div class="excerpt">
           <h4 class="heading" style="text-align:center;"><b>${love.userNickname }</b></h4>
