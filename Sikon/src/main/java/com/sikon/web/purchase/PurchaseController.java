@@ -179,7 +179,7 @@ public class PurchaseController {
 		point.setPointScore(usedpoint);
 		point.setTotalPoint(totalpoint);
 		point.setUserId(userId);
-		point.setPointType("use");
+		point.setPointType("USE");
 		point.setPointCategory("str");
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint, userId);
@@ -191,7 +191,7 @@ public class PurchaseController {
 		point.setPointScore(earnpoint);
 		point.setTotalPoint(totalpoint+earnpoint);
 		point.setUserId(userId);
-		point.setPointType("earn");
+		point.setPointType("EARN");
 		point.setPointCategory("str");
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint+earnpoint, userId);
@@ -343,7 +343,7 @@ public class PurchaseController {
 		point.setPointScore(usedpoint);
 		point.setTotalPoint(totalpoint);
 		point.setUserId(userId);
-		point.setPointType("use");
+		point.setPointType("USE");
 		point.setPointCategory("str");
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint, userId);
@@ -355,7 +355,7 @@ public class PurchaseController {
 		point.setPointScore(earnpoint);
 		point.setTotalPoint(totalpoint+earnpoint);
 		point.setUserId(userId);
-		point.setPointType("earn");
+		point.setPointType("EARN");
 		point.setPointCategory("str");
 		pointService.addPoint(point);
 		pointService.updateHoldPoint(totalpoint+earnpoint, userId);
@@ -412,14 +412,72 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
+	
+	@RequestMapping( value="getPurchaseBySerial", method=RequestMethod.GET)
+	public ModelAndView getPurchaseBySerial( @RequestParam("serialNo") String serialNo) throws Exception {
+		
+		System.out.println("/purchase/getPurchaseBySerial : GET ");
+		
+		List purchaselist = new ArrayList();
+		
+		List list = purchaseService.getPurchaseBySerial(serialNo);
+		Map map = new HashMap();
+		
+		String serial = "";
+		int totalprice = 0;
+		int divyfee = 0;
+		int couponpay = 0;
+		int pointpay = 0;
+		
+		for(int i=0; i<list.size();i++) {
+			
+			Purchase purchase = purchaseService.getPurchase(((Purchase)list.get(i)).getTranNo());
+			User user = userService.getUser(((Purchase)list.get(i)).getBuyer().getUserId());
+			Product product = productService.getProduct(((Purchase)list.get(i)).getPurchaseProd().getProdNo());			
+			purchase.setBuyer(user);
+			purchase.setPurchaseProd(product);
+			
+			purchaselist.add(purchase);
+			
+			totalprice += product.getProdDisPrice();
+			divyfee += purchase.getDivyFee();
+			pointpay += purchase.getUsedPoint();
+			
+			serial = purchase.getSerialNo();
+			
+			System.out.println(list.get(i));
+		}	
+		
+		map.put("totalprice", totalprice);
+		map.put("divyfee", divyfee);
+		map.put("couponpay", couponpay);
+		map.put("pointpay", pointpay);
+		map.put("serial", serial);
+
+		System.out.println("================================================================================");
+		System.out.println("totalprice: "+totalprice);
+		System.out.println("divyfee: "+divyfee);
+		System.out.println("couponpay: "+couponpay);
+		System.out.println("pointpay: "+pointpay);
+		System.out.println("serial: "+serial);
+		System.out.println("map: "+map);
+		System.out.println("================================================================================");
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/getPurchaseBySerial.jsp");
+		modelAndView.addObject("purchaselist", purchaselist);
+		modelAndView.addObject("purchaseinfo", map);
+		
+		return modelAndView;
+	}
+	
 
 	@RequestMapping(value="updatePurchase", method=RequestMethod.GET)
 	public ModelAndView updatePurchase( @RequestParam("tranNo") int tranNo) throws Exception{
 
 		System.out.println("/purchase/updatePurchase : GET ");
 		//Business Logic
-		
-
+	
 		Purchase purchase = purchaseService.getPurchase(tranNo);
 		
 		int prodNo = purchase.getPurchaseProd().getProdNo();
@@ -439,6 +497,65 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="updatePurchaseBySerial", method=RequestMethod.GET)
+	public ModelAndView updatePurchaseBySerial( @RequestParam("serialNo") String serialNo) throws Exception{
+
+		System.out.println("/purchase/updatePurchaseBySerial : GET ");
+
+		List list = purchaseService.getPurchaseBySerial(serialNo);
+		
+		List purchaselist = new ArrayList();
+		Map map = new HashMap();
+		
+		String serial = "";
+		int totalprice = 0;
+		int divyfee = 0;
+		int couponpay = 0;
+		int pointpay = 0;
+		
+		for(int i=0; i<list.size();i++) {
+			
+			Purchase purchase = purchaseService.getPurchase(((Purchase)list.get(i)).getTranNo());
+			User user = userService.getUser(((Purchase)list.get(i)).getBuyer().getUserId());
+			Product product = productService.getProduct(((Purchase)list.get(i)).getPurchaseProd().getProdNo());			
+			purchase.setBuyer(user);
+			purchase.setPurchaseProd(product);
+			
+			purchaselist.add(purchase);
+			
+			totalprice += product.getProdDisPrice();
+			divyfee += purchase.getDivyFee();
+			pointpay += purchase.getUsedPoint();
+			
+			serial = purchase.getSerialNo();
+			
+			System.out.println(list.get(i));
+		}	
+		
+		map.put("totalprice", totalprice);
+		map.put("divyfee", divyfee);
+		map.put("couponpay", couponpay);
+		map.put("pointpay", pointpay);
+		map.put("serial", serial);
+
+		System.out.println("================================================================================");
+		System.out.println("totalprice: "+totalprice);
+		System.out.println("divyfee: "+divyfee);
+		System.out.println("couponpay: "+couponpay);
+		System.out.println("pointpay: "+pointpay);
+		System.out.println("serial: "+serial);
+		System.out.println("map: "+map);
+		System.out.println("================================================================================");
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/updatePurchaseBySerial.jsp");
+		modelAndView.addObject("purchaselist", purchaselist);
+		modelAndView.addObject("purchaseinfo", map);
+		
+		return modelAndView;
+				
+	}
+	
 	@RequestMapping(value="updatePurchase", method=RequestMethod.POST)
 	public ModelAndView updatePurchase( @ModelAttribute("purchase") Purchase purchase, @RequestParam("tranNo") int tranNo) throws Exception{
 
@@ -449,6 +566,27 @@ public class PurchaseController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/purchase/getPurchase?tranNo="+tranNo);		
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="updatePurchaseBySerial", method=RequestMethod.POST)
+	public ModelAndView updatePurchaseBySerial( @ModelAttribute("purchase") Purchase purchase, @RequestParam("tranlist") int[] tranlist) throws Exception{
+
+		System.out.println("/purchase/updatePurchaseBySerial : POST ");
+		
+		System.out.println("1¹ø Purchase: "+purchase);
+		System.out.println("-----------------------------------------------------------------------------");
+		
+		for(int i=0; i<tranlist.length; i++) {
+			
+			purchase.setTranNo(tranlist[i]);
+			purchaseService.updatePurchase(purchase);
+			
+		}
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/purchase/getPurchaseBySerial?serialNo="+purchase.getSerialNo());		
 		
 		return modelAndView;
 	}
