@@ -21,6 +21,8 @@
 html {
   line-height: 1;
   font-family: 'Nanum Myeongjo', serif;
+  
+  
 }
 
 ol, ul {
