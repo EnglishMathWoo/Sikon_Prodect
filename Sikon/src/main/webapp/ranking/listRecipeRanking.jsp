@@ -279,7 +279,7 @@ background-color: #f7f7f7;
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RANKING </h3>
+		      <div class="font-x2 nospace" align="center" style="color:#937062; font-size:35px"><br> RANKING </div>
 		      <div align="center" style="color:#937062; font-size:18px;"><br> TOP 20 </div>
 		    </div>
 		  

@@ -4,21 +4,24 @@ public class Love {
 	
 	
 	private int loveNo;
-	private String mentorNickname;
+	private String userNickname;
 	private String userId;
 	private User user;
 	private int loveCheck;
+	private int loveIncrease;
+	
+	
 	public int getLoveNo() {
 		return loveNo;
 	}
 	public void setLoveNo(int loveNo) {
 		this.loveNo = loveNo;
 	}
-	public String getMentorNickname() {
-		return mentorNickname;
+	public String getUserNickname() {
+		return userNickname;
 	}
-	public void setMentorNickname(String mentorNickname) {
-		this.mentorNickname = mentorNickname;
+	public void setUserNickname(String userNickname) {
+		this.userNickname = userNickname;
 	}
 	public String getUserId() {
 		return userId;
@@ -40,9 +43,15 @@ public class Love {
 	}
 	
 	
+	public int getLoveIncrease() {
+		return loveIncrease;
+	}
+	public void setLoveIncrease(int loveIncrease) {
+		this.loveIncrease = loveIncrease;
+	}
 	@Override
 	public String toString() {
-		return "Love [loveNo=" + loveNo + ", mentorNickname=" + mentorNickname + ", userId=" + userId + ", user=" + user
+		return "Love [loveNo=" + loveNo + ", mentorNickname=" + userNickname + ", userId=" + userId + ", user=" + user
 				+ ", loveCheck=" + loveCheck + "]";
 	}
 	
