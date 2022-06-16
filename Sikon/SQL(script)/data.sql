@@ -184,7 +184,7 @@ SELECT '낙지' AS ingredientName , '1g' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '냉이 차돌박이 솥밥', '냉이는 별로예요', '987eb588939a8cb12033994139c0018e.jpg', null, '고급', 'CH', 50, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '냉이 차돌박이 솥밥', '냉이는 별로예요','냉이냉이냉이냉이별로별로별로별로', '987eb588939a8cb12033994139c0018e.jpg', null, '고급', 'CH', 50, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)

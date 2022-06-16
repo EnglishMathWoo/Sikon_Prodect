@@ -39,6 +39,16 @@ public class PurchaseServiceImpl implements PurchaseService{
 	public Purchase getPurchase(int tranNo) throws Exception {
 		return purchaseDao.getPurchase(tranNo);
 	}
+	
+	
+	public List<Purchase> getPurchaseBySerial(String serialNo) throws Exception {
+		
+		List<Purchase> list= purchaseDao.getPurchaseBySerial(serialNo);
+		
+		return list;
+	}
+	
+	
 
 	public Map<String , Object > getPurchaseList(Search search, String buyerId) throws Exception {
 		List<Purchase> list= purchaseDao.getPurchaseList(search, buyerId);

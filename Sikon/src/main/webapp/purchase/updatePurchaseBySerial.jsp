@@ -215,7 +215,7 @@ label{
 			console.log(addr);
 			$("input:hidden[name='divyAddr']").val( addr );
 			
-			$("form").attr("method" , "POST").attr("action" , "/purchase/updatePurchase?tranNo=${purchase.tranNo }").submit();
+			$("form").attr("method" , "POST").attr("action" , "/purchase/updatePurchaseBySerial").submit();
 		
 			
 		}	
@@ -296,7 +296,7 @@ label{
 			  <p>배송정보</p>
 			</div><br>
 		
-				  
+			<c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	  	  
 				 <div class="form-group">
 				    <label for="receiverName">받는분 이름</label>
 				      <input type="text" class="form-control" id="receiverName" name="receiverName" value="${purchase.receiverName }">
@@ -357,14 +357,22 @@ label{
 				      <input type="text" class="form-control" id="divyMessage" name="divyMessage" value="${purchase.divyMessage}" >
 				  </div>
 				
-		
+				
+				<input type="hidden" name="paymentOpt" value="${purchase.paymentOpt}">
+				<input type="hidden" name="usedCoupon" value="${purchase.usedCoupon}">
+				<input type="hidden" name="usedPoint" value="${purchase.usedPoint}">
+				<input type="hidden" name="earnPoint" value="${purchase.earnPoint}">
+				<input type="hidden" name="serialNo" value="${purchase.serialNo}">
+				
+			</c:forEach>	  
 				  
-				  
-			<div><br>
+			<div>
+			
+			<br>
 				  <div class="subtitle">
 				  <p>주문상품</p>
 				  </div><br>
-				  
+			<c:forEach var="purchase" items="${purchaselist}">	  	  
 				  <div class="form-group">
 				  <table style="width: 100%">
 					  <tr>
@@ -379,19 +387,18 @@ label{
 							<c:if test="${purchase.purchaseProd.couponApply == 'N' }">
 								<p style="color:#F0445C">*쿠폰 적용이 불가능한 상품입니다.</p>
 							</c:if>
-						  	<input type="hidden" id="price" value="${purchase.purchaseProd.prodDisPrice}">
+						  	<input type="hidden" name="tranlist" value="${purchase.tranNo}">
 					  	
 					  	</td>
 					  </tr>
 				 </table>		 
 				</div>
+			</c:forEach>	
+				
 			</div>	  
 			
 			
-			<input type="hidden" name="paymentOpt" value="${purchase.paymentOpt}">
-			<input type="hidden" name="usedCoupon" value="${purchase.usedCoupon}">
-			<input type="hidden" name="usedPoint" value="${purchase.usedPoint}">
-			<input type="hidden" name="earnPoint" value="${purchase.earnPoint}">
+			
 			
 			
 			
@@ -405,33 +412,32 @@ label{
 				  
 				  <div class="sectd">
 				  	<h5>총 상품금액</h5>
-				  	<div class="payment">${purchase.purchaseProd.prodDisPrice * purchase.purchaseQuantity}원</div>
+				  	<div class="payment">${purchaseinfo.totalprice}원</div>
 				  </div>
 				  
 				  <div class="sectd">
 				  	<h5>쿠폰 사용</h5>
-				  	<div class="payment">
-				  		<c:if test="${!empty purchase.usedCoupon}">- ${purchase.usedCoupon}원</c:if>
-				  		<c:if test="${empty purchase.usedCoupon}">- 0원</c:if>
-				  	</div>
+				  	<div class="payment">- ${purchaseinfo.couponpay}원</div>
 				  </div>
 				  
 				  <div class="sectd">
 				  	<h5>포인트 사용</h5>
-				  	<div class="payment">- ${purchase.usedPoint}P</div>
+				  	<div class="payment">- ${purchaseinfo.pointpay}P</div>
 				  </div>
 				  
 				  <div class="sectd">
 				  	<h5>배송비</h5>
-				  	<div class="payment">+ ${purchase.divyFee}원</div>
+				  	<div class="payment">+ ${purchaseinfo.divyfee}원</div>
 				  </div>
 				  
 				  <br>
 				  
 				  <div class="sectd">
 				  	<h5>총 결제금액</h5>
-				  	<div class="payment totals"><strong class="totalpay">${purchase.purchaseProd.prodDisPrice * purchase.purchaseQuantity - purchase.usedPoint + purchase.divyFee }</strong>원</div>
+				  	<div class="payment totals"><strong class="totalpay">${purchaseinfo.totalprice - purchaseinfo.couponpay - purchaseinfo.pointpay + purchaseinfo.divyfee }</strong>원</div>
 				  </div>
+				  
+			  <c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	
 				  
 				  <div class="sectd">
 				  	<h6>적립 포인트</h6>
@@ -450,11 +456,15 @@ label{
 				  	</div>
 				  </div>
 				  
+			</c:forEach>	  
 				  
 			</section>
 			
 </form>
 			<br><br>
+			
+			<c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	
+			
 			<div class="text-center buttons">
 			
 				<c:if test="${purchase.divyStatus.equals('001') }">	
@@ -463,6 +473,8 @@ label{
 				
 				<button type="button" class="check" >취&emsp;소</button>
 			</div>
+			
+			</c:forEach>	
 				
 			<br>
 			

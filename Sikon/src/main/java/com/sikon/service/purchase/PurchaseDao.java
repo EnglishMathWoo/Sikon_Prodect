@@ -15,6 +15,9 @@ public interface PurchaseDao {
 	// SELECT ONE
 	public Purchase getPurchase(int tranNo) throws Exception ;
 
+	// SELECT LIST 
+	public List<Purchase> getPurchaseBySerial(String serialNo) throws Exception ;
+
 	// SELECT LIST
 	public List<Purchase> getPurchaseList(Search search, String buyerId) throws Exception ;
 	

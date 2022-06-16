@@ -136,6 +136,13 @@ html input[type=button]:hover{
 	padding-left: 20px
 }
 
+.payProduct{
+	border-top: 2px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+    padding-top:20px;
+}
+
 </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -456,7 +463,8 @@ function payment(data) {
 			</div>
 				  
 				  
-			<div><br>
+			<div>
+			<br>
 				  <div class="subtitle">
 				  <p>주문상품</p>
 				  </div><br>
@@ -524,15 +532,15 @@ function payment(data) {
 				  </div>
 				  
 			</div>
+				  <br>
+			<div class="payProduct">	    
 				  
-			<div>	    
-				  
-				  <div class="form-group">
+				  <div>
 				  <label for="purchaseQuantity">총 결제금액</label>
 				    <input type="text" id="totalprice" name="totalprice" value=""  style="border:none;width:50px;text-align: right;">원
 				  </div>
 				  
-				   <div class="form-group">
+				   <div>
 				  <label for="purchaseQuantity">적립 포인트</label>
 				    <input type="text" id="earnPoint" name="earnPoint" value=""  style="border:none;width:50px;text-align: right;">P
 				  </div>

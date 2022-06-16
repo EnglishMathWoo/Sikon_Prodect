@@ -299,7 +299,8 @@ table.type09 td {
 					<div class="col-lg-offset-1 col-lg-11">
 						<br />
 
-						<textarea id="summernote" class="form-control" name="recipeOrder"  >
+						<textarea id="summernote" class="form-control" name="recipeOrder"
+						placeholder="${recipe.recipeOrder}"  >
       
      </textarea>
 						<script>

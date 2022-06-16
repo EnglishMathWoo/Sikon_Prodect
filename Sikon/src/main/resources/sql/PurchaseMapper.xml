@@ -81,6 +81,13 @@
 	 </select>
 	 
 	 
+	 <!-- SQL : SELECT LIST -->
+	 <select 	id="getPurchaseBySerial"	parameterType="String"	resultMap="purchaseSelectMap">
+		SELECT * 
+		FROM purchase
+		WHERE serial_no = #{value}
+	 </select>
+	 
 	 
 	 <!-- SQL : UPDATE -->
 	 <update	id="updatePurchase"	parameterType="purchase" >

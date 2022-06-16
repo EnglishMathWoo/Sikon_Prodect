@@ -1,5 +1,6 @@
 package com.sikon.service.purchase;
 
+import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
@@ -12,6 +13,8 @@ public interface PurchaseService {
 	public void addPurchase(Purchase purchase) throws Exception;
 	
 	public Purchase getPurchase(int tranNo) throws Exception;
+
+	public List<Purchase> getPurchaseBySerial(String serialNo) throws Exception;
 	 
 	public Map<String , Object> getPurchaseList(Search search, String buyerId) throws Exception;
 	
