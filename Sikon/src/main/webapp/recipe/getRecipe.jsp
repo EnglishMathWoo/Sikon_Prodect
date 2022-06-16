@@ -434,7 +434,7 @@ body {
 			<div class="iEJcKG">
 				<h3 class="iEJcKGheader">기본 재료</h3>
 				<div class="table">
-					<table class="type09" style="width: 592px">
+					<table class="type09" style="width: 740px">
 						<c:set var="i" value="0" />
 						<c:forEach var="ingredient" items="${list}">
 							<tr>
