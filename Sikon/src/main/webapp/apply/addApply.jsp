@@ -222,7 +222,7 @@ $(function() {
 	<div class="container" >
 	
 		<div class="layout">
-		<h1 class="bg-defualt text-center">신청</h1><br>
+		<h1 class="bg-defualt text-center">쿠킹클래스 신청</h1><br>
 		
 	<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
@@ -252,22 +252,7 @@ $(function() {
 		  </div>
 		  
 		  
-		  <div class="form-group">
-		    <label for="cookDifficuty" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스난이도</label>
-		   
-		    
-			<c:if test = "${cook.cookDifficuty == '1'}">
-			초급 
-			</c:if>
-			<c:if test = "${cook.cookDifficuty == '2'}">
-			중급
-			</c:if>
-			<c:if test = "${cook.cookDifficuty == '3'}">
-			고급
-			</c:if>
-			
-		 
-		  </div>		  
+	  
 		  
 			<div><br>
 				  <div class="subtitle">
@@ -283,25 +268,9 @@ $(function() {
 						<td class="content">
 							<p style="font-weight: bold;font-size: 15px">${cook.cookName}</p>
 							<p>${cook.cookPrice} 원</p>
-			<p>
-			<c:if test = "${cook.cookTheme =='KO'}">
-			한식
-			</c:if>
-			<c:if test = "${cook.cookTheme == 'JA'}">
-			일식
-			</c:if>
-			<c:if test = "${cook.cookTheme == 'AM'}">
-			양식
-			</c:if>
-			<c:if test = "${cook.cookTheme == 'CH'}">
-			중식
-			</c:if>
-			<c:if test = "${cook.cookTheme == 'DE'}">
-			간식
-			</c:if>
-			</p>
+
 							
-							<p>신청인원: ${apply.cookStatus} <input type="number" min="0"  class="form-control" id="cookStatus" name="cookStatus" placeholder="남은 신청자수 : ${cook.cookStock}"></p>
+							
 
 		<p>쿠킹클래스 장소: ${cook.cookLocation} </p>
 		<p>테마 : 	
@@ -320,7 +289,21 @@ $(function() {
 			</c:if>
 			<c:if test = "${cook.cookTheme == 'DE'}">
 			간식
-			</c:if>	</p>			  	
+			</c:if>	</p>
+			
+			<p>난이도 :
+			<c:if test = "${cook.cookDifficuty == '1'}">
+			초급 
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '2'}">
+			중급
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '3'}">
+			고급
+			</c:if>			
+			
+			
+			</p>		  	
 					  	</td>
 					  </tr>
 				 </table>		 
@@ -328,61 +311,72 @@ $(function() {
 			</div>	 				  
 				  
 				  
-
+				<div class="subtitle">
+				  <p>결제 </p>
+				  </div><br>
+				  
+				 
+				 <div class="form-group">
+				    <label for="usedCoupon">결제 날짜</label>
+<input type="date" class="form-control" id="checkDate" name="checkDate" placeholder="결제날짜" value="${apply.checkDate}" >
+				  </div>
 		  		  				  			
 
-		  <div class="form-group">
-		    <label for="checkDate" class="col-sm-offset-1 col-sm-3 control-label">결제날짜</label>
-		   
-		      <input type="date" class="form-control" id="checkDate" name="checkDate" placeholder="결제날짜" value="${apply.checkDate}" >
-		   
-		  </div>		  
+	  
 		  
 
 		  
 		  	  
 		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">신청자아이디</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="신청자아이디" value="${user.userId}" readonly>
-		    </div>
+		    <label for="userId" >신청자아이디 :  ${user.userId} </label>
+		   
+		     
+		  
 		  </div>
 		  
 		  	  
 		  <div class="form-group">
-		    <label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label">결제방법</label>
-		    <div class="col-sm-4">
+		    <label for="paymentOption" >결제방법</label>
+		   
 		      <select 	name="paymentOption"		class="form-control" >
 				<option value="1" selected="selected">카카오페이구매</option>
 				<option value="2">네이버페이구매</option>
 			</select>
-		    </div>
+		   
 		  </div>
 		  
 		    <div class="form-group">
-		    <label for="text" class="col-sm-offset-1 col-sm-3 control-label">수업시간</label>
-		    <div class="col-sm-2">
-		      <input type="TIME" class="form-control" id="startTime"  name="startTime" value="${cook.startTime}" placeholder="수업시작시간">
-		    </div>
+		    <label for="text">수업시간 :&emsp;</label>
 		    
-		      <div class="col-sm-2">
-		      <input type="TIME" class="form-control" id="endTime"  name="endTime"  value="${cook.endTime}" placeholder="수업종료시간">
-		    </div>
+		   ${cook.startTime}&emsp;~&emsp; ${cook.endTime}
+		   
+		    
+		      
+		     
+		    
 		  </div>		  
 		  
 
 
 		   <input type="hidden" id="cookStock"  value="${cook.cookStock }" />
 		      <div class="form-group">
-		    <label for="cookStatus" class="col-sm-offset-1 col-sm-3 control-label">신청자수</label>
+		    <label for="cookStatus" >신청자수</label>
 		  
 		      <input type="number" min="0"  class="form-control" id="cookStatus" name="cookStatus" placeholder="남은 재고량 : ${cook.cookStock}">
 		  
 		  </div>
-	  	  
+	  		</form>  
 	  
-		  
-		     
+			<br>
+			<div class="text-center">
+				<button type="button" class="buy" id="iamportPayment" value="KA">결제하기</button>	
+				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
+			</div>
+				
+			<br>
+ 	</div>
+</div>			  
+	     
   
  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -476,14 +470,7 @@ $(function() {
 		  
 		  
 	
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button"  class="btn btn-primary"  >구&nbsp;매</button>
-		      <button type="button"  class="btn btn-warning"  >장바구니</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 
-		
-		
-		 </div>
 
 <!-- 결제하기 /////////////////////////////////////-->		
 	  <input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">	
@@ -493,13 +480,7 @@ $(function() {
 	<input type="hidden" id="userName" value="${user.userName }"/>
 	<input type="hidden" id="cookLocation" value="${cook.cookLocation }"/>		  
 
-			<div class="text-left">
-		<button type="button" class="btn btn-default btn-block iamportPayment" id="iamportPayment" value="KA">결제하기</button>		
-		</div>
-		<!-- 결제하기 /////////////////////////////////////-->	
-		
-		<br/>
-			</div>
+
  
 	
 </body>

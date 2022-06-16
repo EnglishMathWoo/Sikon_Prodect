@@ -169,11 +169,11 @@ div.emptyProd{
 			self.location = "/apply/getApply?applyNo=" + applyNo;
 		});
 
-		$("td.userid").on("click", function() {
-
-			var userId = $(this).attr("value");
-
-			self.location = "/user/getUser?userId=" + userId;
+		$( ".review" ).on("click" , function() {
+			var textNo=$(this).attr("value");
+			var category='COOK';
+			console.log('리뷰');
+			window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
 		});
 
 		$("td.divy")
@@ -286,37 +286,36 @@ div.emptyProd{
 					<td align="left" class="cookcontent">
 						<p class="cookName">${ apply.classCook.cookName }</p>
 						<p>${ apply.classCook.cookPrice }원</p>
-						<p>구매수량 ${ apply.cookStatus }개</p>
+						<p>신청인원: ${ apply.cookStatus }명</p>
 					</td>
-						<c:choose>
-							<c:when test="${apply.applyStatus.equals('000')}">
-								<td align="left">수강취소한 쿠킹클래스 입니다.</td>
-							</c:when>
-							<c:when test="${apply.applyStatus.equals('100')}">
-								<td align="left">현재 신청완료 상태 입니다.</td>
-							</c:when>
-							<c:when test="${apply.applyStatus.equals('200')}">
-								<td align="left">수강완료입니다.</td>
-							</c:when>
 
-						</c:choose>
 					 
 						<c:choose>
 							<c:when test="${apply.applyStatus.equals('200')}">
 								<td align="left" class="divy" value1="${apply.applyNo }"
-									value2="${apply.applyStatus}">수강완료 
-									<c:if test="${apply.reviewStatus.equals('001') }">
-					<a onclick="window.open('/review/addReview.jsp?category=COOK&textNo=${apply.applyNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">리뷰쓰기</a>					
-									</c:if></td>
+									value2="${apply.applyStatus}">수강중 
+							</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('100')}">
 								<td align="left" class="cancel" value1="${apply.applyNo }"
-									value2="${apply.applyStatus}">신청취소</td>
+									value2="${apply.applyStatus}"><p  class="status">신청완료</p><p class="cancel"  value1="${apply.applyNo }" value2="${apply.applyStatus}">신청취소</p></td>
 							</c:when>
-							<c:when test="${apply.applyStatus.equals('200')}">
-								<td align="left" class="complete">수강완료한 클래스입니다</td>
+							<c:when test="${apply.applyStatus.equals('000')}">
+								<td align="left" class="complete">수강취소완료</td>
 							</c:when>
+						<c:otherwise>
+							<td align="center"><p class="end status">수강완료</p></td>
+						</c:otherwise>							
 						</c:choose>
+
+							 <c:choose>
+							 	<c:when test="${apply.applyStatus.equals('300') && apply.reviewStatus.equals('001')}">
+							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo }">리뷰쓰기</button></td>
+							 	</c:when>
+							 	<c:otherwise>
+							 		
+							 	</c:otherwise>
+							 </c:choose>
 					 
 				</tr>	 
 					 
@@ -336,39 +335,35 @@ div.emptyProd{
 							<td align="left"  class="cookcontent">
 								<p class="cookName">${ cook.cookName }</p>
 								<p>${ apply.classCook.cookPrice }원</p>
-								<p>구매수량 ${ apply.cookStatus }개</p>
+								<p>신청인원 ${ apply.cookStatus }명</p>
 							</td>
-							
-						<c:choose>
-							<c:when test="${apply.applyStatus.equals('000')}">
-								<td align="left">수강취소한 쿠킹클래스 입니다.</td>
-							</c:when>
-							<c:when test="${apply.applyStatus.equals('100')}">
-								<td align="left">현재 신청완료 상태 입니다.</td>
-							</c:when>
-							<c:when test="${apply.applyStatus.equals('200')}">
-								<td align="left">수강완료입니다.</td>
-							</c:when>
-
-						</c:choose>
+	
 							 
 						<c:choose>
 							<c:when test="${apply.applyStatus.equals('200')}">
 								<td align="left" class="divy" value1="${apply.applyNo }"
-									value2="${apply.applyStatus}">수강완료 
-									<c:if test="${apply.reviewStatus.equals('001') }">
-					<a onclick="window.open('/review/addReview.jsp?category=COOK&textNo=${apply.classCook.cookNo }', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">리뷰쓰기</a>					
-									</c:if></td>
+									value2="${apply.applyStatus}">수강중 
+							</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('100')}">
 								<td align="left" class="cancel" value1="${apply.applyNo }"
-									value2="${apply.applyStatus}">신청취소</td>
+									value2="${apply.applyStatus}"><p  class="status">신청완료</p><p class="cancel"  value1="${apply.applyNo }" value2="${apply.applyStatus}">신청취소</p></td>
 							</c:when>
-							<c:when test="${apply.applyStatus.equals('200')}">
-								<td align="left" class="complete">수강완료한 클래스입니다</td>
+							<c:when test="${apply.applyStatus.equals('000')}">
+								<td align="left" class="complete">수강취소완료</td>
 							</c:when>
+						<c:otherwise>
+							<td align="center"><p class="end status">수강완료</p></td>
+						</c:otherwise>							
 						</c:choose>
-			  	
+							 <c:choose>
+							 	<c:when test="${apply.applyStatus.equals('300') && apply.reviewStatus.equals('001')}">
+							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo }">리뷰쓰기</button></td>
+							 	</c:when>
+							 	<c:otherwise>
+							 		
+							 	</c:otherwise>
+							 </c:choose>			  	
 						</tr>
 			  		</c:if>
 			  		
@@ -388,35 +383,32 @@ div.emptyProd{
 								<p>구매수량 ${ apply.cookStatus }개</p>
 							</td>
 						<c:choose>
-							<c:when test="${apply.applyStatus.equals('000')}">
-								<td align="left">수강취소한 쿠킹클래스 입니다.</td>
-							</c:when>
-							<c:when test="${apply.applyStatus.equals('100')}">
-								<td align="left">현재 신청완료 상태 입니다.</td>
-							</c:when>
-							<c:when test="${apply.applyStatus.equals('200')}">
-								<td align="left">수강완료입니다.</td>
-							</c:when>
-
-						</c:choose>
-
-							 
-						<c:choose>
 							<c:when test="${apply.applyStatus.equals('200')}">
 								<td align="left" class="divy" value1="${apply.applyNo }"
-									value2="${apply.applyStatus}">수강완료 
-									<c:if test="${apply.reviewStatus.equals('001') }">
-					<a onclick="window.open('/review/addReview.jsp?category=COOK&textNo=${apply.applyNo}', 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');">리뷰쓰기</a>					
-									</c:if></td>
+									value2="${apply.applyStatus}">수강중 
+							</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('100')}">
 								<td align="left" class="cancel" value1="${apply.applyNo }"
-									value2="${apply.applyStatus}">신청취소</td>
+									value2="${apply.applyStatus}"><p  class="status">신청완료</p><p class="cancel"  value1="${apply.applyNo }" value2="${apply.applyStatus}">신청취소</p></td>
 							</c:when>
-							<c:when test="${apply.applyStatus.equals('200')}">
-								<td align="left" class="complete">수강완료한 클래스입니다</td>
+							<c:when test="${apply.applyStatus.equals('000')}">
+								<td align="left" class="complete">수강취소완료</td>
 							</c:when>
+						<c:otherwise>
+							<td align="center"><p class="end status">수강완료</p></td>
+						</c:otherwise>							
 						</c:choose>
+							 <c:choose>
+							 	<c:when test="${apply.applyStatus.equals('300') && apply.reviewStatus.equals('001')}">
+							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo }">리뷰쓰기</button></td>
+							 	</c:when>
+							 	<c:otherwise>
+							 		
+							 	</c:otherwise>
+							 </c:choose>						
+						
+						
 						</tr>	
 			  		</c:if>
 				  	
