@@ -174,7 +174,7 @@ VALUES (seq_notice_notice_no.NEXTVAL, '식탁의 온도 코스닥 상장 안내'
 
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'user', '생강', '노맛', 'htm_20150402190451608.jpg', null, '중급', 'KO', 10, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'user', '생강', '노맛','노맛노맛노맛' ,'htm_20150402190451608.jpg', null, '중급', 'KO', 10, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -196,7 +196,7 @@ SELECT '냉이' AS ingredientName , '1개' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '달걀 만두', '만두에 달걀을', '6605dfaa474f5fb72d3ba125efe14db7.jpg', null, '초급', 'DES', 40, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '달걀 만두', '만두에 달걀을', '노맛노맛노맛' ,'6605dfaa474f5fb72d3ba125efe14db7.jpg', null, '초급', 'DES', 40, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -206,7 +206,7 @@ SELECT '달걀' AS ingredientName , '3개' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '대패삼겹살된장찌개', '삼겹살+된장찌개 이즈 굿', '7.PNG', null, '고급', 'JP', 85, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '대패삼겹살된장찌개', '삼겹살+된장찌개 이즈 굿','노맛노맛노맛' , '7.PNG', null, '고급', 'JP', 85, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -236,6 +236,10 @@ VALUES (seq_bookmark_no.nextval ,'10001' , 'user@naver.com');
 INSERT
 INTO review
 VALUES (seq_review_no.nextval  ,'COOK' , 'user', '아주 좋았습니다.', 'summerNotefa2fdebe-6d98-48a7-a5a3-c85a61a9092c.jpg', SYSDATE, NULL, NULL, 10000, '100');
+
+INSERT
+INTO review
+VALUES (seq_review_no.nextval  ,'REC' , 'user', '맛있어요', 'summerNotefa2fdebe-6d98-48a7-a5a3-c85a61a9092c.jpg', SYSDATE, 10001, NULL, NULL, '100');
 
 INSERT 
 INTO alarm (alarm_no, alarm_target, alarm_content, alarm_status, alarm_date)

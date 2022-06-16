@@ -34,10 +34,8 @@
 
 
     body {
-      font-family: 'Noto Sans KR', sans-serif;
       font-size: 0.9rem;
       line-height: 1rem;
-      color: #666;
       letter-spacing: 0.1px;
     }
 

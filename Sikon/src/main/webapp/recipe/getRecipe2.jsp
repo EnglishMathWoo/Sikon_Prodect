@@ -44,7 +44,8 @@
 
 <style>
 .btn-sm {
-	background-color: red;
+	background-color: #937062;
+	color: white;
 }
 
 @font-face {
@@ -448,18 +449,19 @@ body {
 				<br /> ${recipe.recipeOrder }
 			</div>
 			<hr />
-			<form enctype="multipart/form-data">
+		
 				<h3 class="iEJcKGheader">리뷰</h3>
+			<form id="comment" name="comment" method="post" enctype="multipart/form-data">
 
 				<div class="panel">
 					<div class="panel-body">
-						<textarea class="form-control" name="reviewContent" rows="2"
-							placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
+						<textarea class="form-control" name="reviewContent"
+							id="reviewContent" rows="2" placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
 						<div class="mar-top clearfix">
-							<button class="btn btn-sm btn-primary pull-right"  type="submit">
+							<button class="btn btn-sm  pull-right" type="submit">
 								<i class="fa fa-pencil fa-fw"></i>등록
 							</button>
-
+							<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
 
 							<div class="yes">
 								<span class="btn_upload"> <input multiple="multiple"
@@ -474,8 +476,11 @@ body {
 
 						</div>
 					</div>
-
-					<c:forEach var="review" items="${review}">
+				</div>
+			</form>
+			
+			
+			<c:forEach var="review" items="${review}">
 
 						<div class="panel">
 							<div class="panel-body">
@@ -523,13 +528,12 @@ body {
 
 
 				</div>
-			</form>
 		</div>
-	</div>
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 </body>
 
+<script>history.scrollRestoration = "auto"</script>
 <script type="text/javascript">
 	$(function() {
 
@@ -555,64 +559,95 @@ body {
 			
 		});
 
-		$(".deleteReview").on("click", function() {
-			var array = new Array();
-			var textNo = $("input:hidden[name='recipeNo']").val();
-			array.push($(this).attr('id'));
-			alert("해당 리뷰를 삭제하시겠습니까?")
-			self.location = "/review/deleteReview?textNo="+textNo+"checkList="+array;
-		});
-
-		$(document)
-				.on('click','.updateReview',function() {
-							//alert($(this).attr('id'))	
-							var reviewContent = $(this).attr('id');
-							var reviewNo = $("input:hidden[name='reviewNo']").val();
-							var imgreview = $("#imgreview").attr('id');
-							
-							if(imgreview=='undefined'){
-							$('#acontent').html(
-											"<img src='/resources/images/uploadFiles/"+imgreview+"' width='100' height='100'>"+
-											"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
-							}
-							else{
-								$('#acontent').html(
-										
-										"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
-								
-							}
-							
-							$('#abt').html("<div class='updateButton'> <input type='button'  value='수정' id='"+reviewNo+"'>"
-													+ "<input type='button' value='취소' ></div>");
-
-						});
-
-		function answerEditSave() {
-			console.log('이에옹');
-			var content = $("#updatecontent").val();
-			var reviewNo = $("input:hidden[name='reviewNo']").val();
-			location.href = '/review/updateReview?reviewNo=' + reviewNo;
-		}
-
+	
 
 	});
 
 	function fncAddReview() {
-		var textNo = $("input:hidden[name='recipeNo']").val();
-		console.log(textNo);
-		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action",	"/review/addReview?category=REC&textNo=" + textNo)
-				.submit();
-
+		event.preventDefault();
+		 var form = $('#comment')[0];  	    
+		    // Create an FormData object          
+		    var data = new FormData(form);  	   
+		    // disabled the submit button         
+		
+		var recipeNo = $("input:hidden[name='recipeNo']").val();
+		var reviewContent=$('#reviewContent').val();
 		var userId = $("input:hidden[name='userId']").val();
-		console.log(userId);
 		var userNickname = $("input:hidden[name='userNickname']").val();
 		console.log(userNickname);
-		var recipeNo = $("input:hidden[name='recipeNo']").val();
 		console.log(recipeNo);
+		console.log(userId);
+
+	     $.ajax({
+	            type : "POST",  
+	            url : "/review/json/addReview", 
+	            data : data,
+	            processData: false,    
+	            contentType: false,      
+	            cache: false,  
+	            error : function(request,status,error){
+	            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	            },
+	            success : function(request) {
+						alert("등록 성공");				           
+	                    location.reload();
+	    					
+	                    }
+	     
+	     });
+
 
 		pushAlarm(userId, userNickname, recipeNo);
 	}
 
+	$(".deleteReview").on("click", function() {
+		var reviewNo = $("input:hidden[name='reviewNo']").val();
+		alert("해당 리뷰를 삭제하시겠습니까?")
+
+		$.ajax({
+            type : "POST",  
+            url : "/review/json/deleteReview",       
+            data : {'reviewNo' : reviewNo },
+            error : function(request,status,error){
+            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success : function(request) {
+                
+					alert("삭제 성공~");				           
+                    location.reload();
+                    	
+    					
+                    }
+		
+	});
+	});
+	
+
+
+
+	$(document).on('click','.updateReview',function() {
+				//alert($(this).attr('id'))	
+				var reviewContent = $(this).attr('id');
+				var reviewNo = $("input:hidden[name='reviewNo']").val();
+				var imgreview = $("#imgreview").attr('id');
+				
+				if(imgreview=='undefined'){
+				$('#acontent').replaceWith(
+								"<img src='/resources/images/uploadFiles/"+imgreview+"' width='100' height='100'>"+
+								"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
+				}
+				else{
+					$('#acontent').replaceWith(
+							
+							"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
+					
+				}
+				
+				$('#abt').replaceWith("<div class='updateButton'> <input type='button'  value='수정' id='"+reviewNo+"'>"
+										+ "<input type='button' value='취소' ></div>");
+
+			});
+	
 	function readURL(input, imgControlName) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();

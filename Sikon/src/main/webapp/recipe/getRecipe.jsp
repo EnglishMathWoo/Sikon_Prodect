@@ -44,7 +44,7 @@
 
 <style>
 .btn-sm {
-	background-color: red;
+	color: #000;
 }
 
 @font-face {
@@ -315,11 +315,10 @@ body {
   border: none;
   width: 40px;
   height: 30px;
-  color: #fff;
+  color: #000;
   font-size: 15px;
   cursor: pointer;
   margin-bottom: 10px;
-  background: #d4af7a;
   float: right;
   	font-family: 'Gowun Batang', serif;
   
@@ -448,82 +447,105 @@ body {
 				<br /> ${recipe.recipeOrder }
 			</div>
 			<hr />
-
-
-			<h3 class="iEJcKGheader">리뷰</h3>
-			<div class="card" id="comments">
-			
-				<div class="card-body">
-					<!-- 댓글 작성 창 -->
-
-					<form enctype="multipart/form-data">
-						<div class="form-group">
-							<label>댓글 작성</label>
-							<textarea class="form-control" name="reviewContent" rows="2"
-							placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
-						</div>
-						
-						<input type="hidden" name="writerNickname" value="${user.userNickname }">
-						
-						<button type="button" class="btn btn-primary"
-							id="comment-create-btn">제출</button>
-					
 		
-					<!-- 댓글 목록 -->
-					<c:forEach var="review" items="${review}">
-					
-					<ul class="list-unstyled">
-						
-						<li class="media mt-4" id="comment-{{id}}">
-						<img src="https://api.adorable.io/avatars/64/{{author}}.png" class="mr-3" alt="avata">
-							<div class="media-body">
-							
-								<!-- 댓글 -->
-								<h5 class="mt-0 mb-1">
-									 <small> <!-- 부트스트랩 collapse 활용, https://getbootstrap.com/docs/4.5/components/collapse/ -->
-										<a href="#" class="comment-edit-btn" data-toggle="collapse"
-										data-target=".multi-collapse-{{id}}">수정</a>
-									</small>
-								</h5>
-								
-								<!-- 보기 모드 -->
-								<p class="collapse multi-collapse-{{id}} show">${review.reviewContent }</p>
-								
-								<!-- 수정 모드 -->
-									<div class="form-group">
-										<textarea class="form-control" id="comment-content" rows="3">${review.reviewContent }</textarea>
-										<input type="hidden" name="reviewContent" value="${review.reviewContent }">
-									</div>
-									<input type="hidden" id="comment-id" value="{{id}}"> 
-									<button type="button" class="btn btn-info comment-update-btn">수정
-										완료</button>
-							</div></li> 
-					</ul>
-					</c:forEach>
+				<h3 class="iEJcKGheader">리뷰</h3>
+			<form id="comment" name="comment" method="post" enctype="multipart/form-data">
+
+				<div class="panel">
+					<div class="panel-body">
+						<textarea class="form-control" name="reviewContent"
+							id="reviewContent" rows="2" placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
+						<div class="mar-top clearfix">
+							<button class="btn btn-sm  pull-right" type="submit">
+								등록
+							</button>
+							<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
+
+							<div class="yes">
+								<span class="btn_upload"> <input multiple="multiple"
+									type="file" id="reviewImg" name="fileArray" class="input-img" />
+									<i class="fa-solid fa-camera"></i>
+								</span> <img id="ImgPreview" name="reviewImg" src="" class="preview1" />
+								<input type="button" id="removeImage1" value="x"
+									class="btn-rmv1" />
+							</div>
+
+
+
+						</div>
+					</div>
 				</div>
-				
-			</div>
-
-
-			<!--===================================================-->
-
-
-
-
 			</form>
+			
+			
+			<c:forEach var="review" items="${review}">
+
+						<div class="panel">
+							<div class="panel-body">
+								<div class="media-block">
+									<a class="media-left" href="#"><img
+										class="img-circle img-sm" alt="Profile Picture"
+										src="/resources/images/168939.jpg"></a>
+									<div class="media-body">
+										<div class="mar-btm">
+											<a href="#"
+												class="btn-link text-semibold media-heading box-inline">${review.writerNickname }</a>
+											<p class="text-muted text-sm">
+												<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+													value="${review.reviewRegdate}" />
+
+											</p>
+										</div>
+										<input type="hidden" name="reviewNo"
+											value="${review.reviewNo }"> <br />
+										<br />
+										<c:if test="${review.reviewImg != null }">
+											<img id="${review.reviewImg }" src="/resources/images/uploadFiles/${review.reviewImg }"
+												width="200" height="200">
+										</c:if>
+										<p id="acontent">${review.reviewContent }</p>
+										<div id="abt">
+											<c:if test="${review.writerNickname == user.userNickname }">
+												<input type="button" class="deleteReview" value="&#xf2ed"
+													id="${review.reviewNo }"
+													style="float: right; margin-right: 17px">
+												<input type="button" class="updateReview"
+													id="${review.reviewContent }" value="&#xf304"
+													style="float: right; margin-right: 5px">
+											</c:if>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+
+					<!--===================================================-->
+
+
+
+
+				</div>
 		</div>
-	</div>
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 </body>
-<script type="text/javascript">
 
+<script>history.scrollRestoration = "auto"</script>
+<script type="text/javascript">
+	$(function() {
+
+		$("button:contains('등록')").on("click", function() {
+			fncAddReview();
+
+		});
+		
 		$(document).on('click','.update',function() {
 			var recipeNo = $("input:hidden[name='recipeNo']").val();
 			self.location ="/recipe/updateRecipe?recipeNo="+recipeNo
 			});
 		
-		$(document).on('click','.submit',function() {
+		$( "button:contains('삭제')" ).on("click" , function() {
 			var recipeNo = $("input:hidden[name='recipeNo']").val();
 
 		    var array = new Array();
@@ -534,35 +556,124 @@ body {
 			self.location = "/recipe/deleteRecipe?recipeList="+array;
 			
 		});
-		
-		
-		
-		//리뷰 등록&수정&삭제
-		$(document).on("click" ,"#comment-create-btn", function(){
-			var textNo = $("input:hidden[name='recipeNo']").val();
-			var writerNickname = $("input:hidden[name='writerNickname']").val();
-			var reviewContent  = $("input:hidden[name='reviewContent']").val();
 
-			$.ajax({
-				url : "/review/json/addReview",
-				type : 'POST',
-				dataType : "json",
-				data : {
-					'textNo' : textNo,
-					'writerNickname' : writerNickname,
-					'reviewContent' : reviewContent
-				},
-				async : false,
-				error : function() {
-					alert("통신 에러");
-				},
-				success : function(content) {
+	
 
-							alert(content);
-					}
-			})
+	});
+
+	function fncAddReview() {
+		event.preventDefault();
+		 var form = $('#comment')[0];  	    
+		    // Create an FormData object          
+		    var data = new FormData(form);  	   
+		    // disabled the submit button         
+		
+		var recipeNo = $("input:hidden[name='recipeNo']").val();
+		var reviewContent=$('#reviewContent').val();
+		var userId = $("input:hidden[name='userId']").val();
+		var userNickname = $("input:hidden[name='userNickname']").val();
+		console.log(userNickname);
+		console.log(recipeNo);
+		console.log(userId);
+
+	     $.ajax({
+	            type : "POST",  
+	            url : "/review/json/addReview", 
+	            data : data,
+	            processData: false,    
+	            contentType: false,      
+	            cache: false,  
+	            error : function(request,status,error){
+	            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	            },
+	            success : function(request) {
+						alert("등록 성공");				           
+	                    location.reload();
+	    					
+	                    }
+	     
+	     });
+
+
+		pushAlarm(userId, userNickname, recipeNo);
+	}
+
+	$(".deleteReview").on("click", function() {
+		var reviewNo = $("input:hidden[name='reviewNo']").val();
+		alert("해당 리뷰를 삭제하시겠습니까?")
+
+		$.ajax({
+            type : "POST",  
+            url : "/review/json/deleteReview",       
+            data : {'reviewNo' : reviewNo },
+            error : function(request,status,error){
+            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success : function(request) {
+                
+					alert("삭제 성공~");				           
+                    location.reload();
+                    	
+    					
+                    }
+		
+	});
 	});
 	
+
+
+
+	$(document).on('click','.updateReview',function() {
+				//alert($(this).attr('id'))	
+				var reviewContent = $(this).attr('id');
+				var reviewNo = $("input:hidden[name='reviewNo']").val();
+				var imgreview = $("#imgreview").attr('id');
+				
+				if(imgreview=='undefined'){
+				$('#acontent').replaceWith(
+								"<img src='/resources/images/uploadFiles/"+imgreview+"' width='100' height='100'>"+
+								"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
+				}
+				else{
+					$('#acontent').replaceWith(
+							
+							"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
+					
+				}
+				
+				$('#abt').replaceWith("<div class='updateButton'> <input type='button'  value='수정' id='"+reviewNo+"'>"
+										+ "<input type='button' value='취소' ></div>");
+
+			});
+	
+	function readURL(input, imgControlName) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$(imgControlName).attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$("#reviewImg").change(function() {
+		// add your logic to decide which image control you'll use
+		var imgControlName = "#ImgPreview";
+		readURL(this, imgControlName);
+		$('.preview1').addClass('it');
+		$('.btn-rmv1').addClass('rmv');
+	});
+
+	$("#removeImage1").click(function(e) {
+		e.preventDefault();
+		$("#imag").val("");
+		$("#ImgPreview").attr("src", "");
+		$('.preview1').removeClass('it');
+		$('.btn-rmv1').removeClass('rmv');
+	});
+	
+	
+
 	//리뷰 push 알림
 	function pushAlarm(userId, userNickname, recipeNo) {
 
@@ -596,47 +707,51 @@ body {
 			}
 		})
 	};
+	
+		
 
-	//책갈피 등록&삭제
-	$(document).on("click", "#bookmarkBtn", function() {
-		var recipeNo = $("input:hidden[name='recipeNo']").val();
-		var userId = $("input:hidden[name='userId']").val();
-		console.log(recipeNo);
-		console.log(userId);
+	
+		$(document).on("click" ,"#bookmarkBtn", function(){
+			var recipeNo = $("input:hidden[name='recipeNo']").val();
+			var userId = $("input:hidden[name='userId']").val();
+			console.log(recipeNo);
+			console.log(userId);
 
-		$.ajax({
-			type : "POST",
-			url : "/recipe/json/updateBookmark",
-			dataType : "json",
-			data : {
-				'recipeNo' : recipeNo,
-				'userId' : userId
-			},
-			error : function() {
-				alert("통신 에러");
-			},
-			success : function(bookmarkStatus) {
-
-				if (bookmarkStatus == 0) {
-					alert("북마크 성공");
-
-					$("#bookmarkBtn").removeClass('bi-bookmark');
-					$("#bookmarkBtn").addClass('bi-bookmark-plus');
-
-					location.reload();
-
-				} else if (bookmarkStatus == 1) {
-					alert("북마크 취소");
-
-					$("#bookmarkBtn").removeClass('bi-bookmark-plus');
-					$("#bookmarkBtn").addClass('bi-bookmark');
-
-					location.reload();
-				}
-
-			}
-		})
-	});
+		     $.ajax({
+		            type : "POST",  
+		            url : "/recipe/json/updateBookmark",       
+		            dataType : "json",   
+		            data : {'recipeNo' : recipeNo, 'userId' : userId },
+		            error : function(){
+		               alert("통신 에러");
+		            },
+		            success : function(bookmarkStatus) {
+		                
+		                    if(bookmarkStatus == 0){
+		                    	alert("북마크 성공");
+		                    	                    	
+		                    							           
+		                    $("#bookmarkBtn").removeClass('bi-bookmark');
+					        $("#bookmarkBtn").addClass('bi-bookmark-plus');
+					           
+		                    location.reload();
+		                    	
+		    					
+		                    }
+		                    else if (bookmarkStatus == 1){
+		                     alert("북마크 취소");
+		                     
+		                     	$("#bookmarkBtn").removeClass('bi-bookmark-plus');
+					            $("#bookmarkBtn").addClass('bi-bookmark');
+					         
+		                  
+		                    	location.reload();
+		                }
+		                    
+		                    
+		            }
+		        })
+		 });
 </script>
 
 

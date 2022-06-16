@@ -1,7 +1,6 @@
 package com.sikon.web.review;
 
 import java.io.File;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,25 +14,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.sikon.common.Page;
-import com.sikon.common.Search;
-import com.sikon.service.cook.CookService;
-import com.sikon.service.domain.Cook;
-import com.sikon.service.domain.Point;
-import com.sikon.service.domain.Product;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.Review;
 import com.sikon.service.domain.User;
-import com.sikon.service.point.PointService;
-import com.sikon.service.product.ProductService;
 import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.review.ReviewService;
 import com.sikon.service.user.UserService;
 
-@Controller
+@RestController
 @RequestMapping("/review/*")
 public class ReviewRestController {
 
@@ -64,21 +55,42 @@ public class ReviewRestController {
 	@Value("#{commonProperties['filepath']}")
 	String filePath;
 
-	@RequestMapping(value = "json/addReview", method = RequestMethod.POST)
-	public String addReview(@RequestParam("writerNickname") String writerNickname,@RequestParam("reviewContent") String reviewContent,
-			@RequestParam("textNo") int textNo, Model model) throws Exception {
-
-		System.out.println("/review/addReview : POST");
-		System.out.println("review="+reviewContent);
-		System.out.println("writerNickname="+writerNickname);
-		System.out.println("textNo="+textNo);
+	@RequestMapping(value = "/json/addReview", method = RequestMethod.POST)
+	public String addReview(@RequestParam("fileArray") MultipartFile[] fileArray,HttpServletRequest request,@ModelAttribute("review") Review review,
+			@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
 		
-		Recipe recipe = recipeService.getRecipeName(textNo);
-		Review review=new Review();
+		System.out.println("/review/addReview : POST");
+		System.out.println(fileArray[0]);
+		System.out.println("review="+review);
+		System.out.println("textNo="+recipeNo);
+		
+		Recipe recipe = recipeService.getRecipeName(recipeNo);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+
+		String FILE_SERVER_PATH = filePath;
+		String newFileName = "";
+
+		for (int i = 0; i < fileArray.length; i++) {
+
+			if (!fileArray[i].getOriginalFilename().isEmpty()) {
+				fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
+				model.addAttribute("msg", "File uploaded successfully.");
+
+			} else {
+				model.addAttribute("msg", "Please select a valid mediaFile..");
+			}
+
+			newFileName += fileArray[i].getOriginalFilename();
+
+		}
+
+		review.setReviewImg(newFileName);
 		
 		review.setRecipe(recipe);
-		review.setReviewContent(reviewContent);
-		review.setWriterNickname(writerNickname);
+		review.setReviewContent(review.getReviewContent());
+		review.setWriterNickname(user.getUserNickname());
 		review.setReviewCategory("REC");
 
 		System.out.println("¸®ºä:" + review);
@@ -153,21 +165,13 @@ public class ReviewRestController {
 //		return modelAndView;
 //	}
 //
-//	// ¸®ºä ¼±ÅÃ »èÁ¦
-//	@RequestMapping(value = "deleteReview")
-//	public String deleteReview(@RequestParam("checkList") int[] reviewList) throws Exception {
-//
-//		System.out.println("/review/deleteReview : POST");
-//
-//		for (int i = 0; i < reviewList.length; i++) {
-//			System.out.println(reviewList[i]);
-//		}
-//
-//		for (int i = 0; i < reviewList.length; i++) {
-//			reviewService.deleteReview(reviewList[i]);
-//		}
-//
-//		return "redirect:/review/listMyReview";
-//
-//	}
+	// ¸®ºä »èÁ¦
+	@RequestMapping(value = "/json/deleteReview")
+	public void deleteReview(@RequestParam("reviewNo") int reviewNo) throws Exception {
+
+		System.out.println("/review/deleteReview °¡º¸ÀÚ°í : POST");
+
+			reviewService.deleteReview(reviewNo);
+
+	}
 }
