@@ -193,7 +193,8 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public String findUserId(String userName, String phone) throws Exception {
-		
+		System.out.println("userName="+userName);
+		 System.out.println("phone="+phone);
 		String result = "";
 		
 		try {
@@ -201,7 +202,8 @@ public class UserServiceImpl implements UserService{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println("userName="+userName);
+		 System.out.println("phone="+phone);
 		
 		return result;
 	}

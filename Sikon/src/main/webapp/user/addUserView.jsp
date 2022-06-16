@@ -128,6 +128,63 @@
 			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 		}
 		
+		//이메일 인증        
+		$(function() {       
+		  
+		   var code = "";
+		     $("#emailChk").click(function(){
+		    	
+		     	var userId = $('#userId').val();
+		     	console.log(userId);
+		     	
+		     	
+		     	
+		       	$.ajax({
+		                type:"GET",
+		                url:"./json/mailCheck?userId=" +userId,
+		                cache : false,
+		                success:function(data){ console.log(data);
+		                	if(data == "error"){
+		                		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
+		        				$("#userId").attr("autofocus",true);
+		        				$(".successEmailChk").text("유효한 이메일 주소를 입력해주세요.");
+		        				$(".successEmailChk").css("color","red");
+		                	}else{	        		
+		        				alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
+		                		$("#sm_email2").attr("disabled",false);
+		                		$("#emailChk2").css("display","inline-block");
+		                		$(".successEmailChk").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
+		                		$(".successEmailChk").css("color","green");
+		                		code = data;
+		                	}
+		                }
+		            });
+		     	
+		     	
+		     	
+		        });
+		     
+		   
+		   //이메일 인증번호 대조
+		     $("#emailChk2").click(function(){
+		     	if($("#sm_email2").val() == code){
+		     		$(".successEmailChk").text("인증번호가 일치합니다.");
+		     		$(".successEmailChk").css("color","green");
+		     		$("#emailDoubleChk").val("true");
+		     		$("#sm_email2").attr("disabled",true);
+		     		//$("#userId").attr("disabled",true);
+		     	}else{
+		     		$(".successEmailChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
+		     		$(".successEmailChk").css("color","red");
+		     		$("#emailDoubleChk").val("false");
+		     		$("#sm_email2").attr("autofocus",true);
+		     	}
+		     });
+		        
+		});	
+		
+	
+	
 		// 아이디 중복체크
 		function checkId(){
 	        var userId = $('#userId').val(); //id값이 "id"인 입력란의 값을 저장
@@ -138,13 +195,14 @@
 	            type:'post', //POST 방식으로 전달
 	            data:{userId:userId},
 	            success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
-	                if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+	            	console.log(cnt);
+	                if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디  
 	                    $('.id_ok').css("display","inline-block"); 
 	                    $('.id_already').css("display", "none");
 	                } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
 	                    $('.id_already').css("display","inline-block");
 	                    $('.id_ok').css("display", "none");
-	                    alert("아이디를 다시 입력해주세요");
+	                 //   alert("아이디를 다시 입력해주세요");
 	                 //   $('#userId').val('');
 	                }
 	            },
@@ -166,8 +224,9 @@
 			     }
 			});
 			 
-		});	
+		});
 		
+		// 닉네임 유효성체크 
 		 function checkNickname(){
 		        var userNickname = $('#userNickname').val(); //닉네임값이 "userNickname"인 입력란의 값을 저장
 		        console.log(userNickname);
@@ -192,59 +251,7 @@
 		            }
 		        });
 		        };
-		        
-		$(function() {       
-		  //이메일 인증
-		   var code = "";
-		     $("#emailChk").click(function(){
-		    	console.log(userId);
-		     	var userId = $("#userId").val();
-		     	console.log(userId);
-		     	
-		     	///*
-		     	
-		       	$.ajax({
-		                type:"GET",
-		                url:"./json/mailCheck?userId=" +userId,
-		                cache : false,
-		                success:function(data){
-		                	if(data == "error"){
-		                		alert("이메일 주소가 올바르지 않습니다. 유효한 이메일 주소를 입력해주세요.");
-		        				$("#userId").attr("autofocus",true);
-		        				$(".successEmailChk").text("유효한 이메일 주소를 입력해주세요.");
-		        				$(".successEmailChk").css("color","red");
-		                	}else{	        		
-		        				alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
-		                		$("#sm_email2").attr("disabled",false);
-		                		$("#emailChk2").css("display","inline-block");
-		                		$(".successEmailChk").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
-		                		$(".successEmailChk").css("color","green");
-		                		code = data;
-		                	}
-		                }
-		            });
-		     	
-		     	//*/
-		     	
-		        });
-		});	     
-		   
-		   //이메일 인증번호 대조
-		     $("#emailChk2").click(function(){
-		     	if($("#sm_email2").val() == code){
-		     		$(".successEmailChk").text("인증번호가 일치합니다.");
-		     		$(".successEmailChk").css("color","green");
-		     		$("#emailDoubleChk").val("true");
-		     		$("#sm_email2").attr("disabled",true);
-		     		//$("#userId").attr("disabled",true);
-		     	}else{
-		     		$(".successEmailChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
-		     		$(".successEmailChk").css("color","red");
-		     		$("#emailDoubleChk").val("false");
-		     		$("#sm_email2").attr("autofocus",true);
-		     	}
-		     });
-		        
+		      
 		        
 		        
 		// 생년월일
@@ -351,26 +358,36 @@
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" enctype="multipart/form-data">
-		 <div class="email">
+		 
 		   <div class="form-group">
 		   
 		  
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디(이메일)</label>
 		 
-		    <div class="col-sm-4">
+		    <div class="col-sm-5">
+		     <div class="col-sm-8" style="display: inline-block">
 		      <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" oninput = "checkId()" >
-		      <button type="button" id="emailChk" class="doubleChk" style="float: right;">인증번호 보내기</button><br/>
-		      
-		      <input type="text" class="form-control" id="sm_email2" name="sm_email2" placeholder="인증번호 입력" disabled required>
-		      <span id="emailChk2" class="doubleChk" style="float: right;">이메일인증</span>
-		      <span class="point successEmailChk">이메일 입력후 인증번호 보내기를 해주십시오.</span>
-		     		      
+		     </div> 
+		      <button type="button" id="emailChk" class="doubleChk" >인증번호 보내기</button><br/>
+		     
+		     <div style="display: inline-block"> 
 		      <span id="helpBlock" class="id_ok">사용 가능한 아이디입니다.</span>
 			  <span id="helpBlock" class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
+			 </div>
+			  
+		    <div class="col-sm-8" style="display: inline-block">  
+		      <input type="text" class="form-control" id="sm_email2" name="sm_email2" placeholder="인증번호 입력" disabled required>
+		    </div>
+		      <button type="button" id="emailChk2" class="doubleChk" style="float: left;" >이메일인증</button>
+		      
+		    <div style="display: inline-block">
+		      <span class="point successEmailChk">이메일 입력후 인증번호 보내기를 해주십시오.</span> 
+		    </div> 		      
+		      
 			</div>
 		
-		  </div>
-		</div>  
+		    </div>
+		 
 		  <div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
 		    <div class="col-sm-4">
