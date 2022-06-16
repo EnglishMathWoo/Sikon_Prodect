@@ -173,6 +173,34 @@ margin-left: 60px;
 .mar-top {
     margin-top: 15px;
 }
+
+
+.btn-w {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+  width:40%;
+  font-size: large;
+}
+.btn-w:hover {
+  background-color: #e7e2e2;
+}
+
+
+.btn-b {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+  width:40%;
+  font-size: large;
+}
+.btn-b:hover {
+  background-color: #937062d4;
+}
 </style>
 <style>
 
@@ -228,7 +256,7 @@ div.image{
 			 self.location = "/cook/listCook?menu=search"
 		}); 
 		 
-		 $( "button.btn-warning" ).on("click" , function() {
+		 $( ".addPurchase" ).on("click" , function() {
 			 var quantity = $('#quantity').val();
 			 self.location = "/apply/addApply?menu=${param.menu}&cookNo=${cook.cookNo}"
 		});
@@ -238,7 +266,7 @@ div.image{
 		}); 		 
 
 		 
-		 $( "button.btn-primary" ).on("click" , function() {
+		 $( ".updateCook" ).on("click" , function() {
 			 var cookNo = $('#cookNo').val();
 			 self.location = "/cook/updateCook?cookNo="+cookNo
 		});
@@ -339,8 +367,9 @@ $(function() {
 					
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
 				
-					<div>${cook.cookBrief }</div>
-					<br/>
+					<div><strong>${cook.cookBrief }</strong></div>
+						<br/>
+
 					<div  id="listMyCook"><h5><strong>쿠킹멘토 ${cook.mentor.userNickname }</strong></h5></div>
 					
 					
@@ -350,7 +379,7 @@ $(function() {
 					
 				</div>
 				
-				<br/><br/>
+				<br/>
 				
 				
 				
@@ -401,14 +430,18 @@ $(function() {
 				
 				
 				<div class="form-group">
-			  		<div class="text-center">	
+			  		<div class="text-right">	
 			  			
-			  				<button type="button" class="btn btn-warning btn-lg" id="buy" >구매하기</button>
-			  			
-			  				<button type="button" class="btn btn-primary btn-lg" id="buy" >수정하기</button>
+			  				<button type="button" class="btn-b addPurchase" id="buy" >신청하기</button>
 			  				
-			  			
 			  				
+			  			<c:if test="${sessionScope.user.role == 'mentor'}">
+			  				<button type="button" class="btn-w updateCook"  >수정하기</button>
+			  			  </c:if>	
+			  			
+				  			<c:if test="${sessionScope.user.role == 'admin'}">
+			  				<button type="button" class="btn-w updateCook"  >수정하기</button>
+			  			  </c:if>			  				
 			  		</div>
 				</div>
 		
@@ -430,7 +463,12 @@ $(function() {
         </a>
     </em>
 </p>
+
+<div class="row text-center"><h5><strong>쿠킹클래스 장소</strong></h5>
 <div id="map" style="width:1100px;height:500px; text-align: center; margin:36px auto;" ></div>
+</div>
+	<hr/>
+	<br/>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bdc66313a731d6cd370ddce26735db6a&libraries=services"></script>
 <script>
@@ -472,8 +510,20 @@ geocoder.addressSearch(cookLocation, function(result, status) {
     } 
 });    
 </script>
-			<div><strong>${cook.cookContent}</strong></div>
-		
+			<div><h4><strong>클래스 정보</strong></h4> 
+			
+				
+				</br>
+					</br>
+			<div>
+			
+			${cook.cookContent}
+			</div>
+			
+			</div>
+					 
+	
+				
 			<h4 class="reviewHeader">리뷰</h4>
 			
 			<c:forEach var="review" items="${review}">

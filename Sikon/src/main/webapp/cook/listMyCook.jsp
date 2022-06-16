@@ -38,128 +38,12 @@
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
-<style>
-body {
-    background-color: #F7F7F7;
-}
-
-#logo a{
-	font-family: 'Gowun Batang', serif;
-
-}
-
-.padding {
-    padding: 3rem !important;
-    margin-left: 200px;
-}
-
-.card-img-top{
-    height:300px;
-    width: 1140px;
-    
-}
-
-
-
-.card-no-border .card {
-    border-color: #d7dfe3;
-    border-radius: 4px;
-    margin-bottom: 30px;
-    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
-    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
-}
-
-.card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 1.25rem
-}
-
-.pro-img {
-    margin-top: -80px;
-    margin-bottom: 20px
-}
-
-.little-profile .pro-img img {
-    width: 128px;
-    height: 128px;
-    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    border-radius: 100%
-}
-
-html body .m-b-0 {
-    margin-bottom: 0px
-}
-
-h3 {
-    line-height: 30px;
-    font-size: 21px
-}
-
-.btn-rounded.btn-md {
-    padding: 12px 35px;
-    font-size: 16px
-}
-
-html body .m-t-10 {
-    margin-top: 10px
-}
-
-.btn-primary,
-.btn-primary.disabled {
-    background: #7460ee;
-    border: 1px solid #7460ee;
-    -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
-    box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
-    -webkit-transition: 0.2s ease-in;
-    -o-transition: 0.2s ease-in;
-    transition: 0.2s ease-in
-}
-
-.btn-rounded {
-    border-radius: 60px;
-    padding: 7px 18px
-}
-
-.m-t-20 {
-    margin-top: 20px
-}
-
-.text-center {
-    text-align: center !important
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: #455a64;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400
-}
-
-p {
-    margin-top: 0;
-    margin-bottom: 1rem
-}
-
-.padding{
-padding-top:120px;
-}
-
-.col-md-8{
-padding-top:100px;
-}
-</style>
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 
 
-.channel {
-	padding-top: 200px;
+.container {
+	padding-top: 150px;
 } 
 </style>
 
@@ -300,13 +184,7 @@ p {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-	function fncGetList(currentPage) {
-		$("#currentPage").val(currentPage);
-		console.log(currentPage);
-		$("form").attr("method" , "POST").attr("action" , "/cook/mentor").submit();
-		
-	}
-
+	
 		 
 		 $(function() {
 			
@@ -315,77 +193,81 @@ p {
 					self.location ="/cook/getCook?cookNo="+$(this).attr("value")+"&menu=search"
 					});
 					
-
-					
-					$("#addLove").on("click", function() {
-						var userNickname = $("input:hidden[name='userNickname']").val();
-						//console.log(recipeNo);
-							self.location = "/love/addLove?userNickname="+userNickname;
-						});					
-					
 		 });
 		 
-		 $(function() {
-		   	 $(window).scroll(function() {
-	                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
-	                	
-	                	var cpage = $("#currentPage").val();
-	                	cpage = Number(cpage)+1;
-	                	console.log(cpage);
+		 $( document ).ready(function() {
+				
+		
 
-	        	   		
-	        	   		
-				            $.ajax({
-				                
-				                  url : "/cook/json/listMyCook" ,
-				                  method : "POST" ,
-				                  data : JSON.stringify({
-				                	  currentPage : cpage
+ //==================================================================================///	
 
-				                  }), 
-				                  dataType : "json" ,
-				                  headers : {
-				                     "Accept" : "application/json",
-				                     "Content-Type" : "application/json"
-				                  },
-				                success : function(JSONData , status) {
-				                	 
-				                	$("#currentPage").val(cpage)
-				                	console.log(JSONData.list[0].recipeName);
-				                	console.log(JSONData.list[0].recipeImg);
-					                	 
-				                	for(var i=0; i<JSONData.list.length; i++){
-				                
-					                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
-					                     					+"<div id='latest' class='group'>"
-					                     					+"<article class='one_third first'>"
-					                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
-					                     					+"<div class='shape1'>"+[i+5]+"</div>"
-					                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'></a>"
-				                     						+"<div class='excerpt'>"
-				                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
-				                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
-				                     						+"<ul class='meta'>"
-				                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
-				                     			            +"<li>&nbsp;"+ JSONData.list[i].recipeDifficulty +"</li>"
-				                     			            +"<li>&nbsp;"+ JSONData.list[i].cookingTime +"분</li>"
-				                     			            +"<li>&nbsp;"+ JSONData.list[i].writer.userNickname +"</li>"
-				                     			          	+"<li style='float:right'>조회수: "+ JSONData.list[i].recipeViews +"</li>"
-				                     						+"</ul></div></article></div></div>"
-				                     						
-				                     						
-					               	$( '#scrollList' ).append(displayValue);	
-				                     						
-				                     						 		
-				                    						
-				                     						
-				                	}//for 
-				                 }
-				            });//ajax
-				           
-	                }//if
-	            });//function
-		 });		 
+ 
+				 $(document).on('click', '#image', function(){
+					 var cookNo =$(this).attr("value");
+					 console.log('썸네일 클릭'+cookNo);
+					 self.location = "/cook/getCook?menu=search&cookNo="+cookNo
+				}); 
+
+	   	 $(window).scroll(function() {
+             if($(window).scrollTop() == $(document).height() - $(window).height()) { 
+             	
+             	var cpage = $("#currentPage").val();
+             	console.log("cpage1: "+cpage);
+             	cpage = Number(cpage)+1;
+             	console.log("cpage2: "+cpage);
+
+     	   		
+     	   		
+			            $.ajax({
+			                
+			                  url : "/cook/json/listMyCook",
+			                  method : "POST" ,
+			                  data : JSON.stringify({
+			                	  currentPage : cpage
+			                  }), 
+			                  dataType : "json" ,
+			                  headers : {
+			                     "Accept" : "application/json",
+			                     "Content-Type" : "application/json"
+			                  },
+			                success : function(JSONData , status) {
+			                	 
+			                	$("#currentPage").val(cpage)
+							
+				               
+			                	for(var i=0; i<JSONData.list.length; i++){
+			                		
+			                		
+			                		
+	
+			                
+				                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
+				                     					+"<div id='latest' class='group'>"
+				                     					+"<article class='one_third first'>"				                     									                     				
+				                     					+"<a class='imgover' value='"+JSONData.list[i].cookNo+"' ><img src='/resources/images/uploadFiles/"+JSONData.list[i].cookFilename.split('/')[0]+"' id='image' value='"+JSONData.list[i].cookNo+"' width='320' height='300'></a>"
+			                     						+"<div class='excerpt'>"
+			                     						+"<h4 class='heading' >"+JSONData.list[i].cookName+"</h4>"
+			                     						+"<h6>"+JSONData.list[i].cookBrief+"</h6>"				                     						
+			                     						+"<ul class='meta'>"
+			                     			            +"<li>"+ JSONData.list[i].cookBrief +"</li>"
+			                     			            +"<li>&nbsp;"+ JSONData.list[i].cookRecruit +"</li>"
+			                     			            +"<li>&nbsp;"+ JSONData.list[i].cookTheme +"</li>"				                     			           				                     			          	
+			                     						+"</ul></div></article></div></div>"
+			                     						
+			                     						
+				               	$( '#scrollList' ).append(displayValue);	
+			                     						
+			                     						 		
+			                    						
+			                     						
+			                	}//for 
+			                 }
+			            });//ajax
+			           
+             }//if
+         });//function
+
+});		 
 					
 </script>
 			 </head>
@@ -393,42 +275,30 @@ p {
 <body>
 
 	
-
+	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-
-
-<div class="container channel">	
-
-	 <input type="hidden" id="currentPage" name="currentPage" value=""/>
-
-        <div class="card "> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
-            <div class="card-body little-profile text-center">
-                <div class="pro-img"><img src="/resources/images/uploadFiles/kim3.jpg" alt="user"></div>
-                <h3 class="m-b-0">${user.userNickname}의 쿠킹클래스</h3>             
-
-            </div>
-        </div>
-				<input type="hidden" name="userNickname" id="userNickname" value="${user.userNickname }" />
-
+   	<!-- ToolBar End /////////////////////////////////////-->
+	
+	<!--  화면구성 div Start /////////////////////////////////////-->
+	
+<div class="container">
+<!-- ################################################################################################ -->
 
 	<div class="wrapper row3">
-
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
-
+		    <br/>
+		      <h3 class="font-x2 nospace" align="center"><br>  ${user.userNickname }의 쿠킹클래스 </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
-		    
-		    <i id="addLove"  class="fa-regular fa-bookmark fa-2x"></i>
 		  		    <button type="button" class="submit">삭제</button>
-		  		
 		  
 		    
 		    <br/><hr/><br/>
     </section>
   	</div>
  
-
+ <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
 <div class="row">
 	<c:set var="i" value="0" />
@@ -438,17 +308,33 @@ p {
   
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${cook.cookNo }" href="#"> 
-      <ul>
-  <li>
-  <img src="/resources/images/uploadFiles/${cook.cookFilename }" width="320" height="300"></li></ul></a>
+     
+ 
+  <img src="/resources/images/uploadFiles/${cook.cookFilename }" id="image" width="320" height="300"></a>
         <div class="excerpt">
           <h4 class="heading" >${cook.cookName }</h4>
            <h6 >${cook.cookBrief }</h6>
-          <ul class="meta">
-            <li > ${cook.cookBrief }</li>
-            <li>${cook.cookRecruit }</li>
-            <li>${cook.cookTheme }</li>
-            <li> ${cook.mentor.userNickname }</li>
+          <ul class="meta">           
+            <li>모집인원 :${cook.cookRecruit }</li>
+            <li>
+			<c:if test = "${cook.cookTheme =='KO'}">
+			 테마 : 한식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'JA'}">
+			 테마 : 일식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'AM'}">
+			테마 : 양식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'CH'}">
+			테마 : 중식
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'DE'}">
+			 테마 : 간식
+			</c:if>		
+
+		</li>
+          
           </ul>
         </div>
       </article>
@@ -457,17 +343,13 @@ p {
     <!-- ################################################################################################ -->
   </div>
   </c:forEach>
-  
-   <div  id="scrollList"></div>
+     <div  id="scrollList"></div>
+     
 </div>
+	  </div>
 	  
 	  
-<c:if test="${empty list}">
-      	<h3 align="center" >등록한 쿠킹클래스가 없습니다.</h3>
-      	<br>
-     </c:if>	
-     </div>  
-	     <jsp:include page="../common/pageNavigator_new.jsp"/>
+	  
 	  
 </body>
 

@@ -55,7 +55,19 @@ div.row{
  input[type="checkbox"]:checked{
  	background: #bc8f8f;
  }
-
+ 
+.btn-b {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+  width:40%;
+  font-size: large;
+}
+.btn-b:hover {
+  background-color: #937062d4;
+}
 </style>
 
 <style>
@@ -159,7 +171,7 @@ div.row{
 		 
 		 
 			 
-			 $( "button:contains('구매')" ).on("click" , function() {
+			 $( ".addPurchase" ).on("click" , function() {
 				 console.log('구매');
 				 
 				 $("form").attr("method" , "GET").attr("action" , "/apply/addApply").submit();
@@ -267,7 +279,7 @@ div.row{
 	  
 	  <div align="right">
 	 	 
-	  	<button class="btn btn-primary btn-sm">구매하기</button>
+	  		<button type="button" class="btn-b addPurchase" id="buy" >신청하기</button>
 	  </div>
 	  
  	</div>

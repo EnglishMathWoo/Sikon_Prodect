@@ -213,9 +213,9 @@ div.emptyProd{
 			
 
 				  
-	   			<td class="col-md-6 text-right">
+	   			<td class="col-md-12 text-right">
 				  <div class="form-group">
-						<select name="searchCondition" id="searchCondition" class="form-control" style="width:110px">
+						<select name="searchCondition" id="searchCondition" class="form-control" style="width:150px">
 						 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>쿠킹클래스번호</option>
 							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>쿠킹클래스명</option>
 							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>쿠킹클래스가격</option>

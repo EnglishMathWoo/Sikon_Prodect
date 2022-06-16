@@ -76,17 +76,17 @@ public class WishController {
 		return "forward:/wish/listWish.jsp";
 	}
 	
-	@RequestMapping("updateWish")
-	public String updateWish( @RequestParam("wishNo") int wishNo, @RequestParam("cookStatus") int cookStatus, Model model, HttpSession session) throws Exception{
-		
-		System.out.println("/updateWish");
-		
-		User user = (User) session.getAttribute("user");
-		wishService.updateWish(wishNo,cookStatus);
-		
-		
-		return "redirect:/wish/getWish?userId="+user.getUserId();
-	}
+//	@RequestMapping("updateWish")
+//	public String updateWish( @RequestParam("wishNo") int wishNo, @RequestParam("cookStatus") int cookStatus, Model model, HttpSession session) throws Exception{
+//		
+//		System.out.println("/updateWish");
+//		
+//		User user = (User) session.getAttribute("user");
+//		wishService.updateWish(wishNo,cookStatus);
+//		
+//		
+//		return "redirect:/wish/getWish?userId="+user.getUserId();
+//	}
 	
 	@RequestMapping("deleteWish")
 	public String deleteWish( @RequestParam("wishNo") int wishNo, Model model, HttpSession session) throws Exception{
