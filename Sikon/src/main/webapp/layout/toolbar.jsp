@@ -496,7 +496,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			        </td>
 			        
 			        <td class="user-td">
-			        &emsp;${user.userNickname}&nbsp;ดิ&nbsp;
+			        &emsp;${sessionScope.user.userNickname}&nbsp;ดิ&nbsp;
 					</td>
 					  
 	    </c:if>

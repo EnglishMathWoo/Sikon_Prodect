@@ -1,7 +1,6 @@
 package com.sikon.web.review;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +22,12 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.cook.CookService;
 import com.sikon.service.domain.Cook;
+import com.sikon.service.domain.Point;
 import com.sikon.service.domain.Product;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.Review;
 import com.sikon.service.domain.User;
+import com.sikon.service.point.PointService;
 import com.sikon.service.product.ProductService;
 import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.review.ReviewService;
@@ -40,6 +41,10 @@ public class ReviewController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+
+	@Autowired
+	@Qualifier("pointServiceImpl")
+	private PointService pointService;
 
 	@Autowired
 	@Qualifier("cookServiceImpl")
@@ -66,14 +71,15 @@ public class ReviewController {
 
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
-	
+
 	@Value("#{commonProperties['filepath']}")
 	String filePath;
 
 	@RequestMapping(value = "addReview", method = RequestMethod.POST)
-	public ModelAndView addReview(@RequestParam("fileArray") MultipartFile[] fileArray, @ModelAttribute("review") Review review, @RequestParam("category") String category,
+	public ModelAndView addReview(@RequestParam("fileArray") MultipartFile[] fileArray,
+			@ModelAttribute("review") Review review, @RequestParam("category") String category,
 			@RequestParam("textNo") int textNo, Model model, HttpServletRequest request) throws Exception {
-		
+
 		System.out.println("/review/addReview : POST");
 		System.out.println("review=" + review);
 		System.out.println("category=" + category);
@@ -100,7 +106,6 @@ public class ReviewController {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
-		
 		if (category.equals("COOK")) {
 			Cook cook = cookService.getCook(textNo);
 			review.setCook(cook);
@@ -115,21 +120,28 @@ public class ReviewController {
 		review.setWriterNickname(user.getUserNickname());
 		review.setReviewCategory(category);
 
-		
 		System.out.println("리뷰:" + review);
 		reviewService.addReview(review);
-		
+
 		System.out.println("가나");
 		reviewService.updateStatus(textNo, category);
 		System.out.println("가나");
-		
+
 		// 리뷰 작성시 일반리뷰: 100원, 포토리뷰: 500원 적립금
-		if ((!category.equals("REC") )&& (review.getReviewImg() != null || review.getReviewImg() != "")) {
-			reviewService.givePoint(500, user.getUserId());
-		} else if ((!category.equals("REC") ) && (review.getReviewImg() == null || review.getReviewImg() == "")) {
-			reviewService.givePoint(100, user.getUserId());
-		}
+		Point point = new Point();
+		point.setUserId(user.getUserId());
+		point.setPointType("earn");
+		point.setPointCategory(category);
 		
+		if (category.equals("COOK") || category.equals("PRD")) {
+			if (review.getReviewImg() != null) {
+				point.setPointScore(500);
+			} else {
+				point.setPointScore(100);
+			}
+			pointService.addPoint(point);
+
+		}
 
 		ModelAndView modelAndView = new ModelAndView();
 		if (category.equals("REC")) {
@@ -205,7 +217,7 @@ public class ReviewController {
 
 	// 리뷰 선택 삭제
 	@RequestMapping(value = "deleteReview")
-	public String deleteReview(	@RequestParam("checkList") int[] reviewList) throws Exception {
+	public String deleteReview(@RequestParam("checkList") int[] reviewList) throws Exception {
 
 		System.out.println("/review/deleteReview : POST");
 
@@ -217,7 +229,7 @@ public class ReviewController {
 			reviewService.deleteReview(reviewList[i]);
 		}
 
-			return "redirect:/review/listMyReview";
+		return "redirect:/review/listMyReview";
 
 	}
 }

@@ -11,6 +11,7 @@
 		<result property="loveNo" 			column="love_no" 			jdbcType="NUMERIC"/>
 		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
 		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR" />
+		<result property="loveCheck" 			column="love_check" 		jdbcType="NUMERIC" />
 		<collection property="user" resultMap="userSelectMap"/>
 		
 		
@@ -37,18 +38,26 @@
 
 	
 	<!-- SQL : INSERT -->
-	<insert 	id="addLove"		parameterType="love" >
+	<insert 	id="addLove"	parameterType="map" >
 	 	INSERT
 		INTO love( love_no , user_nickname, user_id) 
 		VALUES	 (	seq_love_love_no.nextval,  #{userNickname}, #{userId})
 	 </insert>
 	 
 	 
-	 <delete id="deletelove" parameterType="int" >
+	 <delete id="deletelove" parameterType="map" >
 	 DELETE
 	 FROM love 
-	 WHERE love_no= #{loveNo} 
+	 WHERE love_no= #{loveNo} and user_id = #{userId}
 	 </delete>
+	 
+	 
+
+
+<select id="loveCheck" resultType="int">
+select count(*) from love
+ where user_nickname = #{userNickname} and user_id = #{userId} 
+</select> 
 	 
 	<select  id="getLoveList"  parameterType="map"	statementType="CALLABLE" resultMap="loveSelectMap">
 	  	SELECT *

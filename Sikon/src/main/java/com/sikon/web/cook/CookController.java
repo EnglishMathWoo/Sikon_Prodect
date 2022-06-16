@@ -41,8 +41,9 @@ import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.User;
 import com.sikon.service.domain.Wish;
 import com.sikon.service.domain.Heart;
-
+import com.sikon.service.domain.Love;
 import com.sikon.service.heart.HeartService;
+import com.sikon.service.love.LoveService;
 import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.review.ReviewService;
 import com.sikon.service.cook.CookService;
@@ -76,6 +77,9 @@ public class CookController {
 	@Autowired
 	@Qualifier("reviewServiceImpl")
 	private ReviewService reviewService;
+	@Autowired
+	@Qualifier("loveServiceImpl")
+	private LoveService loveService;
 
 	public CookController() {
 		System.out.println(this.getClass());
@@ -325,11 +329,15 @@ public class CookController {
 		
 		System.out.println("!$#@%%%@!");
 		System.out.println(mentorId);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
 
-		User user = userService.getUser(mentorId);
+		User mentor = userService.getUser(mentorId);
+		
 
+	
 		// Business logic ผ๖วเ
-		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
+		Map<String, Object> map = cookService.listMyCook(search, mentor.getUserNickname());
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
@@ -337,7 +345,8 @@ public class CookController {
 		System.out.println(resultPage);
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("user", user);
+		modelAndView.addObject("user", user);		
+		modelAndView.addObject("mentor", mentor);
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);
