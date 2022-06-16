@@ -242,7 +242,7 @@ label{
 <div class="container">
 	<div class="layout">
 			<br>
-				<h1 class="bg-defualt text-center">결제내역</h1><br>
+				<h1 class="bg-defualt text-center">| PAYMENT |</h1><br><br>
 				
 				<!-- form Start /////////////////////////////////////-->
 

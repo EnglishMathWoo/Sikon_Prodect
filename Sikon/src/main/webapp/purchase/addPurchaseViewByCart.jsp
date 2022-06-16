@@ -363,7 +363,7 @@ body>div.container {
 		    <c:forEach var="cart" items="${cartlist}">
 		   	  <c:if test="${cart.cartProd.couponApply == 'Y' }">
 		      		<select name="coupon" class="form-control" id="usedCoupon">
-		      			<option value=""> 사용할 쿠폰을 선택해주세요 </option>
+		      			<option value="none"> 사용할 쿠폰을 선택해주세요 </option>
 				      		<c:forEach var="couponlist" items="${coupon}">
 				      			<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
 				      		</c:forEach>

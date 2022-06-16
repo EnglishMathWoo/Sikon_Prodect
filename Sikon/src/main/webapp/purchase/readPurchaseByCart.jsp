@@ -165,7 +165,7 @@ div.container{
 		 <hr/>
 		  <h4 align="center">배송정보</h4>
 		  <hr/>
-	
+<c:forEach var="purchase" items="${list}" begin="0" end="0">		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-4"><strong>받는분 이름</strong></div>
 			<div class="col-xs-8 col-md-8">${purchase.receiverName }</div>
@@ -192,7 +192,7 @@ div.container{
 			<div class="col-xs-8 col-md-8">${purchase.divyMessage }</div>
 		</div>
 		
-		
+</c:forEach>		
 		<hr/>
 		  <h4 align="center">쿠폰 / 포인트</h4>
 		  <hr/>

@@ -267,6 +267,17 @@ public class PurchaseController {
 
 		System.out.println("========================================================================");
 		System.out.println("/purchase/addPurchaseByCart : POST");
+		System.out.println("========================================================================");
+		for(String str : coupon) {
+			System.out.println("str");
+			System.out.println(str);
+		}
+		System.out.println("========================================================================");
+		for(int carts : cartNo) {
+			System.out.println("carts");
+			System.out.println(carts);
+		}
+		System.out.println("========================================================================");
 		
 		User user = userService.getUser(userId);
 		
@@ -294,7 +305,6 @@ public class PurchaseController {
 			Cart cart = cartService.getCart(cartNo[i]);
 			
 			Product product = productService.getProduct(cart.getCartProd().getProdNo());
-			
 			Purchase purchaseByCart = new Purchase();
 			purchaseByCart.setReceiverName(purchase.getReceiverName());
 			purchaseByCart.setReceiverPhone(purchase.getReceiverPhone());
@@ -306,7 +316,11 @@ public class PurchaseController {
 			purchaseByCart.setEarnPoint(purchase.getEarnPoint());
 			purchaseByCart.setBuyer(user);
 			purchaseByCart.setPurchaseProd(product);
-			purchaseByCart.setUsedCoupon(coupon[i]);
+			if(coupon[i].equals("none")) {
+				purchaseByCart.setUsedCoupon(null);
+			}else {
+				purchaseByCart.setUsedCoupon(coupon[i]);
+			}
 			purchaseByCart.setPurchaseQuantity(cart.getQuantity());
 			purchaseByCart.setDivyStatus("001");
 			purchaseByCart.setPaymentOpt("KA");
@@ -315,7 +329,6 @@ public class PurchaseController {
 			
 			list.add(purchaseByCart);
 			
-			System.out.println(purchaseByCart);
 			purchaseService.addPurchase(purchaseByCart);
 			
 			System.out.println(cart.getQuantity());
@@ -327,7 +340,7 @@ public class PurchaseController {
 		}
 		
 		System.out.println("========================================================================");
-
+//*
 
 		//==================================================================================
 		//포인트 적용
@@ -363,10 +376,11 @@ public class PurchaseController {
 		
 		//==================================================================================
 		// 쿠폰 사용하기
+		System.out.println("쿠폰사용 시작");
 		
 		for(String cou : coupon) {
 			
-			if(cou.equals("")) {
+			if(cou.equals("none")) {
 				cou = null;	
 			}
 			
@@ -377,9 +391,11 @@ public class PurchaseController {
 				couponService.updateIssueStatus(usedcoupon);
 			}
 		}
-
+		System.out.println("쿠폰사용 끝");
 		//==================================================================================		
 		
+//*/		
+		System.out.println("장바구니 구매완료");
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");

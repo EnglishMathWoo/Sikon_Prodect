@@ -59,10 +59,10 @@ th{
 }
 .table>tbody>tr>th{
 
-	border-top: 2px solid #afa5a5
+	border-top: 2px solid #957777;
 }
 div.list{
-	padding-top : 200px;
+	padding-top : 210px;
 }
 
 .cancel{
@@ -131,6 +131,10 @@ div.emptyProd{
 	color: #333;
 }
 
+.orderlist{
+	padding: 35px;
+	text-align: center;
+}
 
 </style>
 	<script type="text/javascript">
@@ -213,10 +217,8 @@ div.emptyProd{
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container list">
 	
-		<div class="text-info">
-	       <h3 style="color:#bc8f8f">주문배송조회</h3><br>
-	    </div>
-	    
+		<h3 class="orderlist">| ORDER LIST |</h3>
+	    <br>
 	    
 		<form>
 			<input type="hidden" id="currentPage" name="currentPage" value=""/>

@@ -111,5 +111,19 @@ public class CartController {
 		
 		return "redirect:/cart/getCartList";
 	}
+	
+	@RequestMapping("deleteSelect")
+	public String deleteSelect( @RequestParam("cartNo") int[] cartNo) throws Exception{
+		
+		System.out.println("/deleteSelect");
+		
+		for(int cart : cartNo) {
+			
+			cartService.deleteCart(cart);
+			
+		}
+				
+		return "redirect:/cart/getCartList";
+	}
 
 }
