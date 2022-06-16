@@ -492,11 +492,11 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	    <c:if test="${!empty sessionScope.user.role}">
 	    	
 			        <td>
-			        <img src="/resources/images/168939.jpg" width="25px" height="25px"> 
+			        <img src="/resources/images/168939.jpg" width="25px" height="25px" style="border-radius: 100%"> 
 			        </td>
 			        
 			        <td class="user-td">
-			        &emsp;${sessionScope.user.userNickname}&nbsp;ดิ&nbsp;
+			        &ensp;${sessionScope.user.userNickname}&nbsp;ดิ&nbsp;
 					</td>
 					  
 	    </c:if>

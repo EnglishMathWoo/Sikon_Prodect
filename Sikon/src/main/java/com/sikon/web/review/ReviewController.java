@@ -81,9 +81,9 @@ public class ReviewController {
 			@RequestParam("textNo") int textNo, Model model, HttpServletRequest request) throws Exception {
 
 		System.out.println("/review/addReview : POST");
-		System.out.println("review=" + review);
-		System.out.println("category=" + category);
-		System.out.println("textNo=" + textNo);
+//		System.out.println("review=" + review);
+//		System.out.println("category=" + category);
+//		System.out.println("textNo=" + textNo);
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
@@ -101,6 +101,7 @@ public class ReviewController {
 				point.setPointScore(500);
 			}
 			pointService.addPoint(point);
+			
 
 		}
 		
@@ -158,7 +159,7 @@ public class ReviewController {
 	public ModelAndView updateReview(@RequestParam("reviewNo") int reviewNo, HttpServletRequest request)
 			throws Exception {
 		System.out.println("/review/updateReview : GET");
-		System.out.println("reviewNo=" + reviewNo);
+//		System.out.println("reviewNo=" + reviewNo);
 
 		Review review = reviewService.getReview(reviewNo);
 
@@ -173,7 +174,7 @@ public class ReviewController {
 	public String updateReview(@ModelAttribute("review") Review review, Model model, HttpServletRequest request)
 			throws Exception {
 		System.out.println("/review/updateReview : POST");
-		System.out.println("review=" + review);
+//		System.out.println("review=" + review);
 
 		model.addAttribute("msg", "리뷰 수정이 완료되었습니다.");
 		model.addAttribute("url", "/review/updateReview.jsp");
@@ -190,7 +191,7 @@ public class ReviewController {
 
 		System.out.println("/review/listMyReview :  POST/get");
 
-		System.out.println("search:" + search);
+//		System.out.println("search:" + search);
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -205,8 +206,8 @@ public class ReviewController {
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, 10);
 
-		System.out.println("list=" + map.get("list"));
-		System.out.println("resultPage=" + resultPage);
+//		System.out.println("list=" + map.get("list"));
+//		System.out.println("resultPage=" + resultPage);
 
 		// Model 과 View 연결
 		ModelAndView modelAndView = new ModelAndView();
