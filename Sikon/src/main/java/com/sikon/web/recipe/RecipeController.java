@@ -285,9 +285,6 @@ public class RecipeController {
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 
-		System.out.println("list=" + map.get("list"));
-		System.out.println("resultPage=" + resultPage);
-
 		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
@@ -303,7 +300,7 @@ public class RecipeController {
 
 		System.out.println("/recipe/listMyRecipe :  POST/get");
 
-		System.out.println("search:" + search);
+		//System.out.println("search:" + search);
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -319,8 +316,8 @@ public class RecipeController {
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 
-		System.out.println("list=" + map.get("list"));
-		System.out.println("resultPage=" + resultPage);
+//		System.out.println("list=" + map.get("list"));
+//		System.out.println("resultPage=" + resultPage);
 
 		// Model 과 View 연결
 		ModelAndView modelAndView = new ModelAndView();

@@ -87,7 +87,7 @@ public class RecipeRestController {
 		map2.put("resultPage", map);
 		map2.put("search", search);
 
-		System.out.println("map=" + map);
+//		System.out.println("map=" + map);
 		return map2;
 	}
 
