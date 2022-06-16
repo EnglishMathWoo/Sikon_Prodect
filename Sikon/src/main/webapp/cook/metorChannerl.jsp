@@ -58,7 +58,20 @@ body {
     width: 1140px;
     
 }
-
+.bi-bookmark-plus::before,.bi-bookmark-plus-fill::before  {
+	color:#d4af7a;
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size:33px;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 
 .card-no-border .card {
@@ -317,13 +330,13 @@ p {
 					
 
 					
-				$("#addLove").on("click", function() {
+		/*		$("#addLove").on("click", function() {
 						var userNickname = $("input:hidden[name='userNickname']").val();
 						//console.log(recipeNo);
 							self.location = "/love/addLove?userNickname="+userNickname;
-						});				
+						});		*/		
   //=======================================즐겨찾기===========================================///					
-					$(document).on("click" ,"i.fa-bookmark", function(){
+					$(document).on("click" ,"#bookmarkBtn", function(){
 
 						var userId = $("input[name='userId']").val();
 						var userNickname = $("input[name='userNickname']").val();
@@ -349,10 +362,10 @@ p {
 					                    	var userNickname = $("input[name='userNickname']").val();
 
 					                    	console.log(userId);
-					                    	console.log(cookNo);
+					                
 					                    	console.log(userNickname);
 					                    	
-					                    	pushAlarm(userId, userNickname, cookNo);
+					                    	
 
 
 								           
@@ -471,8 +484,10 @@ p {
 
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
-		    
-		    <i id="addLove"  class="fa-regular fa-bookmark fa-2x"></i>
+		    		
+		  			<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
+					
+				
 		  		    <button type="button" class="submit">삭제</button>
 		  		
 		  
