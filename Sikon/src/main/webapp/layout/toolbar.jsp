@@ -711,9 +711,16 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			});
 			*/
 			
+			/*
+			$("#kakaoout").on("click" , function() {
+				$(self.location).attr("href","https://kauth.kakao.com/oauth/logout?client_id=07cd433423b8401d52fda5136624e099&logout_redirect_uri=http://192.168.0.11:8080/user/logout");
+			});
+			*/
+			
 			$("#kakaoout").on("click" , function() {
 				$(self.location).attr("href","https://kauth.kakao.com/oauth/logout?client_id=07cd433423b8401d52fda5136624e099&logout_redirect_uri=http://localhost:8080/user/logout");
 			});
+			
 			
 			$("#logout").on("click" , function() {
 				$(self.location).attr("href","/user/logout");

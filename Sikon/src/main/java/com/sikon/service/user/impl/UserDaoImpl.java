@@ -62,7 +62,20 @@ public class UserDaoImpl implements UserDao{
 	// id 중복체크
 	public int checkNickname(String userNickname) throws Exception {
 		return sqlSession.selectOne("UserMapper.checkNickname", userNickname);
-	}	
+	}
+	// Pw찾기 유효성 검사
+	public int findUserPwCheck(User user)throws Exception {
+		return sqlSession.selectOne("UserMapper.findUserPwCheck", user);
+	}
+	// Pw찾기
+	public int updateUserPw(String userId,String userName,String password)throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("userName", userName);
+		map.put("password", password);
+		
+		return sqlSession.update("UserMapper.updateUserPw", map);	
+	}
 	public User getUser(String userId) throws Exception {
 		System.out.println("userId="+userId);
 		return sqlSession.selectOne("UserMapper.getUser", userId);
