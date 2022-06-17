@@ -44,6 +44,11 @@ public class RankingDaoImpl implements RankingDao {
 		return sqlSession.selectList("RankingMapper.getRecipeList", search);
 	}
 	
+	//구매 날짜 저장
+	public void insertPurchase(int prodNo) throws Exception {
+		sqlSession.insert("RankingMapper.addPurchase", prodNo);
+	}
+	
 	//즐겨찾는 멘토 날짜 저장
 	public void insertLoveMentor(String userNickname, String userId) throws Exception {
 		

@@ -12,6 +12,9 @@ public interface RankingService {
 	// 레시피 리스트 조회
 	public Map<String, Object> getRecipeList(Search search) throws Exception;
 	
+	//구매 날짜 저장
+	public void addPurchase(int prodNo) throws Exception;
+	
 	//즐겨찾는 멘토 날짜 저장
 	public void addLoveMentor(String userNickname, String userId) throws Exception;
 	

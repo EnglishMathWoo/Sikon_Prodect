@@ -307,8 +307,8 @@ CREATE TABLE ranking (
 	user_id VARCHAR2(200), 
 	love_date DATE, 
 	love_increase NUMBER, 
-	search_keyword VARCHAR2(200), 
-	search_date DATE, 
+	prod_no NUMBER, 
+	purchase_date DATE, 
 	PRIMARY KEY(ranking_no) 
 );
 
