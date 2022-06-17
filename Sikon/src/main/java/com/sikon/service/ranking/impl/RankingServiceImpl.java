@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.sikon.common.Search;
 import com.sikon.service.domain.Love;
+import com.sikon.service.domain.Product;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.ranking.RankingDao;
 import com.sikon.service.ranking.RankingService;
@@ -56,6 +57,18 @@ public class RankingServiceImpl implements RankingService{
 	//구매 날짜 삭제
 	public void deletePurchase(int prodNo, int tranNo) throws Exception{
 		rankingDao.deletePurchase(prodNo, tranNo);
+	}
+	
+	// 판매 랭킹 조회
+	public Map<String, Object> getProductList(Search search) throws Exception {
+		System.out.println("search=" + search);
+		List<Product> list = rankingDao.getProductList(search);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		System.out.println("list=" + list);
+
+		return map;
 	}
 	
 	//즐겨찾는 멘토 날짜 저장

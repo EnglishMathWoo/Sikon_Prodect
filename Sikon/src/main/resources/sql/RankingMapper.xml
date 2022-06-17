@@ -156,4 +156,28 @@
 											ORDER BY ranking_table.love_increase DESC ) WHERE ROWNUM &lt;= 20
 	 </select>
 	 
+	 
+	  <!-- SQL : SELECT LIST -->
+	<select  id="getProductList"  parameterType="search"	resultMap="productSelectMap">
+	  	SELECT * FROM (SELECT p.*, ranking_table.count 
+										FROM product p, (SELECT prod_no, count(*) count FROM ranking 
+																			
+											<if test="orderCondition != null">
+												<choose>
+													<when test="orderCondition == 0 ">
+										 			 WHERE purchase_date &gt;= CURRENT_DATE-1 
+													</when>
+													<when test="orderCondition == 1 ">
+										 			 WHERE purchase_date &gt;= CURRENT_DATE-8 
+													</when>
+													<when test="orderCondition == 2 ">
+										 			 WHERE purchase_date &gt;= CURRENT_DATE-31 
+													</when>				
+												</choose>
+											</if>
+											GROUP BY prod_no) ranking_table  
+											WHERE p.prod_no = ranking_table.prod_no  
+											ORDER BY ranking_table.count DESC) WHERE ROWNUM &lt;= 20
+	 </select>
+	 
 </mapper>

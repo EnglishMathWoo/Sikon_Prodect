@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.cook.CookService;
 import com.sikon.service.ranking.RankingService;
@@ -66,6 +65,27 @@ public class RankingController {
 		model.addAttribute("search", search);
 
 		return "forward:/ranking/listRecipeRanking.jsp";
+	}
+	
+	@RequestMapping(value = "listProduct")
+	public String listProduct(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
+
+		System.out.println("/ranking/listProduct : POST/get");
+
+		System.out.println("search:" + search);
+			
+		search.setPageSize(pageSize);
+			
+		// Business logic 수행
+		Map<String, Object> map = rankingService.getProductList(search);
+
+		System.out.println("list=" + map.get("list"));
+
+		// Model 과 View 연결
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("search", search);
+
+		return "forward:/ranking/listProductRanking.jsp";
 	}
 	
 	
