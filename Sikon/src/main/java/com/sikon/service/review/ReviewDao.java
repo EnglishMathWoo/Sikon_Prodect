@@ -31,6 +31,8 @@ public interface ReviewDao {
 	public int getTotalCount(Search search,String category,int textNo) throws Exception ;
 	
 	public int getTotalMyCount(Search search, String writerNickname) throws Exception;
+	public void updateReviewNum(int count, int recipeNo) throws Exception;
+	public int countReviewNum(int textNo,String category) throws Exception;
 
 
 }

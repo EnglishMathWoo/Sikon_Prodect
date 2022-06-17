@@ -320,6 +320,15 @@ body{
 			});
 		});
 		
+		//============= 회원비밀번호찾기화면이동 =============
+		$( function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			$("a[href='#' ]").on("click" , function() {
+				self.location = "/user/findUserpw"
+			});
+		});
+		
+		
 		
 	</script>		
 	
@@ -368,13 +377,25 @@ body{
 						<span class="btn_text">로그인</span>
 					</button>
 					</div>
-					<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?
+				  	<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?
 											client_id=07cd433423b8401d52fda5136624e099&
 											redirect_uri=http://localhost:8080/user/kakaoLogin
 											&response_type=code">
 				
 						<img src="/resources/images/logo/kakao_login_large_wide.png" height="60px" width="400" style="display: block; margin: 0 auto;">
 					</a>
+					
+				
+					<!-- ip 11번 카카오 로그인 -->
+			<!--		
+					<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?
+											client_id=07cd433423b8401d52fda5136624e099&
+											redirect_uri=http://192.168.0.11:8080/user/kakaoLogin
+											&response_type=code">
+				
+						<img src="/resources/images/logo/kakao_login_large_wide.png" height="60px" width="400" style="display: block; margin: 0 auto;">
+					</a> 
+				-->	
 				</div>
 			</div>	
 		</li>

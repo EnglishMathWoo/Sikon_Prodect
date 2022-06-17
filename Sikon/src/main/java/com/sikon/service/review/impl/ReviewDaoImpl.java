@@ -125,6 +125,23 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.selectOne("ReviewMapper.getReview", reviewNo);
 		
 	}
+
+	@Override
+	public void updateReviewNum(int count, int recipeNo) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("count", count);
+		map.put("recipeNo", recipeNo);
+		sqlSession.insert("ReviewMapper.updateReviewNum", map);
+		
+	}
+
+	@Override
+	public int countReviewNum(int textNo,String category) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("textNo", textNo);
+		map.put("category", category);
+		return sqlSession.selectOne("ReviewMapper.getReviewCount", map);
+	}
 	
 
 }

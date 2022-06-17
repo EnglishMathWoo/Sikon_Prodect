@@ -11,8 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
@@ -36,6 +40,9 @@ public class UserServiceImpl implements UserService{
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
+	
+//	@Autowired
+//	private JavaMailSender mailSender;
 	
 	///Constructor
 	public UserServiceImpl() {
@@ -81,7 +88,8 @@ public class UserServiceImpl implements UserService{
             
 			sb.append("&client_id=07cd433423b8401d52fda5136624e099"); //본인이 발급받은 key
 			sb.append("&redirect_uri=http://localhost:8080/user/kakaoLogin"); // 본인이 설정한 주소
-            
+		//	sb.append("&redirect_uri=http://192.168.0.11:8080/user/kakaoLogin"); // 본인이 설정한 주소
+			
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
@@ -207,7 +215,62 @@ public class UserServiceImpl implements UserService{
 		
 		return result;
 	}
-
+	
+	// Pw찾기 유효성 검사
+	public int findUserPwCheck(User user)throws Exception {
+		return userDao.findUserPwCheck(user);
+	}
+		
+	// Pw찾기
+	public void updateUserPw(String userId,String userName)throws Exception {
+		int rendom = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+		String key = "";
+		key = Integer.toString(rendom);
+		String password = key;
+		
+		userDao.updateUserPw(userId, userName, password);
+		
+		String from = "se981106@gmail.com";//보내는 이 메일주소
+	    System.out.println("1 from="+from);
+	    String to = userId;
+	    System.out.println("2 userId="+userId);
+	    String title = "식탁의 온도 비밀번호 찾기를 통한 임시비밀번호입니다.";
+	    System.out.println("3 title="+title);
+	    String content = "<h1>임시비밀번호 발급</h1>" +
+							"<br/>"+userId+"님 "+
+							"<br/>비밀번호 찾기를 통한 임시 비밀번호입니다."+
+							"<br/>임시비밀번호 :   <h2>"+password+"</h2>"+
+							"<br/>로그인 후 비밀번호 변경을 해주세요.";
+	    System.out.println("4 content="+content);
+	    try {
+	    	System.out.println("오냐");
+	    	
+	    	//JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+//			MimeMessage mail = mailSender.createMimeMessage();
+//			System.out.println("여긴 오냐");
+//	        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8"); // true는 멀티파트 메세지를 사용하겠다는 뜻?
+//	        System.out.println("5 mailHelper="+mailHelper);
+//	        
+//	        mailHelper.setFrom(from); // 보내는 사람 이메일주소 표기, 생략하면 작동안한다
+//	        mailHelper.setTo(to); // 받는 사람 이메일
+//	        mailHelper.setSubject(title); // 메일제목
+//	        mailHelper.setText(content, true); // 메일내용   
+//	        System.out.println("6 from="+from);
+//	        System.out.println("7 to="+to);
+//	        System.out.println("8 title="+title);
+//	        System.out.println("9 content="+content);
+//	        
+//	        mailSender.send(mail);
+//	        System.out.println("10 mail="+mail);
+	        
+	        
+	    } catch(Exception e) {
+	         
+	    }
+	    
+		
+	}
+		
 
 	public void updateUser(User user) throws Exception {
 		System.out.println("user="+user);

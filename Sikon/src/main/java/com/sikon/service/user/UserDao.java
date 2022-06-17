@@ -19,9 +19,16 @@ public interface UserDao {
 	
 	// id 중복체크
 	public int checkId(String userId) throws Exception;
+	
 	// 닉네임 중복체크
 	public int checkNickname(String userNickname) throws Exception;
-
+	
+	// Pw찾기 유효성 검사
+	public int findUserPwCheck(User user)throws Exception; 
+	
+	// Pw찾기
+	public int updateUserPw(String userId,String userName,String password)throws Exception;
+	
 	// SELECT ONE
 	public User getUser(String userId) throws Exception ;
 	public List getLicense(String userId) throws Exception;

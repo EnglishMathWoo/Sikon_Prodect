@@ -160,11 +160,14 @@ public class CookController {
 
 		search.setPageSize(pageSize);
 		Map map = reviewService.getReviewList(search, "COOK", cookNo);
+		int reviewNum=reviewService.countReviewNum(cookNo, "COOK");
+		System.out.println("¸®ºä¼ö"+reviewNum);
 		Cook cook = cookService.getCook(cookNo);
 
 		model.addAttribute("cook", cook);
 		model.addAttribute("menu", menu);
 		model.addAttribute("review", map.get("list"));
+		model.addAttribute("reviewNum", reviewNum);
 
 		String history = "/" + cookNo;
 

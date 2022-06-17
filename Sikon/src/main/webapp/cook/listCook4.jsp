@@ -519,7 +519,7 @@ div.emptyProd{
 						                	//alert(JSONData.list[0].cookName);
 						                	//alert(JSONData.list.length);
 						                	console.log(JSONData.list[0].cookName);
-						                	   
+							                	 
 						                	for(var i=0; i<JSONData.list.length; i++){
 						                		///*
 						                		var image;
@@ -529,7 +529,7 @@ div.emptyProd{
 						                		var cookTheme;
 						                		var heartCount;
 						                		
-													
+
 						                
 						                		if(JSONData.list[i].cookStock == '0'){
 					                				
@@ -561,13 +561,9 @@ div.emptyProd{
 						                		
 						                		if(JSONData.list[i].heartCount == '0'){
 						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >&nbsp; 좋아요&nbsp;"+JSONData.list[i].hearthit+"개</p>";
-						                			
-						                			
 						                		}else{
 						                			
 						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >&nbsp; 좋아요&nbsp;"+JSONData.list[i].hearthit+"개</p>";
-						                			
-						                			
 						                		}
 						                
 						                			
@@ -610,11 +606,11 @@ div.emptyProd{
 						                     						+"</div>"
 						                     						+"</div>"
 						                     						+"<hr/>"
-						                     					  
+
 						                     		//*/				
 							               	$( '#scrollList' ).append(displayValue);	
 						                     						
-							             	 		
+						                     						 		
 						                    						
 						                     						
 						                	}//for 

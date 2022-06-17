@@ -148,6 +148,14 @@ public class UserController {
 		return "redirect:/user/findUserId.jsp";
 	}
 	
+	@RequestMapping( value="findUserpw", method=RequestMethod.GET )
+	public String findUserpw() throws Exception {
+
+		System.out.println("/user/findUserpw : GET");
+		
+		return "redirect:/user/findUserpw.jsp";
+	}
+	
 //	@RequestMapping( value="findUser", method=RequestMethod.POST )
 //	public String findUserId(@RequestParam("userName") String userName,
 //			@RequestParam("phone") String phone, Model model, HttpServletRequest request ) throws Exception {

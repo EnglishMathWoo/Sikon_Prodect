@@ -145,7 +145,7 @@ public class RecipeController {
 		return "forward:/recipe/readRecipe.jsp";
 	}
 
-	@RequestMapping(value = "getRecipe")
+	@RequestMapping(value = "getRecipe", method=RequestMethod.GET)
 	public String getRecipe(@ModelAttribute("search") Search search, @RequestParam("recipeNo") int recipeNo,
 			Model model, HttpServletRequest request) throws Exception {
 
@@ -163,7 +163,6 @@ public class RecipeController {
 		List<Recipe> list = recipeService.getRecipe(recipeNo);
 		String category="REC";
 		Map map=reviewService.getReviewList(search, category, recipeNo);
-		System.out.println("리뷰map결과"+map);
 		
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute("user");
@@ -180,12 +179,10 @@ public class RecipeController {
 			rankingService.addRecipeView(recipeNo);
 		}
 		
-		System.out.println("레시피 list=" + list);
 		model.addAttribute("recipe", list.get(0));
 		model.addAttribute("recipeViews", recipe.getRecipeViews());
 		model.addAttribute("list", list);
 		model.addAttribute("review", map.get("list"));
-		model.addAttribute("user",user);
 
 		
 		return "forward:/recipe/getRecipe.jsp";

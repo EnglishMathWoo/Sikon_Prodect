@@ -139,23 +139,20 @@
 											<if test="orderCondition != null">
 											
 											<choose>
-													<when test="orderCondition == 0  ">
-										 				ORDER BY r.recipe_regdate DESC
+													<when test='orderCondition == "1"  '>
+										 				ORDER BY r.review_num DESC
 													</when>
-													<when test="orderCondition == 1  ">
-										 				ORDER BY r.review_num ASC
-													</when>
-													<when test="orderCondition == 2 ">
+													<when test='orderCondition == "2"  '>
 										 				ORDER BY r.recipe_difficulty DESC
 													</when>
-													<when test="orderCondition == 3  ">
+													<when test='orderCondition == "3"  '>
 										 				ORDER BY r.cooking_time DESC
 													</when>
-													<when test="orderCondition == 4  ">
+													<when test='orderCondition == "4"  '>
 										 				ORDER BY r.recipe_views DESC
 													</when>
 													<otherwise>
-														order by r.recipe_no
+														ORDER BY r.recipe_regdate DESC
 													</otherwise>
 													</choose>
 													</if>

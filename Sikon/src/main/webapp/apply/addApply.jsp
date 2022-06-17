@@ -175,7 +175,7 @@ function fncAddWish() {
 
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	$( "button.btn.btn-primary" ).on("click" , function() {
+	$( "#buyjust" ).on("click" , function() {
 		fncAddApply();
 	});
 });	
@@ -369,6 +369,7 @@ $(function() {
 	  
 			<br>
 			<div class="text-center">
+			<button type="button" class="btn.btn-primary" id="buyjust">그냥결제하기</button>	
 				<button type="button" class="buy" id="iamportPayment" value="KA">결제하기</button>	
 				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
 			</div>

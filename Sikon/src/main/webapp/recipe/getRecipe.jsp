@@ -338,6 +338,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 </style>
 
 </head>
@@ -347,8 +348,8 @@ body {
 
 	<div class="container">
 
-		<input type="hidden" name="userId" value="${user.userId}"> <input
-			type="hidden" name="userNickname" value="${user.userNickname}">
+		<input type="hidden" name="userId" value="${user.userId}"> 
+		<input type="hidden" name="userNickname" value="${user.userNickname}">
 
 		<div class="col-xs-12 col-md-12  col-lg-12"
 			style="padding-right: 88px">
@@ -483,12 +484,12 @@ body {
 						<div class="panel">
 							<div class="panel-body">
 								<div class="media-block">
-									<a class="media-left" href="#"><img
+									<a class="media-left" ><img
 										class="img-circle img-sm" alt="Profile Picture"
 										src="/resources/images/168939.jpg"></a>
 									<div class="media-body">
 										<div class="mar-btm">
-											<a href="#"
+											<a 
 												class="btn-link text-semibold media-heading box-inline">${review.writerNickname }</a>
 											<p class="text-muted text-sm">
 												<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
@@ -600,13 +601,14 @@ body {
 	}
 
 	$(".deleteReview").on("click", function() {
-		var reviewNo = $("input:hidden[name='reviewNo']").val();
+		var reviewNo = $(this).attr('id');
+		var recipeNo = $("input:hidden[name='recipeNo']").val();
 		alert("해당 리뷰를 삭제하시겠습니까?")
 
 		$.ajax({
             type : "POST",  
             url : "/review/json/deleteReview",       
-            data : {'reviewNo' : reviewNo },
+            data : {'reviewNo' : reviewNo, 'recipeNo':recipeNo },
             error : function(request,status,error){
             	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             },
@@ -631,8 +633,10 @@ body {
 				var imgreview = $("#imgreview").attr('id');
 				
 				if(imgreview=='undefined'){
+				
+				
 				$('#acontent').replaceWith(
-								"<img src='/resources/images/uploadFiles/"+imgreview+"' width='100' height='100'>"+
+								"<img id='yeda' src='/resources/images/uploadFiles/"+imgreview+"' width='100' height='100'>"+
 								"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
 				}
 				else{
