@@ -114,7 +114,16 @@ div.emptyProd{
 	padding-top: 35px;
 	text-align: center;
 }
-
+.prodinfo{
+	text-align: left;
+	padding-left: 30px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 6px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
 </style>
 	<script type="text/javascript">
 
@@ -172,7 +181,7 @@ div.emptyProd{
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container list">
 	
-	       <h3 class="pltitle" style="color:#333">| PRODUCT LIST |</h3>
+	       <h3 class="pltitle" style="color:#333">| PRODUCT MANAGEMENT |</h3>
 	    <br><br><br>
 	    
 		
@@ -263,16 +272,16 @@ div.emptyProd{
 		  <c:forEach var="product" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
-			  	<td align="center">${ i }</td>
+			  	<td align="center" class="view">${ i }</td>
 			  
 			  
-			  	<td align="center" class="toget" value="${product.prodNo }">${product.prodNo }</td>	
+			  	<td align="center" class="toget view" value="${product.prodNo }">${product.prodNo }</td>	
 			  
 				<td align="right" class="toget" value="${product.prodNo }">
 					<img src="/resources/images/uploadFiles/${product.prodThumbnail.split('&')[0]}" class="image" width="80" height="80">
 				</td>
 			  
-			  	<td align="left" class="toget" value="${product.prodNo }">
+			  	<td align="left" class="toget prodinfo" value="${product.prodNo }">
 			  	
 			  		<p style="font-weight:bold">${product.prodName }</p> <br>
 			  		

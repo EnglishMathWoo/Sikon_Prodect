@@ -151,11 +151,10 @@ html input[type=button]:hover{
 	
 		//============= "구매"  Event 연결 =============
 		
-		/*	
+		///*	
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "#iamportPayment" ).on("click" , function() {
-				alert('결제');
 				console.log($("#usedCoupon").val());
 				fncAddPurchase();
 			});
@@ -289,7 +288,7 @@ html input[type=button]:hover{
 <script>
   
 
-///*
+/*
 
 	
 	$(function() {
@@ -548,7 +547,7 @@ function payment(data) {
 			</div>
 			
 			
-			<input type="hidden" name="paymentOpt" id="paymentOpt" value="">
+			<input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">
 			
 			</form>
 			
