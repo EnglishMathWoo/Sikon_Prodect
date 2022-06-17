@@ -17,7 +17,9 @@
 		<result property="checkDate" 				column="check_date" 			jdbcType="DATE"/>
 		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
 		<result property="classCook.cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
-		<result property="classCook.cookFilename" 				column="cook_filename" 					jdbcType="VARCHAR" />	
+		<result property="classCook.cookFilename" 				column="cook_filename" 					jdbcType="VARCHAR" />
+		<result property="total" 			column="total" 		jdbcType="NUMERIC" />
+			
 	<collection property="classCook" resultMap="cookSelectMap"/>
 		
 		
@@ -198,10 +200,8 @@
 	 
 	 <select id="saleCount" parameterType="apply" resultMap="applySelectMap">
 
-		SELECT SUM(cook_price) , check_date , applier_id , apply_status, apply_no
-			FROM apply 
-			WHERE check_date &gt;=CURRENT_DATE-1 
-		AND check_date &lt;CURRENT_DATE
-		group by cook_price,check_date , applier_id , apply_status, apply_no  
+select  cook_price, cook_status ,check_date , applier_id, apply_no, cook_price*cook_status as "total"
+from apply 
+where applier_id= #{applier.userId} ;
 </select>
 </mapper>

@@ -20,13 +20,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/resources/css/animate.min.css" rel="stylesheet">
-   <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/resources/javascript/bootstrap-dropdownhover.min.js"></script>
+
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -39,17 +33,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
-.container:before{
-    display: table;
-}
-.container{
-	padding-top: 200px
-	}
-	
 body{
+	 padding-top : 50px;
 	font-family: 'Nanum Myeongjo', serif;
 }
 
@@ -72,10 +59,10 @@ th{
 }
 .table>tbody>tr>th{
 
-	border-top: 2px solid #afa5a5
+	border-top: 2px solid #957777;
 }
 div.list{
-	padding-top : 200px;
+	padding-top : 210px;
 }
 
 .cancel{
@@ -92,10 +79,14 @@ div.list{
 	font-weight: bold;
 }
 
+.prodcontent{
+	text-align: left;
+}
+
 .image{
 	width: 105px;
 }
-.cookcontent{
+.prodcontent{
 	width: 50%;
 }
 .rev{
@@ -139,6 +130,12 @@ div.emptyProd{
 	font-weight: bold;
 	color: #333;
 }
+
+.orderlist{
+	padding: 35px;
+	text-align: center;
+}
+
 
 </style>
 
@@ -213,55 +210,25 @@ div.emptyProd{
 
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-		<jsp:include page="/mypage/leftbar.jsp" />
 	
-	<!-- ToolBar End /////////////////////////////////////-->
+	
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container mt-5 px-2">
-	
-	<div class="center btmspace-50">
-			<br />
-			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
-				<br> | M Y A P P L Y | <br>
-			</h3>
-			<br>
-		</div>
 		
-			    
-				    <div class="btmspace-50">
-				    	<p class="text-primary" style="color:gray">
-				    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
-				    	</p>
-				    </div>
-				    
-				    <div class="btmspace-50">
-					    <form class="form-inline " id="form"> 
-				    <div class="btmspace-50">
-						  <div class="form-group" align="left">
-								<select name="applyCondition" class="form-control" style="width:125px">
-								 	<option value="0"  ${ ! empty search.applyCondition && search.applyCondition==0 ? "selected" : "" }>--정렬하기--</option>
-									<option value="5"  ${ ! empty search.applyCondition && search.applyCondition==5 ? "selected" : "" }>신청완료</option>
-									<option value="6"  ${ ! empty search.applyCondition && search.applyCondition==6 ? "selected" : "" }>수강완료</option>									
-								</select>
-						  </div>
-						  <button type="button" class="btn btn-default" id="sorting">조회</button>
-						  <br/><br/>
-						  </div>
-					<input type="hidden" id="currentPage" name="currentPage" value="" />
-						</form>
-					</div>
+	<div class="container list">
+	
+		<h3 class="orderlist">| M Y A P P L Y |</h3>
+	    <br>
+	    
+		<form>
+			<input type="hidden" id="currentPage" name="currentPage" value=""/>
+		</form>
+      <!--  table Start /////////////////////////////////////-->
+      <table class="table table-hover table-striped">
 					
 
 
 
-	
-		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
-
-		<!--  table Start /////////////////////////////////////-->
-<div class="btmspace-50">
-		<table class="table table-hover table-striped">
 
 
 
@@ -330,8 +297,33 @@ div.emptyProd{
 			  		<c:if test="${ before eq after }">
 					  	<tr>
 							
-							<td align="left" class="image" value="${apply.classCook.cookNo }">	
-									<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename.split('/')[0]}" width="85" height="85" align="absmiddle"/>
+							<td align="left" class="image" value="${apply.classCook.cookNo }">
+							
+							
+					<c:choose>
+		    	<c:when test="${apply.classCook.cookFilename.contains('/')}">
+						<c:choose>
+						<c:when test="${apply.classCook.cookFilename.contains('mp4')}">
+							<c:forEach var="name" items="${apply.classCook.cookFilename.split('/')}">
+								<video width="85" height="85" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach var="name" items="${apply.classCook.cookFilename.split('/')}">
+								<img src="/resources/images/uploadFiles/${name}" width="85" height="85" align="absmiddle"/>
+								<input type="hidden" name="image" value="${name }"/>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
+				</c:when>
+				<c:otherwise>
+					<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename}" width="85" height="85" align="absmiddle" class="image" value="${prodThumbnail}"/>
+				</c:otherwise>
+		    	</c:choose>
+		    	
+		    									
+
 							</td>
 							
 							<td align="left"  class="cookcontent">
@@ -377,7 +369,27 @@ div.emptyProd{
 					  	<tr>
 							
 							<td align="left" class="image" value="${apply.classCook.cookNo }">	
-									<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename.split('/')[0]}" width="85" height="85" align="absmiddle"/>
+														<c:choose>
+		    	<c:when test="${apply.classCook.cookFilename.contains('/')}">
+						<c:choose>
+						<c:when test="${apply.classCook.cookFilename.contains('mp4')}">
+							<c:forEach var="name" items="${apply.classCook.cookFilename.split('/')}">
+								<video width="85" height="85" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach var="name" items="${apply.classCook.cookFilename.split('/')}">
+								<img src="/resources/images/uploadFiles/${name}" width="85" height="85" align="absmiddle"/>
+								<input type="hidden" name="image" value="${name }"/>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
+				</c:when>
+				<c:otherwise>
+					<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename}" width="85" height="85" align="absmiddle" class="image" value="${prodThumbnail}"/>
+				</c:otherwise>
+		    	</c:choose>
 							</td>
 							<td align="left"  class="cookcontent">
 								<p class="cookName">${ apply.classCook.cookName }</p>
