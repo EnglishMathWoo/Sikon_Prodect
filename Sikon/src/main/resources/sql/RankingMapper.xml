@@ -72,7 +72,7 @@
 	 <select  id="deleteLoveMentor"  parameterType="map">
 	  	DELETE FROM ranking 
 	  	<where>
-			user_nickname = {userNickname} AND user_id = {userId}
+			user_nickname = #{userNickname} AND user_id = #{userId}
 		</where>		
 	 </select>
 	 
