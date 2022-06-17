@@ -261,7 +261,7 @@ padding-top:0px;
 <div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="love" items="${list}">
-  <div class="col-sm-6 col-md-3">
+  <div class="col-sm-6 col-md-3 col-lg-3">
   <br/> <br/>
   
     <div id="latest" class="group">
