@@ -204,6 +204,13 @@ div.container {
 				
 				// 취득일자
 				 $(function() {
+						$('#licenseDate2').datepicker({
+							dateFormat: "yy-mm-dd"
+						});
+				});
+				
+				// 취득일자
+				 $(function() {
 						$('#licenseDate3').datepicker({
 							dateFormat: "yy-mm-dd"
 						});
@@ -368,7 +375,9 @@ div.container {
     		<label for="mentorApply" class="col-sm-offset-1 col-sm-3 control-label" >쿠킹멘토 신청 여부</label>
    			<div class="col-sm-4">
       	 	<input type="radio" name="mentorApply" value="N" >미신청  &nbsp
+      	 	<c:if test="${career ne 'empty'}">
 			<input type="radio" name="mentorApply" value="Y" checked="checked">신청
+			</c:if>
     		</div>
  	 	  </div>
 		  

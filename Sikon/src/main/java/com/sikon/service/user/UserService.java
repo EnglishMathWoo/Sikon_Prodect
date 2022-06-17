@@ -32,11 +32,11 @@ public interface UserService {
 	// ID찾기
 	public String findUserId(String userName, String phone) throws Exception ;
 	
-	// Pw찾기 유효성 검사
-	public int findUserPwCheck(User user)throws Exception;
-	
-	// Pw찾기
-	public void updateUserPw(String userId,String userName)throws Exception;
+//	// Pw찾기 유효성 검사
+//	public int findUserPwCheck(User user)throws Exception;
+//	
+	// Pw 변경
+	public void updateUserPw(String userId,String password)throws Exception;
 		
 	// 회원정보수정
 	public void updateUser(User user) throws Exception;

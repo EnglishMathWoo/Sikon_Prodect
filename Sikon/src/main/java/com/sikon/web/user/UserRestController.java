@@ -119,6 +119,67 @@ public class UserRestController {
 			return cnt;
 	}
 	
+	// 비밀번호 이메일 인증
+	@RequestMapping(value = "json/mailCheckPw", method = RequestMethod.GET)
+	public String mailCheckPw(@RequestParam("userId") String userId) throws Exception{
+		
+		System.out.println("json/mailCheckPw: GET");
+		
+		int rendom = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+		
+		String from = "se981106@gmail.com";//보내는 이 메일주소
+	    System.out.println("1 from="+from);
+	    
+	    String to = userId;
+	    System.out.println("2 userId="+userId);
+	    
+	    String title = "비밀번호찾기에 필요한 인증번호 입니다.";
+	    System.out.println("3 title="+title);
+	    String content = "[인증번호] "+ rendom +" 입니다. <br/> 인증번호 확인란에 기입해주십시오.";
+	    
+//	    String title = "식탁의 온도 비밀번호 찾기를 통한 임시비밀번호입니다.";
+//	    System.out.println("3 title="+title);
+//	    
+//	    String content = "<h1>임시비밀번호 발급</h1>" +
+//						"<br/>"+userId+"님 "+
+//						"<br/>비밀번호 찾기를 통한 임시 비밀번호입니다."+
+//						"<br/>임시비밀번호 :   <h2>"+rendom+"</h2>"+
+//						"<br/>로그인 후 비밀번호 변경을 해주세요.";
+	    System.out.println("4 content="+content);
+	    
+	    String num = "";
+	    try {
+	    	System.out.println("오냐");
+	    	
+	    	//JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+			MimeMessage mail = mailSender.createMimeMessage();
+			System.out.println("여긴 오냐");
+			
+	        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8"); // true는 멀티파트 메세지를 사용하겠다는 뜻?
+	        System.out.println("5 mailHelper="+mailHelper);
+	        
+	        mailHelper.setFrom(from); // 보내는 사람 이메일주소 표기, 생략하면 작동안한다
+	        mailHelper.setTo(to); // 받는 사람 이메일
+	        mailHelper.setSubject(title); // 메일제목
+	        mailHelper.setText(content, true); // 메일내용   
+	        System.out.println("6 from="+from);
+	        System.out.println("7 to="+to);
+	        System.out.println("8 title="+title);
+	        System.out.println("9 content="+content);
+	        
+	        mailSender.send(mail);
+	        System.out.println("10 mail="+mail);
+	        num = Integer.toString(rendom);
+	        System.out.println("11 num="+num);
+	        
+	    } catch(Exception e) {
+	        num = "error";
+	    }
+	    
+	    System.out.println("9 num="+num);
+	    return num;
+	}
+	
 	// 이메일 인증
 	@RequestMapping(value = "json/mailCheck", method = RequestMethod.GET)
 	public String mailCheck(@RequestParam("userId") String userId) throws Exception{
