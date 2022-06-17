@@ -167,7 +167,9 @@ p {
 	width: 250px;
 	height:250px;
 } 
-
+.image:hover{
+	opacity: 0.8;
+}
 
 div.emptyProd{
 	border: 1px solid #937062;
@@ -224,6 +226,7 @@ div.emptyProd{
   background: #937062;
   font-family: 'Gowun Batang', serif;
 }
+
 
 
 </style>
