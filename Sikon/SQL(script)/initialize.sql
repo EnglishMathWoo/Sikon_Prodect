@@ -304,10 +304,11 @@ CREATE TABLE ranking (
 	recipe_no NUMBER, 
 	view_date DATE, 
 	user_nickname VARCHAR2(200), 
-	user_id VARCHAR2(200), 
+	user_id VARCHAR2(50), 
 	love_date DATE, 
 	love_increase NUMBER, 
 	prod_no NUMBER, 
+	serial_no VARCHAR2(50), 
 	purchase_date DATE, 
 	PRIMARY KEY(ranking_no) 
 );

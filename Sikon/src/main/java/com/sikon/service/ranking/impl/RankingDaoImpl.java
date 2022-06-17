@@ -45,8 +45,24 @@ public class RankingDaoImpl implements RankingDao {
 	}
 	
 	//구매 날짜 저장
-	public void insertPurchase(int prodNo) throws Exception {
-		sqlSession.insert("RankingMapper.addPurchase", prodNo);
+	public void insertPurchase(int prodNo, String serialNo) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("prodNo", prodNo);
+		map.put("serialNo", serialNo);
+		
+		sqlSession.insert("RankingMapper.addPurchase", map);
+		
+	}
+	
+	//구매 날짜 삭제
+	public void deletePurchase(int prodNo, int tranNo) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("prodNo", prodNo);
+		map.put("tranNo", tranNo);
+		
+		sqlSession.delete("RankingMapper.deletePurchase", map);
 	}
 	
 	//즐겨찾는 멘토 날짜 저장

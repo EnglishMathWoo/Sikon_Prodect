@@ -42,6 +42,12 @@
 		<result property="prodRegDate" 			column="prod_regdate" 			jdbcType="DATE"/>
 	</resultMap>
 	
+	<resultMap id="purchaseSelectMap" type="purchase">
+		<result property="tranNo" 					column="tran_no" 				jdbcType="NUMERIC"/>
+		<result property="serialNo" 				column="serial_no" 				jdbcType="VARCHAR"/>		
+		<collection property="purchaseProd" resultMap="productSelectMap"/>
+	</resultMap>
+	
 	<resultMap id="loveSelectMap" type="love">
 		<result property="loveNo" 			column="love_no" 			jdbcType="NUMERIC"/>
 		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
@@ -71,11 +77,11 @@
 				SYSDATE)
 	 </insert>
 	 
-	 <insert 	id="addPurchase"		parameterType="int" >
+	 <insert 	id="addPurchase"		parameterType="map" >
 	 	INSERT
-		INTO ranking ( ranking_no, prod_no, purchase_date) 
+		INTO ranking ( ranking_no, prod_no, serial_no, purchase_date) 
 		VALUES (seq_ranking_ranking_no.NEXTVAL, 
-				#{prodNo}, 
+				#{prodNo}, #{serialNo},
 				SYSDATE)
 	 </insert>
 	 
@@ -85,6 +91,14 @@
 		VALUES (seq_ranking_ranking_no.NEXTVAL, 
 				#{userNickname}, #{userId}, SYSDATE)
 	 </insert>
+	 
+	  <!-- 구매 취소 -->	
+	 <select  id="deletePurchase"  parameterType="map">
+	  	DELETE FROM ranking 
+	  	<where>
+			prod_no = #{prodNo} AND tran_no = #{tranNo}
+		</where>		
+	 </select>
 	 
 	 <!-- 즐겨찾기 삭제 -->	
 	 <select  id="deleteLoveMentor"  parameterType="map">

@@ -16,7 +16,10 @@ public interface RankingDao{
 	public List<Recipe> getRecipeList(Search search) throws Exception;
 	
 	//구매 날짜 저장
-	public void insertPurchase(int prodNo) throws Exception;
+	public void insertPurchase(int prodNo, String serialNo) throws Exception;
+	
+	//구매 날짜 삭제
+	public void deletePurchase(int prodNo, int tranNo) throws Exception;
 	
 	//즐겨찾는 멘토 날짜 저장
 	public void insertLoveMentor(String userNickname, String userId) throws Exception;
