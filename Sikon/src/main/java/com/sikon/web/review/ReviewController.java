@@ -95,14 +95,15 @@ public class ReviewController {
 				point.setPointType("EARN");
 				point.setPointCategory("RE");
 	
-				
+				int pointt=0;
 				if (category.equals("COOK") || category.equals("PRD")) {
 					if (review.getReviewImg() == null ||review.getReviewImg()=="") {
 						point.setPointScore(100);
+						pointt=100;
 					} else {
 						point.setPointScore(500);
+						pointt=500;
 					}
-					
 				}
 		String FILE_SERVER_PATH = filePath;
 		String newFileName = "";
@@ -144,10 +145,11 @@ public class ReviewController {
 		System.out.println("가나");
 		reviewService.updateStatus(textNo2, category);
 		pointService.addPoint(point);
-		reviewService.givePoint(textNo, user.getUserId());
+		reviewService.givePoint(pointt, user.getUserId());
 		System.out.println("가나");
-
-
+		
+		session.setAttribute("user", user);
+		
 		ModelAndView modelAndView = new ModelAndView();
 		if (category.equals("REC")) {
 			modelAndView.addObject(review);
