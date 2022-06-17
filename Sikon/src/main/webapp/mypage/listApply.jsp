@@ -174,6 +174,7 @@ div.emptyProd{
 			var category='COOK';
 			console.log('¸®ºä');
 			window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
+			console.log('¸®ºä´Þ·È´Ï?');
 		});
 
 		$("td.divy")
