@@ -112,7 +112,7 @@
 			 $("#totalprice").val(totalprice); 
 		});	
 
-/*	  
+ 
 	    $(document).ready(function(){ 
 	  		getGraph();
 	  		
@@ -165,7 +165,7 @@
 			     		  
 		    	  }) // ajax	  
 		      } // getGraph
-		  */    	  
+ 	  
 			 
 </script>	
 	

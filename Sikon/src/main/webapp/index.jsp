@@ -582,12 +582,12 @@ footer img:hover{
       <div>
         <section>
           <div>
-            <h3>가리비 칼국수</h3>
+            <h3>동치미 메밀 막국수</h3>
           </div>
         </section>
  <section>
           <div>
-            <h3>계란 두부</h3>
+            <h3>고소한 버터 스콘</h3>
           </div>
         </section>
       </div>
@@ -596,7 +596,7 @@ footer img:hover{
     <article class="two">
       <div>
         <section>
-          <h2>NEW ARRIVALS</h2>
+          <h2><span style="font-size: 20px">MENTOR'S</span> <br/>PICK</h2>
         <p>멘토의 추천 아이템 </p>
           
           	<!-- 네비게이션 -->
