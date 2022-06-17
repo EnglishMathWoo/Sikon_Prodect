@@ -16,7 +16,7 @@
 /* 배경색 */
 body {
 	background-color: #F7F7F7;
-	
+		
 }
 
 /* <hr/> 색상 */
@@ -62,6 +62,8 @@ margin-top:10px;
 	#topbar {
 		padding-top: 15px;
 		text-align: center;
+		font-family: 'Gowun Batang', serif;
+		font-weight: bold;
 	}
 	#header {
 		text-align: center;
@@ -71,6 +73,9 @@ margin-top:10px;
 	}
 	#mainav form {
 		margin-top: 0;
+		
+		
+
 	}
 	#pageintro article .heading {
 		margin-bottom: 30px;
@@ -110,6 +115,8 @@ margin-top:10px;
 /* Transition Fade
 --------------------------------------------------------------------------------------------------------------- */
 #mainav form * {
+font-family: 'Gowun Batang', serif;
+		font-weight: bold;
 	transition: none !important;
 }
 
@@ -142,6 +149,8 @@ nav ul, nav ol {
 
 /* Top Navigation */
 #mainav {
+font-family: 'Gowun Batang', serif;
+		font-weight: bold;
 	
 }
 

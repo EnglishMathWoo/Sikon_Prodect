@@ -94,7 +94,7 @@
 	<update id="givePoint" parameterType="map">
 		update users
 		<set>
-			holdpoint+=#{point}
+			holdpoint = holdpoint + #{point}
 		</set>
 		WHERE user_id = #{userId}
 	</update>
