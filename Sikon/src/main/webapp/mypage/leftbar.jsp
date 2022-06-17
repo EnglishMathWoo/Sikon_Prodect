@@ -28,7 +28,7 @@ h3{
     font-size: 14px;
     padding: 60px 10px 10px 30px;
     height: 630px;
-    padding-top:130px;
+    padding-top:220px;
 }
   .leftBarNav::-webkit-scrollbar {
     width: 3px;
@@ -179,7 +179,7 @@ color: #937062;
 </script>
 <body>
 <nav class="leftBarNav">
-<h2>Mypage Navigation Menus</h2>
+
 <span></span>
 <div class="leftBarMenu">
 	<h3>마이페이지</h3>

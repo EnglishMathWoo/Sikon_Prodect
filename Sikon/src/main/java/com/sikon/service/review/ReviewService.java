@@ -27,5 +27,7 @@ public interface ReviewService {
 	public void updateStatus(int textNo,String category) throws Exception;
 	
 	public void givePoint(int point,String userId) throws Exception;
+	public void updateReviewNum(int count, int recipeNo) throws Exception;
+	public int countReviewNum(int textNo,String category) throws Exception;
 
 }

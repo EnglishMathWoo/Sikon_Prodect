@@ -28,9 +28,16 @@ public interface UserService {
 	public List getCareer(String userId) throws Exception;
 	
 	public List getUCL(String userId) throws Exception;
+	
 	// ID찾기
 	public String findUserId(String userName, String phone) throws Exception ;
 	
+	// Pw찾기 유효성 검사
+	public int findUserPwCheck(User user)throws Exception;
+	
+	// Pw찾기
+	public void updateUserPw(String userId,String userName)throws Exception;
+		
 	// 회원정보수정
 	public void updateUser(User user) throws Exception;
 	public void updateLicense(Map license, User user) throws Exception;

@@ -14,6 +14,7 @@ public class Apply {
 	private Date checkDate;
 	private String receiverPhone;
 	private String reviewStatus;
+	private int total;
 	
 	public Apply() {
 		// TODO Auto-generated constructor stub
@@ -91,12 +92,22 @@ public class Apply {
 		this.reviewStatus = reviewStatus;
 	}
 
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
 	@Override
 	public String toString() {
 		return "Apply [applyNo=" + applyNo + ", classCook=" + classCook + ", applier=" + applier + ", paymentOption="
 				+ paymentOption + ", applyStatus=" + applyStatus + ", cookStatus=" + cookStatus + ", checkDate="
-				+ checkDate + ", receiverPhone=" + receiverPhone + ", reviewStatus=" + reviewStatus + "]";
+				+ checkDate + ", receiverPhone=" + receiverPhone + ", reviewStatus=" + reviewStatus + ", total=" + total
+				+ "]";
 	}
+
 
 
 

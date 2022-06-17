@@ -98,6 +98,15 @@
 		</set>
 		WHERE user_id = #{userId}
 	</update>
+	
+	<!-- SQL : UPDATE -->
+	<update id="updateReviewNum" parameterType="map">
+		update recipe
+		<set>
+			review_num = review_num + #{count}
+		</set>
+		WHERE recipe_no = #{recipeNo}
+	</update>
   
 	  <!-- SQL : UPDATE -->
 	 <update	id="updateReview"	parameterType="review" >
@@ -152,6 +161,7 @@
 	  					</when>
 	  					</choose>
 	  					</if>
+	  					order by r.review_regdate desc
 				
 	 </select>
 	 
@@ -182,6 +192,28 @@
 	  					</choose>
 	  					</if>
 				
+	  					 ) countTable
+						
+	 </select>
+	 
+	 <select  id="getReviewCount"  parameterType="int"	 resultType="int">
+	  SELECT COUNT(*)
+	  					FROM		(	select r.review_no
+	  					from review r,
+	  					<if test="category !=null">
+	  					<choose>
+						<when test='category == "PRD"'>
+						product p
+	  					where r.prod_no=p.prod_no
+	  					and p.prod_no=#{textNo}
+	  					</when>
+						<when test='category == "COOK"'>
+	  					cook c
+	  					where r.cook_no=c.cook_no
+	  					and c.cook_no=#{textNo}
+	  					</when>
+	  					</choose>
+	  					</if>
 	  					 ) countTable
 						
 	 </select>

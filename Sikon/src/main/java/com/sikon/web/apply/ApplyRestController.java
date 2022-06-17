@@ -128,9 +128,11 @@ public class ApplyRestController {
 	}	
 	
 	
-	@RequestMapping( value="json/saleCount", method=RequestMethod.GET )
+	@RequestMapping( value="json/saleCount", method=RequestMethod.GET)
 
-	public List<Apply> saleCount( 
+	public List<Apply> saleCount( @RequestParam("total") int total,			
+			@RequestParam("checkDate") Date checkDate,
+		
 			Model model, Apply apply) throws Exception {
 		
 		System.out.println("/apply/json/saleCount : POST");

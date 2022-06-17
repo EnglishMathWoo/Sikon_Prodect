@@ -559,7 +559,7 @@ background-color: #f7f7f7;
 							<option value="2"
 								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
 								<option value="3"
-								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>소요시간순</option>
+								${!empty search.orderCondition && search.orderCondition==3 ? "selected" : ""}>소요시간순</option>
 								
 						</select>
 			</div>
@@ -612,9 +612,10 @@ background-color: #f7f7f7;
   <br/> <br/>
   
     <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#"><img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
+      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" ><img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">
           <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
+           <p style="float:right">리뷰수: ${recipe.reviewNum }</p>
            <h6 >${recipe.recipeDetail }</h6>
           <ul class="meta">
             <li >${recipe.recipeTheme} </li>

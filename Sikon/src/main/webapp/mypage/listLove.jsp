@@ -176,8 +176,10 @@ p {
 .hoc{
 padding-top:0px;
 }
-img {
-    border-radius: 50%;
+#mentor {
+    border-radius: 100%;
+      width: 150px;
+  height: 150px;
 }
 
 </style>
@@ -265,7 +267,7 @@ img {
     <div id="latest" class="group">
  
       <article class="one_third first">
-      <a class="imgover"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300" style="border: 1px solid #d7d7d7"></a>
+      <a class="imgover"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" id="mentor" style="border: 1px solid #d7d7d7"></a>
         <div class="excerpt">
           <h4 class="heading" >${love.user.userName }</h4>
            <h6 >${love.user.phone }</h6>
