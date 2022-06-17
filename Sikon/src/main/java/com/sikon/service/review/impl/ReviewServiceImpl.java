@@ -100,4 +100,15 @@ public class ReviewServiceImpl implements ReviewService {
 		
 	}
 
+	@Override
+	public void updateReviewNum(int count, int recipeNo) throws Exception{
+		reviewDao.updateReviewNum(count,recipeNo);
+		
+	}
+
+	@Override
+	public int countReviewNum(int textNo,String category) throws Exception{
+		return reviewDao.countReviewNum(textNo,category);		
+	}
+
 }

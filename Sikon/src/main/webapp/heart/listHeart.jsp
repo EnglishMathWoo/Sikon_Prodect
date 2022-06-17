@@ -48,17 +48,23 @@
   <style>
 
         .bi-heart{
-            font-size: 30px;
-            line-height: 30px;
-            color:crimson;
+            font-size: 15px;
+            line-height: 15px;
+            color:#000;
         }
 
         .bi-heart-fill{
-            font-size: 30px;
-            line-height: 30px;
-            color:crimson;
+            font-size: 15px;
+            line-height: 15px;
+             color:#000;
         }
+.bi-heart-fill::before{
+color:crimson;
+}
 
+.bi-heart::before{
+color:crimson;
+}
 </style>
 
 <style>
@@ -300,7 +306,7 @@ p {
 		      <h3 class="font-x2 nospace" align="center"><br>내가좋아요한목록 조회 </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
-		    		    <button type="button" class="submit">선택삭제</button>
+		    		  
 		    
 		  
 		    
@@ -320,18 +326,54 @@ p {
   
     <div id="latest" class="group">
  
-   <input type="checkbox" name="ckBookmark" id="${list.heartNo }" >
+
       <article class="one_third first">
-      <a class="imgover" value="${list.cook.cookNo }" href="#"><img src="/resources/images/uploadFiles/${list.cook.cookFilename }" width="320" height="300"></a>
+      <a class="imgover" value="${list.cook.cookNo }" href="#"><c:choose>
+		    	<c:when test="${list.cook.cookFilename.contains('/')}">
+						<c:choose>
+						<c:when test="${list.cook.cookFilename.contains('mp4')}">
+							<c:forEach var="name" items="${list.cook.cookFilename.split('/')}">
+								<video width="320" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach var="name" items="${list.cook.cookFilename.split('/')}">
+								<img src="/resources/images/uploadFiles/${name}" width="320" height="300" align="absmiddle"/>
+								<input type="hidden" name="image" value="${name }"/>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
+				</c:when>
+				<c:otherwise>
+					<img src="/resources/images/uploadFiles/${list.cook.cookFilename}" width="320" height="300" align="absmiddle" class="image" value="${prodThumbnail}"/>
+				</c:otherwise>
+		    	</c:choose></a>
         <div class="excerpt">
           <h4 class="heading" >${list.cook.cookName }</h4>
            <h6 >${list.cook.cookBrief }</h6>
           <ul class="meta">
-            <li > ${list.cook.cookBrief }</li>
-            <li>${list.cook.cookRecruit }</li>
-            <li>${list.cook.cookTheme }</li>
-             <li> ${list.cook.mentor.userNickname }</li>
-<p align="right" class="bi bi-heart-fill like_btn" value="${list.cook.cookNo}" id="like_btn">${list.cook.hearthit}</p>
+           
+            <li ><strong>모집인원 : ${list.cook.cookRecruit } 명</strong></li>
+            <li>
+            <c:if test = "${list.cook.cookTheme =='KO'}">
+			 <strong>테마 : 한식</strong>
+			</c:if>
+			<c:if test = "${list.cook.cookTheme == 'JA'}">
+			 <strong>테마 : 일식</strong>
+			</c:if>
+			<c:if test = "${list.cook.cookTheme == 'AM'}">
+		   <strong>테마 : 양식</strong>
+			</c:if>
+			<c:if test = "${list.cook.cookTheme == 'CH'}">
+			 <strong>테마 : 중식</strong>
+			</c:if>
+			<c:if test = "${list.cook.cookTheme == 'DE'}">
+			 <strong>테마 : 간식</strong>
+			</c:if>		</li>
+           
+          </ul>
+<p align="right" class="bi bi-heart-fill like_btn" value="${list.cook.cookNo}" id="like_btn">&nbsp; 좋아요${list.cook.hearthit}개</p>
           </ul>
           </div>
       </article>

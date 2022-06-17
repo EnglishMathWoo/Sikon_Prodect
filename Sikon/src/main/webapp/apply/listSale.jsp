@@ -121,20 +121,19 @@
 		   function getGraph(){
 		       	  let timeList = [];
 		    	  let posList = [];
-		    	  var cookPrice = $(this).attr("value"); 	 
-		    	  var checkDate = $(this).attr("value");	
+
 		   
 		    	  $.ajax({
 		    		  url : "/apply/json/saleCount",
 		    		  type:"get",
-		    		  data:{'cookPrice' : cookPrice, 'checkDate' : checkDate},
+		    		  data:{ total : "${apply.total}", check_date : "${apply.checkDate}"},
 		    		  dataType:"json",
 		    		  success:function(data){
 		    			   console.log(data[0].cook_price);
 		    			  // 그래프로 나타낼 자료 리스트에 담기
 		    			  for (let i = 0; i<data.length;i++){    				  
 								timeList.push(data[i].check_date);    				  
-								posList.push(data[i].cook_price);    				  
+								posList.push(data[i].total);    				  
 		    			  }
 		    			  console.log(timeList);
 		    			   console.log(posList);  	
@@ -145,7 +144,7 @@
 		    		    	    labels: timeList, // X축 
 		    		    	    datasets: [{ 
 		    		    	        data: posList, // 값
-		    		    	        label: "checkDate",
+		    		    	        label: "${apply.checkDate}",
 		    		    	        borderColor: "#3e95cd",
 		    		    	        fill: false
 		    		    	      }

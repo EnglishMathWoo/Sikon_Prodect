@@ -96,10 +96,10 @@ public class ReviewRestController {
 		review.setReviewContent(review.getReviewContent());
 		review.setWriterNickname(user.getUserNickname());
 		review.setReviewCategory("REC");
-
+		
 		System.out.println("¸®ºä:" + review);
 		reviewService.addReview(review);
-
+		reviewService.updateReviewNum(1,recipeNo);
 		String content=review.getReviewContent();
 		return content;
 	}
@@ -170,11 +170,13 @@ public class ReviewRestController {
 //
 	// ¸®ºä »èÁ¦
 	@RequestMapping(value = "/json/deleteReview")
-	public void deleteReview(@RequestParam("reviewNo") int reviewNo) throws Exception {
+	public void deleteReview(@RequestParam("recipeNo") int recipeNo,@RequestParam("reviewNo") int reviewNo) throws Exception {
 
 		System.out.println("/review/deleteReview °¡º¸ÀÚ°í : POST");
 
 			reviewService.deleteReview(reviewNo);
+			reviewService.updateReviewNum(-1,recipeNo);
+
 
 	}
 }

@@ -268,22 +268,12 @@ public class PurchaseController {
 	
 
 	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.POST)
-	public ModelAndView addPurchaseByCart(@ModelAttribute("purchase") Purchase purchase, @RequestParam("coupon") String[] coupon,
-															@RequestParam("cartNo") int[] cartNo, @RequestParam("userId") String userId ) throws Exception {
+	public ModelAndView addPurchaseByCart(@ModelAttribute("purchase") Purchase purchase, @RequestParam("cartNo") int[] cartNo, @RequestParam("userId") String userId ) throws Exception {
 
 		System.out.println("========================================================================");
 		System.out.println("/purchase/addPurchaseByCart : POST");
-		System.out.println("========================================================================");
-		for(String str : coupon) {
-			System.out.println("str");
-			System.out.println(str);
-		}
-		System.out.println("========================================================================");
-		for(int carts : cartNo) {
-			System.out.println("carts");
-			System.out.println(carts);
-		}
-		System.out.println("========================================================================");
+		
+		/*
 		
 		User user = userService.getUser(userId);
 		
@@ -322,11 +312,7 @@ public class PurchaseController {
 			purchaseByCart.setEarnPoint(purchase.getEarnPoint());
 			purchaseByCart.setBuyer(user);
 			purchaseByCart.setPurchaseProd(product);
-			if(coupon[i].equals("none")) {
-				purchaseByCart.setUsedCoupon(null);
-			}else {
-				purchaseByCart.setUsedCoupon(coupon[i]);
-			}
+			purchaseByCart.setUsedCoupon(purchase.getUsedCoupon());
 			purchaseByCart.setPurchaseQuantity(cart.getQuantity());
 			purchaseByCart.setDivyStatus("001");
 			purchaseByCart.setPaymentOpt("KA");
@@ -386,19 +372,16 @@ public class PurchaseController {
 		// 쿠폰 사용하기
 		System.out.println("쿠폰사용 시작");
 		
-		for(String cou : coupon) {
-			
-			if(cou.equals("none")) {
-				cou = null;	
+			if(purchase.getUsedCoupon().equals("none")) {
+				purchase.setUsedCoupon(null);
 			}
 			
-			if(cou != null) {
-				int issueNo = Integer.parseInt(cou);
+			if(purchase.getUsedCoupon() != null) {
+				int issueNo = Integer.parseInt(purchase.getUsedCoupon());
 				Coupon usedcoupon = couponService.getIssuedCoupon(issueNo);
 				usedcoupon.setIssueStatus("002");
 				couponService.updateIssueStatus(usedcoupon);
 			}
-		}
 		System.out.println("쿠폰사용 끝");
 		//==================================================================================		
 		
@@ -407,7 +390,7 @@ public class PurchaseController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");
-		modelAndView.addObject("list", list);
+//		modelAndView.addObject("list", list);
 		
 		return modelAndView;
 	}

@@ -42,8 +42,24 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 
-
 <style>
+
+
+.container {
+	padding-top: 150px;
+} 
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 500px;
+    padding-top: 170px;
+}
+</style>
+<style>
+
+
 body {
 	padding-top: 50px;
 	
@@ -176,8 +192,10 @@ p {
 .hoc{
 padding-top:0px;
 }
-img {
-    border-radius: 50%;
+#mentor {
+    border-radius: 100%;
+      width: 150px;
+  height: 150px;
 }
 
 </style>
@@ -259,13 +277,13 @@ img {
 <div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="love" items="${list}">
-  <div class="col-sm-6 col-md-3">
+  <div class="col-sm-6 col-md-3 col-lg-3">
   <br/> <br/>
   
     <div id="latest" class="group">
  
       <article class="one_third first">
-      <a class="imgover"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300" style="border: 1px solid #d7d7d7"></a>
+      <a class="imgover"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" id="mentor" style="border: 1px solid #d7d7d7"></a>
         <div class="excerpt">
           <h4 class="heading" >${love.user.userName }</h4>
            <h6 >${love.user.phone }</h6>

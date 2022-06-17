@@ -45,6 +45,14 @@
 .container {
 	padding-top: 150px;
 } 
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 500px;
+    padding-top: 170px;
+}
 </style>
 
 <style>
@@ -102,7 +110,7 @@ body {
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
 
-#latest article{max-width:348px;}
+#latest article{max-width:200px;}
 
 #footer{padding-bottom:50px;}/* Not required, just looks a little better */
 .latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
@@ -310,7 +318,27 @@ p {
       <article class="one_third first"><a class="imgover" value="${cook.cookNo }" href="#"> 
      
  
-  <img src="/resources/images/uploadFiles/${cook.cookFilename }" id="image" width="320" height="300"></a>
+<c:choose>
+		    	<c:when test="${cook.cookFilename.contains('/')}">
+						<c:choose>
+						<c:when test="${cook.cookFilename.contains('mp4')}">
+							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
+								<video width="400" height="400" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
+								<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+								<input type="hidden" name="image" value="${name }"/>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
+				</c:when>
+				<c:otherwise>
+					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle" class="image" value="${prodThumbnail}"/>
+				</c:otherwise>
+		    	</c:choose></a>
         <div class="excerpt">
           <h4 class="heading" >${cook.cookName }</h4>
            <h6 >${cook.cookBrief }</h6>

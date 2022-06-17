@@ -134,35 +134,33 @@
 													<if test='themeCondition == "des"'>
 										 				AND r.recipe_theme LIKE UPPER('DES')
 													</if>
-											</if>
-													
+											</if>													
 											<if test="orderCondition != null">
 											
 											<choose>
-													<when test="orderCondition == 0  ">
+											<when test='orderCondition == 0  '>
 										 				ORDER BY r.recipe_regdate DESC
 													</when>
-													<when test="orderCondition == 1  ">
-										 				ORDER BY r.review_num ASC
+													<when test='orderCondition == 1  '>
+										 				ORDER BY r.review_num DESC
 													</when>
-													<when test="orderCondition == 2 ">
+													<when test='orderCondition == 2  '>
 										 				ORDER BY r.recipe_difficulty DESC
 													</when>
-													<when test="orderCondition == 3  ">
+													<when test='orderCondition == 3  '>
 										 				ORDER BY r.cooking_time DESC
 													</when>
-													<when test="orderCondition == 4  ">
+													<when test='orderCondition == 4  '>
 										 				ORDER BY r.recipe_views DESC
 													</when>
 													<otherwise>
-														order by r.recipe_no
+														ORDER BY r.recipe_regdate DESC
 													</otherwise>
 													</choose>
 													</if>
 
 
- ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} ) 
+ ) inner_table	WHERE ROWNUM &lt;= #{endRowNum} ) 
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	
@@ -204,20 +202,23 @@
 											<if test="orderCondition != null">
 											
 											<choose>
-											<when test="orderCondition == 0  ">
+											<when test='orderCondition == 0  '>
 										 				ORDER BY r.recipe_regdate DESC
 													</when>
-													<when test="orderCondition == 1  ">
-										 				ORDER BY r.review_num ASC
+													<when test='orderCondition == 1  '>
+										 				ORDER BY r.review_num DESC
 													</when>
-													<when test="orderCondition == 2 ">
+													<when test='orderCondition == 2  '>
 										 				ORDER BY r.recipe_difficulty DESC
 													</when>
-													<when test="orderCondition == 3  ">
+													<when test='orderCondition == 3  '>
 										 				ORDER BY r.cooking_time DESC
 													</when>
+													<when test='orderCondition == 4  '>
+										 				ORDER BY r.recipe_views DESC
+													</when>
 													<otherwise>
-														order by r.recipe_no
+														ORDER BY r.recipe_regdate DESC
 													</otherwise>
 													</choose>
 													</if>
