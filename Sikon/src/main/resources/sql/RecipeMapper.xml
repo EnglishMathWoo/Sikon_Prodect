@@ -90,6 +90,14 @@
 		WHERE recipe_no = #{recipeNo}
 	</update>
 	 
+	  <!-- SQL : UPDATE -->
+	<update id="givePoint" parameterType="map">
+		update users
+		<set>
+			holdpoint=#{point}
+		</set>
+		WHERE user_id = #{userId}
+	</update>
 		
 	 
 	  <delete id="deleteRecipe" parameterType="int" >

@@ -171,9 +171,10 @@ div.emptyProd{
 
 		$( ".review" ).on("click" , function() {
 			var textNo=$(this).attr("value");
+			var textNo2=$(this).attr("value2");
 			var category='COOK';
 			console.log('¸®ºä');
-			window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
+			window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo+'&textNo2='+textNo2, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
 			console.log('¸®ºä´Þ·È´Ï?');
 		});
 
@@ -311,7 +312,7 @@ div.emptyProd{
 
 							 <c:choose>
 							 	<c:when test="${apply.applyStatus.equals('300') && apply.reviewStatus.equals('001')}">
-							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo }">¸®ºä¾²±â</button></td>
+							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo }"  value2="${apply.applyNo }">¸®ºä¾²±â</button></td>
 							 	</c:when>
 							 	<c:otherwise>
 							 		
@@ -359,7 +360,7 @@ div.emptyProd{
 						</c:choose>
 							 <c:choose>
 							 	<c:when test="${apply.applyStatus.equals('300') && apply.reviewStatus.equals('001')}">
-							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo }">¸®ºä¾²±â</button></td>
+							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo }" value2="${apply.applyNo }">¸®ºä¾²±â</button></td>
 							 	</c:when>
 							 	<c:otherwise>
 							 		
