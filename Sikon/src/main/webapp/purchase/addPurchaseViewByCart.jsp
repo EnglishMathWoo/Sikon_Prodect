@@ -52,16 +52,15 @@ body>div.container {
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-
+		///*
 		//============= "구매"  Event 연결 =============
 		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "#iamportPayment" ).on("click" , function() {
 				console.log('구매');
 				fncAddPurchase();
 			});
 		});	
-		
+		//*/
 		
 		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
@@ -192,6 +191,94 @@ body>div.container {
     }
 </script> 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<script>
+  
+
+/*
+
+	
+	$(function() {
+		
+		$("#iamportPayment").on("click" , function() {
+			console.log("아임포트");		
+			
+			var payopt = $("#iamportPayment").attr('value');
+			console.log("payopt: "+payopt);
+			$("#paymentOpt").val(payopt);
+			
+			payment();	
+		});
+	});	
+	
+function payment(data) {
+	
+	var payment = $("#paymentOpt").val();
+	console.log("payment: "+payment);
+	
+	var prodname = $("#prodname").val();
+	console.log("prodname: "+prodname);
+	
+	var prodprice = $("#prodprice").val();
+	console.log("prodprice: "+prodprice);
+
+	var buyeremail = $("#buyeremail").val();
+	console.log("buyeremail: "+buyeremail);
+
+	var buyername = $("#buyername").val();
+	console.log("buyername: "+buyername);
+
+	var buyerphone = $("#buyerphone").val();
+	console.log("buyerphone: "+buyerphone);
+	
+	var address = $("#sample6_address").val();
+	console.log("address: "+address);
+	
+	var postcode = $("#sample6_postcode").val();
+	console.log("postcode: "+postcode);
+	
+	var uid="${uid }";
+	console.log("uid: "+uid);
+	
+	IMP.init('imp05238113'); 
+    
+    IMP.request_pay({
+    	pg : "kakaopay", 
+        pay_method : payment,
+        merchant_uid : uid ,
+        name : prodname ,
+        amount : prodprice ,
+        buyer_email : buyeremail ,
+        buyer_name : buyername ,
+        buyer_tel : buyerphone ,
+        buyer_addr : address ,
+        buyer_postcode : postcode 
+    }, function(rsp) {
+    	console.log(rsp);
+    	$.ajax({
+
+        	type : "POST",
+        	url : "/purchase/json/verifyIamport?imp_uid=" + rsp.imp_uid 
+        	
+        }).done(function(data) {
+        	
+        	console.log(data);
+        	
+        	if(rsp.paid_amount == data.response.amount){
+	        	alert("결제 및 결제검증완료");
+	        	fncAddPurchase();
+        	} else {
+        		alert("결제 실패");
+        	}
+        });
+    });
+	
+}
+    //*/
+    
+
+
+    </script>
 
 
 	
