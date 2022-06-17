@@ -65,9 +65,22 @@
 	$(function() {	
 		
 	
+
 		
 		
 		$( "td.divy" ).on("click" , function() {
+			console.log('수강중이심');
+			var message1 = $(this).attr("value1");
+			console.log(message1);
+			var message2 = $(this).attr("value2");
+			console.log(message2);
+			
+			self.location ="/apply/updateApplyStatus?menu=search&applyNo="+message1+"&applyStatus="+message2;
+		});
+		
+		
+		
+		$( "td.arrival" ).on("click" , function() {
 			console.log('수강완료하심');
 			var message1 = $(this).attr("value1");
 			console.log(message1);
@@ -99,7 +112,7 @@
 			 $("#totalprice").val(totalprice); 
 		});	
 
-	  
+/*	  
 	    $(document).ready(function(){ 
 	  		getGraph();
 	  		
@@ -152,7 +165,7 @@
 			     		  
 		    	  }) // ajax	  
 		      } // getGraph
-		      	  
+		  */    	  
 			 
 </script>	
 	
@@ -205,8 +218,7 @@
             <th align="center">수량</th>
             <th align="center">결제날짜</th>
             <th align="center">상품번호</th>
-            <th align="center">수강현황</th>
-            <th align="center">현재상태</th>
+            <th align="center">수강현황</th>           
             <th align="center">구매회원</th>
           </tr>
         </thead>
@@ -237,7 +249,7 @@
 					</c:when>
 					<c:when test="${apply.applyStatus.equals('200') }">
 						<td align="center" style="color:#2990e9" class="arrival status"  value1="${apply.applyNo }" value2="${apply.applyStatus}">수 강 중</td>
-						<td align="center"> 수강중</td>
+						
 					</c:when>
 							<c:when test="${apply.applyStatus.equals('300') }">
 								

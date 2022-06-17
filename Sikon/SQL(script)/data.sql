@@ -1,6 +1,6 @@
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'user@naver.com', 'user', '1234', '19941111', 'user', 'kim3.jpg', '서울시 서초구', default, '01022249988', 100000, 'N', default, SYSDATE, 'N');
+VALUES ( 'user@naver.com', 'user', '1234', '19941111', 'user', 'user.jpg', '서울시 서초구', default, '01022249988', 100000, 'N', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
@@ -12,19 +12,23 @@ VALUES ( 'abc@naver.com', 'abc', '1234', '19941111', 'abc', default, '서울시 
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor1@naver.com', 'mentor1', '1234', '19941111', 'mentor1', 'aaa.jpg', '서울시 서초구', 'mentor', '01033337777', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor1@naver.com', 'mentor1', '1234', '19941111', 'mentor1', '고든램지.jpg', '서울시 서초구', 'mentor', '01033337777', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
 VALUES ( 'mentor2@naver.com', 'mentor2', '1234', '19941111', 'mentor2', '168939.jpg', '서울시 서초구', 'mentor', '01033331111', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
+INTO users ( user_id, user_name원 password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
+VALUES ( 'mentor3@naver.com', 'mentor3', '1234', '19941111', 'mentor3', '호빵맨.jpg', '서울시 서초구', 'mentor', '01033338888', 100000, 'Y', default, SYSDATE, 'N');
+
+INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor3@naver.com', 'mentor3', '1234', '19941111', 'mentor3', '60a81c75-c604-4abf-a119-364aa1dd7f1f.jpg', '서울시 서초구', 'mentor', '01033338888', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor4@naver.com', 'mentor4', '1234', '19941111', 'mentor4', '백종원.jpg', '서울시 서초구', 'mentor', '01032125777', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT all
 INTO users
-VALUES ( 'admin@naver.com', 'admin', '1234', '19941111', 'admin', 'ee.jpg', '서울시 서초구', 'admin', '01023341200', 100000, 'Y', default, SYSDATE, to_date('2013/01/14', 'YYYY/MM/DD'), 'Y')
+VALUES ( 'admin@naver.com', 'admin', '1234', '19941111', 'admin', '60a81c75-c604-4abf-a119-364aa1dd7f1f.jpg', '서울시 서초구', 'admin', '01023341200', 100000, 'Y', default, SYSDATE, to_date('2013/01/14', 'YYYY/MM/DD'), 'Y')
 INTO license
 VALUES ( seq_license_license_no.nextval, '2종보통', '강남구청', to_date('2017/05/24', 'YYYY/MM/DD'), 'admin@naver.com' )
 INTO career
@@ -111,7 +115,7 @@ VALUES (seq_cook_cook_no.nextval, '예다의 고양이', '0a2bb178-ac96-4c04-85e
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
-VALUES (seq_cook_cook_no.nextval, '예다의 화이트초코케익 쿠킹클래스', '0a2bb178-ac96-4c04-85e9-bd424f4d849b.jpg', '진짜 쉬워요', '1', 14000, 'JA', '22/06/10',  '22/06/10', 5, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 20, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor', 'mentor@naver.com' );
+VALUES (seq_cook_cook_no.nextval, '예다의 화이트초코케익 쿠킹클래스', '0a2bb178-ac96-4c04-85e9-bd424f4d849b.jpg', '진짜 쉬워요', '1', 14000, 'JA', '22/06/10',  '22/06/10', 5, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 20, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor4', 'mentor4@naver.com' );
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
@@ -174,13 +178,13 @@ VALUES (seq_notice_notice_no.NEXTVAL, '식탁의 온도 코스닥 상장 안내'
 
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'user', '생강', '노맛','노맛노맛노맛' ,'htm_20150402190451608.jpg', null, '중급', 'KO', 10, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'user', '김치비빔국수', '새콤달콤 비빔국수','여름철 별미로 최고에요!' ,'김치비빔국수.jpg', null, '중급', 'KO', 10, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
 select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
 from(
-SELECT '낙지' AS ingredientName , '1g' AS ingredientAmount FROM DUAL
+SELECT '김치' AS ingredientName , '500g' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT

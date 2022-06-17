@@ -78,33 +78,32 @@ public class ReviewController {
 	@RequestMapping(value = "addReview", method = RequestMethod.POST)
 	public ModelAndView addReview(@RequestParam("fileArray") MultipartFile[] fileArray,
 			@ModelAttribute("review") Review review, @RequestParam("category") String category,
-			@RequestParam("textNo") int textNo, Model model, HttpServletRequest request) throws Exception {
+			@RequestParam("textNo") int textNo,@RequestParam("textNo2") int textNo2, Model model, HttpServletRequest request) throws Exception {
 
 		System.out.println("/review/addReview : POST");
 //		System.out.println("review=" + review);
 //		System.out.println("category=" + category);
-//		System.out.println("textNo=" + textNo);
+		System.out.println("textNo=" + textNo);
+		System.out.println("textNo2=" + textNo2);
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		
 		// 리뷰 작성시 일반리뷰: 100원, 포토리뷰: 500원 적립금
-		Point point = new Point();
-		point.setUserId(user.getUserId());
-		point.setPointType("EARN");
-		point.setPointCategory("RE");
-		
-		if (category.equals("COOK") || category.equals("PRD")) {
-			if (review.getReviewImg() == null ||review.getReviewImg()=="") {
-				point.setPointScore(100);
-			} else {
-				point.setPointScore(500);
-			}
-			pointService.addPoint(point);
-			
-
-		}
-		
+				Point point = new Point();
+				point.setUserId(user.getUserId());
+				point.setPointType("EARN");
+				point.setPointCategory("RE");
+	
+				
+				if (category.equals("COOK") || category.equals("PRD")) {
+					if (review.getReviewImg() == null ||review.getReviewImg()=="") {
+						point.setPointScore(100);
+					} else {
+						point.setPointScore(500);
+					}
+					
+				}
 		String FILE_SERVER_PATH = filePath;
 		String newFileName = "";
 
@@ -143,7 +142,9 @@ public class ReviewController {
 		reviewService.addReview(review);
 
 		System.out.println("가나");
-		reviewService.updateStatus(textNo, category);
+		reviewService.updateStatus(textNo2, category);
+		pointService.addPoint(point);
+		reviewService.givePoint(textNo, user.getUserId());
 		System.out.println("가나");
 
 

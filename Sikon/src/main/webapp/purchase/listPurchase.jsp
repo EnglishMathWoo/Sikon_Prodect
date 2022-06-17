@@ -199,8 +199,9 @@ div.emptyProd{
 			
 			$( ".review" ).on("click" , function() {
 				var textNo=$(this).attr("value");
+				var textNo2=$(this).attr("value2");
 				var category='PRD';
-				window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
+				window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo+'&textNo2='+textNo2, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
 			});
 			
 		});	
@@ -273,7 +274,7 @@ div.emptyProd{
 					 
 					 <c:choose>
 					 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
-					 		<td class="rev"><button type="button" class="review" value="${purchase.purchaseProd.prodNo }">¸®ºä¾²±â</button></td>
+					 		<td class="rev"><button type="button" class="review" value="${purchase.purchaseProd.prodNo }" value2="${purchase.tranNo }">¸®ºä¾²±â</button></td>
 					 	</c:when>
 					 	<c:otherwise>
 					 		<td class="rev"></td>

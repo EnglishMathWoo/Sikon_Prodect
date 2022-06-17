@@ -112,9 +112,6 @@ form{
     max-height: 250px;
     margin-bottom: 30px;
 }
-</style>
-
-<style>
 .drop-zone{
 width:837px;
 height:200px;
@@ -174,7 +171,6 @@ margin-bottom: 10px;
 
 .btn_upload {
   cursor: pointer;
-  display: inline-block;
   overflow: hidden;
   position: relative;
   padding: 5px 10px;
@@ -254,8 +250,6 @@ margin-bottom: 10px;
 							      </span>
 							    <img id="ImgPreview" src="" class="preview1" />
 							    <input type="button" id="removeImage1" value="x" class="btn-rmv1" />
-                         
-                        
                     </div>
                     
                     <div class="form-group">
@@ -270,6 +264,7 @@ margin-bottom: 10px;
                     
                     <input type="hidden" name="category" value="${param.category }"/>
                     <input type="hidden" name="textNo" value="${param.textNo }"/>
+                    <input type="hidden" name="textNo2" value="${param.textNo2 }"/>
                     
                 </form>
             </div>
