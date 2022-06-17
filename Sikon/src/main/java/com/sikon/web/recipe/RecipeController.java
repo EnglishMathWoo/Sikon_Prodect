@@ -137,6 +137,7 @@ public class RecipeController {
 		point.setPointType("EARN");
 		point.setPointScore(1000);
 		pointService.addPoint(point);
+		reviewService.givePoint(1000, user.getUserId());
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("ingredient", list);

@@ -176,6 +176,9 @@ p {
 .hoc{
 padding-top:0px;
 }
+img {
+    border-radius: 50%;
+}
 
 </style>
 
@@ -240,7 +243,7 @@ padding-top:0px;
      <div class="center btmspace-50">
 			<br />
 			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
-				<br> | 내가 사랑하는 멘토 | <br>
+				<br> | MY MENTORS | <br>
 			</h3>
 		</div>
 			   <button type="button" class="submit">즐겨찾기삭제</button>
@@ -262,7 +265,7 @@ padding-top:0px;
     <div id="latest" class="group">
  
       <article class="one_third first">
-      <a class="imgover"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300"></a>
+      <a class="imgover"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300" style="border: 1px solid #d7d7d7"></a>
         <div class="excerpt">
           <h4 class="heading" >${love.user.userName }</h4>
            <h6 >${love.user.phone }</h6>

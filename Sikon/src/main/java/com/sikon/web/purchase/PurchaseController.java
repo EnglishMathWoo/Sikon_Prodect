@@ -34,6 +34,7 @@ import com.sikon.service.domain.Coupon;
 import com.sikon.service.domain.Point;
 import com.sikon.service.product.ProductService;
 import com.sikon.service.purchase.PurchaseService;
+import com.sikon.service.ranking.RankingService;
 import com.sikon.service.user.UserService;
 import com.sikon.service.cart.CartService;
 import com.sikon.service.coupon.CouponService;
@@ -63,6 +64,9 @@ public class PurchaseController {
 	@Autowired
 	@Qualifier("pointServiceImpl")
 	private PointService pointService;
+	@Autowired
+	@Qualifier("rankingServiceImpl")
+	private RankingService rankingService;
 	
 		
 	public PurchaseController(){
@@ -215,6 +219,8 @@ public class PurchaseController {
 		}
 		//==================================================================================		
 		
+		rankingService.addPurchase(prodNo, serialNo);
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchase.jsp");
 		modelAndView.addObject("purchsae", purchase);
@@ -336,6 +342,8 @@ public class PurchaseController {
 			purchaseService.updateStock(cart.getQuantity(), product.getProdNo());
 			
 			cartService.deleteCart(cartNo[i]);
+			
+			rankingService.addPurchase(cart.getCartProd().getProdNo(), serialNo);
 		
 		}
 		

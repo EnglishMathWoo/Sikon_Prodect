@@ -166,7 +166,7 @@ text-align: center
 								</c:if>
 								</td>
 								<td>
-								<c:if test="${point.pointCategory=='STR'}">
+								<c:if test="${point.pointCategory=='str'}">
 								상품 구매
 								</c:if>
 								<c:if test="${point.pointCategory=='RE'&&point.pointScore=='500'}">

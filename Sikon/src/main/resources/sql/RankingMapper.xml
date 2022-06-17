@@ -5,13 +5,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="RankingMapper">
- 	 	
-	<resultMap id="searchSelectMap" type="search">
-		<result property="searchNo" 					column="search_no" 				jdbcType="NUMERIC"/>
-  		<result property="searchKeyword" 				column="search_keyword" 				jdbcType="VARCHAR"/>
-  		<result property="searchDate" 			column="search_date"				jdbcType="DATE"/>
-	</resultMap>
-	
+ 		
 	<resultMap   id="recipeSelectMap"  type="recipe">
 		<result property="recipeNo" 			column="recipe_no" 			jdbcType="NUMERIC"/>
 		<result property="recipeName"			column="recipe_name" 		jdbcType="VARCHAR" />
@@ -30,6 +24,28 @@
 		<result property="ingredientAmount"      column="ingredient_amount"           jdbcType="VARCHAR"/>
 		<result property="recipeViews"      column="recipe_views"           jdbcType="NUMERIC"/>
 		<collection property="writer" resultMap="userSelectMap"/>
+	</resultMap>
+	
+	<resultMap id="productSelectMap" type="product">
+		<result property="prodNo" 				column="prod_no" 				jdbcType="NUMERIC"/>
+		<result property="prodName"				column="prod_name" 				jdbcType="VARCHAR"/>
+		<result property="prodThumbnail" 		column="prod_thumbnail" 		jdbcType="VARCHAR"/>
+		<result property="prodContent" 			column="prod_content" 			jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="prodDetail" 			column="prod_detail" 			jdbcType="VARCHAR"/>
+		<result property="prodStock" 			column="prod_stock" 			jdbcType="NUMERIC"/>
+		<result property="prodTheme" 			column="prod_theme" 			jdbcType="VARCHAR"/>
+		<result property="prodPrice" 			column="prod_price" 			jdbcType="NUMERIC"/>
+		<result property="prodDisRate" 			column="prod_disrate" 			jdbcType="NUMERIC"/>
+		<result property="prodDisPrice" 		column="prod_disprice" 			jdbcType="NUMERIC"/>
+		<result property="prodStatus" 			column="prod_status" 			jdbcType="VARCHAR"/>
+		<result property="couponApply" 			column="coupon_apply" 			jdbcType="VARCHAR"/>
+		<result property="prodRegDate" 			column="prod_regdate" 			jdbcType="DATE"/>
+	</resultMap>
+	
+	<resultMap id="purchaseSelectMap" type="purchase">
+		<result property="tranNo" 					column="tran_no" 				jdbcType="NUMERIC"/>
+		<result property="serialNo" 				column="serial_no" 				jdbcType="VARCHAR"/>		
+		<collection property="purchaseProd" resultMap="productSelectMap"/>
 	</resultMap>
 	
 	<resultMap id="loveSelectMap" type="love">
@@ -61,6 +77,14 @@
 				SYSDATE)
 	 </insert>
 	 
+	 <insert 	id="addPurchase"		parameterType="map" >
+	 	INSERT
+		INTO ranking ( ranking_no, prod_no, serial_no, purchase_date) 
+		VALUES (seq_ranking_ranking_no.NEXTVAL, 
+				#{prodNo}, #{serialNo},
+				SYSDATE)
+	 </insert>
+	 
 	 <insert 	id="addLoveMentor"		parameterType="map" >
 	 	INSERT
 		INTO ranking ( ranking_no, user_nickname, user_id, love_date) 
@@ -68,11 +92,19 @@
 				#{userNickname}, #{userId}, SYSDATE)
 	 </insert>
 	 
+	  <!-- 구매 취소 -->	
+	 <select  id="deletePurchase"  parameterType="map">
+	  	DELETE FROM ranking 
+	  	<where>
+			prod_no = #{prodNo} AND tran_no = #{tranNo}
+		</where>		
+	 </select>
+	 
 	 <!-- 즐겨찾기 삭제 -->	
 	 <select  id="deleteLoveMentor"  parameterType="map">
 	  	DELETE FROM ranking 
 	  	<where>
-			user_nickname = {userNickname} AND user_id = {userId}
+			user_nickname = #{userNickname} AND user_id = #{userId}
 		</where>		
 	 </select>
 	 

@@ -48,6 +48,16 @@ public class RankingServiceImpl implements RankingService{
 		return map;
 	}
 	
+	//구매 날짜 저장
+	public void addPurchase(int prodNo, String serialNo) throws Exception {
+		rankingDao.insertPurchase(prodNo, serialNo);
+	}
+	
+	//구매 날짜 삭제
+	public void deletePurchase(int prodNo, int tranNo) throws Exception{
+		rankingDao.deletePurchase(prodNo, tranNo);
+	}
+	
 	//즐겨찾는 멘토 날짜 저장
 	public void addLoveMentor(String userNickname, String userId) throws Exception{
 		rankingDao.insertLoveMentor(userNickname, userId);

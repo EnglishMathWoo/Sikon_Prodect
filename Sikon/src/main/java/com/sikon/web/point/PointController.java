@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
@@ -31,6 +32,10 @@ import com.sikon.service.user.UserService;
 public class PointController {
 	
 	///Field
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService userService;
+	
 	@Autowired
 	@Qualifier("pointServiceImpl")
 	private PointService pointService;
@@ -77,6 +82,19 @@ public class PointController {
 		model.addAttribute("search", search);
 				
 		return "forward:/mypage/listMyPoint.jsp";
+	}
+	
+	@RequestMapping( value="/mypage" )
+	public String mypage(HttpServletRequest request) throws Exception{
+			System.out.println("/product/updateProduct : GET");
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("user");
+			
+		user = userService.getUser(user.getUserId());
+		
+		session.setAttribute("user", user);
+		
+		return "forward:/mypage/mymain.jsp";
 	}
 	
 	

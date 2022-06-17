@@ -198,9 +198,10 @@
 	 
 	 <select id="saleCount" parameterType="apply" resultMap="applySelectMap">
 
-		select sum(cook_price) from apply
-        where applier_id=#{applier.userId}
-        and check_date >= TO_CHAR(SYSDATE-7,'YY/MM/DD')
-        order by check_date;   
+		SELECT SUM(cook_price) , check_date , applier_id , apply_status, apply_no
+			FROM apply 
+			WHERE check_date &gt;=CURRENT_DATE-1 
+		AND check_date &lt;CURRENT_DATE
+		group by cook_price,check_date , applier_id , apply_status, apply_no  
 </select>
 </mapper>

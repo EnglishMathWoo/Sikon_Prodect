@@ -230,8 +230,8 @@ article img {
 		 self.location = "/ranking/listRecipe";
 	});
 	
-	//검색어 랭킹
-	$(document).on('click', '#keyword', function(){
+	//스토어 랭킹
+	$(document).on('click', '#store', function(){
 		 var cookNo =$(this).attr("value");
 		 self.location = "/cook/updateCook?cookNo="+cookNo
 	});
@@ -324,7 +324,7 @@ article img {
 	      <nav class="ref-sort" >
 	      <ul>
 	        <li id="recipe"><div>&nbsp;레시피&nbsp;</div></li>
-	        <li id="keyword"><div>&nbsp;검색어&nbsp;</div></li>
+	        <li id="keyword"><div>&nbsp;스토어&nbsp;</div></li>
 	        <li id="mentor"><div style="color:#DAA520;">&nbsp;쿠킹멘토&nbsp;</div></li>
 	      </ul>  
 	      

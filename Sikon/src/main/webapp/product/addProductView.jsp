@@ -255,6 +255,10 @@ input:-webkit-autofill {
 	padding-top: 35px;
 }
 /* ---------------------------------------- */
+.summernote{
+	padding-left: 17px;
+	
+}
 </style>
 <script>
 
@@ -321,8 +325,8 @@ input:-webkit-autofill {
 	    <div class="controls">
 	      <i class="fa fa-sort"></i>
 	      <select class="floatLabel" name="prodStatus" id="prodStatus">
-	        <option value="deluxe" selected>판매중</option>
-	        <option value="Zuri-zimmer">판매중지</option>
+	        <option value="Y" selected>판매중</option>
+	        <option value="N">판매중지</option>
 	      </select>
 	     </div>     
 	    </div>
@@ -372,14 +376,14 @@ input:-webkit-autofill {
       
       <div class="row">
       
-      <div class="form-group text-center">
+      <div class="form-group text-center summernote">
 	      <textarea id="summernote" class="form-control col-sm-5" rows="5" name="prodContent"
 					placeholder="내용" style="resize: none"></textarea>
 	    
 	</div>
       </div>
 	<button type="submit" value="Submit" class="size submit">등록하기</button> &nbsp;
-	<button class="size cancel">취 소</button>
+	<button type="button" class="size cancel">취 소</button>
       
   </div> <!-- /.form-group -->
 </form>
@@ -395,6 +399,7 @@ input:-webkit-autofill {
    	 $('#summernote').summernote({
    	        placeholder: '내용을 입력해주세요.',
    	        tabsize: 2,
+   	        width: 700, 
    	        height: 500,
    	        lang : 'ko-KR',
    	        maximumImageFileSize : 20 * 1024 * 1024,

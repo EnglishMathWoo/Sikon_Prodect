@@ -90,6 +90,7 @@
 		WHERE recipe_no = #{recipeNo}
 	</update>
 	 
+
 		
 	 
 	  <delete id="deleteRecipe" parameterType="int" >

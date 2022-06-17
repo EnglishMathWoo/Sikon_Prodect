@@ -469,8 +469,8 @@ p {
 
         <div class="card "> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
             <div class="card-body little-profile text-center">
-                <div class="pro-img"><img src="/resources/images/uploadFiles/kim3.jpg" alt="user"></div>
-                <h3 class="m-b-0">${mentor.userNickname}/${user.userId}의 쿠킹클래스</h3>             
+                <div class="pro-img"><img src="/resources/images/uploadFiles/${mentor.userImage}" alt="user"></div>
+                <h3 class="m-b-0">${mentor.userNickname}의 쿠킹클래스</h3>             
 
             </div>
         </div>
@@ -515,10 +515,25 @@ p {
           <h4 class="heading" >${cook.cookName }</h4>
            <h6 >${cook.cookBrief }</h6>
           <ul class="meta">
-            <li > ${cook.cookBrief }</li>
-            <li>${cook.cookRecruit }</li>
-            <li>${cook.cookTheme }</li>
-            <li> ${cook.mentor.userNickname }</li>
+           
+            <li ><strong>모집인원 : ${cook.cookRecruit } 명</strong></li>
+            <li>
+            <c:if test = "${cook.cookTheme =='KO'}">
+			 <strong>테마 : 한식</strong>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'JA'}">
+			 <strong>테마 : 일식</strong>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'AM'}">
+		   <strong>테마 : 양식</strong>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'CH'}">
+			 <strong>테마 : 중식</strong>
+			</c:if>
+			<c:if test = "${cook.cookTheme == 'DE'}">
+			 <strong>테마 : 간식</strong>
+			</c:if>		</li>
+           
           </ul>
         </div>
       </article>
