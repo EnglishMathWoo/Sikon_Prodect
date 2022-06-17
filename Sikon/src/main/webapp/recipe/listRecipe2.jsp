@@ -337,7 +337,6 @@ background-color: #f7f7f7;
 				 $(".themeAll").addClass('act');
 				 
 			 }
-		
 			 
 			//*/ 
 			
@@ -348,7 +347,6 @@ background-color: #f7f7f7;
 		  console.log($("#orderCondition").val());
 	      fncGetList(1);
 		  });
-			
 			  
 		  $( "#themeAll" ).on("click" , function() {
 	        	
@@ -369,10 +367,16 @@ background-color: #f7f7f7;
 
 			});
 		  
-			$( ".submit" ).on("click" , function() {
+		});
+			  
+		
+		 
+		 $(function() {
+			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				
+					$( ".submit" ).on("click" , function() {
 						self.location ="/recipe/addRecipe.jsp"
-			});
-			
+						});
 		 });
 					
 			$(document).on('click', '.imgover', function(){
@@ -383,7 +387,6 @@ background-color: #f7f7f7;
 			
 			   	//====================================================================
 			 $(function() {
-				 console.log('아아악');
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 		                	
@@ -437,13 +440,11 @@ background-color: #f7f7f7;
 					                     						+"<div class='excerpt'>"
 					                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
 					                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
-					                     						+"<p style='float:right'>리뷰수: "+JSONData.list[i].reviewNum+"</p>"
 					                     						+"<ul class='meta'>"
 					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
 					                     			            +"<li>"+ JSONData.list[i].recipeDifficulty +"</li>"
 					                     			            +"<li>"+ JSONData.list[i].cookingTime +"분</li>"
 					                     			            +"<li>"+ JSONData.list[i].writer.userNickname +"</li>"
-					                     			            +"<li style='float:right'>조회수: "+JSONData.list[i].recipeViews+"</li>"
 					                     						+"</ul></div></article></div></div>"
 					                     						
 					                     						

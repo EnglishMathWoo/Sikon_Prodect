@@ -173,6 +173,7 @@ p {
 }
 
 .container {
+    font-family: 'Gowun Batang', serif;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -297,10 +298,11 @@ background-color: #f7f7f7;
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage);
-			$("form").attr("method" , "POST").attr("action" , "/recipe/listRecipe").submit();
+			$("form").attr("method" , "POST").attr("action" , "/recipe/manageRecipe").submit();
 		}
 		
 		$(function() {
+			
 			
 			
 			var themeCondition = $("#themeCondition").val();
@@ -337,17 +339,10 @@ background-color: #f7f7f7;
 				 $(".themeAll").addClass('act');
 				 
 			 }
-		
 			 
 			//*/ 
 			
 			
-			
-			
-		  $("#orderCondition").on( "change", function() {
-		  console.log($("#orderCondition").val());
-	      fncGetList(1);
-		  });
 			
 			  
 		  $( "#themeAll" ).on("click" , function() {
@@ -369,10 +364,29 @@ background-color: #f7f7f7;
 
 			});
 		  
-			$( ".submit" ).on("click" , function() {
-						self.location ="/recipe/addRecipe.jsp"
-			});
-			
+		});
+			  
+		
+		 
+		 $(function() {
+			 
+				 $(document).on('click', '.submit', function(){
+				 var checkCount = $("input[name='ckBookmark']:checked").length;
+
+				    var array = new Array();
+				    
+					$("input[name='ckBookmark']:checked").each(function() {
+						array.push(Number($(this).attr('id')));
+				    });
+					
+					if(checkCount != 0) {
+						alert(checkCount+"개의 레시피를 삭제하시겠습니까?")
+					}
+					console.log(array);
+					console.log(checkCount);
+					self.location = "/recipe/deleteRecipe?recipeList="+array;
+
+				});
 		 });
 					
 			$(document).on('click', '.imgover', function(){
@@ -383,7 +397,6 @@ background-color: #f7f7f7;
 			
 			   	//====================================================================
 			 $(function() {
-				 console.log('아아악');
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 		                	
@@ -411,7 +424,6 @@ background-color: #f7f7f7;
 					                  method : "POST" ,
 					                  data : JSON.stringify({
 					                	  currentPage : cpage,
-					                	  orderCondition : orderCon,
 					                	  searchKeyword : keyword,
 					                	  searchCondition : search,
 					                	  themeCondition : themeCon
@@ -437,13 +449,11 @@ background-color: #f7f7f7;
 					                     						+"<div class='excerpt'>"
 					                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
 					                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
-					                     						+"<p style='float:right'>리뷰수: "+JSONData.list[i].reviewNum+"</p>"
 					                     						+"<ul class='meta'>"
 					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
 					                     			            +"<li>"+ JSONData.list[i].recipeDifficulty +"</li>"
 					                     			            +"<li>"+ JSONData.list[i].cookingTime +"분</li>"
 					                     			            +"<li>"+ JSONData.list[i].writer.userNickname +"</li>"
-					                     			            +"<li style='float:right'>조회수: "+JSONData.list[i].recipeViews+"</li>"
 					                     						+"</ul></div></article></div></div>"
 					                     						
 					                     						
@@ -474,44 +484,6 @@ background-color: #f7f7f7;
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	
 <div class="container">
-<div class="page-header text-info text-left">
-	    </div>
-		 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-	        <ol class="carousel-indicators">
-	          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-	          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-	          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-	        </ol>
-	    
-	    
-	      <div class="carousel-inner" role="listbox">
-	          
-	          <div class="item active">
-	            <img src="/resources/images/uploadFiles/unnamed (2).jpg"  alt="First slide">
-	          </div>
-	          
-	          <div class="item">
-	            <img src="/resources/images/uploadFiles/unnamed (4).jpg" alt="Second slide">
-	          </div>
-	          
-	          <div class="item">
-	            <img src="/resources/images/uploadFiles/pasta-1181189_960_720.jpg"  alt="Third slide">
-	          </div>
-	          
-	       </div> 
-	       <!-- carousel-inner end -->
-	        
-	       <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-	          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-	          <span class="sr-only">Previous</span>
-	        </a>
-	        
-	        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-	          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-	          <span class="sr-only">Next</span>
-	        </a>
-	    </div>
-<br/>	     
 <!-- ################################################################################################ -->
 
  
@@ -521,14 +493,14 @@ background-color: #f7f7f7;
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RECIPE LIST </h3>
+		      <h3 class="font-x2 nospace" align="center" style="color:#937062;padding-top: 100px"><br> <b>레시피 관리</b> </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
-		    <button type="button" class="submit">레시피 등록</button>
 		  
     			    <form class="form-inline" name="detailForm">
 		    
-		    <br/><hr/><br/>
+		  			   <button type="button" class="submit">레시피삭제</button>
+		    <br/><br/><br/>
     
     	<nav class="ref-sort" >
 	      <button class="theme themeAll" id="themeAll" value="all">모두보기</button>
@@ -538,7 +510,7 @@ background-color: #f7f7f7;
 	      <button class="theme themejp" value="jp">일식</button>
 	      <button class="theme themedes" value="des">간식</button>
 	    </nav>
-    
+    <br/>
 
 	    
  <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>
@@ -546,24 +518,6 @@ background-color: #f7f7f7;
             
      <table style="width: 100%;">
         <tr>
-        <td style="text-align: left;">  
-		             
-    		<div class="row height">
-    		<div class="col-md-6">
-	   					<select class="form-control" id="orderCondition" name="orderCondition">
-							<option value="0"
-								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
-							<option value="1"
-								${!empty search.orderCondition && search.orderCondition==1 ? "selected" : ""}>인기순</option>
-							<option value="2"
-								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
-								<option value="3"
-								${!empty search.orderCondition && search.orderCondition==3 ? "selected" : ""}>소요시간순</option>
-								
-						</select>
-			</div>
-			</div>
-			</td>
 			
         	<td style="text-align: right;">
             
@@ -611,6 +565,7 @@ background-color: #f7f7f7;
   <br/> <br/>
   
     <div id="latest" class="group">
+          <input type="checkbox" name="ckBookmark" id="${recipe.recipeNo }" >
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" ><img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">
           <h4 class="heading" ><b>${recipe.recipeName }</b></h4>

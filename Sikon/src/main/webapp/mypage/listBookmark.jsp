@@ -225,7 +225,7 @@ padding-top:0px;
 	
 <!-- ################################################################################################ -->
 
- <div class="container mt-5 px-2">
+ <div class="container mt-5 px-2 lg-3">
      <br>
      
      <div class="center btmspace-50">
@@ -236,18 +236,13 @@ padding-top:0px;
 		</div>
 			   <button type="button" class="submit">북마크삭제</button>
  
-		    		 
-		  
-		    
-    
-	     
   <input type="hidden" id="currentPage" name="currentPage" value="1"/>
  
   
 <div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="list" items="${list}">
-  <div class="col-sm-6 col-md-3">
+  <div class="col-sm-6 col-md-3 col-lg-3">
   <br/> <br/>
   
     <div id="latest" class="group">
@@ -275,8 +270,7 @@ padding-top:0px;
       	<h3 align="center" >책갈피 내역이 없습니다.</h3>
       	<br>
      </c:if>
-
-	  </div>
+</div>
 	
 </body>
 </html>
