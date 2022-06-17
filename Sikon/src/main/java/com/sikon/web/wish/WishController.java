@@ -58,7 +58,7 @@ public class WishController {
 		
 		wishService.addWish(wish);
 		
-		return "redirect:/cook/getCook?menu=search&cookNo="+wish.getCookNo();
+		return "forward:/cook/getCook?menu=search&cookNo="+wish.getCookNo();
 	}
 	
 	

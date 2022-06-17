@@ -42,8 +42,24 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 
-
 <style>
+
+
+.container {
+	padding-top: 150px;
+} 
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 500px;
+    padding-top: 170px;
+}
+</style>
+<style>
+
+
 body {
 	padding-top: 50px;
 	

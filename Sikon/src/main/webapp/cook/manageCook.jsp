@@ -288,7 +288,27 @@ div.emptyProd{
 			  	<td align="center" class="toget" value="${cook.cookNo }">${cook.cookNo }</td>	
 			  
 				<td align="right" class="toget" value="${cook.cookNo }">
-					<img src="/resources/images/uploadFiles/${cook.cookFilename.split('/')[0]}" class="image" width="80" height="80">
+										<c:choose>
+		    	<c:when test="${cook.cookFilename.contains('/')}">
+						<c:choose>
+						<c:when test="${cook.cookFilename.contains('mp4')}">
+							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
+								<video width="85" height="85" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
+								<img src="/resources/images/uploadFiles/${name}" width="85" height="85" align="absmiddle"/>
+								<input type="hidden" name="image" value="${name }"/>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
+				</c:when>
+				<c:otherwise>
+					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="85" height="85" align="absmiddle" class="image" value="${prodThumbnail}"/>
+				</c:otherwise>
+		    	</c:choose>
 				</td>
 			  
 			  	<td align="left" class="toget" value="${cook.cookNo }">
