@@ -285,7 +285,7 @@ margin-bottom: 10px;
 
 
 	function fncAddReview() {
-		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action","/review/addReview").submit();
+		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("accept-charset", "euc-kr").attr("action","/review/addReview").submit();
 		setTimeout(function() {   
             window.close();
          }, 3);

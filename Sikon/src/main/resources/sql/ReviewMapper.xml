@@ -89,6 +89,15 @@
 		FROM review
 		WHERE review_no = #{reviewNo}
 	 </select>
+	 
+	 	  <!-- SQL : UPDATE -->
+	<update id="givePoint" parameterType="map">
+		update users
+		<set>
+			holdpoint+=#{point}
+		</set>
+		WHERE user_id = #{userId}
+	</update>
   
 	  <!-- SQL : UPDATE -->
 	 <update	id="updateReview"	parameterType="review" >

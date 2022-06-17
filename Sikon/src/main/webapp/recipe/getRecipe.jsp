@@ -8,7 +8,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
 <head>
 <meta charset="EUC-KR">
@@ -579,6 +579,7 @@ body {
 	     $.ajax({
 	            type : "POST",  
 	            url : "/review/json/addReview", 
+	            contentType: "application/x-www-form-urlencoded; charset=euc-kr",
 	            data : data,
 	            processData: false,    
 	            contentType: false,      
