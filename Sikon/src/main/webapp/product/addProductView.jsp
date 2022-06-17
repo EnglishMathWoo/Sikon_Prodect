@@ -321,8 +321,8 @@ input:-webkit-autofill {
 	    <div class="controls">
 	      <i class="fa fa-sort"></i>
 	      <select class="floatLabel" name="prodStatus" id="prodStatus">
-	        <option value="deluxe" selected>판매중</option>
-	        <option value="Zuri-zimmer">판매중지</option>
+	        <option value="Y" selected>판매중</option>
+	        <option value="N">판매중지</option>
 	      </select>
 	     </div>     
 	    </div>
