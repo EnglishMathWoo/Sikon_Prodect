@@ -150,7 +150,7 @@ public class CookController {
 	@RequestMapping(value = "getCook", method = RequestMethod.GET)
 	public String getCook(@ModelAttribute("search") Search search, @RequestParam("cookNo") int cookNo,
 			@RequestParam("menu") String menu, @CookieValue(value = "history", required = false) Cookie cookie,
-			HttpServletResponse response, Model model) throws Exception {
+			HttpServletResponse response, Model model,HttpServletRequest request) throws Exception {
 
 		System.out.println("getCook");
 
@@ -163,7 +163,17 @@ public class CookController {
 		int reviewNum=reviewService.countReviewNum(cookNo, "COOK");
 		System.out.println("¸®ºä¼ö"+reviewNum);
 		Cook cook = cookService.getCook(cookNo);
-
+		
+		
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+	
+		
+			int heartCount = heartService.heartCheck(cookNo, user.getUserId());
+			cook.setHeartCount(heartCount);
+			
+		
+		
 		model.addAttribute("cook", cook);
 		model.addAttribute("menu", menu);
 		model.addAttribute("review", map.get("list"));
@@ -241,6 +251,8 @@ public class CookController {
 		Map<String, Object> map = cookService.getCookList(search);
 
 		List<Cook> cookList = (List<Cook>) map.get("list");
+		
+		
 
 		for (int i = 0; i < cookList.size(); i++) {
 			int heartCount = heartService.heartCheck(cookList.get(i).getCookNo(), user.getUserId());

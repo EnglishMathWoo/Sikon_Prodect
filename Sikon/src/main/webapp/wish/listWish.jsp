@@ -20,15 +20,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
-   
+
    <!-- jQuery UI toolTip 사용 CSS-->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
@@ -39,43 +31,93 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+
 <style>
-body{
-	 padding-top : 50px;
+.cartlayout{
+	 padding-top : 170px;
 	font-family: 'Nanum Myeongjo', serif;
+	padding-bottom: 200px;
 }
 
-div.row{
+div{
 	font-family: 'Nanum Myeongjo', serif;
 }
- div{
-	font-family: 'Nanum Myeongjo', serif;
-}  
-
+.subtitle{
+	font-weight: bold;
+	font-size: 15px;
+	border-top: 2px solid #937062d4;
+	padding: 15px;
+}
  input[type="checkbox"]:checked{
  	background: #bc8f8f;
  }
- 
-.btn-b {
+
+#totalprice{
+	border:none;
+	width:100px;
+	text-align:right;
+	background: #f7f7f7;
+	font-weight: bold;
+	font-size: x-large;
+}
+
+.boxselect, .quantity, .price{
+	padding-top:35px;
+}
+
+.deletebtn{
+ 	cursor: pointer;
+	 background-color: #f7f7f7;
+	 border: 1px solid #c1c1c1;
+	 color: #c1c1c1;
+	 padding-top: -5px;
+ }
+
+.selectdelete {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #b39183;
+  color: #b39183;
+  padding: 11px 0;
+  width: 35%;
+}
+.selectdelete:hover {
+  border: 1px solid #937062;
+  color: #937062;
+}
+
+.buybtn {
   cursor: pointer;
   background-color: #937062;
   border: none;
   color: #fff;
   padding: 12px 0;
-  width:40%;
-  font-size: large;
+  width: 18%;
 }
-.btn-b:hover {
+.buybtn:hover {
   background-color: #937062d4;
 }
-</style>
+.col-md-6 {
+    width: 40%;
+}
 
-<style>
+.calculation{
+	 cursor: pointer;
+	 background-color: #f7f7f7;
+	 border: 1px solid #999595;
+	 color: #999595;
+	 height: 28.39px;
+	 width: 28.39px;
+	 font-weight: bold;
+}
 
-
-.container {
-	padding-top: 150px;
-} 
+.carttitle{
+	padding: 40px;
+	text-align: center;
+}
+.price{
+	font-size: 16px;
+}
 </style>
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -92,7 +134,7 @@ div.row{
 		 
 		 var list = [];
 	   		<c:forEach var="wish" items="${wish}" >
-	   		totalprice += (Number(${wish.cookPrice})*Number(${wish.cookStatus}));
+	   		totalprice += (Number(${wish.wishCook.cookPrice})*Number(${wish.cookStatus}));
 	   		</c:forEach>
 	   		
 		 console.log(totalprice);
@@ -103,12 +145,19 @@ div.row{
 		 <!-- ------------- 장바구니 삭제 --------------- -->
 		 
 		 $( "button.delete" ).on("click" , function() {
-			 var cartNo = $(this).val();
+			 var wishNo = $(this).val();
 				console.log('delete');
 				console.log(wishNo);
 				self.location = "/wish/deleteWish?wishNo="+wishNo;
 				
 				alert('삭제');
+		  });
+		 $( ".selectdelete" ).on("click" , function() {
+				
+				console.log('deleteSelect');
+				
+				$("form").attr("method" , "POST").attr("action" , "/wish/deleteSelect").submit();
+				
 		  });
 	
 		 <!-- ------------- 상품수량 수정 --------------- -->
@@ -197,11 +246,13 @@ div.row{
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container cartlayout">
 	
-		<div class="page-header text-info">
-	       <h3>장바구니</h3>
-	    </div>
+		
+		
+	       <h3 class="carttitle">| W I S H L I S T |</h3>
+		
+		<br>
 		
 		
       
@@ -221,24 +272,27 @@ div.row{
 			<c:set var="i" value="${ i+1 }" />  
 		
 			  
-			  <div class="col-md-1 text-center">
-			  	
-			  	<input type="hidden" name="cookNo" value="${wish.cookNo}"/>
+			  <div class="col-md-1 text-center boxselect">
+			  	<input type="checkbox" class="checkbuy"  name="wishNo" value="${wish.wishNo}"/>	
+			  	<input type="hidden" name="cookNo" value="${wish.wishCook.cookNo}"/>
 			  	<input type="hidden" name="userId" value="${wish.userId}"/>
 			  	<input type="hidden" name="cookStatus" value="${wish.cookStatus}"/>			  	
 			  </div>
 			  
-			  
+		  
 			
 			  
 			  <div class="col-md-6 text-left">
 				    
-				<c:forEach var="name" items="${wish.cookFilename.split('/')[0]}">
+				<c:forEach var="name" items="${wish.wishCook.cookFilename.split('/')[0]}">
 					<img src="/resources/images/uploadFiles/${name}" class="image" width="100" height="100">
 				</c:forEach>
 						
-				&emsp;&emsp;${wish.cookName}
+				&emsp;&emsp;${wish.wishCook.cookName}&emsp;&emsp;
+				
+				<button class="delete deletebtn" value="${wish.wishNo}">X</button>
 			  </div>
+		
 			 
 			 	<div align="center" class="col-md-2 text-center quantity" value="${wish.cookStatus }">
 			  	<c:choose>
@@ -253,13 +307,10 @@ div.row{
 			  	<button class="btn btn-default btn-xs plus" value="${wish.wishNo}">+</button>
 			  </div>
 				
- <div align="center" class="col-md-2 text-center price" value="${wish.cookPrice*wish.cookStatus }" >${wish.cookPrice*wish.cookStatus} 원</div>
+ <div align="center" class="col-md-2 text-center price" value="${wish.wishCook.cookPrice*wish.cookStatus }" >${wish.wishCook.cookPrice*wish.cookStatus} 원</div>
 			  
 			  
-			  <div class="col-md-1 text-center">
-			  	<button class="btn btn-default btn-sm delete" value="${wish.wishNo}">삭제</button>
-			  </div>
-			  
+
 			  
 			  
 			
@@ -270,16 +321,21 @@ div.row{
            <hr/>
           </c:forEach>
     </form>       
-	      <div align="right">
-	        총 결제금액 : <input type="text" id="totalprice" value="" style="border:none;width:100px;text-align:right;" min="0" readonly/> 원
-	      </div>	    
+	      <div>
+		      <table style="width:100%;">
+			      <tr>
+			      	  <td style="text-align: left"><button class="selectdelete">선택상품 삭제</button></td>
+				      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="" min="0" readonly/> 원</td>
+			       </tr>
+		       </table>
+	      </div>    
      
       
 	  <hr/>
 	  
 	  <div align="right">
 	 	 
-	  		<button type="button" class="btn-b addPurchase" id="buy" >신청하기</button>
+	  		<button type="button" class="buybtn" id="buy" >신청하기</button>
 	  </div>
 	  
  	</div>

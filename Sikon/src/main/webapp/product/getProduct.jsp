@@ -260,6 +260,27 @@ margin-left: 140px;
 .mar-top {
     margin-top: 15px;
 }
+.productDetail{
+	color: #937062;
+	font-size: 18px;
+	font-weight: bold;
+	
+}
+.productDetail:hover{
+	text-decoration: none;
+	color: #937062;
+}
+.goreview{
+	color: #937062;
+	font-size: 15px;
+	
+}
+.goreview:hover{
+	text-decoration: none;
+	color: #937062;
+}
+
+
 </style>
  <!-- //////////////////////////////////공유하기////////////////////////////// -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
@@ -534,8 +555,11 @@ $( document ).ready( function() {
 
 		 	
 		 	</div>
+		 	<br>
+		 	<div>
+		 	<a href="#" class="productDetail">상품정보 </a> | <a href="#" class="goreview"> 리뷰보기(${reviewNum })</a>
+		 	</div>
 		 	
-		 	<hr/>
 		 	<br><br>
 		 	
 		 	<div class="col-xs-12 col-md-12 text-center">
