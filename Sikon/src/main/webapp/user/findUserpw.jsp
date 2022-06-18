@@ -166,8 +166,11 @@
 		        });
 		     
 		   
-		   //이메일 인증번호 대조
+		   //이메일 인증번호 대조 후 업데이트 이메일로 팝업
 		     $("#emailChk2").click(function(){
+		    	 var userId = $('#userId').val(); 
+		    	 console.log( "user id + 콘솔 ^_^ " + userId) ;  
+		    	 
 		     	if($("#sm_email2").val() == code){
 		     		$(".successEmailChk").text("인증번호가 일치합니다.");
 		     		$(".successEmailChk").css("color","green");
@@ -175,7 +178,7 @@
 		     		$("#sm_email2").attr("disabled",true);
 		     		$("#userId").attr("disabled",true);
 		     		
-		     		popWin = window.open("/user/updateUserpw?id="+id, "openWin",
+		     		popWin = window.open("/user/updateUserpw?userId="+userId, "popWin",
 									"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
 									"scrollbars=no,scrolling=no,menubar=no,resizable=no");
 		     	}else{
@@ -283,7 +286,7 @@
                   
            
            
-           
+      <!--     
            		<div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">새 비밀번호</label>
 		    <div class="col-sm-4">
@@ -306,7 +309,7 @@
 		    </div>
 		  </div>
 		  
-		  
+	 --> 	  
 		  
 		  
             </form>

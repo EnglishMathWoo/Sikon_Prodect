@@ -75,10 +75,10 @@
 			return;
 		}
 		
-		$("form").attr("method" , "POST").attr("action" , "/user/findUserpw").submit();
+		$("form").attr("method" , "POST").attr("action" , "/user/updateUserpw").submit();
 	}
 	
-	
+/*	
 	// 아이디 중복체크
 	function checkId(){
         var userId = $('#userId').val(); //id값이 "id"인 입력란의 값을 저장
@@ -207,7 +207,7 @@
 			
 		}
 		
-		
+	*/	
 		
 		
 		
@@ -223,7 +223,7 @@
 
 <div class="container">
     
-        <h1 class="bg-white text-center">비밀번호 찾기</h1>
+        <h1 class="bg-white text-center">비밀번호 재설정</h1>
         
         <!-- <div class="col-2"></div> -->
        
@@ -232,37 +232,7 @@
                   <div class="form-group" style="padding:8px">
                     
                     
-                    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디(이메일)</label>
-                       
-                    <div class="col-sm-5">
-                            
-                    <div class="col-sm-8" style="display: inline-block">
-				     <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" oninput = "checkId()" >
-				    </div> 
-                       <button type="button" id="emailChk" class="doubleChk" >인증번호 보내기</button><br/> 	
-                       
-                        <div style="display: inline-block"> 
-					      <span id="helpBlock" class="id_ok">저장되지 않은 아이디&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-						  <span id="helpBlock" class="id_already">인증번호 보내기를 눌러주세요</span>
-						</div> 
-                        	
-		            <div class="col-sm-8" style="display: inline-block">  
-				      <input type="text" class="form-control" id="sm_email2" name="sm_email2" placeholder="인증번호 입력" disabled required>
-				    </div>
-				      <button type="button" id="emailChk2" class="doubleChk" style="float: left" >이메일인증</button>
-		                  <br> 	
-                      </div>
-                      
-                      
-           <!--               
-                       <div class="form-group">
-					    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
-					   	<div class="col-sm-4">
-					      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
-					   	</div>
-					  </div>
-			-->			  
-                        
+                    
                   </div>
                   
            
@@ -271,14 +241,17 @@
            		<div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">새 비밀번호</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="새 비밀번호" disabled required>
+		      <input type="password" class="form-control" id="password" name="password" placeholder="새 비밀번호" >
 		    </div>
 		  </div>
+		  
+			      <input type="hidden" class="form-control" id="userId" name="userId" value="${userId}" >
+		  
 		  
 		  <div class="form-group">
 		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">새 비밀번호 확인</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="새 비밀번호 확인" disabled required>
+		      <input type="password" class="form-control" id="password2" name="password2" placeholder="새 비밀번호 확인" >
 		    </div>
 		  </div>
 		  

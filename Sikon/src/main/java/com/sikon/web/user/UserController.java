@@ -157,20 +157,25 @@ public class UserController {
 		return "redirect:/user/findUserpw.jsp";
 	}
 	
+	//Å¸°Ù
 	@RequestMapping( value="updateUserpw", method=RequestMethod.GET )
-	public String updateUserpw(@RequestParam( value = "id", required = false ) String id, Model model) throws Exception {
+	public String updateUserpw(@RequestParam( value = "userId", required = false ) String userId, Model model) throws Exception {
 
 		System.out.println("/user/updateUserpw : GET");
+		System.out.println("/user/updateUserpw : GET"+ userId);
+	
+		model.addAttribute("userId", userId);
 		
-		model.addAttribute("id", id);
-		
-		return "redirect:/user/updateUserpw.jsp";
+		return "forward:/user/updateUserpw.jsp";
 	}
 	
-	@RequestMapping( value="findUserpw", method=RequestMethod.POST )
+	@RequestMapping( value="updateUserpw", method=RequestMethod.POST )
 	public String findUserPw(HttpServletRequest request,@RequestParam("userId") String userId, @RequestParam("password") String password) throws Exception {
 		
 		System.out.println("/user/findUserId : POST");
+		
+		System.out.println("userId="+userId);
+		System.out.println("password="+password);
 		
 		User user = userService.getUser(userId);
 		
