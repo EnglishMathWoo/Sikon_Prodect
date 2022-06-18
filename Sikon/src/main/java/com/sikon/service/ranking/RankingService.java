@@ -18,6 +18,9 @@ public interface RankingService {
 	//구매 날짜 삭제
 	public void deletePurchase(int prodNo, int tranNo) throws Exception;
 	
+	// 판매 랭킹 조회
+	public Map<String, Object> getProductList(Search search) throws Exception;
+	
 	//즐겨찾는 멘토 날짜 저장
 	public void addLoveMentor(String userNickname, String userId) throws Exception;
 	

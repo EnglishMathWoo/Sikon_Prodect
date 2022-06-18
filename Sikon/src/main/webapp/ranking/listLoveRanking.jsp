@@ -233,7 +233,7 @@ article img {
 	//스토어 랭킹
 	$(document).on('click', '#store', function(){
 		 var cookNo =$(this).attr("value");
-		 self.location = "/cook/updateCook?cookNo="+cookNo
+		 self.location = "/ranking/listProduct";
 	});
 	
 	//쿠킹멘토 랭킹
@@ -244,11 +244,6 @@ article img {
 	$(document).on('click', '#all', function(){
 		 var orderCondition = $(this).attr('value');
 		 self.location = "/ranking/listLove";
-	});
-	
-	$(document).on('click', '#daily', function(){
-		 var orderCondition = $(this).attr('value');
-		 self.location = "/ranking/listLove?orderCondition="+orderCondition;
 	});
 		
 	$(document).on('click', '#daily', function(){
@@ -264,10 +259,7 @@ article img {
 	$(document).on('click', '#monthly', function(){
 		 var orderCondition = $(this).attr('value');
 		self.location = "/ranking/listLove?orderCondition="+orderCondition;
-	});
-	
-	
-	
+	});	
 	
 			
 	//버튼 클릭시 색 유지
@@ -324,7 +316,7 @@ article img {
 	      <nav class="ref-sort" >
 	      <ul>
 	        <li id="recipe"><div>&nbsp;레시피&nbsp;</div></li>
-	        <li id="keyword"><div>&nbsp;스토어&nbsp;</div></li>
+	        <li id="store"><div>&nbsp;스토어&nbsp;</div></li>
 	        <li id="mentor"><div style="color:#DAA520;">&nbsp;쿠킹멘토&nbsp;</div></li>
 	      </ul>  
 	      

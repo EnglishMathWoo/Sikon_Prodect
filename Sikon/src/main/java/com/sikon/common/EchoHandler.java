@@ -5,10 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -79,19 +84,16 @@ public class EchoHandler extends TextWebSocketHandler {
 				Alarm alarm = new Alarm();
 								
 				//좋아요
-				if ("heart".equals(cmd) && toUserSession != null) {
-					System.out.println("onmessage되나??");
-					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
-									+ postName+"']");
-					toUserSession.sendMessage(tmpMsg);
-					alarm.setAlarmTarget(toUserId);
-					alarm.setAlarmContent(tmpMsg.toString());
-					alarmService.addAlarm(alarm);
-				} else if ("heart".equals(cmd)){
+				if ("heart".equals(cmd)){
 					alarm.setAlarmTarget(toUserId);
 					alarm.setAlarmContent(fromUserNickname + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
 							+ postName+"']");
 					alarmService.addAlarm(alarm);
+					
+					HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+					HttpSession userSession = request.getSession();
+					
+					
 				}
 				
 				//레시피 리뷰
@@ -101,13 +103,14 @@ public class EchoHandler extends TextWebSocketHandler {
 									+ postName+"']");
 					toUserSession.sendMessage(tmpMsg);
 					alarm.setAlarmTarget(toUserId);
-					alarm.setAlarmContent(tmpMsg.toString());
-					alarmService.addAlarm(alarm);
+					alarm.setAlarmContent(fromUserNickname + "님이 회원님의 레시피에 리뷰를 작성했습니다! : [제목 : '"
+							+ postName+"']");
+					//alarmService.addAlarm(alarm);
 				} else if ("recipeReview".equals(cmd)){
 					alarm.setAlarmTarget(toUserId);
 					alarm.setAlarmContent(fromUserNickname + "님이 회원님의 레시피에 리뷰를 작성했습니다! : [제목 : '"
 							+ postName+"']");
-					alarmService.addAlarm(alarm);
+					//alarmService.addAlarm(alarm);
 				}
 			}
 			

@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/ef3e0db941.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 
 <style>
 	a{
@@ -720,10 +720,8 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 											<li><a>즐겨찾는멘토</a></li>
 											<li><a>포인트조회</a></li>
 											<li><a>쿠폰조회</a></li>
-											<li></li>
 									</ul>
 								</div>
-													<a href="" class="btnLogout">로그아웃</a>
 									</div>
 							</div>
 						</div>                      
@@ -1052,7 +1050,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			 //====================================================
 			//마이페이지	 
 			 $("a:contains('내정보보기')").on("click", function() {
-					self.location = "/user/getUser?userId="+$(this).text().trim();
+					self.location = "/user/getUser?userId=${sessionScope.user.userId}"
 					
 				});
 				
@@ -1166,12 +1164,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			};
 		
 			ws.onmessage = function(event) {
-				alert(event.data);
-				/*
-				let $socketAlert = $('div#socketAlert');
-				$socketAlert.html(event.data)
-				$socketAlert.css('display', 'block');
-				*/
+				//alert(event.data);
 				
 				setTimeout(function(){
 					$socketAlert.css('display','none');

@@ -58,6 +58,35 @@
 			font-family: 'Nanum Myeongjo', serif;
 		}
 		
+		#button{
+			margin-top:15px;
+			margin-bottom:15px;
+			display: flex;
+  			justify-content: center;	
+		}
+		
+		.btn-b {
+			cursor: pointer;
+		    background-color: #937062;
+		    border: none;
+		    color: #fff;
+		    padding: 12px 0;
+		    width:20%;
+		    height: 34px;
+		    justify-content: center;
+	        display: flex;
+	        align-items: center;
+		    font-size: 17px;
+		    border-radius: 5px;
+		    border: 1px solid #d7d7d7
+		}
+	
+		.btn-b:hover {
+			background-color: #937062d4;
+		}
+		
+		
+		
 	</style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -153,9 +182,9 @@
 		  
 		 
 		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary" id="giveCoupon">持 &nbsp;失</button>
-			  <a class="btn btn-primary btn" role="button" id="previous">昼&nbsp;社</a>
+		    <div class="col-sm-offset-4  col-sm-4 text-center" id="button">
+		      <button type="button"  class="btn-b" style="margin-right: 10px;" id="giveCoupon">持 &nbsp;失</button>
+			  <button type="button" class="btn-b" id="previous">昼&nbsp;社</button>
 		    </div>
 		  </div>
 	

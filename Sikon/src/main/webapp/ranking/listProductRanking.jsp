@@ -4,7 +4,6 @@
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -54,7 +53,7 @@ body {
   background-color: white;
   border-color:	#C0C0C0;
   border-style: solid;
-  width: 35px;
+  width: 40px;
   height: 25px;
   text-align: center;
   font-weight:bold;
@@ -189,18 +188,37 @@ background-color: #f7f7f7;
 	color: #f7f7f7;
 }
 
+article img {
+    width: 100%;
+}
+
+.fa-arrow-up:before {
+    content: "\f062";
+    margin-right: 7px;
+    font-size: 19px;
+    color: #a93f0d94;
+    margin-top: 3px;
+}
+
+#increase {
+    font-weight: bold;
+    margin-right: 25px;
+    font-size: 19px;
+    color: #a93f0d94;
+}
+
 </style>
 
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-						
+
 	$(document).on('click', '.imgover', function(){
 		console.log($(this).attr("value"));
-		self.location ="/recipe/getRecipe?recipeNo="+$(this).attr("value")
+		self.location ="/product/getProduct?prodNo="+$(this).attr("value")+"&menu=search";
 	});
-	
-	//레시피 랭킹
+					
+	///레시피 랭킹
 	$(document).on('click', '#recipe', function(){
 		 self.location = "/ranking/listRecipe";
 	});
@@ -218,25 +236,26 @@ background-color: #f7f7f7;
 	
 	$(document).on('click', '#all', function(){
 		 var orderCondition = $(this).attr('value');
-		 self.location = "/ranking/listRecipe";
+		 self.location = "/ranking/listProduct";
 	});
-			
+	
 	$(document).on('click', '#daily', function(){
 		 var orderCondition = $(this).attr('value');
-		 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
+		 self.location = "/ranking/listProduct?orderCondition="+orderCondition;
 	});
 			
 	$(document).on('click', '#weekly', function(){
 		 var orderCondition = $(this).attr('value');
-		 self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
+		 self.location = "/ranking/listProduct?orderCondition="+orderCondition;
 	});
 		
 	$(document).on('click', '#monthly', function(){
 		 var orderCondition = $(this).attr('value');
-		self.location = "/ranking/listRecipe?orderCondition="+orderCondition;
+		self.location = "/ranking/listProduct?orderCondition="+orderCondition;
 	});
-	
-									
+			
+			
+	//버튼 클릭시 색 유지
 	$(function() {
 						
 		var odc = $("#orderCon").val();
@@ -279,7 +298,7 @@ background-color: #f7f7f7;
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <div class="font-x2 nospace" align="center" style="color:#937062; font-size:35px"><br> RANKING </div>
+		       <div class="font-x2 nospace" align="center" style="color:#937062; font-size:35px"><br> RANKING </div>
 		      <div align="center" style="color:#937062; font-size:18px;"><br> TOP 20 </div>
 		    </div>
 		  
@@ -289,13 +308,12 @@ background-color: #f7f7f7;
     
 	      <nav class="ref-sort" >
 	      <ul>
-	        <li id="recipe"><div style="color:#DAA520;" >&nbsp;레시피&nbsp;</div></li>
-	        <li id="store"><div>&nbsp;스토어&nbsp;</div></li>
+	        <li id="recipe"><div>&nbsp;레시피&nbsp;</div></li>
+	        <li id="store"><div style="color:#DAA520;">&nbsp;스토어&nbsp;</div></li>
 	        <li id="mentor"><div>&nbsp;쿠킹멘토&nbsp;</div></li>
 	      </ul>  
 	      
 	      <br>
-	      
 			<div class="orderCondition" style="float:right">
 		  	  <div class="order" id="monthly" value="2">월간</div>
 		      <div class="order" id="weekly" value="1">주간</div>
@@ -318,27 +336,21 @@ background-color: #f7f7f7;
 <div class="row">
 	
 	<c:if test="${!empty list}">
-	<c:forEach var="recipe" items="${list}">
+	<c:forEach var="product" items="${list}">
 	<c:set var="i" value="${i+1}" />
   <div class="col-sm-6 col-md-3">
   <br/> <br/>
   
     <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#">
-      <div class="shape1">${i}</div>
-      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
-        <div class="excerpt">
-          <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
-           <h6 >${recipe.recipeDetail }</h6>
-          <ul class="meta">
-            <li > ${recipe.recipeTheme }</li>
-            <li>${recipe.recipeDifficulty }</li>
-            <li>${recipe.cookingTime }분</li>
-            <li> ${recipe.writer.userNickname}</li>
-            <li style="float:right">조회수: ${recipe.recipeViews }</li>
-          </ul>
-        </div>
-      </article>
+    	<article class="one_third first">
+    	<div class="shape1" style="float:left;">${i}</div><a class="imgover" value="${product.prodNo}" href="#">
+			<img src="/resources/images/uploadFiles/${product.prodThumbnail.split('&')[0]}" id="image" class="image" value="${product.prodNo }"></a>
+	        <div class="excerpt">
+	        	<p>${product.prodDetail}<p>
+	          	<h4 class="heading prodName" style="font-weight: bold">${product.prodName}</h4>
+	        </div>
+	         <br>
+	      </article>
     </div>
     <!-- ################################################################################################ -->
   </div>

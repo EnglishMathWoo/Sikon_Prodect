@@ -33,6 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -133,6 +134,7 @@ div.emptyProd{
 
 .orderlist{
 	padding: 35px;
+	font-family: 'Tiro Devanagari Sanskrit', serif;
 	text-align: center;
 }
 
@@ -216,7 +218,8 @@ div.emptyProd{
 		
 	<div class="container list">
 	
-		<h3 class="orderlist">| M Y A P P L Y |</h3>
+		<h3 class="orderlist">
+		| M Y A P P L Y |</h3>
 	    <br>
 	    
 		<form>

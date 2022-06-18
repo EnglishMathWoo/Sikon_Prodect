@@ -60,15 +60,12 @@ public class AlarmDaoImpl implements AlarmDao {
 		return sqlSession.selectOne("AlarmMapper.getTotalCount", search);
 	}
 	
-	public void deleteAlarm(String userId) throws Exception {
-		sqlSession.delete("AlarmMapper.deleteCook", userId);
-	}
-	
 	/// updateAlarm Method
 	public void updateAlarmStatus(Alarm alarm) throws Exception {
 		sqlSession.update("AlarmMapper.updateAlarmStatus", alarm);
 	}
 	
+	//미확인 알람 개수
 	public int getStatusCount(String userId) throws Exception {
 		return sqlSession.selectOne("AlarmMapper.getStatusCount", userId);
 	}

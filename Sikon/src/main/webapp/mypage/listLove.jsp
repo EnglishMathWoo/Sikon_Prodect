@@ -177,7 +177,7 @@ p {
 
 .container {
     padding-right: 10px;
-    padding-left: 200px;
+   /* padding-left: 200px;*/
     margin-right: auto;
     margin-left: auto;
     padding-top:170px;
@@ -254,7 +254,7 @@ padding-top:0px;
      <div class="center btmspace-50">
 			<br />
 			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
-				<br> | MY MENTORS | <br>
+				<br> | M Y M E N T O R S | <br>
 			</h3>
 		</div>
 			   <button type="button" class="submit">즐겨찾기삭제</button>
