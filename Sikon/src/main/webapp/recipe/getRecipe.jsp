@@ -466,7 +466,6 @@ body {
 		
 				<h3 class="iEJcKGheader">¸®ºä</h3>
 			<form id="comment" name="comment" method="post" enctype="multipart/form-data">
-
 				<div class="panel">
 					<div class="panel-body">
 						<textarea class="form-control" name="reviewContent"
@@ -801,7 +800,6 @@ body {
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 
-<!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 	///*
 	Kakao.init('92dfe0703b7ef1d171ddfba9cfe0e6e6');

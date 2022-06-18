@@ -40,6 +40,9 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
 	rel="stylesheet">
+	<link
+	href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap"
+	rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
@@ -110,6 +113,7 @@ body {
 .row {
 	margin-right: 0px;
 	margin-left: 0px;
+	margin-top:12px
 }
 
 .updateButton{
@@ -126,9 +130,7 @@ text-align: right;
 </style>
 
 <style>
-.text-center {
-	text-align: left;
-}
+
 
 .iEJcKGheader {
 	font-family: 'YeolrinMyeongjo-Medium';
@@ -355,6 +357,37 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+
+.btn-b {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+  width:20%;
+  font-size: large;
+}
+.btn-b:hover {
+  background-color: #937062d4;
+}
+
+.btn-w {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+  width:20%;
+  font-size: large;
+}
+.btn-w:hover {
+  background-color: #e7e2e2;
+}
+
+#thum{
+margin-top: 20px;
+}
 </style>
 
 </head>
@@ -364,185 +397,198 @@ body {
 
 	<div class="container">
 
-		<input type="hidden" name="userId" value="${user.userId}"> 
-		<input type="hidden" name="userNickname" value="${user.userNickname}">
-
-		<div class="col-xs-12 col-md-12  col-lg-12"
-			style="padding-right: 88px">
-		  	<button type="button" class="update">수정</button>
-		  	<button type="button" class="submit">삭제</button>
-
-			<br/>
+<div class="center btmspace-50">
+			<br />
+			<h3 class="font-x2 nospace" align="center"
+				style="font-family: 'Tiro Devanagari Sanskrit', serif;">
+				<br> | P R O F I L E | <br>
+			</h3>
 		</div>
 
-		<div class="col-xs-12 col-md-12  col-lg-12" style="text-align: center">
-			<c:forEach var="name" items="${recipe.recipeImg.split('/')[0]}">
-				<input type="hidden" name="image" value="${recipe.recipeImg}">
-				<img id="thum" src="/resources/images/uploadFiles/${name}"
-					width="400" height="400" style="text-align: center;" />
-			</c:forEach>
-		</div>
-
-		<br/> <input type="hidden" name="recipeNo" id="recipeNo"
-			value="${recipe.recipeNo }" />
-
-
-
-
-
-		<div class="col-xs-12 col-md-12  col-lg-12">
-			<br />
-			<br />
-			<div style="font-family: 'YeolrinMyeongjo-Medium'; font-size: 17px">${recipe.recipeDetail }</div>
-			<div>
-				<div class="kgiNry" style="text-align: right;" align="right">
-					<c:if test="${recipe.bookmarkStatus =='0'}">
-					<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
-					</c:if>
-					<c:if test="${recipe.bookmarkStatus =='1'}">
-					<i id="bookmarkBtn" class="bi bi-bookmark-plus-fill"></i>
-					</c:if>
-					<a id="kakao-link-btn" href="javascript:kakaoShare()"> <img
-						src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
-						width="30" height="30" />
-					</a> 
+		<div class="row" style="text-align: center">
+				<br/>
+				&nbsp;
+				<img id="thum" src="/resources/images/uploadFiles/${user.userImage}" style="border-radius: 100%" width= "200px"; height=" 200px">
 				</div>
-				<h4>
-					<strong style="font-family: 'YeolrinMyeongjo-Medium';">${recipe.recipeName}</strong>
-				</h4>
-			</div>
-			<br> <input type="hidden" name="detail"
-				value="${recipe.recipeDetail }" /> <input type="hidden" name="name"
-				value="${recipe.recipeName}" />
 
 
-			<h5>
-				난이도
-				<c:choose>
-					<c:when test="${recipe.recipeDifficulty.equals('100') }">
-					초급
-					</c:when>
-					<c:when test="${recipe.recipeDifficulty.equals('200') }">
-					중급
-					</c:when>
-					<c:otherwise>
-					고급
-					</c:otherwise>
-				</c:choose>
-
-
-				&nbsp;소요시간 ${recipe.cookingTime }분
-				<div style="float: right">조회수: ${recipeViews}</div>
-			</h5>
-			<hr />
-			${recipe.detail }
-			 <br />
-
-
+		<br/><br/>
 
 			<div class="iEJcKG">
-				<h3 class="iEJcKGheader">기본 재료</h3>
-				<div class="table">
-					<table class="type09" style="width: 740px">
-						<c:set var="i" value="0" />
-						<c:forEach var="ingredient" items="${list}">
-							<tr>
-								<td class="ingredientName">${ingredient.ingredientName}</td>
-								<td class="ingredientAmount">${ingredient.ingredientAmount}</td>
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
-			</div>
-
-
-			<hr />
-
-			<div class="iEJcKG">
-				<h3 class="iEJcKGheader">레시피</h3>
-				<br /> ${recipe.recipeOrder }
-			</div>
-			<hr />
-		
-				<h3 class="iEJcKGheader">리뷰</h3>
-			<form id="comment" name="comment" method="post" enctype="multipart/form-data">
-
-				<div class="panel">
-					<div class="panel-body">
-						<textarea class="form-control" name="reviewContent"
-							id="reviewContent" rows="2" placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
-						<div class="mar-top clearfix">
-							<button class="btn btn-sm  pull-right" type="submit">
-								등록
-							</button>
-							<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
-
-							<div class="yes">
-								<span class="btn_upload"> <input multiple="multiple"
-									type="file" id="reviewImg" name="fileArray" class="input-img" />
-									<i class="fa-solid fa-camera"></i>
-								</span> <img id="ImgPreview" name="reviewImg" src="" class="preview1" />
-								<input type="button" id="removeImage1" value="x"
-									class="btn-rmv1" />
-							</div>
-
-
-
-						</div>
+				<h3 class="iEJcKGheader">프로필</h3>
+				
+				
+				<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">아 이 디</label>
+					<div class="col-sm-4">
+					<p>${user.userId}</p>
 					</div>
 				</div>
-			</form>
-			
-			
-			<c:forEach var="review" items="${review}">
-
-						<div class="panel">
-							<div class="panel-body">
-								<div class="media-block">
-									<a class="media-left" ><img
-										class="img-circle img-sm" alt="Profile Picture"
-										src="/resources/images/168939.jpg"></a>
-									<div class="media-body">
-										<div class="mar-btm">
-											<a 
-												class="btn-link text-semibold media-heading box-inline">${review.writerNickname }</a>
-											<p class="text-muted text-sm">
-												<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-													value="${review.reviewRegdate}" />
-
-											</p>
-										</div>
-										<input type="hidden" name="reviewNo"
-											value="${review.reviewNo }"> <br />
-										<br />
-										<c:if test="${review.reviewImg != null }">
-											<img id="${review.reviewImg }" src="/resources/images/uploadFiles/${review.reviewImg }"
-												width="200" height="200">
-										</c:if>
-										<p id="acontent">${review.reviewContent }</p>
-										<div id="abt">
-											<c:if test="${review.writerNickname == user.userNickname }">
-												<input type="button" class="deleteReview" value="&#xf2ed"
-													id="${review.reviewNo }"
-													style="float: right; margin-right: 17px">
-												<input type="button" class="updateReview"
-													id="${review.reviewContent }" value="&#xf304"
-													style="float: right; margin-right: 5px">
-											</c:if>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-
-					<!--===================================================-->
-
-
-
-
+				
+				<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">닉 네 임</label>
+					<div class="col-sm-4">
+					<p>${user.userNickname}</p>
+					</div>
+					</div>
+					
 				</div>
-		</div>
+					
+					
+				<div class="iEJcKG">
+				<h3 class="iEJcKGheader">회원정보</h3>	
+				<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">이 름</label>
+					<div class="col-sm-4">
+					<p>${user.userName}</p>
+					</div>
+				</div>
+				
+				
+				<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">휴대전화번호</label>
+					<div class="col-sm-4">
+					<p>${user.phone}</p>
+					</div>
+					</div>
+				
+				<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">생년월일</label>
+					<div class="col-sm-4">
+					<p>${user.userBirth}</p>
+					</div>
+					</div>
+					
+					<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">주소</label>
+					<div class="col-sm-4">
+					<p>${user.addr}</p>
+					</div>
+					</div>
+					
+					<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">가입일자</label>
+					<div class="col-sm-4">
+					<p>${user.regDate}</p>
+					</div>
+					</div>
+					
+					<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">쿠킹멘토 신청 여부</label>
+					<div class="col-sm-4">
+					<p>${user.mentorApply}</p>
+					</div>
+					</div>
+					
+					
+			<c:if test="${user.mentorApply == 'Y' }">
+					<div class="iEJcKG">
+					<h3 class="iEJcKGheader">경력사항</h3>	
+					<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">경력사항</label>
+					<c:set var="i" value="0" />
+				 	 <c:forEach var="career" items="${career}" begin="0" end="1">
+					<div class="col-sm-4">
+					<p>${career.COMPANY}</p>
+					</div>
+					</c:forEach>
+					</div>
+				
+				
+					<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">경력기간</label>
+					<c:set var="i" value="0" />
+				 	 <c:forEach var="career" items="${career}" begin="0" end="1">
+					<div class="col-sm-4">
+					<p><fmt:formatDate pattern="yyyy-MM-dd" value="${career.START_DATE}" /> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${career.END_DATE}" /></p>
+					</div>
+					</c:forEach>
+					</div>
+					
+					
+					<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">업무내용</label>
+					<c:set var="i" value="0" />
+				 	 <c:forEach var="career" items="${career}" begin="0" end="1">
+					<div class="col-sm-4">
+					<p>${career.CAREER_EXPERIENCE}</p>
+					</div>
+					</c:forEach>
+					</div>
+					</div>
+					
+					<div class="iEJcKG">
+					<h3 class="iEJcKGheader">자격사항</h3>	
+					<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">자격증명</label>
+					<c:set var="i" value="0" />
+		 	 		<c:forEach var="license" items="${license}">
+					<div class="col-sm-4">
+					<p>${license.LICENSE_NAME}</p>
+					</div>
+					</c:forEach>
+					</div>
+					
+					<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">발급기관</label>
+					<c:set var="i" value="0" />
+		 	 		<c:forEach var="license" items="${license}">
+					<div class="col-sm-4">
+					<p>${license.LICENSE_INSTITUTION}</p>
+					</div>
+					</c:forEach>
+					</div>
+					
+					<div class="row">
+					<label for="recipeDetail"
+					class="col-sm-3 control-label">취득기간</label>
+					<c:set var="i" value="0" />
+		 	 		<c:forEach var="license" items="${license}">
+					<div class="col-sm-4">
+					<p><fmt:formatDate pattern="yyyy-MM-dd" value="${license.LICENSE_DATE}" /></p>
+					</div>
+					</c:forEach>
+					</div>
+				</div>
+				</c:if>
+				
+				
+				
+				<c:choose>
+		<c:when test="${sessionScope.user.role == 'admin' && user.mentorApply == 'Y' && user.role == 'user' }">
+		<div class="row" style="padding-top: 50px;padding-bottom:60px">
+	  		<div class="col-lg-12 text-center ">
+	  			<button type="button" class="btn-w addcart">승인</button>&emsp;
+	  			<button type="button" class="btn-b addPurchase" >거절</button>
+	  		</div>
+	  	</div>
+	  	</c:when>
+	  	<c:otherwise>
+		<div class="row" style="padding-top: 50px;padding-bottom:60px">
+	  		<div class="col-lg-12 text-center ">
+	  			<button type="button" class="btn-w addcart" id="editUserInfo">수정</button>&emsp;
+	  			<button type="button" class="btn-b addPurchase" >탈퇴</button>
+	  		</div>
+	  		</div>
+	  	</c:otherwise>
+	  	</c:choose>
+				
+					
+</div>
+</div>
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 </body>
@@ -551,124 +597,14 @@ body {
 <script type="text/javascript">
 
 
-	$(function() {
-		
-
-		$("button:contains('등록')").on("click", function() {
-			fncAddReview();
-
-		});
-		
-		$(document).on('click','.update',function() {
-			var recipeNo = $("input:hidden[name='recipeNo']").val();
-			self.location ="/recipe/updateRecipe?recipeNo="+recipeNo
+		 $(function() {
+				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				 $( "#editUserInfo" ).on("click" , function() {
+						self.location = "/user/updateUser?userId=${user.userId}"
+				});
 			});
 		
-		$( "button:contains('삭제')" ).on("click" , function() {
-			var recipeNo = $("input:hidden[name='recipeNo']").val();
 
-		    var array = new Array();
-			array.push(recipeNo);
-			
-			if (window.confirm('레시피를 삭제하시겠습니까?'))
-        	{
-				self.location = "/recipe/deleteRecipe?recipeList="+array;
-        	}
-			
-		});
-
-	
-
-	});
-
-	function fncAddReview() {
-		event.preventDefault();
-		 var form = $('#comment')[0];  	    
-		    // Create an FormData object          
-		    var data = new FormData(form);  	   
-		    // disabled the submit button         
-		
-		var recipeNo = $("input:hidden[name='recipeNo']").val();
-		var reviewContent=$('#reviewContent').val();
-		var userId = $("input:hidden[name='userId']").val();
-		var userNickname = $("input:hidden[name='userNickname']").val();
-		console.log(userNickname);
-		console.log(recipeNo);
-		console.log(userId);
-
-	     $.ajax({
-	            type : "POST",  
-	            url : "/review/json/addReview", 
-	            contentType: "application/x-www-form-urlencoded; charset=euc-kr",
-	            data : data,
-	            processData: false,    
-	            contentType: false,      
-	            cache: false,  
-	            error : function(request,status,error){
-	            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	            },
-	            success : function(request) {
-						alert("등록 성공");				           
-	                   location.reload();
-	            }
-	   	     
-	     });
-
-		pushAlarm(userId, userNickname, recipeNo);
-	}
-
-	$(".deleteReview").on("click", function() {
-		var reviewNo = $(this).attr('id');
-		var recipeNo = $("input:hidden[name='recipeNo']").val();
-		if (window.confirm('해당 리뷰를 삭제하시겠습니까?'))
-        	{
-			
-		
-		$.ajax({
-            type : "POST",  
-            url : "/review/json/deleteReview",       
-            data : {'reviewNo' : reviewNo, 'recipeNo':recipeNo },
-            error : function(request,status,error){
-            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            },
-            success : function(request) {
-                
-					alert("삭제 성공~");				           
-                    location.reload();
-                    	
-                    }
-		
-	});
-        	}
-	});
-	
-
-
-
-	$(document).on('click','.updateReview',function() {
-				//alert($(this).attr('id'))	
-				var reviewContent = $(this).attr('id');
-				var reviewNo = $("input:hidden[name='reviewNo']").val();
-				var imgreview = $("#imgreview").attr('id');
-				
-				if(imgreview=='undefined'){
-				
-				
-				$('#acontent').replaceWith(
-								"<img id='yeda' src='/resources/images/uploadFiles/"+imgreview+"' width='100' height='100'>"+
-								"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
-				}
-				else{
-					$('#acontent').replaceWith(
-							
-							"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
-					
-				}
-				
-				$('#abt').replaceWith("<div class='updateButton'> <input type='button'  value='수정' id='"+reviewNo+"'>"
-										+ "<input type='button' value='취소' ></div>");
-
-			});
 	
 	function readURL(input, imgControlName) {
 		if (input.files && input.files[0]) {
