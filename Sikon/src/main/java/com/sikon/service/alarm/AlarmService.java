@@ -5,12 +5,11 @@ import com.sikon.service.domain.Alarm;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 public interface AlarmService {
 	
 	//알람생성
-	public void addAlarm(Alarm Alarm, HttpSession session) throws Exception;
+	public void addAlarm(Alarm Alarm) throws Exception;
 	
 	//알람개수
 	public int getAlarmCount(String userId) throws Exception;

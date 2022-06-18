@@ -5,10 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -83,7 +88,11 @@ public class EchoHandler extends TextWebSocketHandler {
 					alarm.setAlarmTarget(toUserId);
 					alarm.setAlarmContent(fromUserNickname + "¥‘¿Ã ∏‡≈‰¥‘¿« ƒÌ≈∑≈¨∑°Ω∫ø° ¡¡æ∆ø‰∏¶ ¥≠∑∂Ω¿¥œ¥Ÿ! : [¡¶∏Ò : '"
 							+ postName+"']");
-					//alarmService.addAlarm(alarm);
+					alarmService.addAlarm(alarm);
+					
+					HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+					HttpSession userSession = request.getSession();
+					
 					
 				}
 				
