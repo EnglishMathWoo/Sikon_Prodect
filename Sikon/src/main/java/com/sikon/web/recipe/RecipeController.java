@@ -269,10 +269,6 @@ public class RecipeController {
 			search.setSearchCondition("0");
 		}
 
-		if (search.getOrderCondition() == null) {
-			search.setOrderCondition("0");
-		}
-		
 		if(search.getThemeCondition() == "all") {
 			search.setThemeCondition(null);
 		}

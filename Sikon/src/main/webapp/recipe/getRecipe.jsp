@@ -40,9 +40,25 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
 	rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
 <style>
+.colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important;
+}
+.colored-toast .swal2-title {
+  color: white;
+}
+
+.colored-toast .swal2-close {
+  color: white;
+}
+
+.colored-toast .swal2-html-container {
+width:50%;
+  color: white;
+}
 .btn-sm {
 	color: #000;
 }
@@ -442,7 +458,6 @@ body {
 
 			<hr />
 
-
 			<div class="iEJcKG">
 				<h3 class="iEJcKGheader">레시피</h3>
 				<br /> ${recipe.recipeOrder }
@@ -534,7 +549,10 @@ body {
 
 <script>history.scrollRestoration = "auto"</script>
 <script type="text/javascript">
+
+
 	$(function() {
+		
 
 		$("button:contains('등록')").on("click", function() {
 			fncAddReview();
@@ -590,12 +608,10 @@ body {
 	            },
 	            success : function(request) {
 						alert("등록 성공");				           
-	                    location.reload();
-	    					
-	                    }
-	     
+	                   location.reload();
+	            }
+	   	     
 	     });
-
 
 		pushAlarm(userId, userNickname, recipeNo);
 	}
@@ -731,16 +747,34 @@ body {
 		               alert("통신 에러");
 		            },
 		            success : function(bookmarkStatus) {
-		                
+		             
+		              
 		                    if(bookmarkStatus == 0){
-		                    	alert("북마크 성공");
-		                    	                    	
-		                    							           
-		                    $("#bookmarkBtn").removeClass('bi-bookmark');
-					        $("#bookmarkBtn").addClass('bi-bookmark-plus');
-					           
-		                    location.reload();
 		                    	
+		                  
+		                    	 
+		                    	 
+		                    	const Toast = Swal.mixin({
+		                    	    toast: true,
+		                    	    position: 'center-center',
+		                    	    showConfirmButton: false,
+		                    	    timer: 3000,
+		                    	    timerProgressBar: false,
+		                    	    didOpen: (toast) => {
+		                    	        toast.addEventListener('mouseenter', Swal.stopTimer)
+		                    	        toast.addEventListener('mouseleave', Swal.resumeTimer)
+		                    	    }
+		                    	});
+		                    	 
+		                    	Toast.fire({
+		                    	    icon: 'success',
+		                    	    title: '책갈피에 등록되었습니다.'
+		                    	});
+		                    	
+		                    	
+		                    //	alert("책갈피에 등록되었습니다.");
+		                     	location.reload();				           
+					           
 		    					
 		                    }
 		                    else if (bookmarkStatus == 1){

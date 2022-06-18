@@ -42,7 +42,9 @@ div.container {
 	padding-bottom: 150px;
 }
 
-
+html input[type=text]{
+	background-color: #f7f7f7;
+}
 .update {
   cursor: pointer;
   background-color: #937062;

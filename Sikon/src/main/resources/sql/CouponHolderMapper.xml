@@ -35,9 +35,9 @@
 	 
 	 
 	 <select 	id="findIssuedCoupon" 	parameterType="int"	 resultMap="couponSelectMap">
-		SELECT * FROM couponholder
+		SELECT h.*, c.* FROM couponholder h, coupon c 
 		<where>
-		issue_no = #{issueNo}
+		h.coupon_no = c.coupon_no AND issue_no = #{issueNo}
 		</where>
   	 </select>
 	 

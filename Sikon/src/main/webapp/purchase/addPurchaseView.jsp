@@ -55,7 +55,9 @@ div.container {
 .buy:hover {
   background-color: #937062d4;
 }
-
+html input[type=text]{
+	background-color: #f7f7f7;
+}
 .cancel {
   cursor: pointer;
   background-color: #f7f7f7;
@@ -271,7 +273,6 @@ html input[type=button]:hover{
 			
 			var quantity = 0;
 			var price = Number("${product.prodDisPrice}");
-			var totalPrice = 0;
 			
 			console.log("총 상품금액: "+price);
 			
@@ -312,7 +313,10 @@ html input[type=button]:hover{
 			$("#usedCoupon").on( "change", function() { 
 			
 				var disvalue = $("#usedCoupon>option:selected").attr('disvalue');
-				var disrate = totalProdPrice*$("#usedCoupon>option:selected").attr('disrate');
+				var disrate = price*$("#usedCoupon>option:selected").attr('disrate');
+				
+				console.log("disvalue: "+disvalue);
+				console.log("disrate: "+ disrate);
 				
 				applycoupons = Number(disvalue)+Number(disrate)
 				
@@ -631,7 +635,7 @@ function payment(data) {
 				      		<select name="usedCoupon" class="form-control" id="usedCoupon">
 				      			<option value=""> 사용할 쿠폰을 선택해주세요 </option>
 						      		<c:forEach var="couponlist" items="${coupon}">
-						      			<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
+						      			<option value="${couponlist.issueNo}" disvalue="${couponlist.discountValue}" disrate="${couponlist.discountRate}">${couponlist.couponName}</option>
 						      		</c:forEach>
 				      		</select>
 				      		

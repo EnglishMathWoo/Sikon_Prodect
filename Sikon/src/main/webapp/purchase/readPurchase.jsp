@@ -78,8 +78,9 @@ html input[type=button]{
 html input[type=button]:hover{
 	background-color: #937062d4;
 }
-
-
+html input[type=text]{
+	background-color: #f7f7f7;
+}
 .point{
 	background-color: #f7f7f7;
 	border: 1px solid #937062;
@@ -145,15 +146,6 @@ label{
 	width: 15%;
 }
 
-.sectd{
-	display: flex;
-}
-.paycontent{
-	border-top: 2px solid #937062;
-	width: 652px;
-	margin-left: -15px;
-	padding-top: 20px;
-}
 .payment{
 	width:84%;
 	text-align: right;
@@ -203,31 +195,76 @@ label{
 .golist:hover {
   background-color: #e7e2e2;
 }
+
+.paycontent{
+	border-top: 2px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+	padding-top: 20px;
+}
+.sectd{
+	display: flex;
+}
+.payment{
+	width:84%;
+	text-align: right;
+}
+
+.totalpay{
+	font-size: 20px;
+}
+.totals{
+	color: #FF4800;
+}
+.info{
+	width: 15%;
+	font-weight: bold;
+}
 </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
 	
-		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$(".check").on("click" , function() {
-				history.go(-1);
+				self.location = "/product/listProduct";
 			});
-			
-			$(".golist").on("click" , function() {
-				self.location = "/purchase/listPurchase"
-			});
-			
-			$(".update").on("click" , function() {
-				self.location = "/purchase/updatePurchaseBySerial?serialNo=${purchaseinfo.serial}"
-			});
-			
+		
 		});	
 
-
-		 
+		$(function() {
+			
+			var why = "${purchaseInfo.couponRate}";
+			
+			var prodprice = Number("${purchaseInfo.prodprice}");
+			var divyfee = Number("${purchaseInfo.divyfee}");
+			var couponvalue = Number("${purchaseInfo.couponvalue}");
+			var couponRate = prodprice*("${purchaseInfo.couponRate}");
+			var pointpay = Number("${purchaseInfo.pointpay}");
+			var serial = "${purchaseInfo.serial}";
+			
+			var couponpay = couponvalue+(couponRate);
+			
+			console.log("why: "+why);
+			console.log("==========");
+			
+			console.log("prodprice: "+prodprice);
+			console.log("divyfee: "+divyfee);
+			console.log("couponvalue: "+couponvalue);
+			console.log("couponRate: "+couponRate);
+			console.log("pointpay: "+pointpay);
+			console.log("serial: "+serial);
+			console.log("couponpay: "+couponpay);
+			
+			$("#totalProdPrice").val(prodprice);
+			$("#couponuse").val("- "+couponpay);
+			$("#usingpoint").val("- "+pointpay);
+			$("#divyfee").val("+ "+divyfee);
+			$("#totalpayment").val(prodprice-couponpay-pointpay+divyfee);
+			$("#earnPoint").val(prodprice*0.05);
+			
+		});	 
 	</script>		
 	
 </head>
@@ -249,8 +286,7 @@ label{
 
 				
 			  
-			<div>
-			<c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	  
+			<div>	  
 				  <div class="subtitle">
 				  <p>배송정보</p>
 				  </div><br>
@@ -285,7 +321,7 @@ label{
 				    <label for="divyMessage">배송메시지</label>
 				      ${purchase.divyMessage }
 				  </div>
-			</c:forEach>	
+
 			</div>
 				  
 				  
@@ -294,7 +330,7 @@ label{
 				  <div class="subtitle">
 				  <p>주문상품</p>
 				  </div><br>
-			<c:forEach var="purchase" items="${purchaselist}">	  
+ 
 				  <div class="form-group">
 				  <table style="width: 100%">
 					  <tr>
@@ -318,7 +354,7 @@ label{
 				<input type="hidden" class="quantity" value="${purchase.purchaseQuantity}" />
 				<input type="hidden" class="price" value="${purchase.purchaseProd.prodDisPrice}" />
 				
-			</c:forEach>	
+	
 			</div>	  
 			
 			<br>
@@ -326,74 +362,50 @@ label{
 			<section class="paycontent">	    
 				  
 				  <div class="sectd">
-				  	<h5>총 상품금액</h5>
-				  	<div class="payment">${purchaseinfo.totalprice}원</div>
+				  	<h5 class="info">총 상품금액</h5>
+				  	<div class="payment"><input type="text" id="totalProdPrice" value="" size="" style="border:none;text-align:right">원</div>
 				  </div>
 				  
 				  <div class="sectd">
-				  	<h5>쿠폰 사용</h5>
-				  	<div class="payment">- ${purchaseinfo.couponpay}원</div>
+				  	<h5 class="info">쿠폰 사용</h5>
+				  	<div class="payment"><input type="text" id="couponuse" value="" size=""  style="border:none;text-align:right">원</div>
 				  </div>
 				  
 				  <div class="sectd">
-				  	<h5>포인트 사용</h5>
-				  	<div class="payment">- ${purchaseinfo.pointpay}P</div>
+				  	<h5 class="info">포인트 사용</h5>
+				  	<div class="payment"><input type="text" id="usingpoint" value="" size=""  style="border:none;text-align:right">P</div>
 				  </div>
 				  
 				  <div class="sectd">
-				  	<h5>배송비</h5>
-				  	<div class="payment">+ ${purchaseinfo.divyfee}원</div>
+				  	<h5 class="info">배송비</h5>
+				  	<div class="payment"><input type="text" id="divyfee" value="" size=""  style="border:none;text-align:right">원</div>
 				  </div>
 				  
 				  <br>
 				  
 				  <div class="sectd">
-				  	<h5>총 결제금액</h5>
-				  	<div class="payment totals"><strong class="totalpay">${purchaseinfo.totalprice - purchaseinfo.couponpay - purchaseinfo.pointpay + purchaseinfo.divyfee }</strong>원</div>
+				  	<h5 class="info">총 결제금액</h5>
+				  	<div class="payment totals"><strong class="totalpay"><input type="text" id="totalpayment" value="" size=""  style="border:none;text-align:right"></strong>원</div>
 				  </div>
 				  
-			  <c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	
-				  
 				  <div class="sectd">
-				  	<h6>적립 포인트</h6>
-				  	<div class="payment totals">+ ${purchase.earnPoint} P</div>
+				  	<h6 class="info">적립 포인트</h6>
+				  	<div class="payment totals"><input type="text" id="earnPoint" name="earnPoint" value="" size=""  style="border:none;text-align:right"> P</div>
 				  </div>
 				  
 				  
 				  <hr>
 				  
 				  
-				  <div class="sectd">
-				  	<h5>결제수단</h5>
-				  	<div class="payment">
-				  		<c:if test="${purchase.paymentOpt == 'KA'}">카카오 간편결제</c:if>
-						<c:if test="${purchase.paymentOpt == 'CA'}">신용카드 결제</c:if>
-				  	</div>
-				  </div>
-				  
-			</c:forEach>	  
-				  
 			</section>
 			
 
 			<br><br>
 			
-			<c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	
-			
 			<div class="text-center">
-			
-				<c:if test="${purchase.divyStatus.equals('001') && user.role != 'admin'}">	
-				<button type="button" class="update" >수정하기</button>	
-				</c:if>
-				<c:if test="${user.role == 'admin' }">	
 				<button type="button" class="check" >확&emsp;인</button>
-				</c:if>
-				<c:if test="${user.role != 'admin' }">	
-				<button type="button" class="golist" >확&emsp;인</button>
-				</c:if>
 			</div>
 			
-			</c:forEach>	
 				
 			<br>
  	</div>
