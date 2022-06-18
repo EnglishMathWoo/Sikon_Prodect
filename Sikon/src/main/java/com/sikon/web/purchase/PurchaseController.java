@@ -316,12 +316,17 @@ public class PurchaseController {
 		
 		List list = new ArrayList();
 		
+		int productPrice = 0;
+		int num = 0;
 		//for문
 		for(int i=0; i<cartNo.length; i++) {
 			
 			Cart cart = cartService.getCart(cartNo[i]);
 			
 			Product product = productService.getProduct(cart.getCartProd().getProdNo());
+			productPrice += product.getProdDisPrice();
+			num ++;
+			
 			Purchase purchaseByCart = new Purchase();
 			purchaseByCart.setReceiverName(purchase.getReceiverName());
 			purchaseByCart.setReceiverPhone(purchase.getReceiverPhone());
@@ -393,25 +398,46 @@ public class PurchaseController {
 		// 쿠폰 사용하기
 		System.out.println("쿠폰사용 시작");
 		
+		Coupon usedcoupon = new Coupon();
+		
 			if(purchase.getUsedCoupon().equals("none")) {
 				purchase.setUsedCoupon(null);
 			}
 			
 			if(purchase.getUsedCoupon() != null) {
 				int issueNo = Integer.parseInt(purchase.getUsedCoupon());
-				Coupon usedcoupon = couponService.getIssuedCoupon(issueNo);
+				usedcoupon = couponService.getIssuedCoupon(issueNo);
 				usedcoupon.setIssueStatus("002");
 				couponService.updateIssueStatus(usedcoupon);
 			}
+			
 		System.out.println("쿠폰사용 끝");
-		//==================================================================================		
 		
-//*/		
+		//==================================================================================
+
+		Map map = new HashMap();
+		
+		String serial = serialNo;
+		int price = productPrice;
+		int divyfee = 3000*num;
+		int couponvalue = usedcoupon.getDiscountValue();
+		double couponRate = usedcoupon.getDiscountRate();
+		int pointpay = purchase.getUsedPoint();
+
+		map.put("prodprice", price);
+		map.put("divyfee", divyfee);
+		map.put("couponvalue", couponvalue);
+		map.put("couponRate", couponRate);
+		map.put("pointpay", pointpay);
+		map.put("serial", serial);
+
+		//==================================================================================	
 		System.out.println("장바구니 구매완료");
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");
-//		modelAndView.addObject("list", list);
+		modelAndView.addObject("purchaselist", list);
+		modelAndView.addObject("purchaseInfo", map);
 		
 		return modelAndView;
 	}
