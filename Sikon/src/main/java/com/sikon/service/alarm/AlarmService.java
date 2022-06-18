@@ -15,12 +15,10 @@ public interface AlarmService {
 	
 	//알람List
 	public Map<String , Object> getAlarmList(Search search, String userId) throws Exception;
-	
-	//알람삭제
-	public void deleteAlarm(String userId) throws Exception;
-	
+
 	public void updateAlarmStatus(Alarm alarm) throws Exception;
 	
+	//미확인 알람 개수
 	public int getStatusCount(String userId) throws Exception;
 		
 }

@@ -52,7 +52,7 @@ public class AlarmController {
 	
 	@RequestMapping( value="/listAlarm" )
 	public String listCoupon(@ModelAttribute("search") Search search, @RequestParam("userId") String userId,
-			Model model , HttpServletRequest request, HttpSession session) throws Exception{
+			Model model, HttpSession session) throws Exception{
 		
 		
 		if(search.getCurrentPage() ==0 ){
@@ -80,18 +80,6 @@ public class AlarmController {
 		model.addAttribute("user", user);
 		
 		return "forward:/alarm/listAlarm.jsp";
-	}
-		
-
-	@RequestMapping( value="/deleteAlarm", method=RequestMethod.GET)
-	public String deleteAlarm( @RequestParam("userId") String userId ) throws Exception{
-
-		System.out.println("/coupon/deleteAlarm : GET");
-		
-		//Business Logic
-		alarmService.deleteAlarm(userId);
-		
-		return "redirect:/recipe/listRecipe";
 	}
 
 }

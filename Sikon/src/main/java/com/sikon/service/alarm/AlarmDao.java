@@ -19,11 +19,10 @@ public interface AlarmDao{
 	
 	//알람리스트
 	public List<Alarm> getAlarmList(Search search, String userId) throws Exception;
-	
-	public void deleteAlarm(String userId) throws Exception;
-	
+
 	public void updateAlarmStatus(Alarm alarm) throws Exception;
 	
+	//미확인 알람 개수
 	public int getStatusCount(String userId) throws Exception;
 	
 }

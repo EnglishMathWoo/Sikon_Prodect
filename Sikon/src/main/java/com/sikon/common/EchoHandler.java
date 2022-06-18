@@ -79,15 +79,7 @@ public class EchoHandler extends TextWebSocketHandler {
 				Alarm alarm = new Alarm();
 								
 				//좋아요
-				if ("heart".equals(cmd) && toUserSession != null) {
-					System.out.println("onmessage되나??");
-					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
-									+ postName+"']");
-					toUserSession.sendMessage(tmpMsg);
-					alarm.setAlarmTarget(toUserId);
-					alarm.setAlarmContent(tmpMsg.toString());
-					alarmService.addAlarm(alarm);
-				} else if ("heart".equals(cmd)){
+				if ("heart".equals(cmd)){
 					alarm.setAlarmTarget(toUserId);
 					alarm.setAlarmContent(fromUserNickname + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
 							+ postName+"']");
@@ -101,7 +93,8 @@ public class EchoHandler extends TextWebSocketHandler {
 									+ postName+"']");
 					toUserSession.sendMessage(tmpMsg);
 					alarm.setAlarmTarget(toUserId);
-					alarm.setAlarmContent(tmpMsg.toString());
+					alarm.setAlarmContent(fromUserNickname + "님이 회원님의 레시피에 리뷰를 작성했습니다! : [제목 : '"
+							+ postName+"']");
 					alarmService.addAlarm(alarm);
 				} else if ("recipeReview".equals(cmd)){
 					alarm.setAlarmTarget(toUserId);
