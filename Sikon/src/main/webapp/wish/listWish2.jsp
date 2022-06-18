@@ -37,27 +37,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
  <!-- //////////////////////////////////공유하기////////////////////////////// -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
-      <style>
+    <style>
 
         .bi-heart{
-            font-size: 20px;
-            line-height: 20px;
-            color:#000;
+            font-size: 30px;
+            line-height: 30px;
+            color:crimson;
         }
 
         .bi-heart-fill{
-            font-size: 20px;
-            line-height: 20px;
-            color:#000;
+            font-size: 30px;
+            line-height: 30px;
+            color:crimson;
         }
 
-.bi-heart-fill::before{
-color:crimson;
-}
-
-.bi-heart::before{
-color:crimson;
-}
     </style>
     <!--  댓글 -->
 <style>
@@ -322,7 +315,7 @@ div.image{
 
 			
 		 $( ".addWish" ).on("click" , function() {
-			 console.log('쿠킹장바구니');
+			 console.log('장바구니');
 			 var cookStatus = $('#cookStatus').val();
 			 
 			 
@@ -354,85 +347,26 @@ div.image{
 		});			 
 		 
 	});
-//=========================================좋아요=========================================//	
-			$(document).on("click" ,"p.like_btn", function(){
-
-				var userId = $("input[name='userId']").val();
-				var userNickname = $("input[name='userNickname']").val();
-				var cookNo = $(this).attr("value");
-			
-				console.log(cookNo);
-				console.log(userId);
-
-			     $.ajax({
-			            type : "POST",  
-			            url : "/heart/json/updateHeart",       
-			            dataType : "json",   
-			            data : {'cookNo' : cookNo, 'userId' : userId },
-			            error : function(){
-			               alert("통신 에러");
-			            },
-			            success : function(heartCheck) {
-			                
-			                    if(heartCheck == 0){
-			                    	alert("추천완료.");
-			                    	                    	
-			                    	
-			                    	var userNickname = $("input[name='userNickname']").val();
-
-			                    	console.log(userId);
-			                    	console.log(cookNo);
-			                    	console.log(userNickname);
-			                    	
-			                    	pushAlarm(userId, userNickname, cookNo);
-			                    							           
-				   
-						           
-			                    location.reload();
-			                    	
-			                    	
-			    					
-			                    }
-			                    else if (heartCheck == 1){
-			                     alert("추천취소");
-			                     
-			                     location.reload();
-						         
-			                  
-			                    	
-			                }
-			                    
-			                    
-			            }
-			        })
-			 });
+//=========================================장바구니=========================================//	
+/*	
+function fncAddWish() {
+	
+	var cookStock=$("#cookStock").val();
+	var cookStatus=$("input[name='cookStatus']").val();
+	console.log(cookStock);
+	console.log(cookStatus);
+	if (cookStock < cookStatus) {
+		alert("장바구니 담기가능 개수가 초과되었습니다");
+		return;
+	}
+	
+	
+	$("form").attr("method" , "POST").attr("action" , "/wish/addWish").submit();
+	
+}
+	 */
 	 
-			//좋아요 push 알림
-			 function pushAlarm(userId, userNickname, cookNo){
-													
-					$.ajax({
-				        url : "/cook/json/pushAlarm",
-				        type : 'POST',
-				        dataType : "json",   
-			            data : {'cookNo' : cookNo, 'userId' : userId, 'userNickname' : userNickname }, 
-			            async: false, 
-			            error : function(){
-				            alert("통신 에러");
-				        },
-				        success : function(data){
-				        	
-				        	alert("알람 전송 완료!!");
-				        	      	          
-				           		if(socket){
-				        			let socketMsg = "heart,"+data.userId+","+data.userNickname+","+data.mentorId+","+data.cookName;
-				        			console.log(socketMsg);
-				        			socket.send(socketMsg);
-				           		}
-				        }
-				    
-				    })
-			 };
-			 
+
 //=========================================================================================//	
 //===================== 상단으로 이동 ====================================
 	
@@ -460,7 +394,7 @@ div.image{
 
 	function modal(id) {
     var zIndex = 9999;
-    var modal = $('#' + id);
+    var modal = $('/' + id);
     var cookStatus = $('#cookStatus').val();
 
     // 모달 div 뒤에 희끄무레한 레이어
@@ -518,8 +452,6 @@ div.image{
 				<div class="row">
 					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo}"/>
 					  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
-					    <input type="hidden" name="userId" value="${user.userId}">
-					     <input type="hidden" name="userNickname" value="${user.userNickname}">
 				</div>		 
 	
 		<div class="row">
@@ -547,26 +479,6 @@ div.image{
 					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle" class="image" value="${prodThumbnail}"/>
 				</c:otherwise>
 		    	</c:choose>
-		    	
-		    	
-		    	<br><br>
-		    		
-		    	<table>
-		    		<tr class="liketable">
-						<td>
-							<c:choose>
-					 		<c:when test = "${cook.heartCount == '0'}">
-					 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">&nbsp; 좋아요 ${cook.hearthit}개</p>
-							</c:when>    
-					 		<c:otherwise>
-					 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn">&nbsp; 좋아요 ${cook.hearthit}개</p>
-					 		</c:otherwise>
-					 		</c:choose>
-						</td>
-						<td class="likes"></td>
-					</tr>
-				</table>		    	
-		    	
 				</div>	
 			
 
@@ -791,11 +703,11 @@ geocoder.addressSearch(cookLocation, function(result, status) {
  		<a class="modal_close_btn"><i class="bi bi-x"></i></a>
  		<br>
  		<div class="message">
-	    클래스가 담겼습니다.
+	    장바구니에 상품이 담겼습니다.
 	    </div><br>
 	    <div class="forcenter">
-	    <a href="#" class="gowish">
-	    담은 클래스보기 &nbsp;
+	    <a  id="gowish">
+	    장바구니 바로가기 &nbsp;
 	    <i class="fa-solid fa-angle-right"></i>
 	    </a>
 	    </div>
