@@ -86,7 +86,7 @@
 	<select  id="getIssuedCouponList"  parameterType="search"	resultMap="couponSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT h.*, c.*
+	  					FROM		(	SELECT h.*, c.coupon_name
  										FROM couponholder h, coupon c
  										WHERE h.coupon_no = c.coupon_no
  										<if test="orderCondition == null">
