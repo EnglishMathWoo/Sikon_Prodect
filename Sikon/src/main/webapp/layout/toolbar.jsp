@@ -418,11 +418,21 @@ address {
 }
 
 .bi-bell {
-	 font-size: 18px;
+	 font-size: 20px;
 }
 
-.bi-bell-fill {
-	 font-size: 18px;
+.shape2 {
+  border-width: 1px;
+  background-color: red;
+  border-color:	#C0C0C0;
+  border-style: solid;
+  width: 75%;
+  height: 16px;
+  text-align: center;
+  font-weight:bold;
+  color:white;
+  font-size:0.5px;
+  border-radius: 5px;
 }
 
 td{
@@ -733,7 +743,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			<li><i class="bi bi-bell" id="vacantAlarm"></i></li>
 			</c:if>
 			<c:if test="${sessionScope.alarm != 0}">
-			<li><i class="bi bi-bell-fill" id="filledAlarm"></i></li>
+			<li><i class="bi bi-bell" id="vacantAlarm"></i><div class="shape2">${sessionScope.alarm}</div></li>
 			</c:if>
 			</td>
 			
@@ -1155,7 +1165,6 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			
 		function connectWs(){
 			
-			console.log("tttttt")
 			var ws = new SockJS("/alarm");
 			socket = ws;
 		
@@ -1164,7 +1173,12 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			};
 		
 			ws.onmessage = function(event) {
-				//alert(event.data);
+				
+				if(event.data != null) {
+				
+					alert(event.data);
+				
+				}
 				
 				setTimeout(function(){
 					$socketAlert.css('display','none');

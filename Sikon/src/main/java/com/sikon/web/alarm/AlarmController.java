@@ -50,7 +50,7 @@ public class AlarmController {
 		System.out.println(this.getClass());
 	}
 	
-	///Method	
+	///Method
 	@RequestMapping( value="/listAlarm" )
 	public String listCoupon(@ModelAttribute("search") Search search, @RequestParam("userId") String userId,
 			Model model, HttpSession session) throws Exception{

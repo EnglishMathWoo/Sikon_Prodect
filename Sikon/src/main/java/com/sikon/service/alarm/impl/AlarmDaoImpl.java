@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import com.sikon.common.Search;
 import com.sikon.service.alarm.AlarmDao;
 import com.sikon.service.domain.Alarm;
-import com.sikon.service.domain.Coupon;
 
 
 @Repository("alarmDaoImpl")
