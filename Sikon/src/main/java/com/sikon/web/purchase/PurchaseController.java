@@ -218,12 +218,32 @@ public class PurchaseController {
 			couponService.updateIssueStatus(coupon);
 		}
 		//==================================================================================		
+		Coupon coupon = couponService.getIssuedCoupon(Integer.parseInt(purchase.getUsedCoupon()));
+		
+		Map map = new HashMap();
+		
+		String serial = serialNo;
+		int price = purchase.getPurchaseProd().getProdDisPrice();
+		int divyfee = 3000;
+		int couponvalue = coupon.getDiscountValue();
+		double couponRate = coupon.getDiscountRate();
+		int pointpay = purchase.getUsedPoint();
+
+		map.put("totalprice", price);
+		map.put("divyfee", divyfee);
+		map.put("couponvalue", couponvalue);
+		map.put("couponRate", couponRate);
+		map.put("pointpay", pointpay);
+		map.put("serial", serial);
+
+		//==================================================================================		
 		
 		rankingService.addPurchase(prodNo, serialNo);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchase.jsp");
 		modelAndView.addObject("purchsae", purchase);
+		modelAndView.addObject("purchsaeInfo", purchase);
 		
 		return modelAndView;
 	}
@@ -273,7 +293,7 @@ public class PurchaseController {
 		System.out.println("========================================================================");
 		System.out.println("/purchase/addPurchaseByCart : POST");
 		
-		/*
+		///*
 		
 		User user = userService.getUser(userId);
 		
@@ -707,7 +727,7 @@ public class PurchaseController {
 		// Model °ú View ¿¬°á
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/listPurchase.jsp");
+		modelAndView.setViewName("/mypage/listPurchase.jsp");
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);
