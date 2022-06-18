@@ -235,14 +235,19 @@ label{
 
 		$(function() {
 			
+			var why = "${purchaseInfo.couponRate}";
+			
 			var prodprice = Number("${purchaseInfo.prodprice}");
 			var divyfee = Number("${purchaseInfo.divyfee}");
 			var couponvalue = Number("${purchaseInfo.couponvalue}");
-			var couponRate = Number("${purchaseInfo.couponRate}");
+			var couponRate = prodprice*("${purchaseInfo.couponRate}");
 			var pointpay = Number("${purchaseInfo.pointpay}");
 			var serial = "${purchaseInfo.serial}";
 			
-			var couponpay = couponvalue+(prodprice*couponRate);
+			var couponpay = couponvalue+(couponRate);
+			
+			console.log("why: "+why);
+			console.log("==========");
 			
 			console.log("prodprice: "+prodprice);
 			console.log("divyfee: "+divyfee);

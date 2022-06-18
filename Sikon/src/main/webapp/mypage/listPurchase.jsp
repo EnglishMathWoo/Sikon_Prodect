@@ -192,12 +192,10 @@ div.emptyProd{
 			$( ".cancel" ).on("click" , function() {
 				alert('구매를 취소하시겠습니까?');
 				console.log('구매취소');
-				var message1 = $(this).attr("value1");
-				console.log(message1);
-				var message2 = $(this).attr("value2");
-				console.log(message2);
+				var serialNo = $(this).attr("value1");
+				console.log("serialNo: "+serialNo);
 				
-				self.location ="/purchase/cancelOrder?tranNo="+message1+"&divyStatus="+message2;
+				self.location ="/purchase/cancelOrder?serialNo="+serialNo;
 			});
 			
 			$( ".review" ).on("click" , function() {
@@ -221,7 +219,7 @@ div.emptyProd{
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container list">
 	
-		<h3 class="orderlist">| O R D E R L I S T |</h3>
+		<h3 class="orderlist">| O R D E R &nbsp; L I S T |</h3>
 	    <br>
 	    
 		<form>
@@ -265,7 +263,7 @@ div.emptyProd{
 							<td align="center" class="status">배송중</td>
 						</c:when>
 						<c:when test="${purchase.divyStatus.equals('001')}">
-							<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
+							<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.serialNo }">구매취소</p></td>
 						</c:when>
 						<c:when test="${purchase.divyStatus.equals('000')}">
 							<td align="center" class="complete status">취소완료</td>
@@ -310,7 +308,7 @@ div.emptyProd{
 									<td align="center" class="status">배송중</td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('001')}">
-									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
+									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.serialNo }">구매취소</p></td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('000')}">
 									<td align="center" class="complete status">취소완료</td>
@@ -357,7 +355,7 @@ div.emptyProd{
 									<td align="center" class="status">배송중</td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('001')}">
-									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.tranNo }" value2="${purchase.divyStatus}">구매취소</p></td>
+									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.serialNo }">구매취소</p></td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('000')}">
 									<td align="center" class="complete status">취소완료</td>

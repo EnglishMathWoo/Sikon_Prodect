@@ -237,6 +237,9 @@ public class PurchaseController {
 		map.put("pointpay", pointpay);
 		map.put("serial", serial);
 
+		System.out.println("couponvalue: "+couponvalue);
+		System.out.println("couponRate: "+couponRate);
+		
 		//==================================================================================		
 		
 		rankingService.addPurchase(prodNo, serialNo);
@@ -698,7 +701,7 @@ public class PurchaseController {
 		return modelAndView;
 	}
 
-	
+/*	
 	@RequestMapping(value="cancelOrder", method=RequestMethod.GET)
 	public ModelAndView cancelOrder(@RequestParam("tranNo") int tranNo) throws Exception{
 
@@ -724,7 +727,67 @@ public class PurchaseController {
 		
 		return modelAndView;
 	}
+//*/
 	
+	@RequestMapping(value="cancelOrder", method=RequestMethod.GET)
+	public ModelAndView cancelOrder(@RequestParam("serialNo") String serialNo, HttpServletRequest request) throws Exception{
+
+		System.out.println("/purchase/cancelOrder : GET");
+		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		User buyer = userService.getUser(user.getUserId());
+		
+		List list = purchaseService.getPurchaseBySerial(serialNo);
+		
+		for(int i=0; i<list.size(); i++) {
+			int quantity = ((Purchase)list.get(i)).getPurchaseQuantity();
+			int prodNo = ((Purchase)list.get(i)).getPurchaseProd().getProdNo();
+			
+			purchaseService.cancelOrder(quantity, prodNo);
+			
+			((Purchase)list.get(i)).setDivyStatus("000");
+			purchaseService.updateDivyStatus(((Purchase)list.get(i)));
+			
+		}
+		
+		int usedPoint = ((Purchase)list.get(0)).getUsedPoint();
+		String usedCouponNo = ((Purchase)list.get(0)).getUsedCoupon();
+		
+		if(usedCouponNo != null && !usedCouponNo.equals("none")) {
+			Coupon usedcoupon = couponService.getIssuedCoupon(Integer.parseInt(usedCouponNo));
+			usedcoupon.setIssueStatus("001");
+			couponService.updateIssueStatus(usedcoupon);
+		}
+		
+		Point point = new Point();
+		int usedpoint = ((Purchase)list.get(0)).getUsedPoint();
+		int totalpoint = buyer.getHoldpoint() + usedpoint;
+		
+		point.setPointScore(usedpoint);
+		point.setTotalPoint(totalpoint);
+		point.setUserId(buyer.getUserId());
+		point.setPointType("CANCELUSE");
+		point.setPointCategory("str");
+		pointService.addPoint(point);
+		pointService.updateHoldPoint(totalpoint, buyer.getUserId());
+		
+
+		int earnpoint = ((Purchase)list.get(0)).getEarnPoint();
+		totalpoint = totalpoint - earnpoint;
+		point.setPointScore(earnpoint);
+		point.setTotalPoint(totalpoint);
+		point.setUserId(buyer.getUserId());
+		point.setPointType("CANCELEARN");
+		point.setPointCategory("str");
+		pointService.addPoint(point);
+		pointService.updateHoldPoint(totalpoint, buyer.getUserId());
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/listPurchase");		
+		
+		return modelAndView;
+	}
 
 	@RequestMapping(value="listPurchase" )
 	public ModelAndView listPurchase( @ModelAttribute("search") Search search ,  HttpServletRequest request) throws Exception{
