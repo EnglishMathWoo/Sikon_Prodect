@@ -397,6 +397,7 @@ address {
 	margin-right: 0;
 	padding-right: 0;
 	border-right: none;
+	position: relative;
 }
 
 #topbar i {
@@ -426,13 +427,17 @@ address {
   background-color: red;
   border-color:	#C0C0C0;
   border-style: solid;
-  width: 75%;
-  height: 16px;
+  width: 40%;
+  height: 17px;
   text-align: center;
   font-weight:bold;
   color:white;
   font-size:0.5px;
   border-radius: 5px;
+  position: absolute;
+   top: -1px;
+   left: 13px;
+   width: 15px;
 }
 
 td{
@@ -743,7 +748,11 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			<li><i class="bi bi-bell" id="vacantAlarm"></i></li>
 			</c:if>
 			<c:if test="${sessionScope.alarm != 0}">
-			<li><i class="bi bi-bell" id="vacantAlarm"></i><div class="shape2">${sessionScope.alarm}</div></li>
+			<li>
+				<i class="bi bi-bell" id="vacantAlarm"></i>
+				<div class="shape2">${sessionScope.alarm}</div>
+			</li>
+		
 			</c:if>
 			</td>
 			
@@ -1162,7 +1171,6 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		})
 			
 		//소켓
-			
 		function connectWs(){
 			
 			var ws = new SockJS("/alarm");
@@ -1175,40 +1183,20 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			ws.onmessage = function(event) {
 				
 				if(event.data != null) {
-				
-					addUncheckedAlarm();
-					
-					 function addUncheckedAlarm(){
-							
-							$.ajax({
-						        url : "/alarm/json/addUncheckedAlarm",
-						        type : 'POST',
-						        dataType : "json",   
-					            data : {'cookNo' : cookNo, 'userId' : userId, 'userNickname' : userNickname }, 
-					            async: false, 
-					            error : function(){
-						            alert("통신 에러");
-						        },
-						        success : function(data){
-						        	
-						        	alert("알람 전송 완료!!");
-						        	      	          
-						           		if(socket){
-						        			let socketMsg = "heart,"+data.userId+","+data.userNickname+","+data.mentorId+","+data.cookName;
-						        			console.log(socketMsg);
-						        			socket.send(socketMsg);
-						           		}
-						        }
-						    
-						    })
-					 };
-				
+			
+					$.ajax({
+				        url : "/alarm/json/addUncheckedAlarm",
+				        type : 'GET',
+			            error : function(){
+				            alert("통신 에러");
+				        },
+				        success : function(){
+				        	location.reload();
+				        }
+				    
+				    })
 				}
-				
-				setTimeout(function(){
-					$socketAlert.css('display','none');
 					
-				}, 5000);
 			};
 		
 			ws.onclose = function() {
