@@ -44,27 +44,29 @@
 
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 body {
 	padding-top: 50px;
+	
 	
 }
 
 .page-header.text-info {
-	font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
 	color: #75574B;
 	border-bottom: none;
 }
 .text-info {
-	font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
 	color: #75574B
 }
 .row {
-	font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 .table.table-hover.table-striped {
-	font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
 .ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
@@ -98,10 +100,11 @@ body {
 #latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
 article{}
 article img{width:100%;}/* Force the image to have the full width of parent at all times */
-.excerpt{padding:30px 0 0;}
+.excerpt{padding:30px 0 0;		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+}
 .excerpt time{display:block; margin:0 0 30px 0; padding:0 0 15px 0; font-style:normal; font-size:.8rem; line-height:1; border-bottom:1px solid;}
 .excerpt time i{margin-right:5px;}
-.excerpt .heading{margin:0 0 10px 0; font-size:1.3rem;}
+.excerpt .heading{margin:0 0 10px 0; }
 .excerpt .meta{margin:0 0 30px 0; padding:0; list-style:none; text-align:left;}
 .excerpt .meta li{display:inline-block; font-size:.8rem;}
 .excerpt .meta li::after{margin-left:5px; content:"|";}
@@ -168,7 +171,6 @@ hr {
 /* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
     margin: 0 0 0px;
-    font-family: 'Gowun Batang', serif;
     
 }
 
@@ -260,9 +262,8 @@ background-color: #f7f7f7;
   width: 100px;
   height: 36px;
   color: #fff;
-  font-size: 15px;
+  font-size: 13px;
   background: #937062;
-  font-family: 'Gowun Batang', serif;
   
 }
 
@@ -271,9 +272,9 @@ background-color: #f7f7f7;
   height: 36px;
   color: #937062;
   border: 1px solid #937062;
-  font-size: 15px;
+  font-size: 13px;
   background: #f7f7f7;
-  font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 .act{
@@ -281,11 +282,17 @@ background-color: #f7f7f7;
   width: 100px;
   height: 36px;
   color: #fff;
-  font-size: 15px;
+  font-size: 13px;
   background: #937062;
-  font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
+.namehead,.detailhead{
+font-size: 13px;
+    line-height: normal;
+    text-transform: uppercase;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+}
 </style>
 
 
@@ -383,7 +390,6 @@ background-color: #f7f7f7;
 			
 			   	//====================================================================
 			 $(function() {
-				 console.log('아아악');
 			   	 $(window).scroll(function() {
 		                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 		                	
@@ -542,6 +548,7 @@ background-color: #f7f7f7;
 
 	    
  <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>
+
  
             
      <table style="width: 100%;">
@@ -571,7 +578,7 @@ background-color: #f7f7f7;
               <div class="col-md-6">
 					<div class="form-group">
 					 
-						<select class="form-control" name="searchCondition">
+						<select class="form-control" name="searchCondition" id="searchCondition">
 						<option value="0"
 								${!empty search.searchCondition && search.searchCondition==0 ? "selected" : ""}>검색조건</option>
 							<option value="1"
@@ -582,11 +589,10 @@ background-color: #f7f7f7;
 
 					</div>
 
-                  <input type="text" class="form-control form-input" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력하세요. ">&nbsp;
+                  <input type="text" class="form-control form-input" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력하세요." value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >&nbsp;
                   <input type="submit" class="search"  value="&#xf002">
                 </div>
 					</div>
-            
             
             
           </td>
@@ -613,11 +619,29 @@ background-color: #f7f7f7;
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" ><img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">
-          <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
+           <p class="namehead">${recipe.recipeDetail }</p>
            <p style="float:right">리뷰수: ${recipe.reviewNum }</p>
-           <h6 >${recipe.recipeDetail }</h6>
+          <p class="detailhead" ><b>${recipe.recipeName }</b></p>
           <ul class="meta">
-            <li >${recipe.recipeTheme} </li>
+            <li >
+            <c:choose>
+            <c:when test="${recipe.recipeTheme}=='KO'">
+            한식
+            </c:when>
+            <c:when test="${recipe.recipeTheme}=='CH'">
+            중식
+            </c:when>
+            <c:when test="${recipe.recipeTheme}=='FR'">
+            양식
+            </c:when>
+            <c:when test="${recipe.recipeTheme}=='JP'">
+            일식
+            </c:when>
+            <c:otherwise>
+            간식
+            </c:otherwise>
+            </c:choose>
+            </li>
             <li>
             <c:choose>
            	<c:when test="${recipe.recipeDifficulty =='100'}"> 
