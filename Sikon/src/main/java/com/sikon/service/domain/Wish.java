@@ -10,6 +10,7 @@ public class Wish {
 	private String cookFilename;
 	private int cookPrice;	
 	private int cookStatus;
+	private Cook wishCook;
 	
 
 
@@ -102,10 +103,23 @@ public class Wish {
 
 
 
+	public Cook getWishCook() {
+		return wishCook;
+	}
+
+
+
+	public void setWishCook(Cook wishCook) {
+		this.wishCook = wishCook;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Wish [wishNo=" + wishNo + ", cookNo=" + cookNo + ", userId=" + userId + ", cookName=" + cookName
-				+ ", cookFilename=" + cookFilename + ", cookPrice=" + cookPrice + ", cookStatus=" + cookStatus + "]";
+				+ ", cookFilename=" + cookFilename + ", cookPrice=" + cookPrice + ", cookStatus=" + cookStatus
+				+ ", wishCook=" + wishCook + "]";
 	}
 
 

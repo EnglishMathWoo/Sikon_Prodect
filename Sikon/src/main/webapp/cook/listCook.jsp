@@ -292,6 +292,14 @@ div.emptyProd{
 		 //테마버튼 상태 유지
 		 $(function() {
 			 
+				$( ".theme" ).on("click" , function() {
+					var theme = $(this).attr('value');
+					console.log(theme);
+					$("#themeCondition").val(theme);
+					fncGetList(1);
+				 });
+			 
+			 
 			 var themeCondition = $("#themeCondition").val();
 			 console.log(themeCondition);
 			 ///* 
@@ -329,7 +337,7 @@ div.emptyProd{
 			
 		 });
 		 
-		//테마로 정렬
+	/*	//테마로 정렬
 		$(document).on('click', '#themeAll', function(){
 			self.location = "/cook/listCook?themeCondition="+null+"&menu=${param.menu}";
 		});
@@ -358,6 +366,7 @@ div.emptyProd{
 			var themeCondition = $(this).attr('value');
 			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
 		});
+		*/
 		
 
 		//좋아요 push 알림
@@ -424,8 +433,7 @@ div.emptyProd{
 			                    	
 			                    	pushAlarm(userId, userNickname, cookNo);
 			                    							           
-				                    $("#bookmarkBtn").removeClass('bi-bookmark');
-							        $("#bookmarkBtn").addClass('bi-bookmark-plus');
+				   
 						           
 			                    location.reload();
 			                    	
@@ -450,6 +458,14 @@ div.emptyProd{
 					fncGetList(1);
 				 
 			 });
+				
+				//==== 검색창 입력 후 enter시 검색 이벤트 ===========================================================
+				
+				function enterkey() { 
+					if(window.event.keyCode == 13){
+						fncGetList(1);
+					}
+				} 				
 				
 				 $(document).on('click', 'a.btn-defualt', function(){
 					 var cookNo =$(this).attr("value");
@@ -699,7 +715,7 @@ div.emptyProd{
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
 		    <br/><hr/><br/>
-    	<form class="form-inline" name="detailForm">
+   
     	
     	<nav class="ref-sort" >
 	      <button type="button" class="theme themeAll" id="themeAll" value="all">모두보기</button>
@@ -709,7 +725,7 @@ div.emptyProd{
 	      <button type="button" class="theme themech" id="themech" value="ch">중식</button>
 	      <button type="button" class="theme themede" id="themede" value="de">간식</button>
 	    </nav>
-    	
+    	 	<form class="form-inline" name="detailForm">
 
 <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition}"/>
  

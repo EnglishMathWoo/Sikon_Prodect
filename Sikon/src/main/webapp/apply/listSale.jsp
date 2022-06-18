@@ -35,20 +35,65 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 <style>
 
 
 .container {
-	padding-top: 150px;
+	padding-top: 100px;
 } 
 </style>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-	  body {
-            padding-top : 50px;
-        }
-    </style>
+<style>
+body{
+	font-family: 'Nanum Myeongjo', serif;
+}
+.listsale{
+	padding-top : 170px;
+	padding-bottom: 200px;
+}
+.subtitle th{
+	text-align:center;
+}
+
+.subtitle{
+	border-bottom: 1px solid #937062;
+	border-top: 2px solid #937062;
+}
+
+ div.row{
+	font-family: 'Nanum Myeongjo', serif;
+}
+ 
+table {
+	font-family: 'Nanum Myeongjo', serif;
+}    
+th{
+	height: 50px;
+	font-size: 15px
+}
+td{
+	height: 50px;
+	border-bottom:  1px solid #D7D7D7;
+}
+.status{
+	font-weight: bold;
+}
+.cancel{
+	color: #898989;
+}
+h3{
+	font-family: 'Nanum Myeongjo', serif;
+	color: #5a443b;
+}
+.pltitle{
+	padding-top: 35PX;
+	text-align: center;
+}
+</style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
@@ -111,7 +156,7 @@
 			
 			 $("#totalprice").val(totalprice); 
 		});	
-
+/*
  
 	    $(document).ready(function(){ 
 	  		getGraph();
@@ -164,7 +209,7 @@
 			     		  
 		    	  }) // ajax	  
 		      } // getGraph
- 	  
+ 	  */
 			 
 </script>	
 	
@@ -181,18 +226,25 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<div class="page-header text-info">
-	       <h3>판매목록관리</h3>
-	    </div>
+	<div class="wrapper row3">
+		  <section class="hoc container clear"> 
+		    <div class="center btmspace-50">
+		    <br/>
+		      <h3 class="font-x2 nospace" align="center"><br>| 판매된 쿠킹클래스 | </h3>
+		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
+		    </div>
+		    		  
+		    
+		  
+		    
+		    <br/>
+    </section>
+  	</div>
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	   <div class="row">
 	    
-		    <div class="col-md-6 text-left">
-		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
-		    	</p>
-		    </div>
+
 		    
 		    <div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
@@ -208,10 +260,10 @@
 		</div>
 		
       <!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped">
+       <table style="width: 100%">
       
         <thead>
-          <tr>
+          <tr class="subtitle">
              <th align="center">No</th>
             <th align="center">가격</th>
             <th align="center">수량</th>

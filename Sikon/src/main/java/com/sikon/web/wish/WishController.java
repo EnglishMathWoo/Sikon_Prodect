@@ -46,26 +46,28 @@ public class WishController {
 	
 	
 	
-	@RequestMapping("addWish")
-	public String addWish( @ModelAttribute("wish") Wish wish) throws Exception {
-
-		System.out.println("/addWish");
-		System.out.println("userId : "+wish.getUserId());
-		System.out.println("cookNo : "+wish.getCookNo());
-		System.out.println("cookName : "+wish.getCookName());
-		
-		
-		
-		wishService.addWish(wish);
-		
-		return "forward:/cook/getCook?menu=search&cookNo="+wish.getCookNo();
-	}
+//	@RequestMapping("addWish")
+//	public String addWish( @ModelAttribute("wish") Wish wish) throws Exception {
+//
+//		System.out.println("/addWish");
+//		System.out.println("userId : "+wish.getUserId());
+//		System.out.println("cookNo : "+wish.getCookNo());
+//		System.out.println("cookName : "+wish.getCookName());
+//		
+//		
+//		
+//		wishService.addWish(wish);
+//		
+//		return "forward:/cook/getCook?menu=search&cookNo="+wish.getCookNo();
+//	}
 	
 	
 	@RequestMapping("getWish")
-	public String getWish( @RequestParam("userId") String userId, Model model) throws Exception{
+	public String getWish(HttpSession session,  Model model) throws Exception{
 		
 		System.out.println("/getWish");
+		User user = (User) session.getAttribute("user");
+		String userId = user.getUserId();
 		
 		List<Wish> list = wishService.getWish(userId);
 		
@@ -97,7 +99,21 @@ public class WishController {
 		wishService.deleteWish(wishNo);
 		
 		
-		return "redirect:/wish/getWish?userId="+user.getUserId();
+		return "redirect:/wish/getWish";
+	}
+	
+	@RequestMapping("deleteSelect")
+	public String deleteSelect( @RequestParam("wishNo") int[] wishNo) throws Exception{
+		
+		System.out.println("/deleteSelect");
+		
+		for(int wish : wishNo) {
+			
+			wishService.deleteWish(wish);
+			
+		}
+				
+		return "redirect:/wish/getWish";
 	}
 
 }
