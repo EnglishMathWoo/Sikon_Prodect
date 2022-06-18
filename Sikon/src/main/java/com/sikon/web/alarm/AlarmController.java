@@ -20,6 +20,7 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.alarm.AlarmService;
 import com.sikon.service.domain.Alarm;
+import com.sikon.service.domain.Coupon;
 import com.sikon.service.domain.User;
 
 
@@ -49,7 +50,7 @@ public class AlarmController {
 		System.out.println(this.getClass());
 	}
 	
-	
+	///Method	
 	@RequestMapping( value="/listAlarm" )
 	public String listCoupon(@ModelAttribute("search") Search search, @RequestParam("userId") String userId,
 			Model model, HttpSession session) throws Exception{

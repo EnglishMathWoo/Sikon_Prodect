@@ -83,7 +83,8 @@ public class EchoHandler extends TextWebSocketHandler {
 					alarm.setAlarmTarget(toUserId);
 					alarm.setAlarmContent(fromUserNickname + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
 							+ postName+"']");
-					alarmService.addAlarm(alarm);
+					//alarmService.addAlarm(alarm);
+					
 				}
 				
 				//레시피 리뷰
@@ -95,12 +96,12 @@ public class EchoHandler extends TextWebSocketHandler {
 					alarm.setAlarmTarget(toUserId);
 					alarm.setAlarmContent(fromUserNickname + "님이 회원님의 레시피에 리뷰를 작성했습니다! : [제목 : '"
 							+ postName+"']");
-					alarmService.addAlarm(alarm);
+					//alarmService.addAlarm(alarm);
 				} else if ("recipeReview".equals(cmd)){
 					alarm.setAlarmTarget(toUserId);
 					alarm.setAlarmContent(fromUserNickname + "님이 회원님의 레시피에 리뷰를 작성했습니다! : [제목 : '"
 							+ postName+"']");
-					alarmService.addAlarm(alarm);
+					//alarmService.addAlarm(alarm);
 				}
 			}
 			

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -35,7 +37,7 @@ public class AlarmServiceImpl implements AlarmService{
 
 
 	///Method
-	public void addAlarm(Alarm Alarm) throws Exception {
+	public void addAlarm(Alarm Alarm, HttpSession session) throws Exception {
 		alarmDao.insertAlarm(Alarm);
 	}
 
