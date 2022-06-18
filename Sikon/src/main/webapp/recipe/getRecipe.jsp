@@ -466,7 +466,6 @@ body {
 		
 				<h3 class="iEJcKGheader">리뷰</h3>
 			<form id="comment" name="comment" method="post" enctype="multipart/form-data">
-
 				<div class="panel">
 					<div class="panel-body">
 						<textarea class="form-control" name="reviewContent"
@@ -570,9 +569,10 @@ body {
 		    var array = new Array();
 			array.push(recipeNo);
 			
-			alert("레시피를 삭제하시겠습니까?");
-
-			self.location = "/recipe/deleteRecipe?recipeList="+array;
+			if (window.confirm('레시피를 삭제하시겠습니까?'))
+        	{
+				self.location = "/recipe/deleteRecipe?recipeList="+array;
+        	}
 			
 		});
 
@@ -619,8 +619,10 @@ body {
 	$(".deleteReview").on("click", function() {
 		var reviewNo = $(this).attr('id');
 		var recipeNo = $("input:hidden[name='recipeNo']").val();
-		alert("해당 리뷰를 삭제하시겠습니까?")
-
+		if (window.confirm('해당 리뷰를 삭제하시겠습니까?'))
+        	{
+			
+		
 		$.ajax({
             type : "POST",  
             url : "/review/json/deleteReview",       
@@ -633,10 +635,10 @@ body {
 					alert("삭제 성공~");				           
                     location.reload();
                     	
-    					
                     }
 		
 	});
+        	}
 	});
 	
 
@@ -773,7 +775,7 @@ body {
 		                    	
 		                    	
 		                    //	alert("책갈피에 등록되었습니다.");
-		                     	location.reload();				           
+		                     //	location.reload();				           
 					           
 		    					
 		                    }
@@ -798,7 +800,6 @@ body {
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 
-<!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 	///*
 	Kakao.init('92dfe0703b7ef1d171ddfba9cfe0e6e6');

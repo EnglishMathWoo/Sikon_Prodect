@@ -43,16 +43,10 @@
 
 
 .container {
-	padding-top: 150px;
+	padding-top: 100px;
 } 
 
-.container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: 500px;
-    padding-top: 170px;
-}
+
 </style>
 
 <style>
@@ -201,6 +195,23 @@ p {
 					self.location ="/cook/getCook?cookNo="+$(this).attr("value")+"&menu=search"
 					});
 					
+					$(".submit").on("click" , function() {
+						
+						var checkCount = $("input[name='cookCheck']:checked").length;
+					    var array = new Array();
+						$("input[name='cookCheck']:checked").each(function() {
+							array.push($(this).attr('id'));
+					    });
+						
+						if(checkCount != 0) {
+							alert("쿠킹클래스를 삭제하시겠습니까?")
+							self.location = "/cook/deleteCook?checkCount="+checkCount+"&checkList="+array;
+						} else {
+							alert("선택된 게시물이 없습니다.")	
+						}
+					});					
+					
+					
 		 });
 		 
 		 $( document ).ready(function() {
@@ -315,8 +326,9 @@ p {
   <br/> <br/>
   
     <div id="latest" class="group">
+    	<td align="center"><input type="checkbox" name="cookCheck" id="${cook.cookNo}"/>  	</td>
       <article class="one_third first"><a class="imgover" value="${cook.cookNo }" href="#"> 
-     
+
  
 <c:choose>
 		    	<c:when test="${cook.cookFilename.contains('/')}">

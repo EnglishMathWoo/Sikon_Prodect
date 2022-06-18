@@ -41,6 +41,26 @@ div.container {
 	padding-top: 200px;
 	
 }
+
+.btn-w {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+  width:100px;
+  font-size: small;
+}
+
+.btn-b {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+  width:100px;
+  font-size: small;
+}
     </style>
 	<script type="text/javascript">
 
@@ -78,9 +98,9 @@ $(function() {
 		  </div>
 		
 			<div class="row">
-	  		<div class="col-md-12 text-right">
-	  			<button type="button" class="btn btn-default">확인</button>
-	  			<button type="button" class="btn btn-default">추가등록</button>
+	  		<div class="text-right">
+	  			<button type="button" class="btn-b">확인</button>
+	  			<button type="button" class="btn-w">추가등록</button>
 	  		</div>
 		</div>
 		
@@ -221,9 +241,9 @@ $(function() {
 <br/><br/>
 
 
-		<div class="row">
+			<div class="col-xs-12 col-md-12" align="center">
 	 
-			<div class="col-xs-8 col-md-8">${cook.cookContent }</div>
+			${cook.cookContent }
 		</div>
 
 		  

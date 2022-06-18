@@ -36,6 +36,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 body{
 	 padding-top : 50px;
 	font-family: 'Nanum Myeongjo', serif;

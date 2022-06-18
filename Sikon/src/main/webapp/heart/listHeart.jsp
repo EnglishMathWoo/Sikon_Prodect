@@ -303,7 +303,7 @@ p {
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br>내가좋아요한목록 조회 </h3>
+		      <h3 class="font-x2 nospace" align="center"><br>| MY COOKINGCLASS | </h3>
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		    		  
@@ -371,9 +371,9 @@ p {
 			<c:if test = "${list.cook.cookTheme == 'DE'}">
 			 <strong>테마 : 간식</strong>
 			</c:if>		</li>
-           
-          </ul>
-<p align="right" class="bi bi-heart-fill like_btn" value="${list.cook.cookNo}" id="like_btn">&nbsp; 좋아요${list.cook.hearthit}개</p>
+             <li>&emsp;&emsp;<p align="right" class="bi bi-heart-fill like_btn" value="${list.cook.cookNo}" id="like_btn">&nbsp; </p>
+        </li>
+
           </ul>
           </div>
       </article>

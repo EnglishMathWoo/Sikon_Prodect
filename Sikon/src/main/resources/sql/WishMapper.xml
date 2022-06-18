@@ -9,12 +9,12 @@
  	
 	<resultMap id="wishSelectMap" type="wish">
 		<result property="wishNo" 				column="wish_no" 				jdbcType="NUMERIC"/>
-		<result property="cookNo"	   			column="cook_no" 				jdbcType="NUMERIC" />
+		<result property="wishCook.cookNo"	   			column="cook_no" 				jdbcType="NUMERIC" />
 		<result property="cookStatus" 			    column="cook_status" 			jdbcType="NUMERIC" />
 		<result property="userId" 			column="user_id" 		jdbcType="VARCHAR" />
-		<result property="cookName"			column="cook_name" 			jdbcType="VARCHAR" />
-		<result property="cookFilename" 		column="cook_filename" 		jdbcType="VARCHAR" />
-		<result property="cookPrice" 		column="cook_price" 		jdbcType="VARCHAR" />
+		<result property="wishCook.cookName"			column="cook_name" 			jdbcType="VARCHAR" />
+		<result property="wishCook.cookFilename" 		column="cook_filename" 		jdbcType="VARCHAR" />
+		<result property="wishCook.cookPrice" 		column="cook_price" 		jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<!-- SQL : INSERT
@@ -27,7 +27,7 @@
 	<insert 	id="addWish"		parameterType="wish" >
 		INSERT 
 	 	INTO wish(wish_no, cook_no, cook_status, user_Id, cook_price,cook_name,cook_filename) 
-	 	values (seq_wish_wish_no.nextval, #{cookNo}, #{cookStatus},#{userId},#{cookPrice}, #{cookName},#{cookFilename})
+	 	values (seq_wish_wish_no.nextval, #{wishCook.cookNo}, #{cookStatus},#{userId},#{wishCook.cookPrice}, #{wishCook.cookName},#{wishCook.cookFilename})
 	 </insert>
 	 
 	 <!-- SQL : SELECT -->

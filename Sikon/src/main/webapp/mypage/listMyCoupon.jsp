@@ -44,13 +44,15 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	
 	.container{
 	padding-top: 200px
 	}
 	         
 
 body{
-   	font-family: 'Gowun Batang', serif; 
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
  /*   	font-family: 'Open Sans', sans-serif; */
     
 }
