@@ -45,13 +45,15 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 	.container{
 	padding-top: 200px
 	}
 	         
 
 body{
-   	font-family: 'Gowun Batang', serif;
+    font-family: 'Open Sans', sans-serif;
     
 }
 .search{

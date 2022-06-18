@@ -69,7 +69,7 @@ body {
     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
+.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; 
 }
 .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
 .ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
@@ -129,7 +129,6 @@ font-family: 'Tiro Devanagari Sanskrit', serif;
 }
 /* 검색, 정렬조건 css */
 .condition{
-font-family: 'Gowun Batang', serif;
 width: 100px;
 float:right;
 border-color:#D7D7D7;
@@ -149,7 +148,7 @@ border-color:#D7D7D7;
   margin-bottom: 20px;
   background: #937062;
   float: right;
-  	font-family: 'Gowun Batang', serif;
+  font-family: 'Gowun Batang', serif;
   
 }
 
@@ -170,8 +169,9 @@ hr {
 
 /* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
     margin: 0 0 0px;
-    
+        font-size: 13px;
 }
 
 .container {
@@ -240,7 +240,7 @@ height: 34px;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
-    color: #555;
+    color: #999;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
@@ -620,21 +620,20 @@ font-size: 13px;
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" ><img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">
            <p class="namehead">${recipe.recipeDetail }</p>
-           <p style="float:right">리뷰수: ${recipe.reviewNum }</p>
           <p class="detailhead" ><b>${recipe.recipeName }</b></p>
           <ul class="meta">
             <li >
             <c:choose>
-            <c:when test="${recipe.recipeTheme}=='KO'">
+            <c:when test="${recipe.recipeTheme=='KO'} ">
             한식
             </c:when>
-            <c:when test="${recipe.recipeTheme}=='CH'">
+            <c:when test="${recipe.recipeTheme=='CH'}">
             중식
             </c:when>
-            <c:when test="${recipe.recipeTheme}=='FR'">
+            <c:when test="${recipe.recipeTheme=='FR'}">
             양식
             </c:when>
-            <c:when test="${recipe.recipeTheme}=='JP'">
+            <c:when test="${recipe.recipeTheme=='JP'}">
             일식
             </c:when>
             <c:otherwise>

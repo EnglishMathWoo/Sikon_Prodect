@@ -44,31 +44,31 @@
 
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 body {
-	padding-top: 50px;
+padding-top: 200px;	
 	
 }
 
 .page-header.text-info {
-	font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
 	color: #75574B;
 	border-bottom: none;
 }
 .text-info {
-	font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
 	color: #75574B
 }
 .row {
-	font-family: 'Gowun Batang', serif;
-	margin-top: 87px;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 .table.table-hover.table-striped {
-	font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
+.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; 
 }
 .ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
 .ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
@@ -99,10 +99,11 @@ body {
 #latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
 article{}
 article img{width:100%;}/* Force the image to have the full width of parent at all times */
-.excerpt{padding:30px 0 0;}
+.excerpt{padding:30px 0 0;		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+}
 .excerpt time{display:block; margin:0 0 30px 0; padding:0 0 15px 0; font-style:normal; font-size:.8rem; line-height:1; border-bottom:1px solid;}
 .excerpt time i{margin-right:5px;}
-.excerpt .heading{margin:0 0 10px 0; font-size:1.3rem;}
+.excerpt .heading{margin:0 0 10px 0; }
 .excerpt .meta{margin:0 0 30px 0; padding:0; list-style:none; text-align:left;}
 .excerpt .meta li{display:inline-block; font-size:.8rem;}
 .excerpt .meta li::after{margin-left:5px; content:"|";}
@@ -127,7 +128,6 @@ font-family: 'Tiro Devanagari Sanskrit', serif;
 }
 /* 검색, 정렬조건 css */
 .condition{
-font-family: 'Gowun Batang', serif;
 width: 100px;
 float:right;
 border-color:#D7D7D7;
@@ -145,11 +145,19 @@ border-color:#D7D7D7;
   cursor: pointer;
   margin-top: 20px;
   margin-bottom: 20px;
-  background: #d4af7a;
+  background: #937062;
   float: right;
-  	font-family: 'Gowun Batang', serif;
+  font-family: 'Gowun Batang', serif;
   
 }
+
+.submit:hover{
+	background: #f7f7f7;
+	color: #937062;
+	border: 1px solid #937062;
+}
+
+
 /* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
 hr {
     margin-top: 60px;
@@ -160,9 +168,9 @@ hr {
 
 /* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
     margin: 0 0 0px;
-    font-family: 'Gowun Batang', serif;
-    
+        font-size: 13px;
 }
 
 .container {
@@ -170,11 +178,80 @@ p {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    padding-top:170px;
-}
+padding-top: 200px;	}
 
 .hoc{
 padding-top:0px;
+}
+
+
+/* 검색창 css */
+
+.form{
+
+    position: relative;
+}
+
+.form .fa-search{
+
+    top:20px;
+    left: 20px;
+    color: #9ca3af;
+
+}
+
+.form span{
+
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+
+}
+
+.left-pan{
+    padding-left: 7px;
+}
+
+.left-pan i{
+   
+   padding-left: 10px;
+}
+
+.form-input{
+
+    border-radius: 10px;
+}
+
+.form-input:focus{
+
+    box-shadow: none;
+    border:none;
+}
+
+.form-control{
+border-radius: 10px;
+display: inline-block;
+vertical-align: middle;
+height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #999;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+}
+
+.col-md-6 {
+    width: 100%;
+}
+.namehead,.detailhead{
+font-size: 13px;
+    line-height: normal;
+    text-transform: uppercase;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 
@@ -228,7 +305,6 @@ padding-top:0px;
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-	<jsp:include page="/mypage/leftbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	
@@ -259,11 +335,41 @@ padding-top:0px;
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#"> 
   <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
         <div class="excerpt">
-          <h4 class="heading" >${recipe.recipeName }</h4>
-           <h6 >${recipe.recipeDetail }</h6>
+           <p class="namehead">${recipe.recipeDetail }</p>
+          <p class="detailhead" ><b>${recipe.recipeName }</b></p>
           <ul class="meta">
-            <li > ${recipe.recipeTheme }</li>
-            <li>${recipe.recipeDifficulty }</li>
+            <li >
+            <c:choose>
+            <c:when test="${recipe.recipeTheme=='KO'} ">
+            한식
+            </c:when>
+            <c:when test="${recipe.recipeTheme=='CH'}">
+            중식
+            </c:when>
+            <c:when test="${recipe.recipeTheme=='FR'}">
+            양식
+            </c:when>
+            <c:when test="${recipe.recipeTheme=='JP'}">
+            일식
+            </c:when>
+            <c:otherwise>
+            간식
+            </c:otherwise>
+            </c:choose>
+            </li>
+            <li>
+            <c:choose>
+           	<c:when test="${recipe.recipeDifficulty =='100'}"> 
+           초급
+           </c:when>
+           <c:when test="${recipe.recipeDifficulty =='200'}"> 
+           중급
+           </c:when>
+           <c:otherwise> 
+           고급
+           </c:otherwise>
+           </c:choose>
+           </li>
             <li>${recipe.cookingTime }분</li>
             <li><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${recipe.recipeRegDate }" /></li>

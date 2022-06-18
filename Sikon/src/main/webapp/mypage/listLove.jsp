@@ -43,6 +43,7 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 
 .container {
@@ -60,22 +61,22 @@ body {
 }
 
 .page-header.text-info {
-	font-family: 'Gowun Batang', serif;
+    	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 	font-weight: bold;
 	color: #75574B;
 	border-bottom: none;
 }
 .text-info {
-	font-family: 'Gowun Batang', serif;
+    	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 	font-weight: bold;
 	color: #75574B
 }
 .row {
-	font-family: 'Gowun Batang', serif;
-	margin-top: 87px;
+    	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue";
+    	margin-top: 100px;
 }
 .table.table-hover.table-striped {
-	font-family: 'Gowun Batang', serif;
+    	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 }
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
 .ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
@@ -99,7 +100,11 @@ body {
 .imgover, .imgover:hover::after{color:#333333;} 
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
-#latest article{max-width:348px;}
+
+#latest article{max-width:348px;
+    text-align: center;
+    
+    }
 #footer{padding-bottom:50px;}/* Not required, just looks a little better */
 .latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
 .latestimg > li img{width:auto;}
@@ -210,25 +215,8 @@ padding-top:0px;
 			 self.location = "/cook/mentor?mentorId="+mentorId;
 			});
 			
-			$(".submit").on("click" , function() {
-				
-				
-				var checkCount = $("input[name='ckBookmark']:checked").length;
-
-			    var array = new Array();
-			    
-				$("input[name='ckBookmark']:checked").each(function() {
-					array.push($(this).attr('id'));
-			    });
-				
-				if(checkCount != 0) {
-					alert(checkCount+"개의 책갈피를 삭제하시겠습니까?")
-
-				self.location = "/bookmark/deleteBookmark?bookmarkList="+array;
-				}
 				
 			});
-});
 		 
 	</script>
 	
@@ -257,7 +245,6 @@ padding-top:0px;
 				<br> | M Y M E N T O R S | <br>
 			</h3>
 		</div>
-			   <button type="button" class="submit">즐겨찾기삭제</button>
  
 		    		 
 		  

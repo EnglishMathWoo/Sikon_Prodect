@@ -570,9 +570,10 @@ body {
 		    var array = new Array();
 			array.push(recipeNo);
 			
-			alert("레시피를 삭제하시겠습니까?");
-
-			self.location = "/recipe/deleteRecipe?recipeList="+array;
+			if (window.confirm('레시피를 삭제하시겠습니까?'))
+        	{
+				self.location = "/recipe/deleteRecipe?recipeList="+array;
+        	}
 			
 		});
 
@@ -619,8 +620,10 @@ body {
 	$(".deleteReview").on("click", function() {
 		var reviewNo = $(this).attr('id');
 		var recipeNo = $("input:hidden[name='recipeNo']").val();
-		alert("해당 리뷰를 삭제하시겠습니까?")
-
+		if (window.confirm('해당 리뷰를 삭제하시겠습니까?'))
+        	{
+			
+		
 		$.ajax({
             type : "POST",  
             url : "/review/json/deleteReview",       
@@ -633,10 +636,10 @@ body {
 					alert("삭제 성공~");				           
                     location.reload();
                     	
-    					
                     }
 		
 	});
+        	}
 	});
 	
 
@@ -773,7 +776,7 @@ body {
 		                    	
 		                    	
 		                    //	alert("책갈피에 등록되었습니다.");
-		                     	location.reload();				           
+		                     //	location.reload();				           
 					           
 		    					
 		                    }
