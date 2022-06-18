@@ -381,7 +381,7 @@
 		      <button type="button" id="emailChk2" class="doubleChk" style="float: left;" >이메일인증</button>
 		      
 		    <div style="display: inline-block">
-		      <span class="point successEmailChk">이메일 입력후 인증번호 보내기를 해주십시오.</span> 
+		      <span class="point successEmailChk"></span> 
 		    </div> 		      
 		      
 			</div>

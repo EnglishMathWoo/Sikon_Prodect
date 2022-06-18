@@ -41,6 +41,8 @@
 
 <!-- ³»Á¤º¸ css -->
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 body {
     background-color: #F7F7F7;
 }
