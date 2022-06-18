@@ -203,6 +203,8 @@ public class PurchaseController {
 		//==================================================================================
 		// 쿠폰 사용하기
 		
+		Coupon coupon = new Coupon();
+		
 		if(purchase.getUsedCoupon().equals("")) {
 			purchase.setUsedCoupon(null);			
 		}
@@ -211,14 +213,13 @@ public class PurchaseController {
 			int issueNo = Integer.parseInt(purchase.getUsedCoupon());
 			System.out.println("issueNo: "+issueNo);
 			
-			Coupon coupon = couponService.getIssuedCoupon(issueNo);
+			coupon = couponService.getIssuedCoupon(issueNo);
 			coupon.setIssueStatus("002");
 			System.out.println("coupon: "+coupon);
 			
 			couponService.updateIssueStatus(coupon);
 		}
-		//==================================================================================		
-		Coupon coupon = couponService.getIssuedCoupon(Integer.parseInt(purchase.getUsedCoupon()));
+		//==================================================================================
 		
 		Map map = new HashMap();
 		
@@ -229,7 +230,7 @@ public class PurchaseController {
 		double couponRate = coupon.getDiscountRate();
 		int pointpay = purchase.getUsedPoint();
 
-		map.put("totalprice", price);
+		map.put("prodprice", price);
 		map.put("divyfee", divyfee);
 		map.put("couponvalue", couponvalue);
 		map.put("couponRate", couponRate);
@@ -242,8 +243,8 @@ public class PurchaseController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchase.jsp");
-		modelAndView.addObject("purchsae", purchase);
-		modelAndView.addObject("purchsaeInfo", purchase);
+		modelAndView.addObject("purchase", purchase);
+		modelAndView.addObject("purchaseInfo", map);
 		
 		return modelAndView;
 	}

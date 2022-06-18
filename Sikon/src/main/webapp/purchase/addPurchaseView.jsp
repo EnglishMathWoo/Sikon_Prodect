@@ -55,7 +55,9 @@ div.container {
 .buy:hover {
   background-color: #937062d4;
 }
-
+html input[type=text]{
+	background-color: #f7f7f7;
+}
 .cancel {
   cursor: pointer;
   background-color: #f7f7f7;
