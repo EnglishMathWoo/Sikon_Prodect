@@ -33,6 +33,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -134,6 +135,8 @@ div.emptyProd{
 .orderlist{
 	padding: 35px;
 	text-align: center;
+		font-family: 'Tiro Devanagari Sanskrit', serif;
+	
 }
 
 </style>
@@ -199,8 +202,9 @@ div.emptyProd{
 			
 			$( ".review" ).on("click" , function() {
 				var textNo=$(this).attr("value");
+				var textNo2=$(this).attr("value2");
 				var category='PRD';
-				window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
+				window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo+'&textNo2='+textNo2, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
 			});
 			
 		});	
@@ -217,7 +221,7 @@ div.emptyProd{
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container list">
 	
-		<h3 class="orderlist">| ORDER LIST |</h3>
+		<h3 class="orderlist">| O R D E R L I S T |</h3>
 	    <br>
 	    
 		<form>
@@ -273,7 +277,7 @@ div.emptyProd{
 					 
 					 <c:choose>
 					 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
-					 		<td class="rev"><button type="button" class="review" value="${purchase.purchaseProd.prodNo }">리뷰쓰기</button></td>
+					 		<td class="rev"><button type="button" class="review" value="${purchase.purchaseProd.prodNo }" value2="${purchase.tranNo }">리뷰쓰기</button></td>
 					 	</c:when>
 					 	<c:otherwise>
 					 		<td class="rev"></td>
