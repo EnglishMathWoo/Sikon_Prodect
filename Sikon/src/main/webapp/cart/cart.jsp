@@ -33,9 +33,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 
 <style>
-div.container{
+.cartlayout{
 	 padding-top : 170px;
 	font-family: 'Nanum Myeongjo', serif;
+	padding-bottom: 200px;
 }
 
 div{
@@ -224,7 +225,21 @@ div{
 			 
 			$( ".buybtn" ).on("click" , function() {
 				 console.log('구매');
+				 var checking = $(".checkbuy").val();
 				 
+				 var delchk = []; 
+
+				    $('.checkbuy:checked').each(function(){
+				        delchk.push($(this).val());
+				    });
+				 
+				    console.log('delchk: '+delchk.length);
+				 if(delchk.length == 0){
+					 alert('구매할 상품을 선택해주세요.');
+					 return null;
+				 }
+				   
+				    
 				 $("form").attr("method" , "GET").attr("action" , "/purchase/addPurchaseByCart").submit();
 				 
 			});
@@ -276,7 +291,7 @@ div{
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container cartlayout">
 	
 		
 		
@@ -303,7 +318,7 @@ div{
 			<c:set var="i" value="${ i+1 }" />
 			  
 			  <div class="col-md-1 text-center boxselect">
-			  	<input type="checkbox"  name="cartNo" value="${cart.cartNo}"/>		  	
+			  	<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}"/>		  	
 			  </div>
 			  
 			  <div class="col-md-6 text-left">

@@ -103,6 +103,10 @@ table.type09 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
+
+.container{
+padding-top:200px;
+}
 </style>
 
 <script type="text/javascript">
@@ -244,6 +248,15 @@ function tableDelete(){
 							name="recipeDetail" placeholder="50자 이내로 입력하세요.">
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label for="detail"
+						class="col-lg-offset-1 col-lg-2 control-label">상세정보</label>
+					<div class="col-lg-9">
+						<input type="text" class="form-control" id="detail" style="height:100px"
+							name="detail" placeholder="상세 정보를 입력하세요.">
+					</div>
+				</div>
 
 
 				<div class="form-group">
@@ -262,9 +275,9 @@ function tableDelete(){
 						class="col-lg-offset-1 col-lg-2 control-label">난이도</label>
 					<div class="col-lg-9">
 						<select name="recipeDifficulty" class="form-control">
-							<option value="1" selected="selected">초급</option>
-							<option value="2">중급</option>
-							<option value="3">고급</option>
+							<option value="초급" selected="selected">초급</option>
+							<option value="중급">중급</option>
+							<option value="고급">고급</option>
 						</select>
 					</div>
 				</div>
@@ -308,12 +321,12 @@ function tableDelete(){
 					<label for="recipeTheme" class="col-lg-offset-1 col-lg-2 control-label">카테고리</label>
 					<div class="col-lg-9">
 						<select name="recipeTheme" class="form-control">
-							<option value="1" selected="selected">카테고리</option>
-							<option value="2">한식</option>
-							<option value="3">중식</option>
-							<option value="4">양식</option>
-							<option value="5">일식</option>
-							<option value="6">간식</option>
+							<option value="0" selected="selected">카테고리</option>
+							<option value="KO">한식</option>
+							<option value="CH">중식</option>
+							<option value="FR">양식</option>
+							<option value="JP">일식</option>
+							<option value="DES">간식</option>
 						</select>
 					</div>
 				</div>

@@ -153,9 +153,32 @@ public class UserController {
 
 		System.out.println("/user/findUserpw : GET");
 		
+		
 		return "redirect:/user/findUserpw.jsp";
 	}
 	
+	@RequestMapping( value="findUserpw", method=RequestMethod.POST )
+	public String findUserPw(HttpServletRequest request,@RequestParam("userId") String userId, @RequestParam("password") String password) throws Exception {
+		
+		System.out.println("/user/findUserId : POST");
+		
+		User user = userService.getUser(userId);
+		
+		
+		
+//		if(userId.equals(user) ) {
+//			System.out.println("userId="+userId);
+//			System.out.println("password="+password);
+//			userService.updateUserPw(userId, password);
+//		}else {
+//			System.out.println("¹Ù²î¾ù³ª?");
+//		}
+		
+		userService.updateUserPw(userId, password);
+		System.out.println("userId="+userId);
+		System.out.println("password="+password);
+		return "redirect:/user/loginView.jsp";
+	}
 //	@RequestMapping( value="findUser", method=RequestMethod.POST )
 //	public String findUserId(@RequestParam("userName") String userName,
 //			@RequestParam("phone") String phone, Model model, HttpServletRequest request ) throws Exception {
@@ -295,15 +318,15 @@ public class UserController {
 	
 	@RequestMapping( value="updateUser", method=RequestMethod.POST )
 	public String updateUser( @ModelAttribute("user") User user ,
-			@RequestParam("licenseNo") int[] licenseNo,
-			@RequestParam("licenseName") String[] licenseName,
-			@RequestParam("licenseInstitution") String[] licenseInstitution,
-			@RequestParam("licenseDate") String[] licenseDate,
-			@RequestParam("careerNo") int[] careerNo,
-			@RequestParam("company") String[] company,
-			@RequestParam("careerExperience") String[] careerExperience,
-			@RequestParam("startDate") String[] startDate,
-			@RequestParam("endDate") String[] endDate,
+			@RequestParam(value="licenseNo", defaultValue="0") int[] licenseNo,
+			@RequestParam(value="licenseName",  required=false) String[] licenseName,
+			@RequestParam(value="licenseInstitution", required=false) String[] licenseInstitution,
+			@RequestParam(value="licenseDate", required=false) String[] licenseDate,
+			@RequestParam(value="careerNo", defaultValue="0") int[] careerNo,
+			@RequestParam(value="company", required=false) String[] company,
+			@RequestParam(value="careerExperience", required=false) String[] careerExperience,
+			@RequestParam(value="startDate", required=false) String[] startDate,
+			@RequestParam(value="endDate", required=false) String[] endDate,
 			@RequestParam("uploadFile")  MultipartFile file, Model model , HttpServletRequest request, HttpSession session) throws Exception{
 
 		System.out.println("/user/updateUser : POST");
@@ -321,7 +344,24 @@ public class UserController {
 		System.out.println("======================");
 	//	session.setAttribute("user", userService.getUser(user.getUserId()));
 		
+		if(!file.getOriginalFilename().isEmpty()) {
+			file.transferTo(new File(FILE_SERVER_PATH, file.getOriginalFilename()));
+			model.addAttribute("msg", "File uploaded successfully.");
+		}else {
+			model.addAttribute("msg", "Please select a valid mediaFile..");
+		}
 		
+		user.setUserImage(file.getOriginalFilename());
+		user.setUserBirth(user.getUserBirth().replace("-",""));
+		
+		userService.updateUser(user);
+		
+		System.out.println("user2="+user);
+		
+		
+		
+		if(user.getRole().equals("mentor")) {
+			
 		List list = new ArrayList();
 		for ( int j=0 ; j<licenseName.length ; j++) {
 			License license = new License();
@@ -332,6 +372,7 @@ public class UserController {
 			license.setLicenseNo(licenseNo[j]);
 			license.setUserId(user.getUserId());
 			list.add(license);
+			System.out.println("license="+license);
 		}
 		
 		List list2 = new ArrayList();
@@ -344,6 +385,7 @@ public class UserController {
 			career.setCareerNo(careerNo[m]);
 			career.setUserId(user.getUserId());
 			list2.add(career);
+			System.out.println("career="+career);
 		}
 
 		System.out.println("list=" + list);
@@ -354,22 +396,12 @@ public class UserController {
 		map.put("list2", list2);
 		
 		
-		if(!file.getOriginalFilename().isEmpty()) {
-			file.transferTo(new File(FILE_SERVER_PATH, file.getOriginalFilename()));
-			model.addAttribute("msg", "File uploaded successfully.");
-		}else {
-			model.addAttribute("msg", "Please select a valid mediaFile..");
-		}
 		
-		user.setUserImage(file.getOriginalFilename());
-		user.setUserBirth(user.getUserBirth().replace("-",""));
-		
-		userService.updateUser(user);
 		userService.updateLicense(map, user);
 		userService.updateCareer(map, user);
 		
 		
-		
+		}	
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	

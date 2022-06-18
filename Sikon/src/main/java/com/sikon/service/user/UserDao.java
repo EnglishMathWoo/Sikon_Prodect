@@ -23,11 +23,11 @@ public interface UserDao {
 	// 닉네임 중복체크
 	public int checkNickname(String userNickname) throws Exception;
 	
-	// Pw찾기 유효성 검사
-	public int findUserPwCheck(User user)throws Exception; 
-	
-	// Pw찾기
-	public int updateUserPw(String userId,String userName,String password)throws Exception;
+//	// Pw찾기 유효성 검사
+//	public int findUserPwCheck(User user)throws Exception; 
+//	
+	// Pw 변경
+	public int updateUserPw(String userId, String password)throws Exception;
 	
 	// SELECT ONE
 	public User getUser(String userId) throws Exception ;

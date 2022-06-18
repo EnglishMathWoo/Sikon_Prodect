@@ -56,7 +56,7 @@ div.container {
   background-color: #937062d4;
 }
 
-.cancel {
+.wish {
   cursor: pointer;
   background-color: #f7f7f7;
   border: 1px solid #937062;
@@ -181,7 +181,7 @@ $(function() {
 });	
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	$( "button.btn.btn-warning" ).on("click" , function() {
+	$( ".wish" ).on("click" , function() {
 		console.log('장바구니');
 		fncAddWish();
 	});
@@ -227,9 +227,9 @@ $(function() {
 	<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
-				<input type="hidden" name="cookNo" value="${cook.cookNo }" />
-				  <input type="hidden" name="userId" value="${user.userId }" />
-		<div>
+
+				  
+		
 		
 		
 				  <div class="subtitle">
@@ -370,8 +370,8 @@ $(function() {
 			<br>
 			<div class="text-center">
 			<button type="button" class="btn.btn-primary" id="buyjust">그냥결제하기</button>	
-				<button type="button" class="buy" id="iamportPayment" value="KA">결제하기</button>	
-				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
+				<button type="button" class="buy" id="iamportPayment" value="KA">결제하기</button>					
+				<button type="button" class="wish" href="#" role="button">장바구니</button>
 			</div>
 				
 			<br>
@@ -479,6 +479,7 @@ $(function() {
 	<input type="hidden" id="cookPrice" value="${cook.cookPrice }"/>
 	<input type="hidden" id="phone" value="${user.phone }"/>
 	<input type="hidden" id="userName" value="${user.userName }"/>
+	<input type="hidden" id="userId" value="${user.userId }"/>
 	<input type="hidden" id="cookLocation" value="${cook.cookLocation }"/>		  
 
 

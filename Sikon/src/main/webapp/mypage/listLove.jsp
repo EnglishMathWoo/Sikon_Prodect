@@ -42,8 +42,24 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 
-
 <style>
+
+
+.container {
+	padding-top: 150px;
+} 
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: 500px;
+    padding-top: 170px;
+}
+</style>
+<style>
+
+
 body {
 	padding-top: 50px;
 	
@@ -261,7 +277,7 @@ padding-top:0px;
 <div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="love" items="${list}">
-  <div class="col-sm-6 col-md-3">
+  <div class="col-sm-6 col-md-3 col-lg-3">
   <br/> <br/>
   
     <div id="latest" class="group">

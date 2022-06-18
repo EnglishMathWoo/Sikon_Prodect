@@ -395,7 +395,7 @@ body{
 				
 						<img src="/resources/images/logo/kakao_login_large_wide.png" height="60px" width="400" style="display: block; margin: 0 auto;">
 					</a> 
-				-->	
+			-->	
 				</div>
 			</div>	
 		</li>

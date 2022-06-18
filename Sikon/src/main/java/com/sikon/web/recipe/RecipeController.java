@@ -295,6 +295,48 @@ public class RecipeController {
 
 		return "forward:/recipe/listRecipe.jsp";
 	}
+	
+//	@RequestMapping(value = "manageRecipe")
+//	public String manageRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
+//			throws Exception {
+//
+//		System.out.println("/recipe/listRecipe :  POST/get");
+//
+//
+//		if (search.getCurrentPage() == 0) {
+//			search.setCurrentPage(1);
+//		}
+//		
+//		if(search.getSearchCondition()==null) {
+//			search.setSearchCondition("0");
+//		}
+//
+//		if (search.getOrderCondition() == null) {
+//			search.setOrderCondition("0");
+//		}
+//		
+//		if(search.getThemeCondition() == "all") {
+//			search.setThemeCondition(null);
+//		}
+//		
+//
+//		search.setPageSize(pageSize);
+//
+//
+//		// Business logic 수행
+//		Map<String, Object> map = recipeService.getRecipeList(search);
+//
+//		
+//		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+//				pageSize);
+//
+//		// Model 과 View 연결
+//		model.addAttribute("list", map.get("list"));
+//		model.addAttribute("resultPage", resultPage);
+//		model.addAttribute("search", search);
+//
+//		return "forward:/recipe/manageRecipe.jsp";
+//	}
 
 	// 내가 쓴 레시피(마이페이지)
 	@RequestMapping(value = "listMyRecipe")
