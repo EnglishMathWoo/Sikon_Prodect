@@ -157,6 +157,16 @@ public class UserController {
 		return "redirect:/user/findUserpw.jsp";
 	}
 	
+	@RequestMapping( value="updateUserpw", method=RequestMethod.GET )
+	public String updateUserpw(@RequestParam( value = "id", required = false ) String id, Model model) throws Exception {
+
+		System.out.println("/user/updateUserpw : GET");
+		
+		model.addAttribute("id", id);
+		
+		return "redirect:/user/updateUserpw.jsp";
+	}
+	
 	@RequestMapping( value="findUserpw", method=RequestMethod.POST )
 	public String findUserPw(HttpServletRequest request,@RequestParam("userId") String userId, @RequestParam("password") String password) throws Exception {
 		
@@ -179,6 +189,33 @@ public class UserController {
 		System.out.println("password="+password);
 		return "redirect:/user/loginView.jsp";
 	}
+	
+	
+//	@RequestMapping( value="findUserpw", method=RequestMethod.POST )
+//	public String findUserPw(HttpServletRequest request,@RequestParam("userId") String userId, @RequestParam("password") String password) throws Exception {
+//		
+//		System.out.println("/user/findUserId : POST");
+//		
+//		User user = userService.getUser(userId);
+//		
+//		
+//		
+////		if(userId.equals(user) ) {
+////			System.out.println("userId="+userId);
+////			System.out.println("password="+password);
+////			userService.updateUserPw(userId, password);
+////		}else {
+////			System.out.println("바뀌엇나?");
+////		}
+//		
+//		userService.updateUserPw(userId, password);
+//		System.out.println("userId="+userId);
+//		System.out.println("password="+password);
+//		return "redirect:/user/loginView.jsp";
+//	}
+	
+	
+	
 //	@RequestMapping( value="findUser", method=RequestMethod.POST )
 //	public String findUserId(@RequestParam("userName") String userName,
 //			@RequestParam("phone") String phone, Model model, HttpServletRequest request ) throws Exception {
@@ -283,8 +320,9 @@ public class UserController {
 		User user = userService.getUser(userId);
 		List list = userService.getLicense(userId);
 		List list2 = userService.getCareer(userId);
-		System.out.println(list);
-		System.out.println(list2);
+		System.out.println("user가져오기="+user);
+		System.out.println("list가져오기="+list);
+		System.out.println("list2가져오기="+list2);
 	//	List list = userService.getUCL(userId);
 		
 //		HttpSession session=request.getSession();
@@ -360,7 +398,7 @@ public class UserController {
 		
 		
 		
-		if(user.getRole().equals("mentor")) {
+		if(user.getRole().equals("mentor") || user.getMentorApply().equals("Y") ) {
 			
 		List list = new ArrayList();
 		for ( int j=0 ; j<licenseName.length ; j++) {
@@ -400,8 +438,9 @@ public class UserController {
 		userService.updateLicense(map, user);
 		userService.updateCareer(map, user);
 		
+		}
 		
-		}	
+		
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	

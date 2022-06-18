@@ -248,7 +248,7 @@
 		</c:if>
 		
 		<c:choose>
-		<c:when test="${user.mentorApply == 'Y' && user.role == 'user' }">
+		<c:when test="${sessionScope.user.role == 'admin' && user.mentorApply == 'Y' && user.role == 'user' }">
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
 	  			<button type="button" class="btn btn-primary" id="">½ÂÀÎ</button>

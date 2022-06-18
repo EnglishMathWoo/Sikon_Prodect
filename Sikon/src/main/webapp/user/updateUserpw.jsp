@@ -90,20 +90,14 @@
             data:{userId:userId},
             success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
             	console.log(cnt);
-                if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 존재하지 않는 아이디 
+                if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디  
                     $('.id_ok').css("display","inline-block"); 
                     $('.id_already').css("display", "none");
-            		$("#emailChk").attr("disabled",true);
-
                 } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
                     $('.id_already').css("display","inline-block");
                     $('.id_ok').css("display", "none");
                  //   alert("아이디를 다시 입력해주세요");
                  //   $('#userId').val('');
-            		$("#emailChk").attr("disabled",false);
-
-                 
-                 
                 }
             },
             error:function(){
@@ -173,11 +167,9 @@
 		     		$(".successEmailChk").css("color","green");
 		     		$("#emailDoubleChk").val("true");
 		     		$("#sm_email2").attr("disabled",true);
-		     		$("#userId").attr("disabled",true);
-		     		
-		     		popWin = window.open("/user/updateUserpw?id="+id, "openWin",
-									"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
-									"scrollbars=no,scrolling=no,menubar=no,resizable=no");
+		     		$("#password").attr("disabled",false);
+		     		$("#password2").attr("disabled",false);
+		     		//$("#userId").attr("disabled",true);
 		     	}else{
 		     		$(".successEmailChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
 		     		$(".successEmailChk").css("color","red");
@@ -190,14 +182,14 @@
 
 
 		
-	/*	
+		
 		$("#emailChk2").click(function(){
 			
 			var formData = $("#form").serialize() ;
 			
 			alert(formData) ;
 			$.ajax({
-					url: "./json/findPw" ,
+					url: "/user/json/findPw" ,
 					 type: 'POST',
 					 data: formData , 
 					dataType:"text",
@@ -205,12 +197,7 @@
 						if(data == ("ddd") ){
 							alert("결과="+data);
 						}else{
-							
-							popWin = window.open("/user/updateUserpw?id="+id, "popWin",
-									"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
-									"scrollbars=no,scrolling=no,menubar=no,resizable=no" )
-							
-							
+							alert("패스워드")
 						}
 						
 					}
@@ -218,8 +205,8 @@
 			})
 			
 			
-		});
-	*/	
+		}
+		
 		
 		
 		
@@ -252,7 +239,7 @@
                     <div class="col-sm-8" style="display: inline-block">
 				     <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" oninput = "checkId()" >
 				    </div> 
-                       <button type="button" id="emailChk" class="doubleChk"  disabled required >인증번호 보내기</button><br/> 	
+                       <button type="button" id="emailChk" class="doubleChk" >인증번호 보내기</button><br/> 	
                        
                         <div style="display: inline-block"> 
 					      <span id="helpBlock" class="id_ok">저장되지 않은 아이디&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
@@ -265,10 +252,7 @@
 				      <button type="button" id="emailChk2" class="doubleChk" style="float: left" >이메일인증</button>
 		                  <br> 	
                       </div>
-                    
-	                    <div style="display: inline-block">
-					      <span class="point successEmailChk"></span> 
-					    </div>  
+                      
                       
            <!--               
                        <div class="form-group">

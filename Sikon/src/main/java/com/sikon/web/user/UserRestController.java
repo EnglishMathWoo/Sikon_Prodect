@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,6 +103,18 @@ public class UserRestController {
 	//	 return "redirect:/user/Modal.jsp";
 		 return userService.findUserId(userName, phone);
 	}
+	
+//	@RequestMapping( value= "json/findPw", method=RequestMethod.POST )
+//	public String findPw(@ModelAttribute("user") User user, Model model ,  HttpSession session , HttpServletRequest request)throws Exception {
+//		
+//			user.getUserId()
+//			
+//			
+//			if( userService.findUserId(userName, phone)) {
+//				
+//			}
+//		
+//	}
 	
 	// id 중복체크
 	@RequestMapping( value="json/checkId", method=RequestMethod.POST )
