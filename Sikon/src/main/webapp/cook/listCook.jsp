@@ -42,7 +42,7 @@
   <!-- jQuery UI toolTip »ç¿ë JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
-  <script>history.scrollRestoration = "auto"</script>
+
   
       <style>
 

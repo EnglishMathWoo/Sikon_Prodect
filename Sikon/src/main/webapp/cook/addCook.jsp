@@ -596,7 +596,7 @@ footer {
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
- <h5 class="container-headline">식탁의 온도</h5>
+ <h5 class="container-headline">쿠킹클래스 등록</h5>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" enctype="multipart/form-data">
@@ -790,18 +790,14 @@ footer {
 			${user.userId}
 		    </div>
 		  </div>	    
-	    <br>
+
 	    
-	    <div class="container">
+	    <div class="form-group">
+	    
  		 <textarea class="summernote" id ="summernote" name="cookContent"></textarea>    
 		</div>
 		  
-		  
-		  
-		  
-		  
-		
-		  
+
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >등&nbsp;록</button>

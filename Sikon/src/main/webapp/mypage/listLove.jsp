@@ -49,13 +49,7 @@
 	padding-top: 150px;
 } 
 
-.container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: 500px;
-    padding-top: 170px;
-}
+
 </style>
 <style>
 
@@ -182,8 +176,8 @@ p {
 }
 
 .container {
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 10px;
+    padding-left: 200px;
     margin-right: auto;
     margin-left: auto;
     padding-top:170px;
