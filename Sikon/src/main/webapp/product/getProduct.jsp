@@ -544,7 +544,7 @@ $( document ).ready( function() {
 		 	
 		 	</div>
 
-			<h4 class="reviewHeader">¸®ºä</h4>
+			<h4 class="reviewHeader">¸®ºä(${reviewNum })</h4>
 			
 			<c:forEach var="review" items="${review}">
 				<div class="panel">

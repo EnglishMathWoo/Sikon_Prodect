@@ -606,6 +606,7 @@ footer a, footer h6 {
 	color: #ff8a3d;
 }
 
+
 /*# sourceMappingURL=style.css.map */
 </style>
 </head>
@@ -676,8 +677,8 @@ footer a, footer h6 {
 				<label for="recipeTheme"
 					class="col-sm-offset-1 col-sm-3 control-label">레시피 테마</label>
 				<div class="col-sm-4">
-					<select name="recipeTheme" class="form-control">
-						<option value="0" selected="selected">카테고리</option>
+					<select name="recipeTheme" class="form-control" id="recipeTheme" required>
+						<option value="">카테고리</option>
 						<option value="KO">한식</option>
 						<option value="CH">중식</option>
 						<option value="FR">양식</option>
@@ -740,8 +741,8 @@ footer a, footer h6 {
 
 			<div class="form-group">
 				<div class="col-sm-offset-4  col-sm-4 text-center">
-					<button type="button" class="btn btn-primary">레시피등록</button>
-					<a class="btn btn-primary btn" href="#" role="button">취소</a>
+							<button type="button">레시피등록</button>
+					<button type="button">취소</button>
 				</div>
 			</div>
 		</form>
@@ -758,34 +759,93 @@ footer a, footer h6 {
 </body>
 <script type="text/javascript">
 	$(function() {
-		//여기서 또 상품/레시피/클래스 조건 걸어줘야됨
 		$("button:contains('취소')").on("click", function() {
 			self.location = "/recipe/listRecipe"
 		});
-		$("button:contains('레시피등록')").on("click", function() {
-			fncAddRecipe();
-		});
-
 		$("button:contains('재료추가')").on("click", function() {
 			tableCreate();
 		});
 		$("button:contains('재료빼기')").on("click", function() {
 			tableDelete();
 		});
+		
+		function tableCreate() {
+			var tc = new Array();
+			var html = '';
+
+			var ingredientName = $("#ingredientName").val();
+			var ingredientAmount = $("#ingredientAmount").val();
+
+			html += '<tr>';
+			html += '<td>'
+					+ '<input type="text" placeholder="재료명" id="ingredientName" name="ingredientName">'
+					+ '</td>';
+			html += '<td>'
+					+ '<input type="text" placeholder="재료양" id="ingredientAmount" name="ingredientAmount">'
+					+ '</td>';
+			html += '</tr>';
+
+			$("#dynamicTable").append(html);
+
+		}
+
+		function tableDelete() {
+			$('#dynamicTable tbody tr:last').remove();
+		}
 	});
-	$("button:contains('레시피등록')").css("color", "red")
-	function fncAddRecipe() {
-		$("form").attr("method", "POST").attr("enctype", "multipart/form-data")
-				.attr("action", "/recipe/addRecipe").submit();
-		//$("form").attr("method", "POST").attr("action", "/recipe/addRecipe").submit();
+	
+	$("button:contains('레시피등록')").on("click", function() {
+		
+		//FORM 유효성 검증
+		var recipeName = $("input[name='recipeName']").val();
+		var recipeDetail = $("input[name='recipeDetail']").val();
+		var detail = $("input[name='detail']").val();
+		var cookingTime = $("input[name='cookingTime']").val();
+		var recipeDifficulty = $("input[name='recipeDifficulty']").val();
+		var recipeTheme = $("[name='recipeTheme']").val();
+		var recipeImg = $("input[name='multiImg']").val();
+		var recipeOrder = $("input[name='recipeOrder']").val();
+		var ingredientName = $("input[name='ingredientName']").val();
+		var ingredientAmount =  $("input[name='ingredientAmount']").val();
+		
+		if (recipeName == null || recipeName.length < 1) {
+			alert("레시피명은 반드시 입력하여야 합니다.");
+			return;
+		}
+		if (recipeDetail == null || recipeDetail.length < 1) {
+			alert("레시피간략정보는 반드시 입력하여야 합니다.");
+			return;
+		}
+		if (detail == null || detail.length < 1) {
+			alert("레시피상세정보는 반드시 입력하여야 합니다.");
+			return;
+		}
+		if (recipeTheme == "" || recipeTheme.length < 1) {
+			alert("레시피 테마는 반드시 입력하여야 합니다.");
+			return;
+		}
+		if (cookingTime == null || cookingTime.length < 1) {
+			alert("소요시간은 반드시 입력하셔야 합니다.");
+			return;
+		}
+		if (recipeImg == null || recipeImg.length < 1) {
+			alert("대표이미지는 반드시 입력하셔야 합니다.");
+			return;
+		}
+	if (ingredientName == null || ingredientName.length < 1) {
+		alert("재료명은 최소 1가지 입력하셔야 합니다.");
+		return;
 	}
+	if (ingredientAmount == null || ingredientAmount.length < 1) {
+		alert("재료양은 최소 1가지 입력하셔야 합니다.");
+		return;
+	}
+		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action", "/recipe/addRecipe").submit();
+	});
 </script>
 <script>
-	$(document)
-			.ready(
-					function() {
-						$('#summernote')
-								.summernote(
+	$(document).ready(function() {
+						$('#summernote').summernote(
 										{
 											height : 300, // 에디터 높이
 											minHeight : null, // 최소 높이
@@ -832,66 +892,4 @@ footer a, footer h6 {
 	}
 </script>
 
-<script>
-	function tableCreate() {
-		var tc = new Array();
-		var html = '';
-
-		var ingredientName = $("#ingredientName").val();
-		var ingredientAmount = $("#ingredientAmount").val();
-
-		html += '<tr>';
-		html += '<td>'
-				+ '<input type="text" placeholder="재료명" id="ingredientName" name="ingredientName">'
-				+ '</td>';
-		html += '<td>'
-				+ '<input type="text" placeholder="재료양" id="ingredientAmount" name="ingredientAmount">'
-				+ '</td>';
-		html += '</tr>';
-
-		$("#dynamicTable").append(html);
-
-		console.log('왜이러니' + $("#dynamicTable tr").find("td").length);
-	}
-
-	function tableDelete() {
-		$('#dynamicTable tbody tr:last').remove();
-	}
-
-	function fncAddCook() {
-		//Form 유효성 검증
-		//var name = document.detailForm.prodName.value;
-		//var detail = document.detailForm.prodDetail.value;
-		//var manuDate = document.detailForm.manuDate.value;
-		//var price = document.detailForm.price.value;
-
-		var cookName = $("input[name='cookName']").val();
-		var cookBrief = $("input[name='cookBrief']").val();
-		var aplstarTime = $("input[name='aplstarTime']").val();
-		var aplendTime = $("input[name='aplendTime']").val();
-		var startTime = $("input[name='startTime']").val();
-		var endTime = $("input[name='endTime']").val();
-		var cookRegdate = $("input[name='cookRegdate']").val();
-
-		var cookStock = $("input[name='cookStock']").val();
-
-		if (cookName == null || cookName.length < 1) {
-			alert("상품명은 반드시 입력하여야 합니다.");
-			return;
-		}
-		if (cookBrief == null || cookBrief.length < 1) {
-			alert("상품상세정보는 반드시 입력하여야 합니다.");
-			return;
-		}
-
-		if (cookStock == null || cookStock.length < 1) {
-			alert("재고는 반드시 입력하셔야 합니다.");
-			return;
-		}
-
-		$("form").attr("method", "POST").attr("enctype", "multipart/form-data")
-				.attr("action", "/cook/addCook").submit();
-
-	}
-</script>
 </html>

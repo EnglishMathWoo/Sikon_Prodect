@@ -113,7 +113,6 @@ text-align: center
 
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-	<jsp:include page="/mypage/leftbar.jsp" />
 
 
 	<div class="container mt-5 px-2">

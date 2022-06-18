@@ -203,6 +203,8 @@ public class PurchaseController {
 		//==================================================================================
 		// 쿠폰 사용하기
 		
+		Coupon coupon = new Coupon();
+		
 		if(purchase.getUsedCoupon().equals("")) {
 			purchase.setUsedCoupon(null);			
 		}
@@ -211,19 +213,41 @@ public class PurchaseController {
 			int issueNo = Integer.parseInt(purchase.getUsedCoupon());
 			System.out.println("issueNo: "+issueNo);
 			
-			Coupon coupon = couponService.getIssuedCoupon(issueNo);
+			coupon = couponService.getIssuedCoupon(issueNo);
 			coupon.setIssueStatus("002");
 			System.out.println("coupon: "+coupon);
 			
 			couponService.updateIssueStatus(coupon);
 		}
+		//==================================================================================
+		
+		Map map = new HashMap();
+		
+		String serial = serialNo;
+		int price = purchase.getPurchaseProd().getProdDisPrice();
+		int divyfee = 3000;
+		int couponvalue = coupon.getDiscountValue();
+		double couponRate = coupon.getDiscountRate();
+		int pointpay = purchase.getUsedPoint();
+
+		map.put("prodprice", price);
+		map.put("divyfee", divyfee);
+		map.put("couponvalue", couponvalue);
+		map.put("couponRate", couponRate);
+		map.put("pointpay", pointpay);
+		map.put("serial", serial);
+
+		System.out.println("couponvalue: "+couponvalue);
+		System.out.println("couponRate: "+couponRate);
+		
 		//==================================================================================		
 		
 		rankingService.addPurchase(prodNo, serialNo);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchase.jsp");
-		modelAndView.addObject("purchsae", purchase);
+		modelAndView.addObject("purchase", purchase);
+		modelAndView.addObject("purchaseInfo", map);
 		
 		return modelAndView;
 	}
@@ -273,7 +297,7 @@ public class PurchaseController {
 		System.out.println("========================================================================");
 		System.out.println("/purchase/addPurchaseByCart : POST");
 		
-		/*
+		///*
 		
 		User user = userService.getUser(userId);
 		
@@ -295,12 +319,17 @@ public class PurchaseController {
 		
 		List list = new ArrayList();
 		
+		int productPrice = 0;
+		int num = 0;
 		//for문
 		for(int i=0; i<cartNo.length; i++) {
 			
 			Cart cart = cartService.getCart(cartNo[i]);
 			
 			Product product = productService.getProduct(cart.getCartProd().getProdNo());
+			productPrice += product.getProdDisPrice();
+			num ++;
+			
 			Purchase purchaseByCart = new Purchase();
 			purchaseByCart.setReceiverName(purchase.getReceiverName());
 			purchaseByCart.setReceiverPhone(purchase.getReceiverPhone());
@@ -372,25 +401,46 @@ public class PurchaseController {
 		// 쿠폰 사용하기
 		System.out.println("쿠폰사용 시작");
 		
+		Coupon usedcoupon = new Coupon();
+		
 			if(purchase.getUsedCoupon().equals("none")) {
 				purchase.setUsedCoupon(null);
 			}
 			
 			if(purchase.getUsedCoupon() != null) {
 				int issueNo = Integer.parseInt(purchase.getUsedCoupon());
-				Coupon usedcoupon = couponService.getIssuedCoupon(issueNo);
+				usedcoupon = couponService.getIssuedCoupon(issueNo);
 				usedcoupon.setIssueStatus("002");
 				couponService.updateIssueStatus(usedcoupon);
 			}
+			
 		System.out.println("쿠폰사용 끝");
-		//==================================================================================		
 		
-//*/		
+		//==================================================================================
+
+		Map map = new HashMap();
+		
+		String serial = serialNo;
+		int price = productPrice;
+		int divyfee = 3000*num;
+		int couponvalue = usedcoupon.getDiscountValue();
+		double couponRate = usedcoupon.getDiscountRate();
+		int pointpay = purchase.getUsedPoint();
+
+		map.put("prodprice", price);
+		map.put("divyfee", divyfee);
+		map.put("couponvalue", couponvalue);
+		map.put("couponRate", couponRate);
+		map.put("pointpay", pointpay);
+		map.put("serial", serial);
+
+		//==================================================================================	
 		System.out.println("장바구니 구매완료");
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");
-//		modelAndView.addObject("list", list);
+		modelAndView.addObject("purchaselist", list);
+		modelAndView.addObject("purchaseInfo", map);
 		
 		return modelAndView;
 	}
@@ -651,7 +701,7 @@ public class PurchaseController {
 		return modelAndView;
 	}
 
-	
+/*	
 	@RequestMapping(value="cancelOrder", method=RequestMethod.GET)
 	public ModelAndView cancelOrder(@RequestParam("tranNo") int tranNo) throws Exception{
 
@@ -677,7 +727,67 @@ public class PurchaseController {
 		
 		return modelAndView;
 	}
+//*/
 	
+	@RequestMapping(value="cancelOrder", method=RequestMethod.GET)
+	public ModelAndView cancelOrder(@RequestParam("serialNo") String serialNo, HttpServletRequest request) throws Exception{
+
+		System.out.println("/purchase/cancelOrder : GET");
+		
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		User buyer = userService.getUser(user.getUserId());
+		
+		List list = purchaseService.getPurchaseBySerial(serialNo);
+		
+		for(int i=0; i<list.size(); i++) {
+			int quantity = ((Purchase)list.get(i)).getPurchaseQuantity();
+			int prodNo = ((Purchase)list.get(i)).getPurchaseProd().getProdNo();
+			
+			purchaseService.cancelOrder(quantity, prodNo);
+			
+			((Purchase)list.get(i)).setDivyStatus("000");
+			purchaseService.updateDivyStatus(((Purchase)list.get(i)));
+			
+		}
+		
+		int usedPoint = ((Purchase)list.get(0)).getUsedPoint();
+		String usedCouponNo = ((Purchase)list.get(0)).getUsedCoupon();
+		
+		if(usedCouponNo != null && !usedCouponNo.equals("none")) {
+			Coupon usedcoupon = couponService.getIssuedCoupon(Integer.parseInt(usedCouponNo));
+			usedcoupon.setIssueStatus("001");
+			couponService.updateIssueStatus(usedcoupon);
+		}
+		
+		Point point = new Point();
+		int usedpoint = ((Purchase)list.get(0)).getUsedPoint();
+		int totalpoint = buyer.getHoldpoint() + usedpoint;
+		
+		point.setPointScore(usedpoint);
+		point.setTotalPoint(totalpoint);
+		point.setUserId(buyer.getUserId());
+		point.setPointType("CANCELUSE");
+		point.setPointCategory("str");
+		pointService.addPoint(point);
+		pointService.updateHoldPoint(totalpoint, buyer.getUserId());
+		
+
+		int earnpoint = ((Purchase)list.get(0)).getEarnPoint();
+		totalpoint = totalpoint - earnpoint;
+		point.setPointScore(earnpoint);
+		point.setTotalPoint(totalpoint);
+		point.setUserId(buyer.getUserId());
+		point.setPointType("CANCELEARN");
+		point.setPointCategory("str");
+		pointService.addPoint(point);
+		pointService.updateHoldPoint(totalpoint, buyer.getUserId());
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/purchase/listPurchase");		
+		
+		return modelAndView;
+	}
 
 	@RequestMapping(value="listPurchase" )
 	public ModelAndView listPurchase( @ModelAttribute("search") Search search ,  HttpServletRequest request) throws Exception{
@@ -707,7 +817,7 @@ public class PurchaseController {
 		// Model 과 View 연결
 
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/listPurchase.jsp");
+		modelAndView.setViewName("/mypage/listPurchase.jsp");
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);

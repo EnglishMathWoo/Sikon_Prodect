@@ -40,21 +40,42 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-		body{
-			font-family: 'Nanum Myeongjo', serif;
-		}
-	         
-        .table{
-        	margin-top:70px;
-        }
-        
-        #noCoupon{
-        	text-align:center;
-        }
-        
-        .soo{
-			padding-top : 170px;
-		}
+	
+	.btn-b {
+	  cursor: pointer;
+	  background-color: #937062;
+	  border: none;
+	  color: #fff;
+	  padding: 12px 0;
+	  width:6%;
+	  height: 34px;
+	  justify-content: center;
+      display: flex;
+      align-items: center;
+	  font-size: 17px;
+	  border-radius: 5px;
+	  border: 1px solid #d7d7d7
+	}
+	
+	.btn-b:hover {
+	  background-color: #937062d4;
+	}
+	
+	body{
+		font-family: 'Nanum Myeongjo', serif;
+	}
+	        
+    .table{
+    	margin-top:70px;
+    }
+       
+    #noCoupon{
+      	text-align:center;
+    }
+       
+    .soo{
+		padding-top : 170px;
+	}
 
     </style>
     
@@ -130,8 +151,8 @@
 		 전체  ${resultPage.totalCount} 건수, 현재 ${resultPage.currentPage} 페이지
 		 </p>
 		
-		<button type="button" class="btn btn-primary delete" style="float: right;  margin-right: 10px;" >삭&nbsp;제</button>
-		<button type="button" class="btn btn-primary" id="addCoupon" style="float: right; margin-right: 10px;">생 &nbsp;성</button>
+		<button type="button" class="btn-b delete" style="float: right;  margin-right: 10px;" >삭&nbsp;제</button>
+		<button type="button" class="btn-b" id="addCoupon" style="float: right; margin-right: 10px;">생 &nbsp;성</button>
 			
       <table class="table table-hover table-striped">
 		

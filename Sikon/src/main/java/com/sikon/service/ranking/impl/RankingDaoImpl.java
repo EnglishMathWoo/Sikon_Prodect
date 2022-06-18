@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
 import com.sikon.service.domain.Love;
+import com.sikon.service.domain.Product;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.ranking.RankingDao;
 
@@ -63,6 +64,12 @@ public class RankingDaoImpl implements RankingDao {
 		map.put("tranNo", tranNo);
 		
 		sqlSession.delete("RankingMapper.deletePurchase", map);
+	}
+	
+	//판매 랭킹 리스트
+	public List<Product> getProductList(Search search) throws Exception {
+		System.out.println("search=" + search);
+		return sqlSession.selectList("RankingMapper.getProductList", search);
 	}
 	
 	//즐겨찾는 멘토 날짜 저장

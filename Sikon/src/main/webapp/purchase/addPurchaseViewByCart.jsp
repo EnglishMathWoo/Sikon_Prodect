@@ -41,7 +41,9 @@ div.container {
 	width: 652px;
 	padding-bottom: 200px;
 }
-
+html input[type=text]{
+	background-color: #f7f7f7;
+}
 .buy {
   cursor: pointer;
   background-color: #937062;

@@ -25,8 +25,8 @@
 	
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
    <link href="/resources/css/animate.min.css" rel="stylesheet">
@@ -50,7 +50,8 @@
 	         
 
 body{
-   	font-family: 'Gowun Batang', serif;
+   	font-family: 'Gowun Batang', serif; 
+ /*   	font-family: 'Open Sans', sans-serif; */
     
 }
 .search{
@@ -93,7 +94,6 @@ text-align: center;
 	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-	<jsp:include page="/mypage/leftbar.jsp" />
 	
    <div class="container mt-5 px-2">
      <br>

@@ -55,7 +55,9 @@ div.container {
 .buy:hover {
   background-color: #937062d4;
 }
-
+html input[type=text]{
+	background-color: #f7f7f7;
+}
 .cancel {
   cursor: pointer;
   background-color: #f7f7f7;
@@ -135,7 +137,10 @@ html input[type=button]:hover{
 	text-align: left;
 	padding-left: 20px
 }
-
+.buttons{
+	width:652px;
+	margin-left: -20px;
+}
 .payProduct{
 	border-top: 2px solid #937062;
 	width: 652px;
@@ -143,6 +148,30 @@ html input[type=button]:hover{
     padding-top:20px;
 }
 
+.paycontent{
+	border-top: 2px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+	padding-top: 20px;
+}
+.sectd{
+	display: flex;
+}
+.payment{
+	width:84%;
+	text-align: right;
+}
+
+.totalpay{
+	font-size: 20px;
+}
+.totals{
+	color: #FF4800;
+}
+.info{
+	width: 15%;
+	font-weight: bold;
+}
 </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -231,6 +260,109 @@ html input[type=button]:hover{
 			});
 		});	
 		 
+		
+		
+		
+		//======= 총결제금액 및 적립포인트 계산 =============================================
+		$(function() {
+			
+			var applycoupon = 0;
+			var applypoint=0;
+			var express=3000;
+			
+			
+			var quantity = 0;
+			var price = Number("${product.prodDisPrice}");
+			
+			console.log("총 상품금액: "+price);
+			
+			
+			var earnpoint = Math.round(price*0.05);
+			console.log("earnpoint: "+earnpoint);
+			
+			$( "#earnPoint" ).val(earnpoint);
+			$("#totalProdPrice").val(price);
+			$("#totalDivyFee").val(express);
+			$("#totalpayment").val(price+express);
+			
+			$("#usingpoint").val(applypoint);
+			$("#couponuse").val(applycoupon);
+			$("#divyfee").val(express);
+			$("#usingpoint").attr('size', $("#usingpoint").val().length);
+			$("#couponuse").attr('size', $("#couponuse").val().length);
+			$("#divyfee").attr('size', $("#divyfee").val().length);
+			
+			//==============================================
+			
+			$("#usedPoint").on( "change", function() { 
+				
+				var usepoint = $("#usedPoint").val();
+				$("#usingpoint").val(usepoint);
+				$("#usingpoint").attr('size', $("#usingpoint").val().length);
+				
+				var totalprod = $('#totalProdPrice').val();
+				var usecoupon = $('#couponuse').val();
+				
+				
+				$("#totalpayment").val(totalprod-usepoint-usecoupon+express);
+				
+			  });
+			
+			//==============================================
+			
+			$("#usedCoupon").on( "change", function() { 
+			
+				var disvalue = $("#usedCoupon>option:selected").attr('disvalue');
+				var disrate = price*$("#usedCoupon>option:selected").attr('disrate');
+				
+				console.log("disvalue: "+disvalue);
+				console.log("disrate: "+ disrate);
+				
+				applycoupons = Number(disvalue)+Number(disrate)
+				
+				$("#couponuse").val(applycoupons);
+				$("#couponuse").attr('size', $("#couponuse").val().length);
+				
+				var usepointa = $("#usingpoint").val();
+				var totalproda = $('#totalProdPrice').val();
+				
+				$("#totalpayment").val(totalproda-usepointa-applycoupons+express);
+				
+			  });
+			
+			//==============================================
+			
+			$("#point" ).on("click" , function() {
+				allpoint = $(this).val();
+				var ttpay = $("#totalpayment").val();
+				
+					if(allpoint-(price+express) >= 0){
+						
+						$( "#usedPoint" ).val(ttpay);
+						$("#usingpoint").val(ttpay);
+						$("#usingpoint").attr('size', $("#usingpoint").val().length);
+						$("#totalpayment").val(0);
+						
+					}else{
+						
+						
+						$("#usingpoint").val(allpoint);
+						$("#usingpoint").attr('size', $("#usingpoint").val().length);
+						var totalprodb = $('#totalProdPrice').val();
+						var usecouponb = $('#couponuse').val();
+						
+						
+						$("#totalpayment").val(totalprodb-allpoint-usecouponb+express);
+					}
+				
+				
+				});
+			
+			});
+			//==============================================
+			
+		
+		
 	</script>		
 <!-- 주소록 --> 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -503,7 +635,7 @@ function payment(data) {
 				      		<select name="usedCoupon" class="form-control" id="usedCoupon">
 				      			<option value=""> 사용할 쿠폰을 선택해주세요 </option>
 						      		<c:forEach var="couponlist" items="${coupon}">
-						      			<option value="${couponlist.issueNo}">${couponlist.couponName}</option>
+						      			<option value="${couponlist.issueNo}" disvalue="${couponlist.discountValue}" disrate="${couponlist.discountRate}">${couponlist.couponName}</option>
 						      		</c:forEach>
 				      		</select>
 				      		
@@ -532,19 +664,45 @@ function payment(data) {
 				  
 			</div>
 				  <br>
-			<div class="payProduct">	    
+			<section class="paycontent">	    
 				  
-				  <div>
-				  <label for="purchaseQuantity">총 결제금액</label>
-				    <input type="text" id="totalprice" name="totalprice" value=""  style="border:none;width:50px;text-align: right;">원
+				  <div class="sectd">
+				  	<h5 class="info">총 상품금액</h5>
+				  	<div class="payment"><input type="text" id="totalProdPrice" value="" size="" style="border:none;text-align:right">원</div>
 				  </div>
 				  
-				   <div>
-				  <label for="purchaseQuantity">적립 포인트</label>
-				    <input type="text" id="earnPoint" name="earnPoint" value=""  style="border:none;width:50px;text-align: right;">P
+				  <div class="sectd">
+				  	<h5 class="info">쿠폰 사용</h5>
+				  	<div class="payment">-<input type="text" id="couponuse" value="" size=""  style="border:none;text-align:right">원</div>
 				  </div>
 				  
-			</div>
+				  <div class="sectd">
+				  	<h5 class="info">포인트 사용</h5>
+				  	<div class="payment">-<input type="text" id="usingpoint" value="" size=""  style="border:none;text-align:right">P</div>
+				  </div>
+				  
+				  <div class="sectd">
+				  	<h5 class="info">배송비</h5>
+				  	<div class="payment">+<input type="text" id="divyfee" value="" size=""  style="border:none;text-align:right">원</div>
+				  </div>
+				  
+				  <br>
+				  
+				  <div class="sectd">
+				  	<h5 class="info">총 결제금액</h5>
+				  	<div class="payment totals"><strong class="totalpay"><input type="text" id="totalpayment" value="" size=""  style="border:none;text-align:right"></strong>원</div>
+				  </div>
+				  
+				  <div class="sectd">
+				  	<h6 class="info">적립 포인트</h6>
+				  	<div class="payment totals"><input type="text" id="earnPoint" name="earnPoint" value="" size=""  style="border:none;text-align:right"> P</div>
+				  </div>
+				  
+				  
+				  <hr>
+				  
+				  
+			</section>
 			
 			
 			<input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">
@@ -560,7 +718,7 @@ function payment(data) {
 			
 	
 			<br>
-			<div class="text-center">
+			<div class="text-center  buttons">
 				<button type="button" class="buy" id="iamportPayment" value="KA">결제하기</button>	
 				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
 			</div>

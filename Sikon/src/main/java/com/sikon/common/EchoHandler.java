@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -43,19 +45,19 @@ public class EchoHandler extends TextWebSocketHandler {
 	private Map<String, WebSocketSession> userSessionsMap = new HashMap<String, WebSocketSession>();
 	
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session) throws Exception {//클라이언트와 서버가 연결
+	public void afterConnectionEstablished(WebSocketSession socketSession) throws Exception {//클라이언트와 서버가 연결
 		
 		System.out.println("Socket 연결");
-		sessions.add(session);
-		System.out.println(currentUserName(session));//현재 접속한 사람
-		String senderId = currentUserName(session);
-		userSessionsMap.put(senderId, session);
+		sessions.add(socketSession);
+		System.out.println(currentUserName(socketSession));//현재 접속한 사람
+		String senderId = currentUserName(socketSession);
+		userSessionsMap.put(senderId, socketSession);
 	}
 	
 	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {// 메시지
+	protected void handleTextMessage(WebSocketSession socketSession, TextMessage message) throws Exception {// 메시지
 		
-		System.out.println("session"+currentUserName(session));
+		System.out.println("session"+currentUserName(socketSession));
 		String msg = message.getPayload();//자바스크립트에서 넘어온 Msg
 		System.out.println("msg="+msg);
 		
@@ -80,12 +82,16 @@ public class EchoHandler extends TextWebSocketHandler {
 								
 				//좋아요
 				if ("heart".equals(cmd) && toUserSession != null) {
+					
 					System.out.println("onmessage되나??");
 					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
-									+ postName+"']");
+							+ postName+"']");
 					toUserSession.sendMessage(tmpMsg);
+					
 					alarm.setAlarmTarget(toUserId);
-					alarm.setAlarmContent(tmpMsg.toString());
+					alarm.setAlarmContent(fromUserNickname + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
+							+ postName+"']");
+			
 					alarmService.addAlarm(alarm);
 				} else if ("heart".equals(cmd)){
 					alarm.setAlarmTarget(toUserId);
@@ -101,7 +107,8 @@ public class EchoHandler extends TextWebSocketHandler {
 									+ postName+"']");
 					toUserSession.sendMessage(tmpMsg);
 					alarm.setAlarmTarget(toUserId);
-					alarm.setAlarmContent(tmpMsg.toString());
+					alarm.setAlarmContent(fromUserNickname + "님이 회원님의 레시피에 리뷰를 작성했습니다! : [제목 : '"
+							+ postName+"']");
 					alarmService.addAlarm(alarm);
 				} else if ("recipeReview".equals(cmd)){
 					alarm.setAlarmTarget(toUserId);
@@ -115,20 +122,20 @@ public class EchoHandler extends TextWebSocketHandler {
 	}
 	
 	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {//연결 해제
+	public void afterConnectionClosed(WebSocketSession socketSession, CloseStatus status) throws Exception {//연결 해제
 		
 		System.out.println("Socket 끊음");
-		sessions.remove(session);
-		userSessionsMap.remove(currentUserName(session),session);
+		sessions.remove(socketSession);
+		userSessionsMap.remove(currentUserName(socketSession),socketSession);
 	}
 
 	
-	private String currentUserName(WebSocketSession session) {
-		Map<String, Object> httpSession = session.getAttributes();
+	private String currentUserName(WebSocketSession socketSession) {
+		Map<String, Object> httpSession = socketSession.getAttributes();
 		User loginUser = (User)httpSession.get("user");
 		
 		if(loginUser == null) {
-			String mid = session.getId();
+			String mid = socketSession.getId();
 			return mid;
 		}
 		String mid = loginUser.getUserId();

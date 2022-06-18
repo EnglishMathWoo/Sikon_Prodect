@@ -120,6 +120,8 @@ public class ProductController {
 		search.setPageSize(pageSize);
 
 		Map map=reviewService.getReviewList(search, "PRD", prodNo);
+		int reviewNum=reviewService.countReviewNum(prodNo, "PRD");
+		System.out.println("¸®ºä¼ö"+reviewNum);
 		System.out.println("¸®ºäÈ®ÀÎ"+map.get("list"));
 		
 		Product product = productService.getProduct(prodNo);
@@ -127,7 +129,8 @@ public class ProductController {
 		model.addAttribute("product", product);
 		model.addAttribute("menu", menu);
 		model.addAttribute("review", map.get("list"));
-		
+		model.addAttribute("reviewNum", reviewNum);
+
 		
 		String img = product.getProdThumbnail();
 		String prod = product.getProdName().replace(" ", "_");

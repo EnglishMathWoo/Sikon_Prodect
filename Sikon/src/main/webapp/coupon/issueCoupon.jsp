@@ -72,7 +72,28 @@
       
       .soo{
 			padding-top : 170px;
+	  }
+	  
+	  .btn-b {
+			cursor: pointer;
+		    background-color: #937062;
+		    border: none;
+		    color: #fff;
+		    padding: 12px 0;
+		    width:6%;
+		    height: 34px;
+		    justify-content: center;
+	        display: flex;
+	        align-items: center;
+		    font-size: 17px;
+		    border-radius: 5px;
+		    border: 1px solid #d7d7d7
 		}
+	
+		.btn-b:hover {
+			background-color: #937062d4;
+		}
+		
      
               
     </style>
@@ -193,7 +214,7 @@
          	</select>
 		  </div>
 		  
-		  <button type="button" class="btn btn-primary" id="issueCoupon" style="float:right">발 &nbsp;급</button>
+		  <button type="button" class="btn-b" id="issueCoupon" style="float:right">발 &nbsp;급</button>
 		    
 	    	
 		</div>

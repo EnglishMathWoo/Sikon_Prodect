@@ -1,215 +1,416 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
-<html>
 
+<html lang="ko">
+	
 <head>
 	<meta charset="EUC-KR">
 	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- jQuery UI toolTip 사용 CSS-->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- jQuery UI toolTip 사용 JS-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
  <!-- font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 
 <style>
-body{
-	padding-top : 50px;
+
+
+div.container {
+	padding-top: 220px;
 	font-family: 'Nanum Myeongjo', serif;
-	font-family: 'Open Sans', sans-serif;
+	width: 652px;
+	padding-bottom: 150px;
 }
-div.container{
-	padding-top : 170px;
+
+
+.update {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  font-size: large;
+  padding: 12px 0;
+  width: 49.3%;
+}
+.update:hover {
+  background-color: #937062d4;
+}
+
+.check {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  font-size: large;
+  padding: 11px 0;
+  width: 49.3%;
+}
+.check:hover {
+  background-color: #e7e2e2;
+}
+
+html input[type=button]{
+	background-color: #937062;
+	border: none;
+	color: #fff;
+}
+
+html input[type=button]:hover{
+	background-color: #937062d4;
+}
+html input[type=text]{
+	background-color: #f7f7f7;
+}
+.point{
+	background-color: #f7f7f7;
+	border: 1px solid #937062;
+	color: #937062;
+}
+
+.point:hover{
+	background-color: #e7e2e2;
+}
+
+.search{
+	display: flex;
+	padding: 5px;
+}
+
+.form-divy{
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.addr{
+	padding-top : 5px;
+}
+
+
+.subtitle{
+	border-top: 2px solid #937062;
+	border-bottom: 1px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+    height: 50px;
+	padding: 15px;
+	font-weight: bold;
+	font-size: 18px;
+}
+.imagetd{
+	width:20%;
+}
+.content{
+	text-align: left;
+	padding-left: 20px
+}
+
+h5,h6{
+	width: 15%;
+	font-weight: bold;
+}
+
+label{
+	width: 15%;
+}
+
+.payment{
+	width:84%;
+	text-align: right;
+}
+
+.totalpay{
+	font-size: 20px;
+}
+.totals{
+	color: #FF4800;
+}
+
+.update {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  font-size: large;
+  padding: 12px 0;
+  width: 49.3%;
+}
+.update:hover {
+  background-color: #937062d4;
+}
+
+.check {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  font-size: large;
+  padding: 11px 0;
+  width: 49.3%;
+}
+.check:hover {
+  background-color: #e7e2e2;
+}
+.golist {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  font-size: large;
+  padding: 11px 0;
+  width: 49.3%;
+}
+.golist:hover {
+  background-color: #e7e2e2;
+}
+
+.paycontent{
+	border-top: 2px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+	padding-top: 20px;
+}
+.sectd{
+	display: flex;
+}
+.payment{
+	width:84%;
+	text-align: right;
+}
+
+.totalpay{
+	font-size: 20px;
+}
+.totals{
+	color: #FF4800;
+}
+.info{
+	width: 15%;
+	font-weight: bold;
 }
 </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-		
-		 $(function() {	
-			 $( "button.btn.btn-default" ).on("click" , function() {
-				 self.location = "/product/listProduct?menu=search"
-			});
-			
-			 
-		});
-		 
-		 $(function() {
-				var price = $( "#price" ).val();
-				console.log("price: "+price);
-				
-				var quantity = $("#purchaseQuantity").val();
-				console.log("quantity: "+quantity);
-				
-				$("#totalprice").val(price*quantity);
-			});	
-			
-		
-	</script>
 	
+	
+		$(function() {
+			$(".check").on("click" , function() {
+				self.location = "/product/listProduct";
+			});
+		
+		});	
+
+		$(function() {
+			
+			var why = "${purchaseInfo.couponRate}";
+			
+			var prodprice = Number("${purchaseInfo.prodprice}");
+			var divyfee = Number("${purchaseInfo.divyfee}");
+			var couponvalue = Number("${purchaseInfo.couponvalue}");
+			var couponRate = prodprice*("${purchaseInfo.couponRate}");
+			var pointpay = Number("${purchaseInfo.pointpay}");
+			var serial = "${purchaseInfo.serial}";
+			
+			var couponpay = couponvalue+(couponRate);
+			
+			console.log("why: "+why);
+			console.log("==========");
+			
+			console.log("prodprice: "+prodprice);
+			console.log("divyfee: "+divyfee);
+			console.log("couponvalue: "+couponvalue);
+			console.log("couponRate: "+couponRate);
+			console.log("pointpay: "+pointpay);
+			console.log("serial: "+serial);
+			console.log("couponpay: "+couponpay);
+			
+			$("#totalProdPrice").val(prodprice);
+			$("#couponuse").val("- "+couponpay);
+			$("#usingpoint").val("- "+pointpay);
+			$("#divyfee").val("+ "+divyfee);
+			$("#totalpayment").val(prodprice-couponpay-pointpay+divyfee);
+			$("#earnPoint").val(prodprice*0.05);
+			
+		});	 
+	</script>		
 	
 </head>
 
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
+        <jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
-	
+
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<div class="page-header">
-	       <h3 class=" text-info" style="color:#bc8f8f">결제확인</h3>
-	    </div>
-	
-		 <hr/>
-		 <h4 align="center">주문상품</h4>
-		 <hr/>
-		 
-		 <div class="row">
-		<div class="col-xs-12 col-md-12" align="center">
-		
-		<c:choose>
-		
-		<c:when test="${purchase.purchaseProd.prodThumbnail.contains('&')}">
-		
-			<td class="ct_write01">
-				<c:choose>
-				<c:when test="${purchase.purchaseProd.prodThumbnail.contains('mp4')}">
-					<c:forEach var="name" items="${purchase.purchaseProd.prodThumbnail.split('&')}">
-						<video width="400" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"></video>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="name" items="${purchase.purchaseProd.prodThumbnail.split('&')}">
-						<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
-					</c:forEach>
-				</c:otherwise>
-				</c:choose>		
-		
-			</td>
-		
-		</c:when>
-		
-		<c:otherwise>
-			<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail}" width="300" height="300" align="absmiddle"/>
-		</c:otherwise>
-		</c:choose>
+<div class="container">
+	<div class="layout">
+			<br>
+				<h1 class="bg-defualt text-center">| PAYMENT |</h1><br><br>
+				
+				<!-- form Start /////////////////////////////////////-->
 
-		</div>
-		</div>
-		  <br>
-		 <div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>상품명</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.purchaseProd.prodName}</div>
-		</div>
-			  		<hr/>
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>결제금액</strong></div><br>
-			<div class="col-xs-8 col-md-8">상품가격: ${purchase.purchaseProd.prodDisPrice} 원</div>
-			<div class="col-xs-8 col-md-8">+ 배송비: ${purchase.divyFee} 원</div>
-		</div>
-			  		<hr/>
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>구매수량</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.purchaseQuantity} 개</div>
-		</div>
-		
-		<hr/>
-			  		
-		<input type="hidden" id="price" value="${purchase.purchaseProd.prodDisPrice}">
-		<input type="hidden" id="purchaseQuantity" value="${purchase.purchaseQuantity}">
-			  		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>총 결제금액</strong></div>
-			<div class="col-xs-8 col-md-8">
-		     <input type="text" id="totalprice" value="" style="border:none;width:50px"> 원</div>
-		</div>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>적립 포인트</strong></div>
-			<div class="col-xs-8 col-md-8">+
-		      ${purchase.earnPoint} P</div>
-		</div>
-		  
-	  
-		 <hr/>
-		  <h4 align="center">배송정보</h4>
-		  <hr/>
-	
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>받는분 이름</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.receiverName }</div>
-		</div>
 
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>배송지</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.divyAddr }</div>
-		</div>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>연락처</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.receiverName }</div>
-		</div>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>이메일</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.receiverName }</div>
-		</div>
-		
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>배송메시지</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.divyMessage }</div>
-		</div>
-		
-		
-		<hr/>
-		  <h4 align="center">쿠폰 / 포인트</h4>
-		  <hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>사용 쿠폰</strong></div>
-			<div class="col-xs-8 col-md-8">${purchase.usedCoupon }</div>
-		</div>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-4"><strong>사용 포인트</strong></div>
-			<div class="col-xs-8 col-md-8">- ${purchase.usedPoint } P</div>
-		</div>
-		
-		
-		
-		<div class="row">
-	  		<div class="col-md-12 text-right ">
-	  			<button type="button" class="btn btn-default" id="check">확인</button>
-	  		</div>
-		</div>
-		
-		<br/>
-		
+				
+			  
+			<div>	  
+				  <div class="subtitle">
+				  <p>배송정보</p>
+				  </div><br>
+				  	  
+				  <div class="form-group">
+				    <label for="receiverName">받는분 이름</label>
+				      ${purchase.receiverName }
+				  </div>
+				  
+				 <div class="form-group">
+				    <label for="receiverPhone">연락처</label>
+				      ${purchase.receiverPhone }
+				  </div>
+				  
+				  
+				  <c:if test="${empty user}">
+					  <div class="form-group">
+					    <label for="receiverEmail">이메일</label>
+					    ${purchase.receiverEmail }
+					  </div>
+				  </c:if>
+				  
+				  <div class="form-group divyAddr">
+				    <label for="divyAddr">배송지</label>
+				    	<c:forEach var="addr" items="${purchase.divyAddr.split('/')}" begin="1">
+				    	${addr }&nbsp;
+				    	</c:forEach>
+				  </div>
+				  
+				  
+				   <div class="form-group">
+				    <label for="divyMessage">배송메시지</label>
+				      ${purchase.divyMessage }
+				  </div>
+
+			</div>
+				  
+				  
+			<div><br>
+			
+				  <div class="subtitle">
+				  <p>주문상품</p>
+				  </div><br>
+ 
+				  <div class="form-group">
+				  <table style="width: 100%">
+					  <tr>
+						<td class="imagetd">
+							<img src="/resources/images/uploadFiles/${purchase.purchaseProd.prodThumbnail.split('&')[0]}" class="image" width="120" height="120">
+						</td>
+						<td class="content">
+							<p style="font-weight: bold;font-size: 15px">${purchase.purchaseProd.prodName}</p>
+							<p>${purchase.purchaseProd.prodDisPrice} 원</p>
+							<p>배송비: 3000 원</p><input type="hidden" class="form-control" id="divyFee" name="divyFee" value="3000">
+							<p>구매수량: ${purchase.purchaseQuantity} 개</p><input type="hidden" min="0" class="form-control" name="purchaseQuantity" />
+							<c:if test="${purchase.purchaseProd.couponApply == 'N' }">
+								<p style="color:#F0445C">*쿠폰 적용이 불가능한 상품입니다.</p>
+							</c:if>
+					  	
+					  	</td>
+					  </tr>
+				 </table>		 
+				</div>
+				
+				<input type="hidden" class="quantity" value="${purchase.purchaseQuantity}" />
+				<input type="hidden" class="price" value="${purchase.purchaseProd.prodDisPrice}" />
+				
+	
+			</div>	  
+			
+			<br>
+				  
+			<section class="paycontent">	    
+				  
+				  <div class="sectd">
+				  	<h5 class="info">총 상품금액</h5>
+				  	<div class="payment"><input type="text" id="totalProdPrice" value="" size="" style="border:none;text-align:right">원</div>
+				  </div>
+				  
+				  <div class="sectd">
+				  	<h5 class="info">쿠폰 사용</h5>
+				  	<div class="payment"><input type="text" id="couponuse" value="" size=""  style="border:none;text-align:right">원</div>
+				  </div>
+				  
+				  <div class="sectd">
+				  	<h5 class="info">포인트 사용</h5>
+				  	<div class="payment"><input type="text" id="usingpoint" value="" size=""  style="border:none;text-align:right">P</div>
+				  </div>
+				  
+				  <div class="sectd">
+				  	<h5 class="info">배송비</h5>
+				  	<div class="payment"><input type="text" id="divyfee" value="" size=""  style="border:none;text-align:right">원</div>
+				  </div>
+				  
+				  <br>
+				  
+				  <div class="sectd">
+				  	<h5 class="info">총 결제금액</h5>
+				  	<div class="payment totals"><strong class="totalpay"><input type="text" id="totalpayment" value="" size=""  style="border:none;text-align:right"></strong>원</div>
+				  </div>
+				  
+				  <div class="sectd">
+				  	<h6 class="info">적립 포인트</h6>
+				  	<div class="payment totals"><input type="text" id="earnPoint" name="earnPoint" value="" size=""  style="border:none;text-align:right"> P</div>
+				  </div>
+				  
+				  
+				  <hr>
+				  
+				  
+			</section>
+			
+
+			<br><br>
+			
+			<div class="text-center">
+				<button type="button" class="check" >확&emsp;인</button>
+			</div>
+			
+				
+			<br>
  	</div>
- 	<!--  화면구성 div Start /////////////////////////////////////-->
-
+</div>	
+	
 </body>
+
 </html>
