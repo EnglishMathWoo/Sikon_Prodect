@@ -1176,7 +1176,32 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 				
 				if(event.data != null) {
 				
-					alert(event.data);
+					addUncheckedAlarm();
+					
+					 function addUncheckedAlarm(){
+							
+							$.ajax({
+						        url : "/alarm/json/addUncheckedAlarm",
+						        type : 'POST',
+						        dataType : "json",   
+					            data : {'cookNo' : cookNo, 'userId' : userId, 'userNickname' : userNickname }, 
+					            async: false, 
+					            error : function(){
+						            alert("통신 에러");
+						        },
+						        success : function(data){
+						        	
+						        	alert("알람 전송 완료!!");
+						        	      	          
+						           		if(socket){
+						        			let socketMsg = "heart,"+data.userId+","+data.userNickname+","+data.mentorId+","+data.cookName;
+						        			console.log(socketMsg);
+						        			socket.send(socketMsg);
+						           		}
+						        }
+						    
+						    })
+					 };
 				
 				}
 				
