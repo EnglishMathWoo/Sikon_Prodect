@@ -522,7 +522,12 @@ p {
 		    </div>
 		    		
 		  		
-					<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
+			
+						<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
+		
+
+				
+	
 		
 					
 				<c:if test="${seessionScope.user.role=='mentor' }">

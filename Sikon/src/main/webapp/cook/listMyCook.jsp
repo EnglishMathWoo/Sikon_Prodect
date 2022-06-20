@@ -156,9 +156,13 @@ div.emptyProd{
 			 
 			 
 			 
-			 $( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
+				$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
 					fncGetList(1);
-				 });	
+				 
+			 });
+				
+				
+				
 			 
 				$(".delete").on("click" , function() {
 					
@@ -183,6 +187,12 @@ div.emptyProd{
 					
 					
 		 });
+		 
+		 function enterkey() { 
+				if(window.event.keyCode == 13){
+					fncGetList(1);
+				}
+			} 			 
 		 
 		 $( document ).ready(function() {
 				
@@ -258,11 +268,7 @@ div.emptyProd{
 
 });	
 		 
-		 function enterkey() { 
-				if(window.event.keyCode == 13){
-					fncGetList(1);
-				}
-			} 		 
+	 
 					
 </script>
 			 </head>
@@ -330,7 +336,8 @@ div.emptyProd{
 				  
 					
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+						  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+
 				  
 				  
 				  
