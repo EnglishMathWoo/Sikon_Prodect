@@ -27,6 +27,8 @@ public class Purchase {
 	private String paymentOpt;
 	private String divyStatus;
 	private String reviewStatus;
+	private String impNumber;
+	
 
 
 	
@@ -263,6 +265,17 @@ public class Purchase {
 	}
 
 
+	public String getImpNumber() {
+		return impNumber;
+	}
+
+
+
+	public void setImpNumber(String impNumber) {
+		this.impNumber = impNumber;
+	}
+
+
 
 	@Override
 	public String toString() {
@@ -271,8 +284,11 @@ public class Purchase {
 				+ receiverPhone + ", receiverEmail=" + receiverEmail + ", divyAddr=" + divyAddr + ", divyMessage="
 				+ divyMessage + ", purchaseQuantity=" + purchaseQuantity + ", orderDate=" + orderDate + ", invoiceNum="
 				+ invoiceNum + ", usedPoint=" + usedPoint + ", earnPoint=" + earnPoint + ", divyFee=" + divyFee
-				+ ", paymentOpt=" + paymentOpt + ", divyStatus=" + divyStatus + ", reviewStatus=" + reviewStatus + "]";
+				+ ", paymentOpt=" + paymentOpt + ", divyStatus=" + divyStatus + ", reviewStatus=" + reviewStatus
+				+ ", impNumber=" + impNumber + "]";
 	}
+
+
 
 
 }

@@ -27,6 +27,7 @@
   		<result property="invoiceNum" 				column="invoice_num" 			jdbcType="VARCHAR"/>
   		<result property="divyFee" 					column="divy_fee" 				jdbcType="NUMERIC"/>
   		<result property="reviewStatus" 			column="review_status" 			jdbcType="VARCHAR"/>
+  		<result property="impNumber" 				column="imp_number" 			jdbcType="VARCHAR"/>
 		
 		<collection property="purchaseProd" resultMap="productSelectMap"/>
 	</resultMap>
@@ -51,7 +52,7 @@
 	<!-- SQL : INSERT -->
 	<insert 	id="addPurchase"		parameterType="purchase" >
 	 	INSERT
-		INTO purchase( tran_no , prod_no, user_id, serial_no, receiver_name, receiver_phone, receiver_email, quantity, divy_addr, divy_message, used_coupon, used_point, earn_point, orderdate, payment_opt, divy_status, invoice_num, divy_fee, review_status) 
+		INTO purchase( tran_no , prod_no, user_id, serial_no, receiver_name, receiver_phone, receiver_email, quantity, divy_addr, divy_message, used_coupon, used_point, earn_point, orderdate, payment_opt, divy_status, invoice_num, divy_fee, review_status, imp_number) 
 		VALUES (seq_purchase_tran_no.NEXTVAL , 
 				#{purchaseProd.prodNo}, 
 				#{buyer.userId}, 
@@ -70,7 +71,9 @@
 				#{divyStatus}, 
 				#{invoiceNum}, 
 				#{divyFee},
-				#{reviewStatus})
+				#{reviewStatus},
+				#{impNumber}
+				)
 	 </insert>
 	 
 	 <!-- SQL : SELECT ONE -->

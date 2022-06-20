@@ -87,7 +87,7 @@
 	        align-items: center;
 		    font-size: 17px;
 		    border-radius: 5px;
-		    border: 1px solid #d7d7d7
+		    border: 1px solid #d7d7d7;
 		}
 	
 		.btn-b:hover {

@@ -57,6 +57,33 @@
 		.container{
 			padding-top : 170px;
 		}
+		
+		.btn-b {
+			cursor: pointer;
+		    background-color: #937062;
+		    color: #fff;
+		    padding: 12px 0;
+		    width:20%;
+		    height: 34px;
+		    justify-content: center;
+	        display: flex;
+	        align-items: center;
+		    font-size: 17px;
+		    border-radius: 5px;
+		    border: 1px solid #d7d7d7;
+		    margin: 0 10px;
+		}
+	
+		.btn-b:hover {
+			background-color: #937062d4;
+		}
+		
+		#button{
+			margin-top:15px;
+			margin-bottom:15px;
+			display: flex;
+  			justify-content: center;	
+		}
 	 
     </style>
     
@@ -111,52 +138,12 @@
 	
 		 $( document ).ready(function() {
 				$( "#register" ).on("click" , function() {
-					//var pushData = {
-					//		"noticeTitle" : $("input[name='noticeTitle']").val(),
-					//		"noticeContent" :$('#summernote').val() };
-										
-					var pushData = $("input[name='noticeTitle']").val();
-					console.log(pushData);
-					commentInsert(pushData);
+					
+					$("form").attr("method", "POST").attr("action", "/notice/addNotice").submit();
 
 				});
 			});
-		 
-		 
-		 function commentInsert(pushData){
-				
-				data = new FormData();
-				data.append("pushData", pushData);
-				console.log(pushData);
-				
-				$.ajax({
-			        url : "/notice/json/pushAlarm",
-			        type : 'POST',
-			        dataType : "json",   
-		            data : {'pushData' : pushData},
-			        success : function(data){
-			        	
-			        	alert("알람 전송 완료!!");
-			        	
-			        	$("form").attr("method", "POST").attr("action", "/notice/addNotice").submit();
-			          
-			                //$('[name=content]').val('');
-			           		//$('.myEditor').summernote('reset');
-			                
-			           		//소켓
-			           		//if(readWriter != writer){
-			           		if(socket){
-			           			console.log(data.noticeTitle)
-			        			let socketMsg = "reply,"+data.userId+","+data.noticeTitle;
-			        			console.log(socketMsg);
-			        			socket.send(socketMsg);
-			           		}
-			        	//}
-			        }
-			    
-			    })
-		 };
-	 
+		 		
 		 
 		 $(function() {
 				$( "#previous" ).on("click" , function() {
@@ -179,7 +166,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>공지사항등록</h3>
+	       <h3 style="color:#bc8f8f">공지사항등록</h3>
 	    </div>
 	    
 	    <form class="form-horizontal" name="detailForm"  enctype="multipart/form-data" >
@@ -193,9 +180,9 @@
 		</div>
 		
 		 <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary" id="register">등 &nbsp;록</button>
-			  <a class="btn btn-primary btn" role="button" id="previous">취&nbsp;소</a>
+		    <div class="col-sm-offset-4  col-sm-4 text-center" id="button">
+		      <button type="button" class="btn-b" id="register">등 &nbsp;록</button>
+			  <a class="btn-b" role="button" id="previous">취&nbsp;소</a>
 		    </div>
 		  </div>
 		</form>

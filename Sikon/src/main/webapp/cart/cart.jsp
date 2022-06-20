@@ -290,16 +290,12 @@ div{
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	
-	<!--  화면구성 div Start /////////////////////////////////////-->
+
 	<div class="container cartlayout">
-	
-		
-		
-	       <h3 class="carttitle">| SHOPPING BAG |</h3>
-		
-		<br>
+
+		<h3 class="carttitle">| SHOPPING BAG |</h3><br>
       
-        <div class="row">
+	       <div class="row">
 	        <div class="subtitle">
 	            <div class="col-md-1 text-left">&ensp;&nbsp;<input type="checkbox" id="checkall" /></div>
 	            <div class="col-md-6 text-center">상품정보</div>
@@ -308,62 +304,66 @@ div{
 	            <div class="col-md-2 text-center">상품수량</div>
 	            <div class="col-md-2 text-center">소 계</div>
 	        </div>    
-        </div>
-       
+	       </div>
+	      
 		<hr/>
+		
 		<form class="form-horizontal">
-		  <c:set var="i" value="0" />
-		  <c:forEach var="cart" items="${Cart}">
-		  <div class="row">
-			<c:set var="i" value="${ i+1 }" />
-			  
-			  <div class="col-md-1 text-center boxselect">
-			  	<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}"/>		  	
-			  </div>
-			  
-			  <div class="col-md-6 text-left">
-				<table>
-				<tr>
-				    <td>
-					    <c:forEach var="name" items="${cart.cartProd.prodThumbnail.split('&')[0]}">
-						<img src="/resources/images/uploadFiles/${name}" class="image" width="100" height="100">
-						</c:forEach>
-					</td>
-				    <td>
-				    <p style="font-weight: bold;font-size:15px;">&emsp;&emsp;${cart.cartProd.prodName }</p>
-				    </td>
-				    
-				</tr>
-				</table>
-			  </div>	 
-			    	  
-			  <div class="col-md-1 text-center">
-			  	<button class="delete deletebtn" value="${cart.cartNo}">X</button>
-			  </div>
-			  <div class="col-md-1 text-center"></div>
-			    	  
-			  <div align="center" class="col-md-2 text-center quantity" value="${cart.quantity }">
-			  	<c:choose>
-			  		<c:when test="${cart.quantity == 1 }">
-			  			<button type="button" class="calculation nope" role="button" value="${cart.cartNo}">-</button>
-			  		</c:when>
-			  		<c:otherwise>
-			  			<button class="calculation minus" value="${cart.cartNo}">-</button>
-			  		</c:otherwise>
-			  	</c:choose>
-			  	<input type="text" name="quantity" class="result" value=" ${cart.quantity }" style="width:30px;text-align: center" readonly/>
-			  	<button class="calculation plus" value="${cart.cartNo}">+</button>
-			  </div>
-			  
-			  
-			  
-			  <div align="center" class="col-md-2 text-center price" value="${cart.cartProd.prodDisPrice*cart.quantity }" >${cart.cartProd.prodDisPrice*cart.quantity } 원</div>
-			  
-           </div>
-           <hr>
-          </c:forEach>
-        
-	      </form>
+			  <c:set var="i" value="0" />
+			  <c:forEach var="cart" items="${Cart}">
+			  <div class="row">
+				<c:set var="i" value="${ i+1 }" />
+				  
+				  <div class="col-md-1 text-center boxselect">
+				  	<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}"/>		  	
+				  </div>
+				  
+				  <div class="col-md-6 text-left">
+					<table>
+					<tr>
+					    <td>
+						    <c:forEach var="name" items="${cart.cartProd.prodThumbnail.split('&')[0]}">
+							<img src="/resources/images/uploadFiles/${name}" class="image" width="100" height="100">
+							</c:forEach>
+						</td>
+					    <td>
+					    <p style="font-weight: bold;font-size:15px;">&emsp;&emsp;${cart.cartProd.prodName }</p>
+					    </td>
+					    
+					</tr>
+					</table>
+				  </div>	 
+				    	  
+				  <div class="col-md-1 text-center">
+				  	<button class="delete deletebtn" value="${cart.cartNo}">X</button>
+				  </div>
+				  
+				  <div class="col-md-1 text-center"></div>
+				    	  
+				  <div align="center" class="col-md-2 text-center quantity" value="${cart.quantity }">
+				  
+				  	<c:choose>
+				  		<c:when test="${cart.quantity == 1 }">
+				  			<button type="button" class="calculation nope" role="button" value="${cart.cartNo}">-</button>
+				  		</c:when>
+				  		<c:otherwise>
+				  			<button class="calculation minus" value="${cart.cartNo}">-</button>
+				  		</c:otherwise>
+				  	</c:choose>
+				  	
+				  	<input type="text" name="quantity" class="result" value=" ${cart.quantity }" style="width:30px;text-align: center" readonly/>
+				  	<button class="calculation plus" value="${cart.cartNo}">+</button>
+				  	
+				  </div>
+				  
+				  <div align="center" class="col-md-2 text-center price" value="${cart.cartProd.prodDisPrice*cart.quantity }" >${cart.cartProd.prodDisPrice*cart.quantity } 원</div>
+				  
+	           </div>
+	           <hr>
+	          </c:forEach>
+	        
+		 </form>
+		      
 	      <div>
 		      <table style="width:100%;">
 			      <tr>
@@ -371,12 +371,12 @@ div{
 				      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="" min="0" readonly/> 원</td>
 			       </tr>
 		       </table>
-	      </div>
-     
-	  <br>
-	  <div align="right">
-	  	<button class="buybtn">구매하기</button>
-	  </div>
+	      </div><br>
+		      
+		      
+		  <div align="right">
+		  	<button class="buybtn">구매하기</button>
+		  </div>
 	  
  	</div>
  	

@@ -134,25 +134,26 @@ div.emptyProd{
 			$("form").attr("method" , "POST").attr("action" , "/product/manageProduct").submit();
 		}
 		
+		//==============================================================================================
+		
 		 $(function() {
 				 
 			 $( ".submit" ).on("click" , function() {
 				self.location = "/product/addProductView.jsp"
 			 });
 			 
+			 
 			 $( ".toget" ).on("click" , function() {
-				 
 				 var prodNo = $(this).attr('value');
 				 console.log(prodNo);
-				 
 				 self.location = "/product/getProduct?menu=manage&prodNo="+prodNo
 			 });
 				 
+			 
 			 $( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
 				fncGetList(1);
 			 });
-			
-			
+						
 			 
 			$("#orderCondition").on( "change", function() { 
 		      	fncGetList(1);
@@ -160,7 +161,7 @@ div.emptyProd{
 				
 		});	
 		 
-		 
+		//==== 검색창 입력 후 enter시 검색 이벤트 ===========================================================	 
 		 function enterkey() { 
 			if(window.event.keyCode == 13){
 				fncGetList(1);
@@ -174,82 +175,75 @@ div.emptyProd{
 
 <body>
 	
-	<!-- ToolBar Start /////////////////////////////////////-->
+	<!-- ToolBar Start -->
 	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
+   	<!-- ToolBar End -->
 	
-	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container list">
 	
-	       <h3 class="pltitle" style="color:#333">| PRODUCT MANAGEMENT |</h3>
+		<h3 class="pltitle" style="color:#333">| PRODUCT MANAGEMENT |</h3>
 	    <br><br><br>
 	    
-		
 		<form class="form-inline" name="detailForm">
+		
+			<input type="hidden" id=themeCondition name=themeCondition value="${search.themeCondition }">
 	   			
-	   			<input type="hidden" id=themeCondition name=themeCondition value="${search.themeCondition }">
-	   			
-	<div class="row">
-		<table width="100%">
-			<tr>
-			
-			
-				<td class="col-md-6 text-left"> 
-					  <div class="form-group">
-							<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
-								<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>전체보기</option>
-								<option value="3"  ${ ! empty search.orderCondition && search.orderCondition==3 ? "selected" : "" }>판매중</option>
-								<option value="4"  ${ ! empty search.orderCondition && search.orderCondition==4 ? "selected" : "" }>판매중지</option>
-								<option value="5"  ${ ! empty search.orderCondition && search.orderCondition==5 ? "selected" : "" }>재고없음</option>
-							</select>
-					  </div>
-					  
-				  </td>
+			<div class="row">
+				<table width="100%">
+					<tr>
+						<td class="col-md-6 text-left"> 
+						  <div class="form-group">
+								<select name="orderCondition" id="orderCondition" class="form-control" style="width:125px">
+									<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>전체보기</option>
+									<option value="3"  ${ ! empty search.orderCondition && search.orderCondition==3 ? "selected" : "" }>판매중</option>
+									<option value="4"  ${ ! empty search.orderCondition && search.orderCondition==4 ? "selected" : "" }>판매중지</option>
+									<option value="5"  ${ ! empty search.orderCondition && search.orderCondition==5 ? "selected" : "" }>재고없음</option>
+								</select>
+						  </div>
+					  	</td>
 				  
-	   			<td class="col-md-6 text-right">
-				  <div class="form-group">
-						<select name="searchCondition" id="searchCondition" class="form-control" style="width:110px">
-						 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
-							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
-							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
-						</select>
-				  </div>
+	   					<td class="col-md-6 text-right">
+						  <div class="form-group">
+								<select name="searchCondition" id="searchCondition" class="form-control" style="width:110px">
+								 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
+									<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
+									<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
+								</select>
+						  </div>
 				  
-				  <div class="form-group">
-				    <input type="text" style="display: none;">
-				    <input type="text" class="form-control" id="prodname" name="searchKeyword"  placeholder="검색"
-				    		onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-				  </div>
+						  <div class="form-group">
+						    <input type="text" style="display: none;">
+						    <input type="text" class="form-control" id="prodname" name="searchKeyword"  placeholder="검색"
+						    		onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+						  </div>
 				  
-				  <button type="button" class="btn btn-default" id="search">검색</button>
+				  		  <button type="button" class="btn btn-default" id="search">검색</button>
 				  
-				</td>
-				
-				
-			</tr>
-		</table>
-	</div>				  
-					<div class="row">
-						<table width="100%">
-						<tr>
+						</td>
+					</tr>
+				</table>
+			</div>			
+				  
+			<div class="row">
+				<table width="100%">
+					<tr>
+						<td class="col-md-6 text-left">
+				    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지
+						</td>
 							
-							<td class="col-md-6 text-left">
-						    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지
-							</td>
+						<td class="col-md-6 text-right">
+							<button type="button" class="submit">상품등록</button>
+						</td>
 							
-							<td class="col-md-6 text-right"><button type="button" class="submit">상품등록</button></td>
-							
-						</tr>
-						</table>
-					</div>
+					</tr>
+				</table>
+			</div>
 				  
 					
-				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-				  
-				  
-				  
-				</form>
+		  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+		  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+		  
+	</form>
 		
       <!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped">
@@ -320,18 +314,19 @@ div.emptyProd{
         </tbody>
       
       </table>
-	  <!--  table End /////////////////////////////////////-->
-	  <c:if test="${empty list}">
-		<br><br>
-		<div class="emptyProd">
-			판매중인 상품이 없습니다.
-		</div>
-		<br>
-	</c:if>
- 	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 	
+      
+      
+		 <!--  table End /////////////////////////////////////-->
+	 	<c:if test="${empty list}">
+			<br><br>
+			<div class="emptyProd">
+				판매중인 상품이 없습니다.
+			</div>
+			<br>
+		</c:if>
 	
+ 	</div>
+ 	
  	
  	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>

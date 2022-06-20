@@ -44,9 +44,49 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  body {
+	 body {
+			font-family: 'Nanum Myeongjo', serif;
             padding-top : 50px;
         }
+        	
+		h1.text-center {
+			font-family: 'Nanum Myeongjo', serif;
+		}
+		
+		div.form-group{
+			font-family: 'Nanum Myeongjo', serif;
+		}
+		
+		.container{
+			padding-top : 180px;
+		}
+		
+		.btn-b {
+			cursor: pointer;
+		    background-color: #937062;
+		    color: #fff;
+		    padding: 12px 0;
+		    width:20%;
+		    height: 34px;
+		    justify-content: center;
+	        display: flex;
+	        align-items: center;
+		    font-size: 17px;
+		    border-radius: 5px;
+		    border: 1px solid #d7d7d7;
+		    margin: 0 10px;
+		}
+	
+		.btn-b:hover {
+			background-color: #937062d4;
+		}
+		
+		#button{
+			margin-top:15px;
+			margin-bottom:15px;
+			display: flex;
+  			justify-content: center;	
+		}
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -124,29 +164,28 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3>공지사항수정 </h3>
+	       <h3 style="color:#bc8f8f">공지사항수정</h3>
 	    </div>
 	    
 	    <form class="form-horizontal" name="detailForm"  enctype="multipart/form-data" >
-	    
-	    <input type="hidden" class="form-control" id="noticeNo" name="noticeNo"  value="${notice.noticeNo}" />
-	    
-	    <input type="text" class="form-control" id="noticeTitle" name="noticeTitle"  value="${notice.noticeTitle}" />
-	    
+	     <div class="row">
+	     <input type="hidden" class="form-control" id="noticeNo" name="noticeNo"  value="${notice.noticeNo}" />
+	     <input type="text" class="form-control" id="noticeTitle" name="noticeTitle"  value="${notice.noticeTitle}" />
+	    </div>
 	    <br>
 	    
-	    <div class="container">
- 		 <textarea class="summernote" id ="summernote" name="noticeContent">${notice.noticeContent}</textarea>    
+	    <div class="row">
+ 			<textarea class="summernote" id ="summernote" name="noticeContent">${notice.noticeContent}</textarea>    
 		</div>
 		
-		 <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary" id="edit">수 &nbsp;정</button>
-			  <a class="btn btn-primary btn" role="button" id="previous">취&nbsp;소</a>
+		  <div class="form-group">
+		    <div class="col-sm-offset-4  col-sm-4 text-center" id="button">
+		      <button type="button" class="btn-b" id="edit">수 &nbsp;정</button>
+			  <a class="btn-b" role="button" id="previous">취&nbsp;소</a>
 		    </div>
 		  </div>
 		</form>
-		
+	</div>
 		
 </body>
 

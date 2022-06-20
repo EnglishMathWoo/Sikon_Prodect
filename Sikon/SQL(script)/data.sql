@@ -121,10 +121,6 @@ INTO product( prod_no , prod_name , prod_price, prod_detail, prod_disrate, prod_
 VALUES (seq_product_prod_no.NEXTVAL , '야옹이 식기 7종', 3900, '귀엽고 사랑스러운 접시', 0.26, 2900, '03cat00.jpg&', '<p><img src="/summernoteImage/bde51f58-12e2-47ed-91de-0e6ac0cdfa86.jpg" style=""><img src="/summernoteImage/951205bb-cad8-4498-8aa0-610490e64d56.jpg" style=""><img src="/summernoteImage/35a986f7-5d40-4fde-9f9e-afb58c5bdbf3.jpg" style=""><img src="/summernoteImage/fbbffc76-a3d4-44ab-a925-65954e05ac79.jpg" style=""><img src="/summernoteImage/90ee7b8d-9bd2-4cb3-b7f7-6a01db441bd9.jpg" style=""><br></p>', 100, 'TW', 'Y', 'Y', SYSDATE );
 
 INSERT
-INTO purchase( tran_no , prod_no, user_id, serial_no, receiver_name, receiver_phone, receiver_email, quantity, divy_addr, divy_message, used_coupon, used_point, earn_point, orderdate, payment_opt, divy_status, invoice_num, divy_fee, review_status) 
-VALUES (seq_purchase_tran_no.NEXTVAL , 10000, 'user@naver.com', 'str202206097720618', '힙쟁이', '01012345678', 'heap@naver.com', 5, '/서울시 서초구//', '8층으로 가져다주세요', '10% 할인쿠폰', 500, 270, SYSDATE, 'KA', '001', '송장번호', 3000, '001');
-
-INSERT
 INTO cart( cart_no , prod_no, user_id, quantity, prod_name, prod_image, prod_price ) 
 VALUES (seq_cart_cart_no.NEXTVAL , 10004, 'user@naver.com', 5, '플라워 식기세트', '02flw00.jpg&', 39900);
 
@@ -268,7 +264,7 @@ VALUES (seq_review_no.nextval  ,'COOK' , 'user', '아주 좋았습니다.', 'sum
 
 INSERT
 INTO review
-VALUES (seq_review_no.nextval  ,'REC' , 'user', '맛있어요', 'summerNotefa2fdebe-6d98-48a7-a5a3-c85a61a9092c.jpg', SYSDATE, 10001, NULL, NULL, '100');
+VALUES (seq_review_no.nextval  ,'REC' , 'user', '맛있어요!!!!',NULL, SYSDATE, 10006, NULL, NULL, '100');
 
 INSERT 
 INTO alarm (alarm_no, alarm_target, alarm_content, alarm_status, alarm_date)
