@@ -293,6 +293,11 @@ font-size: 13px;
     text-transform: uppercase;
     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
+
+.imgover:hover{
+	opacity: 0.8;
+}
+
 </style>
 
 
@@ -615,7 +620,8 @@ font-size: 13px;
   <br/> <br/>
   
     <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" ><img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
+      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" >
+      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300" id="image"></a>
         <div class="excerpt">
            <p class="namehead">${recipe.recipeDetail }</p>
           <p class="detailhead" ><b>${recipe.recipeName }</b></p>
