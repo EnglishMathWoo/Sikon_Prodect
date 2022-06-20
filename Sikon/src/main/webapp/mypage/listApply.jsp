@@ -51,6 +51,7 @@ div.row{
 }  
 table {
 	font-family: 'Nanum Myeongjo', serif;
+	margin-top: 20px;
 }
 th{
 	font-weight: lighter;
@@ -65,7 +66,7 @@ th{
 	border-top: 2px solid #957777;
 }
 div.list{
-	padding-top : 210px;
+	padding-top : 240px;
 }
 
 .cancel{

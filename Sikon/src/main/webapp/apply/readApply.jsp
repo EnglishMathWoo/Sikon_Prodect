@@ -60,7 +60,7 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 		<form class="form-horizontal" enctype="multipart/form-data">
-		 <input type="hidden" name="cookNo" value="${cook.cookNo}"/>
+	
 		
 		<div class="page-header">
 
@@ -73,7 +73,7 @@
 				<strong>쿠킹클래스이미지</strong>
 			</div>
 			<div class="col-xs-8 col-md-4">		    	
-		<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle"/></div>
+		<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename}" width="300" height="300" align="absmiddle"/></div>
 		</div>
 
 		<hr/>
@@ -103,10 +103,10 @@
 				<strong>수업시간</strong>
 			</div>
 			<div class="col-xs-4 col-md-2">
-<input type="TIME" class="form-control" id="startTime"  name="startTime" value="${cook.startTime}" placeholder="수업시작시간">
+<input type="TIME" class="form-control" id="startTime"  name="startTime" value="${apply.classCook.startTime}" placeholder="수업시작시간">
 </div>
 	<div class="col-xs-4 col-md-2">
-  <input type="TIME" class="form-control" id="endTime"  name="endTime"  value="${cook.endTime}" placeholder="수업종료시간">
+  <input type="TIME" class="form-control" id="endTime"  name="endTime"  value="${apply.classCook.endTime}" placeholder="수업종료시간">
 </div>
 		</div>
 

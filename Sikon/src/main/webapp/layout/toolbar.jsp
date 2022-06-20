@@ -14,6 +14,8 @@
 
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 	a{
 		cursor:pointer;
 	}
@@ -66,7 +68,7 @@ margin-top:10px;
 	#topbar {
 		padding-top: 15px;
 		text-align: center;
-		font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 		font-weight: bold;
 	}
 	#header {
@@ -119,7 +121,7 @@ margin-top:10px;
 /* Transition Fade
 --------------------------------------------------------------------------------------------------------------- */
 #mainav form * {
-font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 		font-weight: bold;
 	transition: none !important;
 }
@@ -153,8 +155,7 @@ nav ul, nav ol {
 
 /* Top Navigation */
 #mainav {
-font-family: 'Gowun Batang', serif;
-		font-weight: bold;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	
 }
 
@@ -517,8 +518,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 }
 
 	.dropHeader .dropLayer {
-		font-family: 'Gowun Batang', serif;
-		font-weight: bold;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 		overflow: hidden;
 		position: absolute;
 		top: 60px;
@@ -556,13 +556,13 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 		top: 10px;
 }
 
-.dropHeader .dropLayer .divide:after {
+.dropHeader .dropLayer:after {
 	display: block;
 	content: "";
 	margin: 8px 16px;
 	height: 1px;
-	background: #E2E5EA;
 }
+
 
 .dropHeader .member.selected{
 	position: relative;
@@ -646,6 +646,22 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 .divide .link li:hover{
 	background: #edd8cf;
 }
+
+.bi-basket3,.bi-basket3-fill{
+font-size: 25px;
+color:#937062
+}
+
+th{
+text-align:center;
+font-weight: normal;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+	font-size: 12px;
+}
+.table{
+border-spacing:0px
+}
+
 </style>
 
 <!-- /////////////////////// ToolBar Start ////////////////////////////-->
@@ -723,8 +739,23 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 											<span class="handle">${user.userId }</span>
 											</strong></p>
 										</div>
-										
 									</div>
+									<div class="userInfo">
+									<table class="tool" width="227px" height="50px">
+									<thead>
+									<tr class="bg-light">
+									<th  width="50%" class="stcart" style="border-right: 1px solid rgb(224, 224, 224);">
+									<i class="bi bi-basket3-fill"></i><br/>스토어
+									</th>
+									<th width="50%" class="ckcart">
+									<i class="bi bi-basket3"></i><br/>쿠킹클래스
+									</th>
+									</tr>
+									</thead>
+									</table>
+									
+									</div>
+									
 								<div class="divide">
 									<ul class="link">                                              
 											<li><a>내정보보기</a></li>
@@ -781,19 +812,11 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	<nav id="mainav" class="fl_right">
 	  <ul class="clear">
 		<li class="active"><a href="#">레시피</a></li>
-		<li><a class="drop" href="#">스토어</a>
-					<c:if test="${! empty sessionScope.user.role}">
-					<ul>
-						<li><a href="#">구매목록</a></li>
-						<li><a href="#">장바구니</a></li>
-					  </ul>
-					  </c:if>
-		</li>
+		<li class="active"><a href="#">스토어</a></li>
 		<li><a class="drop" href="#">쿠킹클래스</a>
 					<c:if test="${! empty sessionScope.user.role}">
 					<ul>
 						<li><a href="#">쿠킹클래스신청목록</a></li>
-						<li><a href="#">쿠킹클래스장바구니</a></li>		               
 						<li><a href="#">좋아요한쿠킹클래스</a></li>	               
 						
 					  </ul>
@@ -1029,7 +1052,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			$(self.location).attr("href","/purchase/listSales");
 			});
 			 
-			 $( "a:contains('장바구니')" ).on("click" , function() {
+			 $( "th.stcart" ).on("click" , function() {
 			$(self.location).attr("href","/cart/getCartList");
 			});
 				 
@@ -1052,7 +1075,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 			$(self.location).attr("href","/apply/listSale?menu=manage");
 			});
 			 
-			 $( "a:contains('쿠킹클래스장바구니')" ).on("click" , function() {
+			 $( "th.ckcart" ).on("click" , function() {
 			$(self.location).attr("href","/wish/getWish?userId=${sessionScope.user.userId}");
 			});
 			 

@@ -444,7 +444,11 @@ padding-top: 10px;
 					</div>
 					
 				</div>
-					
+				<input type="hidden" class="form-control" id="userId" name="userId" value="${user.userId}" >
+								
+				<input type="hidden" class="form-control 12" id="role" name="role" value="${user.role}" >
+				
+				<input type="hidden" class="form-control 1" id="mentorApply" name="mentorApply" value="${user.mentorApply}" >
 					
 				<div class="iEJcKG">
 				<h3 class="iEJcKGheader">회원정보</h3>	
@@ -552,8 +556,8 @@ padding-top: 10px;
 		<c:when test="${sessionScope.user.role == 'admin' && user.mentorApply == 'Y' && user.role == 'user' }">
 		<div class="row" style="padding-top: 50px;padding-bottom:60px">
 	  		<div class="col-lg-12 text-center ">
-	  			<button type="button" class="btn-w addcart">승인</button>&emsp;
-	  			<button type="button" class="btn-b addPurchase" >거절</button>
+	  			<button type="button" class="btn-w addcart" id="changeUserInfo">승인</button>&emsp;
+	  			<button type="button" class="btn-b addPurchase" id="backUserInfo" >거절</button>
 	  		</div>
 	  	</div>
 	  	</c:when>
@@ -561,7 +565,7 @@ padding-top: 10px;
 		<div class="row" style="padding-top: 50px;padding-bottom:60px">
 	  		<div class="col-lg-12 text-center ">
 	  			<button type="button" class="btn-w addcart" id="editUserInfo">수정</button>&emsp;
-	  			<button type="button" class="btn-b addPurchase" >탈퇴</button>
+	  			<button type="button" class="btn-b addPurchase" id="deleteUserInfo">탈퇴</button>
 	  		</div>
 	  		</div>
 	  	</c:otherwise>
@@ -577,7 +581,7 @@ padding-top: 10px;
 <script>history.scrollRestoration = "auto"</script>
 <script type="text/javascript">
 
-
+		 // 수정
 		 $(function() {
 				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 				 $( "#editUserInfo" ).on("click" , function() {
@@ -585,7 +589,60 @@ padding-top: 10px;
 				});
 			});
 		
-
+		 
+		// 탈퇴
+		 $(function() {
+				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				 $( "#deleteUserInfo" ).on("click" , function() {
+						self.location = "/user/deleteUser?userId=${user.userId}"
+				});
+			});
+		 
+		 
+		// 승인
+		 $(function() {
+				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				 $( "#changeUserInfo" ).on("click" , function() {
+					 var userId = $('#userId').val(); 
+			    	 console.log( "user id + 콘솔 ^_^ " + userId) ; 
+			    	 
+			    	
+			    
+			    	 var role = $('#role').val(); 
+			    	 console.log( "role + 콘솔 ^_^ " + role) ;
+			    	 
+					//	self.location = "/user/changeUserRole?userId=${user.userId}"
+							
+			    	 popWin = window.open("/user/changeUserRole?userId="+userId+"&&role="+role, "popWin",
+								"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
+								"scrollbars=no,scrolling=no,menubar=no,resizable=no");	
+					
+			    	 
+				});
+			});
+		
+		
+		// 거절
+		 $(function() {
+				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+				 $( "#backUserInfo" ).on("click" , function() {
+					 var userId = $('#userId').val(); 
+			    	 console.log( "user id = " + userId) ; 
+			    	 		    
+			    	 var mentorApply = $('#mentorApply').val(); 
+			    	 console.log( "mentorApply = " + mentorApply) ;
+			    	 
+					//	self.location = "/user/backUserRole?userId=${user.userId}"
+							
+			    	 popWin = window.open("/user/backUserRole?userId="+userId+"&&mentorApply="+mentorApply, "popWin",
+								"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
+								"scrollbars=no,scrolling=no,menubar=no,resizable=no");	
+					
+			    	 
+				});
+			});
+		 
+		 
 	
 	function readURL(input, imgControlName) {
 		if (input.files && input.files[0]) {

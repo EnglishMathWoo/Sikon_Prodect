@@ -79,7 +79,7 @@ public class ApplyController {
 		
 		//@RequestMapping("/addPurchaseView.do")
 		@RequestMapping( value="addApply", method=RequestMethod.GET )
-		public ModelAndView addApply(@RequestParam("cookNo") int cookNo,HttpSession session) throws Exception {
+		public ModelAndView addApply(@RequestParam("cookNo") int cookNo,@RequestParam("cookStatus") int cookStatus,HttpSession session) throws Exception {
 
 			System.out.println("/apply/addApply : GET");
 			Cook cook=cookService.getCook(cookNo);
@@ -101,14 +101,14 @@ public class ApplyController {
 						
 			
 			ModelAndView modelAndView=new ModelAndView();
+			modelAndView.setViewName("/apply/addApply.jsp");
 			modelAndView.addObject("cook", cook);
+			modelAndView.addObject("cookStatus", cookStatus);
+			
 			modelAndView.addObject("uid", uid);
 			modelAndView.addObject("user", applier);
 			//addObject : key와 value를 담아 보낼 수 있는 메서드
 
-
-			modelAndView.setViewName("forward:/apply/addApply.jsp");
-			//modelAndView.setViewName("forward:/apply/addApply_KakaoPay.jsp");
 			
 			return modelAndView;
 		}

@@ -257,9 +257,10 @@ public class RecipeController {
 	@RequestMapping(value = "listRecipe")
 	public String listRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
 			throws Exception {
+		System.out.println("ahsi모냐고!!!!!!!!!!!!!!"+search);
 
 		System.out.println("/recipe/listRecipe :  POST/get");
-
+		System.out.println("왜0임"+search.getCurrentPage());
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);

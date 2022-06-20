@@ -250,27 +250,24 @@ public class CookRestController {
 	}
 	
 	//즐겨찾기 push 알림
-//		@RequestMapping(value="/json/addLove", method=RequestMethod.POST)
-//		@ResponseBody
-//		public Map addLove(@RequestParam("userId") String userId, @RequestParam("userNickname") String userNickname) {
-//					
-//			Map map = new HashMap();
-//			
-//			try{
-//				Cook cook = cookService.getCook(cookNo);
-//				
-//				map.put("userId", userId);
-//				map.put("userNickname", userNickname);
-//				map.put("cookName", cook.getCookName());
-//				map.put("mentorId", cook.getMentor().getUserId());
-//				map.put("responseCode", "success");
-//			
-//			}catch (Exception e){
-//				e.printStackTrace();
-//			}
-//			
-//			return map;	
-//		}
+	@RequestMapping(value="/json/addLove", method=RequestMethod.POST)
+	@ResponseBody
+	public Map addLove(@RequestParam("userId") String userId, @RequestParam("userNickname") String userNickname, @RequestParam("mentorId") String mentorId) {
+				
+		Map map = new HashMap();
+		
+		try{				
+			map.put("userId", userId);
+			map.put("userNickname", userNickname);
+			map.put("mentorId", mentorId);
+			map.put("responseCode", "success");
+		
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return map;	
+	}
 	
 	@RequestMapping(value = "json/mentor")
 	public Map mentor(@RequestParam("mentorId") String mentorId,@RequestBody Search search, Model model, HttpServletRequest request)

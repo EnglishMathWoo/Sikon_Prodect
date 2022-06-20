@@ -73,7 +73,7 @@ color:crimson;
   border-radius: 5px;
   position: absolute;
    top: 55px;
-   left: 7px;
+   left: 2px;
    width: 15px;
 }
 
@@ -332,8 +332,8 @@ div.image{
 		}); 
 		 
 		 $( ".addPurchase" ).on("click" , function() {
-			
-			 self.location = "/apply/addApply?menu=${param.menu}&cookNo=${cook.cookNo}"
+			 var cookStatus = $('#cookStatus').val();
+			 self.location = "/apply/addApply?cookNo=${cook.cookNo}&cookStatus="+cookStatus;
 		});
 		 
 		 $( "#listMyCook" ).on("click" , function() {
@@ -406,7 +406,7 @@ div.image{
 			                    	alert("√ﬂ√µøœ∑·.");
 			                    	                    	
 			                    	
-			                    	var userNickname = $("input[name='userNickname']").val();
+			                    	
 
 			                    	console.log(userId);
 			                    	console.log(cookNo);
@@ -542,13 +542,7 @@ div.image{
 
 
 	<div class="container">
-	
-				<div class="row">
-					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo}"/>
-					  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
-					    <input type="hidden" name="userId" value="${user.userId}">
-					     <input type="hidden" name="userNickname" value="${user.userNickname}">
-				</div>		 
+	 
 	
 		<div class="row">
 		
@@ -586,8 +580,10 @@ div.image{
 				<div class="col-xs-4 col-md-4">
 			
 				<div class="row">
-					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo }"/>
-					<input type="hidden" name="cookRegdate" id="cookRegdate" value="${cook.cookRegdate }"/>
+					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo}"/>
+						<input type="hidden" name="userId" id="userId" value="${user.userId}"/>
+						<input type="hidden" name="userNickname" id="userNickname" value="${user.userNickname}"/>
+					
 				</div>
 				
 				<hr/>
@@ -639,8 +635,7 @@ div.image{
 					<div  id="listMyCook"><h5><strong>ƒÌ≈∑∏‡≈‰ ${cook.mentor.userNickname }</strong></h5></div>
 					
 					
-					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>
-					<input type="hidden" name="cookName" value="${cook.cookName}"/>
+
 					
 					
 				</div>

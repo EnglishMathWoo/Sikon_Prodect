@@ -1,5 +1,6 @@
 package com.sikon.service.user.impl;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,27 @@ public class UserDaoImpl implements UserDao{
 		
 		return sqlSession.update("UserMapper.updateUserPw", map);	
 	}
+	// ƒÌ≈∑∏‡≈‰ Ω¬¿Œ
+	public void changeUserRole(String userId, String role) throws Exception {
+		System.out.println("userId="+userId);
+		System.out.println("role="+role);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("role", role);
+		
+		 sqlSession.update("UserMapper.changeUserRole", map);
+	}
+	// ƒÌ≈∑∏‡≈‰ ∞≈¿˝
+	public void backUserRole(String userId, String mentorApply) throws Exception {
+		System.out.println("userId="+userId);
+		System.out.println("mentorApply="+mentorApply);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("mentorApply", mentorApply);
+		
+		 sqlSession.update("UserMapper.backUserRole", map);
+	}
+	
 	public User getUser(String userId) throws Exception {
 		System.out.println("userId="+userId);
 		return sqlSession.selectOne("UserMapper.getUser", userId);
@@ -138,8 +160,16 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectList("UserMapper.getUserList", search);
 	}
 	
-	public void deleteUser(User user) throws Exception {
-		 sqlSession.delete("UserMapper.deleteUser", user);
+	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception {
+		System.out.println("user="+user);
+		System.out.println("quitDate="+quitDate);
+		System.out.println("quitStatus="+quitStatus);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user", user);
+		map.put("quitDate", quitDate);
+		map.put("quitStatus", quitStatus);
+		sqlSession.delete("UserMapper.deleteUser", map);
 	}
 
 	// ∞‘Ω√∆« Page √≥∏Æ∏¶ ¿ß«— ¿¸√º Row(totalCount)  return

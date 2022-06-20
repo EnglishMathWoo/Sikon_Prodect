@@ -138,65 +138,29 @@ public class ReviewRestController {
 //	}
 	
 	
+
+	@RequestMapping(value = "/json/updateReview", method = RequestMethod.POST)
+	public void updateReview(HttpServletRequest request,@ModelAttribute("review") Review review,@RequestParam("recipeNo") int recipeNo, Model model)
+			throws Exception {
+		System.out.println("/review/updateReview : POST");
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println("review=" + review);
+		System.out.println("recipeNo=" + recipeNo);
+
+		Recipe recipe = recipeService.getRecipeName(recipeNo);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		review.setRecipe(recipe);
+		review.setReviewContent(review.getReviewContent());
+		review.setWriterNickname(user.getUserNickname());
+		review.setReviewCategory("REC");
+		
+		reviewService.updateReview(review);
+
+	}
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-//
-//	@RequestMapping(value = "updateReview", method = RequestMethod.POST)
-//	public String updateReview(@ModelAttribute("review") Review review, Model model, HttpServletRequest request)
-//			throws Exception {
-//		System.out.println("/review/updateReview : POST");
-////		System.out.println("review=" + review);
-//
-//		model.addAttribute("msg", "리뷰 수정이 완료되었습니다.");
-//		model.addAttribute("url", "/review/updateReview.jsp");
-//
-//		reviewService.updateReview(review);
-//
-//		return "forward:/review/test.jsp";
-//	}
-//
-//	// 내가 쓴 리뷰(마이페이지)
-//	@RequestMapping(value = "listMyReview")
-//	public ModelAndView listMyRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
-//			throws Exception {
-//
-//		System.out.println("/review/listMyReview :  POST/get");
-//
-////		System.out.println("search:" + search);
-//
-//		if (search.getCurrentPage() == 0) {
-//			search.setCurrentPage(1);
-//		}
-//
-//		search.setPageSize(10);
-//
-//		HttpSession session = request.getSession();
-//		User user = (User) session.getAttribute("user");
-//
-//		Map<String, Object> map = reviewService.getMyReviewList(search, user.getUserNickname());
-//
-//		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, 10);
-//
-////		System.out.println("list=" + map.get("list"));
-////		System.out.println("resultPage=" + resultPage);
-//
-//		// Model 과 View 연결
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.addObject("list", map.get("list"));
-//		modelAndView.addObject("resultPage", resultPage);
-//		modelAndView.addObject("search", search);
-//		modelAndView.setViewName("forward:/mypage/listMyReview.jsp");
-//
-//		return modelAndView;
-//	}
-//
 	// 리뷰 삭제
 	@RequestMapping(value = "/json/deleteReview")
 	public void deleteReview(@RequestParam("recipeNo") int recipeNo,@RequestParam("reviewNo") int reviewNo) throws Exception {

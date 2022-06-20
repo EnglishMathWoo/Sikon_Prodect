@@ -147,6 +147,7 @@ function fncAddApply() {
 	
 	var cookStock=$("#cookStock").val();
 	var cookStatus=$("input[name='cookStatus']").val();
+	
 	console.log(cookStock);
 	console.log(cookStatus);
 	if (cookStock < cookStatus) {
@@ -155,7 +156,7 @@ function fncAddApply() {
 	}
 	
 	
-	$("form").attr("method" , "POST").attr("action" , "/apply/addApply").submit();	
+	$("form").attr("method" , "POST").attr("action" , "/apply/addApply?cookNo=${cook.cookNo}").submit();	
 }
 function fncAddWish() {
 	
@@ -227,8 +228,11 @@ $(function() {
 	<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
+	<input type="hidden" id="userId" value="${user.userId }"/>
+	<input type="hidden" id="cookNo" value="${cook.cookNo}"/>
+		
 
-				  
+			<div>		  
 		
 		
 		
@@ -474,6 +478,7 @@ $(function() {
 
 
 <!-- 결제하기 /////////////////////////////////////-->		
+
 	  <input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">	
 	<input type="hidden" id="cookName" value="${cook.cookName }"/>
 	<input type="hidden" id="cookPrice" value="${cook.cookPrice }"/>

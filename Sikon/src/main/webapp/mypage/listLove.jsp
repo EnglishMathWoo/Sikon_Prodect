@@ -46,15 +46,6 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 
-.container {
-	padding-top: 150px;
-} 
-
-
-</style>
-<style>
-
-
 body {
 	padding-top: 50px;
 	
@@ -185,7 +176,7 @@ p {
    /* padding-left: 200px;*/
     margin-right: auto;
     margin-left: auto;
-    padding-top:170px;
+    padding-top:200px;
 }
 
 .hoc{

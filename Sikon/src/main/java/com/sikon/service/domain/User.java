@@ -101,8 +101,8 @@ public class User {
 		return quitStatus;
 	}
 
-	public void setQuitStatus(String quitStatus) {
-		this.quitStatus = quitStatus;
+	public String setQuitStatus(String quitStatus) {
+		return this.quitStatus = quitStatus;
 	}
 
 
@@ -127,8 +127,8 @@ public class User {
 	public String getRole() {
 		return role;
 	}
-	public void setRole(String role) {
-		this.role = role;
+	public String setRole(String role) {
+		return this.role = role;
 	}
 	
 	public String getPhone() {
