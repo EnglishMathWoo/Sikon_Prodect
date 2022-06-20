@@ -829,7 +829,12 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 			
 			
 		</div>
+		<a href="#" class="btn_gotop">
+		  <span class="glyphicon glyphicon-chevron-up">
+		  </span>
+		</a>	
 		
+			
  	<div id="wish_modal">
  		<a class="modal_close_btn"><i class="bi bi-x"></i></a>
  		<br>
@@ -844,6 +849,8 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 	    </div>
 	    <br>
 	</div>	 	
+	
+	
 		 	</div>
 	
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>		 	

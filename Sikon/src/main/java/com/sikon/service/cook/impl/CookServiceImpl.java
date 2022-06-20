@@ -22,11 +22,11 @@ import com.sikon.service.recipe.RecipeService;;
 
 
 
-//==> 회원관리 서비스 구현
+
 @Service("cookServiceImpl")
 public class CookServiceImpl implements CookService{
 	
-	///Field
+
 	@Autowired
 	@Qualifier("cookDaoImpl")
 	private CookDao cookDao;
@@ -34,7 +34,7 @@ public class CookServiceImpl implements CookService{
 		this.cookDao = cookDao;
 	}
 	
-	/// Field
+
 	@Autowired
 	@Qualifier("recipeDaoImpl")
 	private RecipeDao recipeDao;
@@ -62,6 +62,7 @@ public class CookServiceImpl implements CookService{
 	}
 
 	public Map<String, Object> getCookList(Search search) throws Exception {
+		
 		List<Cook> list= cookDao.getCookList(search);
 		int totalCount = cookDao.getTotalCount(search);
 		

@@ -343,11 +343,18 @@ public class ApplyController {
 			user = userService.getUser(user.getUserId());
 			
 			ModelAndView modelAndView=new ModelAndView();
+
 			
-			if(user.getRole().equals("user")) {
-			modelAndView.setViewName("forward:/apply/listApply");
-			}else{
-			modelAndView.setViewName("forward:/apply/listSale");
+			if(user.getRole().equals("admin")) {
+				modelAndView.setViewName("/apply/listSale");	
+				System.out.println("Role: "+user.getRole());
+			}else if(user.getRole().equals("mentor")) {
+				modelAndView.setViewName("/apply/listSale");
+				System.out.println("Role: "+user.getRole());
+			}else {
+				modelAndView.setViewName("/apply/listApply");
+				System.out.println("Role: "+user.getRole());
+				
 			}
 			
 			
@@ -376,8 +383,10 @@ public class ApplyController {
 			HttpSession session=request.getSession();
 			User user=(User)session.getAttribute("user");
 			
+			String applierId = user.getUserId();
+			
 			// Business logic ผ๖วเ
-			Map<String , Object> map=applyService.getApplyList(search,user.getUserId());
+			Map<String , Object> map=applyService.getApplyList(search,applierId);
 			
 			Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 			System.out.println(resultPage);
@@ -392,7 +401,7 @@ public class ApplyController {
 			
 			modelAndView.addObject("category", "COOK");
 			
-			modelAndView.setViewName("forward:/mypage/listApply.jsp");
+			modelAndView.setViewName("/mypage/listApply.jsp");
 			
 			
 			return modelAndView;

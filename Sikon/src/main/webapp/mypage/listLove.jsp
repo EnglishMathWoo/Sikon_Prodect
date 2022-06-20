@@ -257,7 +257,7 @@ padding-top:0px;
       <a class="imgover"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" id="mentor" style="border: 1px solid #d7d7d7"></a>
         <div class="excerpt">
           <h4 class="heading" >${love.user.userName }</h4>
-           <h6 >${love.user.phone }</h6>
+          
 
            <input type="hidden" id="mentorId" name="mentorId" value="${love.user.userId }"/>
 

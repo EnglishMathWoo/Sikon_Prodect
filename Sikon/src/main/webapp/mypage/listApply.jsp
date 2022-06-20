@@ -147,7 +147,7 @@ div.emptyProd{
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 	function fncGetList(currentPage) {
-		//document.getElementById("currentPage").value = currentPage;
+		console.log("currentPage: "+currentPage);
 		$("#currentPage").val(currentPage);
 
 		console.log(currentPage);
@@ -450,7 +450,7 @@ div.emptyProd{
 	</c:if>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	</div>
- 	</div>
+ 
  	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->
