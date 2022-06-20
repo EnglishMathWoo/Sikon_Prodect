@@ -12,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +22,6 @@ import com.sikon.service.notice.NoticeService;
 import com.sikon.service.user.UserService;
 
 
-//==> 쿠폰 Controller
 @Controller
 @RequestMapping("/notice/*")
 public class NoticeRestController {
@@ -38,14 +35,10 @@ public class NoticeRestController {
 	@Qualifier("userServiceImpl")
 	private UserService userSerivce;
 		
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
-	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
 	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 	
 	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
 	@Value("#{commonProperties['summerNote']}")
@@ -61,21 +54,14 @@ public class NoticeRestController {
 	///Method
 	@PostMapping(value="/json/uploadSummernoteImageFile", produces = "application/json")
 	@ResponseBody
-	public Map uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+	public Map uploadSummernoteImageFile( @RequestParam("file") MultipartFile multipartFile ) {
 		
 		Map map = new HashMap();
 		
-		String fileRoot = summerNote;	//저장될 외부 파일 경로
-		System.out.println(fileRoot);
-		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-		
-		System.out.println(originalFileName);
-		
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-				
-		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-		
-		System.out.println(savedFileName);
+		String fileRoot = summerNote; //저장될 외부 파일 경로
+		String originalFileName = multipartFile.getOriginalFilename(); //오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); //파일 확장자
+		String savedFileName = UUID.randomUUID() + extension; //저장될 파일 명
 		
 		File targetFile = new File(fileRoot + savedFileName);
 		
@@ -86,29 +72,12 @@ public class NoticeRestController {
 			map.put("responseCode", "success");
 				
 		} catch (IOException e) {
-			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
+			FileUtils.deleteQuietly(targetFile); //저장된 파일 삭제
 			map.put("responseCode", "error");
 			e.printStackTrace();
 		}
 		
 		return map;
 	}
-	
-	
-	@RequestMapping(value="/json/pushAlarm", method=RequestMethod.POST)
-	@ResponseBody
-	public Map pushAlram(@RequestParam("pushData") String pushData) {
-		
-		Map map = new HashMap();
-		
-		System.out.println(pushData);
-				
-		map.put("userId", "admin@naver.com");
-		map.put("noticeTitle", pushData);
-		map.put("responseCode", "success");
-				
-		return map;
-	}
-
 	
 }

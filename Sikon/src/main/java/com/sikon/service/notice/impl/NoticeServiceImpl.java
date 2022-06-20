@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.sikon.common.Search;
 import com.sikon.service.domain.Coupon;
 import com.sikon.service.domain.Notice;
-import com.sikon.service.domain.Product;
-import com.sikon.service.domain.User;
 import com.sikon.service.notice.NoticeDao;
 import com.sikon.service.notice.NoticeService;
 
@@ -33,16 +31,21 @@ public class NoticeServiceImpl implements NoticeService{
 
 
 	///Method
+	//공지사항 등록
 	public void addNotice(Notice notice) throws Exception {
+		
 		noticeDao.insertNotice(notice);
 	}
 	
+	//공지사항 조회
 	public Notice getNotice(int noticeNo) throws Exception {
+		
 		return noticeDao.findNotice(noticeNo);
 	}
 
-	//생성쿠폰리스트 검색
+	//공지사항 리스트
 	public Map<String , Object > getNoticeList(Search search) throws Exception {
+		
 		List<Coupon> list= noticeDao.getNoticeList(search);
 		int totalCount = noticeDao.getNoticeTotalCount(search);
 		
@@ -53,13 +56,15 @@ public class NoticeServiceImpl implements NoticeService{
 		return map;
 	}
 	
-	//updateNotice
+	//공지사항 수정
 	public void updateNotice(Notice notice) throws Exception{
+		
 		noticeDao.updateNotice(notice);
 	}
 		
-	//deleteNotice
+	//공지사항 삭제
 	public void deleteNotice(int noticeNo) throws Exception{
+		
 		noticeDao.deleteNotice(noticeNo);
-	};
+	}
 }

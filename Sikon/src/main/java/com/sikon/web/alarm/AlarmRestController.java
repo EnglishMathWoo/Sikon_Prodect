@@ -28,7 +28,9 @@ public class AlarmRestController {
 	
 	///Method
 	@RequestMapping(value="json/addUncheckedAlarm")
-	public void addUncheckedAlarm(HttpSession session) throws Exception{
+	public void addUncheckedAlarm( HttpSession session ) throws Exception{
+		
+		System.out.println("/alarm/json/addUncheckedAlarm");
 					
 		int uncheckedAlarm = (int)session.getAttribute("alarm");
 		session.removeAttribute("alarm");

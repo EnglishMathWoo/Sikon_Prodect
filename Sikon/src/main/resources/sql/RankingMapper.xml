@@ -31,15 +31,6 @@
 		<result property="prodName"				column="prod_name" 				jdbcType="VARCHAR"/>
 		<result property="prodThumbnail" 		column="prod_thumbnail" 		jdbcType="VARCHAR"/>
 		<result property="prodContent" 			column="prod_content" 			jdbcType="CLOB" javaType="java.lang.String"/>
-		<result property="prodDetail" 			column="prod_detail" 			jdbcType="VARCHAR"/>
-		<result property="prodStock" 			column="prod_stock" 			jdbcType="NUMERIC"/>
-		<result property="prodTheme" 			column="prod_theme" 			jdbcType="VARCHAR"/>
-		<result property="prodPrice" 			column="prod_price" 			jdbcType="NUMERIC"/>
-		<result property="prodDisRate" 			column="prod_disrate" 			jdbcType="NUMERIC"/>
-		<result property="prodDisPrice" 		column="prod_disprice" 			jdbcType="NUMERIC"/>
-		<result property="prodStatus" 			column="prod_status" 			jdbcType="VARCHAR"/>
-		<result property="couponApply" 			column="coupon_apply" 			jdbcType="VARCHAR"/>
-		<result property="prodRegDate" 			column="prod_regdate" 			jdbcType="DATE"/>
 	</resultMap>
 	
 	<resultMap id="purchaseSelectMap" type="purchase">
@@ -67,117 +58,109 @@
 	</resultMap>
 	
 	
-	
-	<!-- SQL : INSERT -->
+	<!-- 레시피 조회날짜 등록 -->
 	<insert 	id="addRecipeView"		parameterType="int" >
 	 	INSERT
-		INTO ranking ( ranking_no, recipe_no, view_date) 
-		VALUES (seq_ranking_ranking_no.NEXTVAL, 
-				#{recipeNo}, 
-				SYSDATE)
+		INTO ranking (ranking_no, recipe_no, view_date) 
+		VALUES (seq_ranking_ranking_no.NEXTVAL, #{recipeNo}, SYSDATE)
 	 </insert>
 	 
+	 <!-- 스토어 구매날짜 등록 -->
 	 <insert 	id="addPurchase"		parameterType="map" >
 	 	INSERT
-		INTO ranking ( ranking_no, prod_no, serial_no, purchase_date) 
-		VALUES (seq_ranking_ranking_no.NEXTVAL, 
-				#{prodNo}, #{serialNo},
-				SYSDATE)
+		INTO ranking (ranking_no, prod_no, serial_no, purchase_date) 
+		VALUES (seq_ranking_ranking_no.NEXTVAL, #{prodNo}, #{serialNo}, SYSDATE)
 	 </insert>
 	 
+	 <!-- 쿠킹멘토 즐겨찾기 날짜 등록 -->
 	 <insert 	id="addLoveMentor"		parameterType="map" >
 	 	INSERT
-		INTO ranking ( ranking_no, user_nickname, user_id, love_date) 
-		VALUES (seq_ranking_ranking_no.NEXTVAL, 
-				#{userNickname}, #{userId}, SYSDATE)
+		INTO ranking (ranking_no, user_nickname, user_id, love_date)  
+		VALUES (seq_ranking_ranking_no.NEXTVAL, #{userNickname}, #{userId}, SYSDATE)
 	 </insert>
 	 
-	  <!-- 구매 취소 -->	
-	 <select  id="deletePurchase"  parameterType="map">
-	  	DELETE FROM ranking 
-	  	<where>
-			prod_no = #{prodNo} AND serial_no = #{serialNo}
-		</where>		
+	 <!-- 스토어 구매날짜 삭제 -->	
+	 <select 	id="deletePurchase"		parameterType="map">
+	  	DELETE
+	  	FROM ranking 
+	  	WHERE prod_no = #{prodNo} AND serial_no = #{serialNo}		
 	 </select>
 	 
-	 <!-- 즐겨찾기 삭제 -->	
-	 <select  id="deleteLoveMentor"  parameterType="map">
-	  	DELETE FROM ranking 
-	  	<where>
-			user_nickname = #{userNickname} AND user_id = #{userId}
-		</where>		
+	 <!-- 쿠킹멘토 즐겨찾기 날짜 삭제 -->	
+	 <select 	id="deleteLoveMentor"		parameterType="map">
+	  	DELETE 
+	  	FROM ranking 
+	  	WHERE user_nickname = #{userNickname} AND user_id = #{userId}		
 	 </select>
 	 
-	 <!-- SQL : SELECT LIST -->
-	<select  id="getRecipeList"  parameterType="search"	resultMap="recipeSelectMap">
-	  	SELECT * FROM (SELECT r.*, ranking_table.count, u.user_nickname 
-										FROM recipe r, (SELECT recipe_no, count(*) count FROM ranking 
-																			
-											<if test="orderCondition != null">
-												<choose>
-													<when test="orderCondition == 0 ">
-										 			 WHERE view_date &gt;= CURRENT_DATE-1 
-													</when>
-													<when test="orderCondition == 1 ">
-										 			 WHERE view_date &gt;= CURRENT_DATE-8 
-													</when>
-													<when test="orderCondition == 2 ">
-										 			 WHERE view_date &gt;= CURRENT_DATE-31 
-													</when>				
-												</choose>
-											</if>
-											GROUP BY recipe_no) ranking_table, users u 
-											WHERE r.recipe_no = ranking_table.recipe_no AND r.writer_nickname = u.user_nickname  
-											ORDER BY ranking_table.count DESC) WHERE ROWNUM &lt;= 20
+	 <!-- 레시피 랭킹 리스트 -->
+	<select 	id="getRecipeList"		parameterType="search"		resultMap="recipeSelectMap">
+	  	SELECT * 
+	  	FROM ( SELECT r.*, ranking_table.count, u.user_nickname 
+			   FROM recipe r, (SELECT recipe_no, count(*) count FROM ranking 
+							   <if test="orderCondition != null">
+							    	<choose>
+									<when test="orderCondition == 0 ">
+									 WHERE view_date &gt;= CURRENT_DATE-1 
+									</when>
+									<when test="orderCondition == 1 ">
+									 WHERE view_date &gt;= CURRENT_DATE-8 
+									</when>
+									<when test="orderCondition == 2 ">
+									 WHERE view_date &gt;= CURRENT_DATE-31 
+									</when>				
+									</choose>
+								</if>
+								GROUP BY recipe_no) ranking_table, users u 
+								WHERE r.recipe_no = ranking_table.recipe_no AND r.writer_nickname = u.user_nickname  
+								ORDER BY ranking_table.count DESC) WHERE ROWNUM &lt;= 20
 	 </select>
 	 
-	 
-	 <!-- SQL : SELECT LIST -->
-	<select  id="getLoveList"  parameterType="search" statementType="CALLABLE"	resultMap="loveSelectMap">
-	  	SELECT * FROM (SELECT l.user_nickname, ranking_table.love_increase, u.user_id, u.user_image 
-					FROM love l, (SELECT user_nickname, count(*) love_increase FROM ranking 
-																			
-											<if test="orderCondition != null">
-												<choose>
-													<when test="orderCondition == 0 ">
-										 			 WHERE love_date &gt;= CURRENT_DATE-1 
-													</when>
-													<when test="orderCondition == 1 ">
-										 			 WHERE love_date &gt;= CURRENT_DATE-8 
-													</when>
-													<when test="orderCondition == 2 ">
-										 			 WHERE love_date &gt;= CURRENT_DATE-31 
-													</when>				
-												</choose>
-											</if>
-											GROUP BY user_nickname) ranking_table, users u 
-											WHERE l.user_nickname = ranking_table.user_nickname AND l.user_nickname = u.user_nickname
-											GROUP BY l.user_nickname, ranking_table.love_increase, u.user_id, u.user_image 
-											ORDER BY ranking_table.love_increase DESC ) WHERE ROWNUM &lt;= 20
+	 <!-- 스토어 랭킹 리스트 -->
+	 <select 	id="getProductList"		parameterType="search"		resultMap="productSelectMap">
+	 	SELECT *
+	 	FROM (SELECT p.*, ranking_table.count 
+	 		  FROM product p, (SELECT prod_no, count(*) count FROM ranking 															
+							   <if test="orderCondition != null">
+							    	<choose>
+									<when test="orderCondition == 0 ">
+									 WHERE purchase_date &gt;= CURRENT_DATE-1 
+									</when>
+									<when test="orderCondition == 1 ">
+									 WHERE purchase_date &gt;= CURRENT_DATE-8 
+									</when>
+									<when test="orderCondition == 2 ">
+								    WHERE purchase_date &gt;= CURRENT_DATE-31 
+									</when>				
+									</choose>
+								</if>
+								GROUP BY prod_no) ranking_table  
+								WHERE p.prod_no = ranking_table.prod_no  
+								ORDER BY ranking_table.count DESC) WHERE ROWNUM &lt;= 20
 	 </select>
 	 
-	 
-	  <!-- SQL : SELECT LIST -->
-	<select  id="getProductList"  parameterType="search"	resultMap="productSelectMap">
-	  	SELECT * FROM (SELECT p.*, ranking_table.count 
-										FROM product p, (SELECT prod_no, count(*) count FROM ranking 
-																			
-											<if test="orderCondition != null">
-												<choose>
-													<when test="orderCondition == 0 ">
-										 			 WHERE purchase_date &gt;= CURRENT_DATE-1 
-													</when>
-													<when test="orderCondition == 1 ">
-										 			 WHERE purchase_date &gt;= CURRENT_DATE-8 
-													</when>
-													<when test="orderCondition == 2 ">
-										 			 WHERE purchase_date &gt;= CURRENT_DATE-31 
-													</when>				
-												</choose>
-											</if>
-											GROUP BY prod_no) ranking_table  
-											WHERE p.prod_no = ranking_table.prod_no  
-											ORDER BY ranking_table.count DESC) WHERE ROWNUM &lt;= 20
+	 <!-- 쿠킹멘토 랭킹 리스트 -->
+	 <select 	id="getLoveList"		parameterType="search"		statementType="CALLABLE"		resultMap="loveSelectMap">
+	 	SELECT * 
+	 	FROM (SELECT l.user_nickname, ranking_table.love_increase, u.user_id, u.user_image 
+			  FROM love l, (SELECT user_nickname, count(*) love_increase FROM ranking 
+			  				<if test="orderCondition != null">
+								<choose>
+								<when test="orderCondition == 0 ">
+								 WHERE love_date &gt;= CURRENT_DATE-1 
+								</when>
+								<when test="orderCondition == 1 ">
+								 WHERE love_date &gt;= CURRENT_DATE-8 
+								</when>
+								<when test="orderCondition == 2 ">
+								 WHERE love_date &gt;= CURRENT_DATE-31 
+								</when>				
+								</choose>
+							</if>
+							GROUP BY user_nickname) ranking_table, users u 
+							WHERE l.user_nickname = ranking_table.user_nickname AND l.user_nickname = u.user_nickname
+							GROUP BY l.user_nickname, ranking_table.love_increase, u.user_id, u.user_image 
+							ORDER BY ranking_table.love_increase DESC ) WHERE ROWNUM &lt;= 20
 	 </select>
 	 
 </mapper>
