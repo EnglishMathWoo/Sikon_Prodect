@@ -26,21 +26,25 @@ public class AlarmDaoImpl implements AlarmDao {
 		this.sqlSession = sqlSession;
 	}
 
+	
 	/// Constructor
 	public AlarmDaoImpl() {
 		System.out.println(this.getClass());
 	}
 
+	
 	/// Method
-	/// insertAlarm Method
+	//알람생성
 	public void insertAlarm(Alarm alarm) throws Exception {
 		sqlSession.insert("AlarmMapper.addAlarm", alarm);
 	}
 	
+	//알람개수
 	public int getAlarmCount(String userId) throws Exception {
 		return sqlSession.selectOne("AlarmMapper.getAlarmCount", userId);
 	}
-		
+	
+	//알람리스트
 	public List<Alarm> getAlarmList(Search search, String userId) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -49,18 +53,18 @@ public class AlarmDaoImpl implements AlarmDao {
 		
 		return sqlSession.selectList("AlarmMapper.getAlarmList", map);
 	}
-	
-	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
+
+	//알람개수
 	public int getTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("AlarmMapper.getTotalCount", search);
 	}
 	
-	/// updateAlarm Method
+	//알람상태 변경
 	public void updateAlarmStatus(Alarm alarm) throws Exception {
 		sqlSession.update("AlarmMapper.updateAlarmStatus", alarm);
 	}
 	
-	//미확인 알람 개수
+	//미확인 알람개수
 	public int getUncheckedAlarm(String userId) throws Exception {
 		return sqlSession.selectOne("AlarmMapper.getUncheckedAlarm", userId);
 	}

@@ -48,17 +48,25 @@ body {
 	
 }
 
-.shape1 {
-  border-width: 1px;
-  background-color: white;
-  border-color:	#C0C0C0;
-  border-style: solid;
-  width: 40px;
-  height: 25px;
-  text-align: center;
-  font-weight:bold;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+.best_label {
+    position: absolute;
+    transform: translate(14px, 43px);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    top: 1px;
+    left: 1px;
+    width: 32px;
+    height: 40px;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: -0.5px;
+    color: rgb(255, 255, 255);
+    background: url(https://storage.wcuisine.net/web-assets/icons/best_label.svg) 0% 0% / 32px 40px no-repeat;
 }
 
 .orderCondition{
@@ -343,8 +351,9 @@ article img {
   
     <div id="latest" class="group">
     	<article class="one_third first">
-    	<div class="shape1" style="float:left;">${i}</div><a class="imgover" value="${product.prodNo}" href="#">
+    	<a class="imgover" value="${product.prodNo}" href="#">
 			<img src="/resources/images/uploadFiles/${product.prodThumbnail.split('&')[0]}" id="image" class="image" value="${product.prodNo }"></a>
+			<div class="best_label"><span style="margin-bottom: 8px;">${i}</span></div>
 	        <div class="excerpt">
 	        	<p>${product.prodDetail}<p>
 	          	<h4 class="heading prodName" style="font-weight: bold">${product.prodName}</h4>

@@ -3,8 +3,6 @@ package com.sikon.web.coupon;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,14 +36,10 @@ public class CouponController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
-	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
 	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 	
 	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
 	
@@ -53,87 +47,24 @@ public class CouponController {
 	public CouponController(){
 		System.out.println(this.getClass());
 	}
-		
+	
+	
 	///Method
 	@RequestMapping( value="/addCoupon", method=RequestMethod.POST )
-	public String addCoupon(@ModelAttribute("coupon") Coupon coupon) throws Exception{
+	public String addCoupon( @ModelAttribute("coupon") Coupon coupon ) throws Exception{
 
 		System.out.println("/coupon/addCoupon : POST");
 		
-		//Business Logic
-		System.out.println(coupon.getCouponNo());
 		couponService.addCoupon(coupon);
 		
 		return "forward:/coupon/listCoupon";
 	}
 	
-	@RequestMapping( value="/listCoupon" )
-	public String listCoupon(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
-		
-		
-		if(search.getCurrentPage() ==0 ){
-			search.setCurrentPage(1);
-		}
-		search.setPageSize(pageSize);
-		
-		// Business logic 수행
-		Map<String , Object> resultMap = couponService.getCouponList(search);
-		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
-		
-		// Model 과 View 연결
-		model.addAttribute("list", resultMap.get("list"));
-		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("search", search);
-		
-		return "forward:/coupon/listCoupon.jsp";
-	}
-	
-	@RequestMapping( value="/deleteCoupon", method=RequestMethod.GET)
-	public String deleteCoupon( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
-
-		System.out.println("/coupon/deleteCoupon : GET");
-		
-		//Business Logic
-		for(int i=0; i<checkCount; i++) {
-			couponService.deleteCoupon(checkList[i]);
-		}		
-		
-		return "forward:/coupon/listCoupon";
-	}
-		
-	@RequestMapping(value="/issueCouponView")
-	public String issueCouponView(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
-				
-		System.out.println("/coupon/issueCouponView");
-		
-		if(search.getCurrentPage() ==0 ){
-			search.setCurrentPage(1);
-		}
-		search.setPageSize(pageSize);
-		
-		// Business logic 수행
-		Map<String , Object> map = userService.getUserList(search);
-		List <Coupon> couponList = couponService.getCoupon(); 
-		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(resultPage);
-		
-		// Model 과 View 연결
-		model.addAttribute("list", map.get("list"));
-		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("search", search);
-		model.addAttribute("couponList", couponList);
-		
-		return "forward:/coupon/issueCoupon.jsp";
-	}
-	
 	@RequestMapping( value="/issueCoupon", method=RequestMethod.POST )
-	public String issueCoupon(@ModelAttribute("coupon") Coupon coupon, @RequestParam("userId") List<String> userId) throws Exception{
+	public String issueCoupon( @ModelAttribute("coupon") Coupon coupon, @RequestParam("userId") List<String> userId ) throws Exception{
 
 		System.out.println("/coupon/issueCoupon : POST");
 		
-		//Business Logic		
 		for (String couponUser : userId) {
 			User user = userService.getUser(couponUser);
 			coupon.setCouponUser(user);
@@ -144,43 +75,39 @@ public class CouponController {
 		return "redirect:/coupon/listIssuedCoupon";
 	}
 	
-	@RequestMapping( value="/listIssuedCoupon" )
-	public String listIssuedCoupon(@ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+	@RequestMapping( value="/listCoupon" )
+	public String listCoupon(@ModelAttribute("search") Search search , Model model) throws Exception{
 		
+		System.out.println("/coupon/listCoupon");
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic 수행
-		Map<String , Object> resultMap = couponService.getIssuedCouponList(search);
-		
+		Map<String , Object> resultMap = couponService.getCouponList(search);
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
 		
-		// Model 과 View 연결
 		model.addAttribute("list", resultMap.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-				
-		return "forward:/coupon/listIssuedCoupon.jsp";
+		
+		return "forward:/coupon/listCoupon.jsp";
 	}
 	
 	@RequestMapping( value="/listMyCoupon" )
-	public String listMyCoupon(@ModelAttribute("search") Search search , Model model , HttpServletRequest request, @RequestParam("userId") String userId) throws Exception{
+	public String listMyCoupon( @ModelAttribute("search") Search search , Model model, @RequestParam("userId") String userId ) throws Exception{
 		
+		System.out.println("/coupon/listMyCoupon");
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic 수행
 		Map<String , Object> resultMap = couponService.getMyCouponList(search, userId);
-		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
 		
-		// Model 과 View 연결
 		model.addAttribute("list", resultMap.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
@@ -188,12 +115,53 @@ public class CouponController {
 		return "forward:/mypage/listMyCoupon.jsp";
 	}
 	
+	@RequestMapping(value="/issueCouponView")
+	public String issueCouponView( @ModelAttribute("search") Search search , Model model) throws Exception{
+				
+		System.out.println("/coupon/issueCouponView");
+		
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		Map<String , Object> map = userService.getUserList(search);
+		List <Coupon> couponList = couponService.getCoupon(); 
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+		model.addAttribute("couponList", couponList);
+		
+		return "forward:/coupon/issueCoupon.jsp";
+	}
+	
+	@RequestMapping( value="/listIssuedCoupon" )
+	public String listIssuedCoupon( @ModelAttribute("search") Search search , Model model ) throws Exception{
+		
+		System.out.println("/coupon/listIssuedCoupon");
+		
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+	
+		Map<String , Object> resultMap = couponService.getIssuedCouponList(search);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
+		
+		model.addAttribute("list", resultMap.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+				
+		return "forward:/coupon/listIssuedCoupon.jsp";
+	}
+			
 	@RequestMapping( value="/updateIssueStatus", method=RequestMethod.GET )
-	public String updateIssueStatus(@RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList) throws Exception{
+	public String updateIssueStatus( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
 
 		System.out.println("/coupon/updateIssueStatus : GET");
 		
-		//Business Logic
 		for(int i=0; i<checkCount; i++) {
 			Coupon coupon = couponService.getIssuedCoupon(checkList[i]);
 			coupon.setIssueStatus("003");
@@ -201,6 +169,18 @@ public class CouponController {
 		}		
 		
 		return "redirect:/coupon/listIssuedCoupon";
+	}
+	
+	@RequestMapping( value="/deleteCoupon", method=RequestMethod.GET)
+	public String deleteCoupon( @RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList ) throws Exception{
+
+		System.out.println("/coupon/deleteCoupon : GET");
+		
+		for(int i=0; i<checkCount; i++) {
+			couponService.deleteCoupon(checkList[i]);
+		}		
+		
+		return "forward:/coupon/listCoupon";
 	}
 	
 }

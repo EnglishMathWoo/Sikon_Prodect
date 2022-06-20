@@ -44,9 +44,11 @@ public class AlarmController {
 	
 	///Method
 	@RequestMapping( value="/listAlarm" )
-	public String listAlarm(@ModelAttribute("search") Search search, @RequestParam("userId") String userId,
-			Model model, HttpSession session) throws Exception{ 
-				
+	public String listAlarm( @ModelAttribute("search") Search search, @RequestParam("userId") String userId,
+			Model model, HttpSession session ) throws Exception{ 
+		
+		System.out.println("/alarm/listAlarm");
+		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}

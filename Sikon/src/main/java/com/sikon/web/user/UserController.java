@@ -82,25 +82,24 @@ public class UserController {
 		
 		//탈퇴 회원 로그인 못하게
 		if(dbUser.getQuitStatus().equals("Y")) {
-			System.out.println("quitStatus="+dbUser.getQuitStatus());
-			 model.addAttribute("msg","탈퇴 회원 입니다.");
-			 model.addAttribute("url","/");
+		System.out.println("quitStatus="+dbUser.getQuitStatus());
+		model.addAttribute("msg","탈퇴 회원 입니다.");
+		model.addAttribute("url","loginView.jsp");
 
-
-			 return "/user/loginFail.jsp";
-
+		return "/user/loginFail.jsp";
 		}
+		
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 			session.setAttribute("alarm", statusCount );
-		}
-		System.out.println(user.getPassword());
-		System.out.println(dbUser.getPassword());
+			return "redirect:/index.jsp";
+		} else {
+			model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
+			model.addAttribute("url","loginView.jsp");
+			return "/user/loginFail.jsp";
+		}		
 		
-		
-		
-		return "redirect:/index.jsp";
 	}
 	
 	@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
@@ -370,7 +369,7 @@ public class UserController {
 		model.addAttribute("license", license);
 		model.addAttribute("career", career);
 		
-		return "forward:/user/updateUser.jsp";
+		return "forward:/user/updateUserEdit.jsp";
 	}
 	
 	@RequestMapping( value="updateUser", method=RequestMethod.POST )
@@ -603,7 +602,7 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="deleteUser", method=RequestMethod.POST )
-	public String deleteUser(@ModelAttribute("user") User user , HttpSession session, HttpServletRequest request,
+	public String deleteUser(@ModelAttribute("user") User user , HttpSession session, HttpServletRequest request, Model model,
 									@RequestParam("quitStatus") String quitStatus) throws Exception{
 		
 		System.out.println("/user/deleteUser : POST");
@@ -623,7 +622,7 @@ public class UserController {
 		
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
-		//	session.setAttribute("user", user);
+			session.setAttribute("user", dbUser);
 			
 			System.out.println("userID 1="+dbUser.getPassword());
 			
@@ -640,14 +639,11 @@ public class UserController {
 			userService.deleteUser(user, quitDate, quitStatus);
 			
 			
-		}else {
-			
 		}
 		
+			
 		
-		
-		
-		
+		session.invalidate();
 		
 		return "redirect:/index.jsp";
 	}

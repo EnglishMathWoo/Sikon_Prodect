@@ -4,7 +4,6 @@
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -12,7 +11,6 @@
 <head>
 	<meta charset="EUC-KR">
 	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -21,13 +19,11 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 		
-	
 	<!-- Bootstrap Dropdown Hover CSS -->
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
     <!-- Bootstrap Dropdown Hover JS -->
     <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   
    
     <!-- jQuery UI toolTip 사용 CSS-->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -35,48 +31,44 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		
 	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-	  body {
-			font-family: 'Nanum Myeongjo', serif;
-            padding-top : 100px;
-        }
-        
-        table {
-        	margin-top:30px;
-        }
-        	
-		h1.text-center {
-			font-family: 'Nanum Myeongjo', serif;
-		}
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style>
+	body {
+		font-family: 'Nanum Myeongjo', serif;
+        padding-top : 100px;
+    }
+       
+    table {
+      	margin-top:30px;
+    }
+       	
+	h1.text-center {
+		font-family: 'Nanum Myeongjo', serif;
+	}
 		
-		div.form-group{
-			font-family: 'Nanum Myeongjo', serif;
-		} 
+	div.form-group {
+		font-family: 'Nanum Myeongjo', serif;
+	} 
 		
-		.soo{
-			padding-top : 170px;
-		}
-    </style>
+	.soo {
+		padding-top : 170px;
+	}
+</style>
     
-    
-	<script type="text/javascript">
+<script type="text/javascript">
 
+	//검색 & 페이지
 	function fncGetList(currentPage) {
 		
 		$("#currentPage").val(currentPage);
 	  	$("form").attr("method" , "POST").attr("action", "/alarm/listAlarm?userId=${user.userId}").submit();
 	}
 
-	
-	//===== 기존Code 주석 처리 후  jQuery 변경 ======//
 	 $(function() {
 		$( "button.btn.btn-default" ).on("click" , function() {
 			fncGetList(1); 
 		});
 	 });
-
-		
 
 </script>
 
@@ -84,13 +76,9 @@
 
 <body>
 	
-<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
-	
+   
 	<!--  화면구성 div Start /////////////////////////////////////-->
-	
-	
 	<div class="container soo">
 	
 		<div class="page-header text-info">
@@ -99,7 +87,6 @@
 	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row">
-	    	<form class="form-inline" name="detailForm">
 		    	<p class="text-primary" style="color:gray">
 		    		&nbsp;&nbsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
@@ -107,15 +94,14 @@
 		    	<button type="button" class="btn btn-primary delete" value="${notice.noticeNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
 				<button type="button" class="btn btn-primary" id="addNotice" style="float: right;  margin-right: 10px;">등&nbsp;록</button>
 			</c:if>
-			
 		</div>
 		
+		<form class="form-inline" name="detailForm">
 		<input type="hidden" id="currentPage" name="currentPage" value=""/>
-		
 		</form>
 		
 		<!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped" >
+		<table class="table table-hover table-striped" >
       
         <thead>
           <tr>
@@ -130,7 +116,7 @@
 		<tbody>
 		
 		<c:set var="i" value="0" />
-	<c:forEach var="alarm" items="${list}">
+		<c:forEach var="alarm" items="${list}">
 		<c:set var="i" value="${ i+1 }" />
 		<tr class="ct_list_pop">
 				<td></td>
@@ -139,19 +125,16 @@
 				<td></td>
 				<td align="left"> ${alarm.alarmDate} </td>
 		</tr>
-	</c:forEach>
+		</c:forEach>
         
         </tbody>
       
-      </table>
-	  <!--  table End /////////////////////////////////////-->
+        </table>
+	    <!--  table End /////////////////////////////////////-->
 	  
- 	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 	<!-- PageNavigation Start... -->
+	  </div>
+ 	
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
-
 	
 </body>
 

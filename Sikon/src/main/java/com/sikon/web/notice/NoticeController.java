@@ -2,9 +2,6 @@ package com.sikon.web.notice;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,11 +16,9 @@ import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.alarm.AlarmService;
 import com.sikon.service.domain.Notice;
-import com.sikon.service.domain.User;
 import com.sikon.service.notice.NoticeService;
 
 
-//==> 쿠폰 Controller
 @Controller
 @RequestMapping("/notice/*")
 public class NoticeController {
@@ -37,14 +32,10 @@ public class NoticeController {
 	@Qualifier("alarmServiceImpl")
 	private AlarmService alarmService;
 		
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
-	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
 	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 	
 	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
 	
@@ -53,36 +44,34 @@ public class NoticeController {
 		System.out.println(this.getClass());
 	}
 	
+	
 	///Method
 	@RequestMapping( value="/addNotice", method=RequestMethod.POST )
-	public String addCoupon(@ModelAttribute("notice") Notice notice, Model model) throws Exception{
+	public String addNotice( @ModelAttribute("notice") Notice notice, Model model ) throws Exception{
 
 		System.out.println("/notice/addNotice : POST");
 		
-		//Business Logic
-		System.out.println(notice);
 		noticeService.addNotice(notice);
+		
 		model.addAttribute(notice);
 		
 		return "forward:/notice/readNotice.jsp";
 	}
 	
 	@RequestMapping(value="/getNotice", method=RequestMethod.GET)
-	public String getNotice( @RequestParam("noticeNo") int noticeNo , Model model, HttpServletResponse response) throws Exception {
-		
+	public String getNotice( @RequestParam("noticeNo") int noticeNo , Model model ) throws Exception {
 		
 		System.out.println("/notice/getNotice : GET");
-		//Business Logic
+		
 		Notice notice = noticeService.getNotice(noticeNo);
 		
-		// Model 과 View 연결
 		model.addAttribute("notice", notice);
 	
 		return "forward:/notice/getNotice.jsp";
 	}
 	
 	@RequestMapping("/listNotice")
-	public String listProduct( @ModelAttribute("search") Search search , @RequestParam("menu") String menu, Model model, HttpSession session) throws Exception{
+	public String listNotice( @ModelAttribute("search") Search search , @RequestParam("menu") String menu, Model model ) throws Exception{
 		
 		System.out.println("/listNotice");
 			
@@ -91,13 +80,9 @@ public class NoticeController {
 		}
 		search.setPageSize(pageSize);
 	
-		// Business logic 수행
 		Map<String , Object> map = noticeService.getNoticeList(search);
-		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(resultPage);
 		
-		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
@@ -110,25 +95,19 @@ public class NoticeController {
 	public String updateNoticeView( @RequestParam("noticeNo") int noticeNo, Model model ) throws Exception{
 
 		System.out.println("/notice/updateNotice : GET");
-		//Business Logic
+
 		Notice notice = noticeService.getNotice(noticeNo);
-		System.out.println(notice.getNoticeTitle());
-		// Model 과 View 연결
+		
 		model.addAttribute("notice", notice);
 		
 		return "forward:/notice/updateNotice.jsp";
 	}
 	
-	
 	@RequestMapping( value="/updateNotice", method=RequestMethod.POST )
-	public String updateNotice( @ModelAttribute("notice") Notice notice) throws Exception{
+	public String updateNotice( @ModelAttribute("notice") Notice notice ) throws Exception{
 
 		System.out.println("/notice/updateNotice : POST");
 		
-		System.out.println(notice);
-		System.out.println(notice.getNoticeNo());
-						
-		//Business Logic
 		noticeService.updateNotice(notice);
 		
 		return "redirect:/notice/getNotice?noticeNo="+notice.getNoticeNo();
@@ -139,7 +118,6 @@ public class NoticeController {
 
 		System.out.println("/notice/deleteNotice : GET");
 		
-		//Business Logic
 		for(int i=0; i<checkCount; i++) {
 			noticeService.deleteNotice(checkList[i]);
 		}		

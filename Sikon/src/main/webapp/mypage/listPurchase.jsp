@@ -446,7 +446,7 @@ a.payback:hover{
 							 
 							 <c:choose>
 							 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
-							 		<td class="rev"><button class="review" value="${purchase.purchaseProd.prodNo }">¸®ºä¾²±â</button></td>
+							 		<td class="rev"><button class="review" value="${purchase.purchaseProd.prodNo }" value2="${purchase.tranNo }">¸®ºä¾²±â</button></td>
 							 	</c:when>
 							 	<c:otherwise>
 							 		<td class="rev"></td>
@@ -496,7 +496,7 @@ a.payback:hover{
 							 
 							 <c:choose>
 							 	<c:when test="${purchase.divyStatus.equals('003') && purchase.reviewStatus.equals('001')}">
-							 		<td class="rev"><button class="review" value="${purchase.purchaseProd.prodNo }">¸®ºä¾²±â</button></td>
+							 		<td class="rev"><button class="review" value="${purchase.purchaseProd.prodNo }" value2="${purchase.tranNo }">¸®ºä¾²±â</button></td>
 							 	</c:when>
 							 	<c:otherwise>
 							 		<td class="rev"></td>
