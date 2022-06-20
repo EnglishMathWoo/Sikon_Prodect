@@ -423,6 +423,12 @@ html input[type=button]:hover{
 				paymentKA();
 				
 			}
+			
+			
+			if($("#totalpayment").val()<100){
+				alert('최소결제금액은 100원입니다.');
+				return null;
+			}
 				
 		});
 	});	
