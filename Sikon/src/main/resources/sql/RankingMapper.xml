@@ -96,7 +96,7 @@
 	 <select  id="deletePurchase"  parameterType="map">
 	  	DELETE FROM ranking 
 	  	<where>
-			prod_no = #{prodNo} AND tran_no = #{tranNo}
+			prod_no = #{prodNo} AND serial_no = #{serialNo}
 		</where>		
 	 </select>
 	 

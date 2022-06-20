@@ -54,6 +54,23 @@
 			font-family: 'Nanum Myeongjo', serif;
 		}  
 		
+		
+		.btn-b {
+			cursor: pointer;
+		    background-color: #937062;
+		    border: none;
+		    color: #fff;
+		    padding: 12px 0;
+		    width:6%;
+		    height: 34px;
+		    justify-content: center;
+	        display: flex;
+	        align-items: center;
+		    font-size: 17px;
+		    border-radius: 5px;
+		    border: 1px solid #d7d7d7
+		}
+		
 		.soo{
 			padding-top : 170px;
 		}
@@ -84,6 +101,36 @@
 				self.location = "/notice/addNotice.jsp";
 			});
 		});
+	 
+	 
+	 $(document).ready(function() {
+			
+		 $("#checkall").click(function(){
+				
+				if($("#checkall").prop("checked")){
+					
+					$("input[name=noticeCheck]").prop("checked",true);
+					
+				}else{
+					
+					$("input[name=noticeCheck]").prop("checked",false);
+					
+				}
+				
+			})
+			 
+			 
+			$("input[name=noticeCheck]").click(function(){
+				
+				if($("#checkall").prop("checked")){
+					
+					$("#checkall").prop("checked",false);
+					
+				}
+				
+			})
+		
+	 });	
 	
 			
 	 $(function() {
@@ -159,8 +206,8 @@
 		    		&nbsp;&nbsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
 			<c:if test = "${menu == 'manage'}">
-		    	<button type="button" class="btn btn-primary delete" value="${notice.noticeNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
-				<button type="button" class="btn btn-primary" id="addNotice" style="float: right;  margin-right: 10px;">등&nbsp;록</button>
+				<button type="button" class="btn-b delete" value="${notice.noticeNo}" style="float: right; margin-right: 10px;">삭&nbsp;제</button>
+				<button type="button" class="btn-b" id="addNotice" style="float: right;  margin-right: 10px;" >등&nbsp;록</button>
 			</c:if>
 			
 		</div>
@@ -173,13 +220,10 @@
         <thead>
           <tr>
           	<c:if test = "${menu == 'manage'}">
-          	<th align="center"></th>
+          	<th align="center" style="text-align:center;"><input type="checkbox" id="checkall" /></th>
           	</c:if>
-          	<th align="center"></th>
             <th align="center"  style="text-align:center">공지번호</th>
-            <th align="center"></th>
             <th align="left"  style="text-align:center">공지제목</th>
-            <th align="center"></th>
             <th align="left" style="text-align:center">공지시간</th>
           </tr>
          </thead>
@@ -192,27 +236,21 @@
 		<tr class="ct_list_pop">
 			<c:if test = "${menu == 'manage'}">
 				<td align="left"><input type="checkbox" name="noticeCheck" id="${notice.noticeNo}"/></td>
-				<td></td>
+			
 				<td align="left"> ${notice.noticeNo}</td>
-				<td></td>
+	
 				<td align="left" name="manageNoticeTitle" id="manageNoticeTitle">
 				${notice.noticeTitle}
 				<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
 				</td>
-				<td></td>
+				
 				<td align="left"> ${notice.noticeDate} </td>
 			</c:if>
 			<c:if test = "${menu == 'search'}">
-				<td></td>
 				<td align="left"> ${notice.noticeNo}</td>
-				<td></td>
-				<td align="left" name="searchNoticeTitle" id="searchNoticeTitle">
-				${notice.noticeTitle}
-				<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
-				</td>
-				<td></td>
+				<td align="left" name="searchNoticeTitle" id="searchNoticeTitle">${notice.noticeTitle}
+				<input type="hidden" name="noticeNo" value="${notice.noticeNo}"></td>
 				<td align="left"> ${notice.noticeDate} </td>
-				<td></td>
 			</c:if>
 		</tr>
 	</c:forEach>

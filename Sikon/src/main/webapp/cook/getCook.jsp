@@ -439,7 +439,7 @@ div.image{
 			 function pushAlarm(userId, userNickname, cookNo){
 													
 					$.ajax({
-				        url : "/cook/json/pushAlarm",
+				        url : "/cook/json/addHeart",
 				        type : 'POST',
 				        dataType : "json",   
 			            data : {'cookNo' : cookNo, 'userId' : userId, 'userNickname' : userNickname }, 
