@@ -491,6 +491,45 @@ p {
     stroke-dashoffset: 0;
   }
 }
+
+/* «œ≈ı */
+.menu-content {
+    float: right;
+    li {
+      margin: 0 5px;
+      position: relative;
+    }
+    span {
+      transition: all 0.3s;
+      opacity: 0;
+    }
+  }
+  
+  .card {
+  float: left;
+  padding: 0 1.7rem;
+  width: 50%;
+  .menu-content {
+    @include cf;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    li {
+      display: inline-block;
+    }
+    a {
+      color: $white;
+    }
+    span {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Open Sans';
+      transform: translate(-50%, 0);
+    }
+  }
 </style>
 
 
@@ -562,17 +601,26 @@ p {
 					<br /> <br />
 
 					<div id="latest" class="group">
+					
 						<input type="checkbox" name="ckBookmark" 
 							id="${list.recipe.recipeNo }">
 						<article class="one_third first">
+						
 							<a class="imgover" value="${list.recipe.recipeNo }" href="#"><img
 								src="/resources/images/uploadFiles/${list.recipe.recipeImg }"
-								width="320" height="300"></a>
+								width="320" height="300">
+								<ul class="menu-content">
+							          <li><a href="#" class="fa fa-eye"><span>${list.recipe.recipeViews }</span></a></li>
+							          <li><a href="#" class="fa fa-comment-o"><span>${list.recipe.reviewNum }</span></a></li>
+							  </ul>
+								</a>
 							<div class="excerpt">
+							
 								<p class="namehead">${list.recipe.recipeDetail }</p>
 								<p class="detailhead">
 									<b>${list.recipe.recipeName }</b>
 								</p>
+								
 								<ul class="meta">
 									<li><c:choose>
 											<c:when test="${list.recipe.recipeTheme=='KO'} ">
