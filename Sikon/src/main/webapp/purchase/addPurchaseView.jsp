@@ -482,7 +482,6 @@ function paymentKA(data) {
         	
         	if(rsp.paid_amount == data.response.amount){
 	        	$("#impNumber").val(rsp.imp_uid);
-	        	alert("결제 및 결제검증완료");
 	        	fncAddPurchase();
         	} else {
         		alert("결제가 중단되었습니다.");
@@ -548,7 +547,6 @@ function paymentCA(data) {
         	
         	if(rsp.paid_amount == data.response.amount){
 	        	$("#impNumber").val(rsp.imp_uid);
-	        	alert("결제 및 결제검증완료");
 	        	fncAddPurchase();
         	} else {
         		alert("결제가 중단되었습니다.");
@@ -575,7 +573,7 @@ function paymentCA(data) {
 <div class="container">
 	<div class="layout">
 			<br>
-				<h1 class="bg-defualt text-center">PURCHASE</h1><br>
+				<h1 class="bg-defualt text-center">| PURCHASE |</h1><br>
 				
 				<!-- form Start /////////////////////////////////////-->
 				<form class="form-horizontal">
@@ -804,7 +802,8 @@ function paymentCA(data) {
 			<br>
  	</div>
 </div>	
-	
+
+
 </body>
 
 </html>
