@@ -73,6 +73,21 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.bi-bookmark-check-fill::before,.bi-bookmark-check-fill::before  {
+	color:#d4af7a;
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size:33px;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 
 .card-no-border .card {
     border-color: #d7dfe3;
@@ -521,11 +536,14 @@ p {
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		    		
-		  		
-			
+		  				<c:choose>
+						<c:when test = "${mentor.loveCount == '0'}">
 						<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
-		
-
+						</c:when>
+						<c:otherwise>
+						<i id="bookmarkBtn" class="bi bi-bookmark-check-fill"></i>
+						</c:otherwise>
+						</c:choose>
 				
 	
 		

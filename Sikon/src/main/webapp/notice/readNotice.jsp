@@ -31,11 +31,39 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
  		body {
+ 			font-family: 'Nanum Myeongjo', serif;
             padding-top : 50px;
         }
         
         .container{
+        	font-family: 'Nanum Myeongjo', serif;
 			padding-top : 170px;
+		}
+		
+		h2{
+			font-family: 'Nanum Myeongjo', serif;
+    		margin-top: 50px;
+		}
+		
+		.btn-b {
+			cursor: pointer;
+		    background-color: #937062;
+		    border: none;
+		    color: #fff;
+		    padding: 12px 0;
+		    width: 6%;
+		    height: 34px;
+		    justify-content: center;
+	        display: flex;
+	        align-items: center;
+		    font-size: 17px;
+		    border-radius: 5px;
+		    border: 1px solid #d7d7d7;
+		    margin : auto;
+		}
+	
+		.btn-b:hover {
+			background-color: #937062d4;
 		}
      </style>
 
@@ -78,7 +106,7 @@
 		
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
-	  			<button type="button" id="previous" class="btn btn-primary">이전</button>
+	  			<button type="button" id="previous" class="btn-b">이전</button>
 	  		</div>
 		</div>
 		

@@ -14,12 +14,13 @@ public interface AlarmService {
 	//알람개수
 	public int getAlarmCount(String userId) throws Exception;
 	
-	//알람List
+	//알람리스트
 	public Map<String , Object> getAlarmList(Search search, String userId) throws Exception;
 
+	//알람상태 변경
 	public void updateAlarmStatus(Alarm alarm) throws Exception;
 	
 	//미확인 알람 개수
-	public int getStatusCount(String userId) throws Exception;
+	public int getUncheckedAlarm(String userId) throws Exception;
 		
 }

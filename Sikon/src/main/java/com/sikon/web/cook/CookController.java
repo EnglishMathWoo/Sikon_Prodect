@@ -340,15 +340,15 @@ public class CookController {
 
 		search.setPageSize(pageSize);
 		
-		System.out.println("!$#@%%%@!");
 		System.out.println(mentorId);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
 		User mentor = userService.getUser(mentorId);
-		
-		
-	
+
+		int loveCount = loveService.loveCheck(mentor.getUserNickname(), user.getUserId());
+		mentor.setLoveCount(loveCount);
+			
 		// Business logic ผ๖วเ
 		Map<String, Object> map = cookService.listMyCook(search, mentor.getUserNickname());
 

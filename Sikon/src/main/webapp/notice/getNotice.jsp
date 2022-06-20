@@ -66,6 +66,26 @@
 			padding-top : 170px;
 		}
 		
+		.btn-b {
+			cursor: pointer;
+		    background-color: #937062;
+		    color: #fff;
+		    padding: 12px 0;
+		    width: 6%;
+		    height: 34px;
+		    justify-content: center;
+	        display: flex;
+	        align-items: center;
+		    font-size: 17px;
+		    border-radius: 5px;
+		    border: 1px solid #d7d7d7;
+		    margin: auto;
+		}
+	
+		.btn-b:hover {
+			background-color: #937062d4;
+		}
+		
      </style>
 
   <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -109,7 +129,7 @@
 		
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
-	  			<button type="button" id="previous" class="btn btn-primary">이전</button>
+	  			<button type="button" id="previous" class="btn-b">이전</button>
 	  		</div>
 		</div>
 		

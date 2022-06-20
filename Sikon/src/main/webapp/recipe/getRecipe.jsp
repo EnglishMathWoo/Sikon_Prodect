@@ -422,11 +422,22 @@ body {
 		<hr />
 
 		<div class="col-xs-12 col-md-12  col-lg-12" style="text-align: center">
-			<c:forEach var="name" items="${recipe.recipeImg.split('/')[0]}">
-				<input type="hidden" name="image" value="${recipe.recipeImg}">
-				<img id="thum" src="/resources/images/uploadFiles/${name}"
+		 <c:choose>
+      <c:when test="${recipe.recipeImg.contains('mp4')}">
+      <c:forEach var="name" items="${recipe.recipeImg.split('/')[0]}">
+  		<video width="652" height="356" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4" ></video>
+      </c:forEach>
+      </c:when>
+      
+      <c:otherwise>
+            <c:forEach var="name" items="${recipe.recipeImg.split('/')[0]}">
+      <img id="thum" src="/resources/images/uploadFiles/${name}"
 					width="400" height="400" style="text-align: center;" />
-			</c:forEach>
+      </c:forEach>
+        </c:otherwise>
+        </c:choose>
+			
+				<input type="hidden" name="image" value="${recipe.recipeImg}">
 		</div>
 
 		<br /> <input type="hidden" name="recipeNo" id="recipeNo"

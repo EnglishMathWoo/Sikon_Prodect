@@ -20,175 +20,323 @@
    	
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+  <!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap"
+	rel="stylesheet">
     <title>아이디 찾기</title>
-    <!--  
-    <style>
-        @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
-	
-	html {
-		height: 100%;
-	}
-	
-	body {
-	    width:100%;
-	    height:100%;
-	    margin: 0;
-  		padding-top: 200px;
-  		padding-bottom: 40px;
-  		font-family: "Nanum Gothic", arial, helvetica, sans-serif;
-  		background-repeat: no-repeat;
-	}
-	
-    .card {
-        margin: 0 auto; /* Added */
-        float: none; /* Added */
-        margin-bottom: 10px; /* Added */
-         background-color: #f1ebe6;
-	}
-
-    #findUser{
-        background-color: #e4932b;
-        border: none;
-    }
-	
-	.form-signin .form-control {
-  		position: relative;
-  		height: auto;
-  		-webkit-box-sizing: border-box;
-     	-moz-box-sizing: border-box;
-        	 box-sizing: border-box;
-  		padding: 10px;
-  		font-size: 16px;
-	}
- 
-    .card-title{
-        margin-left: 30px;
-    }
-
-
-    a{ 
-    	color: #f58b34; text-decoration: none; 
-    }
-
-    .links{
-        text-align: center;
-        margin-bottom: 10px;
-    }
     
-    .checks{
-    	color : red;
-    }
+    <style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+	font-family: 'Gowun Batang', serif;
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0px solid silver;
+  outline: none;
+}
+
+img {
+  width: 100px;
+}
+
+body {
+	font-family: 'Gowun Batang', serif;
+
+padding-top: 30px;
+  font-size: 0.9rem;
+  color: #999;
+  line-height: 1rem;
+  letter-spacing: 0.1px;
+}
+
+h1, h2, h3 {
+	font-family: 'Gowun Batang', serif;
+  color: #444;
+}
+body {
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch;
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #eee;
+  border-radius: 10px;
+}
+h4, h5 {
+	font-family: 'Gowun Batang', serif;
+  color: #444;
+}
+
+h1 {
+  font-size: 4rem;
+  line-height: 4.5rem;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+}
+
+h2 {
+    padding-top: 70px;
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+}
+
+h5 {
+  font-size: 0.9rem;
+  line-height: 2.8rem;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 10px 30px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+button:hover {
+  color: white;
+  background: black;
+}
+
+/*start*/
+.header{
+  padding-bottom: 15rem;
+}
+.login {
+  margin: 0 auto;
+  text-align: center;
+  width: 450px;
+  padding: 0rem 3rem;
+  padding-bottom: 2rem;
+  border: 1px solid #ccc;
+  margin-bottom: 10rem;
+}
+.login a:hover{
+  text-decoration: none;
+}
+.login> :nth-child(1)> :nth-child(2) h4{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.login> :nth-child(1)> :nth-child(2) {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.login> :nth-child(1)> :nth-child(2) a {
+  font-size: 1.6rem;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.login> :nth-child(1)> :nth-child(2) a:nth-child(2) {
+ color: #444;
+  border-bottom: 3px solid #eee;
+}
+
+.login> :nth-child(1)> :nth-child(2) a:nth-child(1) {
+
+    color: #937062;
+    border-bottom: 3px solid #937062;
+}
+
+.login> :first-child>input {
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  background: none;
+  margin-bottom: 7px;
+  width: 100%;
+  height: 50px;
+  border: 1px solid #ccc;
+
+}
+.login input:focus{
+  border: 1px solid #000;
+}
+.login button {
+  width: 100%;
+  background: #937062;
+  color: white;
+  transition: 0.8s;
+  height: 50px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.login button:hover {
+  background: #000;
+  transition: 0.8s;
+}
+
+.login> :nth-child(2) {
+  display: flex;
+  justify-content: space-around;
+  width: 250px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.login> :nth-child(2) {
+  width: 100%;
+}
+
+.login h3 {
+  font-weight: lighter;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+.login a{
+  color: #444;
+}
+.login a:hover{
+  color: #444;
+
+}
+.login img {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+  transition: 0.8s;
+  cursor: pointer;
+  margin-left:80px;
+}
+
+.login button{
+  font-size: 1.5rem;
+}
+.login>div> :nth-child(4){
+  display: flex;
+  width: 352px;
+  margin-bottom: 2rem;
+}.login>div> :nth-child(4) select{
+  width:80px;
+  border: 1px solid #666;
+
+padding: .8em .5em;
+
+font-family: inherit;
+background: url('https://cdn2.iconfinder.com/data/icons/font-awesome/1792/angle-down-512.png') no-repeat;
+border-radius: 0px;
+background-position: 95% 50%;
+background-size: 25px;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+opacity: 0.6;
+margin-right: 10px;
+cursor: pointer;
+
+}
+
+.login>div> :nth-child(4) input{
+  border: 1px solid #ccc;
+  width: 99px;
+  height: 50px;
+  padding: 5px;
+}
+.login>div> :nth-child(4) input:last-child{
+  margin-left: 10px;
+}
+.login>div> :nth-child(4) input:focus{
+  border: 1px solid #000;
+}
+.btn-w {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+  width:20%;
+  font-size: large;
+}
+.btn-w:hover {
+  background-color: #e7e2e2;
+}
+
     </style>
+  	
+  </head>
+   
+   
+<body onload='resizeWindow(this)'>
+
+  <article class="login">
+    <div>
+      <h2>
+        내 계정찾기
+      </h2>
+     
+      <div>
+        <h4>
+          <a href="/user/findUserId.jsp">아이디찾기</a><a href="/user/findUserpw.jsp">비밀번호 찾기</a>
+        </h4>
+      </div>
+      
+      <input type="text" name="userName" id="userName"  placeholder="이름" required>
+      <input type="text" name="phone" id="phone"  placeholder="전화번호" width="352px" required>
+   <!--  <input type="email" name="email" id="email" class="form-control" placeholder="이메일" required><br>
+        <p class="checks" id="checks">${findpw_checkf}</p><br/>
     -->
-    
-    <style>
-    #modal.modal-overlay {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            backdrop-filter: blur(1.5px);
-            -webkit-backdrop-filter: blur(1.5px);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        #modal.modal-window {
-            background: rgba( 0, 0, 0, 0.70 ); // 69, 139, 197
-            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-            backdrop-filter: blur( 13.5px );
-            -webkit-backdrop-filter: blur( 13.5px );
-            border-radius: 10px;
-            border: 1px solid rgba( 255, 255, 255, 0.18 );
-            width: 400px;
-            height: 300px;
-            position: relative;
-            top: -100px;
-            padding: 10px;
-        }
-        #modal.title {
-            padding-left: 10px;
-            display: inline;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
-            
-        }
-        #modal.title h2 {
-            display: inline;
-        }
-        #modal.close-area {
-            display: inline;
-            float: right;
-            padding-right: 10px;
-            cursor: pointer;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
-        }
-        
-        #modal.content {
-            margin-top: 20px;
-            padding: 0px 10px;
-            text-shadow: 1px 1px 2px gray;
-            color: white;
-        }
-    </style>
-    
-    <script type="text/javascript">
+    </div>
+  	 
+	  			<button  type="button" id="findUser" onclick="findUser_click()">아이디 찾기</button>
 
-	
-	  	//아이디 정규식
-	//	var idJ = /^[a-z0-9]{5,20}$/;
-	/*	
-		$("#userName").on("click",function(){
-		     if($('#userName').val() == ""){
-		   		$('#checks').text('이름을 입력해주세요.');
-		   	  	$('#checks').css('color', 'red');
-		 }
-		 });
+
+  </article>
+  	
+  </body>
+    <script type="text/javascript">
+	function resizeWindow(win){
+	var wid=win.document.body.offsetWidth+30;
+	var hei=win.document.body.offsetHeight+40;
+		win.resizeTo(wid,hei);
+	}
 		
-  		$("#phone").on("click",function(){
-	     if($('#phone').val() == ""){
-	   		$('#checks').text('전화번호를 입력해주세요.');
-	   	  	$('#checks').css('color', 'red');
-	     }
-	     });
-  		
-  		
-  		$("#member_id").focusout(function(){
-  			if(!idJ.test($(this).val())){
-  			$('#checks').text('5~20자의 영문 소문자, 숫자만 사용가능합니다');
-  			$('#checks').css('color', 'red');
-  		}
-  		 });
-  		
-  		
-	     
-  		$("#email").focusout(function(){
-	     if($('#email').val() == ""){
-	   		$('#checks').text('이메일을 입력해주세요');
-	   	  	$('#checks').css('color', 'red');
-	     }
-	     });
-  	*/	
-  		
-  	
-  	
-  	
-  	
-  	
-  		
 		//ID 찾기 
-	//	$("#findUser").on("click",function(){
 		function findUser_click(){
 			var name = $('#userName').val();
-			console.log(userName);
+			console.log(name);
 			var phone = $('#phone').val();
 			console.log(phone);
 			
@@ -198,15 +346,26 @@
              data:{'userName':name, 'phone':phone},
              success:function(data){  console.log(data);
                if(data == 0){
-            	   $('#id_value').text("회원 정보를 확인해주세요!");
+            	  // $('#id_value').text("회원 정보를 확인해주세요!");
 				   $('#userName').val('');
 				   $('#phone').val('');
+				   $('.login').replaceWith(
+						   " <article class='login' style='height: 320px'><div><h2>내 계정찾기</h2></div>"+
+						   "<p><br/><br/>입력하신 정보에 맞는 회원정보가 없습니다. <br/><br/>회원 정보를 확인해주세요</p>"+
+						   " <button type='button' class='back'>돌아가기</button>&emsp;"+
+						   " </article>"
+						   );
                }else{
-            	   $('#id_value').text(data);
-            	   console.log(data);
+            	//   $('#id_value').text(data);
+            	 //  console.log(data);
 			 	   $('#userName').val('');
-			 	  console.log(userName);
 				   $('#phone').val('');
+				   $('.login').replaceWith(
+						   " <article class='login' style='height: 290px'><div><h2>내 계정찾기</h2></div>"+
+						   "<p><br/><br/>회원님의 아이디는 "+data+"입니다.</p>"+
+						   " <button type='button' class='loglog'>로그인하기</button>&emsp;"+
+						   " </article>"
+						   );
                }
             },   
              error:function(){
@@ -216,102 +375,18 @@
                 });
             };
             
-         //    alert("아이디는 " + response.data + "입니다.");
-  //  	window.onload=function(){
-  		
-  	
-        
-   //     };
-  	 
-  		       
- 
-         
-  		$(function() {
-  			  		
-  			$( "a:contains('로그인')" ).on("click" , function() {
-  			$(self.location).attr("href","/user/loginView.jsp");
-  			});
- 		});
-  	</script>
-  	
-  </head>
-   
-   
-  <body>
-  <%@ include file="Modal.jsp" %>
-
-	<div class="card align-middle" style="width:26rem;">
-		<div class="card-title" style="margin-top:30px;">
+            $(document).on('click','.back',function() {
+            	location.reload();
+            	
+            });
             
-			<h2 class="card-title" style="color:#f58b34;"><img src="/resources/images/logo/usik.png"/></h2>
-		</div>
-        
-		<div class="card-body" style="color:#8f4e19;">
-     
-      	<input type="text" name="userName" id="userName" class="form-control" placeholder="이름" required><br>
-        <input type="text" name="phone" id="phone" class="form-control" placeholder="전화번호" required><br>
-        
-    <!--  <input type="email" name="email" id="email" class="form-control" placeholder="이메일" required><br>
-        <p class="checks" id="checks">${findpw_checkf}</p><br/>
-    -->
-        <button type="button" id="findUser" onclick="findUser_click()"  class="btn btn-lg btn-primary btn-block" >아이디 찾기</button>
-     
-      
-		</div>
-        <div class="links">
-            <a href="memberId">비밀번호 찾기</a> | <a href="#">로그인</a> | <a href="memberRegist">회원가입</a>
+            $(document).on('click','.loglog',function() {
+            	 window.close();
+            	
+            });
 
-        </div>
-	</div>
-  
-  	
-  	
-  	
-  </body>
-   
-  <script>
-  const modal = document.getElementById("modal")
-	 const btnModal = document.getElementById("findUser")
-	const closeBtn = modal.querySelector(".close-area")
-	
-		btnModal.addEventListener("click", e => {
-			console.log('aaaaa');
-			modal.style.display = "flex"
-			console.log('modal.style.display');
-		});
-		
-		    
-		
-		closeBtn.addEventListener("click", e => {
-			console.log('bbbbb');
-		    modal.style.display = "none"
-		});
-		
-		modal.addEventListener("click", e => {
-			console.log('cccc');
-		    const evTarget = e.target
-		    if(evTarget.classList.contains("modal-overlay")) {
-		        modal.style.display = "none"
-		    }
-		});
-		
-		
-	/*	
-		$(document).ready(function() {
-			$('#findUser').click(function() {
-				$('#modal-dialog').show();
-				console.log("finduser");
-			});
-			
-			
-			
-			
-			
-		});
-	*/	
-		
-		
-  </script> 
+  	</script>
+ 
   
 
 </html>
