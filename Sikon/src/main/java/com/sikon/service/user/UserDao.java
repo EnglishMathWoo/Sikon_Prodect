@@ -28,6 +28,8 @@ public interface UserDao {
 //	
 	// Pw ∫Ø∞Ê
 	public int updateUserPw(String userId, String password)throws Exception;
+	// ƒÌ≈∑∏‡≈‰ Ω¬¿Œ
+	public void changeUserRole(String userId, String role) throws Exception;
 	
 	// SELECT ONE
 	public User getUser(String userId) throws Exception ;

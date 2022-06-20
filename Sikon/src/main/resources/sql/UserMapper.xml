@@ -170,6 +170,15 @@
 <!--  AND user_name = #{userName}-->
 	</update>
 	
+	<!--  비밀번호 찾기 -->
+	<update id="changeUserRole" parameterType="user" >
+	UPDATE users
+	<set>
+	role	= #{role}
+	</set>
+	WHERE user_id = #{userId}
+	</update>
+	
 	<!-- 비밀번호 찾기 유효성 검사  -->
 	<select id="findUserPwCheck" resultType="int">
 	SELECT count(*)

@@ -226,7 +226,11 @@ public class UserServiceImpl implements UserService{
 		
 		userDao.updateUserPw(userId, password);
 	}	
+	// ƒÌ≈∑∏‡≈‰ Ω¬¿Œ
+	public void changeUserRole(String userId, String role) throws Exception {
 		
+		userDao.changeUserRole(userId, role);
+	}
 
 	public void updateUser(User user) throws Exception {
 		System.out.println("user="+user);

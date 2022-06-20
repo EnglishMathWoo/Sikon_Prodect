@@ -449,7 +449,46 @@ public class UserController {
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	
+	
+	@RequestMapping( value="changeUserRole", method=RequestMethod.GET )
+	public String changeUserRole( @RequestParam(value = "userId", required = false) String userId ,
+						@RequestParam(value = "role", required = false) String role, Model model ) throws Exception{
+
+		System.out.println("/user/changeUserRole : GET");
+		System.out.println("/user/changeUserRole : GET"+userId);
+		System.out.println("/user/changeUserRole : GET"+role);
+		//Business Logic
 		
+		
+		
+		// Model °ú View ¿¬°á
+		model.addAttribute("userId", userId);
+		model.addAttribute("role", role);
+		
+		return "forward:/user/changeUserRole.jsp";
+	}
+		
+	
+	@RequestMapping( value="changeUserRole", method=RequestMethod.POST )
+	public String changeUserRole(HttpServletRequest request,@RequestParam("userId") String userId,
+											@RequestParam("role") String role) throws Exception {
+		
+		System.out.println("/user/changeUserRole : POST");
+		
+		System.out.println("1 userId="+userId);
+		System.out.println("1 mentorApply="+role);
+		
+		User user = userService.getUser(userId);
+		
+	//	user = userService.getUser(role);
+	
+		
+		userService.changeUserRole(userId, role);
+		System.out.println("2 userId="+userId);
+		System.out.println("2 mentorApply="+role);
+		return "redirect:/user/getUser?userId="+user.getUserId();
+	}
+	
 	@RequestMapping( value="listUser" )
 	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 		
