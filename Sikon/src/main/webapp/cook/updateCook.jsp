@@ -567,9 +567,9 @@ $(document).ready(function() {
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="cookStock" class="col-sm-offset-1 col-sm-3 control-label">모집인원재고</label>
+		    <label for="cookStock" class="col-sm-offset-1 col-sm-3 control-label">모집인원가능인원</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="cookStock" name="cookStock" value="${cook.cookStock}" placeholder="모집인원재고">
+		      <input type="text" class="form-control" id="cookStock" name="cookStock" value="${cook.cookStock}" placeholder="모집인원가능인원">
 		    </div>
 		  </div>
 		  
@@ -584,9 +584,9 @@ $(document).ready(function() {
 			    <label for="cookDifficuty" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스난이도</label>
 			    <div class="col-sm-4">
 			         <select class="form-control" name="cookDifficuty" id="cookDifficuty">
-				  <option value="1" selected="selected">초급</option>
-				  <option value="2">중급</option>
-				  <option value="3">고급</option>
+				  <option value="1" ${!empty cook.cookDifficuty && cook.cookDifficuty=="1" ? "selected" : ""}>초급</option>
+				  <option value="2" ${!empty cook.cookDifficuty && cook.cookDifficuty=="2" ? "selected" : ""}>중급</option>
+				  <option value="3" ${!empty cook.cookDifficuty && cook.cookDifficuty=="3" ? "selected" : ""}>고급</option>
 
 				    				  
 			  </select>
@@ -632,12 +632,13 @@ $(document).ready(function() {
 		  <div class="form-group">
 		    <label for="cookTheme" class="col-sm-offset-1 col-sm-3 control-label">쿠킹클래스테마</label>
 		    <div class="col-sm-4">
-     <select class="form-control" name="cookTheme" id="cookTheme">
-				  <option value="KO" selected="selected">한식</option>
-				  <option value="JA">일식</option>
-				  <option value="AM">양식</option>
-				  <option value="CH">중식</option>
-				  <option value="DE">간식</option>
+     <select class="form-control" name="cookTheme" id="cookTheme" required>
+     			 <option value="0"  ${!empty cook.cookTheme && cook.cookTheme=="" ? "selected" : ""}>카테고리</option>	
+				  <option value="KO"  ${!empty cook.cookTheme && cook.cookTheme=="KO" ? "selected" : ""}>한식</option>
+				  <option value="JA"  ${!empty cook.cookTheme && cook.cookTheme=="JA" ? "selected" : ""}>일식</option>
+				  <option value="AM"  ${!empty cook.cookTheme && cook.cookTheme=="AM" ? "selected" : ""}>양식</option>
+				  <option value="CH"  ${!empty cook.cookTheme && cook.cookTheme=="CH" ? "selected" : ""}>중식</option>
+				  <option value="DE"  ${!empty cook.cookTheme && cook.cookTheme=="DE" ? "selected" : ""}>간식</option>
 				    				  
 			  </select>		    
 

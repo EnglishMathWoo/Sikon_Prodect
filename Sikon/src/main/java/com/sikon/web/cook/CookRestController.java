@@ -330,6 +330,7 @@ public class CookRestController {
 		
 		
 		map.put("user", user);
+		
 		map.put("list", map.get("list"));
 		map.put("resultPage", resultPage);
 		map.put("search", search);

@@ -144,7 +144,14 @@ h3{
 				self.location ="/purchase/getPurchase?tranNo="+tranNo;
 			});
 			
-			
+			$(".getpurchase").on("click" , function() {
+				 
+				var serialNo = $(this).attr('value');
+				console.log('serialNo: '+serialNo);
+				
+				self.location ="/purchase/getPurchaseBySerial?serialNo="+serialNo;
+				
+			});
 			
 			
 			$( "td.divy" ).css("color" , "#f0445c");
@@ -223,7 +230,7 @@ h3{
 					  <td align="center">${ i }</td>
 					  
 					  <td align="center">${purchase.orderDate}</td>
-					  <td align="center">${purchase.serialNo}</td>
+					  <td align="center" class="getpurchase" value="${purchase.serialNo}">${purchase.serialNo}</td>
 					  <td align="center" class="tran" value="${purchase.tranNo}">${purchase.tranNo}</td>
 					 	 
 					  <c:choose>

@@ -767,6 +767,7 @@ border-spacing:0px
 											<li><a>즐겨찾는멘토</a></li>
 											<li><a>포인트조회</a></li>
 											<li><a>쿠폰조회</a></li>
+											<li><a>좋아요한쿠킹클래스</a></li>	 
 									</ul>
 								</div>
 									</div>
@@ -816,8 +817,8 @@ border-spacing:0px
 		<li><a class="drop" href="#">쿠킹클래스</a>
 					<c:if test="${! empty sessionScope.user.role}">
 					<ul>
-						<li><a href="#">쿠킹클래스신청목록</a></li>
-						<li><a href="#">좋아요한쿠킹클래스</a></li>	               
+				
+						              
 						
 					  </ul>
 					  </c:if>
@@ -838,8 +839,8 @@ border-spacing:0px
 				</li>
 				<li><a class="drop" href="#">쿠킹클래스관리</a>
 					  <ul>
-						<li><a href="#">쿠킹클래스등록</a></li>
-						<li><a href="#">쿠킹클래스목록</a></li>
+						
+						<li><a href="#">쿠킹클래스전체목록</a></li>
 						<li><a href="#">쿠킹클래스판매목록</a></li>
 					   
 					  </ul>
@@ -862,8 +863,8 @@ border-spacing:0px
 
 				<li><a class="drop" href="#">쿠킹클래스관리</a>
 					  <ul>
-						<li><a href="#">쿠킹클래스등록</a></li>
-						<li><a href="#">쿠킹클래스목록</a></li>
+						
+						
 						<li><a href="#">쿠킹클래스판매목록</a></li>
 						<li><a href="#">등록한쿠킹클래스</a></li>
 					   
@@ -1067,7 +1068,7 @@ border-spacing:0px
 			$(self.location).attr("href","/cook/addCook.jsp");
 			});
 			 
-			 $( "a:contains('쿠킹클래스목록')" ).on("click" , function() {
+			 $( "a:contains('쿠킹클래스전체목록')" ).on("click" , function() {
 				$(self.location).attr("href","/cook/manageCook");
 				});
 			 
@@ -1083,10 +1084,7 @@ border-spacing:0px
 				$(self.location).attr("href","/cook/listMyCook");
 			}); 
 			 
-			 $( "a:contains('좋아요한쿠킹클래스')" ).on("click" , function() {
-				$(self.location).attr("href","/heart/getHeart?userId=${sessionScope.user.userId}");
-			});
-			 
+
 			 $( "a:contains('쿠킹멘토채널')" ).on("click" , function() {
 				$(self.location).attr("href","/cook/mentor.jsp");
 			}); 
@@ -1096,6 +1094,10 @@ border-spacing:0px
 					self.location = "/user/getUser?userId=${sessionScope.user.userId}"
 					
 				});
+			 $( "a:contains('좋아요한쿠킹클래스')" ).on("click" , function() {
+					self.location ="/heart/getHeart?userId=${sessionScope.user.userId}"
+				});
+				 
 				
 				$("a:contains('마이레시피')").on("click", function() {
 					self.location = "/recipe/listMyRecipe"

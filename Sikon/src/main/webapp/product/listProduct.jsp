@@ -247,6 +247,12 @@ div.emptyProd{
 		 
 		 $(function() {
 			 
+			 $( ".editjoin" ).on("click" , function() {
+				 self.location = "/user/addUserViewEdit.jsp";
+				 });
+			 
+			 
+			 
 			//=============  테마버튼 유지  ==============================================
 				
 			 var themeCondition = $("#themeCondition").val();
@@ -403,7 +409,7 @@ div.emptyProd{
 		 console.log('prodNo: '+prodNo);
 		 var menu = $("#menu").val();
 		 console.log(menu);
-		 self.location = "/product/getProduct?prodNo="+prodNo+"&menu="+menu
+		 self.location = "/product/getProduct?prodNo="+prodNo+"&menu="+menu;
 	});
 
 	 
@@ -501,6 +507,10 @@ div.emptyProd{
 			    <br/>
 			      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">PRODUCT LIST</span></h3>
 			    </div>
+		    
+		    
+		    <button type="button" class="editjoin">회원가입 수정중</button>
+		    
 		    
 		   		 <br/><hr id="hr"/><br/>
     
