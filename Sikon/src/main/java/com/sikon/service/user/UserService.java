@@ -1,5 +1,6 @@
 package com.sikon.service.user;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public interface UserService {
 	public Map<String , Object> getUserList(Search search) throws Exception;
 	
 	// È¸¿øÅ»Åð
-	public void deleteUser(User user) throws Exception ;
+	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception ;
 	
 	// È¸¿ø ID Áßº¹ È®ÀÎ
 	public boolean checkDuplication(String userId) throws Exception;

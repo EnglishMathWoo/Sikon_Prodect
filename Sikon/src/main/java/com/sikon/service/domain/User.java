@@ -101,8 +101,8 @@ public class User {
 		return quitStatus;
 	}
 
-	public void setQuitStatus(String quitStatus) {
-		this.quitStatus = quitStatus;
+	public String setQuitStatus(String quitStatus) {
+		return this.quitStatus = quitStatus;
 	}
 
 

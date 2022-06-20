@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -263,8 +264,8 @@ public class UserServiceImpl implements UserService{
 		return map;
 	}
 
-	public void deleteUser(User user) throws Exception {
-		userDao.deleteUser(user);
+	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception {
+		userDao.deleteUser(user, quitDate, quitStatus);
 	}
 
 	public boolean checkDuplication(String userId) throws Exception {
