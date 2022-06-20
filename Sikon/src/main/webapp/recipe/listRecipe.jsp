@@ -527,7 +527,6 @@ font-size: 13px;
 		    <div class="center btmspace-50">
 		    <br/>
 		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RECIPE LIST </h3>
-		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		    <button type="button" class="submit">레시피 등록</button>
 		  
@@ -547,6 +546,7 @@ font-size: 13px;
 
 	    
  <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition }"/>
+				  <input type="hidden" id="currentPage" name="currentPage"  value="1"/>
 
  
             
@@ -599,7 +599,6 @@ font-size: 13px;
 	     	</tr>
 	     </table>
 	     
- <input type="hidden" id="currentPage" name="currentPage" value="1"/>
   	</form>
     	</section>
   	</div>
@@ -623,7 +622,7 @@ font-size: 13px;
           <ul class="meta">
             <li >
             <c:choose>
-            <c:when test="${recipe.recipeTheme=='KO'} ">
+            <c:when test="${recipe.recipeTheme=='KO'}">
             한식
             </c:when>
             <c:when test="${recipe.recipeTheme=='CH'}">

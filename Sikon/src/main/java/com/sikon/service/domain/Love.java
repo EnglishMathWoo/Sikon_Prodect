@@ -9,6 +9,7 @@ public class Love {
 	private User user;
 	private int loveCheck;
 	private int loveIncrease;
+	private Cook cook;
 	
 	
 	public int getLoveNo() {
@@ -41,21 +42,26 @@ public class Love {
 	public void setLoveCheck(int loveCheck) {
 		this.loveCheck = loveCheck;
 	}
-	
-	
 	public int getLoveIncrease() {
 		return loveIncrease;
 	}
 	public void setLoveIncrease(int loveIncrease) {
 		this.loveIncrease = loveIncrease;
 	}
+	public Cook getCook() {
+		return cook;
+	}
+	public void setCook(Cook cook) {
+		this.cook = cook;
+	}
 	@Override
 	public String toString() {
-		return "Love [loveNo=" + loveNo + ", mentorNickname=" + userNickname + ", userId=" + userId + ", user=" + user
-				+ ", loveCheck=" + loveCheck + "]";
+		return "Love [loveNo=" + loveNo + ", userNickname=" + userNickname + ", userId=" + userId + ", user=" + user
+				+ ", loveCheck=" + loveCheck + ", loveIncrease=" + loveIncrease + ", cook=" + cook + "]";
 	}
 	
 	
+
 	
 
 }

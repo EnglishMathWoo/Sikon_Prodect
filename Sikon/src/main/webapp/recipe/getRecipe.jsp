@@ -373,6 +373,31 @@ body {
 .fa-solid {
 	color: black;
 }
+
+.timer,.uptrev {
+	cursor: pointer;
+	background-color: #937062;
+	border: none;
+	color: #fff;
+	padding: 4px 0;
+	width: 7%;
+	font-size: small;
+}
+
+.timer:hover {
+	background-color: #937062d4;
+}
+
+.reviewButton {
+	cursor: pointer;
+	background-color: #f7f7f7;
+	border: 1px solid #937062;
+	color: #937062;
+	padding: 3px 0;
+	width: 7%;
+	font-size: small;
+}
+
 </style>
 
 </head>
@@ -452,7 +477,7 @@ body {
 				</c:choose>
 
 
-				&nbsp;소요시간 ${recipe.cookingTime }분 <input type="button" value="타이머"
+				&nbsp;소요시간 ${recipe.cookingTime }분 <input type="button" class="timer" value="타이머"
 					onclick="window.open('/recipe/timer.jsp', '_blank', 'width=500, height=400')">
 				<div style="float: right">조회수: ${recipeViews}</div>
 			</h5>
@@ -491,7 +516,7 @@ body {
 						<textarea class="form-control" name="reviewContent"
 							id="reviewContent" rows="2" placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
 						<div class="mar-top clearfix">
-							<button class="btn btn-sm  pull-right" type="submit">등록
+							<button class="btn btn-sm  pull-right" type="submit" class="reviewButton">등록
 							</button>
 							<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
 
@@ -520,15 +545,15 @@ body {
 								</div>
 								<input type="hidden" name="reviewNo" value="${review.reviewNo }">
 								<br /> <br />
-								<p id="acontent">${review.reviewContent }</p>
-								<div id="abt">
+								<p id="acontent${review.reviewNo }">${review.reviewContent }</p>
+								<div id="abt${review.reviewNo }">
 									<c:if test="${user.userNickname !=null }">
 										<c:if test="${review.writerNickname == user.userNickname }">
 											<input type="button" class="deleteReview" value="&#xf2ed"
 												id="${review.reviewNo }"
 												style="float: right; margin-right: 17px">
 											<input type="button" class="updateReview"
-												id="${review.reviewContent }" value="&#xf304"
+												id="${review.reviewContent }" value="&#xf304" value2=${review.reviewNo } 
 												style="float: right; margin-right: 5px">
 										</c:if>
 									</c:if>
@@ -553,6 +578,47 @@ body {
 <script>history.scrollRestoration = "auto"</script>
 <script type="text/javascript">
 
+$(document).on('click','.updateReview',function() {
+			//alert($(this).attr('id'))	
+			var reviewContent = $(this).attr('id');
+			var reviewNo = $(this).attr('value2');
+			console.log(reviewNo)
+			
+				$('#acontent'+reviewNo).replaceWith(
+						
+						"<textarea id='updatecontent'"+reviewNo+" class='form-control' name='reviewContent1' rows='2'>"+ reviewContent+ "</textarea>"
+						);
+			
+			
+			$('#abt'+reviewNo ).replaceWith("<div class='updateButton'> <input type='button' class='uptrev' value='수정' id='"+reviewNo+"'>"
+									+ "<input type='button' class='reviewButton' value='취소' onclick='location.reload()'></div>");
+
+		});
+
+
+
+$(document).on('click','.uptrev',function() {
+	var recipeNo = $("input:hidden[name='recipeNo']").val();
+	var reviewNo =$(this).attr('id');
+	var reviewContent=$("[name='reviewContent1']").val();
+	console.log(recipeNo);
+	console.log(reviewNo);
+	console.log(reviewContent);
+	
+	$.ajax({
+            type : "POST",  
+            url : "/review/json/updateReview", 
+            data : {'recipeNo' : recipeNo ,'reviewContent':reviewContent, 'reviewNo':reviewNo
+            	 },
+            error : function(request,status,error){
+            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            },
+            success : function(request) {
+                   location.reload();
+            }
+   	     
+     });
+});
 
 	$(function() {
 		
@@ -635,28 +701,6 @@ body {
 	
 
 
-
-	$(document).on('click','.updateReview',function() {
-				//alert($(this).attr('id'))	
-				var reviewContent = $(this).attr('id');
-				var reviewNo = $(this).attr('value2');
-				console.log(reviewNo)
-				
-					$('#acontent').replaceWith(
-							
-							"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>"
-							);
-					
-				
-				$('#abt').replaceWith("<div class='updateButton'> <input type='button' class='uptrev' value='수정' id='"+reviewNo+"'>"
-										+ "<input type='button' value='취소' ></div>");
-
-			});
-	
-	$(document).on('click','.uptrev',function() {
-		var ww = $(this).attr('id');
-		alert(ww);
-	});
 	
 	function readURL(input, imgControlName) {
 		if (input.files && input.files[0]) {

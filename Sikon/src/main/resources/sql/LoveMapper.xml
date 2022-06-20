@@ -11,8 +11,9 @@
 		<result property="loveNo" 			column="love_no" 			jdbcType="NUMERIC"/>
 		<result property="userNickname" 	column="user_nickname" 		jdbcType="VARCHAR" />
 		<result property="userId" 	column="user_id" 		jdbcType="VARCHAR" />
-		<result property="loveCheck" 			column="love_check" 		jdbcType="NUMERIC" />
+		<result property="loveCheck" 			column="love_check" 		jdbcType="VARCHAR" />
 		<collection property="user" resultMap="userSelectMap"/>
+		
 	</resultMap>
 
 <resultMap id="userSelectMap" type="user">

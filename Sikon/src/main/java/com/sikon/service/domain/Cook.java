@@ -27,6 +27,7 @@ public class Cook {
 	private String userNickname;
 	private Recipe recipe;
 	private String userId;
+	private int loveCheck;
 	
 	
 	public Cook(){
@@ -263,6 +264,16 @@ public class Cook {
 	}
 
 
+	public int getLoveCheck() {
+		return loveCheck;
+	}
+
+
+	public void setLoveCheck(int loveCheck) {
+		this.loveCheck = loveCheck;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Cook [cookNo=" + cookNo + ", cookName=" + cookName + ", cookFilename=" + cookFilename + ", cookBrief="
@@ -270,8 +281,9 @@ public class Cook {
 				+ cookTheme + ", aplstarTime=" + aplstarTime + ", aplendTime=" + aplendTime + ", cookRecruit="
 				+ cookRecruit + ", startTime=" + startTime + ", endTime=" + endTime + ", cookLocation=" + cookLocation
 				+ ", cookRegdate=" + cookRegdate + ", cookVideo=" + cookVideo + ", cookStock=" + cookStock
-				+ ", hearthit=" + hearthit + ", heartCount=" + heartCount + ", cookContent=" + cookContent + ", mentor=" + mentor + ", userNickname="
-				+ userNickname + ", recipe=" + recipe + ", userId=" + userId + "]";
+				+ ", hearthit=" + hearthit + ", heartCount=" + heartCount + ", cookContent=" + cookContent + ", mentor="
+				+ mentor + ", userNickname=" + userNickname + ", recipe=" + recipe + ", userId=" + userId
+				+ ", loveCheck=" + loveCheck + "]";
 	}
 
 

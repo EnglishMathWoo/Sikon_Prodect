@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 
 
@@ -36,7 +35,11 @@ public interface UserService {
 //	public int findUserPwCheck(User user)throws Exception;
 //	
 	// Pw 변경
-	public void updateUserPw(String userId,String password)throws Exception;
+	public void updateUserPw(String userId, String password) throws Exception;
+	// 쿠킹멘토 승인
+	public void changeUserRole(String userId, String role) throws Exception;
+	// 쿠킹멘토 거절
+	public void backUserRole(String userId, String mentorApply) throws Exception;
 		
 	// 회원정보수정
 	public void updateUser(User user) throws Exception;

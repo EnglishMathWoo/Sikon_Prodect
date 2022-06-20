@@ -76,6 +76,27 @@ public class UserDaoImpl implements UserDao{
 		
 		return sqlSession.update("UserMapper.updateUserPw", map);	
 	}
+	// ƒÌ≈∑∏‡≈‰ Ω¬¿Œ
+	public void changeUserRole(String userId, String role) throws Exception {
+		System.out.println("userId="+userId);
+		System.out.println("role="+role);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("role", role);
+		
+		 sqlSession.update("UserMapper.changeUserRole", map);
+	}
+	// ƒÌ≈∑∏‡≈‰ ∞≈¿˝
+	public void backUserRole(String userId, String mentorApply) throws Exception {
+		System.out.println("userId="+userId);
+		System.out.println("mentorApply="+mentorApply);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("mentorApply", mentorApply);
+		
+		 sqlSession.update("UserMapper.backUserRole", map);
+	}
+	
 	public User getUser(String userId) throws Exception {
 		System.out.println("userId="+userId);
 		return sqlSession.selectOne("UserMapper.getUser", userId);
