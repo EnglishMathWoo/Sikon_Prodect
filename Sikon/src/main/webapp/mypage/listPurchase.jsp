@@ -190,15 +190,30 @@ div.emptyProd{
 				
 				self.location ="/purchase/updatedivyStatus?tranNo="+message1+"&divyStatus="+message2;
 			});
+
 			
 			$( ".cancel" ).on("click" , function() {
-				alert('구매를 취소하시겠습니까?');
-				console.log('구매취소');
-				var serialNo = $(this).attr("value1");
-				console.log("serialNo: "+serialNo);
 				
-				self.location ="/purchase/cancelOrder?serialNo="+serialNo;
+				var serialNo = $(this).attr("value1");
+				var impNumber = $(this).attr("value2");
+				var price = $(this).attr("value3");
+				
+				alert('구매를 취소하시겠습니까?');
+				
+				$.ajax({
+					 "url": "/purchase/json/cancleIamport?imp_uid="+impNumber,
+				      "type": "POST",
+				      "contentType": "application/json",
+				   
+				    }).done(function(data) {
+			        	
+			        	alert("환불완료");
+			        	self.location ="/purchase/cancelOrder?serialNo="+serialNo;
+			        	
+			        });
 			});
+			
+			
 			
 			$( ".review" ).on("click" , function() {
 				var textNo=$(this).attr("value");
@@ -265,7 +280,10 @@ div.emptyProd{
 							<td align="center" class="status">배송중</td>
 						</c:when>
 						<c:when test="${purchase.divyStatus.equals('001')}">
-							<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.serialNo }">구매취소</p></td>
+							<td align="center">
+								<p  class="status">결제완료</p> 
+								<p class="cancel"  value1="${purchase.serialNo }" value2="${purchase.impNumber }" value3="${purchase.purchaseProd.prodDisPrice }">구매취소</p>
+							</td>
 						</c:when>
 						<c:when test="${purchase.divyStatus.equals('000')}">
 							<td align="center" class="complete status">취소완료</td>
@@ -310,7 +328,10 @@ div.emptyProd{
 									<td align="center" class="status">배송중</td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('001')}">
-									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.serialNo }">구매취소</p></td>
+									<td align="center">
+										<p  class="status">결제완료</p> 
+										<p class="cancel"  value1="${purchase.serialNo }" value2="${purchase.impNumber }" value3="${purchase.purchaseProd.prodDisPrice }">구매취소</p>
+									</td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('000')}">
 									<td align="center" class="complete status">취소완료</td>
@@ -357,7 +378,10 @@ div.emptyProd{
 									<td align="center" class="status">배송중</td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('001')}">
-									<td align="center"><p  class="status">결제완료</p> <p class="cancel"  value1="${purchase.serialNo }">구매취소</p></td>
+									<td align="center">
+										<p  class="status">결제완료</p> 
+										<p class="cancel"  value1="${purchase.serialNo }" value2="${purchase.impNumber }" value3="${purchase.purchaseProd.prodDisPrice }">구매취소</p>
+									</td>
 								</c:when>
 								<c:when test="${purchase.divyStatus.equals('000')}">
 									<td align="center" class="complete status">취소완료</td>

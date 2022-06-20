@@ -148,12 +148,6 @@ html input[type=button]:hover{
     padding-top:20px;
 }
 
-.paycontent{
-	border-top: 2px solid #937062;
-	width: 652px;
-	margin-left: -15px;
-	padding-top: 20px;
-}
 .sectd{
 	display: flex;
 }
@@ -172,6 +166,12 @@ html input[type=button]:hover{
 	width: 15%;
 	font-weight: bold;
 }
+.payul{
+	display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: -25px;
+}
+
 </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -180,7 +180,7 @@ html input[type=button]:hover{
 	
 		//============= "구매"  Event 연결 =============
 		
-		///*	
+		/*	
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "#iamportPayment" ).on("click" , function() {
@@ -405,25 +405,29 @@ html input[type=button]:hover{
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <script>
-  
-
-/*
-
+ 
 	
 	$(function() {
 		
 		$("#iamportPayment").on("click" , function() {
 			console.log("아임포트");		
 			
-			var payopt = $("#iamportPayment").attr('value');
-			console.log("payopt: "+payopt);
-			$("#paymentOpt").val(payopt);
-			
-			payment();	
+			if($("#paybyca").prop("checked")){
+				
+				$("input[name=paymentOpt]").val("CA");
+				paymentCA();
+				
+			}else{
+				
+				$("input[name=paymentOpt]").val("KA");
+				paymentKA();
+				
+			}
+				
 		});
 	});	
 	
-function payment(data) {
+function paymentKA(data) {
 	
 	var payment = $("#paymentOpt").val();
 	console.log("payment: "+payment);
@@ -431,7 +435,7 @@ function payment(data) {
 	var prodname = $("#prodname").val();
 	console.log("prodname: "+prodname);
 	
-	var prodprice = $("#prodprice").val();
+	var prodprice = $("#totalpayment").val();
 	console.log("prodprice: "+prodprice);
 
 	var buyeremail = $("#buyeremail").val();
@@ -477,16 +481,83 @@ function payment(data) {
         	console.log(data);
         	
         	if(rsp.paid_amount == data.response.amount){
+	        	$("#impNumber").val(rsp.imp_uid);
 	        	alert("결제 및 결제검증완료");
 	        	fncAddPurchase();
         	} else {
-        		alert("결제 실패");
+        		alert("결제가 중단되었습니다.");
         	}
         });
     });
 	
 }
-    //*/
+
+
+function paymentCA(data) {
+	
+	var payment = $("#paymentOpt").val();
+	console.log("payment: "+payment);
+	
+	var prodname = $("#prodname").val();
+	console.log("prodname: "+prodname);
+	
+	var prodprice = $("#totalpayment").val();
+	console.log("prodprice: "+prodprice);
+
+	var buyeremail = $("#buyeremail").val();
+	console.log("buyeremail: "+buyeremail);
+
+	var buyername = $("#buyername").val();
+	console.log("buyername: "+buyername);
+
+	var buyerphone = $("#buyerphone").val();
+	console.log("buyerphone: "+buyerphone);
+	
+	var address = $("#sample6_address").val();
+	console.log("address: "+address);
+	
+	var postcode = $("#sample6_postcode").val();
+	console.log("postcode: "+postcode);
+	
+	var uid="${uid }";
+	console.log("uid: "+uid);
+	
+	IMP.init('imp05238113'); 
+    
+    IMP.request_pay({
+    	pg : "html5_inicis", 
+        pay_method : payment,
+        merchant_uid : uid ,
+        name : prodname ,
+        amount : prodprice ,
+        buyer_email : buyeremail ,
+        buyer_name : buyername ,
+        buyer_tel : buyerphone ,
+        buyer_addr : address ,
+        buyer_postcode : postcode 
+    }, function(rsp) {
+    	console.log(rsp);
+    	$.ajax({
+
+        	type : "POST",
+        	url : "/purchase/json/verifyIamport?imp_uid=" + rsp.imp_uid 
+        	
+        }).done(function(data) {
+        	
+        	console.log(data);
+        	
+        	if(rsp.paid_amount == data.response.amount){
+	        	$("#impNumber").val(rsp.imp_uid);
+	        	alert("결제 및 결제검증완료");
+	        	fncAddPurchase();
+        	} else {
+        		alert("결제가 중단되었습니다.");
+        	}
+        });
+    });
+	
+}
+
     
 
 
@@ -652,7 +723,11 @@ function payment(data) {
 				  
 			</div>
 				  <br>
-			<section class="paycontent">	    
+				  
+		  <div class="subtitle">
+		  <p>결제금액</p>
+		  </div><br>
+			<section>	    
 				  
 				  <div class="sectd">
 				  	<h5 class="info">총 상품금액</h5>
@@ -687,13 +762,28 @@ function payment(data) {
 				  </div>
 				  
 				  
-				  <hr>
-				  
-				  
 			</section>
+			<br>
 			
+				<div class="subtitle">
+				  <p>결제수단</p>
+				  </div><br>
+				  
+				 
+				 <div class="form-group">
+				 <ul class="payul">
+				 	<li>
+				 		<input type="radio" name="payoption" id="paybyca" checked/> <span style="font-size:16px; font-weight: bold;">신용카드</span>
+				    </li>
+				    <li> 
+				    	<input type="radio" name="payoption"/> <img src="https://storage.wcuisine.net/web-assets/images/img-pay-kakao@3x.png" alt="kakaopay icon" width="58" height="24">
+				  	</li>
+				  </ul>
+				  </div>
+				  
 			
-			<input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">
+			<input type="hidden" name="impNumber" id="impNumber" value="">
+			<input type="hidden" name="paymentOpt" id="paymentOpt" value="">
 			
 			</form>
 			
@@ -707,7 +797,7 @@ function payment(data) {
 	
 			<br>
 			<div class="text-center  buttons">
-				<button type="button" class="buy" id="iamportPayment" value="KA">결제하기</button>	
+				<button type="button" class="buy" id="iamportPayment" value="">결제하기</button>	
 				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
 			</div>
 				

@@ -264,10 +264,24 @@ public class PurchaseController {
 
 		System.out.println("/addPurchaseByCart : GET");
 	
+	
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 		
 		User buyer = userService.getUser(user.getUserId());
+		
+		//==================================================================================
+		//결제 uid 만들기
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss");
+		String nowrandom = now.format(formatter);   
+		
+		String userid = buyer.getUserId().replace("@", "");
+		String sub = userid.replace(userid.substring(userid.length()-4, userid.length()), "");
+		String uid = sub+nowrandom;	
+		System.out.println("uid: "+uid);
+		//==================================================================================
+		
 		
 		List list = new ArrayList();
 		
@@ -287,6 +301,7 @@ public class PurchaseController {
 		
 		model.addAttribute("cartlist", list);
 		model.addAttribute("user", buyer);
+		model.addAttribute("uid", uid);
 		model.addAttribute("coupon", couponlist);
 		
 		
@@ -350,6 +365,7 @@ public class PurchaseController {
 			purchaseByCart.setPaymentOpt("KA");
 			purchaseByCart.setSerialNo(serialNo);
 			purchaseByCart.setReviewStatus("001");
+			purchaseByCart.setImpNumber(purchase.getImpNumber());
 			
 			list.add(purchaseByCart);
 			
