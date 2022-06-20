@@ -40,6 +40,7 @@
 		body{
 			font-family: 'Nanum Myeongjo', serif;
 		}
+		
 		body>div.container {
 			padding-top : 250px;
 			font-family: 'Nanum Myeongjo', serif;
@@ -54,7 +55,8 @@
 			margin-top: 20px;
 			font-family: 'Nanum Myeongjo', serif;
 		}
-			div.form-group{
+		
+		div.form-group{
 			font-family: 'Nanum Myeongjo', serif;
 		}
 		
@@ -68,7 +70,6 @@
 		.btn-b {
 			cursor: pointer;
 		    background-color: #937062;
-		    border: none;
 		    color: #fff;
 		    padding: 12px 0;
 		    width:20%;
@@ -78,7 +79,7 @@
 	        align-items: center;
 		    font-size: 17px;
 		    border-radius: 5px;
-		    border: 1px solid #d7d7d7
+		    border: 1px solid #d7d7d7;
 		}
 	
 		.btn-b:hover {

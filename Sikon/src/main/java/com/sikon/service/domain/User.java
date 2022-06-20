@@ -22,6 +22,7 @@ public class User {
 	private Date regDate;
 	private Date quitDate;
 	private String quitStatus;
+	private int loveCount;
 	
 //	private int careerNo;
 //	private String company;
@@ -150,6 +151,18 @@ public class User {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	public int getLoveCount() {
+		return loveCount;
+	}
+
+
+
+	public void setLoveCount(int loveCount) {
+		this.loveCount = loveCount;
+	}
+
+
+
 	public String getLoginPath() {
 		return loginPath;
 	}
@@ -279,6 +292,6 @@ public class User {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", userBirth="
 				+ userBirth + ", userNickname=" + userNickname + ", userImage=" + userImage + ", addr=" + addr
 				+ ", role=" + role + ", phone=" + phone + ", holdpoint=" + holdpoint + ", mentorApply=" + mentorApply
-				+ ", regDate=" + regDate + ", quitDate=" + quitDate + ", quitStatus=" + quitStatus + "]";
+				+ ", regDate=" + regDate + ", quitDate=" + quitDate + ", quitStatus=" + quitStatus + ", loveCount=" + loveCount + "]";
 	}
 }

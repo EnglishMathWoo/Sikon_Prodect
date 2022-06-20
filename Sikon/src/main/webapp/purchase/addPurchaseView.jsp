@@ -148,12 +148,6 @@ html input[type=button]:hover{
     padding-top:20px;
 }
 
-.paycontent{
-	border-top: 2px solid #937062;
-	width: 652px;
-	margin-left: -15px;
-	padding-top: 20px;
-}
 .sectd{
 	display: flex;
 }
@@ -172,6 +166,12 @@ html input[type=button]:hover{
 	width: 15%;
 	font-weight: bold;
 }
+.payul{
+	display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: -25px;
+}
+
 </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -180,7 +180,7 @@ html input[type=button]:hover{
 	
 		//============= "구매"  Event 연결 =============
 		
-		///*	
+		/*	
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "#iamportPayment" ).on("click" , function() {
@@ -370,46 +370,33 @@ html input[type=button]:hover{
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+                var addr = ''; 
+                var extraAddr = ''; 
 
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                if (data.userSelectedType === 'R') { 
                     addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                } else { 
                     addr = data.jibunAddress;
                 }
 
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
                 if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                     if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
                         extraAddr += data.bname;
                     }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
                     if(data.buildingName !== '' && data.apartment === 'Y'){
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
                     if(extraAddr !== ''){
                         extraAddr = ' (' + extraAddr + ')';
                     }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
                     document.getElementById("sample6_extraAddress").value = extraAddr;
                 
                 } else {
                     document.getElementById("sample6_extraAddress").value = '';
                 }
 
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_postcode').value = data.zonecode;
                 document.getElementById("sample6_address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("sample6_detailAddress").focus();
             }
         }).open();
@@ -418,25 +405,29 @@ html input[type=button]:hover{
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <script>
-  
-
-/*
-
+ 
 	
 	$(function() {
 		
 		$("#iamportPayment").on("click" , function() {
 			console.log("아임포트");		
 			
-			var payopt = $("#iamportPayment").attr('value');
-			console.log("payopt: "+payopt);
-			$("#paymentOpt").val(payopt);
-			
-			payment();	
+			if($("#paybyca").prop("checked")){
+				
+				$("input[name=paymentOpt]").val("CA");
+				paymentCA();
+				
+			}else{
+				
+				$("input[name=paymentOpt]").val("KA");
+				paymentKA();
+				
+			}
+				
 		});
 	});	
 	
-function payment(data) {
+function paymentKA(data) {
 	
 	var payment = $("#paymentOpt").val();
 	console.log("payment: "+payment);
@@ -444,7 +435,7 @@ function payment(data) {
 	var prodname = $("#prodname").val();
 	console.log("prodname: "+prodname);
 	
-	var prodprice = $("#prodprice").val();
+	var prodprice = $("#totalpayment").val();
 	console.log("prodprice: "+prodprice);
 
 	var buyeremail = $("#buyeremail").val();
@@ -490,16 +481,83 @@ function payment(data) {
         	console.log(data);
         	
         	if(rsp.paid_amount == data.response.amount){
+	        	$("#impNumber").val(rsp.imp_uid);
 	        	alert("결제 및 결제검증완료");
 	        	fncAddPurchase();
         	} else {
-        		alert("결제 실패");
+        		alert("결제가 중단되었습니다.");
         	}
         });
     });
 	
 }
-    //*/
+
+
+function paymentCA(data) {
+	
+	var payment = $("#paymentOpt").val();
+	console.log("payment: "+payment);
+	
+	var prodname = $("#prodname").val();
+	console.log("prodname: "+prodname);
+	
+	var prodprice = $("#totalpayment").val();
+	console.log("prodprice: "+prodprice);
+
+	var buyeremail = $("#buyeremail").val();
+	console.log("buyeremail: "+buyeremail);
+
+	var buyername = $("#buyername").val();
+	console.log("buyername: "+buyername);
+
+	var buyerphone = $("#buyerphone").val();
+	console.log("buyerphone: "+buyerphone);
+	
+	var address = $("#sample6_address").val();
+	console.log("address: "+address);
+	
+	var postcode = $("#sample6_postcode").val();
+	console.log("postcode: "+postcode);
+	
+	var uid="${uid }";
+	console.log("uid: "+uid);
+	
+	IMP.init('imp05238113'); 
+    
+    IMP.request_pay({
+    	pg : "html5_inicis", 
+        pay_method : payment,
+        merchant_uid : uid ,
+        name : prodname ,
+        amount : prodprice ,
+        buyer_email : buyeremail ,
+        buyer_name : buyername ,
+        buyer_tel : buyerphone ,
+        buyer_addr : address ,
+        buyer_postcode : postcode 
+    }, function(rsp) {
+    	console.log(rsp);
+    	$.ajax({
+
+        	type : "POST",
+        	url : "/purchase/json/verifyIamport?imp_uid=" + rsp.imp_uid 
+        	
+        }).done(function(data) {
+        	
+        	console.log(data);
+        	
+        	if(rsp.paid_amount == data.response.amount){
+	        	$("#impNumber").val(rsp.imp_uid);
+	        	alert("결제 및 결제검증완료");
+	        	fncAddPurchase();
+        	} else {
+        		alert("결제가 중단되었습니다.");
+        	}
+        });
+    });
+	
+}
+
     
 
 
@@ -513,7 +571,7 @@ function payment(data) {
         <jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
+
 <div class="container">
 	<div class="layout">
 			<br>
@@ -557,28 +615,29 @@ function payment(data) {
 				    <label for="divyAddr">배송지</label>
 				    <table style="width:652px">
 				    	<tr>
-				    	<td>
-				        <input type="text" class="form-divy postcode" id="sample6_postcode" name="postcode" placeholder="우편번호" value="">
-				        </td>
-				        <td class="search" >
-						<input type="button" class="form-divy searchpost" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-						</td>
+					    	<td>
+					      	  <input type="text" class="form-divy postcode" id="sample6_postcode" name="postcode" placeholder="우편번호" value="">
+					        </td>
+					        
+					        <td class="search" >
+								<input type="button" class="form-divy searchpost" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+							</td>
 						</tr>
 						
 						<tr>
-						<td colspan="2">
-						<input type="text" class="form-divy" id="sample6_address" name="address" placeholder="주소" value=""><br>
-						</td>
+							<td colspan="2">
+								<input type="text" class="form-divy" id="sample6_address" name="address" placeholder="주소" value=""><br>
+							</td>
 						</tr>
 						<tr>
-						<td colspan="2"  class="addr">
-						<input type="text" class="form-divy" id="sample6_detailAddress" name="detailAddress" placeholder="상세주소" value=""><br>
-						</td>
+							<td colspan="2"  class="addr">
+								<input type="text" class="form-divy" id="sample6_detailAddress" name="detailAddress" placeholder="상세주소" value=""><br>
+							</td>
 						</tr>
 						<tr>
-						<td colspan="2" class="addr">
-						<input type="text" class="form-divy" id="sample6_extraAddress" name="extraAddress" placeholder="참고항목" value="">
-						</td>
+							<td colspan="2" class="addr">
+								<input type="text" class="form-divy" id="sample6_extraAddress" name="extraAddress" placeholder="참고항목" value="">
+							</td>
 						</tr>
 						
 					</table>
@@ -651,20 +710,24 @@ function payment(data) {
 				    <label for="usedPoint">포인트 사용</label>
 				     <table>
 				    	<tr>
-				    	<td>
-				      <input type="text" class="form-control" id="usedPoint" name="usedPoint" value="0">
-				      </td>
-				      <td class="search">
-				      <button type="button" class="point" id="point" value="${user.holdpoint }">모두 사용</button>
-				      <h5>&emsp;보유 포인트 ${user.holdpoint } P</h5>
-				      </td>
-				      </tr>
+				    		<td>
+				 				<input type="text" class="form-control" id="usedPoint" name="usedPoint" value="0">
+				      		</td>
+				     		 <td class="search">
+				     			 <button type="button" class="point" id="point" value="${user.holdpoint }">모두 사용</button>
+				      			<h5>&emsp;보유 포인트 ${user.holdpoint } P</h5>
+				     		 </td>
+			    		  </tr>
 				      </table>
 				  </div>
 				  
 			</div>
 				  <br>
-			<section class="paycontent">	    
+				  
+		  <div class="subtitle">
+		  <p>결제금액</p>
+		  </div><br>
+			<section>	    
 				  
 				  <div class="sectd">
 				  	<h5 class="info">총 상품금액</h5>
@@ -699,13 +762,28 @@ function payment(data) {
 				  </div>
 				  
 				  
-				  <hr>
-				  
-				  
 			</section>
+			<br>
 			
+				<div class="subtitle">
+				  <p>결제수단</p>
+				  </div><br>
+				  
+				 
+				 <div class="form-group">
+				 <ul class="payul">
+				 	<li>
+				 		<input type="radio" name="payoption" id="paybyca" checked/> <span style="font-size:16px; font-weight: bold;">신용카드</span>
+				    </li>
+				    <li> 
+				    	<input type="radio" name="payoption"/> <img src="https://storage.wcuisine.net/web-assets/images/img-pay-kakao@3x.png" alt="kakaopay icon" width="58" height="24">
+				  	</li>
+				  </ul>
+				  </div>
+				  
 			
-			<input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">
+			<input type="hidden" name="impNumber" id="impNumber" value="">
+			<input type="hidden" name="paymentOpt" id="paymentOpt" value="">
 			
 			</form>
 			
@@ -719,7 +797,7 @@ function payment(data) {
 	
 			<br>
 			<div class="text-center  buttons">
-				<button type="button" class="buy" id="iamportPayment" value="KA">결제하기</button>	
+				<button type="button" class="buy" id="iamportPayment" value="">결제하기</button>	
 				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
 			</div>
 				

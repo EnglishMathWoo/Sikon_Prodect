@@ -33,6 +33,9 @@ public class PurchaseDaoImpl implements PurchaseDao{
 
 	///Method
 	public void addPurchase(Purchase purchase) throws Exception {
+		
+		System.out.println("////////////////////// impNumber: "+purchase.getImpNumber()+" ///////////////////////////");
+		
 		sqlSession.insert("PurchaseMapper.addPurchase", purchase);
 	}
 

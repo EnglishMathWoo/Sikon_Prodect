@@ -198,6 +198,7 @@ CREATE TABLE purchase (
 	invoice_num 		VARCHAR2(100), 	
 	divy_fee 			NUMBER, 
 	review_status 		VARCHAR2(20) 	NOT NULL, 
+	imp_number		VARCHAR2(100),  
 	PRIMARY KEY(tran_no)
 );
 

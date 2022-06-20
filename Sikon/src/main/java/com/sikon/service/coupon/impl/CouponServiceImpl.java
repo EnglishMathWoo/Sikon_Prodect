@@ -128,6 +128,7 @@ public class CouponServiceImpl implements CouponService{
 			if(currentDate.after(list.get(i).getEndDate())) {
 				list.get(i).setIssueStatus("004");
 				list.set(i, list.get(i));
+				updateIssueStatus(list.get(i));
 			}
 		}
 	}
