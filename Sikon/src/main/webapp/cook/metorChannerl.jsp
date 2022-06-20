@@ -536,13 +536,14 @@ p {
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
 		    		
-		  		
-						
+		  				<c:choose>
+						<c:when test = "${mentor.loveCount == '0'}">
 						<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
-						
-						<i class="bi bi-bookmark-check-fill"></i>
-					
-
+						</c:when>
+						<c:otherwise>
+						<i id="bookmarkBtn" class="bi bi-bookmark-check-fill"></i>
+						</c:otherwise>
+						</c:choose>
 				
 	
 		
