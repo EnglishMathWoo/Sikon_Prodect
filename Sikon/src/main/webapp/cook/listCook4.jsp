@@ -31,6 +31,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 	
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
@@ -205,9 +206,8 @@ p {
 }
 
 div.emptyProd{
-	border: 1px solid #937062;
-	padding : 90px;
-	height: 200px;
+	padding : 20px;
+	height: 100px;
 	text-align: center;
 	font-weight: bold;
 	color: #333;
@@ -602,12 +602,11 @@ div.emptyProd{
 							                    	 				+"<div class='row' id='target'>"
 							                    	 				+"<td align='left'></td>"
 							                    	 				+"<div class='row'>"
-							                     					+"<div class='col-xs-4 col-md-6 text-left image' value='"+JSONData.list[i].cookNo+"'>"
+							                     					+"<div class='col-xs-4 col-md-6 text-lefr image' align='center'  value='"+JSONData.list[i].cookNo+"'>"
 							                     					+image
 							                     					+"<br/><br/>"
 							                     					+"<table><tr class='liketable'>"
-							                     					+"<td>"
-							                     					+heartCount
+							                     					+"<td>"							                     					
 							                     					+"</td><td class='likes'></td></tr>	</table></div>"
 							                     					+"<div class='col-xs-4 col-md-4'>"
 						                     						+"<div class='row'>"
@@ -779,6 +778,15 @@ div.emptyProd{
 	
 		
 <div class="container channel">
+
+
+	<c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			판매중인 쿠킹클래스가 없습니다.
+		</div>
+		<br>
+	</c:if>
 	
 <div class="row" id="target">
 	<c:set var="i" value="0" />

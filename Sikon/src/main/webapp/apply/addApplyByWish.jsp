@@ -65,6 +65,15 @@ div.container {
   padding: 11px 0;
   width: 49.3%;
 }
+.cancel {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  font-size: large;
+  padding: 11px 0;
+  width: 49.3%;
+}
 .cancel:hover {
   background-color: #e7e2e2;
 }
@@ -157,21 +166,7 @@ function fncAddApply() {
 	
 	$("form").attr("method" , "POST").attr("action" , "/apply/addApplyByWish").submit();	
 }
-function fncAddWish() {
-	
-	var cookStock=$("#cookStock").val();
-	var cookStatus=$("input[name='cookStatus']").val();
-	console.log(cookStock);
-	console.log(cookStatus);
-	if (cookStock < cookStatus) {
-		alert("장바구니 담기가능 개수가 초과되었습니다");
-		return;
-	}
-	
-	
-	$("form").attr("method" , "POST").attr("action" , "/wish/addWish").submit();
-	
-}
+
 
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -179,35 +174,167 @@ $(function() {
 		fncAddApply();
 	});
 });	
-$(function() {
-	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	$( ".wish" ).on("click" , function() {
-		console.log('장바구니');
-		fncAddWish();
-	});
-});
+
 
 
 	 
 $(function() {
-	
-	$("a[href='#' ]").on("click" , function() {
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	$(".cancel").on("click" , function() {
 		history.go(-1);
 	});
 });	
+</script>
 
-
-
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
 $(function() {
-	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	$( "#iamportPayment" ).on("click" , function() {
-		console.log('구매');
-		payment();
+	
+	$("#iamportPayment").on("click" , function() {
+		console.log("아임포트");		
+		
+		if($("#paybyca").prop("checked")){
+			
+			
+			alert('card');
+			$("input[name=paymentOpt]").val("CA");
+			alert($("input[name=paymentOpt]").val());
+			paymentCA();
+			
+		}else{
+			alert('kakao');
+			$("input[name=paymentOpt]").val("KA");
+			alert($("input[name=paymentOpt]").val());
+			paymentKA();
+			
+		}
 	});
 });	
+	
+	function paymentKA(data) {
+		
+		var payment = $("#paymentOpt").val();
+		console.log("payment: "+payment);
+		
+		var cookName = $("#cookName").val();
+		console.log("cookName: "+cookName);
+		
+		var cookPrice = $("#cookPrice").val();
+		console.log("cookPrice: "+cookPrice);
+		
+		var phone = $("#phone").val();
+		console.log("phone: "+phone);
 
 
-</script>
+		var userName = $("#userName").val();
+		console.log("userName: "+userName);
+
+		var cookLocation = $("#cookLocation").val();
+		console.log("cookLocation: "+cookLocation);
+		
+		var uid="${uid }";
+		console.log("uid: "+uid);
+		
+		
+		
+		IMP.init('imp05238113'); 
+	    
+	    IMP.request_pay({
+	    	pg : "kakaopay", 
+	        pay_method : payment,
+	        merchant_uid : uid ,
+	        name : cookName ,
+	        amount : cookPrice ,
+	        buyer_name : userName ,
+	        buyer_tel : phone ,
+	        cookLocation : cookLocation
+
+	    }, function(rsp) {
+	    	console.log(rsp);
+	    	$.ajax({
+
+	        	type : "POST",
+	        	url : "/apply/json/verifyIamport?imp_uid=" + rsp.imp_uid 
+	        	
+	        }).done(function(data) {
+	        	
+	        	console.log(data);
+	        	
+	        	if(rsp.paid_amount == data.response.amount){
+	        		$("#impNumber").val(rsp.imp_uid);
+		        	alert("결제 및 결제검증완료");
+		        	fncAddApply();
+	        	} else {
+	        		alert("결제 실패");
+	        	}
+	        });
+	    });
+	}
+	function paymentCA(data) {
+		
+		var payment = $("#paymentOpt").val();
+		console.log("payment: "+payment);
+		
+		var cookName = $("#cookName").val();
+		console.log("cookName: "+cookName);
+		
+		var cookPrice = $("#cookPrice").val();
+		console.log("cookPrice: "+cookPrice);
+		
+		var phone = $("#phone").val();
+		console.log("phone: "+phone);
+
+
+		var userName = $("#userName").val();
+		console.log("userName: "+userName);
+
+		var cookLocation = $("#cookLocation").val();
+		console.log("cookLocation: "+cookLocation);
+		
+		var uid="${uid }";
+		console.log("uid: "+uid);
+		
+		
+		
+		IMP.init('imp05238113'); 
+	    
+	    IMP.request_pay({
+	    	pg : "html5_inicis", 
+	        pay_method : payment,
+	        merchant_uid : uid ,
+	        name : cookName ,
+	        amount : cookPrice ,
+	        buyer_name : userName ,
+	        buyer_tel : phone ,
+	        cookLocation : cookLocation
+
+	    }, function(rsp) {
+	    	console.log(rsp);
+	    	$.ajax({
+
+	        	type : "POST",
+	        	url : "/apply/json/verifyIamport?imp_uid=" + rsp.imp_uid 
+	        	
+	        }).done(function(data) {
+	        	
+	        	console.log(data);
+	        	
+	        	if(rsp.paid_amount == data.response.amount){
+	        		$("#impNumber").val(rsp.imp_uid);
+		        	alert("결제 및 결제검증완료");
+		        	fncAddApply();
+	        	} else {
+	        		alert("결제 실패");
+	        	}
+	        });
+	    });
+	}	
+	    //*/
+
+    </script>
+
+
+
 
 
 
@@ -305,7 +432,7 @@ $(function() {
 			
 			</p>	
 			   <input type="hidden" id="cookStock"  value="${wish.cookStatus }" />
-			<p>신청자수 :&emsp; ${wish.cookStatus }명
+			<p>신청인원 :&emsp; ${wish.cookStatus }명
 			
 			</p>	
 			<p>수업시간 :&emsp; ${wish.wishCook.startTime}&emsp;~&emsp; ${wish.wishCook.endTime}
@@ -318,8 +445,15 @@ $(function() {
 				<input type="hidden" class="wishNo" name="wishNo" value="${wish.wishNo}">
 				    </c:forEach> 	
 			</div>	 				  
-		 		  
-				  
+ <div class="form-group">	
+ 	<c:forEach var="wish" items="${wishlist}" begin="0" end="0"> 
+ 					 <input type="hidden" id="cookName" value="${wish.wishCook.cookName }"/>
+ 					 		<input type="hidden" id="cookName" value="${wish.wishCook.cookName }"/>
+	<input type="hidden" id="cookPrice" value="${wish.wishCook.cookPrice }"/>
+	<input type="hidden" id="cookLocation" value="${wish.wishCook.cookLocation }"/>	
+ 	</c:forEach>
+ 		  
+	  </div>			  
 				<div class="subtitle">
 				  <p>결제 </p>
 				  </div><br>
@@ -358,101 +492,68 @@ $(function() {
 		  
 
 
-	  		</form>  
+		   <input type="hidden" id="cookStock"  value="${cook.cookStock }" />
+		      <div class="form-group">
+		    <label for="cookStatus" >신청인원 : </label>
+		  
+		    
+		   <input type="number" min="0" id="cookStatus" name="cookStatus" value="1" style="width:40px"/> 명
+		  </div>
+	  	
 	  
 			<br>
-			<div class="text-center">
-			<button type="button" class="btn.btn-primary" id="buyjust">그냥결제하기</button>	
-				<button type="button" class="buy" id="iamportPayment" value="KA">결제하기</button>					
-				<button type="button" class="wish" href="#" role="button">장바구니</button>
-			</div>
-				
+
+			
+				<div class="subtitle">
+				  <p>결제수단</p>
+				  </div><br>
+				  
+				 
+				 <div class="form-group">
+				 <ul class="payul">
+				 	<li>
+				 
+				 		<input type="radio" name="payoption" id="paybyca" checked/> <span style="font-size:16px; font-weight: bold;">신용카드</span>
+				    </li>
+				    <li> 
+				    	<input type="radio" name="payoption"/> <img src="https://storage.wcuisine.net/web-assets/images/img-pay-kakao@3x.png" alt="kakaopay icon" width="58" height="24">
+				  	</li>
+				  </ul>
+				  </div>			
+	<input type="hidden" name="impNumber" id="impNumber" value="">
+	  <input type="hidden" name="paymentOpt" id="paymentOpt" value="">	
+	  
+	  	</form>  
+	  	
+			<input type="hidden" id="userId" value="${user.userId }"/>
+			<input type="hidden" id="userName" value="${user.userName }"/>
+			<input type="hidden" id="phone" value="${user.phone }"/>
+ 	
+  	
+	  	
+	
 			<br>
+			
+			<div class="text-center  buttons">
+			
+			 	<button type="button" class="btn.btn-primary" id="buyjust">그냥결제하기</button>
+				<button type="button" class="buy" id="iamportPayment" value="">결제하기</button>					
+				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
+			</div>			
+			
+			
  	</div>
-</div>			  
-	     
+</div>	
+
+	  
+		  
+
+
   
- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 
-<script>
-  
-	
-$(function() {
-	
-	$("button.iamportPayment").on("click" , function() {
-		console.log("아임포트");		
-		
-		var payopt = $("button.iamportPayment").attr('value');
-		console.log("payopt: "+payopt);
-		$("#paymentOpt").val(payopt);
-		
-		payment();	
-	});
-});	
-	
-	function payment(data) {
-		
-		var payment = $("#paymentOpt").val();
-		console.log("payment: "+payment);
-		
-		var cookName = $("#cookName").val();
-		console.log("cookName: "+cookName);
-		
-		var cookPrice = $("#cookPrice").val();
-		console.log("cookPrice: "+cookPrice);
-		
-		var phone = $("#phone").val();
-		console.log("phone: "+phone);
 
 
-		var userName = $("#userName").val();
-		console.log("userName: "+userName);
-
-		var cookLocation = $("#cookLocation").val();
-		console.log("cookLocation: "+cookLocation);
-		
-		var uid="${uid }";
-		console.log("uid: "+uid);
-		
-		
-		
-		IMP.init('imp05238113'); 
-	    
-	    IMP.request_pay({
-	    	pg : "kakaopay", 
-	        pay_method : payment,
-	        merchant_uid : uid ,
-	        name : cookName ,
-	        amount : cookPrice ,
-	        buyer_name : userName ,
-	        buyer_tel : phone ,
-	        cookLocation : cookLocation
-
-	    }, function(rsp) {
-	    	console.log(rsp);
-	    	$.ajax({
-
-	        	type : "POST",
-	        	url : "/apply/json/verifyIamport?imp_uid=" + rsp.imp_uid 
-	        	
-	        }).done(function(data) {
-	        	
-	        	console.log(data);
-	        	
-	        	if(rsp.paid_amount == data.response.amount){
-		        	alert("결제 및 결제검증완료");
-		        	fncAddApply();
-	        	} else {
-	        		alert("결제 실패");
-	        	}
-	        });
-	    });
-	}
-	    //*/
-    
-    </script>
 		
 		  
 		
@@ -467,15 +568,13 @@ $(function() {
 
 
 <!-- 결제하기 /////////////////////////////////////-->		
-	  <input type="hidden" name="paymentOpt" id="paymentOpt" value="KA">	
-	<input type="hidden" id="cookName" value="${cook.cookName }"/>
-	<input type="hidden" id="cookPrice" value="${cook.cookPrice }"/>
-	<input type="hidden" id="phone" value="${user.phone }"/>
-	<input type="hidden" id="userName" value="${user.userName }"/>
-	<input type="hidden" id="userId" value="${user.userId }"/>
-	<input type="hidden" id="cookLocation" value="${cook.cookLocation }"/>		  
+	
 
 
+	  
+
+
+	
  
 	
 </body>

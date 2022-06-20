@@ -149,7 +149,7 @@ public class CookController {
 
 	@RequestMapping(value = "getCook", method = RequestMethod.GET)
 	public String getCook(@ModelAttribute("search") Search search, @RequestParam("cookNo") int cookNo,
-			@RequestParam("menu") String menu, @CookieValue(value = "history", required = false) Cookie cookie,
+			 @CookieValue(value = "history", required = false) Cookie cookie,
 			HttpServletResponse response, Model model,HttpServletRequest request) throws Exception {
 
 		System.out.println("getCook");
@@ -175,7 +175,7 @@ public class CookController {
 		
 		
 		model.addAttribute("cook", cook);
-		model.addAttribute("menu", menu);
+	
 		model.addAttribute("review", map.get("list"));
 		model.addAttribute("reviewNum", reviewNum);
 

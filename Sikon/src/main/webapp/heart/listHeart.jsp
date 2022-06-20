@@ -84,6 +84,13 @@ body {
 	font-weight: bold;
 	color: #75574B
 }
+.emptyHeart{
+	padding : 90px;
+	height: 200px;
+	text-align: center;
+	font-weight: bold;
+	color: #808080;
+}
 
 .text-info {
 	font-family: 'Gowun Batang', serif;
@@ -386,6 +393,14 @@ p {
   
      
 </div>
+   <c:if test="${empty list}">
+		<br><br>
+		<div class="emptyHeart">
+			좋아요한 쿠킹클래스가 없습니다.
+		</div>
+		<br>
+	</c:if>
+     
 	  </div>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	

@@ -152,13 +152,13 @@ $(function() {
 		  
 		<div class="row">
 	  		<div class="col-xs-4 col-md-4"><strong>모집인원가능인원</strong></div>
-			<div class="col-xs-8 col-md-8">${cook.cookStock }</div>
+			<div class="col-xs-8 col-md-8">${cook.cookStock }명</div>
 		</div>	
 			<hr/>  
 		  
 		<div class="row">
 	  		<div class="col-xs-4 col-md-4"><strong>쿠킹클래스모집인원</strong></div>
-			<div class="col-xs-8 col-md-8">${cook.cookRecruit }</div>
+			<div class="col-xs-8 col-md-8">${cook.cookRecruit }명</div>
 		</div>	
 			<hr/> 		  
 
