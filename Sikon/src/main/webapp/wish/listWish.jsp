@@ -61,7 +61,7 @@ div{
 	font-size: x-large;
 }
 
-.boxselect, .quantity, .price{
+.boxselect, .cookStatus, .price{
 	padding-top:35px;
 }
 
@@ -220,15 +220,56 @@ div{
 		 
 		 
 			 
-			 $( ".addPurchase" ).on("click" , function() {
+			 $( ".buybtn" ).on("click" , function() {
 				 console.log('구매');
+				 var checking = $(".checkbuy").val();
 				 
-				 $("form").attr("method" , "GET").attr("action" , "/apply/addApply").submit();
+				 var delchk = []; 
+
+				    $('.checkbuy:checked').each(function(){
+				        delchk.push($(this).val());
+				    });
+				 
+				    console.log('delchk: '+delchk.length);
+				 if(delchk.length == 0){
+					 alert('구매할 상품을 선택해주세요.');
+					 return null;
+				 }
+				 
+				 $("form").attr("method" , "GET").attr("action" , "/apply/addApplyByWish").submit();
 				 
 				});
 		
 					
-		
+			 <!-- ------------- 일괄선택 --------------- -->
+			 
+				$("#checkall").click(function(){
+					
+					if($("#checkall").prop("checked")){
+						
+						$("input[name=wishNo]").prop("checked",true);
+						
+					}else{
+						
+						$("input[name=wishNo]").prop("checked",false);
+						
+					}
+					
+				})
+				 
+				 
+				$("input[name=wishNo]").click(function(){
+					
+					if($("#checkall").prop("checked")){
+						
+						$("#checkall").prop("checked",false);
+						
+					}
+					
+				})
+							
+				
+				<!-- ------------------------------------ -->		
 			 
 				
 		
@@ -257,7 +298,7 @@ div{
 		
       
         <div class="row">
-        	 <div class="col-md-1 text-center"><input type="checkbox" id="cbx_chkAll" checked/></div>
+        	 <div class="col-md-1 text-center"><input type="checkbox" id="checkall" checked/></div>
         	<div class="col-md-6 text-center">쿠킹클래스정보</div>  
             <div class="col-md-2 text-center">추가신청</div>
             <div class="col-md-2 text-center">소 계</div>
@@ -274,9 +315,7 @@ div{
 			  
 			  <div class="col-md-1 text-center boxselect">
 			  	<input type="checkbox" class="checkbuy"  name="wishNo" value="${wish.wishNo}"/>	
-			  	<input type="hidden" name="cookNo" value="${wish.wishCook.cookNo}"/>
-			  	<input type="hidden" name="userId" value="${wish.userId}"/>
-			  	<input type="hidden" name="cookStatus" value="${wish.cookStatus}"/>			  	
+			  	
 			  </div>
 			  
 		  
@@ -294,7 +333,7 @@ div{
 			  </div>
 		
 			 
-			 	<div align="center" class="col-md-2 text-center quantity" value="${wish.cookStatus }">
+			 	<div align="center" class="col-md-2 text-center cookStatus" value="${wish.cookStatus }">
 			  	<c:choose>
 			  		<c:when test="${wish.cookStatus == 1 }">
 			  			<a href="#" class="btn btn-default btn-xs disabled" role="button" value="${wish.wishNo}">-</a>
@@ -303,7 +342,7 @@ div{
 			  			<button class="btn btn-default btn-xs minus" value="${wish.wishNo}">-</button>
 			  		</c:otherwise>
 			  	</c:choose>
-			  	<input type="text" name="quantity" value=" ${wish.cookStatus }" style="width:30px;" readonly/>
+			  	<input type="text" name="cookStatus" value=" ${wish.cookStatus }" style="width:30px;" readonly/>
 			  	<button class="btn btn-default btn-xs plus" value="${wish.wishNo}">+</button>
 			  </div>
 				

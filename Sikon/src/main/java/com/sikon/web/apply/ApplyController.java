@@ -2,6 +2,7 @@ package com.sikon.web.apply;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ import com.sikon.common.Search;
 import com.sikon.service.apply.ApplyService;
 import com.sikon.service.cook.CookService;
 import com.sikon.service.user.UserService;
+import com.sikon.service.wish.WishService;
 import com.sikon.service.domain.Apply;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.Review;
@@ -53,6 +55,11 @@ public class ApplyController {
 		@Autowired
 		@Qualifier("userServiceImpl")
 		private UserService userService;
+		
+		
+		@Autowired
+		@Qualifier("wishServiceImpl")
+		private WishService wishService;
 		
 		//setter Method 구현 않음
 			
@@ -143,7 +150,108 @@ public class ApplyController {
 			return modelAndView;
 		}
 		
+		//=== 장바구니 구매 ==============================================================================================		
+				@RequestMapping( value="addApplyByWish", method=RequestMethod.GET )
+				public String addApplyByWish(@RequestParam("wishNo") int[] wishNo,  Model model, HttpServletRequest request) throws Exception {
 
+					System.out.println("/apply/addApplyByWish : GET");
+					
+					
+					HttpSession session = request.getSession();
+					User user = (User)session.getAttribute("user");
+					
+					User applier = userService.getUser(user.getUserId());
+					List list = new ArrayList();
+			
+					for(int cooknum : wishNo) {
+						
+						Wish wish = wishService.getWishList(cooknum);
+						Cook cook = cookService.getCook(wish.getWishCook().getCookNo());
+						wish.setWishCook(cook);
+						
+						list.add(wish);
+						
+					}	
+					
+					System.out.println("wishlist: "+list);
+					
+					
+					model.addAttribute("wishlist", list);
+					model.addAttribute("user", applier);
+			
+
+					
+					return "forward:/apply/addApplyByWish.jsp";
+				}
+				
+				@RequestMapping( value="addApplyByWish", method=RequestMethod.POST )
+				public ModelAndView addApplyByWish(@ModelAttribute("apply") Apply apply,
+						
+						@RequestParam("wishNo") int[] wishNo,
+						HttpServletRequest request) throws Exception {
+					
+					System.out.println("/apply/addApply : POST");
+					
+							
+					HttpSession session = request.getSession();
+					User user = (User)session.getAttribute("user");
+				
+					
+					List list = new ArrayList();
+				
+				
+					for(int i=0; i<wishNo.length; i++) {
+						
+						Wish wish = wishService.getWishList(wishNo[i]);
+						
+						
+						Cook cook = cookService.getCook(wish.getWishCook().getCookNo());
+						
+						Apply applyByWish = new Apply();
+						
+						applyByWish.setApplier(user);
+						applyByWish.setClassCook(cook);
+						applyByWish.setApplyStatus("100");
+						applyByWish.setReviewStatus("001");
+						applyByWish.setPaymentOption(apply.getPaymentOption());
+						applyByWish.setCookStatus(wish.getCookStatus());
+						applyByWish.setCheckDate(apply.getCheckDate());
+						applyByWish.setReceiverPhone(apply.getReceiverPhone());
+					
+						
+					
+						
+						
+						list.add(applyByWish);
+						
+						
+						
+						applyService.addApply(applyByWish);
+						
+						System.out.println(wish.getCookStatus());
+						System.out.println(cook.getCookNo());
+						
+						int buy= apply.getCookStatus();   //사는 신청자수를 가져와 buy에 넣어줍니다
+						int cookNoo=cook.getCookNo(); //쿠킹클래스번호를 가져와 cookNo에 넣어줍니다
+						applyService.buyCook(buy, cookNoo);
+						
+						wishService.deleteWish(wishNo[i]);
+						
+					}
+					
+
+					
+					
+					ModelAndView modelAndView=new ModelAndView(); //modelAndView 객체생성
+					modelAndView.setViewName("forward:/apply/readApplyByWish.jsp");
+					modelAndView.addObject("applylist",list); 
+			
+					
+					
+					return modelAndView;
+				}		
+				
+				//=============================================================================================================			
 		@RequestMapping( value="getApply" )
 		public ModelAndView getApply(HttpServletRequest request,@RequestParam("applyNo") int applyNo
 		

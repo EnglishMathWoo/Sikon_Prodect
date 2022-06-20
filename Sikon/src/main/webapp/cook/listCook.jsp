@@ -5,6 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
+
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -71,7 +74,7 @@ color:crimson;
 <style>
 
 div.container {
-	padding-top: 200px;
+	padding-top: 180px;
 	
 }
 
@@ -195,6 +198,11 @@ p {
 	width: 300px;
 	height:300px;
 } 
+
+
+.image:hover{
+	opacity: 0.8;
+}
 
 div.emptyProd{
 	border: 1px solid #937062;
@@ -594,12 +602,11 @@ div.emptyProd{
 							                    	 				+"<div class='row' id='target'>"
 							                    	 				+"<td align='left'></td>"
 							                    	 				+"<div class='row'>"
-							                     					+"<div class='col-xs-4 col-md-6 text-left image' value='"+JSONData.list[i].cookNo+"'>"
+							                     					+"<div class='col-xs-4 col-md-6 text-lefr image' align='center'  value='"+JSONData.list[i].cookNo+"'>"
 							                     					+image
 							                     					+"<br/><br/>"
 							                     					+"<table><tr class='liketable'>"
-							                     					+"<td>"
-							                     					+heartCount
+							                     					+"<td>"							                     					
 							                     					+"</td><td class='likes'></td></tr>	</table></div>"
 							                     					+"<div class='col-xs-4 col-md-4'>"
 						                     						+"<div class='row'>"
@@ -650,7 +657,8 @@ div.emptyProd{
 
 <body>
 
-	
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="yy/MM/dd" var="today" />
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -769,14 +777,14 @@ div.emptyProd{
 
 	
 		
-<div class="container">
+<div class="container channel">
 	
 <div class="row" id="target">
 	<c:set var="i" value="0" />
 
 
 <c:forEach var="cook" items="${list}">
-<td align="left"></td>
+
  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
  <input type="hidden" name="userNickname" value="${user.userNickname}">
   <input type="hidden" name="userId" value="${user.userId}">
@@ -784,10 +792,12 @@ div.emptyProd{
     <input type="hidden" name="cookNo" value="${cook.cookStock}">
       <input type="hidden" name="hearthit" value="${cook.hearthit}">
 
-	<div class="row">
+
+
+	<div class="row" >
 		
 
-				<div class="col-xs-4 col-md-6 text-lefr image"  value="${cook.cookNo }">				
+				<div class="col-xs-4 col-md-6 text-lefr image" align="center"  value="${cook.cookNo }">				
 <c:choose>
 		    	<c:when test="${cook.cookFilename.contains('/')}">
 						<c:choose>
@@ -812,22 +822,7 @@ div.emptyProd{
 		    	
 		    	<br><br>
 		    		
-		    	<table>
-		    		<tr class="liketable">
-						<td>
-							<c:choose>
-					 		<c:when test = "${cook.heartCount == '0'}">
-					 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">&nbsp; 좋아요 ${cook.hearthit}개</p>
-							</c:when>    
-					 		<c:otherwise>
-					 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn">&nbsp; 좋아요 ${cook.hearthit}개</p>
-					 		</c:otherwise>
-					 		</c:choose>
-						</td>
-						<td class="likes"></td>
-					</tr>
-				</table>
-			
+		    
 				</div>	
 			
 
@@ -907,8 +902,7 @@ div.emptyProd{
 				
 		 	</div>
 		 	
-		 	<div class="col-xs-2 col-md-2">
-		 	</div>
+	
 		 	
 		 	</div>
 		 	

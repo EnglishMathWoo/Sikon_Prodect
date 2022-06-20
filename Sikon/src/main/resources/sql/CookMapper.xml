@@ -181,10 +181,10 @@
 											WHERE mentor_nickname=#{userNickname}
 											<if test="searchCondition != null">
 											<choose>
-													<when test="searchCondition == 0 and searchKeyword !='' ">
+													<when test="search.searchCondition == 0 and searchKeyword !='' ">
 										 				and cook_NO LIKE '%'||#{searchKeyword}||'%'
 													</when>
-													<when test="searchCondition == 1 and searchKeyword !='' ">
+													<when test="search.searchCondition == 1 and searchKeyword !='' ">
 										 				 and cook_Name LIKE '%'||#{searchKeyword}||'%'
 													</when>
 													<otherwise>

@@ -1085,7 +1085,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 				});
 				
 				$("a:contains('등록한쿠킹클래스')").on("click", function() {
-					self.location = "/cook/"
+					self.location = "/cook/listMyCook"
 					
 				});
 				
