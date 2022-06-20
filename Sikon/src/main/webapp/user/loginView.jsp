@@ -316,8 +316,11 @@ body{
 		$( function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#1' ]").on("click" , function() {
-				self.location = "/user/findUser"
+				window.open('/user/findUser', 'finduser', 'width=500, height=590, location=no, status=no, scrollbars=yes');
+
+				//self.location = "/user/findUser"
 			});
+			
 		});
 		
 		//============= 회원비밀번호찾기화면이동 =============

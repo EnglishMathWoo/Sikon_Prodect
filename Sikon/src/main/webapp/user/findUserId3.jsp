@@ -49,7 +49,7 @@ img {
 body {
 	font-family: 'Gowun Batang', serif;
 
-padding-top: 30px;
+padding-top: 100px;
   font-size: 0.9rem;
   color: #999;
   line-height: 1rem;
@@ -307,7 +307,6 @@ cursor: pointer;
       <h2>
         내 계정찾기
       </h2>
-     
       <div>
         <h4>
           <a href="search.html">아이디찾기</a><a href="password.html">비밀번호 찾기</a>
@@ -319,7 +318,7 @@ cursor: pointer;
    <!--  <input type="email" name="email" id="email" class="form-control" placeholder="이메일" required><br>
         <p class="checks" id="checks">${findpw_checkf}</p><br/>
     -->
-    </div>
+  	 </div>
   	 
 	  			<button type="button" id="findUser" onclick="findUser_click()">아이디 찾기</button>&emsp;
 
@@ -329,10 +328,53 @@ cursor: pointer;
   </body>
     <script type="text/javascript">
 
+	
+	  	//아이디 정규식
+	//	var idJ = /^[a-z0-9]{5,20}$/;
+	/*	
+		$("#userName").on("click",function(){
+		     if($('#userName').val() == ""){
+		   		$('#checks').text('이름을 입력해주세요.');
+		   	  	$('#checks').css('color', 'red');
+		 }
+		 });
+		
+  		$("#phone").on("click",function(){
+	     if($('#phone').val() == ""){
+	   		$('#checks').text('전화번호를 입력해주세요.');
+	   	  	$('#checks').css('color', 'red');
+	     }
+	     });
+  		
+  		
+  		$("#member_id").focusout(function(){
+  			if(!idJ.test($(this).val())){
+  			$('#checks').text('5~20자의 영문 소문자, 숫자만 사용가능합니다');
+  			$('#checks').css('color', 'red');
+  		}
+  		 });
+  		
+  		
+	     
+  		$("#email").focusout(function(){
+	     if($('#email').val() == ""){
+	   		$('#checks').text('이메일을 입력해주세요');
+	   	  	$('#checks').css('color', 'red');
+	     }
+	     });
+  	*/	
+  		
+  	
+  	
+  	
+  	
+  	
+  		
 		//ID 찾기 
+	//	$("#findUser").on("click",function(){
 		function findUser_click(){
 			var name = $('#userName').val();
-			console.log(name);
+			console.log(userName);
 			var phone = $('#phone').val();
 			console.log(phone);
 			
@@ -342,28 +384,15 @@ cursor: pointer;
              data:{'userName':name, 'phone':phone},
              success:function(data){  console.log(data);
                if(data == 0){
-            	  // $('#id_value').text("회원 정보를 확인해주세요!");
+            	   $('#id_value').text("회원 정보를 확인해주세요!");
 				   $('#userName').val('');
 				   $('#phone').val('');
-				   $('.login').replaceWith(
-						   " <article class='login'><div><h2>내 계정찾기</h2></div>"+
-						   "<p>입력하신 정보에 맞는 회원정보가 없습니다. 회원 정보를 확인해주세요</p>"+
-						   " <button type='button'>로그인하기</button>&emsp;"+
-						   " <button type='button'>회원가입</button>&emsp;"+
-						   " </article>"
-						   );
                }else{
-            	//   $('#id_value').text(data);
-            	 //  console.log(data);
+            	   $('#id_value').text(data);
+            	   console.log(data);
 			 	   $('#userName').val('');
+			 	  console.log(userName);
 				   $('#phone').val('');
-				   $('.login').replaceWith(
-						   " <article class='login'><div><h2>내 계정찾기</h2></div>"+
-						   "<p>"+data+"</p>"+
-						   " <button type='button'>로그인하기</button>&emsp;"+
-						   " <button type='button'>회원가입</button>&emsp;"+
-						   " </article>"
-						   );
                }
             },   
              error:function(){
@@ -380,8 +409,59 @@ cursor: pointer;
         
    //     };
   	 
-  	</script>
+  		       
  
+         
+  		$(function() {
+  			  		
+  			$( "a:contains('로그인')" ).on("click" , function() {
+  			$(self.location).attr("href","/user/loginView.jsp");
+  			});
+ 		});
+  	</script>
+  <script>
+  const modal = document.getElementById("modal")
+	 const btnModal = document.getElementById("findUser")
+	const closeBtn = modal.querySelector(".close-area")
+	
+		btnModal.addEventListener("click", e => {
+			console.log('aaaaa');
+			modal.style.display = "flex"
+			console.log('modal.style.display');
+		});
+		
+		    
+		
+		closeBtn.addEventListener("click", e => {
+			console.log('bbbbb');
+		    modal.style.display = "none"
+		});
+		
+		modal.addEventListener("click", e => {
+			console.log('cccc');
+		    const evTarget = e.target
+		    if(evTarget.classList.contains("modal-overlay")) {
+		        modal.style.display = "none"
+		    }
+		});
+		
+		
+	/*	
+		$(document).ready(function() {
+			$('#findUser').click(function() {
+				$('#modal-dialog').show();
+				console.log("finduser");
+			});
+			
+			
+			
+			
+			
+		});
+	*/	
+		
+		
+  </script> 
   
 
 </html>
