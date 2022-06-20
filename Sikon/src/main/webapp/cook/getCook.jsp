@@ -73,7 +73,7 @@ color:crimson;
   border-radius: 5px;
   position: absolute;
    top: 55px;
-   left: 7px;
+   left: 2px;
    width: 15px;
 }
 
