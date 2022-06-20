@@ -73,6 +73,9 @@ div.container {
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$( "button.btn.btn-primary" ).on("click" , function() {
+				
+				
+				
 				fncUpdateUser();
 			});
 		});	
@@ -92,24 +95,23 @@ div.container {
 		function fncUpdateUser() {
 			
 			var pw=$("input[name='password']").val();
+			var realPassword=$("input[name='realPassword']").val();
 			
 			
 			if(pw == null || pw.length <1){
 				alert("패스워드는  반드시 입력하셔야 합니다.");
 				return;
 			}
+			
+			if(pw == realPassword){
 				
-			
-			
-			
-		
-			//Debug...
-			//alert("phone : "+value);
-			//$("input:hidden[name='phone']").val( value );
+				alert("탈퇴되었습니다.");
+				$("form").attr("method" , "POST").attr("action" , "/user/deleteUser").submit();
 				
-			//console.log('fnc');
-			
-			$("form").attr("method" , "POST").attr("action" , "/user/deleteUser").submit();
+			} else {
+				
+				alert("비밀번호가 틀렸습니다");
+			}
 		}
 	
 		
@@ -137,6 +139,8 @@ div.container {
 		<form class="form-horizontal" enctype="multipart/form-data">
 		
 		 <input type="hidden" name="role" value="${user.role}">
+		 
+		 <input type="hidden" name="realPassword" value="${user.password}">
 		
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
@@ -150,7 +154,7 @@ div.container {
 		  <div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control " id="password" name="password" placeholder="변경비밀번호">
+		      <input type="password" class="form-control " id="password" name="password" placeholder="비밀번호">
 		    </div>
 		  </div>
 		  

@@ -14,7 +14,7 @@
 <body>
  <script>
     alert('${msg}');
-    location.href='<c:out value="${pageContext.request.contextPath}"/>${url}';
+    location.href='<c:out value="${pageContext.request.getRequestURI()}"/>${url}';
  </script>
 	
 	
