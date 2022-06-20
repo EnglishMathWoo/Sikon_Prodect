@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sikon.service.alarm.AlarmService;
 
 
-//==> 회원관리 RestController
 @RestController
 @RequestMapping("/alarm/*")
 public class AlarmRestController {
@@ -20,11 +19,14 @@ public class AlarmRestController {
 	@Qualifier("alarmServiceImpl")
 	private AlarmService alarmService;
 		
+	
+	///Constructor
 	public AlarmRestController(){
 		System.out.println(this.getClass());
 	}
 
 	
+	///Method
 	@RequestMapping(value="json/addUncheckedAlarm")
 	public void addUncheckedAlarm(HttpSession session) throws Exception{
 					

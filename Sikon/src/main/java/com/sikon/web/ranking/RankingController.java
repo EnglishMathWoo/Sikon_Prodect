@@ -47,7 +47,7 @@ public class RankingController {
 
 	
 	@RequestMapping(value = "listRecipe")
-	public String listRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
+	public String listRecipe(@ModelAttribute("search") Search search, Model model) throws Exception {
 
 		System.out.println("/ranking/listRecipe : POST/get");
 
@@ -68,7 +68,7 @@ public class RankingController {
 	}
 	
 	@RequestMapping(value = "listProduct")
-	public String listProduct(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
+	public String listProduct(@ModelAttribute("search") Search search, Model model) throws Exception {
 
 		System.out.println("/ranking/listProduct : POST/get");
 
@@ -90,7 +90,7 @@ public class RankingController {
 	
 	
 	@RequestMapping(value = "listLove")
-	public String listLove(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
+	public String listLove(@ModelAttribute("search") Search search, Model model) throws Exception {
 
 		System.out.println("/ranking/listLove : POST/get");
 
