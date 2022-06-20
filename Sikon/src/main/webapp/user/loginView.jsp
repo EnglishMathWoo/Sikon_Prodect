@@ -270,6 +270,8 @@ body{
     <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
+		
+	
 		//============= "로그인"  Event 연결 =============
 		$( function() {
 			
@@ -316,7 +318,7 @@ body{
 		$( function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#1' ]").on("click" , function() {
-				window.open('/user/findUser', 'finduser', 'width=500, height=590, location=no, status=no, scrollbars=yes');
+				window.open('/user/findUser', 'finduser', 'width=500px, height=590px, location=no, status=no, scrollbars=yes');
 
 				//self.location = "/user/findUser"
 			});
@@ -327,7 +329,9 @@ body{
 		$( function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
-				self.location = "/user/findUserpw"
+				window.open('/user/findUserpw', 'findUserpw', 'width=500px, height=590px, location=no, status=no, scrollbars=yes');
+
+				//self.location = "/user/findUserpw"
 			});
 		});
 		

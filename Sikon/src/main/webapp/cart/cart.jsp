@@ -150,16 +150,20 @@ div{
 				 var cartNo = $(this).val();
 					console.log('delete');
 					console.log(cartNo);
-					self.location = "/cart/deleteCart?cartNo="+cartNo;
 					
-					alert('삭제');
+					if (confirm("해당 상품을 장바구니에서 삭제하시겠습니까?")) {
+						self.location = "/cart/deleteCart?cartNo="+cartNo;
+		            } 
+										
 			  });
 			 
 			 $( ".selectdelete" ).on("click" , function() {
 				
 					console.log('deleteSelect');
 					
-					$("form").attr("method" , "POST").attr("action" , "/cart/deleteSelect").submit();
+					if (confirm("선택한 상품을 장바구니에서 삭제하시겠습니까?")) {
+						$("form").attr("method" , "POST").attr("action" , "/cart/deleteSelect").submit();
+		            } 
 					
 			  });
 
@@ -219,9 +223,7 @@ div{
 		                  }
 		            });
 	  			 });
-			 
-		 
-			 //*/
+
 			 
 			$( ".buybtn" ).on("click" , function() {
 				 console.log('구매');
@@ -277,7 +279,15 @@ div{
 			
 			<!-- ------------------------------------ -->
 			 
-			 
+			$(".goprod").click(function(){
+				
+				var prodNo = $(this).attr('value');
+				
+				self.location = "/product/getProduct?prodNo="+prodNo+"&menu=search";
+				
+			})
+					
+			<!-- ------------------------------------ -->
 		});	
 	
 	</script>		
@@ -320,7 +330,7 @@ div{
 				  
 				  <div class="col-md-6 text-left">
 					<table>
-					<tr>
+					<tr class="goprod" value="${cart.cartProd.prodNo }">
 					    <td>
 						    <c:forEach var="name" items="${cart.cartProd.prodThumbnail.split('&')[0]}">
 							<img src="/resources/images/uploadFiles/${name}" class="image" width="100" height="100">

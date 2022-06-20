@@ -70,15 +70,26 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
+	public String login(@ModelAttribute("user") User user , HttpSession session, Model model ) throws Exception{
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
 		System.out.println("getuserid="+user.getUserId());
 		User dbUser=userService.getUser(user.getUserId());
 		
-		int statusCount = alarmService.getStatusCount(user.getUserId());
+		int statusCount = alarmService.getUncheckedAlarm(user.getUserId());
 		System.out.println("statusCount="+statusCount);
+		
+		//탈퇴 회원 로그인 못하게
+		if(dbUser.getQuitStatus().equals("Y")) {
+			System.out.println("quitStatus="+dbUser.getQuitStatus());
+			 model.addAttribute("msg","탈퇴 회원 입니다.");
+			 model.addAttribute("url","/");
+
+
+			 return "/user/loginFail.jsp";
+
+		}
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
@@ -86,6 +97,8 @@ public class UserController {
 		}
 		System.out.println(user.getPassword());
 		System.out.println(dbUser.getPassword());
+		
+		
 		
 		return "redirect:/index.jsp";
 	}
@@ -567,48 +580,73 @@ public class UserController {
 	}
 	
 	
-//	@RequestMapping( value="deleteUser", method=RequestMethod.GET )
-//	public String deleteUser(  @RequestParam(value = "userId", required = false) String userId ,
-//			@RequestParam(value = "userId", required = false) String userId, 
-//			@RequestParam(value = "userId", required = false) String userId, Model model ) throws Exception{
-//
-//		System.out.println("/user/deleteUser : GET");
-//		//Business Logic
-//		User user = userService.getUser(userId);
-//		
-//		
-//		// Model 과 View 연결
-//		model.addAttribute("user", user);
-//		
-//		
-//		return "forward:/user/deleteUser.jsp";
-//	}
+	@RequestMapping( value="deleteUser", method=RequestMethod.GET )
+	public String deleteUser(  @RequestParam(value = "userId", required = false) String userId ,
+			@RequestParam(value = "quitDate", required = false) Date quitDate, 
+			@RequestParam(value = "quitStatus", required = false) String quitStatus, Model model ) throws Exception{
+
+		System.out.println("/user/deleteUser : GET");
+		System.out.println("/user/deleteUser : GET"+userId);
+		System.out.println("/user/deleteUser : GET"+quitDate);
+		System.out.println("/user/deleteUser : GET"+quitStatus);
+		//Business Logic
+		User user = userService.getUser(userId);
+		
+		
+		// Model 과 View 연결
+		model.addAttribute("user", user);
+		model.addAttribute("quitDate", quitDate);
+		model.addAttribute("quitStatus", quitStatus);
+		
+		
+		return "forward:/user/deleteUser.jsp";
+	}
 	
 	@RequestMapping( value="deleteUser", method=RequestMethod.POST )
-	public String deleteUser(@ModelAttribute("user") User user , HttpSession session,
-								@RequestParam("quitDate") Date quitDate,
-								@RequestParam("quitStatus") String quitStatus) throws Exception{
+	public String deleteUser(@ModelAttribute("user") User user , HttpSession session, HttpServletRequest request,
+									@RequestParam("quitStatus") String quitStatus) throws Exception{
 		
 		System.out.println("/user/deleteUser : POST");
 		//Business Logic
-		System.out.println("getuserid="+user.getUserId());
+		System.out.println("user="+user);
+	
+		System.out.println("quitStatus="+quitStatus);
+		
 		User dbUser=userService.getUser(user.getUserId());
+		
+		Date quitDate = user.getQuitDate();
+		System.out.println("quitDate="+quitDate);
+		
+//		session = request.getSession();
+//		session.getAttribute("user");
 		
 		
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
-			session.setAttribute("user", dbUser);
+		//	session.setAttribute("user", user);
+			
+			System.out.println("userID 1="+dbUser.getPassword());
+			
+			System.out.println("userID 2="+user.getPassword());
+			
+			quitStatus = user.setQuitStatus("Y");
+			
+			quitDate = user.setQuitDate(dbUser.getRegDate());
+			
+			System.out.println("user="+user);
+			System.out.println("quitDate="+quitDate);
+			System.out.println("quitStatus="+quitStatus);
+			
+			userService.deleteUser(user, quitDate, quitStatus);
+			
+			
+		}else {
+			
 		}
-		System.out.println(user.getPassword());
-		System.out.println(dbUser.getPassword());
 		
-		quitStatus = user.setQuitStatus("Y");
 		
-		System.out.println("user="+user);
-		System.out.println("quitDate="+quitDate);
-		System.out.println("quitStatus="+quitStatus);
 		
-		userService.deleteUser(user, quitDate, quitStatus);
+		
 		
 		
 		return "redirect:/index.jsp";

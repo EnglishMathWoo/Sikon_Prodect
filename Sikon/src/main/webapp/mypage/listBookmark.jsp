@@ -491,6 +491,13 @@ p {
     stroke-dashoffset: 0;
   }
 }
+
+/* «œ≈ı */
+  
+  #image{
+    position: relative;
+
+}
 </style>
 
 
@@ -562,17 +569,26 @@ p {
 					<br /> <br />
 
 					<div id="latest" class="group">
+					
 						<input type="checkbox" name="ckBookmark" 
 							id="${list.recipe.recipeNo }">
 						<article class="one_third first">
+						
 							<a class="imgover" value="${list.recipe.recipeNo }" href="#"><img
 								src="/resources/images/uploadFiles/${list.recipe.recipeImg }"
-								width="320" height="300"></a>
+								width="320" height="300" id="image">
+								<ul class="menu-content">
+							          <li><a href="#" class="fa fa-eye"><span>${list.recipe.recipeViews }</span></a></li>
+							          <li><a href="#" class="fa fa-comment-o"><span>${list.recipe.reviewNum }</span></a></li>
+							  </ul>
+								</a>
 							<div class="excerpt">
+							
 								<p class="namehead">${list.recipe.recipeDetail }</p>
 								<p class="detailhead">
 									<b>${list.recipe.recipeName }</b>
 								</p>
+								
 								<ul class="meta">
 									<li><c:choose>
 											<c:when test="${list.recipe.recipeTheme=='KO'} ">
