@@ -68,6 +68,7 @@ padding-top: 200px;
 }
 .row {
     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+        padding-top: 80px;
 }
 .table.table-hover.table-striped {
     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";

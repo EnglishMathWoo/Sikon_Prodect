@@ -47,41 +47,38 @@ div.page-header{
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-
-
-
-$(function() {
 	
-	 $( "#check" ).on("click" , function() {
-		 console.log('확인');
-		 self.location = "/product/listProduct?menu=manage"
-	});
-	
-});
-
-
-$(function() {
-	
-	$("#add").click(function(){
-		console.log('추가등록');
-		self.location = "/product/addProductView.jsp"
+		$(function() {
+			
+			 $( "#check" ).on("click" , function() {
+				 console.log('확인');
+				 self.location = "/product/listProduct?menu=manage"
+			});
+			
+		});
 		
-	});
-	
-});
+		
+		$(function() {
+			
+			$("#add").click(function(){
+				console.log('추가등록');
+				self.location = "/product/addProductView.jsp"
+				
+			});
+			
+		});
 
+	</script>
 
-
-</script>
 </head>
 
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
+	<!-- ToolBar Start -->
 	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
+   	<!-- ToolBar End -->
 	
-	<!--  화면구성 div Start /////////////////////////////////////-->
+
 	<div class="container">
 	
 		<div class="page-header">
@@ -221,7 +218,6 @@ $(function() {
 		<br/>
 		
  	</div>
- 	<!--  화면구성 div Start /////////////////////////////////////-->
 
 </body>
 </html>
