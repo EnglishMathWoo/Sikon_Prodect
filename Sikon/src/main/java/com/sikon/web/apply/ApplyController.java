@@ -161,6 +161,18 @@ public class ApplyController {
 					User user = (User)session.getAttribute("user");
 					
 					User applier = userService.getUser(user.getUserId());
+					
+					//==================================================================================
+					//결제 uid 만들기
+					LocalDateTime now = LocalDateTime.now();
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss");
+					String nowrandom = now.format(formatter);   
+					
+					String userid = applier.getUserId().replace("@", "");
+					String sub = userid.replace(userid.substring(userid.length()-4, userid.length()), "");
+					String uid = sub+nowrandom;	
+					System.out.println("uid: "+uid);
+					//==================================================================================						
 					List list = new ArrayList();
 			
 					for(int cooknum : wishNo) {
@@ -177,6 +189,7 @@ public class ApplyController {
 					
 					
 					model.addAttribute("wishlist", list);
+					model.addAttribute("uid", uid);
 					model.addAttribute("user", applier);
 			
 

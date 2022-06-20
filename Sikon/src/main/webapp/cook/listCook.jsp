@@ -206,9 +206,8 @@ p {
 }
 
 div.emptyProd{
-	border: 1px solid #937062;
-	padding : 90px;
-	height: 200px;
+	padding : 20px;
+	height: 100px;
 	text-align: center;
 	font-weight: bold;
 	color: #333;
@@ -779,6 +778,15 @@ div.emptyProd{
 	
 		
 <div class="container channel">
+
+
+	<c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			판매중인 쿠킹클래스가 없습니다.
+		</div>
+		<br>
+	</c:if>
 	
 <div class="row" id="target">
 	<c:set var="i" value="0" />

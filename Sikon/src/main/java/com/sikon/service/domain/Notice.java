@@ -1,7 +1,6 @@
 package com.sikon.service.domain;
 
 import java.sql.Date;
-import com.sikon.service.domain.User;
 
 public class Notice {
  
@@ -53,7 +52,8 @@ public class Notice {
 	}
 
 	public String toString() {
-		return "notice : [noticeTitle]" + noticeTitle +" [noticeContent]" + noticeContent;
+		return "notice : [noticeNo]" + noticeNo + " [noticeTitle]" + noticeTitle + " [noticeContent]" + noticeContent + 
+				" [noticeFileName]" + noticeFileName + " [noticeDate]" + noticeDate;
 	}
     
 }

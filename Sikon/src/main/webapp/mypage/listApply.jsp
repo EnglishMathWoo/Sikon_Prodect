@@ -78,19 +78,19 @@ div.list{
 	font-weight: bold;
 }
 
-.prodname{
+.cookName{
 	font-size: 15px;
 	font-weight: bold;
 }
 
-.prodcontent{
+.cookcontent{
 	text-align: left;
 }
 
 .image{
 	width: 105px;
 }
-.prodcontent{
+.cookcontent{
 	width: 50%;
 }
 .rev{

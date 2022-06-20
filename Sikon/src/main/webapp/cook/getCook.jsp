@@ -673,7 +673,19 @@ div.image{
 			 <h5><strong>테마 : 간식</strong></h5>
 			</c:if>		
 				</div>
+				<div class="row">
+			<c:if test = "${cook.cookDifficuty =='1'}">
+			 <h5><strong>난이도 : 초급</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '2'}">
+			 <h5><strong>난이도 : 중급</strong></h5>
+			</c:if>
+			<c:if test = "${cook.cookDifficuty == '3'}">
+		 <h5><strong>난이도 : 고급</strong></h5>
+			</c:if>
 				
+
+				</div>				
 
 				<div class="row">
 			
@@ -699,9 +711,9 @@ div.image{
 			  			
 			  				<button type="button" class="btn-b addPurchase" id="buy" >신청하기</button>
 			  				
-			  			<c:if test="${menu == 'search' }">
+			  	
 			  				<button type="button" class="btn-w addWish" id="popup_open_btn">장바구니</button>&emsp;
-						</c:if>
+					
 									  				
 		  				
 			  		</div>
