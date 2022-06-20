@@ -15,20 +15,20 @@
 	</resultMap>
 	
 	<!-- 알람생성 -->
-	<insert		id="addAlarm"	parameterType="alarm" >
+	<insert		id="addAlarm"		parameterType="alarm" >
 	 	INSERT
 		INTO alarm 
 		VALUES (seq_alarm_alarm_no.NEXTVAL, #{alarmTarget}, #{alarmContent}, '001', SYSDATE)
 	 </insert>
 	 
 	 <!-- 알람개수 -->
-	 <select	id="getAlarmCount"	parameterType="String"	resultType="int">
+	 <select	id="getAlarmCount"		parameterType="String"		resultType="int">
 		SELECT COUNT(*)
-	  	FROM( SELECT * FROM alarm WHERE alarm_target = #{userId} ) countTable	
+	  	FROM ( SELECT * FROM alarm WHERE alarm_target = #{userId} ) countTable	
 	 </select>
 	  
 	 <!-- 알람리스트 -->
-	<select 	id="getAlarmList"  parameterType="map"	resultMap="alarmSelectMap">
+	<select 	id="getAlarmList"		parameterType="map"		resultMap="alarmSelectMap">
 	  	SELECT *
 	  	FROM ( SELECT inner_table.*, ROWNUM AS row_seq 
 	  			FROM ( SELECT * FROM alarm WHERE alarm_target = #{userId} ORDER BY alarm_no DESC ) inner_table
@@ -37,16 +37,16 @@
 	 </select>
 	 
 	  <!-- 알람상태 변경 -->
-	 <update 	id="updateAlarmStatus"  parameterType="alarm">
+	 <update 	id="updateAlarmStatus"		parameterType="alarm">
 		UPDATE alarm 
 		SET alarm_status = '002'
 		WHERE alarm_target = #{alarmTarget}
 	</update>
 	
 	<!-- 미확인알람 개수 -->
-	 <select 	id="getUncheckedAlarm"	parameterType="String"	resultType="int">
+	 <select 	id="getUncheckedAlarm"		parameterType="String"		resultType="int">
 		SELECT COUNT(*)
-	  	FROM( SELECT * FROM alarm WHERE alarm_target = #{userId} AND alarm_status = '001') countTable	
+	  	FROM ( SELECT * FROM alarm WHERE alarm_target = #{userId} AND alarm_status = '001') countTable	
 	 </select>
 	 
 </mapper>

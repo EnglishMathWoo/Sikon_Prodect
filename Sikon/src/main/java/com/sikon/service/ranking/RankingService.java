@@ -6,28 +6,28 @@ import java.util.Map;
 
 public interface RankingService {
 	
-	//레시피 뷰 날짜 저장
+	//레시피 조회날짜 등록
 	public void addRecipeView(int recipeNo) throws Exception;
 	
-	// 레시피 리스트 조회
+	//레시피 랭킹 리스트
 	public Map<String, Object> getRecipeList(Search search) throws Exception;
 	
-	//구매 날짜 저장
+	//스토어 구매날짜 저장
 	public void addPurchase(int prodNo, String serialNo) throws Exception;
 	
-	//구매 날짜 삭제
+	//스토어 구매날짜 삭제
 	public void deletePurchase(int prodNo, String serialNo) throws Exception;
 	
-	// 판매 랭킹 조회
+	//스토어 랭킹 리스트
 	public Map<String, Object> getProductList(Search search) throws Exception;
 	
-	//즐겨찾는 멘토 날짜 저장
+	//쿠킹멘토 즐겨찾기 날짜 저장
 	public void addLoveMentor(String userNickname, String userId) throws Exception;
 	
-	//즐겨찾는 멘토 날짜 삭제
+	//쿠킹멘토 즐겨찾기 날짜 삭제
 	public void deleteLoveMentor(String userNickname, String userId) throws Exception;
 	
-	// 즐겨찾기 리스트 조회
+	//쿠킹멘토 랭킹 리스트
 	public Map<String, Object> getLoveList(Search search) throws Exception;
 			
 }

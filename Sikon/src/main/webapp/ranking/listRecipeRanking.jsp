@@ -49,19 +49,6 @@ body {
 	
 }
 
-.shape1 {
-  border-width: 1px;
-  background-color: white;
-  border-color:	#C0C0C0;
-  border-style: solid;
-  width: 35px;
-  height: 25px;
-  text-align: center;
-  font-weight:bold;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
 .orderCondition{
     width: 90%;
     margin: 10px auto;
@@ -352,8 +339,7 @@ background-color: #f7f7f7;
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#">
       <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300" id="image"></a>
-        <c:set var="j" value="${ j+1 }" />
-        <div class="best_label"><span>${j}</span></div>
+        <div class="best_label"><span style="margin-bottom: 8px;">${i}</span></div>
         <div class="excerpt">
           <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
            <h6 >${recipe.recipeDetail }</h6>

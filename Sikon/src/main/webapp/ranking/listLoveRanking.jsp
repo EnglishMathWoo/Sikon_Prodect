@@ -214,6 +214,27 @@ article img {
     color: #a93f0d94;
 }
 
+.best_label {
+    position: absolute;
+    transform: translate(14px, 43px);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    top: 1px;
+    left: 1px;
+    width: 32px;
+    height: 40px;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: -0.5px;
+    color: rgb(255, 255, 255);
+    background: url(https://storage.wcuisine.net/web-assets/icons/best_label.svg) 0% 0% / 32px 40px no-repeat;
+}
+
 </style>
 
 
@@ -350,7 +371,7 @@ article img {
   
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${love.user.userId}" href="#">
-      <div class="shape1" style="float:left;">${i}</div>
+      <div class="best_label"><span style="margin-bottom: 8px;">${i}</span></div>
       <c:if test= "${search.orderCondition != null}">
 	  <div style="float:right;" id="increase">${love.loveIncrease}</div> 
 	  <i class="fa-solid fa-arrow-up" style="float:right;"></i>

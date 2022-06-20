@@ -6,7 +6,6 @@
 
 <mapper namespace="CouponHolderMapper">
  	
- 	
 	<resultMap id="couponSelectMap" type="coupon">
 		<result property="issueNo" 			column="issue_no" 			jdbcType="INTEGER"/>
 		<result property="couponNo" 			column="coupon_no" 			jdbcType="INTEGER"/>
@@ -25,134 +24,111 @@
 	</resultMap>
 	
 	
-	<!-- SQL : INSERT -->
+	<!-- 쿠폰생성 -->
 	<insert 	id="issueCoupon"		parameterType="coupon">
 		INSERT
-		INTO couponholder(issue_no, coupon_no, holder_id, start_date, end_date, issue_status) 
-		VALUES	 (seq_couponhodler_issue_no.NEXTVAL, #{couponNo:INTEGER}, #{couponUser.userId:VARCHAR}, 
-		#{startDate:DATE}, #{endDate:DATE}, #{issueStatus:VARCHAR})
+		INTO couponholder (issue_no, coupon_no, holder_id, start_date, end_date, issue_status) 
+		VALUES (seq_couponhodler_issue_no.NEXTVAL, #{couponNo:INTEGER}, #{couponUser.userId:VARCHAR}, #{startDate:DATE}, #{endDate:DATE}, #{issueStatus:VARCHAR})
 	 </insert>
 	 
-	 
+	 <!-- 발급쿠폰 검색 -->
 	 <select 	id="findIssuedCoupon" 	parameterType="int"	 resultMap="couponSelectMap">
-		SELECT h.*, c.* FROM couponholder h, coupon c 
-		<where>
-		h.coupon_no = c.coupon_no AND issue_no = #{issueNo}
-		</where>
+		SELECT h.*, c.* 
+		FROM couponholder h, coupon c 
+		WHERE h.coupon_no = c.coupon_no AND issue_no = #{issueNo}
   	 </select>
 	 
-	 
+	 <!-- 마이쿠폰 검색 -->
 	 <select 	id="findUsableCoupon" 	parameterType="string"	 resultMap="couponSelectMap">
 		SELECT h.*, c.*
  		FROM couponholder h, coupon c
-		<where>
-		h.coupon_no = c.coupon_no AND h.holder_id = #{userId} AND h.issue_status = '001' AND h.end_date > TO_CHAR(SYSDATE, 'YYYYMMDD')
-		</where>
+		WHERE h.coupon_no = c.coupon_no AND h.holder_id = #{userId} AND h.issue_status = '001' AND h.end_date > TO_CHAR(SYSDATE, 'YYYYMMDD')
   	 </select>
   	 
+  	<!-- 발급쿠폰 상태변경 -->
 	<update 	id="updateIssueStatus"  parameterType="coupon">
 		UPDATE couponholder
-		<set>
-		issue_status = #{issueStatus}
-		</set>
-		<where>
-		issue_no = #{issueNo}
-		</where>
+		SET issue_status = #{issueStatus}
+		WHERE issue_no = #{issueNo}
 	</update>
 	
-	<!-- SQL : SELECT LIST -->
+	<!-- 마이쿠폰 리스트 -->
 	<select  id="getMyCouponList"  parameterType="map"	resultMap="couponSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT h.*, c.coupon_name
- 										FROM couponholder h, coupon c
- 										WHERE h.coupon_no = c.coupon_no AND h.holder_id = #{userId} AND h.issue_status = '001' AND h.end_date > TO_CHAR(SYSDATE, 'YYYYMMDD')
- 										) inner_table
-						WHERE ROWNUM &lt;= #{search.endRowNum} )
+				FROM ( SELECT h.*, c.coupon_name FROM couponholder h, coupon c
+					   WHERE h.coupon_no = c.coupon_no AND h.holder_id = #{userId} AND h.issue_status = '001' AND h.end_date > TO_CHAR(SYSDATE, 'YYYYMMDD')) inner_table
+				WHERE ROWNUM &lt;= #{search.endRowNum} )
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>
 	 
-	 <!-- SQL : SELECT ROW Count -->	 
+	 <!-- 마이쿠폰 개수 -->	 
 	 <select  id="getMyCouponCount"  parameterType="String"	 resultType="int">
 	 SELECT COUNT(*)
-	  	FROM( SELECT h.*, c.coupon_name
- 										FROM couponholder h, coupon c
- 										WHERE h.coupon_no = c.coupon_no AND h.holder_id = #{userId} AND h.issue_status = '001' AND h.end_date > TO_CHAR(SYSDATE, 'YYYYMMDD')
- 										) countTable					
+	 FROM( SELECT h.*, c.coupon_name
+		   FROM couponholder h, coupon c
+		   WHERE h.coupon_no = c.coupon_no AND h.holder_id = #{userId} AND h.issue_status = '001' AND h.end_date > TO_CHAR(SYSDATE, 'YYYYMMDD')) countTable					
 	 </select>
 	 
 	
-	<!-- SQL : SELECT LIST -->
+	<!-- 발급쿠폰 리스트 -->
 	<select  id="getIssuedCouponList"  parameterType="search"	resultMap="couponSelectMap">
 	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT h.*, c.coupon_name
- 										FROM couponholder h, coupon c
- 										WHERE h.coupon_no = c.coupon_no
- 										<if test="orderCondition == null">
-											ORDER BY h.issue_no DESC
-										</if>
-										<if test="orderCondition != null">
-											<choose>
-												<when test="orderCondition == 0">
-													ORDER BY h.issue_no DESC 
-												</when>
-												<when test="orderCondition == 1">
-													AND NVL(h.issue_status,'000')='001' 
-													ORDER BY h.issue_no DESC 
-												</when>
-												<when test="orderCondition == 2">
-													AND NVL(h.issue_status,'000')='002' 
-													ORDER BY h.issue_no DESC 
-												</when>
-												<otherwise>
-													AND NVL(h.issue_status,'000')='003' 
-													 ORDER BY h.issue_no DESC 
-												</otherwise>
-											</choose>
-										</if>
- 										) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
+	  	FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+			   FROM ( SELECT h.*, c.coupon_name FROM couponholder h, coupon c
+ 					  WHERE h.coupon_no = c.coupon_no
+ 					  <if test="orderCondition == null">
+					  	ORDER BY h.issue_no DESC
+					  </if>
+					  <if test="orderCondition != null">
+						  <choose>
+						  <when test="orderCondition == 0">
+						  	ORDER BY h.issue_no DESC 
+						  </when>
+						  <when test="orderCondition == 1">
+						  	AND NVL(h.issue_status,'000')='001'	ORDER BY h.issue_no DESC 
+						  </when>
+					      <when test="orderCondition == 2">
+							AND NVL(h.issue_status,'000')='002'	ORDER BY h.issue_no DESC 
+						  </when>
+						  <otherwise>
+							AND NVL(h.issue_status,'000')='003' ORDER BY h.issue_no DESC 
+						  </otherwise>
+						  </choose>
+					  </if>
+ 					  ) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
 	
-	<!-- 
-	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(	SELECT issue_no, coupon_no, holder_id, start_date, end_date, issue_status
-						FROM couponholder) countTable						
-	 </select>
-	  -->
-	 
-	 <!-- SQL : SELECT ROW Count -->	 
+	 <!-- 발급쿠폰 개수 -->	 
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	 SELECT COUNT(*)
-	  	FROM( SELECT h.*, c.coupon_name
- 										FROM couponholder h, coupon c
- 										WHERE h.coupon_no = c.coupon_no
- 										<if test="orderCondition == null">
-											ORDER BY h.issue_no DESC
-										</if>
-										<if test="orderCondition != null">
-											<choose>
-												<when test="orderCondition == 0">
-													ORDER BY h.issue_no DESC 
-												</when>
-												<when test="orderCondition == 1">
-													AND NVL(h.issue_status,'000')='001' 
-													ORDER BY h.issue_no DESC 
-												</when>
-												<when test="orderCondition == 2">
-													AND NVL(h.issue_status,'000')='002' 
-													ORDER BY h.issue_no DESC 
-												</when>
-												<otherwise>
-													AND NVL(h.issue_status,'000')='003' 
-													 ORDER BY h.issue_no DESC 
-												</otherwise>
-											</choose>
-										</if>
- 										) countTable					
+	 FROM ( SELECT h.*, c.coupon_name FROM couponholder h, coupon c
+ 			WHERE h.coupon_no = c.coupon_no
+ 			<if test="orderCondition == null">
+				ORDER BY h.issue_no DESC
+			</if>
+			<if test="orderCondition != null">
+				<choose>
+				<when test="orderCondition == 0">
+				ORDER BY h.issue_no DESC 
+				</when>
+				<when test="orderCondition == 1">
+				AND NVL(h.issue_status,'000')='001' 
+				ORDER BY h.issue_no DESC 
+				</when>
+				<when test="orderCondition == 2">
+				AND NVL(h.issue_status,'000')='002' 
+				ORDER BY h.issue_no DESC 
+				</when>
+				<otherwise>
+				AND NVL(h.issue_status,'000')='003' 
+				ORDER BY h.issue_no DESC 
+				</otherwise>
+				</choose>
+			</if>
+			) countTable					
 	 </select>
 
 </mapper>
