@@ -38,7 +38,9 @@ public interface UserService {
 	public void updateUserPw(String userId, String password) throws Exception;
 	// ÄíÅ·¸àÅä ½ÂÀÎ
 	public void changeUserRole(String userId, String role) throws Exception;
-	
+	// ÄíÅ·¸àÅä °ÅÀı
+	public void backUserRole(String userId, String mentorApply) throws Exception;
+		
 	// È¸¿øÁ¤º¸¼öÁ¤
 	public void updateUser(User user) throws Exception;
 	public void updateLicense(Map license, User user) throws Exception;

@@ -30,7 +30,9 @@ public interface UserDao {
 	public int updateUserPw(String userId, String password)throws Exception;
 	// ÄíÅ·¸àÅä ½ÂÀÎ
 	public void changeUserRole(String userId, String role) throws Exception;
-	
+	// ÄíÅ·¸àÅä °ÅÀı
+	public void backUserRole(String userId, String mentorApply) throws Exception;
+		
 	// SELECT ONE
 	public User getUser(String userId) throws Exception ;
 	public List getLicense(String userId) throws Exception;

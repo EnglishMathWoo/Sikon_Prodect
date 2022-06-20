@@ -480,13 +480,65 @@ public class UserController {
 		
 		User user = userService.getUser(userId);
 		
+		
+		
+		role = user.setRole("mentor");
+		
 	//	user = userService.getUser(role);
 	
-		
-		userService.changeUserRole(userId, role);
 		System.out.println("2 userId="+userId);
 		System.out.println("2 mentorApply="+role);
-		return "redirect:/user/getUser?userId="+user.getUserId();
+		
+		userService.changeUserRole(userId, role);
+		
+		
+		return "redirect:/user/Navigation.jsp";
+	}
+	
+	
+	@RequestMapping( value="backUserRole", method=RequestMethod.GET )
+	public String backUserRole( @RequestParam(value = "userId", required = false) String userId ,
+						@RequestParam(value = "mentorApply", required = false) String mentorApply, Model model ) throws Exception{
+
+		System.out.println("/user/changeUserRole : GET");
+		System.out.println("/user/changeUserRole : GET"+userId);
+		System.out.println("/user/changeUserRole : GET"+mentorApply);
+		//Business Logic
+		
+		
+		
+		// Model 과 View 연결
+		model.addAttribute("userId", userId);
+		model.addAttribute("mentorApply", mentorApply);
+		
+		return "forward:/user/backUserRole.jsp";
+	}
+	
+	
+	@RequestMapping( value="backUserRole", method=RequestMethod.POST )
+	public String backUserRole(HttpServletRequest request,@RequestParam("userId") String userId,
+											@RequestParam("mentorApply") String mentorApply) throws Exception {
+		
+		System.out.println("/user/backUserRole : POST");
+		
+		System.out.println("1 userId="+userId);
+		System.out.println("1 mentorApply="+mentorApply);
+		
+		User user = userService.getUser(userId);
+		
+		
+		
+		mentorApply = user.setRole("N");
+		
+	//	user = userService.getUser(role);
+	
+		System.out.println("2 userId="+userId);
+		System.out.println("2 mentorApply="+mentorApply);
+		
+		userService.backUserRole(userId, mentorApply);
+		
+		
+		return "redirect:/user/Navigation.jsp";
 	}
 	
 	@RequestMapping( value="listUser" )
@@ -511,6 +563,22 @@ public class UserController {
 		model.addAttribute("search", search);
 		
 		return "forward:/user/listUser.jsp";
+	}
+	
+	
+	@RequestMapping( value="deleteUser", method=RequestMethod.GET )
+	public String deleteUser( @RequestParam("userId") String userId , Model model ) throws Exception{
+
+		System.out.println("/user/deleteUser : GET");
+		//Business Logic
+		User user = userService.getUser(userId);
+		
+		
+		// Model 과 View 연결
+		model.addAttribute("user", user);
+		
+		
+		return "forward:/user/deleteUser.jsp";
 	}
 	
 //	@RequestMapping( value="checkDuplication", method=RequestMethod.POST )

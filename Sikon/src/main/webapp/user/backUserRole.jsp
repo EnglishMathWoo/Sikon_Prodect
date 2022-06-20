@@ -53,7 +53,7 @@
 		
 		
 		
-		$("form").attr("method" , "POST").attr("action" , "/user/changeUserRole").submit();
+		$("form").attr("method" , "POST").attr("action" , "/user/backUserRole").submit();
 		
 		
 	//	opener.location.href='http://192.168.0.11:8080/user/listUser'; 
@@ -70,7 +70,7 @@
 
 <div class="container">
     
-        <h1 class="bg-white text-center">승인하시겠습니까?</h1>
+        <h1 class="bg-white text-center">거절하시겠습니까?</h1>
         
         <!-- <div class="col-2"></div> -->
        
@@ -78,7 +78,7 @@
               
                   <div class="form-group" style="padding:8px">
                     
-              <input type="hidden" class="form-control 12" id="role" name="role" value="${role}" >        
+              <input type="hidden" class="form-control 12" id="mentorApply" name="mentorApply" value="${mentorApply}" >        
                     
                   </div>
                   

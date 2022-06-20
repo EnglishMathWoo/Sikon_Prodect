@@ -53,11 +53,11 @@
 		
 		
 		
-		$("form").attr("method" , "POST").attr("action" , "/user/changeUserRole").submit();
+	//	$("form").attr("method" , "POST").attr("action" , "/user/changeUserRole").submit();
 		
 		
-	//	opener.location.href='http://192.168.0.11:8080/user/listUser'; 
-	//	window.close();
+		opener.location.href='http://192.168.0.11:8080/user/listUser'; 
+		window.close();
 		
 		
 	//	self.close();
@@ -70,7 +70,7 @@
 
 <div class="container">
     
-        <h1 class="bg-white text-center">승인하시겠습니까?</h1>
+        <h1 class="bg-white text-center">승인이 완료되었습니다.</h1>
         
         <!-- <div class="col-2"></div> -->
        
@@ -92,7 +92,7 @@
 		   <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >확인</button>
-			  <a class="btn btn-primary btn" id="previous" role="button">취&nbsp;소</a>
+		<!--  <a class="btn btn-primary btn" id="previous" role="button">취&nbsp;소</a>  -->
 		    </div>
 		  </div>
 		  
