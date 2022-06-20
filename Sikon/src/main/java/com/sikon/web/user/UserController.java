@@ -70,7 +70,7 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
+	public String login(@ModelAttribute("user") User user , HttpSession session, Model model ) throws Exception{
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
@@ -80,12 +80,25 @@ public class UserController {
 		int statusCount = alarmService.getStatusCount(user.getUserId());
 		System.out.println("statusCount="+statusCount);
 		
+		//Å»Åð È¸¿ø ·Î±×ÀÎ ¸øÇÏ°Ô
+		if(dbUser.getQuitStatus().equals("Y")) {
+			System.out.println("quitStatus="+dbUser.getQuitStatus());
+			 model.addAttribute("msg","Å»Åð È¸¿ø ÀÔ´Ï´Ù.");
+			 model.addAttribute("url","/");
+
+
+			 return "/user/loginFail.jsp";
+
+		}
+		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 			session.setAttribute("alarm", statusCount );
 		}
 		System.out.println(user.getPassword());
 		System.out.println(dbUser.getPassword());
+		
+		
 		
 		return "redirect:/index.jsp";
 	}
@@ -626,6 +639,8 @@ public class UserController {
 			
 			userService.deleteUser(user, quitDate, quitStatus);
 			
+			
+		}else {
 			
 		}
 		
