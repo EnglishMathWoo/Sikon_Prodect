@@ -406,7 +406,7 @@ div.image{
 			                    	alert("추천완료.");
 			                    	                    	
 			                    	
-			                    	var userNickname = $("input[name='userNickname']").val();
+			                    	
 
 			                    	console.log(userId);
 			                    	console.log(cookNo);
@@ -439,7 +439,7 @@ div.image{
 			 function pushAlarm(userId, userNickname, cookNo){
 													
 					$.ajax({
-				        url : "/cook/json/pushAlarm",
+				        url : "/cook/json/addHeart",
 				        type : 'POST',
 				        dataType : "json",   
 			            data : {'cookNo' : cookNo, 'userId' : userId, 'userNickname' : userNickname }, 
@@ -581,6 +581,8 @@ div.image{
 			
 				<div class="row">
 					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo}"/>
+						<input type="hidden" name="userId" id="userId" value="${user.userId}"/>
+						<input type="hidden" name="userNickname" id="userNickname" value="${user.userNickname}"/>
 					
 				</div>
 				
