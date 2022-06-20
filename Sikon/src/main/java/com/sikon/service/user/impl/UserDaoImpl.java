@@ -160,13 +160,13 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectList("UserMapper.getUserList", search);
 	}
 	
-	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception {
-		System.out.println("user="+user);
+	public void deleteUser(User dbUser, Date quitDate, String quitStatus) throws Exception {
+		System.out.println("dbUser="+dbUser);
 		System.out.println("quitDate="+quitDate);
 		System.out.println("quitStatus="+quitStatus);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("user", user);
+		map.put("userId", dbUser);
 		map.put("quitDate", quitDate);
 		map.put("quitStatus", quitStatus);
 		sqlSession.delete("UserMapper.deleteUser", map);

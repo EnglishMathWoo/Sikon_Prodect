@@ -264,8 +264,8 @@ public class UserServiceImpl implements UserService{
 		return map;
 	}
 
-	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception {
-		userDao.deleteUser(user, quitDate, quitStatus);
+	public void deleteUser(User dbUser, Date quitDate, String quitStatus) throws Exception {
+		userDao.deleteUser(dbUser, quitDate, quitStatus);
 	}
 
 	public boolean checkDuplication(String userId) throws Exception {

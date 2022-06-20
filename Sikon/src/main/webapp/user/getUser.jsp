@@ -446,9 +446,13 @@ padding-top: 10px;
 				</div>
 				<input type="hidden" class="form-control" id="userId" name="userId" value="${user.userId}" >
 								
-				<input type="hidden" class="form-control 12" id="role" name="role" value="${user.role}" >
+				<input type="hidden" class="form-control 1" id="role" name="role" value="${user.role}" >
 				
-				<input type="hidden" class="form-control 1" id="mentorApply" name="mentorApply" value="${user.mentorApply}" >
+				<input type="hidden" class="form-control 2" id="mentorApply" name="mentorApply" value="${user.mentorApply}" >
+				
+				<input type="hidden" class="form-control 3" id="quitDate" name="quitDate" value="${user.quitDate}" >
+		 
+				<input type="hidden" class="form-control 4" id="quitStatus" name="quitStatus" value="${user.quitStatus}" >
 					
 				<div class="iEJcKG">
 				<h3 class="iEJcKGheader">회원정보</h3>	
@@ -594,7 +598,17 @@ padding-top: 10px;
 		 $(function() {
 				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 				 $( "#deleteUserInfo" ).on("click" , function() {
-						self.location = "/user/deleteUser?userId=${user.userId}"
+					 
+					 var userId = $('#userId').val(); 
+			    	 console.log( "user id = " + userId) ;
+			    	 
+			//		 var quitDate = $('#quitDate').val(); 
+			 //   	 console.log( "quitDate = " + quitDate) ; 
+			    	 
+			    	 var quitStatus = $('#quitStatus').val(); 
+			    	 console.log( "quitStatus = " + quitStatus) ; 
+					 
+						self.location = "/user/deleteUser?userId="+userId+"&&quitStatus="+quitStatus
 				});
 			});
 		 

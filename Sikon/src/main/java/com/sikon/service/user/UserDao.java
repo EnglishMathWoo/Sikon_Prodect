@@ -51,7 +51,7 @@ public interface UserDao {
 	public List<User> getUserList(Search search) throws Exception ;
 	
 	// 회원탈퇴
-	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception ;
+	public void deleteUser(User dbUser, Date quitDate, String quitStatus) throws Exception ;
 		
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception ;
