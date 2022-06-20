@@ -97,26 +97,17 @@ div.container {
 		
 		///////////////////////////////////////////////////////////////////////
 		function fncUpdateUser() {
-			var name=$("input[name='userName']").val();
-			var pw=$("input[name='password']").val();
-			var pw_confirm=$("input[name='password2']").val();
 			
+			var pw=$("input[name='password']").val();
 			
 			
 			if(pw == null || pw.length <1){
 				alert("패스워드는  반드시 입력하셔야 합니다.");
 				return;
 			}
-			if(pw_confirm == null || pw_confirm.length <1){
-				alert("패스워드 확인은  반드시 입력하셔야 합니다.");
-				return;
-			}	
+				
 			
-			if( pw != pw_confirm ) {				
-				alert("비밀번호 확인이 일치하지 않습니다.");
-				$("input:text[name='password2']").focus();
-				return;
-			}
+			
 			
 		
 			//Debug...
@@ -125,39 +116,11 @@ div.container {
 				
 			//console.log('fnc');
 			
-			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
+			$("form").attr("method" , "POST").attr("action" , "/user/deleteUser").submit();
 		}
 	
 		
-		 function checkNickname(){
-		        var userNickname = $('#userNickname').val(); //닉네임값이 "userNickname"인 입력란의 값을 저장
-		        console.log(userNickname);
-		        
-		        $.ajax({
-		            url:'./json/checkNickname', //Controller에서 요청 받을 주소
-		            type:'post', //POST 방식으로 전달
-		            data:{userNickname:userNickname},
-		            success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
-		                if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 닉네임
-		                    $('.id_ok2').css("display","inline-block"); 
-		                    $('.id_already2').css("display", "none");
-		                } else { // cnt가 1일 경우 -> 이미 존재하는 닉네임
-		                    $('.id_already2').css("display","inline-block");
-		                    $('.id_ok2').css("display", "none");
-		                    alert("닉네임을 다시 입력해주세요");
-		                  //  $('#userNickname').val('');
-		                }
-		            },
-		            error:function(){
-		                alert("에러입니다");
-		            }
-		        });
-		        };
-		
-		        
-					
-				
-		        
+		 
 				
 				
 	</script>
@@ -187,30 +150,22 @@ div.container {
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="userId" name="userId" value="${user.userId }" placeholder="중복확인하세요"  readonly>
 		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">아이디는 수정불가</strong>
-		      </span>
+		       </span>
 		    </div>
 		  </div>
 		
 		  <div class="form-group">
 		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control " id="password" name="password" value="${user.password}" placeholder="변경비밀번호">
+		      <input type="password" class="form-control " id="password" name="password" placeholder="변경비밀번호">
 		    </div>
 		  </div>
 		  
-		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
-		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="변경비밀번호 확인">
-		    </div>
-		  </div>
-		  
-		
- 		  		 			  	  		  	 	 
- 	 	 	 	  	 	   	 	  	 	 	 	  
- 	 	
- 	 	  
+		 <input type="hidden" class="form-control 1" id="quitDate" name="quitDate" value="${user.quitDate}" >
+		 
+		 <input type="hidden" class="form-control 1" id="quitStatus" name="quitStatus" value="${user.quitStatus}" >
+		 
+	  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
 		      <button type="button" class="btn btn-primary"  >확 &nbsp;인</button>

@@ -1,5 +1,6 @@
 package com.sikon.service.user.impl;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -159,8 +160,16 @@ public class UserDaoImpl implements UserDao{
 		return sqlSession.selectList("UserMapper.getUserList", search);
 	}
 	
-	public void deleteUser(User user) throws Exception {
-		 sqlSession.delete("UserMapper.deleteUser", user);
+	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception {
+		System.out.println("user="+user);
+		System.out.println("quitDate="+quitDate);
+		System.out.println("quitStatus="+quitStatus);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user", user);
+		map.put("quitDate", quitDate);
+		map.put("quitStatus", quitStatus);
+		sqlSession.delete("UserMapper.deleteUser", map);
 	}
 
 	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return

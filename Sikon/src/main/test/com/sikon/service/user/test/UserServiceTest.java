@@ -370,7 +370,7 @@ public class UserServiceTest {
 //			user.setQuitDate("2020/05/05");
 						
 			
-			userService.deleteUser(user);
+	//		userService.deleteUser(user);
 			
 			user = userService.getUser("test@naver.com");
 			Assert.assertNotNull(user);
