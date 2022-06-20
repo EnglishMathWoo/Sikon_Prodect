@@ -700,6 +700,7 @@ footer a, footer h6 {
 
 				</div>
 			</div>
+			
 
 
 			<button type="button" style="float: right;">재료추가</button>

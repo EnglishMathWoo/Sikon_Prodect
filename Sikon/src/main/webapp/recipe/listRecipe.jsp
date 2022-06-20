@@ -439,7 +439,7 @@ font-size: 13px;
 					                	console.log(JSONData.list[0].recipeImg);
 						                	 
 					                	for(var i=0; i<JSONData.list.length; i++){
-					                
+					                	      
 						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
 						                     					+"<div id='latest' class='group'>"
 						                     					+"<article class='one_third first'>"
@@ -621,7 +621,16 @@ font-size: 13px;
   
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" >
-      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300" id="image"></a>
+      
+      <c:choose>
+      <c:when test="${recipe.recipeImg.contains('mp4')}">
+  		<video width="250" height="250" controls autoplay src="/resources/images/uploadFiles/${recipe.recipeImg }" type="video/mp4" ></video>
+      </c:when>
+      <c:otherwise>
+      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300" id="image">
+        </c:otherwise>
+        </c:choose>
+        </a>
         <div class="excerpt">
            <p class="namehead">${recipe.recipeDetail }</p>
           <p class="detailhead" ><b>${recipe.recipeName }</b></p>
