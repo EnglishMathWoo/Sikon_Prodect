@@ -1,5 +1,6 @@
 package com.sikon.service.user;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,11 @@ public interface UserDao {
 //	
 	// Pw º¯°æ
 	public int updateUserPw(String userId, String password)throws Exception;
-	
+	// ÄíÅ·¸àÅä ½ÂÀÎ
+	public void changeUserRole(String userId, String role) throws Exception;
+	// ÄíÅ·¸àÅä °ÅÀý
+	public void backUserRole(String userId, String mentorApply) throws Exception;
+		
 	// SELECT ONE
 	public User getUser(String userId) throws Exception ;
 	public List getLicense(String userId) throws Exception;
@@ -46,7 +51,7 @@ public interface UserDao {
 	public List<User> getUserList(Search search) throws Exception ;
 	
 	// È¸¿øÅ»Åð
-	public void deleteUser(User user) throws Exception ;
+	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception ;
 		
 	// °Ô½ÃÆÇ Page Ã³¸®¸¦ À§ÇÑ ÀüÃ¼Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception ;

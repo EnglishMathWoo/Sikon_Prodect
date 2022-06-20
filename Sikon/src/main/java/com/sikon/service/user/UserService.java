@@ -1,11 +1,11 @@
 package com.sikon.service.user;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 
 
@@ -36,7 +36,11 @@ public interface UserService {
 //	public int findUserPwCheck(User user)throws Exception;
 //	
 	// Pw 변경
-	public void updateUserPw(String userId,String password)throws Exception;
+	public void updateUserPw(String userId, String password) throws Exception;
+	// 쿠킹멘토 승인
+	public void changeUserRole(String userId, String role) throws Exception;
+	// 쿠킹멘토 거절
+	public void backUserRole(String userId, String mentorApply) throws Exception;
 		
 	// 회원정보수정
 	public void updateUser(User user) throws Exception;
@@ -46,7 +50,7 @@ public interface UserService {
 	public Map<String , Object> getUserList(Search search) throws Exception;
 	
 	// 회원탈퇴
-	public void deleteUser(User user) throws Exception ;
+	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception ;
 	
 	// 회원 ID 중복 확인
 	public boolean checkDuplication(String userId) throws Exception;

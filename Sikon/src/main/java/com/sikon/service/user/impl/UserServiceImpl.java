@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -226,7 +227,19 @@ public class UserServiceImpl implements UserService{
 		
 		userDao.updateUserPw(userId, password);
 	}	
+	// ƒÌ≈∑∏‡≈‰ Ω¬¿Œ
+	public void changeUserRole(String userId, String role) throws Exception {
+		System.out.println("userId="+userId);
+		System.out.println("role="+role);
+		userDao.changeUserRole(userId, role);
+	}
+	// ƒÌ≈∑∏‡≈‰ ∞≈¿˝
+	public void backUserRole(String userId, String mentorApply) throws Exception {
+		System.out.println("userId="+userId);
+		System.out.println("mentorApply="+mentorApply);
+		userDao.backUserRole(userId, mentorApply);
 		
+	}
 
 	public void updateUser(User user) throws Exception {
 		System.out.println("user="+user);
@@ -251,8 +264,8 @@ public class UserServiceImpl implements UserService{
 		return map;
 	}
 
-	public void deleteUser(User user) throws Exception {
-		userDao.deleteUser(user);
+	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception {
+		userDao.deleteUser(user, quitDate, quitStatus);
 	}
 
 	public boolean checkDuplication(String userId) throws Exception {

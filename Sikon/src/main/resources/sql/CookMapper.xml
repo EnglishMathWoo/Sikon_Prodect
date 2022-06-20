@@ -177,21 +177,19 @@
 	 <select  id="listMyCook"  parameterType="map"	resultMap="cookSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *	FROM cook
+	  					FROM		(	SELECT * FROM cook
 											WHERE mentor_nickname=#{userNickname}
-											<if test="searchCondition != null">
-											<choose>
-													<when test="search.searchCondition == 0 and searchKeyword !='' ">
-										 				and cook_NO LIKE '%'||#{searchKeyword}||'%'
-													</when>
-													<when test="search.searchCondition == 1 and searchKeyword !='' ">
-										 				 and cook_Name LIKE '%'||#{searchKeyword}||'%'
-													</when>
-													<otherwise>
-													  and cook_NO LIKE '%'|| ''||'%'
-													</otherwise>
-													</choose>
-											</if>
+												<if test="search.searchCondition != null">
+													<if test="search.searchCondition == 0 ">
+										 				AND cook_no LIKE '%'||#{search.searchKeyword}||'%'
+													</if>
+													<if test="search.searchCondition == 1 ">
+										 				AND cook_name LIKE '%'||#{search.searchKeyword}||'%'
+													</if>
+													<if test="search.searchCondition == 2 ">
+										 				 AND cook_price LIKE '%'||#{search.searchKeyword}||'%'
+													</if>
+											</if>	
 					 )  inner_table
 						WHERE ROWNUM &lt;= #{search.endRowNum} )
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
@@ -199,17 +197,19 @@
 	 
 	 <select  id="getTotalMyCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT cook_no 
-						FROM cook
+	  	FROM(	SELECT cook_no 	FROM cook
 						WHERE mentor_nickname=#{userNickname}
-						<if test="searchCondition != null">
-								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			and cook_no LIKE '%'||#{searchKeyword}||'%'
-								</if>
-								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		and cook_name LIKE '%'||#{searchKeyword}||'%'
-								</if>
-						</if> 
+												<if test="search.searchCondition != null">
+													<if test="search.searchCondition == 0 ">
+										 				and cook_no LIKE '%'||#{search.searchKeyword}||'%'
+													</if>
+													<if test="search.searchCondition == 1 ">
+										 				and cook_name LIKE '%'||#{search.searchKeyword}||'%'
+													</if>
+													<if test="search.searchCondition == 2 ">
+										 				 and cook_price LIKE '%'||#{search.searchKeyword}||'%'
+													</if>
+											</if>	
 						 ) countTable						
 	 </select> 
 	 

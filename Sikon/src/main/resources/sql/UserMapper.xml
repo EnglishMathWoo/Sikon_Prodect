@@ -170,6 +170,24 @@
 <!--  AND user_name = #{userName}-->
 	</update>
 	
+	<!--  쿠킹멘토 승인 -->
+	<update id="changeUserRole" parameterType="user" >
+	UPDATE users
+	<set>
+	role	= #{role}
+	</set>
+	WHERE user_id = #{userId}
+	</update>
+	
+	<!--  쿠킹멘토 거절 -->
+	<update id="backUserRole" parameterType="user" >
+	UPDATE users
+	<set>
+	mentor_apply	= #{mentorApply}
+	</set>
+	WHERE user_id = #{userId}
+	</update>
+	
 	<!-- 비밀번호 찾기 유효성 검사  -->
 	<select id="findUserPwCheck" resultType="int">
 	SELECT count(*)
