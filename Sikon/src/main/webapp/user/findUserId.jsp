@@ -299,8 +299,7 @@ cursor: pointer;
   </head>
    
    
-  <body>
-
+<body onload='resizeWindow(this)'>
 
   <article class="login">
     <div>
@@ -310,7 +309,7 @@ cursor: pointer;
      
       <div>
         <h4>
-          <a href="search.html">아이디찾기</a><a href="password.html">비밀번호 찾기</a>
+          <a href="/user/findUserId.jsp">아이디찾기</a><a href="/user/findUserpw.jsp">비밀번호 찾기</a>
         </h4>
       </div>
       
@@ -321,14 +320,19 @@ cursor: pointer;
     -->
     </div>
   	 
-	  			<button type="button" id="findUser" onclick="findUser_click()">아이디 찾기</button>&emsp;
+	  			<button  type="button" id="findUser" onclick="findUser_click()">아이디 찾기</button>
 
 
   </article>
   	
   </body>
     <script type="text/javascript">
-
+	function resizeWindow(win){
+	var wid=win.document.body.offsetWidth+30;
+	var hei=win.document.body.offsetHeight+40;
+		win.resizeTo(wid,hei);
+	}
+		
 		//ID 찾기 
 		function findUser_click(){
 			var name = $('#userName').val();
@@ -346,10 +350,9 @@ cursor: pointer;
 				   $('#userName').val('');
 				   $('#phone').val('');
 				   $('.login').replaceWith(
-						   " <article class='login'><div><h2>내 계정찾기</h2></div>"+
-						   "<p>입력하신 정보에 맞는 회원정보가 없습니다. 회원 정보를 확인해주세요</p>"+
-						   " <button type='button'>로그인하기</button>&emsp;"+
-						   " <button type='button'>회원가입</button>&emsp;"+
+						   " <article class='login' style='height: 320px'><div><h2>내 계정찾기</h2></div>"+
+						   "<p><br/><br/>입력하신 정보에 맞는 회원정보가 없습니다. <br/><br/>회원 정보를 확인해주세요</p>"+
+						   " <button type='button' class='back'>돌아가기</button>&emsp;"+
 						   " </article>"
 						   );
                }else{
@@ -358,10 +361,9 @@ cursor: pointer;
 			 	   $('#userName').val('');
 				   $('#phone').val('');
 				   $('.login').replaceWith(
-						   " <article class='login'><div><h2>내 계정찾기</h2></div>"+
-						   "<p>"+data+"</p>"+
-						   " <button type='button'>로그인하기</button>&emsp;"+
-						   " <button type='button'>회원가입</button>&emsp;"+
+						   " <article class='login' style='height: 290px'><div><h2>내 계정찾기</h2></div>"+
+						   "<p><br/><br/>회원님의 아이디는 "+data+"입니다.</p>"+
+						   " <button type='button' class='loglog'>로그인하기</button>&emsp;"+
 						   " </article>"
 						   );
                }
@@ -373,13 +375,16 @@ cursor: pointer;
                 });
             };
             
-         //    alert("아이디는 " + response.data + "입니다.");
-  //  	window.onload=function(){
-  		
-  	
-        
-   //     };
-  	 
+            $(document).on('click','.back',function() {
+            	location.reload();
+            	
+            });
+            
+            $(document).on('click','.loglog',function() {
+            	 window.close();
+            	
+            });
+
   	</script>
  
   
