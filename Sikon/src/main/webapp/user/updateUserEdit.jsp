@@ -54,7 +54,7 @@ div.container {
 }
 
 
-.join {
+.update {
   cursor: pointer;
   background-color: #937062;
   border: none;
@@ -63,7 +63,7 @@ div.container {
   padding: 12px 0;
   width: 49.3%;
 }
-.join:hover {
+.update:hover {
   background-color: #937062d4;
 }
 html input[type=text]{
@@ -271,42 +271,93 @@ html input[type=button]:hover{
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 	
-	//============= "취소"  Event 처리 및  연결 =============
-	$(function() {
-		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$(".cancel").on("click" , function() {
-			history.go(-1);
-		});
-	});	
-
 	
-	
-	// 도로명 주소
-	 function findAddr(){
-			new daum.Postcode({
-		        oncomplete: function(data) {
-		        	
-		        	console.log(data);
-		        	
-		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-		            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-		            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-		            var roadAddr = data.roadAddress; // 도로명 주소 변수
-		            var jibunAddr = data.jibunAddress; // 지번 주소 변수
-		            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		            document.getElementById('member_post').value = data.zonecode;
-		            if(roadAddr !== ''){
-		                document.getElementById("member_addr").value = roadAddr;
-		            } 
-		            else if(jibunAddr !== ''){
-		                document.getElementById("member_addr").value = jibunAddr;
-		            }
-		        }
-		    }).open();
+		function fncAddUser() {
+			
+			var id=$("input[name='userId']").val();
+			var pw=$("input[name='password']").val();
+			var pw_confirm=$("input[name='password2']").val();
+			var name=$("input[name='userName']").val();
+			var nickname=$("input[name='userNickname']").val();
+			
+			if(id == null || id.length <1){
+				alert("아이디는 반드시 입력하셔야 합니다.");
+				return;
+			}
+			if(pw == null || pw.length <1){
+				alert("패스워드는  반드시 입력하셔야 합니다.");
+				return;
+			}
+			if(pw_confirm == null || pw_confirm.length <1){
+				alert("패스워드 확인은  반드시 입력하셔야 합니다.");
+				return;
+			}
+			if(name == null || name.length <1){
+				alert("이름은  반드시 입력하셔야 합니다.");
+				return;
+			}
+			if(nickname == null || nickname.length <1){
+				alert("닉네임은 반드시 입력하셔야 합니다.");
+				return;
+			}
+			if( pw != pw_confirm ) {				
+				alert("비밀번호 확인이 일치하지 않습니다.");
+				$("input:text[name='password2']").focus();
+				return;
+			}
+				
+			if ($("#phone").val() == "" || $("#phone").val().length != 11 || isNaN($("#phone").val())) {
+				alert("휴대폰번호를 정확히 입력해 주세요");
+				return;
+			}
+			
+			
+			$("form").attr("method" , "POST").attr("action" , "/user/addUser").attr("enctype","multipart/form-data").submit();
 		}
 	
+	
+		//============= "가입"  Event 연결 =============
+		 $(function() {
+			$( ".update" ).on("click" , function() {
+				fncAddUser();
+			});
+		});	
 		
-	//이메일 인증        
+		//============= "취소"  Event 처리 및  연결 =============
+		$(function() {
+			$(".cancel").on("click" , function() {
+				history.go(-1);
+			});
+		});	
+	
+		
+	
+		// 도로명 주소
+		 function findAddr(){
+				new daum.Postcode({
+			        oncomplete: function(data) {
+			        	
+			        	console.log(data);
+			        	
+			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+			            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+			            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			            var roadAddr = data.roadAddress; // 도로명 주소 변수
+			            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+			            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			            document.getElementById('member_post').value = data.zonecode;
+			            if(roadAddr !== ''){
+			                document.getElementById("member_addr").value = roadAddr;
+			            } 
+			            else if(jibunAddr !== ''){
+			                document.getElementById("member_addr").value = jibunAddr;
+			            }
+			        }
+			    }).open();
+			}
+		
+			
+		//이메일 인증        
 		$(function() {       
 		  
 		   var code = "";
@@ -425,11 +476,13 @@ html input[type=button]:hover{
 		        });
 	        };
         
-	
 	        
 		     // 생년월일
 			 $(function() {
 					$('#userBirth').datepicker({
+						changeMonth: true,
+						changeYear: true, 
+						language: 'kr',
 						dateFormat: "yy-mm-dd"
 					});
 			});
@@ -526,34 +579,23 @@ html input[type=button]:hover{
 				  
 				  <div class="form-group">
 				    <label for="userid">아이디</label>
-				      <table style="width: 652px;">
-				    	<tr>
-				    		<td style="width: 30%;">
-				 				<input type="text" class="form-control" id="userId" name="userId"  oninput = "checkId()" >
-				      		</td>
-				     		 <td style="width: 15%;">
-				     			 <button type="button" id="emailChk" class="doubleChk" >인증번호 발송</button>
-				     		 </td>
-				     		 <td  style="text-align: left;">&ensp;
-				     		 	<div style="display: inline-block;"> 
-							      <span id="helpBlock" class="id_ok">사용 가능한 아이디입니다.</span>
-								  <span id="helpBlock" class="id_already">이미 사용중인 아이디입니다.</span>
-								 </div>  
-				     		 </td>
-			    		  </tr>
-				      </table>
+				 		<input type="text" class="form-control" id="userId" name="userId" value="${user.userId }" >
 				  </div>
 
 				   <div class="form-group">
 				      <table style="width: 652px;">
 				    	<tr>
 				    		<td style="width: 30%;">
-				 				<input type="text" class="form-control" id="sm_email2" name="sm_email2" placeholder="인증번호 입력"  readonly>
+				 				<input type="text" class="form-control" id="sm_email2" name="sm_email2" placeholder="인증번호 입력"  disabled required>
 				      		</td>
 				     		<td style="width: 15%;">
 				     			 <button type="button" id="emailChk2" class="doubleChk" >인증하기</button>
 				     		 </td>
-				     		 <td></td>
+				     		 <td  style="text-align: left;">&ensp;
+				     		 	<div style="display: inline-block">
+							      <span class="successEmailChk"></span> 
+							    </div> 	
+		    				</td>
 			    		  </tr>
 				      </table>
 				  </div>
@@ -727,7 +769,7 @@ html input[type=button]:hover{
 	
 			<br><br>
 			<div class="text-center  buttons">
-				<button type="button" class="join">가입하기</button>	
+				<button type="button" class="update">수정하기</button>	
 				<button type="button" class="cancel" >취&emsp;소</button>
 			</div>
 				

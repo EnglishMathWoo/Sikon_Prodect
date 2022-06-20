@@ -48,11 +48,11 @@ body{
 	padding-top : 170px;
 	padding-bottom: 200px;
 }
-.subtitle th{
+.subtitles th{
 	text-align:center;
 }
 
-.subtitle{
+.subtitles{
 	border-bottom: 1px solid #937062;
 	border-top: 2px solid #937062;
 }
@@ -68,7 +68,7 @@ th{
 	height: 50px;
 	font-size: 15px
 }
-td{
+.pur{
 	height: 50px;
 	border-bottom:  1px solid #D7D7D7;
 }
@@ -210,7 +210,7 @@ h3{
 		      <table style="width: 100%">
 		      
 		        <thead>
-		          <tr class="subtitle">
+		          <tr class="subtitles">
 		            <th align="center">No</th>
 		            <th align="center">주문일자</th>
 		            <th align="center">주문일련번호</th>
@@ -226,7 +226,7 @@ h3{
 				  <c:forEach var="purchase" items="${list}">
 					<c:set var="i" value="${ i+1 }" />
 					
-					<tr>
+					<tr class="pur">
 					  <td align="center">${ i }</td>
 					  
 					  <td align="center">${purchase.orderDate}</td>

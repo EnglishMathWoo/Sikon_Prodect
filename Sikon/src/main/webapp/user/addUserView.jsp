@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -9,82 +9,269 @@
 <head>
 	<meta charset="EUC-KR">
 	
-	<!-- datepicker -->
-	<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
 
-	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
-	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- date picker -->
+<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+
+<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
+<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
+
+<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
+
+<!-- jQuery UI toolTip 사용 CSS-->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- jQuery UI toolTip 사용 JS-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ <!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+ 
+<!-- 주소록 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
-	<!-- jQuery UI toolTip 사용 CSS-->
-  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  	<!-- jQuery UI toolTip 사용 JS-->
- 	 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-       body > div.container{
-            padding-top : 190px;
-            
-        }
-       
-      
-    </style>
+<style>
+
+
+div.container {
+	padding-top: 200px;
+	font-family: 'Nanum Myeongjo', serif;
+	width: 652px;
+	padding-bottom: 200px;
+}
+
+
+.join {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  font-size: large;
+  padding: 12px 0;
+  width: 49.3%;
+}
+.join:hover {
+  background-color: #937062d4;
+}
+html input[type=text]{
+	background-color: #f7f7f7;
+}
+.cancel {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  font-size: large;
+  padding: 11px 0;
+  width: 49.3%;
+}
+.cancel:hover {
+  background-color: #e7e2e2;
+}
+
+html input[type=button]{
+	background-color: #937062;
+	border: none;
+	color: #fff;
+}
+
+html input[type=button]:hover{
+	background-color: #937062d4;
+}
+
+
+.point{
+	background-color: #f7f7f7;
+	border: 1px solid #937062;
+	color: #937062;
+}
+
+.point:hover{
+	background-color: #e7e2e2;
+}
+
+.search{
+	display: flex;
+	padding: 5px;
+}
+
+.form-divy{
+    width: 46%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.addr{
+	padding-top : 5px;
+	text-align: left;
+}
+
+
+.subtitle{
+	border-top: 2px solid #937062;
+	border-bottom: 1px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+    height: 50px;
+	padding: 15px;
+	font-weight: bold;
+	font-size: 18px;
+}
+.imagetd{
+	width:20%;
+}
+.content{
+	text-align: left;
+	padding-left: 20px
+}
+.buttons{
+	width:652px;
+	margin-left: -20px;
+}
+.payProduct{
+	border-top: 2px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+    padding-top:20px;
+}
+
+.sectd{
+	display: flex;
+}
+.payment{
+	width:84%;
+	text-align: right;
+}
+
+.totalpay{
+	font-size: 20px;
+}
+.totals{
+	color: #FF4800;
+}
+.info{
+	width: 15%;
+	font-weight: bold;
+}
+.form-group{
+	width: 48%;
+	text-align: left;
+}
+.form-table{
+	display: block;
+    width: 200%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.form-area{
+	display: block;
+    width: 200%;
+    height: 100px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.payul{
+	display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: -25px;
+}
+.career{
+	border-top: 1px solid #937062;
+}
+.semititle{
+	border-bottom: 1px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+    height: 50px;
+	padding: 15px;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: left;
+}
+#emailChk, #emailChk2{
+	cursor: pointer;
+	background-color: #937062;
+	border: none;
+	color: #fff;
+	font-size: small;
+	width: 100px;
+    height: 34px;
+    margin-left: 5px;
+}
+.id_ok{
+	color:#008000;
+	display: none;
+}
+
+.id_already{
+	color:#d9534f; 
+	display: none;
+}
+
+.id_ok2{
+	color:#008000;
+	display: none;
+}
+
+.id_already2{
+	color:#d9534f; 
+	display: none;
+}
+
+</style>
     
-    <style>
-		.id_ok{
-		color:#008000;
-		display: none;
-		}
-
-		.id_already{
-		color:#6A82FB; 
-		display: none;
-		}
-		
-		.id_ok2{
-		color:#008000;
-		display: none;
-		}
-
-		.id_already2{
-		color:#6A82FB; 
-		display: none;
-		}
-	</style>
-    
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
 	
-		//============= "가입"  Event 연결 =============
-		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "button.btn.btn-primary" ).on("click" , function() {
-				fncAddUser();
-			});
-		});	
-		
-		
-		//============= "취소"  Event 처리 및  연결 =============
-		$(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("#previous").on("click" , function() {
-				history.go(-1);
-			});
-		});	
 	
-		
 		function fncAddUser() {
 			
 			var id=$("input[name='userId']").val();
@@ -125,9 +312,51 @@
 			}
 			
 			
-			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+			$("form").attr("method" , "POST").attr("action" , "/user/addUser").attr("enctype","multipart/form-data").submit();
 		}
+	
+	
+		//============= "가입"  Event 연결 =============
+		 $(function() {
+			$( ".join" ).on("click" , function() {
+				fncAddUser();
+			});
+		});	
 		
+		//============= "취소"  Event 처리 및  연결 =============
+		$(function() {
+			$(".cancel").on("click" , function() {
+				history.go(-1);
+			});
+		});	
+	
+		
+	
+		// 도로명 주소
+		 function findAddr(){
+				new daum.Postcode({
+			        oncomplete: function(data) {
+			        	
+			        	console.log(data);
+			        	
+			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+			            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+			            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			            var roadAddr = data.roadAddress; // 도로명 주소 변수
+			            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+			            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			            document.getElementById('member_post').value = data.zonecode;
+			            if(roadAddr !== ''){
+			                document.getElementById("member_addr").value = roadAddr;
+			            } 
+			            else if(jibunAddr !== ''){
+			                document.getElementById("member_addr").value = jibunAddr;
+			            }
+			        }
+			    }).open();
+			}
+		
+			
 		//이메일 인증        
 		$(function() {       
 		  
@@ -172,7 +401,6 @@
 		     		$(".successEmailChk").css("color","green");
 		     		$("#emailDoubleChk").val("true");
 		     		$("#sm_email2").attr("disabled",true);
-		     		//$("#userId").attr("disabled",true);
 		     	}else{
 		     		$(".successEmailChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
 		     		$(".successEmailChk").css("color","red");
@@ -187,23 +415,21 @@
 	
 		// 아이디 중복체크
 		function checkId(){
-	        var userId = $('#userId').val(); //id값이 "id"인 입력란의 값을 저장
+	        var userId = $('#userId').val(); 
 	        console.log(userId);
 	        
 	        $.ajax({
-	            url:'./json/checkId', //Controller에서 요청 받을 주소
-	            type:'post', //POST 방식으로 전달
+	            url:'./json/checkId', 
+	            type:'post', 
 	            data:{userId:userId},
-	            success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
+	            success:function(cnt){ 
 	            	console.log(cnt);
-	                if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디  
+	                if(cnt == 0){ 
 	                    $('.id_ok').css("display","inline-block"); 
 	                    $('.id_already').css("display", "none");
-	                } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+	                } else { 
 	                    $('.id_already').css("display","inline-block");
 	                    $('.id_ok').css("display", "none");
-	                 //   alert("아이디를 다시 입력해주세요");
-	                 //   $('#userId').val('');
 	                }
 	            },
 	            error:function(){
@@ -228,368 +454,345 @@
 		
 		// 닉네임 유효성체크 
 		 function checkNickname(){
-		        var userNickname = $('#userNickname').val(); //닉네임값이 "userNickname"인 입력란의 값을 저장
+		        var userNickname = $('#userNickname').val(); 
 		        console.log(userNickname);
 		        
 		        $.ajax({
-		            url:'./json/checkNickname', //Controller에서 요청 받을 주소
-		            type:'post', //POST 방식으로 전달
+		            url:'./json/checkNickname',
+		            type:'post',
 		            data:{userNickname:userNickname},
-		            success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
-		                if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 닉네임
+		            success:function(cnt){ 
+		                if(cnt == 0){ 
 		                    $('.id_ok2').css("display","inline-block"); 
 		                    $('.id_already2').css("display", "none");
-		                } else { // cnt가 1일 경우 -> 이미 존재하는 닉네임
+		                } else { 
 		                    $('.id_already2').css("display","inline-block");
-		                    $('.id_ok2').css("display", "none");
-		                    alert("닉네임을 다시 입력해주세요");
-		                  //  $('#userNickname').val('');
+		                    $('.id_ok2').css("display", "none");		                  
 		                }
 		            },
 		            error:function(){
 		                alert("에러입니다");
 		            }
 		        });
-		        };
-		      
-		        
-		        
-		// 생년월일
-		 $(function() {
-				$('#userBirth').datepicker({
-					dateFormat: "yy-mm-dd"
-				});
-		});
-		
-		// 근무시작날짜
-		 $(function() {
-				$('#startDate').datepicker({
-					dateFormat: "yy-mm-dd"
-				});
-		});
-		
-		// 근무시작날짜2
-		 $(function() {
-				$('#startDate2').datepicker({
-					dateFormat: "yy-mm-dd"
-				});
-		});
-		
-		// 근무종료날짜
-		 $(function() {
-				$('#endDate').datepicker({
-					dateFormat: "yy-mm-dd"
-				});
-		});
-		
-		// 근무종료날짜2
-		 $(function() {
-				$('#endDate2').datepicker({
-					dateFormat: "yy-mm-dd"
-				});
-		});
-		
-		// 취득일자
-		 $(function() {
-				$('#licenseDate').datepicker({
-					dateFormat: "yy-mm-dd"
-				});
-		});
-	   
-		// 취득일자2
-		 $(function() {
-				$('#licenseDate2').datepicker({
-					dateFormat: "yy-mm-dd"
-				});
-		});
-		
-		// 도로명 주소
-		 function findAddr(){
-				new daum.Postcode({
-			        oncomplete: function(data) {
-			        	
-			        	console.log(data);
-			        	
-			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-			            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-			            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-			            var roadAddr = data.roadAddress; // 도로명 주소 변수
-			            var jibunAddr = data.jibunAddress; // 지번 주소 변수
-			            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-			            document.getElementById('member_post').value = data.zonecode;
-			            if(roadAddr !== ''){
-			                document.getElementById("member_addr").value = roadAddr;
-			            } 
-			            else if(jibunAddr !== ''){
-			                document.getElementById("member_addr").value = jibunAddr;
-			            }
-			        }
-			    }).open();
-			}
-	
-		 
-		 
-//		//==>"ID중복확인" Event 처리 및 연결
-//		 $(function() {
-//			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-//			 $("button.btn.btn-info").on("click" , function() {
-//				popWin 
-//				= window.open("/user/checkDuplication.jsp",
-//											"popWin", 
-//											"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
-//											"scrollbars=no,scrolling=no,menubar=no,resizable=no");
-//			});
-//		});	
+	        };
+        
+	        
+		     // 생년월일
+			 $(function() {
+					$('#userBirth').datepicker({
+						changeMonth: true,
+						changeYear: true, 
+						language: 'kr',
+						dateFormat: "yy-mm-dd"
+					});
+			});
+			
+			// 근무시작날짜
+			 $(function() {
+					$('#startDate').datepicker({
+						dateFormat: "yy-mm-dd"
+					});
+			});
+			
+			// 근무시작날짜2
+			 $(function() {
+					$('#startDate2').datepicker({
+						dateFormat: "yy-mm-dd"
+					});
+			});
+			
+			// 근무종료날짜
+			 $(function() {
+					$('#endDate').datepicker({
+						dateFormat: "yy-mm-dd"
+					});
+			});
+			
+			// 근무종료날짜2
+			 $(function() {
+					$('#endDate2').datepicker({
+						dateFormat: "yy-mm-dd"
+					});
+			});
+			
+			// 취득일자
+			 $(function() {
+					$('#licenseDate').datepicker({
+						dateFormat: "yy-mm-dd"
+					});
+			});
+		   
+			// 취득일자2
+			 $(function() {
+					$('#licenseDate2').datepicker({
+						dateFormat: "yy-mm-dd"
+					});
+			});
+	        
+</script>
 
-	</script>		
-    
+	
 </head>
 
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/toolbar.jsp" />
+        <jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
-	
-		<h1 class="bg-white text-center">회 원 가 입</h1>
-		
-		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal" enctype="multipart/form-data">
-		 
-		   <div class="form-group">
-		   
-		  
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디(이메일)</label>
-		 
-		    <div class="col-sm-5">
-		     <div class="col-sm-8" style="display: inline-block">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" oninput = "checkId()" >
-		     </div> 
-		      <button type="button" id="emailChk" class="doubleChk" >인증번호 보내기</button><br/>
-		     
-		     <div style="display: inline-block"> 
-		      <span id="helpBlock" class="id_ok">사용 가능한 아이디입니다.</span>
-			  <span id="helpBlock" class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
-			 </div>
+
+<div class="container">
+	<div class="layout">
+			<br>
+				<h1 class="bg-defualt text-center">| ADD PROFILE |</h1><br>
+				
+				<!-- form Start /////////////////////////////////////-->
+				<form class="form-horizontal">
 			  
-		    <div class="col-sm-8" style="display: inline-block">  
-		      <input type="text" class="form-control" id="sm_email2" name="sm_email2" placeholder="인증번호 입력" disabled required>
-		    </div>
-		      <button type="button" id="emailChk2" class="doubleChk" style="float: left;" >이메일인증</button>
-		      
-		    <div style="display: inline-block">
-		      <span class="point successEmailChk"></span> 
-		    </div> 		      
-		      
+			<div>
+				  
+				  <div class="subtitle">
+				  <p>프로필</p>
+				  </div><br>
+				  	  
+				  	  
+				  <div class="form-group">
+						<input multiple="multiple" class="form-control" type="file" id ="uploadFile"  name="uploadFile">
+				  </div>
+				  	  
+				  	  
+				  <div class="form-group">
+					<label for="userNick">닉네임</label>
+						<table style="width: 652px;">
+							<tr>
+								<td style="width: 46%;">
+								<input type="text" class="form-control" id="userNickname" name="userNickname"  oninput="checkNickname()">
+								</td>
+								
+								<td  style="text-align: left;">&ensp;
+								<span id="helpBlock" class="id_ok2">사용 가능한 닉네임입니다.</span>
+					 			<span id="helpBlock" class="id_already2">이미 사용중인 닉네임입니다.</span>
+					 			</td>
+				 			</tr>
+			 			</table>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="userid">아이디</label>
+				      <table style="width: 652px;">
+				    	<tr>
+				    		<td style="width: 30%;">
+				 				<input type="text" class="form-control" id="userId" name="userId"  oninput = "checkId()" >
+				      		</td>
+				     		 <td style="width: 15%;">
+				     			 <button type="button" id="emailChk" class="doubleChk" >인증번호 발송</button>
+				     		 </td>
+				     		 <td  style="text-align: left;">&ensp;
+				     		 	<div style="display: inline-block;"> 
+							      <span id="helpBlock" class="id_ok">사용 가능한 아이디입니다.</span>
+								  <span id="helpBlock" class="id_already">이미 사용중인 아이디입니다.</span>
+								 </div>  
+				     		 </td>
+			    		  </tr>
+				      </table>
+				  </div>
+
+				   <div class="form-group">
+				      <table style="width: 652px;">
+				    	<tr>
+				    		<td style="width: 30%;">
+				 				<input type="text" class="form-control" id="sm_email2" name="sm_email2" placeholder="인증번호 입력"  disabled required>
+				      		</td>
+				     		<td style="width: 15%;">
+				     			 <button type="button" id="emailChk2" class="doubleChk" >인증하기</button>
+				     		 </td>
+				     		 <td  style="text-align: left;">&ensp;
+				     		 	<div style="display: inline-block">
+							      <span class="successEmailChk"></span> 
+							    </div> 	
+		    				</td>
+			    		  </tr>
+				      </table>
+				  </div>
+				  <div class="form-group">
+				    <label for="password">비밀번호</label>
+				      <input type="text" class="form-control" id="password" name="password" >
+				  </div>
+				  <div class="form-group">
+				    <label for="passwordcheck">비밀번호 확인</label>
+				      <input type="text" class="form-control" id="password2" name="password2" >
+				  </div>
+				  
 			</div>
-		
-		    </div>
-		 
-		  <div class="form-group">
-		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
-		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
-		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
-		    </div>
-		  </div>
-		  
-	  	  <div class="form-group">
-		    <label for="userNickname" class="col-sm-offset-1 col-sm-3 control-label">닉네임</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userNickname" name="userNickname" placeholder="닉네임" oninput = "checkNickname()">
-		      
-		      <span id="helpBlock" class="id_ok2">사용 가능한 닉네임입니다.</span>
-			  <span id="helpBlock" class="id_already2">누군가 이 닉네임을 사용하고 있어요.</span>
-		    </div>
-		  </div>
+			<br>
+			<div>
+				<div class="subtitle">
+				  <p>회원정보</p>
+				  </div><br>	  
+				  
+				  
+				  <div class="form-group">
+				    <label for="userName">이름</label>
+				      <input type="text" class="form-control" id="userName" name="userName" >
+				  </div>
+				  
+				 <div class="form-group">
+				    <label for="userPhone">연락처 &ensp;<span style="font-size: 12px;font-weight:bold;color:#a94442;">( " - " 제외 11자리를 입력해주세요. )</span></label>
+				      <input type="text" class="form-control" id="phone" name="phone" >
+				  </div>
+				  
+				  <div class="form-group">
+				    <label for="userBirth">생년월일</label>
+				      <input type="text" class="form-control" id="userBirth" name="userBirth" >
+				  </div>
+				  
+				  <div class="form-group divyAddr">
+				    <label for="divyAddr">주소</label>
+				    <table style="width:652px">
+				    							
+						<tr>
+							<td class="addr">
+								<input type="text" class="form-divy" id="member_post" name="addr" placeholder="우편번호 (클릭해주세요.)" readonly onclick="findAddr()"><br>
+							</td>
+						</tr>
+						<tr>
+							<td class="addr">
+								<input type="text" class="form-divy" id="member_addr" name="addr" placeholder="주소" readonly><br>
+							</td>
+						</tr>
+						<tr>
+							<td class="addr">
+								<input type="text" class="form-divy" name="addr" placeholder="상세주소">
+							</td>
+						</tr>
+						
+					</table>
+				  </div>
+				  
+			</div>
+			<br>
+			<div>
+				<div class="subtitle">
+				  <p>쿠킹멘토 <i class="bi bi-chevron-down"></i></p>
+				  </div><br>		
+
+				  <div class="form-group">
+					 <ul class="payul">
+					 	<li>
+					 		<input type="radio" name="mentorApply" value="Y"/> <span style="font-size:16px; font-weight: bold;">멘토신청</span>
+					    </li>
+					    <li> 
+					    	<input type="radio" name="mentorApply" value="N" checked="checked"/> <span style="font-size:16px; font-weight: bold;">신청안함</span>
+					  	</li>
+					  </ul>
+				  </div>
+				  <br>
+				  
+				  <h4 class="semititle">경력사항</h4>
+				  
+				<table style="width:652px">
+					<tr>
+						<td>
+						  <div class="form-group">
+						    <label for="">소속</label>
+						      <input type="text" class="form-table" id="company" name="company" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">근무시작 날짜</label>
+						      <input type="text" class="form-table" id="startDate" name="startDate" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">근무종료 날짜</label>
+						      <input type="text" class="form-table" id="endDate" name="endDate" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">업무내용</label>
+						      <input type="text" class="form-area" id="careerExperience" name="careerExperience" />
+						  </div>
+		 				</td>
+		 				<td>
+		 				<div class="form-group">
+						    <label for="">소속</label>
+						      <input type="text" class="form-table" id="company" name="company" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">근무시작 날짜</label>
+						      <input type="text" class="form-table" id="startDate2" name="startDate" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">근무종료 날짜</label>
+						      <input type="text" class="form-table" id="endDate2" name="endDate" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">업무내용</label>
+						      <input type="text" class="form-area" id="careerExperience" name="careerExperience" />
+						  </div>
+		 				</td>
+		 			</tr>
+		 		</table>		
+ 			
+ 			
+ 			<h4 class="semititle">자격증</h4>
+				  
+				<table style="width:652px">
+					<tr>
+						<td>
+						  <div class="form-group">
+						    <label for="">자격증명</label>
+						      <input type="text" class="form-table" id="licenseName" name="licenseName" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">발급기관</label>
+						      <input type="text" class="form-table" id="licenseInstitution" name="licenseInstitution" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">취득일자</label>
+						      <input type="text" class="form-table" id="licenseDate" name="licenseDate" >
+						  </div>
+		 				</td>
+		 				<td>
+		 				<div class="form-group">
+						    <label for="">자격증명</label>
+						      <input type="text" class="form-table" id="licenseName" name="licenseName" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">발급기관</label>
+						      <input type="text" class="form-table" id="licenseInstitution" name="licenseInstitution" >
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="">취득일자</label>
+						      <input type="text" class="form-table" id="licenseDate2" name="licenseDate" >
+						  </div>
+		 				</td>
+		 			</tr>
+		 		</table>		
+ 
+			</div>	  
+			
+			</form>
+			
 	
-		  <div class="form-group">
-    		<label for="userBirth" class="col-sm-offset-1 col-sm-3 control-label" >생년월일</label>
-   			<div class="col-sm-4">
-      	  <input type="text" class="form-control" id="userBirth" name="userBirth" placeholder="생년월일">
-    		</div>
- 	 	  </div>
-  
-		  	  	     
-		  <div class="form-group">
-		   <label for="addr" class="col-sm-offset-1 col-sm-3 control-label">주소</label>
-		    <div class="col-sm-4">
-		     <input id="member_post" class="form-control"  type="text" name="addr" placeholder="우편번호" readonly onclick="findAddr()">
-  			 <input id="member_addr" class="form-control"  type="text" name="addr" placeholder="주소" readonly>
-  			 <input type="text" class="form-control" name="addr" placeholder="상세주소">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-    		<label for="phone" class="col-sm-offset-1 col-sm-3 control-label" >휴대폰</label>
-   			<div class="col-sm-4">
-      	  	<input type="text" class="form-control" id="phone" name="phone" placeholder="휴대폰">
-      	  		<span id="helpBlock" class="help-block">
-		      	 <strong class="text-danger">" -  " 제외 11자리입력하세요</strong>
-		  		</span>
-    		</div>
- 	 	  </div>
- 	 	  
- 	 	  <div class="form-group">
-    		<label class="col-sm-offset-1 col-sm-3 control-label" for="userImage">회원이미지</label>
-   			<div class="col-sm-4">
-       		<input multiple="multiple" class="form-control" type="file" id ="uploadFile"  name="uploadFile"  placeholder="회원이미지">
- 			</div>
- 		  </div>
- 		  
-		  <hr style="border: solid 1px #d7d7d7;" width="650px;">	
- 	 	
- 	 	   <div class="form-group">
-    		<label for="mentorApply" class="col-sm-offset-1 col-sm-3 control-label" >쿠킹멘토 신청 여부</label>
-   			<div class="col-sm-4">
-      	 	<input type="radio" name="mentorApply" value="N" checked="checked">미신청  &nbsp
-			<input type="radio" name="mentorApply" value="Y" >신청
-    		</div>
- 	 	  </div>
- 	 	  
- 	 	  <hr style="border: solid 1px #d7d7d7;" width="650px;">	
- 	 	  
- 	 	  <p align="center"><label>경력사항</label> </p>
- 	 	 
- 	 	  
- 	 	  <div class="form-group">
-		    <label for="career" class="col-sm-offset-1 col-sm-3 control-label">소속</label>
-		   	<div class="col-sm-4">
-		      <input type="text" class="form-control" id="company" name="company" placeholder="소속1">
-		      
-		    </div>
-		 </div>   
- 	 	  
- 	 	   <div class="form-group">
-    		<label for="startDate" class="col-sm-offset-1 col-sm-3 control-label" >근무시작날짜</label>
-   			<div class="col-sm-4">
-      	  	  <input type="text" class="form-control" id="startDate" name="startDate" placeholder="근무시작날짜1">
-      	  	  
-    		</div>
- 	 	  </div>
- 	 	  
- 	 	   <div class="form-group">
-    		<label for="endDate" class="col-sm-offset-1 col-sm-3 control-label" >근무종료날짜</label>
-   			<div class="col-sm-4">
-      	 	  <input type="text" class="form-control" id="endDate" name="endDate" placeholder="근무종료날짜1">
-      	 	  
-    		</div>
- 	 	  </div>
- 	 	  
- 	 	  <div class="form-group">
-		    <label for="careerExperience" class="col-sm-offset-1 col-sm-3 control-label">업무내용</label>
-		    <div class="col-sm-4">
-		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" placeholder="업무내용1"></textarea>
-		     <hr>
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="career" class="col-sm-offset-1 col-sm-3 control-label">소속</label>
-		   	<div class="col-sm-4">
-		      <input type="text" class="form-control" id="company" name="company" placeholder="소속2">
-		    </div>
-		 </div>   
- 	 	  
- 	 	   <div class="form-group">
-    		<label for="startDate" class="col-sm-offset-1 col-sm-3 control-label" >근무시작날짜</label>
-   			<div class="col-sm-4">
-      	  	  <input type="text" class="form-control" id="startDate2" name="startDate" placeholder="근무시작날짜2">
-    		</div>
- 	 	  </div>
- 	 	  
- 	 	   <div class="form-group">
-    		<label for="endDate" class="col-sm-offset-1 col-sm-3 control-label" >근무종료날짜</label>
-   			<div class="col-sm-4">
-      	 	  <input type="text" class="form-control" id="endDate2" name="endDate" placeholder="근무종료날짜2">
-    		</div>
- 	 	  </div>
- 	 	  
- 	 	  <div class="form-group">
-		    <label for="careerExperience" class="col-sm-offset-1 col-sm-3 control-label">업무내용</label>
-		    <div class="col-sm-4">
-		      <textarea type="text" class="form-control" id="careerExperience" name="careerExperience" placeholder="업무내용2"></textarea>		    
-		    </div>
-		  </div>
- 	 	  
- 	 	  <hr style="border: solid 1px #d7d7d7;" width="650px;">	
- 	 	  
- 	 	  <p align="center"><label>자격증</label> </p>
- 	 	  
- 	 	  <div class="form-group">
-		    <label for="licenseName" class="col-sm-offset-1 col-sm-3 control-label">자격증명</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="licenseName" name="licenseName" placeholder="자격증명1">
-		    </div>
-		  </div>
- 	 	  
- 	 	  <div class="form-group">
-		    <label for="licenseInstitution" class="col-sm-offset-1 col-sm-3 control-label">발급기관</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="licenseInstitution" name="licenseInstitution" placeholder="발급기관1">
-		    </div>
-		  </div>
- 	 	  
- 	 	  <div class="form-group">
-    		<label for="licenseDate" class="col-sm-offset-1 col-sm-3 control-label" >취득일자</label>
-   			<div class="col-sm-4">
-      	  	  <input type="text" class="form-control" id="licenseDate" name="licenseDate" placeholder="취득일자1">
-      	  	  <hr>
-      	  	</div>
-      	  </div>
- 	 	  
- 	 	  
- 	 	   <div class="form-group">
-		    <label for="licenseName" class="col-sm-offset-1 col-sm-3 control-label">자격증명</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="licenseName" name="licenseName" placeholder="자격증명2">
-		    </div>
-		  </div>
- 	 	  
- 	 	  <div class="form-group">
-		    <label for="licenseInstitution" class="col-sm-offset-1 col-sm-3 control-label">발급기관</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="licenseInstitution" name="licenseInstitution" placeholder="발급기관2">
-		    </div>
-		  </div>
- 	 	  
- 	 	  <div class="form-group">
-    		<label for="licenseDate" class="col-sm-offset-1 col-sm-3 control-label" >취득일자</label>
-   			<div class="col-sm-4">
-      	  	  <input type="text" class="form-control" id="licenseDate2" name="licenseDate" placeholder="취득일자2">
-    		</div>
- 	 	  </div>
-	
-		  <br>
-		
-		  <div class="form-group">
-		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >가 &nbsp;입</button>
-			  <a class="btn btn-primary btn" id="previous" role="button">취&nbsp;소</a>
-		    </div>
-		  </div>
-		</form>
-		<!-- form Start /////////////////////////////////////-->
-		
+			<br><br>
+			<div class="text-center  buttons">
+				<button type="button" class="join">가입하기</button>	
+				<button type="button" class="cancel" >취&emsp;소</button>
+			</div>
+				
+			<br>
  	</div>
-	<!--  화면구성 div end /////////////////////////////////////-->
-	
+</div>	
+
+
 </body>
 
 </html>

@@ -247,8 +247,8 @@ div.emptyProd{
 		 
 		 $(function() {
 			 
-			 $( ".editjoin" ).on("click" , function() {
-				 self.location = "/user/addUserViewEdit.jsp";
+			 $( ".updateuser" ).on("click" , function() {
+				 self.location = "/user/getUser?userId=${sessionScope.user.userId}"
 				 });
 			 
 			 
@@ -509,8 +509,6 @@ div.emptyProd{
 			    </div>
 		    
 		    
-		    <button type="button" class="editjoin">회원가입 수정중</button>
-		    
 		    
 		   		 <br/><hr id="hr"/><br/>
     
@@ -521,6 +519,7 @@ div.emptyProd{
 			      <button class="theme themeMk" value="mk">밀키트</button>
 			    </nav>
 	    
+          		<button type="button" class="updateuser">회원정보수정 진행중</button>
           
       			<div class="center btmspace-50">
       
