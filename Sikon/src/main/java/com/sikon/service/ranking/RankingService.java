@@ -16,7 +16,7 @@ public interface RankingService {
 	public void addPurchase(int prodNo, String serialNo) throws Exception;
 	
 	//구매 날짜 삭제
-	public void deletePurchase(int prodNo, int tranNo) throws Exception;
+	public void deletePurchase(int prodNo, String serialNo) throws Exception;
 	
 	// 판매 랭킹 조회
 	public Map<String, Object> getProductList(Search search) throws Exception;

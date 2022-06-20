@@ -62,8 +62,40 @@ public class EchoHandler extends TextWebSocketHandler {
 		System.out.println("msg="+msg);
 		
 		if (StringUtils.isNotEmpty(msg)) {
-			System.out.println("if문 들어옴?");
+			
 			String[] strs = msg.split(",");
+			
+			if(strs != null && strs.length == 4) {
+				
+				String cmd = strs[0];
+				String fromUserId = strs[1];
+				String fromUserNickname = strs[2];
+				String toUserId = strs[3];
+				
+				WebSocketSession fromUserSession = userSessionsMap.get(fromUserId);
+				WebSocketSession toUserSession = userSessionsMap.get(toUserId);
+				System.out.println("fromUserSession="+userSessionsMap.get(fromUserId));
+				System.out.println("toUserSession="+toUserSession);
+				
+				Alarm alarm = new Alarm();
+								
+				//즐겨찾기
+				if ("love".equals(cmd) && toUserSession != null) {
+					
+					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 멘토님을 즐겨찾기에 추가했습니다!");
+					toUserSession.sendMessage(tmpMsg);
+					
+					alarm.setAlarmTarget(toUserId);
+					alarm.setAlarmContent(fromUserNickname + "님이 멘토님을 즐겨찾기에 추가했습니다!");
+			
+					alarmService.addAlarm(alarm);
+				} else if ("love".equals(cmd)){
+					alarm.setAlarmTarget(toUserId);
+					alarm.setAlarmContent(fromUserNickname + "님이 멘토님을 즐겨찾기에 추가했습니다!");;
+					alarmService.addAlarm(alarm);
+				}
+			}
+			
 			if(strs != null && strs.length == 5) {
 				
 				String cmd = strs[0];
@@ -71,7 +103,6 @@ public class EchoHandler extends TextWebSocketHandler {
 				String fromUserNickname = strs[2];
 				String toUserId = strs[3];
 				String postName = strs[4];
-				System.out.println("length 성공?"+cmd);
 				
 				WebSocketSession fromUserSession = userSessionsMap.get(fromUserId);
 				WebSocketSession toUserSession = userSessionsMap.get(toUserId);
@@ -83,7 +114,6 @@ public class EchoHandler extends TextWebSocketHandler {
 				//좋아요
 				if ("heart".equals(cmd) && toUserSession != null) {
 					
-					System.out.println("onmessage되나??");
 					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
 							+ postName+"']");
 					toUserSession.sendMessage(tmpMsg);
@@ -102,7 +132,6 @@ public class EchoHandler extends TextWebSocketHandler {
 				
 				//레시피 리뷰
 				if ("recipeReview".equals(cmd) && toUserSession != null) {
-					System.out.println("onmessage되나??");
 					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 회원님의 레시피에 리뷰를 작성했습니다! : [제목 : '"
 									+ postName+"']");
 					toUserSession.sendMessage(tmpMsg);

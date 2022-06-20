@@ -331,7 +331,24 @@ background-color: #f7f7f7;
           <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
            <h6 >${recipe.recipeDetail }</h6>
           <ul class="meta">
-            <li > ${recipe.recipeTheme }</li>
+            <li > <c:choose>
+            <c:when test="${recipe.recipeTheme=='KO'}">
+            한식
+            </c:when>
+            <c:when test="${recipe.recipeTheme=='CH'}">
+            중식
+            </c:when>
+            <c:when test="${recipe.recipeTheme=='FR'}">
+            양식
+            </c:when>
+            <c:when test="${recipe.recipeTheme=='JP'}">
+            일식
+            </c:when>
+            <c:otherwise>
+            간식
+            </c:otherwise>
+            </c:choose>
+            </li>
             <li>${recipe.recipeDifficulty }</li>
             <li>${recipe.cookingTime }분</li>
             <li> ${recipe.writer.userNickname}</li>

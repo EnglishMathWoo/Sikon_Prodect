@@ -55,15 +55,11 @@ public class RecipeRestController {
 
 		System.out.println("/recipe/json/listRecipe : POST");
 		// Business Logic
-
+		System.out.println("¤·±â¿¡¤Ë!!!!!!!!!!!!!!"+search);
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
 		System.out.println("orderCondition=" + search.getOrderCondition());
-
-		if (search.getOrderCondition() == null) {
-			search.setOrderCondition("0");
-		}
 
 		if (search.getSearchCondition() == null) {
 			search.setSearchCondition("0");

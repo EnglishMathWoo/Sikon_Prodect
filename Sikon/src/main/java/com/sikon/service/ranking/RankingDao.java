@@ -20,7 +20,7 @@ public interface RankingDao{
 	public void insertPurchase(int prodNo, String serialNo) throws Exception;
 	
 	//구매 날짜 삭제
-	public void deletePurchase(int prodNo, int tranNo) throws Exception;
+	public void deletePurchase(int prodNo, String serialNo) throws Exception;
 	
 	//판매 랭킹 리스트
 	public List<Product> getProductList(Search search) throws Exception;

@@ -95,8 +95,8 @@
 				fncGetList(1); 
 			});
 		 });
-				
 			
+		
 		 $(function() {
 				
 			$("#addCoupon").on("click" , function() {
@@ -104,7 +104,37 @@
 				self.location = "/coupon/addCoupon.jsp";
 			});
 		});
-			 		 
+		 
+		 $(document).ready(function() {
+		
+			 $("#checkall").click(function(){
+					
+					if($("#checkall").prop("checked")){
+						
+						$("input[name=deleteCheck]").prop("checked",true);
+						
+					}else{
+						
+						$("input[name=deleteCheck]").prop("checked",false);
+						
+					}
+					
+				})
+				 
+				 
+				$("input[name=deleteCheck]").click(function(){
+					
+					if($("#checkall").prop("checked")){
+						
+						$("#checkall").prop("checked",false);
+						
+					}
+					
+				})
+			
+		 });	
+		 
+		 
 		 $(function() {
 				
 				$("button.delete").on("click" , function() {
@@ -155,14 +185,14 @@
 		<button type="button" class="btn-b" id="addCoupon" style="float: right; margin-right: 10px;">생 &nbsp;성</button>
 			
       <table class="table table-hover table-striped">
-		
+	
         <thead>
           <tr>
-           	<th align="center"></th>
-            <th align="center">쿠폰번호</th>
-            <th align="left" >쿠폰이름</th>
-            <th align="left">할인율</th>
-            <th align="left">할인금액</th>
+            <th align="center" style="text-align:center;"><input type="checkbox" id="checkall"/></th>
+            <th align="center" style="text-align:center;">쿠폰번호</th>
+            <th align="center" style="text-align:center;">쿠폰이름</th>
+            <th align="center" style="text-align:center;">할인율</th>
+            <th align="center" style="text-align:center;">할인금액</th>
           </tr>  
         </thead>
        

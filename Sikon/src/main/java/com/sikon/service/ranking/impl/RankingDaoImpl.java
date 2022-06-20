@@ -57,11 +57,11 @@ public class RankingDaoImpl implements RankingDao {
 	}
 	
 	//구매 날짜 삭제
-	public void deletePurchase(int prodNo, int tranNo) throws Exception {
+	public void deletePurchase(int prodNo, String serialNo) throws Exception {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("prodNo", prodNo);
-		map.put("tranNo", tranNo);
+		map.put("serialNo", serialNo);
 		
 		sqlSession.delete("RankingMapper.deletePurchase", map);
 	}

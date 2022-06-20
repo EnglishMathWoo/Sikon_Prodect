@@ -89,9 +89,9 @@ public class RecipeController {
 			System.out.println(ingredientAmount[j]);
 		}
 		
-//		String FILE_SERVER_PATH = filePath;
+		String FILE_SERVER_PATH = filePath;
 //		String FILE_SERVER_PATH = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
-		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+//		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 
 		String newFileName = "";
 
@@ -257,9 +257,10 @@ public class RecipeController {
 	@RequestMapping(value = "listRecipe")
 	public String listRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
 			throws Exception {
+		System.out.println("ahsi모냐고!!!!!!!!!!!!!!"+search);
 
 		System.out.println("/recipe/listRecipe :  POST/get");
-
+		System.out.println("왜0임"+search.getCurrentPage());
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
