@@ -346,17 +346,19 @@ p {
 					$(document).on("click" ,"#bookmarkBtn", function(){
 
 						var userId = $("input[name='userId']").val();
-						var userNickname = $("input[name='userNickname']").val();
+						var mentorId = $("input[name='mentorId']").val();
+						var mentorNickname = $("input[name='mentorNickname']").val();
 						
-					
-						console.log(userNickname);
 						console.log(userId);
+						console.log(mentorId);
+						console.log(mentorNickname);
+						
 
 					     $.ajax({
 					            type : "POST",  
 					            url : "/love/json/updateLove",       
 					            dataType : "json",   
-					            data : {'userNickname' : userNickname, 'userId' : userId },
+					            data : {'userNickname' : mentorNickname, 'userId' : userId },
 					            error : function(){
 					               alert("통신 에러");
 					            },
@@ -373,7 +375,7 @@ p {
 					                    	console.log(userNickname);
 					                    	
 					                    	
-					                    	pushAlarm(userId, userNickname, cookNo);
+					                    	pushAlarm(userId, userNickname, mentorId);
 
 								           
 					                    location.reload();
@@ -398,13 +400,13 @@ p {
 		 
         
 					//좋아요 push 알림
-					 function pushAlarm(userId, userNickname, cookNo){
+					 function pushAlarm(userId, userNickname, mentorId){
 															
 							$.ajax({
-						        url : "/cook/json/pushAlarm",
+						        url : "/cook/json/addLove",
 						        type : 'POST',
 						        dataType : "json",   
-					            data : {'cookNo' : cookNo, 'userId' : userId, 'userNickname' : userNickname }, 
+					            data : {'userId' : userId, 'userNickname' : userNickname, 'mentorId' : mentorId }, 
 					            async: false, 
 					            error : function(){
 						            alert("통신 에러");
@@ -414,7 +416,7 @@ p {
 						        	alert("알람 전송 완료!!");
 						        	      	          
 						           		if(socket){
-						        			let socketMsg = "heart,"+data.userId+","+data.userNickname+","+data.mentorId+","+data.cookName;
+						        			let socketMsg = "love,"+data.userId+","+data.userNickname+","+data.mentorId;
 						        			console.log(socketMsg);
 						        			socket.send(socketMsg);
 						           		}
@@ -507,9 +509,10 @@ p {
 
             </div>
         </div>
-				<input type="hidden" name="userNickname" id="userNickname" value="${mentor.userNickname }" />
-
-				<input type="hidden" name="userId" id="userId" value="${user.userId }" />
+				<input type="hidden" name="mentorNickname" id="mentorNickname" value="${mentor.userNickname}" />
+				<input type="hidden" name="mentorId" id="mentorId" value="${mentor.userId}" />
+				<input type="hidden" name="userId" id="userId" value="${user.userId}" />
+				<input type="hidden" name="userNickname" id="userNickname" value="${user.userNickname}" />
 	<div class="wrapper row3">
 
 		  <section class="hoc container clear"> 
