@@ -12,13 +12,6 @@
 <head>
 	<meta charset="EUC-KR">
 	
-	<!-- datepicker -->
-	<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-
-	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
-	<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
-
-	<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -161,7 +154,7 @@ div.container {
 		    </div>
 		  </div>
 		  
-		 <input type="hidden" class="form-control 1" id="quitDate" name="quitDate" value="${user.quitDate}" >
+	<!--  	 <input type="hidden" class="form-control 1" id="quitDate" name="quitDate" value="${user.quitDate}" > -->
 		 
 		 <input type="hidden" class="form-control 1" id="quitStatus" name="quitStatus" value="${user.quitStatus}" >
 		 
