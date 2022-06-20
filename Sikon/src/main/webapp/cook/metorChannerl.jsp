@@ -373,7 +373,7 @@ p {
 					                    	console.log(userNickname);
 					                    	
 					                    	
-
+					                    	pushAlarm(userId, userNickname, cookNo);
 
 								           
 					                    location.reload();
@@ -396,6 +396,32 @@ p {
 					 });
         //==================================================================================///	
 		 
+        
+					//좋아요 push 알림
+					 function pushAlarm(userId, userNickname, cookNo){
+															
+							$.ajax({
+						        url : "/cook/json/pushAlarm",
+						        type : 'POST',
+						        dataType : "json",   
+					            data : {'cookNo' : cookNo, 'userId' : userId, 'userNickname' : userNickname }, 
+					            async: false, 
+					            error : function(){
+						            alert("통신 에러");
+						        },
+						        success : function(data){
+						        	
+						        	alert("알람 전송 완료!!");
+						        	      	          
+						           		if(socket){
+						        			let socketMsg = "heart,"+data.userId+","+data.userNickname+","+data.mentorId+","+data.cookName;
+						        			console.log(socketMsg);
+						        			socket.send(socketMsg);
+						           		}
+						        }
+						    
+						    })
+					 };
 	
 		   	 $(window).scroll(function() {
 	                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
