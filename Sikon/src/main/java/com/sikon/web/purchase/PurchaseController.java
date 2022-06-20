@@ -242,7 +242,10 @@ public class PurchaseController {
 		
 		//==================================================================================		
 		
-		rankingService.addPurchase(prodNo, serialNo);
+		for(int i=0; i<quantity; i++) {
+			rankingService.addPurchase(prodNo, serialNo);
+		}
+		
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchase.jsp");
@@ -358,7 +361,10 @@ public class PurchaseController {
 			
 			cartService.deleteCart(cartNo[i]);
 			
-			rankingService.addPurchase(cart.getCartProd().getProdNo(), serialNo);
+			for(int k=0; k<cart.getQuantity(); k++) {
+				rankingService.addPurchase(cart.getCartProd().getProdNo(), serialNo);
+			}
+			
 		
 		}
 		
@@ -748,6 +754,10 @@ public class PurchaseController {
 			
 			((Purchase)list.get(i)).setDivyStatus("000");
 			purchaseService.updateDivyStatus(((Purchase)list.get(i)));
+			
+			for(int k=0; k<quantity; k++) {
+				rankingService.deletePurchase(prodNo, serialNo);
+			}
 			
 		}
 		

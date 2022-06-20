@@ -227,9 +227,9 @@ public class CookRestController {
 	}
 	
 	//좋아요 push 알림
-	@RequestMapping(value="/json/pushAlarm", method=RequestMethod.POST)
+	@RequestMapping(value="/json/addHeart", method=RequestMethod.POST)
 	@ResponseBody
-	public Map pushAlram(@RequestParam("cookNo") int cookNo, @RequestParam("userId") String userId, @RequestParam("userNickname") String userNickname) {
+	public Map addHeart(@RequestParam("cookNo") int cookNo, @RequestParam("userId") String userId, @RequestParam("userNickname") String userNickname) {
 				
 		Map map = new HashMap();
 		
@@ -240,6 +240,26 @@ public class CookRestController {
 			map.put("userNickname", userNickname);
 			map.put("cookName", cook.getCookName());
 			map.put("mentorId", cook.getMentor().getUserId());
+			map.put("responseCode", "success");
+		
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return map;	
+	}
+	
+	//즐겨찾기 push 알림
+	@RequestMapping(value="/json/addLove", method=RequestMethod.POST)
+	@ResponseBody
+	public Map addLove(@RequestParam("userId") String userId, @RequestParam("userNickname") String userNickname, @RequestParam("mentorId") String mentorId) {
+				
+		Map map = new HashMap();
+		
+		try{				
+			map.put("userId", userId);
+			map.put("userNickname", userNickname);
+			map.put("mentorId", mentorId);
 			map.put("responseCode", "success");
 		
 		}catch (Exception e){
