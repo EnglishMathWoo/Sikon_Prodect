@@ -81,6 +81,7 @@ public class ReviewController {
 			@RequestParam("textNo") int textNo,@RequestParam("textNo2") int textNo2, Model model, HttpServletRequest request) throws Exception {
 
 		System.out.println("/review/addReview : POST");
+		System.out.println("生生生ぱけ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 //		System.out.println("review=" + review);
 //		System.out.println("category=" + category);
 		System.out.println("textNo=" + textNo);

@@ -286,9 +286,15 @@ margin-bottom: 10px;
 	function fncAddReview() {
 		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("accept-charset", "euc-kr").attr("action","/review/addReview").submit();
 		setTimeout(function() {   
+			opener.parent.location.reload();
+         }, 5);
+		
+		setTimeout(function() {   
             window.close();
          }, 3);
-
+		
+		
+		//Window.opener.location.href="/purchase/listPurchase";
 	      }
 	
 	function readURL(input, imgControlName) {

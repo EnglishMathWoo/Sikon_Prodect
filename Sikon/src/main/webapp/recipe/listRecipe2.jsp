@@ -40,9 +40,6 @@
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
-	<!-- 검색엔진 -->
-	<script async src="https://cse.google.com/cse.js?cx=d253ee857bb55c10b"></script>
-	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 
 
@@ -301,21 +298,6 @@ font-size: 13px;
 	opacity: 0.8;
 }
 
-/*검색엔진*/
-.gsc-control-cse {
-    background-color: #f7f7f7 !important;
-    width: 350px !important;
-    border:none !important;
-    float:right;
-    padding: 10px 0 !important;
-}
-
-.gsc-search-button-v2 {
-padding: 3px 9px !important;
-}
-.gsc-search-button-v2 svg{
-vertical-align: middle;
-}
 </style>
 
 
@@ -594,9 +576,8 @@ vertical-align: middle;
 			</div>
 			</td>
 			
-		
         	<td style="text-align: right;">
-            	<div class="gcse-search" style="background-color: #f7f7f7;width:350px "></div>
+            
              <div class="row height">
               <div class="col-md-6">
 					<div class="form-group">
