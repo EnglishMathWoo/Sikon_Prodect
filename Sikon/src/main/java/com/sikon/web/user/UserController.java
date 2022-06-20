@@ -77,7 +77,7 @@ public class UserController {
 		System.out.println("getuserid="+user.getUserId());
 		User dbUser=userService.getUser(user.getUserId());
 		
-		int statusCount = alarmService.getStatusCount(user.getUserId());
+		int statusCount = alarmService.getUncheckedAlarm(user.getUserId());
 		System.out.println("statusCount="+statusCount);
 		
 		//탈퇴 회원 로그인 못하게
