@@ -5,6 +5,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
+
+
+
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -42,7 +45,7 @@
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   
-  <script>history.scrollRestoration = "auto"</script>
+
   
       <style>
 
@@ -71,7 +74,7 @@ color:crimson;
 <style>
 
 div.container {
-	padding-top: 200px;
+	padding-top: 180px;
 	
 }
 
@@ -196,6 +199,11 @@ p {
 	height:300px;
 } 
 
+
+.image:hover{
+	opacity: 0.8;
+}
+
 div.emptyProd{
 	border: 1px solid #937062;
 	padding : 90px;
@@ -292,6 +300,14 @@ div.emptyProd{
 		 //테마버튼 상태 유지
 		 $(function() {
 			 
+				$( ".theme" ).on("click" , function() {
+					var theme = $(this).attr('value');
+					console.log(theme);
+					$("#themeCondition").val(theme);
+					fncGetList(1);
+				 });
+			 
+			 
 			 var themeCondition = $("#themeCondition").val();
 			 console.log(themeCondition);
 			 ///* 
@@ -329,7 +345,7 @@ div.emptyProd{
 			
 		 });
 		 
-		//테마로 정렬
+	/*	//테마로 정렬
 		$(document).on('click', '#themeAll', function(){
 			self.location = "/cook/listCook?themeCondition="+null+"&menu=${param.menu}";
 		});
@@ -358,6 +374,7 @@ div.emptyProd{
 			var themeCondition = $(this).attr('value');
 			self.location = "/cook/listCook?themeCondition="+themeCondition+"&menu=${param.menu}";
 		});
+		*/
 		
 
 		//좋아요 push 알림
@@ -424,8 +441,7 @@ div.emptyProd{
 			                    	
 			                    	pushAlarm(userId, userNickname, cookNo);
 			                    							           
-				                    $("#bookmarkBtn").removeClass('bi-bookmark');
-							        $("#bookmarkBtn").addClass('bi-bookmark-plus');
+				   
 						           
 			                    location.reload();
 			                    	
@@ -450,6 +466,14 @@ div.emptyProd{
 					fncGetList(1);
 				 
 			 });
+				
+				//==== 검색창 입력 후 enter시 검색 이벤트 ===========================================================
+				
+				function enterkey() { 
+					if(window.event.keyCode == 13){
+						fncGetList(1);
+					}
+				} 				
 				
 				 $(document).on('click', 'a.btn-defualt', function(){
 					 var cookNo =$(this).attr("value");
@@ -519,7 +543,7 @@ div.emptyProd{
 						                	//alert(JSONData.list[0].cookName);
 						                	//alert(JSONData.list.length);
 						                	console.log(JSONData.list[0].cookName);
-							                	 
+						                	   
 						                	for(var i=0; i<JSONData.list.length; i++){
 						                		///*
 						                		var image;
@@ -529,7 +553,7 @@ div.emptyProd{
 						                		var cookTheme;
 						                		var heartCount;
 						                		
-
+													
 						                
 						                		if(JSONData.list[i].cookStock == '0'){
 					                				
@@ -561,9 +585,13 @@ div.emptyProd{
 						                		
 						                		if(JSONData.list[i].heartCount == '0'){
 						                			heartCount= "<p align='right' class='bi bi-heart like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >&nbsp; 좋아요&nbsp;"+JSONData.list[i].hearthit+"개</p>";
+						                			
+						                			
 						                		}else{
 						                			
 						                			heartCount= "<p align='right' class='bi bi-heart-fill like_btn' value='"+JSONData.list[i].cookNo+"'  id='like_btn' >&nbsp; 좋아요&nbsp;"+JSONData.list[i].hearthit+"개</p>";
+						                			
+						                			
 						                		}
 						                
 						                			
@@ -606,11 +634,11 @@ div.emptyProd{
 						                     						+"</div>"
 						                     						+"</div>"
 						                     						+"<hr/>"
-
+						                     					  
 						                     		//*/				
 							               	$( '#scrollList' ).append(displayValue);	
 						                     						
-						                     						 		
+							             	 		
 						                    						
 						                     						
 						                	}//for 
@@ -630,7 +658,8 @@ div.emptyProd{
 
 <body>
 
-	
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="yy/MM/dd" var="today" />
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -695,7 +724,7 @@ div.emptyProd{
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 
 		    <br/><hr/><br/>
-    	<form class="form-inline" name="detailForm">
+   
     	
     	<nav class="ref-sort" >
 	      <button type="button" class="theme themeAll" id="themeAll" value="all">모두보기</button>
@@ -705,7 +734,7 @@ div.emptyProd{
 	      <button type="button" class="theme themech" id="themech" value="ch">중식</button>
 	      <button type="button" class="theme themede" id="themede" value="de">간식</button>
 	    </nav>
-    	
+    	 	<form class="form-inline" name="detailForm">
 
 <input type="hidden" id="themeCondition" name="themeCondition" value="${search.themeCondition}"/>
  
@@ -749,14 +778,14 @@ div.emptyProd{
 
 	
 		
-<div class="container">
+<div class="container channel">
 	
 <div class="row" id="target">
 	<c:set var="i" value="0" />
 
 
 <c:forEach var="cook" items="${list}">
-<td align="left"></td>
+
  <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
  <input type="hidden" name="userNickname" value="${user.userNickname}">
   <input type="hidden" name="userId" value="${user.userId}">
@@ -764,10 +793,12 @@ div.emptyProd{
     <input type="hidden" name="cookNo" value="${cook.cookStock}">
       <input type="hidden" name="hearthit" value="${cook.hearthit}">
 
-	<div class="row">
+
+
+	<div class="row" >
 		
 
-				<div class="col-xs-4 col-md-6 text-lefr image"  value="${cook.cookNo }">				
+				<div class="col-xs-4 col-md-6 text-lefr image" align="center"  value="${cook.cookNo }">				
 <c:choose>
 		    	<c:when test="${cook.cookFilename.contains('/')}">
 						<c:choose>
@@ -792,22 +823,7 @@ div.emptyProd{
 		    	
 		    	<br><br>
 		    		
-		    	<table>
-		    		<tr class="liketable">
-						<td>
-							<c:choose>
-					 		<c:when test = "${cook.heartCount == '0'}">
-					 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">&nbsp; 좋아요 ${cook.hearthit}개</p>
-							</c:when>    
-					 		<c:otherwise>
-					 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn">&nbsp; 좋아요 ${cook.hearthit}개</p>
-					 		</c:otherwise>
-					 		</c:choose>
-						</td>
-						<td class="likes"></td>
-					</tr>
-				</table>
-			
+		    
 				</div>	
 			
 
@@ -887,8 +903,7 @@ div.emptyProd{
 				
 		 	</div>
 		 	
-		 	<div class="col-xs-2 col-md-2">
-		 	</div>
+	
 		 	
 		 	</div>
 		 	

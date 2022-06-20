@@ -55,13 +55,12 @@ public class ReviewRestController {
 	@Value("#{commonProperties['filepath']}")
 	String filePath;
 
-	@RequestMapping(value = "/json/addReview", produces = "application/x-www-form-urlencoded; charset=euc-kr")
+	@RequestMapping(value = "/json/addReview",  method = RequestMethod.POST)
 	public String addReview(@RequestParam("fileArray") MultipartFile[] fileArray,HttpServletRequest request, HttpServletResponse response,@ModelAttribute("review") Review review,
 			@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
 		
 		System.out.println("/review/addReview : POST");
 		
-		response.setCharacterEncoding("euc-kr");
 
 			
 		System.out.println(fileArray[0]);
@@ -72,8 +71,9 @@ public class ReviewRestController {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		
+		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 
-		String FILE_SERVER_PATH = filePath;
+		//String FILE_SERVER_PATH = filePath;
 		String newFileName = "";
 
 		for (int i = 0; i < fileArray.length; i++) {
@@ -104,20 +104,6 @@ public class ReviewRestController {
 		return content;
 	}
 
-//	@RequestMapping(value = "updateReview", method = RequestMethod.GET)
-//	public ModelAndView updateReview(@RequestParam("reviewNo") int reviewNo, HttpServletRequest request)
-//			throws Exception {
-//		System.out.println("/review/updateReview : GET");
-////		System.out.println("reviewNo=" + reviewNo);
-//
-//		Review review = reviewService.getReview(reviewNo);
-//
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.addObject(review);
-//		modelAndView.setViewName("forward:/review/updateReview.jsp");
-//
-//		return modelAndView;
-//	}
 //
 //	@RequestMapping(value = "updateReview", method = RequestMethod.POST)
 //	public String updateReview(@ModelAttribute("review") Review review, Model model, HttpServletRequest request)

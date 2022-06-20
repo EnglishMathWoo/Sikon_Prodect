@@ -50,7 +50,7 @@ public class RecipeRestController {
 	}
 
 	// 무한스크롤
-	@RequestMapping(value = "json/listRecipe", method = RequestMethod.POST)
+	@RequestMapping(value = "json/listRecipe")
 	public Map listRecipe(@RequestBody Search search) throws Exception {
 
 		System.out.println("/recipe/json/listRecipe : POST");

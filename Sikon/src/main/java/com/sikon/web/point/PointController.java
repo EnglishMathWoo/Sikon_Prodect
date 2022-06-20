@@ -66,7 +66,7 @@ public class PointController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
-		search.setPageSize(pageSize);
+		search.setPageSize(10);
 		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
@@ -74,7 +74,7 @@ public class PointController {
 		// Business logic 수행
 		Map<String , Object> resultMap = pointService.getPointList(search, user.getUserId());
 		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, pageSize);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, 10);
 		
 		// Model 과 View 연결
 		model.addAttribute("list", resultMap.get("list"));

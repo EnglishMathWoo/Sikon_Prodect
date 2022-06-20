@@ -32,7 +32,8 @@
 <link href="/resources/css/animate.min.css" rel="stylesheet">
 <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
 <script src="/resources/javascript/bootstrap-dropdownhover.min.js"></script>
-
+<!-- font awesome-->
+<script src="https://kit.fontawesome.com/ef3e0db941.js" crossorigin="anonymous"></script>
 
 <style>
 
@@ -168,6 +169,11 @@ margin-bottom: 10px;
   text-align: center;
 }
 
+.yes {
+	display: flex;
+	align-items: flex-start;
+	margin-top: 10px !important;
+}
 
 .btn_upload {
   cursor: pointer;
@@ -176,13 +182,6 @@ margin-bottom: 10px;
   padding: 5px 10px;
 }
 
-
-.yes {
-  display: flex;
-  color:black;
-  align-items: flex-start;
-  margin-top: 10px !important;
-}
 
 .btn_upload input {
   cursor: pointer;
@@ -244,19 +243,19 @@ margin-bottom: 10px;
                     </div>
                     
                     <div class="yes">
-							    <span class="btn_upload">
+							     <span class="btn_upload">
 							      <input  multiple="multiple" type="file"   id="reviewImg"  name="fileArray" class="input-img"/>
-							      <i class="fa-solid fa-camera"></i>
+							     <i class="fa-solid fa-camera"> 이미지첨부</i><br/>
 							      </span>
 							    <img id="ImgPreview" src="" class="preview1" />
 							    <input type="button" id="removeImage1" value="x" class="btn-rmv1" />
                     </div>
-                    
+                    <br/>
                     <div class="form-group">
                         <p class="text-secondary">상품과 무관한 사진 및 욕설/비속어가 포함된 리뷰는 고지 없이 삭제될 수 있습니다.
-							구매하신 상품을 직접 촬영한 사진만 리뷰 등록 및 마일리지 지급이 가능합니다.
-							해당 사유들로 인해 고지없이 리뷰 및 사진이 삭제되는 경우, 지급 마일리지 일부 또는 전액이 회수될 수 있습니다.
-							상품 반품/취소 시, 리뷰 삭제 및 지급 마일리지가 회수 됩니다.</p>
+							구매하신 상품을 직접 촬영한 사진만 리뷰 등록 및 포인트 지급이 가능합니다.
+							해당 사유들로 인해 고지없이 리뷰 및 사진이 삭제되는 경우, 지급 포인트 일부 또는 전액이 회수될 수 있습니다.
+							상품 반품/취소 시, 리뷰 삭제 및 지급 포인트가 회수 됩니다.</p>
                     </div>
                     <div class="form-group">
                         <button type="button" id="post" class="btn">리뷰등록</button>

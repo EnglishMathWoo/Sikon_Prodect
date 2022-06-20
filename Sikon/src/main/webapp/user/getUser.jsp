@@ -388,6 +388,15 @@ body {
 #thum{
 margin-top: 20px;
 }
+
+th{
+text-align: center;
+padding-bottom: 20px;
+}
+
+td{
+padding-top: 10px;
+}
 </style>
 
 </head>
@@ -419,7 +428,7 @@ margin-top: 20px;
 				
 				
 				<div class="row">
-					<label for="recipeDetail"
+					<label for="userId"
 					class="col-sm-3 control-label">아 이 디</label>
 					<div class="col-sm-4">
 					<p>${user.userId}</p>
@@ -427,7 +436,7 @@ margin-top: 20px;
 				</div>
 				
 				<div class="row">
-					<label for="recipeDetail"
+					<label for="userNickname"
 					class="col-sm-3 control-label">닉 네 임</label>
 					<div class="col-sm-4">
 					<p>${user.userNickname}</p>
@@ -440,7 +449,7 @@ margin-top: 20px;
 				<div class="iEJcKG">
 				<h3 class="iEJcKGheader">회원정보</h3>	
 				<div class="row">
-					<label for="recipeDetail"
+					<label for="userName"
 					class="col-sm-3 control-label">이 름</label>
 					<div class="col-sm-4">
 					<p>${user.userName}</p>
@@ -457,7 +466,7 @@ margin-top: 20px;
 					</div>
 				
 				<div class="row">
-					<label for="recipeDetail"
+					<label for="userBirth"
 					class="col-sm-3 control-label">생년월일</label>
 					<div class="col-sm-4">
 					<p>${user.userBirth}</p>
@@ -465,7 +474,7 @@ margin-top: 20px;
 					</div>
 					
 					<div class="row">
-					<label for="recipeDetail"
+					<label for="addr"
 					class="col-sm-3 control-label">주소</label>
 					<div class="col-sm-4">
 					<p>${user.addr}</p>
@@ -473,7 +482,7 @@ margin-top: 20px;
 					</div>
 					
 					<div class="row">
-					<label for="recipeDetail"
+					<label for="regDate"
 					class="col-sm-3 control-label">가입일자</label>
 					<div class="col-sm-4">
 					<p>${user.regDate}</p>
@@ -481,7 +490,7 @@ margin-top: 20px;
 					</div>
 					
 					<div class="row">
-					<label for="recipeDetail"
+					<label for="mentorApply"
 					class="col-sm-3 control-label">쿠킹멘토 신청 여부</label>
 					<div class="col-sm-4">
 					<p>${user.mentorApply}</p>
@@ -492,77 +501,49 @@ margin-top: 20px;
 			<c:if test="${user.mentorApply == 'Y' }">
 					<div class="iEJcKG">
 					<h3 class="iEJcKGheader">경력사항</h3>	
-					<div class="row">
-					<label for="recipeDetail"
-					class="col-sm-3 control-label">경력사항</label>
-					<c:set var="i" value="0" />
-				 	 <c:forEach var="career" items="${career}" begin="0" end="1">
-					<div class="col-sm-4">
-					<p>${career.COMPANY}</p>
-					</div>
-					</c:forEach>
-					</div>
+					<div class="table">
+					<table class="type09" style="width: 740px">
+					<th  width="30%">회사명</th>
+					<th width="40%">경력기간</th>
+					<th width="30%">업무내용</th>
+						<c:set var="i" value="0" />
+						<c:forEach var="career" items="${career}" begin="0" end="1">
+							<tr>
+								<td class="company">${career.COMPANY}</td>
+								<td class="careerDate">
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${career.START_DATE}" />
+								~ 
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${career.END_DATE}" />
+								</td>
+								<td class="experience">${career.CAREER_EXPERIENCE}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				</div>
 				
-				
-					<div class="row">
-					<label for="recipeDetail"
-					class="col-sm-3 control-label">경력기간</label>
-					<c:set var="i" value="0" />
-				 	 <c:forEach var="career" items="${career}" begin="0" end="1">
-					<div class="col-sm-4">
-					<p><fmt:formatDate pattern="yyyy-MM-dd" value="${career.START_DATE}" /> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${career.END_DATE}" /></p>
-					</div>
-					</c:forEach>
-					</div>
 					
-					
-					<div class="row">
-					<label for="recipeDetail"
-					class="col-sm-3 control-label">업무내용</label>
-					<c:set var="i" value="0" />
-				 	 <c:forEach var="career" items="${career}" begin="0" end="1">
-					<div class="col-sm-4">
-					<p>${career.CAREER_EXPERIENCE}</p>
-					</div>
-					</c:forEach>
-					</div>
-					</div>
 					
 					<div class="iEJcKG">
 					<h3 class="iEJcKGheader">자격사항</h3>	
-					<div class="row">
-					<label for="recipeDetail"
-					class="col-sm-3 control-label">자격증명</label>
+					<div class="table">
+					<table class="type09" style="width: 740px">
+					<th width="30%" >자격증명</th>
+					<th width="40%">취득날짜</th>
+					<th width="30%">발급기관</th>
 					<c:set var="i" value="0" />
-		 	 		<c:forEach var="license" items="${license}">
-					<div class="col-sm-4">
-					<p>${license.LICENSE_NAME}</p>
-					</div>
-					</c:forEach>
-					</div>
-					
-					<div class="row">
-					<label for="recipeDetail"
-					class="col-sm-3 control-label">발급기관</label>
-					<c:set var="i" value="0" />
-		 	 		<c:forEach var="license" items="${license}">
-					<div class="col-sm-4">
-					<p>${license.LICENSE_INSTITUTION}</p>
-					</div>
-					</c:forEach>
-					</div>
-					
-					<div class="row">
-					<label for="recipeDetail"
-					class="col-sm-3 control-label">취득기간</label>
-					<c:set var="i" value="0" />
-		 	 		<c:forEach var="license" items="${license}">
-					<div class="col-sm-4">
-					<p><fmt:formatDate pattern="yyyy-MM-dd" value="${license.LICENSE_DATE}" /></p>
-					</div>
-					</c:forEach>
-					</div>
+		 	 		<c:forEach var="license" items="${license}" >
+		 	 		<tr>
+								<td class="company">${license.LICENSE_NAME}</td>
+								<td class="company"><fmt:formatDate pattern="yyyy-MM-dd" value="${license.LICENSE_DATE}" /></td>
+								<td class="company">${license.LICENSE_INSTITUTION}</td>
+					</tr>
+						</c:forEach>
+					</table>
 				</div>
+				</div>
+					
+					
 				</c:if>
 				
 				
