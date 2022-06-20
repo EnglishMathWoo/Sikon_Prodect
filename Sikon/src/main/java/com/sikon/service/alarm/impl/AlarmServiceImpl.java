@@ -52,9 +52,9 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 	
 	//미확인 알람 개수
-	public int getStatusCount(String userId) throws Exception {
+	public int getUncheckedAlarm(String userId) throws Exception {
 		
-		int statusCount = alarmDao.getStatusCount(userId);
+		int statusCount = alarmDao.getUncheckedAlarm(userId);
 				
 		return statusCount;
 	}

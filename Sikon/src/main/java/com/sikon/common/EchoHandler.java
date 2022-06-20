@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,37 +26,35 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Qualifier("alarmServiceImpl")
 	private AlarmService alarmService;
 		
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
-	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
 	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 	
 	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
-	
-	
+		
 	//로그인 한 인원 전체
 	private List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	// 1:1로 할 경우
 	private Map<String, WebSocketSession> userSessionsMap = new HashMap<String, WebSocketSession>();
 	
+	
+	///Method
 	@Override
-	public void afterConnectionEstablished(WebSocketSession socketSession) throws Exception {//클라이언트와 서버가 연결
+	public void afterConnectionEstablished(WebSocketSession socketSession) throws Exception { //클라이언트와 서버 연결
 		
 		System.out.println("Socket 연결");
 		sessions.add(socketSession);
-		System.out.println(currentUserName(socketSession));//현재 접속한 사람
+		System.out.println(currentUserName(socketSession)); //현재 접속한 유저
 		String senderId = currentUserName(socketSession);
 		userSessionsMap.put(senderId, socketSession);
 	}
 	
+	
 	@Override
-	protected void handleTextMessage(WebSocketSession socketSession, TextMessage message) throws Exception {// 메시지
+	protected void handleTextMessage(WebSocketSession socketSession, TextMessage message) throws Exception { //push알람 메시지 전송
 		
 		System.out.println("session"+currentUserName(socketSession));
-		String msg = message.getPayload();//자바스크립트에서 넘어온 Msg
+		String msg = message.getPayload(); //자바스크립트에서 넘어온 메시지
 		System.out.println("msg="+msg);
 		
 		if (StringUtils.isNotEmpty(msg)) {
@@ -72,14 +68,13 @@ public class EchoHandler extends TextWebSocketHandler {
 				String fromUserNickname = strs[2];
 				String toUserId = strs[3];
 				
-				WebSocketSession fromUserSession = userSessionsMap.get(fromUserId);
 				WebSocketSession toUserSession = userSessionsMap.get(toUserId);
 				System.out.println("fromUserSession="+userSessionsMap.get(fromUserId));
 				System.out.println("toUserSession="+toUserSession);
 				
 				Alarm alarm = new Alarm();
 								
-				//즐겨찾기
+				//쿠킹멘토 즐겨찾기
 				if ("love".equals(cmd) && toUserSession != null) {
 					
 					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 멘토님을 즐겨찾기에 추가했습니다!");
@@ -104,14 +99,13 @@ public class EchoHandler extends TextWebSocketHandler {
 				String toUserId = strs[3];
 				String postName = strs[4];
 				
-				WebSocketSession fromUserSession = userSessionsMap.get(fromUserId);
 				WebSocketSession toUserSession = userSessionsMap.get(toUserId);
 				System.out.println("fromUserSession="+userSessionsMap.get(fromUserId));
 				System.out.println("toUserSession="+toUserSession);
 				
 				Alarm alarm = new Alarm();
 								
-				//좋아요
+				//쿠킹클래스 좋아요
 				if ("heart".equals(cmd) && toUserSession != null) {
 					
 					TextMessage tmpMsg = new TextMessage(fromUserNickname + "님이 멘토님의 쿠킹클래스에 좋아요를 눌렀습니다! : [제목 : '"
@@ -146,12 +140,12 @@ public class EchoHandler extends TextWebSocketHandler {
 					alarmService.addAlarm(alarm);
 				}
 			}
-			
 		}
 	}
 	
+	
 	@Override
-	public void afterConnectionClosed(WebSocketSession socketSession, CloseStatus status) throws Exception {//연결 해제
+	public void afterConnectionClosed(WebSocketSession socketSession, CloseStatus status) throws Exception { //웹소켓 연결 해제
 		
 		System.out.println("Socket 끊음");
 		sessions.remove(socketSession);
@@ -159,7 +153,8 @@ public class EchoHandler extends TextWebSocketHandler {
 	}
 
 	
-	private String currentUserName(WebSocketSession socketSession) {
+	private String currentUserName(WebSocketSession socketSession) { //현재 접속한 유저 아이디
+		
 		Map<String, Object> httpSession = socketSession.getAttributes();
 		User loginUser = (User)httpSession.get("user");
 		
@@ -167,8 +162,9 @@ public class EchoHandler extends TextWebSocketHandler {
 			String mid = socketSession.getId();
 			return mid;
 		}
+		
 		String mid = loginUser.getUserId();
 		return mid;
-		
 	}
+	
 }

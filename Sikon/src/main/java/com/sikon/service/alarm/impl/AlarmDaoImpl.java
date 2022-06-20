@@ -37,10 +37,6 @@ public class AlarmDaoImpl implements AlarmDao {
 		sqlSession.insert("AlarmMapper.addAlarm", alarm);
 	}
 	
-	public Alarm getAlarm(String userId) throws Exception {
-		return sqlSession.selectOne("AlarmMapper.getAlarm", userId);
-	}
-	
 	public int getAlarmCount(String userId) throws Exception {
 		return sqlSession.selectOne("AlarmMapper.getAlarmCount", userId);
 	}
@@ -65,8 +61,8 @@ public class AlarmDaoImpl implements AlarmDao {
 	}
 	
 	//미확인 알람 개수
-	public int getStatusCount(String userId) throws Exception {
-		return sqlSession.selectOne("AlarmMapper.getStatusCount", userId);
+	public int getUncheckedAlarm(String userId) throws Exception {
+		return sqlSession.selectOne("AlarmMapper.getUncheckedAlarm", userId);
 	}
 	
 }
