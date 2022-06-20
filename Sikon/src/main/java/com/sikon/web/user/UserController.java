@@ -590,36 +590,41 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="deleteUser", method=RequestMethod.POST )
-	public String deleteUser(@ModelAttribute("userId") String userId , HttpSession session,
-								@RequestParam(value = "quitDate", required = false) Date quitDate,
-								@RequestParam("quitStatus") String quitStatus) throws Exception{
+	public String deleteUser(@ModelAttribute("user") User user , HttpSession session, HttpServletRequest request,
+									@RequestParam("quitStatus") String quitStatus) throws Exception{
 		
 		System.out.println("/user/deleteUser : POST");
 		//Business Logic
-		System.out.println("userId="+userId);
-		System.out.println("quitDate="+quitDate);
+		System.out.println("user="+user);
+	
 		System.out.println("quitStatus="+quitStatus);
 		
-		User dbUser=userService.getUser(userId);
+		User dbUser=userService.getUser(user.getUserId());
 		
-		User user2 = new User();
+		Date quitDate = user.getQuitDate();
+		System.out.println("quitDate="+quitDate);
 		
-		if( user2.getPassword().equals(dbUser.getPassword())){
-			session.setAttribute("user", dbUser);
+//		session = request.getSession();
+//		session.getAttribute("user");
+		
+		
+		
+		if( user.getPassword().equals(dbUser.getPassword())){
+		//	session.setAttribute("user", user);
 			
-			System.out.println("userID 1="+user2.getPassword());
+			System.out.println("userID 1="+dbUser.getPassword());
 			
-			System.out.println("userID 2="+dbUser.getPassword());
+			System.out.println("userID 2="+user.getPassword());
 			
-			quitStatus = dbUser.setQuitStatus("Y");
+			quitStatus = user.setQuitStatus("Y");
 			
-	//		quitDate = dbUser.setQuitDate(user2.getRegDate());
+			quitDate = user.setQuitDate(dbUser.getRegDate());
 			
-			System.out.println("dbUser="+dbUser);
+			System.out.println("user="+user);
 			System.out.println("quitDate="+quitDate);
 			System.out.println("quitStatus="+quitStatus);
 			
-			userService.deleteUser(dbUser, quitDate, quitStatus);
+			userService.deleteUser(user, quitDate, quitStatus);
 			
 			
 		}

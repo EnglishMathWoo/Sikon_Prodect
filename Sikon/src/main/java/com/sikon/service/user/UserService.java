@@ -50,7 +50,7 @@ public interface UserService {
 	public Map<String , Object> getUserList(Search search) throws Exception;
 	
 	// 회원탈퇴
-	public void deleteUser(User dbUser, Date quitDate, String quitStatus) throws Exception ;
+	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception ;
 	
 	// 회원 ID 중복 확인
 	public boolean checkDuplication(String userId) throws Exception;

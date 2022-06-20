@@ -94,8 +94,8 @@ public class User {
 		return quitDate;
 	}
 
-	public void setQuitDate(Date quitDate) {
-		this.quitDate = quitDate;
+	public Date setQuitDate(Date quitDate) {
+		return this.quitDate = quitDate;
 	}
 
 	public String getQuitStatus() {
