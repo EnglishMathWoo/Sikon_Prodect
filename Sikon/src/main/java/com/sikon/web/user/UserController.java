@@ -1,6 +1,7 @@
 package com.sikon.web.user;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -516,7 +517,7 @@ public class UserController {
 	
 	
 	@RequestMapping( value="backUserRole", method=RequestMethod.POST )
-	public String backUserRole(HttpServletRequest request,@RequestParam("userId") String userId,
+	public String backUserRole(HttpServletRequest request, @RequestParam("userId") String userId,
 											@RequestParam("mentorApply") String mentorApply) throws Exception {
 		
 		System.out.println("/user/backUserRole : POST");
@@ -566,19 +567,51 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping( value="deleteUser", method=RequestMethod.GET )
-	public String deleteUser( @RequestParam("userId") String userId , Model model ) throws Exception{
-
-		System.out.println("/user/deleteUser : GET");
+//	@RequestMapping( value="deleteUser", method=RequestMethod.GET )
+//	public String deleteUser(  @RequestParam(value = "userId", required = false) String userId ,
+//			@RequestParam(value = "userId", required = false) String userId, 
+//			@RequestParam(value = "userId", required = false) String userId, Model model ) throws Exception{
+//
+//		System.out.println("/user/deleteUser : GET");
+//		//Business Logic
+//		User user = userService.getUser(userId);
+//		
+//		
+//		// Model 과 View 연결
+//		model.addAttribute("user", user);
+//		
+//		
+//		return "forward:/user/deleteUser.jsp";
+//	}
+	
+	@RequestMapping( value="deleteUser", method=RequestMethod.POST )
+	public String deleteUser(@ModelAttribute("user") User user , HttpSession session,
+								@RequestParam("quitDate") Date quitDate,
+								@RequestParam("quitStatus") String quitStatus) throws Exception{
+		
+		System.out.println("/user/deleteUser : POST");
 		//Business Logic
-		User user = userService.getUser(userId);
+		System.out.println("getuserid="+user.getUserId());
+		User dbUser=userService.getUser(user.getUserId());
 		
 		
-		// Model 과 View 연결
-		model.addAttribute("user", user);
+		
+		if( user.getPassword().equals(dbUser.getPassword())){
+			session.setAttribute("user", dbUser);
+		}
+		System.out.println(user.getPassword());
+		System.out.println(dbUser.getPassword());
+		
+		quitStatus = user.setQuitStatus("Y");
+		
+		System.out.println("user="+user);
+		System.out.println("quitDate="+quitDate);
+		System.out.println("quitStatus="+quitStatus);
+		
+		userService.deleteUser(user, quitDate, quitStatus);
 		
 		
-		return "forward:/user/deleteUser.jsp";
+		return "redirect:/index.jsp";
 	}
 	
 //	@RequestMapping( value="checkDuplication", method=RequestMethod.POST )

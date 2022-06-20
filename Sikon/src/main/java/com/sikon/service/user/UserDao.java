@@ -1,5 +1,6 @@
 package com.sikon.service.user;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ public interface UserDao {
 	public List<User> getUserList(Search search) throws Exception ;
 	
 	// 회원탈퇴
-	public void deleteUser(User user) throws Exception ;
+	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception ;
 		
 	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception ;
