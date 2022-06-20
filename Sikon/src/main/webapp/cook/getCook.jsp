@@ -40,14 +40,14 @@
       <style>
 
         .bi-heart{
-            font-size: 20px;
-            line-height: 20px;
+            font-size: 18px;
+            line-height: 18px;
             color:#000;
         }
 
         .bi-heart-fill{
-            font-size: 20px;
-            line-height: 20px;
+            font-size: 18px;
+            line-height: 18px;
             color:#000;
         }
 
@@ -61,6 +61,21 @@ color:crimson;
     </style>
     <!--  댓글 -->
 <style>
+
+.shape {
+
+  width: 40%;
+  height: 17px;
+  text-align: center;
+  font-weight:bold;
+  color:rgb(158, 158, 158);
+  font-size:0.5px;
+  border-radius: 5px;
+  position: absolute;
+   top: 55px;
+   left: 7px;
+   width: 15px;
+}
 
 #wish_modal {
     display: none;
@@ -232,6 +247,19 @@ margin-left: 60px;
   font-size: large;
 }
 .btn-w:hover {
+  background-color: #e7e2e2;
+}
+
+.btn-u {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+  width:100px;
+  font-size: small;
+}
+.btn-u:hover {
   background-color: #e7e2e2;
 }
 
@@ -537,37 +565,22 @@ div.image{
 						
 						<c:otherwise>
 							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
-								<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+								<img src="/resources/images/uploadFiles/${name}" width="400" height="400" align="absmiddle"/>
 								<input type="hidden" name="image" value="${name }"/>
 							</c:forEach>
 						</c:otherwise>
 						</c:choose>
 				</c:when>
 				<c:otherwise>
-					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle" class="image" value="${prodThumbnail}"/>
+					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="400" height="400" align="absmiddle" class="image" value="${prodThumbnail}"/>
 				</c:otherwise>
 		    	</c:choose>
-		    	
-		    	
-		    	<br><br>
-		    		
-		    	<table>
-		    		<tr class="liketable">
-						<td>
-							<c:choose>
-					 		<c:when test = "${cook.heartCount == '0'}">
-					 			<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn">&nbsp; 좋아요 ${cook.hearthit}개</p>
-							</c:when>    
-					 		<c:otherwise>
-					 			<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn">&nbsp; 좋아요 ${cook.hearthit}개</p>
-					 		</c:otherwise>
-					 		</c:choose>
-						</td>
-						<td class="likes"></td>
-					</tr>
-				</table>		    	
+	    	
 		    	
 				</div>	
+				
+				
+				
 			
 
 				<div class="col-xs-4 col-md-4">
@@ -581,10 +594,39 @@ div.image{
 				
 				<div class="row">
 				
-					<div class="text-right">
+					<div class="text-right">		    	
+		    	
+		    	
+		    	
+		    	<table >
+		    		<tr class="liketable" align="left">
+						<td>	
+							<c:choose>
+					 		<c:when test = "${cook.heartCount == '0'}">
+					 		<p align="right" class="bi bi-heart like_btn" value="${cook.cookNo}" id="like_btn"></p>
+					 		<span class="shape">${cook.hearthit}</span>
+							</c:when>    
+					 		<c:otherwise>
+					 		<p align="right" class="bi bi-heart-fill like_btn" value="${cook.cookNo}" id="like_btn"></p>
+					 		<span class="shape">${cook.hearthit}</span>
+					 		</c:otherwise>
+					 		</c:choose>
+						</td>
+					
+					</tr>
+				</table>	
 						<a id="kakao-link-btn" href="javascript:kakaoShare()">
 					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
 					    </a>
+					    
+					    
+					    	<c:if test="${sessionScope.user.role == 'mentor'}">
+			  				<button type="button" class="btn-u updateCook"  >수정하기</button>
+			  			  </c:if>	
+			  			
+				  			<c:if test="${sessionScope.user.role == 'admin'}">
+			  				<button type="button" class="btn-u updateCook"  >수정하기</button>
+			  			  </c:if>	
 					</div>
 				
 				
@@ -666,13 +708,7 @@ div.image{
 			  				<button type="button" class="btn-w addWish" id="popup_open_btn">장바구니</button>&emsp;
 						</c:if>
 									  				
-			  			<c:if test="${sessionScope.user.role == 'mentor'}">
-			  				<button type="button" class="btn-w updateCook"  >수정하기</button>
-			  			  </c:if>	
-			  			
-				  			<c:if test="${sessionScope.user.role == 'admin'}">
-			  				<button type="button" class="btn-w updateCook"  >수정하기</button>
-			  			  </c:if>			  				
+		  				
 			  		</div>
 				</div>
 		

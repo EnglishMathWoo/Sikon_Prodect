@@ -630,6 +630,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 	padding: 5px 31px 5px 16px;
 	color: #1B1E26 !important;
 	cursor:pointer;
+	  text-decoration: none;
 }
 	.dropHeader .dropLayer li > a {
 	position: relative;
@@ -1085,7 +1086,7 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 				});
 				
 				$("a:contains('등록한쿠킹클래스')").on("click", function() {
-					self.location = "/cook/"
+					self.location = "/cook/listMyCook"
 					
 				});
 				

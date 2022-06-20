@@ -102,11 +102,19 @@ hr {
 .bg-light th{
 text-align: center
 }
+
+.fa-minus-circle{
+color:#a94442
+}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-	
+function fncGetList(currentPage) {
+	$("#currentPage").val(currentPage);
+	$("form").attr("method" , "POST").attr("action" , "/point/listMyPoint").submit();
+}
+	 
 </script>
 
 </head>
@@ -126,7 +134,7 @@ text-align: center
 				<br> | P O I N T |<br><br><br><br>
 			</h3>
 		</div>
-
+<form>
 		<div class="iEJcKG">
 			<h3 class="iEJcKGheader">
 				보유포인트
@@ -144,7 +152,7 @@ text-align: center
 				<thead>
 					<tr class="bg-light">
 						<th scope="col" width="25%" >적용일자</th>
-						<th scope="col" width="25%"  >사용/적립</th>
+						<th scope="col" width="25%"  >적용여부</th>
 						<th scope="col" width="25%"  >적용항목</th>
 						<th scope="col" width="25%"  >포인트</th>
 					</tr>
@@ -159,16 +167,27 @@ text-align: center
 							<tr>
 								<td>${point.pointRegDate}</td>
 								<td>
-								<c:if test="${point.pointType=='EARN'}">
-								적립
+								<c:if test="${point.pointType=='EARN' || point.pointType=='CANCELUSE'}">
+								<i class="fa fa-plus-circle green"></i>&nbsp;적립
 								</c:if>
-								<c:if test="${point.pointType=='USE'}">
-								사용
+								<c:if test="${point.pointType=='USE' || point.pointType=='CANCELEARN'}">
+								<i class="fa fa-minus-circle"></i>&nbsp;사용
 								</c:if>
+								
 								</td>
 								<td>
 								<c:if test="${point.pointCategory=='str'}">
-								상품 구매
+									<c:choose>
+										<c:when test="${point.pointType=='CANCELEUSE'}">
+										포인트 사용 취소
+										</c:when>
+										<c:when test="${point.pointType=='CANCELEEARN'}">
+										구매 취소-포인트 회수
+										</c:when>
+										<c:otherwise>
+										상품 구매
+										</c:otherwise>
+									</c:choose>
 								</c:if>
 								<c:if test="${point.pointCategory=='RE'&&point.pointScore=='500'}">
 								포토 리뷰 작성
@@ -179,6 +198,7 @@ text-align: center
 								<c:if test="${point.pointCategory=='REC'}">
 								레시피 작성
 								</c:if>
+								
 								</td>
 								<td>${point.pointScore}</td>
 							</tr>
@@ -190,7 +210,9 @@ text-align: center
 			</table>
 
 		</div>
-
+		 <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+		
+</form>
 	</div>
 
 	<jsp:include page="../common/pageNavigator_new.jsp" />

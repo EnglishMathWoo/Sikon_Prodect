@@ -1,9 +1,9 @@
 package com.sikon.web.review;
 
 import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.Review;
@@ -55,42 +56,18 @@ public class ReviewRestController {
 	@Value("#{commonProperties['filepath']}")
 	String filePath;
 
-	@RequestMapping(value = "/json/addReview", produces = "application/x-www-form-urlencoded; charset=euc-kr")
-	public String addReview(@RequestParam("fileArray") MultipartFile[] fileArray,HttpServletRequest request, HttpServletResponse response,@ModelAttribute("review") Review review,
+	@RequestMapping(value = "/json/addReview",  method = RequestMethod.POST)
+	public void addReview(HttpServletRequest request,@ModelAttribute("review") Review review,
 			@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
 		
 		System.out.println("/review/addReview : POST");
-		
-		response.setCharacterEncoding("euc-kr");
-
-			
-		System.out.println(fileArray[0]);
-		System.out.println("review="+review);
-		System.out.println("textNo="+recipeNo);
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(recipeNo);
+		System.out.println(review);
 		
 		Recipe recipe = recipeService.getRecipeName(recipeNo);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		
-
-		String FILE_SERVER_PATH = filePath;
-		String newFileName = "";
-
-		for (int i = 0; i < fileArray.length; i++) {
-
-			if (!fileArray[i].getOriginalFilename().isEmpty()) {
-				fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
-				model.addAttribute("msg", "File uploaded successfully.");
-
-			} else {
-				model.addAttribute("msg", "Please select a valid mediaFile..");
-			}
-
-			newFileName += fileArray[i].getOriginalFilename();
-
-		}
-
-		review.setReviewImg(newFileName);
 		
 		review.setRecipe(recipe);
 		review.setReviewContent(review.getReviewContent());
@@ -100,24 +77,76 @@ public class ReviewRestController {
 		System.out.println("¸®ºä:" + review);
 		reviewService.addReview(review);
 		reviewService.updateReviewNum(1,recipeNo);
-		String content=review.getReviewContent();
-		return content;
 	}
 
-//	@RequestMapping(value = "updateReview", method = RequestMethod.GET)
-//	public ModelAndView updateReview(@RequestParam("reviewNo") int reviewNo, HttpServletRequest request)
-//			throws Exception {
-//		System.out.println("/review/updateReview : GET");
-////		System.out.println("reviewNo=" + reviewNo);
+	
+	
+	
+	
+	
+	
+	
+//	@RequestMapping(value = "/json/addReview",  method = RequestMethod.POST)
+//	public void addReview(@RequestParam("fileArray") MultipartFile[] fileArray,HttpServletRequest request, HttpServletResponse response,@ModelAttribute("review") Review review,
+//			@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
+//		
+//		System.out.println("/review/addReview : POST");
+//		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//		System.out.println(recipeNo);
+//		
 //
-//		Review review = reviewService.getReview(reviewNo);
+//			
+////		System.out.println(fileArray[0]);
+////		System.out.println("review="+review);
+////		System.out.println("textNo="+recipeNo);
+////		
+////		Recipe recipe = recipeService.getRecipeName(recipeNo);
+////		HttpSession session = request.getSession();
+////		User user = (User) session.getAttribute("user");
+////		
+////		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 //
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.addObject(review);
-//		modelAndView.setViewName("forward:/review/updateReview.jsp");
-//
-//		return modelAndView;
+//		//String FILE_SERVER_PATH = filePath;
+////		String newFileName = "";
+////
+////		for (int i = 0; i < fileArray.length; i++) {
+////
+////			if (!fileArray[i].getOriginalFilename().isEmpty()) {
+////				fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
+////				model.addAttribute("msg", "File uploaded successfully.");
+////
+////			} else {
+////				model.addAttribute("msg", "Please select a valid mediaFile..");
+////			}
+////
+////			newFileName += fileArray[i].getOriginalFilename();
+////
+////		}
+////
+////		review.setReviewImg(newFileName);
+////		
+////		review.setRecipe(recipe);
+////		review.setReviewContent(review.getReviewContent());
+////		review.setWriterNickname(user.getUserNickname());
+////		review.setReviewCategory("REC");
+//		
+//		System.out.println("¸®ºä:" + review);
+////		reviewService.addReview(review);
+////		reviewService.updateReviewNum(1,recipeNo);
+////		String content=review.getReviewContent();
+////		return content;
 //	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //
 //	@RequestMapping(value = "updateReview", method = RequestMethod.POST)
 //	public String updateReview(@ModelAttribute("review") Review review, Model model, HttpServletRequest request)

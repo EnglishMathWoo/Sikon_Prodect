@@ -16,11 +16,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
-	
-	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -28,9 +23,10 @@
 	
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/resources/css/animate.min.css" rel="stylesheet">
-   <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -39,146 +35,96 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-<style>
-
-
-.container {
-	padding-top: 100px;
-} 
-
-
-</style>
+ <!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 
 <style>
-
-body {
-	padding-top: 50px;
-	
+body{
+	font-family: 'Nanum Myeongjo', serif;
 }
 
-.page-header.text-info {
-	font-family: 'Gowun Batang', serif;
-	font-weight: bold;
-	color: #75574B
+div.row{
+	font-family: 'Nanum Myeongjo', serif;
+}
+ div.page-header{
+	font-family: 'Nanum Myeongjo', serif;
+}  
+table {
+	font-family: 'Nanum Myeongjo', serif;
+}
+.head{
+ 	background: #b19b92;
+ 
 }
 
-.text-info {
-	font-family: 'Gowun Batang', serif;
-	font-weight: bold;
-	color: #75574B
+.head th{
+ 	text-align:center;
+ 	color : #f7f7f7;
+ 	font-weight: lighter;
+}
+.list{
+	padding-top : 200px;
 }
 
-.row {
-	font-family: 'Gowun Batang', serif;
-}
-
-.table.table-hover.table-striped {
-	font-family: 'Gowun Batang', serif;
-}
-
-.ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
-}
-.ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
-.ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
-.ref-sort li:last-child{margin:0; padding:0;}
-.ref-sort li:last-child::after{display:none;}
-.ref-sort li a{}
-
-/* References */
-.ref-sort li a{color:inherit;}
-.ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
-
-.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
-.sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
-.sectiontitle .heading{margin:0; padding:0; line-height:1;}
-
-.sectiontitle{max-width:none; margin-bottom:50px;}
-
-.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
-.imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
-.imgover, .imgover:hover::after{color:#333333;} 
-
-/* Latest */
-.excerpt time{border-color:#D7D7D7;}
-
-#latest article{max-width:200px;}
-
-#footer{padding-bottom:50px;}/* Not required, just looks a little better */
-.latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
-.latestimg > li img{width:auto;}
-
-* Latest
---------------------------------------------------------------------------------------------------------------- */
-#latest{}
-
-#latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
-article{}
-article img{width:100%;}/* Force the image to have the full width of parent at all times */
-.excerpt{padding:30px 0 0;}
-.excerpt time{display:block; margin:0 0 30px 0; padding:0 0 15px 0; font-style:normal; font-size:.8rem; line-height:1; border-bottom:1px solid;}
-.excerpt time i{margin-right:5px;}
-.excerpt .heading{margin:0 0 10px 0; font-size:1.3rem;}
-.excerpt .meta{margin:0 0 30px 0; padding:0; list-style:none; text-align:left;}
-.excerpt .meta li{display:inline-block; font-size:.8rem;}
-.excerpt .meta li::after{margin-left:5px; content:"|";}
-.excerpt .meta li:last-child::after{margin:0; content:"";}
-.excerpt p{}
-.excerpt footer{margin-top:30px;}
-
-.latestimg{}
-.latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
-.latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
-.latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
-.latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
-.latestimg > li a.imgover{display:block;}
-
-.carousel-inner > .item > img {
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  max-height: 500px;
-} 
-
-/* [cook LIST] 폰트 적용 */
-.wrapper{
-font-family: 'Gowun Batang', serif;
-}
-
-
-
-/* 레시피 등록 버튼 css */
-.submit
- {
+.submit:hover {
   display: block;
   border: none;
-  width: 80px;
-  height: 30px;
-  border-radius: 10px;
+  width: 150px;
+  height: 36px;
+  border-radius: 30px;
   color: #fff;
   font-size: 15px;
   cursor: pointer;
   margin-top: 20px;
   margin-bottom: 20px;
-  background: #d4af7a;
+  background: #937062;
   float: right;
-  	font-family: 'Gowun Batang', serif;
+  font-family: 'Gowun Batang', serif;
   
 }
 
-/* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
-hr {
-    margin-top: 60px;
-    margin-bottom: 20px;
-    border: 0;
-    border-top: 1px solid #eee;
+.submit{
+  display: block;
+  width: 150px;
+  height: 36px;
+  border-radius: 30px;
+  color: #937062;
+  border: 1px solid #937062;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #f7f7f7;
+  float: right;
+  font-family: 'Gowun Batang', serif;
+  
 }
 
-/* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
-p {
-    margin: 0 0 0px;
+.delete{
+  display: block;
+  width: 150px;
+  height: 36px;
+  border-radius: 30px;
+  color: #937062;
+  border: 1px solid #937062;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #f7f7f7;
+  float: right;
+  font-family: 'Gowun Batang', serif;
+  
+}
+
+div.emptyProd{
+	padding : 20px;
+	height: 100px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
 }
 
 </style>
@@ -187,29 +133,53 @@ p {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
+	function fncGetList(currentPage) {
+		console.log("currentPage: "+currentPage);
+		$("#currentPage").val(currentPage)
+		$("form").attr("method" , "POST").attr("action" , "/cook/listMyCook").submit();
+	}	
+	
 		 
 		 $(function() {
+			 
+			 $( ".submit" ).on("click" , function() {
+					self.location = "/cook/addCook.jsp"
+				 });									 
 			
-					$( ".imgover" ).on("click" , function() {
-					console.log($(this).attr("value"));
-					self.location ="/cook/getCook?cookNo="+$(this).attr("value")+"&menu=search"
-					});
+			 $( ".toget" ).on("click" , function() {
+				 
+				 var cookNo = $(this).attr('value');
+				 console.log(cookNo);
+				 
+				 self.location = "/cook/getCook?menu=search&cookNo="+cookNo
+			 });
+			 
+			 
+			 
+			 $( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
+					fncGetList(1);
+				 });	
+			 
+				$(".delete").on("click" , function() {
 					
-					$(".submit").on("click" , function() {
-						
-						var checkCount = $("input[name='cookCheck']:checked").length;
-					    var array = new Array();
-						$("input[name='cookCheck']:checked").each(function() {
-							array.push($(this).attr('id'));
-					    });
-						
-						if(checkCount != 0) {
-							alert("쿠킹클래스를 삭제하시겠습니까?")
-							self.location = "/cook/deleteCook?checkCount="+checkCount+"&checkList="+array;
-						} else {
-							alert("선택된 게시물이 없습니다.")	
-						}
-					});					
+					
+					var checkCount = $("input[name='cookCheck']:checked").length;
+
+				    var array = new Array();
+				    
+					$("input[name='cookCheck']:checked").each(function() {
+						array.push($(this).attr('id'));
+				    });
+					
+					if(checkCount != 0) {
+						alert(checkCount+"개의 쿠킹클래스를 삭제하시겠습니까?")
+
+						self.location = "/cook/deleteCook?checkCount="+checkCount+"&checkList="+array;
+					}			
+			
+
+				
+		});					
 					
 					
 		 });
@@ -286,111 +256,182 @@ p {
              }//if
          });//function
 
-});		 
+});	
+		 
+		 function enterkey() { 
+				if(window.event.keyCode == 13){
+					fncGetList(1);
+				}
+			} 		 
 					
 </script>
 			 </head>
 
 <body>
-
-	
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	<!--  화면구성 div Start /////////////////////////////////////-->
+	<div class="container list">
 	
-<div class="container">
-<!-- ################################################################################################ -->
+		<div class="page-header text-info text-center">
+	       <h3 style="color:#333">[ 멘토님의 쿠킹클래스관리 ]</h3>
+	    </div>
+	    
+	    
+		
+		<form class="form-inline" name="detailForm">
+	   			
+	   			<input type="hidden" id=themeCondition name=themeCondition value="${search.themeCondition }">
+	   			
+	<div class="row">
+		<table width="100%">
+			<tr>
+			
 
-	<div class="wrapper row3">
-		  <section class="hoc container clear"> 
-		    <div class="center btmspace-50">
-		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br>  ${user.userNickname }의 쿠킹클래스 </h3>
-		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
-		    </div>
-		  		    <button type="button" class="submit">삭제</button>
-		  
-		    
-		    <br/><hr/><br/>
-    </section>
-  	</div>
- 
- <input type="hidden" id="currentPage" name="currentPage" value="1"/>
- 
-<div class="row">
-	<c:set var="i" value="0" />
-	<c:forEach var="cook" items="${list}">
-  <div class="col-sm-6 col-md-3">
-  <br/> <br/>
-  
-    <div id="latest" class="group">
-    	<td align="center"><input type="checkbox" name="cookCheck" id="${cook.cookNo}"/>  	</td>
-      <article class="one_third first"><a class="imgover" value="${cook.cookNo }" href="#"> 
+				  
+	   			<td class="col-md-12 text-right">
+				  <div class="form-group">
+						<select name="searchCondition" id="searchCondition" class="form-control" style="width:150px">
+						 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>쿠킹클래스번호</option>
+							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>쿠킹클래스명</option>
+							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>쿠킹클래스가격</option>
+						</select>
+				  </div>
+				  
+				  <div class="form-group">
+				    <input type="text" style="display: none;">
+				    <input type="text" class="form-control" id="cookName" name="searchKeyword"  placeholder="검색"
+				    		onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+				  </div>
+				  
+				  <button type="button" class="btn btn-default" id="search">검색</button>
+				  
+				</td>
+				
+				
+			</tr>
+		</table>
+	</div>				  
+					<div class="row">
+						<table width="100%">
+						<tr>
+							
+							<td class="col-md-6 text-left">
+						    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지
+							</td>
+							
+							<td class="col-md-6 text-right"><button type="button" class="submit">쿠킹클래스등록</button> <button type="button" class="delete">삭제</button></td>
+							
+						</tr>
+						</table>
+					</div>
+				  
+					
+				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+				  
+				  
+				  
+				</form>
+		
+      <!--  table Start /////////////////////////////////////-->
+      <table class="table table-hover table-striped">
+      
+        <thead>
+          <tr class="head">
+            <th align="center">No</th>
+            <th align="center">쿠킹클래스번호</th>
+            <th align="center" width="80"></th>
+            <th align="left">클래스정보</th>
+            <th align="center">남은신청인원수</th>
+            <th align="center">쿠킹클래스장소</th>
+          </tr>
+        </thead>
+       
+		<tbody>
 
- 
-<c:choose>
+		
+		  <c:set var="i" value="0" />
+		  <c:forEach var="cook" items="${list}">
+			<c:set var="i" value="${ i+1 }" />
+			<tr>
+			  	<td align="center"><input type="checkbox" name="cookCheck" id="${cook.cookNo}"/>
+			  	
+			 
+			  	</td>
+			  
+			  
+			  	<td align="center" class="toget" value="${cook.cookNo }">${cook.cookNo }</td>	
+			  
+				<td align="right" class="toget" value="${cook.cookNo }">
+										<c:choose>
 		    	<c:when test="${cook.cookFilename.contains('/')}">
 						<c:choose>
 						<c:when test="${cook.cookFilename.contains('mp4')}">
 							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
-								<video width="400" height="400" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+								<video width="85" height="85" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
 							</c:forEach>
 						</c:when>
 						
 						<c:otherwise>
 							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
-								<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+								<img src="/resources/images/uploadFiles/${name}" width="85" height="85" align="absmiddle"/>
 								<input type="hidden" name="image" value="${name }"/>
 							</c:forEach>
 						</c:otherwise>
 						</c:choose>
 				</c:when>
 				<c:otherwise>
-					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle" class="image" value="${prodThumbnail}"/>
+					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="85" height="85" align="absmiddle" class="image" value="${prodThumbnail}"/>
 				</c:otherwise>
-		    	</c:choose></a>
-        <div class="excerpt">
-          <h4 class="heading" >${cook.cookName }</h4>
-           <h6 >${cook.cookBrief }</h6>
-          <ul class="meta">           
-            <li>모집인원 :${cook.cookRecruit }</li>
-            <li>
-			<c:if test = "${cook.cookTheme =='KO'}">
-			 테마 : 한식
-			</c:if>
-			<c:if test = "${cook.cookTheme == 'JA'}">
-			 테마 : 일식
-			</c:if>
-			<c:if test = "${cook.cookTheme == 'AM'}">
-			테마 : 양식
-			</c:if>
-			<c:if test = "${cook.cookTheme == 'CH'}">
-			테마 : 중식
-			</c:if>
-			<c:if test = "${cook.cookTheme == 'DE'}">
-			 테마 : 간식
-			</c:if>		
-
-		</li>
-          
-          </ul>
-        </div>
-      </article>
-     
-    </div>
-    <!-- ################################################################################################ -->
-  </div>
-  </c:forEach>
-     <div  id="scrollList"></div>
-     
-</div>
-	  </div>
-	  
-	  
-	  
-	  
+		    	</c:choose>
+				</td>
+			  
+			  	<td align="left" class="toget" value="${cook.cookNo }">
+			  	
+			  		<p style="font-weight:bold">${cook.cookName }</p> <br>
+			  		
+	
+			  </td>	
+			  
+			  
+			  <td align="center" class="view">
+			  	<c:if test="${cook.cookStock == 0 }">
+			  		<span style="color:#ffb6c1">${cook.cookStock } 명</span>
+			  	</c:if>
+			  	<c:if test="${cook.cookStock != 0 }">
+			  		${cook.cookStock } 명
+			  	</c:if>
+			  </td>	
+			  
+			  
+			  <td align="center" class="view">
+					${cook.cookLocation}		  	
+			  </td>	
+			</tr>
+          </c:forEach>
+        
+        </tbody>
+      
+      </table>
+	  <!--  table End /////////////////////////////////////-->
+	  <c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			판매중인 쿠킹클래스가 없습니다.
+		</div>
+		<br>
+	</c:if>
+ 	</div>
+ 	<!--  화면구성 div End /////////////////////////////////////-->
+ 	
+	
+ 	
+ 	<!-- PageNavigation Start... -->
+	<jsp:include page="../common/pageNavigator_new.jsp"/>
+	<!-- PageNavigation End... -->
+	
 </body>
-
 </html>

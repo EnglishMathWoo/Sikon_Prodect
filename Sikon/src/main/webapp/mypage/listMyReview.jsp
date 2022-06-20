@@ -41,8 +41,10 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
+  <!-- sweetalert -->
 	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
 	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -80,6 +82,7 @@ body{
 }
 
 .table {
+width:1140px;
 	margin-top: 20px;
 }
 
@@ -98,7 +101,7 @@ body{
 	color: #fff;
 	font-size: 15px;
 	cursor: pointer;
-	margin-top: 20px;
+	margin-top: 0px;
 	margin-bottom: 20px;
 	background: #d4af7a;
 	float: right;
@@ -107,6 +110,14 @@ body{
 
 th{
 text-align: center
+}
+
+.emptyReview{
+	padding : 90px;
+	height: 200px;
+	text-align: center;
+	font-weight: bold;
+	color: #808080;
 }
 </style>
     
@@ -132,10 +143,37 @@ text-align: center
 					
 					//Debug..
 					if(checkCount != 0) {
-						alert(checkCount+"개의 리뷰를 삭제하시겠습니까?")
-						self.location = "/review/deleteReview?checkList="+array;
+						Swal.fire({
+							  title: checkCount+'개의 리뷰를 삭제하시겠습니까?',
+							  text: "삭제한 리뷰는 되돌릴 수 없습니다.",
+							  icon: 'warning',
+							  showCancelButton: true,
+							  confirmButtonColor: '#3085d6',
+							  cancelButtonColor: '#d33',
+							  confirmButtonText: '삭제',
+							  cancelButtonText: '취소'
+							}).then((result) => {
+							  if (result.isConfirmed) {
+								  self.location = "/review/deleteReview?checkList="+array;
+							  }
+							})
+					//	alert(checkCount+"개의 리뷰를 삭제하시겠습니까?")
+					//	self.location = "/review/deleteReview?checkList="+array;
 					} else {
-						alert("선택된 리뷰가 없습니다.")						
+
+
+						Swal.fire({
+							  icon: 'error',
+							  text: '선택된 리뷰가 없습니다.',
+							  confirmButtonText: '확인'
+							})
+						
+						
+						
+						
+						
+						
+						
 					}
 				});
 			});
@@ -165,7 +203,7 @@ text-align: center
 		
 	
         
-        <div class="table-responsive">
+        <div class="table-responsive"  style="width: 1140px">
         <p class="text-primary"  style="color:gray">
 		 전체  ${resultPage.totalCount} 건수, 현재 ${resultPage.currentPage} 페이지
 		 </p>
@@ -211,10 +249,13 @@ text-align: center
                  
       </table>
       
-     <c:if test="${empty list}">
-      	<h3 id="noCoupon">작성한 리뷰가 없습니다.</h3>
-      	<br>
-     </c:if>
+    <c:if test="${empty list}">
+		<br><br>
+		<div class="emptyReview">
+			작성한 리뷰가 없습니다.
+		</div>
+		<br>
+	</c:if>
                          
      </div>
      </div>

@@ -40,6 +40,11 @@
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+	<!-- sweetalert -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+	
+	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 
 
@@ -133,23 +138,22 @@ float:right;
 border-color:#D7D7D7;
 }
 /* 레시피 등록 버튼 css */
-.submit
- {
-  display: block;
-  border: none;
-  width: 150px;
-  height: 36px;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: #937062;
-  float: right;
-  font-family: 'Gowun Batang', serif;
-  
+.submit {
+	display: block;
+	border: none;
+	width: 80px;
+	height: 30px;
+	border-radius: 10px;
+	color: #fff;
+	font-size: 15px;
+	cursor: pointer;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	background: #d4af7a;
+	float: right;
+	font-family: 'Gowun Batang', serif;
 }
+
 
 .submit:hover{
 	background: #f7f7f7;
@@ -253,7 +257,13 @@ font-size: 13px;
     text-transform: uppercase;
     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
-
+.emptyRecipe{
+	padding : 90px;
+	height: 200px;
+	text-align: center;
+	font-weight: bold;
+	color: #808080;
+}
 
 </style>
 
@@ -261,8 +271,11 @@ font-size: 13px;
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
-		 
+	//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
+
 		 $(function() {
+			
+			
 			
 					$( ".imgover" ).on("click" , function() {
 					console.log($(this).attr("value"));
@@ -285,15 +298,28 @@ font-size: 13px;
 					    });
 						
 						if(checkCount != 0) {
-							alert(checkCount+"개의 레시피를 삭제하시겠습니까?")
+							Swal.fire({
+								  title: checkCount+'개의 레시피를 삭제하시겠습니까?',
+								  text: "삭제한 레시피는 되돌릴 수 없습니다.",
+								  icon: 'warning',
+								  showCancelButton: true,
+								  confirmButtonColor: '#3085d6',
+								  cancelButtonColor: '#d33',
+								  confirmButtonText: '삭제',
+								  cancelButtonText: '취소'
+								}).then((result) => {
+								  if (result.isConfirmed) {
+										self.location = "/recipe/deleteRecipe?recipeList="+array;
+								  }
+								})
 
-						self.location = "/recipe/deleteRecipe?recipeList="+array;
 						}
 						
 					});
 						
 					
 		 });
+		 
 		 
 		 
 					
@@ -314,7 +340,7 @@ font-size: 13px;
 <div class="center btmspace-50">
 			<br />
 			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
-				<br> | M Y R E C I P E | <br>
+				<br> | R E C I P E | <br>
 			</h3>
 		</div>
 		
@@ -387,10 +413,13 @@ font-size: 13px;
      
 </div>
 
-<c:if test="${empty list}">
-      	<h3 align="center" >등록한 레시피가 없습니다.</h3>
-      	<br>
-     </c:if>
+   <c:if test="${empty list}">
+		<br><br>
+		<div class="emptyRecipe">
+			작성한 레시피가 없습니다.
+		</div>
+		<br>
+	</c:if>
      
 	  </div>
 </body>

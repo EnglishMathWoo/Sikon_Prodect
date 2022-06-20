@@ -38,32 +38,28 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
 
 
 
 <style>
 .colored-toast.swal2-icon-success {
-	background-color: #a5dc86 !important;
+  background-color: #a5dc86 !important;
 }
-
 .colored-toast .swal2-title {
-	color: white;
+  color: white;
 }
 
 .colored-toast .swal2-close {
-	color: white;
+  color: white;
 }
 
 .colored-toast .swal2-html-container {
-	width: 50%;
-	color: white;
+width:50%;
+  color: white;
 }
-
 .btn-sm {
 	color: #000;
 }
@@ -117,10 +113,9 @@ body {
 	margin-left: 0px;
 }
 
-.updateButton {
-	text-align: right;
+.updateButton{
+text-align: right;
 }
-
 .updateButton button {
 	background-color: #75574B;
 	color: #fff;
@@ -327,52 +322,52 @@ body {
 	background: rgba(255, 0, 0, 0.5);
 }
 
-.bi-bookmark-plus::before, .bi-bookmark-plus-fill::before {
-	color: #d4af7a;
-	display: inline-block;
-	font-family: bootstrap-icons !important;
-	font-style: normal;
-	font-weight: normal !important;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	font-size: 33px;
-	vertical-align: -0.125em;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+
+.bi-bookmark-plus::before,.bi-bookmark-plus-fill::before  {
+	color:#d4af7a;
+    display: inline-block;
+    font-family: bootstrap-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size:33px;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
+
 
 .update {
-	cursor: pointer;
-	background-color: #937062;
-	border: none;
-	color: #fff;
-	padding: 5px 0;
-	width: 10%;
-	font-size: large;
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 5px 0;
+  width:10%;
+  font-size: large;
 }
-
 .update:hover {
-	background-color: #937062d4;
+  background-color: #937062d4;
 }
 
 .submit {
-	cursor: pointer;
-	background-color: #f7f7f7;
-	border: 1px solid #937062;
-	color: #937062;
-	padding: 4px 0;
-	width: 10%;
-	font-size: large;
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 4px 0;
+  width:10%;
+  font-size: large;
 }
-
 .submit:hover {
-	background-color: #e7e2e2;
+  background-color: #e7e2e2;
+}
+.fa-solid{
+color:black;
 }
 
-.fa-solid {
-	color: black;
-}
 </style>
 
 </head>
@@ -383,18 +378,19 @@ body {
 
 	<div class="container">
 
-		<input type="hidden" name="userId" value="${user.userId}"> <input
-			type="hidden" name="userNickname" value="${user.userNickname}">
-
-
-		<div class="col-xs-12 col-md-12  col-lg-12" style="text-align: right">
-			<button type="button" class="update">수정</button>
-			<button type="button" class="submit">삭제</button>
-			<hr />
-			<br />
+		<input type="hidden" name="userId" value="${user.userId}"> 
+		<input type="hidden" name="userNickname" value="${user.userNickname}">
+	
+	
+	<div class="col-xs-12 col-md-12  col-lg-12"
+			style="text-align:right">
+		  	<button type="button" class="update">수정</button>
+		  	<button type="button" class="submit">삭제</button>
+			<hr/>
+			<br/>
 		</div>
-
-		<hr />
+		
+		<hr/>
 
 		<div class="col-xs-12 col-md-12  col-lg-12" style="text-align: center">
 			<c:forEach var="name" items="${recipe.recipeImg.split('/')[0]}">
@@ -404,29 +400,30 @@ body {
 			</c:forEach>
 		</div>
 
-		<br /> <input type="hidden" name="recipeNo" id="recipeNo"
+		<br/> <input type="hidden" name="recipeNo" id="recipeNo"
 			value="${recipe.recipeNo }" />
 
 
-
+	
 
 
 
 		<div class="col-xs-12 col-md-12  col-lg-12">
-			<br /> <br />
+			<br />
+			<br />
 			<div style="font-family: 'YeolrinMyeongjo-Medium'; font-size: 17px">${recipe.recipeDetail }</div>
 			<div>
 				<div class="kgiNry" style="text-align: right;" align="right">
 					<c:if test="${recipe.bookmarkStatus =='0'}">
-						<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
+					<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
 					</c:if>
 					<c:if test="${recipe.bookmarkStatus =='1'}">
-						<i id="bookmarkBtn" class="bi bi-bookmark-plus-fill"></i>
+					<i id="bookmarkBtn" class="bi bi-bookmark-plus-fill"></i>
 					</c:if>
 					<a id="kakao-link-btn" href="javascript:kakaoShare()"> <img
 						src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
 						width="30" height="30" />
-					</a>
+					</a> 
 				</div>
 				<h4>
 					<strong style="font-family: 'YeolrinMyeongjo-Medium';">${recipe.recipeName}</strong>
@@ -452,12 +449,13 @@ body {
 				</c:choose>
 
 
-				&nbsp;소요시간 ${recipe.cookingTime }분 <input type="button" value="타이머"
-					onclick="window.open('/recipe/timer.jsp', '_blank', 'width=500, height=400')">
+				&nbsp;소요시간 ${recipe.cookingTime }분
+				<input type="button" value="타이머" onclick="window.open('/recipe/timer.jsp', '_blank', 'width=500, height=400')">
 				<div style="float: right">조회수: ${recipeViews}</div>
 			</h5>
 			<hr />
-			${recipe.detail } <br />
+			${recipe.detail }
+			 <br />
 
 
 
@@ -484,68 +482,87 @@ body {
 				<br /> ${recipe.recipeOrder }
 			</div>
 			<hr />
-
-			<h3 class="iEJcKGheader">리뷰</h3>
+		
+				<h3 class="iEJcKGheader">리뷰</h3>
+			<form id="comment" name="comment" method="post" enctype="multipart/form-data" accept-charset="euc-kr">
 				<div class="panel">
 					<div class="panel-body">
 						<textarea class="form-control" name="reviewContent"
 							id="reviewContent" rows="2" placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
 						<div class="mar-top clearfix">
-							<button class="btn btn-sm  pull-right" type="submit">등록
+							<button class="btn btn-sm  pull-right" type="submit">
+								등록
 							</button>
 							<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
 
+							<div class="yes">
+								<span class="btn_upload"> 
+								<input multiple="multiple" type="file" id="reviewImg" name="fileArray" class="input-img" onchange="fileUpload()" />
+									<i class="fa-solid fa-camera"></i>
+								</span> <img id="ImgPreview" name="reviewImg" src="" class="preview1" />
+								<input type="button" id="removeImage1" value="x"
+									class="btn-rmv1" />
+							</div>
 
 
 
 						</div>
 					</div>
 				</div>
-
+			</form>
+			
+			
 			<c:forEach var="review" items="${review}">
 
-				<div class="panel">
-					<div class="panel-body">
-						<div class="media-block">
-							<a class="media-left"><img class="img-circle img-sm"
-								alt="Profile Picture" src="/resources/images/168939.jpg"></a>
-							<div class="media-body">
-								<div class="mar-btm">
-									<a class="btn-link text-semibold media-heading box-inline">${review.writerNickname }</a>
-									<p class="text-muted text-sm">
-										<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-											value="${review.reviewRegdate}" />
+						<div class="panel">
+							<div class="panel-body">
+								<div class="media-block">
+									<a class="media-left" ><img
+										class="img-circle img-sm" alt="Profile Picture"
+										src="/resources/images/168939.jpg"></a>
+									<div class="media-body">
+										<div class="mar-btm">
+											<a 
+												class="btn-link text-semibold media-heading box-inline">${review.writerNickname }</a>
+											<p class="text-muted text-sm">
+												<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+													value="${review.reviewRegdate}" />
 
-									</p>
-								</div>
-								<input type="hidden" name="reviewNo" value="${review.reviewNo }">
-								<br /> <br />
-								<p id="acontent">${review.reviewContent }</p>
-								<div id="abt">
-									<c:if test="${user.userNickname !=null }">
-										<c:if test="${review.writerNickname == user.userNickname }">
-											<input type="button" class="deleteReview" value="&#xf2ed"
-												id="${review.reviewNo }"
-												style="float: right; margin-right: 17px">
-											<input type="button" class="updateReview"
-												id="${review.reviewContent }" value="&#xf304"
-												style="float: right; margin-right: 5px">
+											</p>
+										</div>
+										<input type="hidden" name="reviewNo"
+											value="${review.reviewNo }"> <br />
+										<br />
+										<c:if test="${review.reviewImg != null }">
+											<img id="${review.reviewImg }" src="/resources/images/uploadFiles/${review.reviewImg }"
+												width="200" height="200">
 										</c:if>
-									</c:if>
+										<p id="acontent">${review.reviewContent }</p>
+										<div id="abt">
+										<c:if test="${user.userNickname !=null }">
+											<c:if test="${review.writerNickname == user.userNickname }">
+												<input type="button" class="deleteReview" value="&#xf2ed"
+													id="${review.reviewNo }"
+													style="float: right; margin-right: 17px">
+												<input type="button" class="updateReview"
+													id="${review.reviewContent }" value="&#xf304"
+													style="float: right; margin-right: 5px">
+											</c:if>
+											</c:if>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</c:forEach>
+
+					<!--===================================================-->
+
+
+
+
 				</div>
-			</c:forEach>
-
-			<!--===================================================-->
-
-
-
-
 		</div>
-	</div>
 
 	<!--  화면구성 div Start /////////////////////////////////////-->
 </body>
@@ -585,29 +602,79 @@ body {
 	});
 	function fncAddReview() {
 		var recipeNo = $("input:hidden[name='recipeNo']").val();
+		var fileInput = document.getElementsByClassName("input-img");
+		var fileArray=fileInput[0].files[0].name;
+		console.log(fileArray);
 		var reviewContent=$('#reviewContent').val();
+		var imagename=$('#imagename').val();
 		var userId = $("input:hidden[name='userId']").val();
 		var userNickname = $("input:hidden[name='userNickname']").val();
-		
-		$.ajax({
+
+	     $.ajax({
 	            type : "POST",  
 	            url : "/review/json/addReview", 
-	            data : {'recipeNo' : recipeNo ,'reviewContent':reviewContent
-	            	 },
+	          //  contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+	            data : {'recipeNo' : recipeNo, 'reviewContent':reviewContent,
+	            	'fileArray':fileArray
+	            },
 	            error : function(request,status,error){
 	            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	            },
 	            success : function(request) {
+						alert(request);				           
 	                   location.reload();
 	            }
 	   	     
 	     });
-	     
 
 		pushAlarm(userId, userNickname, recipeNo);
 	}
-
+	/*
+	function fileUpload() {
+	var fileInput = document.getElementsByClassName("input-img");
+	console.log(fileInput[0].files[0].name);
+	}
 	
+	
+	function fncAddReview() {
+		event.preventDefault();
+		 var form = $('#comment')[0];  	    
+		    // Create an FormData object          
+		    var data = new FormData(form);  	   
+		    // disabled the submit button         
+		  
+		var recipeNo = $("input:hidden[name='recipeNo']").val();
+		var reviewContent=$('#reviewContent').val();
+		var imagename=$('#imagename').val();
+		console.log(imagename);
+		console.log(reviewContent);
+		var userId = $("input:hidden[name='userId']").val();
+		var userNickname = $("input:hidden[name='userNickname']").val();
+		console.log(userNickname);
+		console.log(recipeNo);
+		console.log(userId);
+
+	     $.ajax({
+	            type : "POST",  
+	            url : "/review/json/addReview", 
+	          //  contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+	            contentType:false,
+	            data : data,
+	            processData: false,    
+	            cache: false,  
+	            error : function(request,status,error){
+	            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	            },
+	            success : function(request) {
+						alert(request);				           
+	                   location.reload();
+	            }
+	   	     
+	     });
+
+		pushAlarm(userId, userNickname, recipeNo);
+	}
+	*/
 	$(document).on('click','.deleteReview',function() {
 		var reviewNo = $(this).attr('id');
 		var recipeNo = $("input:hidden[name='recipeNo']").val();
@@ -639,24 +706,27 @@ body {
 	$(document).on('click','.updateReview',function() {
 				//alert($(this).attr('id'))	
 				var reviewContent = $(this).attr('id');
-				var reviewNo = $(this).attr('value2');
-				console.log(reviewNo)
+				var reviewNo = $("input:hidden[name='reviewNo']").val();
+				var imgreview = $("#imgreview").attr('id');
 				
+				if(imgreview=='undefined'){
+				
+				
+				$('#acontent').replaceWith(
+								"<img id='yeda' src='/resources/images/uploadFiles/"+imgreview+"' width='100' height='100'>"+
+								"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
+				}
+				else{
 					$('#acontent').replaceWith(
 							
-							"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>"
-							);
+							"<textarea id='updatecontent' class='form-control' name='reviewContent' rows='2'>"+ reviewContent+ "</textarea>");
 					
+				}
 				
-				$('#abt').replaceWith("<div class='updateButton'> <input type='button' class='uptrev' value='수정' id='"+reviewNo+"'>"
+				$('#abt').replaceWith("<div class='updateButton'> <input type='button'  value='수정' id='"+reviewNo+"'>"
 										+ "<input type='button' value='취소' ></div>");
 
 			});
-	
-	$(document).on('click','.uptrev',function() {
-		var ww = $(this).attr('id');
-		alert(ww);
-	});
 	
 	function readURL(input, imgControlName) {
 		if (input.files && input.files[0]) {

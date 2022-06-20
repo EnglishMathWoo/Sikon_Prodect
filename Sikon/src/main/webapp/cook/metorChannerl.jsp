@@ -326,7 +326,14 @@ p {
 					$( ".imgover" ).on("click" , function() {
 					console.log($(this).attr("value"));
 					self.location ="/cook/getCook?cookNo="+$(this).attr("value")+"&menu=search"
-					});
+							
+							
+							
+							
+							
+							
+							
+});
 					
 
 					
@@ -489,8 +496,9 @@ p {
 					<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
 		
 					
-				
+				<c:if test="${seessionScope.user.role=='mentor' }">
 		  		    <button type="button" class="submit">ªË¡¶</button>
+		  		    </c:if>
 		  		
 		  
 		    

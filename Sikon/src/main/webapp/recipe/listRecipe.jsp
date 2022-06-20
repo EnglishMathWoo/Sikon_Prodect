@@ -441,9 +441,8 @@ font-size: 13px;
 						                     					+"<a class='imgover' value='"+JSONData.list[i].recipeNo+"' >"
 						                     					+"<img src='/resources/images/uploadFiles/"+JSONData.list[i].recipeImg+"' id='image' width='320' height='300'></a>"
 					                     						+"<div class='excerpt'>"
-					                     						+"<h6>"+JSONData.list[i].recipeDetail+"</h6>"
-					                     						+"<h4 class='heading'><b>"+JSONData.list[i].recipeName+"</b></h4>"
-					                     						+"<p style='float:right'>¸®ºä¼ö: "+JSONData.list[i].reviewNum+"</p>"
+					                     						+"<p class='namehead'>"+JSONData.list[i].recipeDetail+"</p>"
+					                     						+"<p class='detailhead'><b>"+JSONData.list[i].recipeName+"</b></p>"
 					                     						+"<ul class='meta'>"
 					                     			            +"<li>"+ JSONData.list[i].recipeTheme +"</li>"
 					                     			            +"<li>"+ JSONData.list[i].recipeDifficulty +"</li>"
@@ -600,13 +599,13 @@ font-size: 13px;
 	     	</tr>
 	     </table>
 	     
+ <input type="hidden" id="currentPage" name="currentPage" value="1"/>
   	</form>
     	</section>
   	</div>
   	
   	
   	
- <input type="hidden" id="currentPage" name="currentPage" value="1"/>
 
  
   
