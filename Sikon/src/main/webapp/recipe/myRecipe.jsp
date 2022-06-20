@@ -266,6 +266,10 @@ font-size: 13px;
 	color: #808080;
 }
 
+.imgover:hover{
+	opacity: 0.8;
+}
+
 </style>
 
 

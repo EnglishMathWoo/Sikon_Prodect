@@ -177,6 +177,11 @@ body {
 
 #latest article {
 	max-width: 348px;
+	position: relative;
+}
+
+#latest article li{
+    margin: 0 5px;
 }
 
 #footer {
@@ -451,45 +456,23 @@ p {
     animation: draw-checkbox ease-in-out 0.2s forwards;
   }
   
-  label:active::after {
-    background-color: $grey-25;
-  }
+
+/* «œ≈ı */
   
-  label {
-    color: $brand;
-    line-height: 40px;
-    cursor: pointer;
+  #image{
     position: relative;
-    &:after {
-      content: "";
-      height: 40px;
-      width: 40px;
-      margin-right: 1rem;
-      float: left;
-      border: 2px solid $brand;
-      border-radius: 3px;
-      transition: 0.15s all ease-out;      
-    }
-  }
-  svg {
-    stroke: $brand;
-    stroke-width: 2px;
-    height: 0; //Firefox fix
-    width: 24px;
-    position: absolute;
-    left: -48px;
-    top: -4px;
-    stroke-dasharray: 33; //Firefox fix
-  }
+
 }
 
-@keyframes draw-checkbox {
-  0% {
-    stroke-dashoffset: 33;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
+.menu-content{
+	   display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.imgover:hover{
+	opacity: 0.8;
 }
 </style>
 
@@ -562,17 +545,26 @@ p {
 					<br /> <br />
 
 					<div id="latest" class="group">
+					
 						<input type="checkbox" name="ckBookmark" 
 							id="${list.recipe.recipeNo }">
 						<article class="one_third first">
+						
 							<a class="imgover" value="${list.recipe.recipeNo }" href="#"><img
 								src="/resources/images/uploadFiles/${list.recipe.recipeImg }"
-								width="320" height="300"></a>
+								width="320" height="300" id="image">
+								<ul class="menu-content">
+							          <li><a href="#" class="fa fa-eye"><span>${list.recipe.recipeViews }</span></a></li>
+							          <li><a href="#" class="fa fa-comment-o"><span>${list.recipe.reviewNum }</span></a></li>
+							  </ul>
+								</a>
 							<div class="excerpt">
+							
 								<p class="namehead">${list.recipe.recipeDetail }</p>
 								<p class="detailhead">
 									<b>${list.recipe.recipeName }</b>
 								</p>
+								
 								<ul class="meta">
 									<li><c:choose>
 											<c:when test="${list.recipe.recipeTheme=='KO'} ">

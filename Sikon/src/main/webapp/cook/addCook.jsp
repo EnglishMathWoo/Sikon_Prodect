@@ -11,11 +11,6 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
-	
-	
-	
-	
 <!--  ///////////////////////// SummerNote ////////////////////////// -->
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -270,7 +265,7 @@ div.container {
 
 		  
 		  <div class="form-group">
-			    <label for="cookStock" class="col-sm-offset-1 col-sm-3 control-label">모집인원재고</label>
+			    <label for="cookStock" class="col-sm-offset-1 col-sm-3 control-label">모집인원가능인원</label>
 			    <div class="col-sm-4">
 			      <input type="text" class="form-control" id="cookStock" name="cookStock" placeholder="모집인원재고">
 			    </div>

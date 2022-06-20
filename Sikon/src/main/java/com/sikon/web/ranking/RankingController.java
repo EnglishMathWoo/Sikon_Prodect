@@ -2,8 +2,6 @@ package com.sikon.web.ranking;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,12 +15,12 @@ import com.sikon.service.cook.CookService;
 import com.sikon.service.ranking.RankingService;
 import com.sikon.service.recipe.RecipeService;
 
-//랭킹 Controller
+
 @Controller
 @RequestMapping("/ranking/*")
 public class RankingController {
 
-	/// Field
+	///Field
 	@Autowired
 	@Qualifier("rankingServiceImpl")
 	private RankingService rankingService;
@@ -35,10 +33,6 @@ public class RankingController {
 	@Qualifier("cookServiceImpl")
 	private CookService cookService;
 
-	public RankingController() {
-		System.out.println(this.getClass());
-	}
-
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 
@@ -46,21 +40,22 @@ public class RankingController {
 	int pageSize;
 
 	
+	///Constructor
+	public RankingController() {
+		System.out.println(this.getClass());
+	}
+	
+	
+	///Method
 	@RequestMapping(value = "listRecipe")
-	public String listRecipe(@ModelAttribute("search") Search search, Model model) throws Exception {
+	public String listRecipe( @ModelAttribute("search") Search search, Model model ) throws Exception {
 
-		System.out.println("/ranking/listRecipe : POST/get");
-
-		System.out.println("search:" + search);
+		System.out.println("/ranking/listRecipe");
 				
 		search.setPageSize(pageSize);
 		
-		// Business logic 수행
 		Map<String, Object> map = rankingService.getRecipeList(search);
 
-		System.out.println("list=" + map.get("list"));
-
-		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("search", search);
 
@@ -68,47 +63,33 @@ public class RankingController {
 	}
 	
 	@RequestMapping(value = "listProduct")
-	public String listProduct(@ModelAttribute("search") Search search, Model model) throws Exception {
+	public String listProduct( @ModelAttribute("search") Search search, Model model ) throws Exception {
 
-		System.out.println("/ranking/listProduct : POST/get");
+		System.out.println("/ranking/listProduct");
 
-		System.out.println("search:" + search);
-			
 		search.setPageSize(pageSize);
 			
-		// Business logic 수행
 		Map<String, Object> map = rankingService.getProductList(search);
 
-		System.out.println("list=" + map.get("list"));
-
-		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("search", search);
 
 		return "forward:/ranking/listProductRanking.jsp";
 	}
 	
-	
 	@RequestMapping(value = "listLove")
-	public String listLove(@ModelAttribute("search") Search search, Model model) throws Exception {
+	public String listLove( @ModelAttribute("search") Search search, Model model ) throws Exception {
 
-		System.out.println("/ranking/listLove : POST/get");
-
-		System.out.println("search:" + search);
+		System.out.println("/ranking/listLove");
 			
 		search.setPageSize(pageSize);
 			
-		// Business logic 수행
 		Map<String, Object> map = rankingService.getLoveList(search);
 
-		System.out.println("list=" + map.get("list"));
-
-		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("search", search);
 
 		return "forward:/ranking/listLoveRanking.jsp";
 	}
-	
 
 }

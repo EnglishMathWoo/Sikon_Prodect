@@ -15,6 +15,10 @@
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+ <!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 
 <style>
 
@@ -250,9 +254,11 @@ input:-webkit-autofill {
 	padding:220px;
 }
 .pltitle{
+
 	text-align: center;
-	color: #937062;
-	padding-top: 35px;
+	color: #333;
+	padding-top: 30px;
+	font-family: 'Nanum Myeongjo', serif;
 }
 /* ---------------------------------------- */
 .summernote{

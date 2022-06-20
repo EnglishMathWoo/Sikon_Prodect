@@ -1,6 +1,5 @@
 package com.sikon.service.coupon.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,59 +32,20 @@ public class CouponServiceImpl implements CouponService{
 
 	///Method
 	//쿠폰생성
-	public void addCoupon(Coupon coupon) throws Exception {
+	public void addCoupon( Coupon coupon ) throws Exception {
+		
 		couponDao.insertCoupon(coupon);
 	}
 	
 	//쿠폰발급
-	public void issueCoupon(Coupon coupon) throws Exception{
+	public void issueCoupon( Coupon coupon ) throws Exception{
+		
 		couponDao.issueCoupon(coupon);
 	};
 	
-	//쿠폰검색
-	public List<Coupon> getCoupon() throws Exception {
-		
-		List<Coupon> couponList = couponDao.findCoupon();
-		
-		System.out.println(couponList);
-		
-		return couponList;
-	}
-	
-	//발급쿠폰검색
-	public Coupon getIssuedCoupon(int issueNo) throws Exception {
-		
-		Coupon issuedCoupon = couponDao.findIssuedCoupon(issueNo);
-		
-		System.out.println(issuedCoupon);
-		
-		return issuedCoupon;
-	}
-	
-	//마이쿠폰검색
-	public List<Coupon> getMyCoupon(String userId) throws Exception {
-		
-		List<Coupon> couponList = couponDao.findMyCoupon(userId);
-		
-		System.out.println(couponList);
-		
-		return couponList;
-	}
-	
-	//마이쿠폰리스트 
-	public Map<String , Object> getMyCouponList(Search search, String userId) throws Exception  {
-		List<Coupon> list= couponDao.getMyCouponList(search, userId);
-		int totalCount = couponDao.getMyCouponCount(userId);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list );
-		map.put("totalCount", new Integer(totalCount));
-		
-		return map;
-	}
-	
 	//쿠폰리스트
-	public Map<String , Object > getCouponList(Search search) throws Exception {
+	public Map<String , Object > getCouponList( Search search ) throws Exception {
+		
 		List<Coupon> list= couponDao.getCouponList(search);
 		int totalCount = couponDao.getTotalCount(search);
 		
@@ -97,7 +57,8 @@ public class CouponServiceImpl implements CouponService{
 	}
 	
 	//발급쿠폰리스트
-	public Map<String , Object > getIssuedCouponList(Search search) throws Exception {
+	public Map<String , Object > getIssuedCouponList( Search search ) throws Exception {
+		
 		List<Coupon> list= couponDao.getIssuedCouponList(search);
 		int totalCount = couponDao.getIssuedTotalCount(search);
 		
@@ -110,18 +71,64 @@ public class CouponServiceImpl implements CouponService{
 		return map;
 	}
 	
+	//마이쿠폰리스트 
+	public Map<String , Object> getMyCouponList( Search search, String userId ) throws Exception  {
+		
+		List<Coupon> list= couponDao.getMyCouponList(search, userId);
+		int totalCount = couponDao.getMyCouponCount(userId);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list );
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
+	}
+	
+	//쿠폰검색
+	public List<Coupon> getCoupon() throws Exception {
+		
+		List<Coupon> couponList = couponDao.findCoupon();
+		
+		System.out.println(couponList);
+		
+		return couponList;
+	}
+	
+	//발급쿠폰 검색
+	public Coupon getIssuedCoupon( int issueNo ) throws Exception {
+		
+		Coupon issuedCoupon = couponDao.findIssuedCoupon(issueNo);
+		
+		System.out.println(issuedCoupon);
+		
+		return issuedCoupon;
+	}
+	
+	//마이쿠폰 검색
+	public List<Coupon> getMyCoupon( String userId ) throws Exception {
+		
+		List<Coupon> couponList = couponDao.findMyCoupon(userId);
+		
+		System.out.println(couponList);
+		
+		return couponList;
+	}
+		
 	//발급쿠폰 상태변경
-	public void updateIssueStatus(Coupon coupon) throws Exception{
+	public void updateIssueStatus( Coupon coupon ) throws Exception{
+		
 		couponDao.updateIssueStatus(coupon);
 	}
 	
 	//쿠폰삭제
-	public void deleteCoupon(int couponNo) throws Exception{
+	public void deleteCoupon( int couponNo ) throws Exception{
+		
 		couponDao.deleteCoupon(couponNo);
 	};
 	
 	//발급쿠폰 만료계산
-	public void checkExpiry(List<Coupon> list) throws Exception {
+	public void checkExpiry( List<Coupon> list ) throws Exception {
+		
 		Date currentDate = new Date();
 		
 		for(int i=0; i<list.size(); i++) {

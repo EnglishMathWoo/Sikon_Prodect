@@ -40,6 +40,9 @@
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+	<!-- 검색엔진 -->
+	<script async src="https://cse.google.com/cse.js?cx=d253ee857bb55c10b"></script>
+	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 
 
@@ -293,6 +296,26 @@ font-size: 13px;
     text-transform: uppercase;
     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
+
+.imgover:hover{
+	opacity: 0.8;
+}
+
+/*검색엔진*/
+.gsc-control-cse {
+    background-color: #f7f7f7 !important;
+    width: 350px !important;
+    border:none !important;
+    float:right;
+    padding: 10px 0 !important;
+}
+
+.gsc-search-button-v2 {
+padding: 3px 9px !important;
+}
+.gsc-search-button-v2 svg{
+vertical-align: middle;
+}
 </style>
 
 
@@ -434,7 +457,7 @@ font-size: 13px;
 					                	console.log(JSONData.list[0].recipeImg);
 						                	 
 					                	for(var i=0; i<JSONData.list.length; i++){
-					                
+					                	      
 						                     var displayValue = "<div class='col-sm-6 col-md-3'><br/> <br/>"
 						                     					+"<div id='latest' class='group'>"
 						                     					+"<article class='one_third first'>"
@@ -571,8 +594,9 @@ font-size: 13px;
 			</div>
 			</td>
 			
+		
         	<td style="text-align: right;">
-            
+            	<div class="gcse-search" style="background-color: #f7f7f7;width:350px "></div>
              <div class="row height">
               <div class="col-md-6">
 					<div class="form-group">
@@ -615,7 +639,17 @@ font-size: 13px;
   <br/> <br/>
   
     <div id="latest" class="group">
-      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" ><img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
+      <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" >
+      
+      <c:choose>
+      <c:when test="${recipe.recipeImg.contains('mp4')}">
+  		<video width="250" height="250" controls autoplay src="/resources/images/uploadFiles/${recipe.recipeImg }" type="video/mp4" ></video>
+      </c:when>
+      <c:otherwise>
+      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300" id="image">
+        </c:otherwise>
+        </c:choose>
+        </a>
         <div class="excerpt">
            <p class="namehead">${recipe.recipeDetail }</p>
           <p class="detailhead" ><b>${recipe.recipeName }</b></p>

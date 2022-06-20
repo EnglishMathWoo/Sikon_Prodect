@@ -91,7 +91,7 @@
 			<div class="col-xs-4 col-md-2">
 				<strong>쿠킹클래스가격</strong>
 			</div>
-			<div class="col-xs-8 col-md-4">${apply.classCook.cookPrice}</div>
+			<div class="col-xs-8 col-md-4">${apply.classCook.cookPrice}원</div>
 		</div>
 
 		<hr/>
@@ -99,15 +99,12 @@
 			
 
 		<div class="row">
-			<div class="col-xs-4 col-md-2">
-				<strong>수업시간</strong>
-			</div>
-			<div class="col-xs-4 col-md-2">
-<input type="TIME" class="form-control" id="startTime"  name="startTime" value="${apply.classCook.startTime}" placeholder="수업시작시간">
-</div>
-	<div class="col-xs-4 col-md-2">
-  <input type="TIME" class="form-control" id="endTime"  name="endTime"  value="${apply.classCook.endTime}" placeholder="수업종료시간">
-</div>
+		  	<div class="col-xs-4 col-md-2">
+		  	<strong>수업시간</strong>
+		  	</div>
+			 <div class="col-sm-8 col-md-4">
+		     ${apply.classCook.startTime}~ ${apply.classCook.endTime}
+		    </div>
 		</div>
 
 		<hr/>		

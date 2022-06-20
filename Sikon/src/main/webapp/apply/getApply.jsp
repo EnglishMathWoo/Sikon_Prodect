@@ -255,7 +255,7 @@ p {
 			<div class="col-xs-4 col-md-2">
 				<strong>쿠킹클래스가격</strong>
 			</div>
-			<div class="col-xs-8 col-md-4"><strong>${apply.classCook.cookPrice}</strong></div>
+			<div class="col-xs-8 col-md-4"><strong>${apply.classCook.cookPrice}원</strong></div>
 		</div>
 
 		<hr/>
@@ -299,8 +299,7 @@ p {
 		</div>
 		
 		<hr/>
-			<hr/>
-		
+
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>신청자수</strong></div>
 			<div class="col-xs-8 col-md-4"><strong>${apply.cookStatus }명</strong></div>

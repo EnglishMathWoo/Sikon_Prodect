@@ -329,6 +329,8 @@ p {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	function fncGetList(currentPage) {
+		
+		console.log("currentPage: "+currentPage);
 		$("#currentPage").val(currentPage);
 	
 		$("form").attr("method" , "POST").attr("action" , "/cook/mentor").submit();
@@ -439,7 +441,7 @@ p {
 						    
 						    })
 					 };
-	
+/*	
 		   	 $(window).scroll(function() {
 	                if($(window).scrollTop() == $(document).height() - $(window).height()) { 
 	                	
@@ -499,6 +501,7 @@ p {
 				           
 	                }//if
 	            });//function
+	            */	
 	 
 	   });
 	 		 
@@ -515,7 +518,7 @@ p {
 
 <div class="container channel">	
 
-
+	<form class="form-inline" name="detailForm">
 
         <div class="card "> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
             <div class="card-body little-profile text-center">
@@ -535,6 +538,8 @@ p {
 
 		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
 		    </div>
+		    
+		      <input type="hidden" id="currentPage" name="currentPage" value=""/>
 		    		
 		  				<c:choose>
 						<c:when test = "${mentor.loveCount == '0'}">
@@ -556,9 +561,11 @@ p {
 		    
 		    <br/><hr/><br/>
     </section>
+      
+				</form>
   	</div>
  
-	 <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+     <input type="hidden" id="currentPage" name="currentPage" value=""/>
  
 <div class="row">
 	<c:set var="i" value="0" />
@@ -601,15 +608,19 @@ p {
     </div>  
   </div>
   </c:forEach>
-  
-   <div  id="scrollList"></div>
-</div>
-	  
-	  
+  	  <c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			판매중인 쿠킹클래스가 없습니다.
+		</div>
+		<br>
+	</c:if>
+
+	   </div>  
 
      </div>  
 	
-	  
+	 	<jsp:include page="../common/pageNavigator_new.jsp"/> 
 </body>
 
 </html>

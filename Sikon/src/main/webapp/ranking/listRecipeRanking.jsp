@@ -49,19 +49,6 @@ body {
 	
 }
 
-.shape1 {
-  border-width: 1px;
-  background-color: white;
-  border-color:	#C0C0C0;
-  border-style: solid;
-  width: 35px;
-  height: 25px;
-  text-align: center;
-  font-weight:bold;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
 .orderCondition{
     width: 90%;
     margin: 10px auto;
@@ -189,6 +176,32 @@ background-color: #f7f7f7;
 	color: #f7f7f7;
 }
 
+/* 라벨달기*/
+
+#image{
+    position: relative;
+
+}
+.best_label {
+    position: absolute;
+    transform: translate(14px, 43px);
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    top: 1px;
+    left: 1px;
+    width: 32px;
+    height: 40px;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: -0.5px;
+    color: rgb(255, 255, 255);
+    background: url(https://storage.wcuisine.net/web-assets/icons/best_label.svg) 0% 0% / 32px 40px no-repeat;
+}
 </style>
 
 
@@ -325,8 +338,8 @@ background-color: #f7f7f7;
   
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${recipe.recipeNo }" href="#">
-      <div class="shape1">${i}</div>
-      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300"></a>
+      <img src="/resources/images/uploadFiles/${recipe.recipeImg }" width="320" height="300" id="image"></a>
+        <div class="best_label"><span style="margin-bottom: 8px;">${i}</span></div>
         <div class="excerpt">
           <h4 class="heading" ><b>${recipe.recipeName }</b></h4>
            <h6 >${recipe.recipeDetail }</h6>

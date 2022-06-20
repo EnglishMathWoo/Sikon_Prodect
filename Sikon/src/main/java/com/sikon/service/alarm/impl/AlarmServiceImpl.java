@@ -29,10 +29,13 @@ public class AlarmServiceImpl implements AlarmService{
 
 
 	///Method
+	//알람생성
 	public void addAlarm(Alarm Alarm) throws Exception {
 		alarmDao.insertAlarm(Alarm);
 	}
 
+	
+	//알람리스트
 	public Map<String , Object> getAlarmList(Search search, String userId) throws Exception {
 		List<Alarm> list= alarmDao.getAlarmList(search, userId);
 		int totalCount = alarmDao.getAlarmCount(userId);
@@ -44,6 +47,7 @@ public class AlarmServiceImpl implements AlarmService{
 		return map;
 	}
 	
+	//알람개수
 	public int getAlarmCount(String userId) throws Exception {
 		
 		int alarmCount = alarmDao.getAlarmCount(userId);
@@ -59,6 +63,7 @@ public class AlarmServiceImpl implements AlarmService{
 		return statusCount;
 	}
 	
+	//알람상태 변경
 	public void updateAlarmStatus(Alarm alarm) throws Exception{
 		alarmDao.updateAlarmStatus(alarm);
 	}
