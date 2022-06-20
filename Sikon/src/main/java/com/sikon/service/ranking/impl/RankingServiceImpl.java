@@ -55,8 +55,8 @@ public class RankingServiceImpl implements RankingService{
 	}
 	
 	//구매 날짜 삭제
-	public void deletePurchase(int prodNo, int tranNo) throws Exception{
-		rankingDao.deletePurchase(prodNo, tranNo);
+	public void deletePurchase(int prodNo, String serialNo) throws Exception{
+		rankingDao.deletePurchase(prodNo, serialNo);
 	}
 	
 	// 판매 랭킹 조회

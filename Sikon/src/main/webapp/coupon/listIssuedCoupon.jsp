@@ -101,6 +101,37 @@
 					self.location = "/coupon/issueCouponView";
 				});
 			});
+		 
+		 
+		 $(document).ready(function() {
+				
+			 $("#checkall").click(function(){
+					
+					if($("#checkall").prop("checked")){
+						
+						$("input[name=retrieveCheck]").prop("checked",true);
+						
+					}else{
+						
+						$("input[name=retrieveCheck]").prop("checked",false);
+						
+					}
+					
+				})
+				 
+				 
+				$("input[name=retrieveCheck]").click(function(){
+					
+					if($("#checkall").prop("checked")){
+						
+						$("#checkall").prop("checked",false);
+						
+					}
+					
+				})
+			
+		 });	
+		 
 		
 		 $(function() {
 				
@@ -163,13 +194,13 @@
       
         <thead>
           <tr>
-            <th align="center"></th>
-            <th align="center">발급번호</th>
-            <th align="left" >발급쿠폰</th>
-            <th align="left">쿠폰보유 회원</th>
-            <th align="left">발급날짜</th>
-            <th align="left">만료날짜</th>
-            <th align="left">현재상태</th>
+            <th align="center" style="text-align:center;"><input type="checkbox" id="checkall" /></th>
+            <th align="center" style="text-align:center;">발급번호</th>
+            <th align="left" style="text-align:center;">발급쿠폰</th>
+            <th align="left" style="text-align:center;">쿠폰보유 회원</th>
+            <th align="left" style="text-align:center;">발급날짜</th>
+            <th align="left" style="text-align:center;">만료날짜</th>
+            <th align="left" style="text-align:center;">현재상태</th>
           </tr>
         </thead>
        

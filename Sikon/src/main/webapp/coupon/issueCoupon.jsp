@@ -115,6 +115,35 @@
 			});
 		 });
 		
+		 $(document).ready(function() {
+				
+			 $("#checkall").click(function(){
+					
+					if($("#checkall").prop("checked")){
+						
+						$("input[name=userId]").prop("checked",true);
+						
+					}else{
+						
+						$("input[name=userId]").prop("checked",false);
+						
+					}
+					
+				})
+				 
+				 
+				$("input[name=userId]").click(function(){
+					
+					if($("#checkall").prop("checked")){
+						
+						$("#checkall").prop("checked",false);
+						
+					}
+					
+				})
+			
+		 });	
+		
 		$(function() {
 			$("#issueCoupon").on("click" , function() {
 							
@@ -226,10 +255,10 @@
       
         <thead>
           <tr>
-          	<th align="center"></th>
-            <th align="left" id="userId">회원ID</th>
-            <th align="left">회원명</th>
-            <th align="left">닉네임</th>
+          	<th align="center" style="text-align:center;"><input type="checkbox" id="checkall" /></th>
+            <th align="left" id="userId" style="text-align:center;">회원ID</th>
+            <th align="left" style="text-align:center;">회원명</th>
+            <th align="left" style="text-align:center;">닉네임</th>
           </tr>
          </thead>
        
@@ -239,7 +268,7 @@
 		  <c:forEach var="user" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr class="ct_list_pop">
-				<td align="left"><input type="checkbox" name="userId" value="${user.userId}" ></td>
+				<td align="left"><input type="checkbox" name="userId" value="${user.userId}"></td>
 				<td align="left">${user.userId}</td>
 				<td align="left">${user.userName}</td>
 				<td align="left">${user.userNickname}</td>
