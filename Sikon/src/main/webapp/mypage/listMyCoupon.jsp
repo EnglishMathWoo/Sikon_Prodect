@@ -86,7 +86,10 @@ text-align: center;
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-	
+	function fncGetList(currentPage) {
+		$("#currentPage").val(currentPage);
+		$("form").attr("method" , "POST").attr("action" , "/coupon/listMyCoupon").submit();
+	}
 				
 	</script>
 	
@@ -108,7 +111,7 @@ text-align: center;
 		</div>
 		
 				<i class="fa fa-tasks"></i>&nbsp;º¸À¯ ÄíÆù<br />
-		 
+		 <form>
 		 
     <div class="table-responsive">
     <table class="table table-responsive table-borderless">
@@ -130,7 +133,7 @@ text-align: center;
 	<c:set var="i" value="${ i+1 }" />
     <tr>
       <th scope="row">${i}</th>
-      <td><i class="fa fa-check-circle-o green"></i>&nbsp; ${coupon.couponName}</td>
+      <td>${coupon.couponName}</td>
       <td>${coupon.startDate}</td>
       <td>${coupon.endDate}</td>
     </tr>
@@ -142,7 +145,9 @@ text-align: center;
 </table>
   
   </div>
-    
+   <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+  
+    </form>
 </div>
                 
       <jsp:include page="../common/pageNavigator_new.jsp"/>

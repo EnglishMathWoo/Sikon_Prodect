@@ -89,9 +89,9 @@ public class RecipeController {
 			System.out.println(ingredientAmount[j]);
 		}
 		
-		String FILE_SERVER_PATH = filePath;
+//		String FILE_SERVER_PATH = filePath;
 //		String FILE_SERVER_PATH = "C:\\Users\\bitcamp\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
-//		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+		String FILE_SERVER_PATH = "C:\\Users\\wnstn\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 
 		String newFileName = "";
 

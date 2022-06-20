@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=euc-kr"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -9,7 +9,7 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="euc-kr">
 
 <!-- 참조 : http://getbootstrap.com/css/   참조 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -484,7 +484,7 @@ color:black;
 			<hr />
 		
 				<h3 class="iEJcKGheader">리뷰</h3>
-			<form id="comment" name="comment" method="post" enctype="multipart/form-data" accept-charset="EUC-KR">
+			<form id="comment" name="comment" method="post" enctype="multipart/form-data" accept-charset="euc-kr">
 				<div class="panel">
 					<div class="panel-body">
 						<textarea class="form-control" name="reviewContent"
@@ -496,8 +496,8 @@ color:black;
 							<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
 
 							<div class="yes">
-								<span class="btn_upload"> <input multiple="multiple"
-									type="file" id="reviewImg" name="fileArray" class="input-img" />
+								<span class="btn_upload"> 
+								<input multiple="multiple" type="file" id="reviewImg" name="fileArray" class="input-img" onchange="fileUpload()" />
 									<i class="fa-solid fa-camera"></i>
 								</span> <img id="ImgPreview" name="reviewImg" src="" class="preview1" />
 								<input type="button" id="removeImage1" value="x"
@@ -600,7 +600,42 @@ color:black;
 	
 
 	});
+	function fncAddReview() {
+		var recipeNo = $("input:hidden[name='recipeNo']").val();
+		var fileInput = document.getElementsByClassName("input-img");
+		var fileArray=fileInput[0].files[0].name;
+		console.log(fileArray);
+		var reviewContent=$('#reviewContent').val();
+		var imagename=$('#imagename').val();
+		var userId = $("input:hidden[name='userId']").val();
+		var userNickname = $("input:hidden[name='userNickname']").val();
 
+	     $.ajax({
+	            type : "POST",  
+	            url : "/review/json/addReview", 
+	          //  contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+	            data : {'recipeNo' : recipeNo, 'reviewContent':reviewContent,
+	            	'fileArray':fileArray
+	            },
+	            error : function(request,status,error){
+	            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	            },
+	            success : function(request) {
+						alert(request);				           
+	                   location.reload();
+	            }
+	   	     
+	     });
+
+		pushAlarm(userId, userNickname, recipeNo);
+	}
+	/*
+	function fileUpload() {
+	var fileInput = document.getElementsByClassName("input-img");
+	console.log(fileInput[0].files[0].name);
+	}
+	
+	
 	function fncAddReview() {
 		event.preventDefault();
 		 var form = $('#comment')[0];  	    
@@ -610,6 +645,8 @@ color:black;
 		  
 		var recipeNo = $("input:hidden[name='recipeNo']").val();
 		var reviewContent=$('#reviewContent').val();
+		var imagename=$('#imagename').val();
+		console.log(imagename);
 		console.log(reviewContent);
 		var userId = $("input:hidden[name='userId']").val();
 		var userNickname = $("input:hidden[name='userNickname']").val();
@@ -618,10 +655,10 @@ color:black;
 		console.log(userId);
 
 	     $.ajax({
-	    	
 	            type : "POST",  
 	            url : "/review/json/addReview", 
-	            contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+	          //  contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+	            contentType:false,
 	            data : data,
 	            processData: false,    
 	            cache: false,  
@@ -629,7 +666,7 @@ color:black;
 	            	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	            },
 	            success : function(request) {
-						alert("등록 성공");				           
+						alert(request);				           
 	                   location.reload();
 	            }
 	   	     
@@ -637,7 +674,7 @@ color:black;
 
 		pushAlarm(userId, userNickname, recipeNo);
 	}
-	
+	*/
 	$(document).on('click','.deleteReview',function() {
 		var reviewNo = $(this).attr('id');
 		var recipeNo = $("input:hidden[name='recipeNo']").val();

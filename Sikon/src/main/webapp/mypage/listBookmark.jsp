@@ -311,19 +311,18 @@ article img {
 .submit {
 	display: block;
 	border: none;
-	width: 150px;
-	height: 36px;
-	border-radius: 30px;
+	width: 120px;
+	height: 40px;
+	border-radius: 10px;
 	color: #fff;
 	font-size: 15px;
 	cursor: pointer;
-	margin-top: 20px;
+	margin-top: 0px;
 	margin-bottom: 20px;
-	background: #937062;
+	background: #d4af7a;
 	float: right;
 	font-family: 'Gowun Batang', serif;
 }
-
 .submit:hover {
 	background: #f7f7f7;
 	color: #937062;
