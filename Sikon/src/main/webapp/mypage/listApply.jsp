@@ -140,7 +140,49 @@ div.emptyProd{
 	font-family: 'Tiro Devanagari Sanskrit', serif;
 	text-align: center;
 }
+#cancel_modal {
+    display: none;
+    width: 330px;
+    padding: 20px 60px;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    border-radius: 3px;
+    text-align: center;
+}
 
+#cancel_modal .modal_close_btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+modal_close_btn{
+	text-decoration-line: none;
+	width:20px;
+	height: 20px;
+}
+
+div.message{
+	text-align: center;
+	font-size: 15px;
+}
+
+a.payback{
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	height: 40px;
+	width : 160px;
+	padding: 10px;
+	text-decoration-line: none;
+	color: #333;
+}
+a.payback:hover{
+	color: #333;
+}
+.bi-x::before {
+    font-size: xx-large;
+    color: black;
+}
 
 </style>
 
@@ -193,6 +235,8 @@ div.emptyProd{
 							self.location = "/apply/updateApplyStatus?menu=search&applyNo="
 									+ applyNo + "&applyStatus=" + applyStatus;
 						});
+		
+		/*
 		$("td.cancel").on(
 				"click",
 				function() {
@@ -205,8 +249,80 @@ div.emptyProd{
 					self.location = "/apply/cancel?applyNo=" + applyNo
 							+ "&applyStatus=" + applyStatus;
 				});
+		*/
+		$( ".cancel" ).on("click" , function() {
+			
+			var applyNo = $(this).attr("value1");
+			var impNumber = $(this).attr("value2");
+		
+			
+			modal('cancel_modal'); 
+			
+			$( ".payback" ).on("click" , function() {
+				
+				$.ajax({
+					
+					 "url": "/apply/json/cancleIamport?imp_uid="+impNumber,
+				      "type": "POST",
+				      "contentType": "application/json",
+			   
+			    }).done(function(data) {
+		        	
+		        	alert("구매취소 완료");
+		        	self.location ="/apply/cancel?applyNo="+applyNo;
+		        	
+		        });
+			});
+			
+			
+		});		
+	
 
 	});
+	
+	//========== 결제취소 모달창 =================================================
+	
+	function modal(id) {
+    var zIndex = 9999;
+    var modal = $('#' + id);
+    var cookStatus = $('#cookStatus').val();
+
+    var bg = $('<div>')
+        .css({
+            position: 'fixed',
+            zIndex: zIndex,
+            left: '0px',
+            top: '0px',
+            width: '100%',
+            height: '100%',
+            overflow: 'auto',
+            backgroundColor: 'rgba(0,0,0,0.4)'
+        })
+        .appendTo('body');
+
+    modal
+        .css({
+            position: 'fixed',
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+            zIndex: zIndex + 1,
+
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            msTransform: 'translate(-50%, -50%)',
+            webkitTransform: 'translate(-50%, -50%)'
+        })
+        .show()
+        .find('.modal_close_btn')
+        .on('click', function() {
+            bg.remove();
+            modal.hide();
+        });
+	}
+	
+//===========================================================
+ 	
 </script>
 
 </head>
@@ -272,8 +388,10 @@ div.emptyProd{
 							</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('100')}">
-								<td align="left" class="cancel" value1="${apply.applyNo }"
-									value2="${apply.applyStatus}"><p  class="status">신청완료</p><p class="cancel"  value1="${apply.applyNo }" value2="${apply.applyStatus}">신청취소</p></td>
+							<td align="left">
+								<p  class="status">신청완료</p> 
+								<p class="cancel"  value1="${apply.applyNo }" value2="${apply.impNumber }" >신청취소</p>
+							</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('000')}">
 								<td align="left" class="complete">수강취소완료</td>
@@ -346,8 +464,10 @@ div.emptyProd{
 							</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('100')}">
-								<td align="left" class="cancel" value1="${apply.applyNo }"
-									value2="${apply.applyStatus}"><p  class="status">신청완료</p><p class="cancel"  value1="${apply.applyNo }" value2="${apply.applyStatus}">신청취소</p></td>
+							<td align="left">
+								<p  class="status">신청완료</p> 
+								<p class="cancel"  value1="${apply.applyNo }" value2="${apply.impNumber }" >신청취소</p>
+							</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('000')}">
 								<td align="left" class="complete">수강취소완료</td>
@@ -409,8 +529,10 @@ div.emptyProd{
 							</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('100')}">
-								<td align="left" class="cancel" value1="${apply.applyNo }"
-									value2="${apply.applyStatus}"><p  class="status">신청완료</p><p class="cancel"  value1="${apply.applyNo }" value2="${apply.applyStatus}">신청취소</p></td>
+							<td align="left">
+								<p  class="status">신청완료</p> 
+								<p class="cancel"  value1="${apply.applyNo }" value2="${apply.impNumber }" >신청취소</p>
+							</td>
 							</c:when>
 							<c:when test="${apply.applyStatus.equals('000')}">
 								<td align="left" class="complete">수강취소완료</td>
@@ -450,7 +572,19 @@ div.emptyProd{
 	</c:if>
  	<!--  화면구성 div End /////////////////////////////////////-->
  	</div>
- 
+ 	 	<div id="cancel_modal">
+	 		<a class="modal_close_btn"><i class="bi bi-x"></i></a>
+	 		<br>
+	 		<div class="message">
+		    	신청 취소하시겠습니까?
+		    </div><br>
+		    <div class="forcenter">
+		   		<a href="#" class="payback" style="text-decoration-line: none;">
+		   	 		&emsp;확 &nbsp;인&emsp;
+		   		</a>
+		    </div>
+		    <br>
+		</div>
  	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 	<!-- PageNavigation End... -->
