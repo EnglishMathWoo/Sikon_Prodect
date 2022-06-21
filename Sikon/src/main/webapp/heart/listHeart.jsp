@@ -340,7 +340,7 @@ p {
 						<c:choose>
 						<c:when test="${list.cook.cookFilename.contains('mp4')}">
 							<c:forEach var="name" items="${list.cook.cookFilename.split('/')}">
-								<video width="320" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+								<video width="280" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
 							</c:forEach>
 						</c:when>
 						
@@ -402,10 +402,7 @@ p {
 	</c:if>
      
 	  </div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
- 	
- 	<!-- PageNavigation Start... -->
-	<!-- PageNavigation End... -->
+
 	
 </body>
 

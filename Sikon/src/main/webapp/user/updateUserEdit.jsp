@@ -272,7 +272,7 @@ html input[type=button]:hover{
 <script type="text/javascript">
 	
 	
-		function fncAddUser() {
+		function fncUpdateUser() {
 			
 			var id=$("input[name='userId']").val();
 			var pw=$("input[name='password']").val();
@@ -311,15 +311,15 @@ html input[type=button]:hover{
 				return;
 			}
 			
+			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").attr("enctype","multipart/form-data").submit();
 			
-			$("form").attr("method" , "POST").attr("action" , "/user/addUser").attr("enctype","multipart/form-data").submit();
 		}
 	
 	
 		//============= "가입"  Event 연결 =============
 		 $(function() {
 			$( ".update" ).on("click" , function() {
-				fncAddUser();
+				fncUpdateUser();
 			});
 		});	
 		
@@ -601,7 +601,7 @@ html input[type=button]:hover{
 				  <p>회원정보</p>
 				  </div><br>	  
 				  
-				  
+				  <input type="hidden" name="holdpoint" value="${user.holdpoint}">
 				  <div class="form-group">
 				    <label for="userName">이름</label>
 				      <input type="text" class="form-control" id="userName" name="userName"  value="${user.userName}">
@@ -722,76 +722,29 @@ html input[type=button]:hover{
 					</c:if>
 					
 					<c:if test="${user.mentorApply == 'Y'}">
-						<c:forEach var="careerlist" items="${career}">
-							<c:set var="i" value="${i+1}" />
-							<c:if test="${i == 1}">
+						<c:forEach var="career" items="${career}">
+								<input type="hidden" name="careerNo" value="${career.CAREER_NO}">
 								<td>
 								  <div class="form-group">
 								    <label for="">소속</label>
-								      <input type="text" class="form-table" id="company" name="company" value="${careerlist.COMPANY}">
+								      <input type="text" class="form-table" id="company" name="company" value="${career.COMPANY}">
 								  </div>
 								  
 								  <div class="form-group">
 								    <label for="">근무시작 날짜</label>
-								      <input type="text" class="form-table" id="startDate" name="startDate" value="${careerlist.START_DATE}" >
+								      <input type="text" class="form-table" id="startDate" name="startDate" value="${career.START_DATE}" >
 								  </div>
 								  
 								  <div class="form-group">
 								    <label for="">근무종료 날짜</label>
-								      <input type="text" class="form-table" id="endDate" name="endDate" value="${careerlist.END_DATE}" >
+								      <input type="text" class="form-table" id="endDate" name="endDate" value="${career.END_DATE}" >
 								  </div>
 								  
 								  <div class="form-group">
 								    <label for="">업무내용</label>
-								      <input type="text" class="form-area" id="careerExperience" name="careerExperience" value="${careerlist.CAREER_EXPERIENCE}"/>
+								      <input type="text" class="form-area" id="careerExperience" name="careerExperience" value="${career.CAREER_EXPERIENCE}"/>
 								  </div>
 				 				</td>
-				 				<td>
-				 				  <div class="form-group">
-								    <label for="">소속</label>
-								      <input type="text" class="form-table" id="company" name="company" >
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">근무시작 날짜</label>
-								      <input type="text" class="form-table" id="startDate2" name="startDate" >
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">근무종료 날짜</label>
-								      <input type="text" class="form-table" id="endDate2" name="endDate" >
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">업무내용</label>
-								      <input type="text" class="form-area" id="careerExperience" name="careerExperience" />
-								  </div>
-				 				</td>
-							</c:if>
-							<c:if test="${i > 1}">
-								<input type="hidden" name="careerNo" value="${careerlist.CAREER_NO}">
-								<td>
-								  <div class="form-group">
-								    <label for="">소속</label>
-								      <input type="text" class="form-table" id="company" name="company" value="${careerlist.COMPANY}">
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">근무시작 날짜</label>
-								      <input type="text" class="form-table" id="startDate" name="startDate" value="${careerlist.START_DATE}" >
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">근무종료 날짜</label>
-								      <input type="text" class="form-table" id="endDate" name="endDate" value="${careerlist.END_DATE}" >
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">업무내용</label>
-								      <input type="text" class="form-area" id="careerExperience" name="careerExperience" value="${careerlist.CAREER_EXPERIENCE}"/>
-								  </div>
-				 				</td>
-			 				</c:if>
 			 			</c:forEach> 	
 		 			</c:if>
 		 			
@@ -840,42 +793,8 @@ html input[type=button]:hover{
 					
 					<c:if test="${user.mentorApply == 'Y'}">
 						<c:forEach var="license" items="${license}">	  
-						<c:set var="j" value="${j+1}" />
-							<c:if test="${j == 1}">
-								<td>
-								  <div class="form-group">
-								    <label for="">자격증명</label>
-								      <input type="text" class="form-table" id="licenseName" name="licenseName" value="${license.LICENSE_NAME}">
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">발급기관</label>
-								      <input type="text" class="form-table" id="licenseInstitution" name="licenseInstitution" value="${license.LICENSE_INSTITUTION}">
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">취득일자</label>
-								      <input type="text" class="form-table" id="licenseDate" name="licenseDate" value="${license.LICENSE_DATE}">
-								  </div>
-				 				</td>
-				 				<td>
-				 				  <div class="form-group">
-								    <label for="">자격증명</label>
-								      <input type="text" class="form-table" id="licenseName" name="licenseName" >
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">발급기관</label>
-								      <input type="text" class="form-table" id="licenseInstitution" name="licenseInstitution" >
-								  </div>
-								  
-								  <div class="form-group">
-								    <label for="">취득일자</label>
-								      <input type="text" class="form-table" id="licenseDate2" name="licenseDate" >
-								  </div>
-				 				</td>
-							</c:if>
-							<c:if test="${j > 1}">
+						
+							
 							 	<input type="hidden" name="licenseNo" value="${license.LICENSE_NO}">
 								<td>
 								  <div class="form-group">
@@ -893,7 +812,7 @@ html input[type=button]:hover{
 								      <input type="text" class="form-table" id="licenseDate" name="licenseDate" value="${license.LICENSE_DATE}">
 								  </div>
 				 				</td>
-			 				</c:if>
+			 				
 			 			</c:forEach>
 		 			</c:if>
 		 			

@@ -160,7 +160,7 @@ function fncAddApply() {
 	console.log(cookStock);
 	console.log(cookStatus);
 	if (cookStock < cookStatus) {
-		alert("재고가 부족합니다");
+		alert("모집인원이 마감되었습니다");
 		return;
 	}
 	
@@ -339,7 +339,7 @@ $(function() {
 		   
 		      <select 	name="paymentOption"		class="form-control" >
 				<option value="1" selected="selected">카카오페이구매</option>
-				<option value="2">네이버페이구매</option>
+				<option value="2">신용카드구매</option>
 			</select>
 		   
 		  </div>
@@ -359,10 +359,10 @@ $(function() {
 
 		   <input type="hidden" id="cookStock"  value="${cook.cookStock }" />
 		      <div class="form-group">
-		    <label for="cookStatus" >신청인원 : </label>
+		  
 		  
 		    
-		   <input type="number" min="0" id="cookStatus" name="cookStatus" value="1" style="width:40px"/> 명
+		  <strong> <p>신청인원: ${cookStatus} 명</p><input type="hidden" min="0" class="form-control" id="cookStatus" name="cookStatus" value="${cookStatus}" /></strong>
 		  </div>
 	  	
 	  
