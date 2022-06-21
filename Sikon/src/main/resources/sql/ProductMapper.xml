@@ -56,6 +56,14 @@
 	   	</set>
 	   	WHERE prod_no = #{prodNo}
 	 </update>
+	 
+	 <update	id="updateProductCart"	parameterType="product" >
+	   	UPDATE cart
+	   	<set>
+	   		prod_stock = #{prodStock}
+	   	</set>
+	   	WHERE prod_no = #{prodNo}
+	 </update>
 		 
 	<!-- SQL : SELECT LIST -->
 	<select  id="getProductList"  parameterType="search"	resultMap="productSelectMap">

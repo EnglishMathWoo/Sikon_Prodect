@@ -128,6 +128,14 @@
 	   		WHERE prod_no= #{prodNo}
 	 </update>	
 	 
+	  <update	id="updateStockCart"	parameterType="map" >
+	   		UPDATE cart
+	   	<set>
+	   		prod_stock = prod_stock - #{purchaseQuantity}
+	   	</set>
+	   		WHERE prod_no= #{prodNo}
+	 </update>	
+	 
 	  <!-- SQL : UPDATE cancelOrder -->
 	 <update	id="cancelOrder"	parameterType="map" >
 	   	UPDATE product
@@ -137,7 +145,13 @@
 	   		WHERE prod_no= #{prodNo}
 	 </update>	 
 		 
-		 
+	<update	id="cancelOrderCart"	parameterType="map" >
+	   	UPDATE cart
+	   	<set>
+	   		prod_stock = prod_stock + #{purchaseQuantity}
+	   	</set>
+	   		WHERE prod_no= #{prodNo}
+	 </update>	 
 		 
 	<!-- SQL : SELECT LIST -->
 	<select  id="getPurchaseList"  parameterType="map"	statementType="CALLABLE" resultMap="purchaseSelectMap">

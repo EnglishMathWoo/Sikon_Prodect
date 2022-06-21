@@ -71,7 +71,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 body {
-  text-align: center;
   font-family: 'Nanum Myeongjo', serif;
   font-weight: 400;
 }
@@ -262,7 +261,7 @@ input:-webkit-autofill {
 }
 /* ---------------------------------------- */
 .summernote{
-	padding-left: 17px;
+	margin-left: -63px;
 	
 }
 </style>
@@ -312,7 +311,7 @@ input:-webkit-autofill {
 				
 				
 				<!-- 상품 기본정보 입력 -->			  
-				<div class="form-group">
+				<div class="form-group prodinfo">
 				
 					<h2 class="heading">상품기본정보</h2>
 			    
@@ -409,14 +408,14 @@ input:-webkit-autofill {
 					<h2 class="heading">상품상세내용</h2>
 					
 					<div class="row">
-				    	<div class="form-group text-center summernote">
-							<textarea id="summernote" class="form-control col-sm-5" rows="5" name="prodContent" placeholder="내용" style="resize: none"></textarea>
+				    	<div class="form-group summernote">
+							<textarea id="summernote" class="form-control col-sm-5" name="prodContent" style="text-align: left;"></textarea>
 						</div>
 					</div>
-					
+					<div class="row text-center">
 					<button type="submit" value="Submit" class="size submit">등록하기</button> &nbsp;
 					<button type="button" class="size cancel">취 소</button>
-				     
+				     </div>
 				</div> 
 				
 				
@@ -434,37 +433,12 @@ input:-webkit-autofill {
 	
 	   	 $('#summernote').summernote({
 	   	        placeholder: '내용을 입력해주세요.',
-	   	        tabsize: 2,
-	   	        width: 700, 
-	   	        height: 500,
-	   	        lang : 'ko-KR',
-	   	        maximumImageFileSize : 20 * 1024 * 1024,
-	   	  	  focus : true,
-	   	  	  toolbar: [
-	   	  		    // 글꼴 설정
-	   	  		    ['fontname', ['fontname']],
-	   	  		    // 글자 크기 설정
-	   	  		    ['fontsize', ['fontsize']],
-	   	  		    // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
-	   	  		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-	   	  		    // 글자색
-	   	  		    ['color', ['forecolor','color']],
-	   	  		    // 표만들기
-	   	  		    ['table', ['table']],
-	   	  		    // 글머리 기호, 번호매기기, 문단정렬
-	   	  		    ['para', ['ul', 'ol', 'paragraph']],
-	   	  		    // 줄간격
-	   	  		    ['height', ['height']],
-	   	  		    // 그림첨부, 링크만들기, 동영상첨부
-	   	  		    ['insert',['picture','link','video']],
-	   	  		    // 코드보기, 확대해서보기, 도움말
-	   	  		    ['view', ['codeview','fullscreen', 'help']]
-	   	  		  ],
-	   	  		 // 추가한 글꼴
-	   	  		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-	   	  		 // 추가한 폰트사이즈
-	   	  		fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-	   	  	
+	   	     	tabsize : 2,
+	   	     	height : 300, 
+	   	    	width: 860, 
+				minHeight : null, 
+				maxHeight : null,
+				focus : true, 
 	   	  		callbacks: {	
 	   	               onImageUpload : function(files) {
 	   	                    uploadSummernoteImageFile(files[0],this);
@@ -490,13 +464,13 @@ input:-webkit-autofill {
 		$.ajax({
 			data : data,
 			type : "POST",
-			url : "/product/uploadSummernoteImageFile",
+			url : "/product/json/uploadSummernoteImageFile",
 			contentType : false,
 			processData : false,
-			success : function(data) {
+			success : function(JSONData, status) {
 				console.log('썸머노트');
-				console.log(data.url);
-				$(editor).summernote('insertImage', data.url);
+				console.log(JSONData.url);
+				$(editor).summernote('insertImage', JSONData.url);
 			}
 		});
 	}

@@ -529,16 +529,28 @@ public class PurchaseController {
 			purchase.setPurchaseProd(product);
 			purchaselist.add(purchase);
 			
-			Coupon coupon = couponService.getIssuedCoupon(Integer.parseInt(purchase.getUsedCoupon()));  
-			System.out.println("-------------------------------------------------------------------");
-			System.out.println("coupon: "+coupon);
-			System.out.println("-------------------------------------------------------------------");
-			totalprice += (product.getProdDisPrice()*purchase.getPurchaseQuantity());
-			divyfee += purchase.getDivyFee();
-			pointpay = purchase.getUsedPoint();
-			serial = purchase.getSerialNo();
-			couponvalue = coupon.getDiscountValue();
-			couponRate = coupon.getDiscountRate();
+			
+			if(purchase.getUsedCoupon()==null || purchase.getUsedCoupon().equals("none")) {
+				
+				System.out.println("purchase.getUsedCoupon(): µé¾î¿È1");
+				purchase.setUsedCoupon(null);
+				
+			}else if(purchase.getUsedCoupon() != null) {
+				
+				System.out.println("purchase.getUsedCoupon(): µé¾î¿È2");
+				Coupon coupon = couponService.getIssuedCoupon(Integer.parseInt(purchase.getUsedCoupon()));  
+				System.out.println("-------------------------------------------------------------------");
+				System.out.println("coupon: "+coupon);
+				System.out.println("-------------------------------------------------------------------");
+				couponvalue = coupon.getDiscountValue();
+				couponRate = coupon.getDiscountRate();
+				
+			}
+				totalprice += (product.getProdDisPrice()*purchase.getPurchaseQuantity());
+				divyfee += purchase.getDivyFee();
+				pointpay = purchase.getUsedPoint();
+				serial = purchase.getSerialNo();
+				
 		}	
 		
 		

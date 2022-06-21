@@ -132,7 +132,15 @@ a.tocart{
 .btn-w:hover {
   background-color: #e7e2e2;
 }
-
+.btn-s {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+  width:40%;
+  font-size: large;
+}
 .divyfee{
 	border-top: 1px solid #d7d7d7;
 	border-bottom: 1px solid #d7d7d7;
@@ -319,16 +327,16 @@ margin-left: 140px;
 		        description: detail,
 		        imageUrl: 'http://192.168.0.65:8080/resources/images/uploadFiles/'+image ,
 		        link: {
-		          mobileWebUrl: 'http://192.168.0.65:8080/product/getProduct?prodNo='+prodNo,
-		          webUrl: 'http://192.168.0.65:8080/product/getProduct?prodNo='+prodNo,
+		          mobileWebUrl: 'http://192.168.0.65:8080/product/getProduct?menu=search&prodNo='+prodNo,
+		          webUrl: 'http://192.168.0.65:8080/product/getProduct?menu=search&prodNo='+prodNo, 
 		        },
 		      },
 		      buttons: [
 		        {
-		          title: '웹으로 보기',
+		          title: '해당상품 보러가기',
 		          link: {
-		            mobileWebUrl: 'http://192.168.0.65:8080/product/getProduct?prodNo='+prodNo,
-		            webUrl: 'http://192.168.0.65:8080/product/getProduct?prodNo='+prodNo,
+		            mobileWebUrl: 'http://192.168.0.65:8080/product/getProduct?menu=search&prodNo='+prodNo,
+		            webUrl: 'http://192.168.0.65:8080/product/getProduct?menu=search&prodNo='+prodNo,
 		          },
 		        },
 		      ],
@@ -354,9 +362,27 @@ margin-left: 140px;
 			 $( ".addPurchase" ).on("click" , function() {
 				 console.log('구매하기');
 				 var quantity = $('#quantity').val();
+				 
 				 self.location = "/purchase/addPurchase?prodNo=${product.prodNo}&quantity="+quantity;
 			});
 			 
+			
+			//======= 상품수량 ================================
+			 $( "#quantity" ).on("change" , function() {
+				 
+				 var quantity = $('#quantity').val();
+				 var stock = Number("${product.prodStock}");
+				 
+				 console.log("quantity: "+quantity);
+				 console.log("stock: "+stock);
+				 
+				 if(quantity>stock){
+					 alert('구매수량이 재고량보다 많습니다.');
+					 $('#quantity').val(stock);
+					 return null;
+				 }
+			});
+			
 			//======= 상품수정 ================================
 			 $( ".updateProd" ).on("click" , function() {
 				 console.log('업데이트');
@@ -531,7 +557,13 @@ margin-left: 140px;
 				
 					<div class="row">
 						구매수량: &emsp;
-				      	<input type="number" min="0" id="quantity" name="quantity" value="1" style="width:40px"/> 개
+						<c:if test="${product.prodStock>0}">
+				      	<input type="number" min="0" id="quantity" name="quantity" value="1" style="width:40px"/> 개&emsp;
+				      	</c:if>
+				      	<c:if test="${product.prodStock==0}">
+				      	<input type="number" min="0" value="0" style="width:40px" readonly/> 개&emsp;
+				      	</c:if>
+				      	<c:if test="${product.prodStock <= 10}">( 현재 남은 재고량: ${product.prodStock} )</c:if>
 					</div>
 				
 					<br/><br/>
@@ -545,7 +577,7 @@ margin-left: 140px;
 				
 					<div class="row">
 				  		<div class="text-center">	
-				  			
+			  			<c:if test="${product.prodStock>0}">
 				  			<c:if test="${menu == 'search' }">
 				  				<button type="button" class="btn-w addcart" id="popup_open_btn">장바구니</button>&emsp;
 							</c:if>
@@ -554,7 +586,14 @@ margin-left: 140px;
 			  				</c:if>			  		
 			  				
 			  				<button type="button" class="btn-b addPurchase" id="buy" >구매하기</button>
-				  				
+				  		</c:if>
+				  		
+				  		<c:if test="${product.prodStock==0}">
+				  			<c:if test="${menu == 'manage' }">
+			  					<button type="button" class="btn-w updateProd">수정하기</button>&emsp;
+			  				</c:if>	
+			  				<button type="button" class="btn-s soldout">품&emsp;절</button>&emsp;
+				  		</c:if>		
 				  		</div>
 					</div>	
 				
