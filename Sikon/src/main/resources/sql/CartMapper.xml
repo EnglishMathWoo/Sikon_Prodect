@@ -8,21 +8,22 @@
  	
  	
 	<resultMap id="CartSelectMap" type="cart">
-		<result property="cartNo" 				column="cart_no" 				jdbcType="NUMERIC"/>
+		<result property="cartNo" 						column="cart_no" 				jdbcType="NUMERIC"/>
 		<result property="cartProd.prodNo"	   			column="prod_no" 				jdbcType="NUMERIC" />
-		<result property="cartProd.prodDisPrice"	   			column="prod_price" 			jdbcType="NUMERIC" />
-		<result property="cartProd.prodName"	   			column="prod_name" 				jdbcType="VARCHAR" />
-		<result property="cartProd.prodThumbnail" 			column="prod_image" 			jdbcType="VARCHAR" />
-		<result property="userId" 				column="user_id" 				jdbcType="VARCHAR" />
-		<result property="quantity" 			column="quantity" 				jdbcType="NUMERIC" />
+		<result property="cartProd.prodDisPrice"	   	column="prod_price" 			jdbcType="NUMERIC" />
+		<result property="cartProd.prodName"	   		column="prod_name" 				jdbcType="VARCHAR" />
+		<result property="cartProd.prodThumbnail" 		column="prod_image" 			jdbcType="VARCHAR" />
+		<result property="cartProd.prodStock" 			column="prod_stock" 			jdbcType="NUMERIC" />
+		<result property="userId" 						column="user_id" 				jdbcType="VARCHAR" />
+		<result property="quantity" 					column="quantity" 				jdbcType="NUMERIC" />
 	</resultMap>	
 	
 	
 	<!-- SQL : INSERT -->
 	<insert 	id="addCart"		parameterType="cart" >
 		INSERT
-		INTO cart( cart_no , prod_no, prod_price, prod_name, prod_image, user_id, quantity) 
-	 	VALUES (seq_cart_cart_no.NEXTVAL , #{cartProd.prodNo}, #{cartProd.prodDisPrice}, #{cartProd.prodName}, #{cartProd.prodThumbnail}, #{userId}, #{quantity})
+		INTO cart( cart_no , prod_no, prod_price, prod_name, prod_image, prod_stock, user_id, quantity) 
+	 	VALUES (seq_cart_cart_no.NEXTVAL , #{cartProd.prodNo}, #{cartProd.prodDisPrice}, #{cartProd.prodName}, #{cartProd.prodThumbnail}, #{cartProd.prodStock},#{userId}, #{quantity})
 	 </insert>
 	 
 	 	 

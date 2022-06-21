@@ -33,8 +33,11 @@
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 	body {
-	font-family: 'Nanum Myeongjo', serif;
            padding-top : 50px;
+    }
+    
+    .container {
+    	font-family: 'Nanum Myeongjo', serif;
     }
        
     table {

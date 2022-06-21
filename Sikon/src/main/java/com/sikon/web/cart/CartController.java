@@ -1,5 +1,6 @@
 package com.sikon.web.cart;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -77,11 +78,21 @@ public class CartController {
 		System.out.println(userId);
 		
 		List<Cart> list = cartService.getCartList(userId);
+		List prodlist = new ArrayList();
 		
-		System.out.println(list);
+		for(Cart cart : list) {
+			Product product = new Product();
+			product = productService.getProduct(cart.getCartProd().getProdNo());
+			
+			
+			prodlist.add(product);
+		}
 		
-		// Model °ú View ¿¬°á
+		System.out.println("Cart: "+list);
+		System.out.println("prodlist: "+prodlist);
+		
 		model.addAttribute("Cart", list);
+		model.addAttribute("prodlist", prodlist);
 		
 		return "forward:/cart/cart.jsp";
 	}

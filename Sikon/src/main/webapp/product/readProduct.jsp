@@ -17,30 +17,46 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
  <!-- font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
-body>div.container{
-	padding-top : 150px;
-	font-family: 'Nanum Myeongjo', serif;
+.checkprod{
+	padding-top : 250px;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 div.row{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
-div.page-header{
-	font-family: 'Nanum Myeongjo', serif;
+
+.more {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  height: 35px;
+  width:10%;
+}
+.more:hover {
+  background-color: #937062d4;
+}
+
+.okay {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  width:10%;
+  height: 35px;
+}
+.okay:hover {
+  background-color: #e7e2e2;
 }
 </style>
     
@@ -50,7 +66,7 @@ div.page-header{
 	
 		$(function() {
 			
-			 $( "#check" ).on("click" , function() {
+			 $( ".okay" ).on("click" , function() {
 				 console.log('확인');
 				 self.location = "/product/listProduct?menu=manage"
 			});
@@ -60,7 +76,7 @@ div.page-header{
 		
 		$(function() {
 			
-			$("#add").click(function(){
+			$(".more").click(function(){
 				console.log('추가등록');
 				self.location = "/product/addProductView.jsp"
 				
@@ -79,18 +95,18 @@ div.page-header{
    	<!-- ToolBar End -->
 	
 
-	<div class="container">
+	<div class="container checkprod">
 	
-		<div class="page-header">
-	       <h3 class=" text-info"  style="color:#bc8f8f">상품등록조회</h3>
+		<div style="text-align: center;">
+	       <h3 class=" text-info" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| CHECK |</h3><br>
 	    </div>
 	    
 	    <div class="row">
-	  		<div class="col-md-12 text-right">
-	  			<button type="button" class="btn btn-default" id="check">확인</button>
-	  			<button type="button" class="btn btn-default" id="add">추가등록</button>
-	  		</div>
-		</div>
+		    <div style="text-align: right;">
+		      <button type="button" class="more"  >추가등록</button>
+			  <button type="button" class="okay" >확&emsp;인</button>
+		    </div>
+		</div><br><br><br>
 	
 	
 		<div class="row">
