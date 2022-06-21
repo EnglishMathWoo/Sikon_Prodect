@@ -43,6 +43,7 @@ public class ProductDaoImpl implements ProductDao{
 	
 	public void updateProduct(Product product) throws Exception {
 		sqlSession.update("ProductMapper.updateProduct", product);
+		sqlSession.update("ProductMapper.updateProductCart", product);
 	}
 
 	

@@ -850,7 +850,14 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 					</div>
 				</div>
 			</c:forEach>
-			
+				  <c:if test="${empty review}">
+		<br><br>
+		<div class="emptyProd">
+			<h3>등록된 리뷰가 없습니다.</h3>
+			<br>
+		</div>
+		<br>
+	</c:if>
 			
 		</div>
 

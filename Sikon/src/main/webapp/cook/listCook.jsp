@@ -274,8 +274,8 @@ div.emptyProd{
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage);
-			$("form").attr("method" , "POST").attr("action" , "/cook/listCook?menu=${param.menu}").submit();
-			console.log('${param.menu}');
+			$("form").attr("method" , "POST").attr("action" , "/cook/listCook").submit();
+		
 		}
 		
 		 $(function() {
@@ -656,8 +656,7 @@ div.emptyProd{
 
 <body>
 
-	<jsp:useBean id="now" class="java.util.Date" />
-	<fmt:formatDate value="${now}" pattern="yy/MM/dd" var="today" />
+
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -708,14 +707,11 @@ div.emptyProd{
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		    <c:if test="${param.menu.contains('manage') }">
+
+		
 		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">COOKING&nbsp;CLASS</span></h3>
 		        <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
-		      </c:if>
-		      		    <c:if test="${param.menu.contains('search') }">
-		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">COOKING&nbsp;CLASS</span></h3>
-		        <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
-		      </c:if>
+		
 		      </div>		  	
 	
 	    
@@ -741,7 +737,7 @@ div.emptyProd{
 		<table width="100%">
 			<tr>
 				<td class="col-md-6 text-right">
-					<input type="hidden" name="searchCondition" id="searchCondition" value="1">
+					<input type="hidden" name="searchCondition" id="searchCondition" value="">
 					<div class="form-group">
 					    <label class="sr-only" for="searchKeyword">검색</label>
 					    <input type="text" style="display: none;">
@@ -779,13 +775,7 @@ div.emptyProd{
 <div class="container channel">
 
 
-	<c:if test="${empty list}">
-		<br><br>
-		<div class="emptyProd">
-			판매중인 쿠킹클래스가 없습니다.
-		</div>
-		<br>
-	</c:if>
+
 	
 <div class="row" id="target">
 	<c:set var="i" value="0" />
@@ -793,7 +783,7 @@ div.emptyProd{
 
 <c:forEach var="cook" items="${list}">
 
- <input type="hidden" id="menu" name = "menu" value="${param.menu }"/>
+
  <input type="hidden" name="userNickname" value="${user.userNickname}">
   <input type="hidden" name="userId" value="${user.userId}">
   <input type="hidden" name="cookNo" value="${cook.cookNo}">
@@ -917,7 +907,13 @@ div.emptyProd{
 		 	<hr/>
 		 	
 </c:forEach>
-		 	
+		<c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			판매중인 쿠킹클래스가 없습니다.
+		</div>
+		<br>
+	</c:if>	 	
 </div>
 </div>
 

@@ -985,7 +985,7 @@ border-spacing:0px
 			});
 			 
 			 $( "a:contains('쿠킹클래스')" ).on("click" , function() {
-			$(self.location).attr("href","/cook/listCook?menu=search");
+			$(self.location).attr("href","/cook/listCook");
 			});
 			 
 			 $( "a:contains('랭킹')" ).on("click" , function() {
@@ -1009,7 +1009,7 @@ border-spacing:0px
 			});
 			 
 			 $( "a:contains('쿠킹클래스관리')" ).on("click" , function() {
-			$(self.location).attr("href","/cook/listCook?menu=manage");
+			$(self.location).attr("href","/cook/listCook");
 			});
 
 			 $( "a:contains('공지사항관리')" ).on("click" , function() {

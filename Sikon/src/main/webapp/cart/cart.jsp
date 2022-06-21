@@ -325,7 +325,13 @@ div{
 				<c:set var="i" value="${ i+1 }" />
 				  
 				  <div class="col-md-1 text-center boxselect">
-				  	<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}"/>		  	
+				  	<c:if test="${cart.cartProd.prodStock == 0}">
+				  		<input type="checkbox" disabled/> 	
+				  	</c:if>
+				  	<c:if test="${cart.cartProd.prodStock > 0}">
+				  		<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}"/> 	
+				  	</c:if>
+				  	
 				  </div>
 				  
 				  <div class="col-md-6 text-left">
@@ -337,7 +343,7 @@ div{
 							</c:forEach>
 						</td>
 					    <td>
-					    <p style="font-weight: bold;font-size:15px;">&emsp;&emsp;${cart.cartProd.prodName }</p>
+					    <p style="font-weight: bold;font-size:15px;">&emsp;&emsp;${cart.cartProd.prodName } | ${cart.cartProd.prodStock}</p>
 					    </td>
 					    
 					</tr>

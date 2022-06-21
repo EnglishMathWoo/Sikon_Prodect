@@ -88,8 +88,7 @@ public class ProductRestController {
 		return map2;
 	}
 	
-	@PostMapping(value="/uploadSummernoteImageFile", produces = "application/json")
-	@ResponseBody
+	@RequestMapping(value = "json/uploadSummernoteImageFile")
     public Map uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
 
 		System.out.println("ΩÊ∏”≥Î∆Æ");

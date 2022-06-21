@@ -415,6 +415,14 @@ html input[type=button]:hover{
 		$("#iamportPayment").on("click" , function() {
 			console.log("아임포트");		
 			
+			var stock = $(".stock").val();
+			console.log("stock: "+stock);	
+			
+			if(stock==0){
+				alert('재고없음');
+				return null;
+			}
+			
 			if($("#paybyca").prop("checked")){
 				
 				$("input[name=paymentOpt]").val("CA");
@@ -676,7 +684,17 @@ function paymentCA(data) {
 							<p style="font-weight: bold;font-size: 15px">${product.prodName}</p>
 							<p>${product.prodDisPrice} 원</p>
 							<p>배송비: 3000 원</p><input type="hidden" class="form-control" id="divyFee" name="divyFee" value="3000">
-							<p>구매수량: ${quantity} 개</p><input type="hidden" min="0" class="form-control" id="purchaseQuantity" name="purchaseQuantity" value="${quantity}" />
+							
+							<c:if test="${product.prodStock == 0}">
+								<p style="color:#ff4800">*품절된 상품입니다.</p>
+								<input type="hidden" class="stock" value="0" />
+							</c:if>
+							<c:if test="${product.prodStock > 0}">
+								<p>구매수량: ${quantity} 개</p>
+								<input type="hidden" min="0" class="form-control" id="purchaseQuantity" name="purchaseQuantity" value="${quantity}" />
+								<input type="hidden" class="stock" value="1" />
+							</c:if>
+							
 							<c:if test="${product.couponApply == 'N' }">
 								<p style="color:#F0445C">*쿠폰 적용이 불가능한 상품입니다.</p>
 							</c:if>
