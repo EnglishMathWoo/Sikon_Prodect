@@ -4,7 +4,6 @@
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -327,6 +326,8 @@ vertical-align: middle;
 		//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
 		function fncGetList(currentPage) {
 			$("#currentPage").val(currentPage);
+			
+			//alert($("#orderCondition").val());
 			$("form").attr("method" , "POST").attr("action" , "/recipe/listRecipe").submit();
 		}
 		
@@ -373,8 +374,7 @@ vertical-align: middle;
 			
 			
 			
-			
-		  $("#orderCondition").on( "change", function() {
+		 $( "#orderCondition" ).on("change" , function() {
 		  console.log($("#orderCondition").val());
 	      fncGetList(1);
 		  });
@@ -384,7 +384,7 @@ vertical-align: middle;
 	        	
 	        	console.log('theme: '+$(".theme").attr('value'));
 	        	
-	        	//fncGetList(1);
+	        	fncGetList(1);
 			 });
 			
 			$( ".theme" ).on("click" , function() {
@@ -552,6 +552,8 @@ vertical-align: middle;
 		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RECIPE LIST </h3>
 		    </div>
 		    <button type="button" class="submit">레시피 등록</button>
+		 <%-- <div class="gcse-search" style="background-color: #f7f7f7;width:350px "></div>  --%>	
+		    
 		  
     			    <form class="form-inline" name="detailForm">
 		    
@@ -579,15 +581,11 @@ vertical-align: middle;
 		             
     		<div class="row height">
     		<div class="col-md-6">
-	   					<select class="form-control" id="orderCondition" name="orderCondition">
-							<option value="0"
-								${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
-							<option value="1"
-								${!empty search.orderCondition && search.orderCondition==1 ? "selected" : ""}>인기순</option>
-							<option value="2"
-								${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
-								<option value="3"
-								${!empty search.orderCondition && search.orderCondition==3 ? "selected" : ""}>소요시간순</option>
+	   					<select class="form-control"  name="orderCondition" id="orderCondition" >
+							<option value="0" ${!empty search.orderCondition && search.orderCondition==0 ? "selected" : ""}>정렬조건</option>
+							<option value="1" ${!empty search.orderCondition && search.orderCondition==1 ? "selected" : ""}>인기순</option>
+							<option value="2" ${!empty search.orderCondition && search.orderCondition==2 ? "selected" : ""}>난이도순</option>
+							<option value="3" ${!empty search.orderCondition && search.orderCondition==3 ? "selected" : ""}>소요시간순</option>
 								
 						</select>
 			</div>
@@ -596,7 +594,6 @@ vertical-align: middle;
 			
 		
         	<td style="text-align: right;">
-            	<div class="gcse-search" style="background-color: #f7f7f7;width:350px "></div>
              <div class="row height">
               <div class="col-md-6">
 					<div class="form-group">
