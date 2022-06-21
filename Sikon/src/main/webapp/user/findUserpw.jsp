@@ -470,9 +470,8 @@ cursor: pointer;
 		     		$("#sm_email2").attr("disabled",true);
 		     		$("#userId").attr("disabled",true);
 		     		
-		     		popWin = window.open("/user/updateUserpw?userId="+userId, "popWin",
-									"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
-									"scrollbars=no,scrolling=no,menubar=no,resizable=no");
+		     		window.location.href="/user/updateUserpw?userId="+userId;
+		     		
 		     	}else{
 		     		$(".successEmailChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
 		     		$(".successEmailChk").css("color","red");
