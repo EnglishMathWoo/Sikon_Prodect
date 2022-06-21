@@ -198,10 +198,10 @@
 				<c:forEach var="coupon" items="${list}">
 				<c:set var="i" value="${ i+1 }"/>
 					<tr>
-						<c:if test = "${coupon.issueStatus != '003'}">
+						<c:if test = "${coupon.issueStatus == '001'}">
 					  		<td align="left"><input type="checkbox" name="retrieveCheck" id="${coupon.issueNo}"></td>
 					  	</c:if>
-					  	<c:if test = "${coupon.issueStatus == '003'}">
+					  	<c:if test = "${coupon.issueStatus != '001'}">
 					  		<td align="left"></td>
 					  	</c:if>
 							<td align="left">${coupon.issueNo}</td>
