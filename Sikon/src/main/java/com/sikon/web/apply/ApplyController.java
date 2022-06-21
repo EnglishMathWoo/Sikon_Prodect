@@ -461,7 +461,7 @@ public class ApplyController {
 			
 			
 			// Business logic ผ๖วเ
-			Map<String , Object> map=applyService.getSaleList(search);
+			Map<String , Object> map=applyService.getSaleList(search,user);
 			
 			Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 			System.out.println(resultPage);

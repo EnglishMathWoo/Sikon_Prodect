@@ -325,7 +325,7 @@ div{
 				<c:set var="i" value="${ i+1 }" />
 				  
 				  <div class="col-md-1 text-center boxselect">
-				  	<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}"/>		  	
+				  	<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}" disabled/>		  	
 				  </div>
 				  
 				  <div class="col-md-6 text-left">
