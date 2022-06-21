@@ -39,20 +39,21 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
 body{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 div.row{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
  div.page-header{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }  
 table {
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 .head{
  	background: #b19b92;
@@ -81,7 +82,7 @@ table {
   margin-bottom: 20px;
   background: #937062;
   float: right;
-  font-family: 'Gowun Batang', serif;
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   
 }
 
@@ -98,7 +99,7 @@ table {
   margin-bottom: 20px;
   background: #f7f7f7;
   float: right;
-  font-family: 'Gowun Batang', serif;
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   
 }
 
@@ -181,7 +182,7 @@ div.emptyProd{
 	
 	<div class="container list">
 	
-		<h3 class="pltitle" style="color:#333">| PRODUCT MANAGEMENT |</h3>
+		<h3 class="pltitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| MANAGEMENT |</h3>
 	    <br><br><br>
 	    
 		<form class="form-inline" name="detailForm">
@@ -277,14 +278,14 @@ div.emptyProd{
 			  
 			  	<td align="left" class="toget prodinfo" value="${product.prodNo }">
 			  	
-			  		<p style="font-weight:bold">${product.prodName }</p> <br>
+			  		<p>${product.prodName }</p>
 			  		
 			  		<p>
 				  		<c:if test="${product.couponApply == 'N' }">
 					  		<span style="color:#ffb6c1">쿠폰적용불가</span>
 					  	</c:if>
 					  	<c:if test="${product.couponApply == 'Y' }">
-					  		쿠폰적용가능
+					  		<span style="color:#7a7878;font-size: 12px;">쿠폰적용가능</span>
 					  	</c:if>
 			  		</p>
 			  </td>	

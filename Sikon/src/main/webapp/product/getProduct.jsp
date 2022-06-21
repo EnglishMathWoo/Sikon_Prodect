@@ -30,13 +30,13 @@
 .getproduct{
 	padding-top : 200px;
 	padding-bottom : 150px;
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 div.row{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 div.page-header{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 div.image{
@@ -155,7 +155,7 @@ h3{
 margin-left: 140px;
 }
 .reviewHeader{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
  	width: 860px;
  	 margin-left: 140px;
 	border-bottom: 2px solid rgb(147, 112, 98);

@@ -19,12 +19,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 <style>
 
 html {
   line-height: 1;
-  font-family: 'Nanum Myeongjo', serif;
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   
   
 }
@@ -71,7 +71,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 body {
-  font-family: 'Nanum Myeongjo', serif;
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   font-weight: 400;
 }
 
@@ -118,7 +118,7 @@ h2.heading {
   width: 100%;
   margin-bottom: 18px;
   color: #888;
-  font-family: 'Nanum Myeongjo', serif;
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   font-size: 16px;
   font-weight: 300;
   -webkit-border-radius: 2px;
@@ -257,7 +257,7 @@ input:-webkit-autofill {
 	text-align: center;
 	color: #333;
 	padding-top: 30px;
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 /* ---------------------------------------- */
 .summernote{
@@ -307,7 +307,7 @@ input:-webkit-autofill {
 			<form action="">
 			  
 			  
-				<h3 class="pltitle">| ADD PRODUCT |</h3><br><br>
+				<h3 class="pltitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| ADD PRODUCT |</h3><br><br>
 				
 				
 				<!-- 상품 기본정보 입력 -->			  
