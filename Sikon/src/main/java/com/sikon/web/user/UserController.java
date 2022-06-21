@@ -387,6 +387,8 @@ public class UserController {
 
 		System.out.println("/user/updateUser : POST");
 		
+		System.out.println(user.getAddr());
+		
 		System.out.println("======================");
 		for(int no : licenseNo) {
 			System.out.println("licenseNo: "+no);

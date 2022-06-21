@@ -55,7 +55,7 @@
         when #{item.ingredientNo} then #{item.ingredientAmount}
         </foreach>
         else ingredient_amount end
-        where recipe_no=#{item.recipeNo}
+        where recipe_no=#{recipeNo}
 	 </update>
 	
 	<!-- SQL : SELECT ROW Count -->	 

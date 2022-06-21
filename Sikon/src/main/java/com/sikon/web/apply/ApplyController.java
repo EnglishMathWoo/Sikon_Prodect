@@ -479,9 +479,12 @@ public class ApplyController {
 			return modelAndView;
 		}
 		@RequestMapping(value="cancel", method=RequestMethod.GET)
-		public ModelAndView cancel(@RequestParam("applyNo") int applyNo) throws Exception{
+		public ModelAndView cancel(@RequestParam("applyNo") int applyNo,HttpServletRequest request) throws Exception{
 
 		
+			HttpSession session = request.getSession();
+			User user = (User)session.getAttribute("user");
+			
 			
 			Apply apply = applyService.getApply(applyNo);
 			

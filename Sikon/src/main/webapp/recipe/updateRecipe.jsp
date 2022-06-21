@@ -702,8 +702,6 @@ footer a, footer h6 {
 			</div>
 
 
-			<button type="button" style="float: right;">재료추가</button>
-			<button type="button" style="float: right;">재료빼기</button>
 
 
 
