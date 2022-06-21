@@ -195,41 +195,40 @@
 	       
 		<tbody>
 			<c:if test="${!empty list}">
-			<c:set var="i" value="0" />
-			<c:forEach var="coupon" items="${list}">
-			<c:set var="i" value="${ i+1 }"/>
-				<tr>
-					<c:if test = "${coupon.issueStatus != '003'}">
-				  		<td align="left"><input type="checkbox" name="retrieveCheck" id="${coupon.issueNo}"></td>
-				  	</c:if>
-				  	<c:if test = "${coupon.issueStatus == '003'}">
-				  		<td align="left"></td>
-				  	</c:if>
-						<td align="left">${coupon.issueNo}</td>
-						<td align="left">${coupon.couponName}</td>
-						<td align="left">${coupon.couponUser.userId}</td> 
-						<td align="left">${coupon.startDate}</td>
-						<td align="left">${coupon.endDate}</td>
-				<c:choose>
-					<c:when test="${coupon.issueStatus.equals('001')}">
-						<td align="left">사용가능</td>
-					</c:when>
-					<c:when test="${coupon.issueStatus.equals('002')}">
-						<td align="left">사용완료</td>
-					</c:when>
-					<c:when test="${coupon.issueStatus.equals('003')}">
-						<td align="left">회수</td>
-					</c:when>
-					<c:when test="${coupon.issueStatus.equals('004')}">
-						<td align="left">만료</td>
-					</c:when>
-				</c:choose>
-				</tr>
-	        </c:forEach>
-	        </c:if> 
-	</tbody>
+				<c:forEach var="coupon" items="${list}">
+				<c:set var="i" value="${ i+1 }"/>
+					<tr>
+						<c:if test = "${coupon.issueStatus == '001'}">
+					  		<td align="left"><input type="checkbox" name="retrieveCheck" id="${coupon.issueNo}"></td>
+					  	</c:if>
+					  	<c:if test = "${coupon.issueStatus != '001'}">
+					  		<td align="left"></td>
+					  	</c:if>
+							<td align="left">${coupon.issueNo}</td>
+							<td align="left">${coupon.couponName}</td>
+							<td align="left">${coupon.couponUser.userId}</td> 
+							<td align="left">${coupon.startDate}</td>
+							<td align="left">${coupon.endDate}</td>
+						<c:choose>
+							<c:when test="${coupon.issueStatus.equals('001')}">
+								<td align="left">사용가능</td>
+							</c:when>
+							<c:when test="${coupon.issueStatus.equals('002')}">
+								<td align="left">사용완료</td>
+							</c:when>
+							<c:when test="${coupon.issueStatus.equals('003')}">
+								<td align="left">회수</td>
+							</c:when>
+							<c:when test="${coupon.issueStatus.equals('004')}">
+								<td align="left">만료</td>
+							</c:when>
+						</c:choose>
+					</tr>
+		        </c:forEach>
+	         </c:if> 
+		</tbody>
 		      
-</table>
+	</table>
 	      
 		<c:if test="${empty list}">
 		  	<div id="noIssuedCoupon"><h3>발급된 쿠폰이 없습니다.</h3></div>
