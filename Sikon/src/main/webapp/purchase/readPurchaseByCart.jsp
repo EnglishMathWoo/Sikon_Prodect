@@ -252,13 +252,17 @@ html input[type=text]{
 		
 		var couponpay = couponvalue+(prodprice*couponRate);
 		
-		console.log("prodprice: "+prodprice);
-		console.log("divyfee: "+divyfee);
-		console.log("couponvalue: "+couponvalue);
-		console.log("couponRate: "+couponRate);
-		console.log("pointpay: "+pointpay);
+		console.log("총 상품금액: "+prodprice);
+		console.log("배송비: "+divyfee);
+		console.log("쿠폰사용 값: "+couponvalue);
+		console.log("쿠폰사용 률: "+couponRate);
+		console.log("포인트사용: "+pointpay);
 		console.log("serial: "+serial);
-		console.log("couponpay: "+couponpay);
+		console.log("쿠폰사용: "+couponpay);
+		console.log("총 결제금액: "+(prodprice-couponpay-pointpay+divyfee));
+		console.log("적립포인트: "+(prodprice*0.05));
+		
+		
 		
 		$("#totalProdPrice").val(prodprice);
 		$("#couponuse").val("- "+couponpay);
