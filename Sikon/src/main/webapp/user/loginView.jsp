@@ -298,6 +298,9 @@ body{
 				}
 				
 				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+				
+			//	window.opener.location.reload();
+			//	window.close();
 			});
 			
 			
