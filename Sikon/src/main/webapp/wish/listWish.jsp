@@ -314,7 +314,7 @@ div{
 		
 			  
 			  <div class="col-md-1 text-center boxselect">
-			 
+			  	<input type="checkbox" class="checkbuy"  name="wishNo" value="${wish.wishNo}"/>	
 			  	
 			  </div>
 			  
@@ -324,27 +324,9 @@ div{
 			  <div class="col-md-6 text-left">
 			
 			
-			 	<c:choose>
-		    	<c:when test="${wish.wishCook.cookFilename.contains('/')}">
-						<c:choose>
-						<c:when test="${wish.wishCook.cookFilename.contains('mp4')}">
-							<c:forEach var="name" items="${wish.wishCook.cookFilename.split('/')}">
-								<video width="100" height="100" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
-							</c:forEach>
-						</c:when>
-						
-						<c:otherwise>
-							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
-								<img src="/resources/images/uploadFiles/${name}" width="100" height="100" align="absmiddle"/>
-								<input type="hidden" name="image" value="${name }"/>
-							</c:forEach>
-						</c:otherwise>
-						</c:choose>
-				</c:when>
-				<c:otherwise>
-					<img src="/resources/images/uploadFiles/${wish.wishCook.cookFilename}" width="100" height="100" align="absmiddle" class="image" value="${prodThumbnail}"/>
-				</c:otherwise>
-		    	</c:choose>	    
+						    <c:forEach var="name" items="${wish.wishCook.cookFilename.split('/')[0]}">
+							<img src="/resources/images/uploadFiles/${name}" class="image" width="100" height="100">
+							</c:forEach> 
 
 						
 				&emsp;&emsp;${wish.wishCook.cookName}&emsp;&emsp;

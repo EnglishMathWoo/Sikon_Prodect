@@ -64,7 +64,7 @@
 		  #{paymentOption} ,
 		   #{applyStatus} ,
 		    #{cookStatus} ,
-		      #{checkDate},
+		      SYSDATE,
 		       #{reviewStatus},
 		        #{classCook.cookPrice},
 		        #{impNumber}

@@ -368,6 +368,13 @@ div.image{
 		 $( ".addWish" ).on("click" , function() {
 			 console.log('쿠킹장바구니');
 			 var cookStatus = $('#cookStatus').val();
+			 var cookStock=$("#cookStock").val();
+				console.log(cookStock);
+				console.log(cookStatus);
+				if (cookStock == 0) {
+					alert("모집인원이 마감되었습니다");
+					return;
+				}		
 			 
 			 
 			 $.ajax({
@@ -632,7 +639,11 @@ div.image{
 					
 					</tr>
 				</table>	
-						<a class ="kakao" id="kakao-link-btn" href="javascript:kakaoShare()">
+				
+		
+					</div>
+						<div class="text-left">
+								<a class ="kakao" id="kakao-link-btn" href="javascript:kakaoShare()">
 					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
 					    </a>
 					    
@@ -644,10 +655,8 @@ div.image{
 				  			<c:if test="${sessionScope.user.role == 'admin'}">
 			  				<button type="button" class="btn-u updateCook"  >수정하기</button>
 			  			  </c:if>	
-					</div>
 				
-				
-					
+						</div>
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
 				
 					<div><strong>${cook.cookBrief }</strong></div>
@@ -665,7 +674,7 @@ div.image{
 				
 						<div class="row">
 					신청인원: &emsp;
-				      <input type="number" min="0" id="cookStatus" name="cookStatus" value="1" style="width:40px"/> 명
+				      <input type="number" min="0" id="cookStatus" name="cookStatus" value="1" style="width:40px" readonly/> 명
 				</div>
 				
 				
@@ -673,6 +682,10 @@ div.image{
 				<div class="row">
 					<div><h6>${cook.cookPrice } 원</h6></div>
 					<div><h5><strong>모집인원${cook.cookRecruit}명</strong></h5></div>
+				</div>
+				<div class="row">
+				
+					<div><h5><strong>남은신청인원${cook.cookStock}명</strong></h5></div>
 				</div>
 				
 				<br/>
@@ -729,14 +742,18 @@ div.image{
 				
 				<div class="form-group">
 			  		<div class="text-right">	
-			  			
-			  				<button type="button" class="btn-b addPurchase" id="buy" >신청하기</button>
-			  				
+			  								<c:choose>
+					 		<c:when test = "${cook.cookStock != '0'}">
+						<button type="button" class="btn-b addPurchase" id="buy" >신청하기</button>
+			  		
 			  	
 			  				<button type="button" class="btn-w addWish" id="popup_open_btn">장바구니</button>&emsp;
-					
-									  				
-		  				
+							</c:when>    
+					 		<c:otherwise>
+					 	<h5><strong>신청종료된 쿠킹클래스입니다</strong></h5>		
+					 		</c:otherwise>
+					 		</c:choose>
+
 			  		</div>
 				</div>
 		
