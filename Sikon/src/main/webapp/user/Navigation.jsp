@@ -55,8 +55,11 @@
 		
 	//	$("form").attr("method" , "POST").attr("action" , "/user/changeUserRole").submit();
 		
+			
+		opener.location.href='http://localhost:8080/user/listUser'; 
 		
-		opener.location.href='http://192.168.0.11:8080/user/listUser'; 
+//      ip 11		
+//		opener.location.href='http://192.168.0.11:8080/user/listUser';	
 		window.close();
 		
 		

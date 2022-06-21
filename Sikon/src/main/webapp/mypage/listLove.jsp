@@ -194,16 +194,19 @@ padding-top:0px;
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 	
+	function fncGetList(currentPage) {
+		console.log("currentPage: "+currentPage);
+		$("#currentPage").val(currentPage)
+		$("form").attr("method" , "POST").attr("action" , "/love/listLove").submit();
+	}	
+	
 	 $(function() {
 			
 			$( ".imgover" ).on("click" , function() {
-				
-			var mentorId = $("input[name='mentorId']").val();
-			
-			alert(mentorId);
+		
 				
 			console.log($(this).attr("value"));
-			 self.location = "/cook/mentor?mentorId="+mentorId;
+			 self.location = "/cook/mentor?mentorId="+$(this).attr("value");
 			});
 			
 				
@@ -237,12 +240,37 @@ padding-top:0px;
 			</h3>
 		</div>
  
-		    		 
+		<form class="form-inline" name="detailForm">
+	   			
+	   			<input type="hidden" id=themeCondition name=themeCondition value="${search.themeCondition }">
+	   			
+	
+					<div class="row">
+						<table width="100%">
+						<tr>
+							
+							<td class="col-md-6 text-left">
+						    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지
+							</td>
+							
+
+							
+						</tr>
+						</table>
+					</div>
+				  
+					
+				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+				  
+				  
+				  
+				</form>		    		 
 		  
 		    
     
 	     
-  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
+  <input type="hidden" id="currentPage" name="currentPage" value=""/>
  
   
 <div class="row">
@@ -254,7 +282,7 @@ padding-top:0px;
     <div id="latest" class="group">
  
       <article class="one_third first">
-      <a class="imgover"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" id="mentor" style="border: 1px solid #d7d7d7"></a>
+      <a class="imgover"  value="${love.user.userId}"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" id="mentor" style="border: 1px solid #d7d7d7"></a>
         <div class="excerpt">
           <h4 class="heading" >${love.user.userName }</h4>
           
@@ -275,6 +303,6 @@ padding-top:0px;
      </c:if>
 </div>
 
-	
+	<jsp:include page="../common/pageNavigator_new.jsp"/>
 </body>
 </html>

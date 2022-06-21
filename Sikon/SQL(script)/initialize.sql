@@ -132,7 +132,7 @@ CREATE TABLE recipe(
 	writer_nickname  VARCHAR2(50) REFERENCES  users(user_nickname),
 	recipe_name  VARCHAR2(100) NOT NULL,
 	recipe_detail  VARCHAR2(200)  NOT NULL,
-	detail  VARCHAR2(600) NOT NULL,
+	detail  VARCHAR2(1000) NOT NULL,
 	recipe_img VARCHAR2(200) NOT NULL,
 	recipe_video VARCHAR2(200),
 	recipe_difficulty VARCHAR2(20) NOT NULL,

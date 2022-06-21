@@ -237,7 +237,7 @@ public class CookController {
 	}
 
 	@RequestMapping(value = "listCook")
-	public String listCook(@ModelAttribute("search") Search search,	@RequestParam("menu") String menu, Model model, HttpServletRequest request) throws Exception {
+	public String listCook(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -273,7 +273,7 @@ public class CookController {
 		model.addAttribute("search", search);
 		model.addAttribute("user", user);
 
-		return "forward:/cook/listCook.jsp?menu=" + menu;
+		return "forward:/cook/listCook.jsp";
 	}
 
 	@RequestMapping(value = "listMyCook")
@@ -315,7 +315,7 @@ public class CookController {
 	}
 
 	@RequestMapping(value = "/deleteCook", method = RequestMethod.GET)
-	public String deleteCook(@RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList)
+	public String deleteCook(@RequestParam("checkCount") int checkCount, @RequestParam("checkList") int[] checkList,HttpServletRequest request)
 			throws Exception {
 
 		System.out.println("/cook/deleteCook : GET");
@@ -324,8 +324,18 @@ public class CookController {
 		for (int i = 0; i < checkCount; i++) {
 			cookService.deleteCook(checkList[i]);
 		}
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		
+		if(user.getRole().equals("admin")) {
+			
+			return "forward:/cook/manageCook";
+		}else {
+			return "forward:/cook/listMyCook";
+		}
 
-		return "forward:/cook/listCook?menu=search";
+		
 	}
 
 	@RequestMapping(value = "mentor")

@@ -736,13 +736,6 @@ footer a, footer h6 {
 
 			<div class="summer">
 				<textarea id="summernote" class="form-control" name="recipeOrder">${recipe.recipeOrder}</textarea>
-				<script>
-					$('#summernote').summernote({
-						placeholder : '레시피를 입력하세요',
-						tabsize : 2,
-						height : 300
-					});
-				</script>
 			</div>
 
 
@@ -852,52 +845,51 @@ footer a, footer h6 {
 	});
 </script>
 <script>
-	$(document).ready(function() {
-						$('#summernote').summernote(
-										{
-											height : 300, // 에디터 높이
-											minHeight : null, // 최소 높이
-											maxHeight : null, // 최대 높이
-											focus : true, // 에디터 로딩후 포커스를 맞출지 여부
-											placeholder : '최대 2048자까지 쓸 수 있습니다', //placeholder 설정
-											callbacks : { //여기 부분이 이미지를 첨부하는 부분
-												onImageUpload : function(files) {
-													uploadSummernoteImageFile(
-															files[0], this);
-												},
-												onPaste : function(e) {
-													var clipboardData = e.originalEvent.clipboardData;
-													if (clipboardData
-															&& clipboardData.items
-															&& clipboardData.items.length) {
-														var item = clipboardData.items[0];
-														if (item.kind === 'file'
-																&& item.type
-																		.indexOf('image/') !== -1) {
-															e.preventDefault();
-														}
-													}
-												}
-											}
-										});
+$(document).ready(function() {
+	$('#summernote').summernote(
+					{
+						height : 300, // 에디터 높이
+						minHeight : null, // 최소 높이
+						maxHeight : null, // 최대 높이
+						focus : true, // 에디터 로딩후 포커스를 맞출지 여부
+						placeholder : '최대 2048자까지 쓸 수 있습니다', //placeholder 설정
+						callbacks : { //여기 부분이 이미지를 첨부하는 부분
+							onImageUpload : function(files) {
+								uploadSummernoteImageFile(
+										files[0], this);
+							},
+							onPaste : function(e) {
+								var clipboardData = e.originalEvent.clipboardData;
+								if (clipboardData
+										&& clipboardData.items
+										&& clipboardData.items.length) {
+									var item = clipboardData.items[0];
+									if (item.kind === 'file'
+											&& item.type
+													.indexOf('image/') !== -1) {
+										e.preventDefault();
+									}
+								}
+							}
+						}
 					});
-	function uploadSummernoteImageFile(file, editor) {
-		data = new FormData();
-		data.append("file", file);
-		$.ajax({
-			data : data,
-			type : "POST",
-			url : "/recipe/json/uploadSummernoteImageFile",
-			contentType : false,
-			processData : false,
-			success : function(JSONData, status) {
-				//항상 업로드된 파일의 url이 있어야 한다.
-				console.log('성공');
-				console.log(JSONData.url);
-				$(editor).summernote('insertImage', JSONData.url);
-			}
-		});
-	}
+});
+function uploadSummernoteImageFile(file, editor) {
+data = new FormData();
+data.append("file", file);
+$.ajax({
+data : data,
+type : "POST",
+url : "/recipe/json/uploadSummernoteImageFile",
+contentType : false,
+processData : false,
+success : function(data) {
+console.log('썸머노트');
+console.log(data.url);
+$(editor).summernote('insertImage', data.url);
+}
+});
+}
 </script>
 
 </html>

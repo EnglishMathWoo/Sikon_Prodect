@@ -40,17 +40,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 
+
+
+
 <style>
-body{
-	font-family: 'Nanum Myeongjo', serif;
-}
+
 
 div.row{
 	font-family: 'Nanum Myeongjo', serif;
 }
- div.page-header{
-	font-family: 'Nanum Myeongjo', serif;
-}  
+.page-header.text-info {
+	font-family: 'Gowun Batang', serif;
+	font-weight: bold;
+	color: #75574B
+}
 table {
 	font-family: 'Nanum Myeongjo', serif;
 }

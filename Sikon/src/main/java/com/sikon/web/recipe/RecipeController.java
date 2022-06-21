@@ -167,12 +167,13 @@ public class RecipeController {
 		
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute("user");
-		
-		int bookmarkStatus = bookmarkService.checkDuplicate(recipeNo, user.getUserId());
-		list.get(0).setBookmarkStatus(bookmarkStatus);
-		
 		//레시피 조회수 +1
-		Recipe recipe = recipeService.getRecipeName(recipeNo);
+				Recipe recipe = recipeService.getRecipeName(recipeNo);
+				
+		int bookmarkStatus = bookmarkService.checkDuplicate(recipeNo, user.getUserId());
+		recipe.setBookmarkStatus(bookmarkStatus);
+		
+		
 		
 		if(user.getUserId() != recipe.getWriter().getUserId()) {
 			recipe.setRecipeViews(recipe.getRecipeViews()+1);
@@ -259,12 +260,11 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "listRecipe")
-	public String listRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
-			throws Exception {
+	public String listRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
 		System.out.println("ahsi모냐고!!!!!!!!!!!!!!"+search);
 
 		System.out.println("/recipe/listRecipe :  POST/get");
-		System.out.println("search"+search);
+		System.out.println("search"+search.getOrderCondition());
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);

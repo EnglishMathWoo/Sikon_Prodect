@@ -159,7 +159,7 @@ function fncAddApply() {
 	console.log(cookStock);
 	console.log(cookStatus);
 	if (cookStock < cookStatus) {
-		alert("재고가 부족합니다");
+		alert("모집인원이 마감되었습니다");
 		return;
 	}
 	
@@ -355,7 +355,7 @@ $(function() {
 		<form class="form-horizontal">
 		
 
-				  
+				    <input type="hidden" name="userId" value="${user.userId }" />
 		
 		
 		
@@ -390,7 +390,27 @@ $(function() {
 				  <table style="width: 100%">
 					  <tr>
 						<td class="imagetd">
-							<img src="/resources/images/uploadFiles/${wish.wishCook.cookFilename}" width="300" height="300" align="absmiddle"/>
+								<c:choose>
+		    	<c:when test="${wish.wishCook.cookFilename.contains('/')}">
+						<c:choose>
+						<c:when test="${wish.wishCook.cookFilename.contains('mp4')}">
+							<c:forEach var="name" items="${wish.wishCook.cookFilename.split('/')}">
+								<video width="300" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
+								<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+								<input type="hidden" name="image" value="${name }"/>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
+				</c:when>
+				<c:otherwise>
+					<img src="/resources/images/uploadFiles/${wish.wishCook.cookFilename}" width="300" height="300" align="absmiddle" class="image" value="${prodThumbnail}"/>
+				</c:otherwise>
+		    	</c:choose>	    
 						</td>
 						<td class="content">
 							<p style="font-weight: bold;font-size: 15px">${wish.wishCook.cookName}</p>
@@ -431,8 +451,8 @@ $(function() {
 			
 			
 			</p>	
-			   <input type="hidden" id="cookStock"  value="${wish.cookStatus }" />
-			<p>신청인원 :&emsp; ${wish.cookStatus }명
+			   <input type="hidden" id="cookStatus"  value="${wish.cookStatus }" />
+			<p>신청인원 :&emsp; ${wish.cookStatus}명
 			
 			</p>	
 			<p>수업시간 :&emsp; ${wish.wishCook.startTime}&emsp;~&emsp; ${wish.wishCook.endTime}
@@ -451,6 +471,7 @@ $(function() {
  					 		<input type="hidden" id="cookName" value="${wish.wishCook.cookName }"/>
 	<input type="hidden" id="cookPrice" value="${wish.wishCook.cookPrice }"/>
 	<input type="hidden" id="cookLocation" value="${wish.wishCook.cookLocation }"/>	
+	<input type="hidden" id="cookStatus" value="${wish.cookStatus }"/>
  	</c:forEach>
  		  
 	  </div>			  
@@ -493,12 +514,7 @@ $(function() {
 
 
 		   <input type="hidden" id="cookStock"  value="${cook.cookStock }" />
-		      <div class="form-group">
-		    <label for="cookStatus" >신청인원 : </label>
 		  
-		    
-		   <input type="number" min="0" id="cookStatus" name="cookStatus" value="1" style="width:40px"/> 명
-		  </div>
 	  	
 	  
 			<br>

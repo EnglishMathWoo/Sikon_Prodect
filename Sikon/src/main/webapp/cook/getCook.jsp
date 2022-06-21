@@ -599,7 +599,9 @@ div.image{
 					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo}"/>
 						<input type="hidden" name="userId" id="userId" value="${user.userId}"/>
 						<input type="hidden" name="userNickname" id="userNickname" value="${user.userNickname}"/>
-					
+					<input type="hidden" name="image" id="image" value="${cook.cookFilename}"/>
+					<input type="hidden" name="cookName" id="cookName" value="${cook.cookName}"/>
+					<input type="hidden" name="cookBrief" id="cookBrief" value="${cook.cookBrief}"/>
 				</div>
 				
 				<hr/>
@@ -848,7 +850,14 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 					</div>
 				</div>
 			</c:forEach>
-			
+				  <c:if test="${empty review}">
+		<br><br>
+		<div class="emptyProd">
+			<h3>등록된 리뷰가 없습니다.</h3>
+			<br>
+		</div>
+		<br>
+	</c:if>
 			
 		</div>
 

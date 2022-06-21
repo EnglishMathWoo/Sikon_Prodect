@@ -201,13 +201,12 @@ public class ApplyController {
 				public ModelAndView addApplyByWish(@ModelAttribute("apply") Apply apply,
 						
 						@RequestParam("wishNo") int[] wishNo,
-						HttpServletRequest request) throws Exception {
+						@RequestParam("userId") String userId) throws Exception {
 					
 					System.out.println("/apply/addApply : POST");
 					
 							
-					HttpSession session = request.getSession();
-					User user = (User)session.getAttribute("user");
+					User user = userService.getUser(userId);
 				
 					
 					List list = new ArrayList();
@@ -230,7 +229,7 @@ public class ApplyController {
 						applyByWish.setCookStatus(wish.getCookStatus());
 						applyByWish.setCheckDate(apply.getCheckDate());
 						applyByWish.setReceiverPhone(apply.getReceiverPhone());
-					
+						applyByWish.setImpNumber(apply.getImpNumber());
 						
 					
 						
@@ -244,11 +243,14 @@ public class ApplyController {
 						System.out.println(wish.getCookStatus());
 						System.out.println(cook.getCookNo());
 						
-						int buy= apply.getCookStatus();   //사는 신청자수를 가져와 buy에 넣어줍니다
+						int buy= wish.getCookStatus();   //사는 신청자수를 가져와 buy에 넣어줍니다
 						int cookNoo=cook.getCookNo(); //쿠킹클래스번호를 가져와 cookNo에 넣어줍니다
 						applyService.buyCook(buy, cookNoo);
 						
 						wishService.deleteWish(wishNo[i]);
+				
+						
+						
 						
 					}
 					
@@ -256,7 +258,7 @@ public class ApplyController {
 					
 					
 					ModelAndView modelAndView=new ModelAndView(); //modelAndView 객체생성
-					modelAndView.setViewName("forward:/apply/readApplyByWish.jsp");
+					modelAndView.setViewName("/apply/readApplyByWish.jsp");
 					modelAndView.addObject("applylist",list); 
 			
 					
