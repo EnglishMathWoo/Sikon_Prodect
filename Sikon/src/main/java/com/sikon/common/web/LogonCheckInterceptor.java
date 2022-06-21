@@ -53,8 +53,8 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 				return false;
 			}
 			
-			System.out.println("[ 로그인 상태 ... ]");
-			System.out.println("[ LogonCheckInterceptor end........]\n");
+//			System.out.println("[ 로그인 상태 ... ]");
+//			System.out.println("[ LogonCheckInterceptor end........]\n");
 			return true;
 		}else{ //==> 미 로그인한 화원이라면...
 			//==> 로그인 시도 중.....
