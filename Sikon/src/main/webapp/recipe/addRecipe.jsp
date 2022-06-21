@@ -729,13 +729,6 @@ footer a, footer h6 {
 
 			<div class="summer">
 				<textarea id="summernote" class="form-control" name="recipeOrder"></textarea>
-				<script>
-					$('#summernote').summernote({
-						placeholder : '레시피를 입력하세요',
-						tabsize : 2,
-						height : 300
-					});
-				</script>
 			</div>
 
 
@@ -883,11 +876,10 @@ footer a, footer h6 {
 			url : "/recipe/json/uploadSummernoteImageFile",
 			contentType : false,
 			processData : false,
-			success : function(JSONData, status) {
-				//항상 업로드된 파일의 url이 있어야 한다.
-				console.log('성공');
-				console.log(JSONData.url);
-				$(editor).summernote('insertImage', JSONData.url);
+			success : function(data) {
+				console.log('썸머노트');
+				console.log(data.url);
+				$(editor).summernote('insertImage', data.url);
 			}
 		});
 	}

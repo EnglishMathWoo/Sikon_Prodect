@@ -15,7 +15,7 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0">	
-	<link rel="stylesheet" href="style.css">
+	
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
@@ -24,7 +24,10 @@
 
 </script>
 <style>
-
+#addbar {
+     text-decoration-line: none; 
+     color: #f7f7f7; 
+}
     * {
       margin: 0;
       padding: 0;
@@ -292,21 +295,21 @@ padding:10px;
 
 .one section{
   width:48.5%;
-  height:300px;
+  height:368px;
   cursor:pointer;
 }
 
 
 /* weekly best*/
 .one>:nth-child(3)>:first-child{
-   background: url('https://i.pinimg.com/564x/f6/5b/72/f65b72b79c5f3e9057e05d5d978cdfa5.jpg') no-repeat;
+   background: url('https://i.pinimg.com/564x/b5/38/e8/b538e8486c22155e052ecf95ed70eaca.jpg') no-repeat;
   background-size: cover;
   background-position: center center;
   position: relative;
 }
 
 .one>:nth-child(3)>:last-child{
-   background: url('https://i.pinimg.com/564x/c8/6d/12/c86d12d78aa8eac81cfef42eae303053.jpg') no-repeat;
+   background: url('https://static.wtable.co.kr/image/production/service/recipe/1895/a612e902-311d-4078-a360-6db530b29f19.jpg?size=500x500') no-repeat;
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -314,7 +317,7 @@ padding:10px;
 
 .one section div{
   width:100%;
-  height:300px;
+  height:368px;
   opacity:0;
 }
 
@@ -455,20 +458,6 @@ opacity:1;
 
 
 
-.three{
-  clear:both;
-  margin:0 auto;
-}
-
-.three>:first-child{
-  height:350px;
-   background: url('https://www.giordano.co.kr/_skin/giordano_20191202/img/title/1094.jpg') no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  cursor:pointer;
-}
-
 .four{
    clear:both;
 
@@ -551,6 +540,23 @@ footer img{
 footer img:hover{
   filter:brightness(0%);
 }
+
+div.addbar{
+	height : 32px;
+	text-align: center;
+	background-color: #937062;
+	color: #F7F7F7;
+	padding: 5px;
+	font-weight: bold;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+	font-size: 12px;
+	z-index: 20;
+}
+
+#addbar{
+	text-decoration-line: none;
+	color:#f7f7f7;
+}
 </style>
 </head>
   
@@ -581,13 +587,13 @@ footer img:hover{
       
       <div>
         <section>
-          <div>
-            <h3>동치미 메밀 막국수</h3>
+          <div class="shrimp">
+            <h3>새우두부찜</h3>
           </div>
         </section>
  <section>
-          <div>
-            <h3>고소한 버터 스콘</h3>
+          <div class="pin">
+            <h3>크로핀</h3>
           </div>
         </section>
       </div>
@@ -801,6 +807,12 @@ footer img:hover{
 		});
 		$(document).on("click" ,"#canvas", function(){
 			self.location = "/product/getProduct?prodNo=10007&menu=search";
+		});
+		$(document).on("click" ,".pin", function(){
+			self.location = "/recipe/getRecipe?recipeNo=10007";
+		});
+		$(document).on("click" ,".shrimp", function(){
+			self.location = "/recipe/getRecipe?recipeNo=10007";
 		});
 	});
   

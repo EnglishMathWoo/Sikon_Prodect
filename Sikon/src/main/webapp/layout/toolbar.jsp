@@ -205,8 +205,13 @@ nav ul, nav ol {
 	border-width: 0 0 1px 0;
 }
 
+#mainav a{
+	padding-left:10px
+
+}
+
 #mainav .drop {
-	padding-left: 15px;
+	padding-left: 0px;
 }
 
 #mainav li li a, #mainav li li .drop {
@@ -814,17 +819,9 @@ border-spacing:0px
 	  <ul class="clear">
 		<li class="active"><a href="#">레시피</a></li>
 		<li class="active"><a href="#">스토어</a></li>
-		<li><a class="drop" href="#">쿠킹클래스</a>
-					<c:if test="${! empty sessionScope.user.role}">
-					<ul>
-				
-						              
-						
-					  </ul>
-					  </c:if>
-		</li>
-		<li><a class="drop" href="#">랭킹</a>      
-		<li><a class="drop" href="#">공지사항</a>
+		<li class="active"><a href="#">쿠킹클래스</a></li>
+		<li class="active"><a href="#">랭킹</a></li>
+		<li class="active"><a href="#">공지사항</a></li>
 				
 		<c:if test="${sessionScope.user.role == 'admin'}">
 		<li><a class="drop" href="#">관리</a>

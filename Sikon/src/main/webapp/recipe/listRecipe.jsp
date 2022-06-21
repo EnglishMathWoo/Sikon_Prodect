@@ -181,7 +181,7 @@ p {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    padding-top:120px;
+    padding-top:110px;
 }
 
 .hoc{
