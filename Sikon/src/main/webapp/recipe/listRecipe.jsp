@@ -49,8 +49,6 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 body {
 	padding-top: 50px;
-	
-	
 }
 
 .page-header.text-info {

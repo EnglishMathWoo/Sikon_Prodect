@@ -44,6 +44,7 @@
 
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 
 div.container {
@@ -64,7 +65,7 @@ div.container {
 }
 
 .row {
-	font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 .table.table-hover.table-striped {
@@ -201,9 +202,9 @@ div.emptyProd{
   width: 100px;
   height: 36px;
   color: #fff;
-  font-size: 15px;
+  font-size: 13px;
   background: #937062;
-  font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   
 }
 
@@ -212,9 +213,9 @@ div.emptyProd{
   height: 36px;
   color: #937062;
   border: 1px solid #937062;
-  font-size: 15px;
+  font-size: 13px;
   background: #f7f7f7;
-  font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 .act{
@@ -222,9 +223,9 @@ div.emptyProd{
   width: 100px;
   height: 36px;
   color: #fff;
-  font-size: 15px;
+  font-size: 13px;
   background: #937062;
-  font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 
