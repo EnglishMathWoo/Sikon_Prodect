@@ -369,12 +369,12 @@ public class UserController {
 		model.addAttribute("license", license);
 		model.addAttribute("career", career);
 		
-		return "forward:/user/updateUserEdit.jsp";
+		return "forward:/user/updateUser.jsp";
 	}
 	
 	@RequestMapping( value="updateUser", method=RequestMethod.POST )
 	public String updateUser( @ModelAttribute("user") User user ,
-			@RequestParam(value="licenseNo", required=false) int[] licenseNo,
+			@RequestParam(value="licenseNo",  defaultValue="0") int[] licenseNo,
 			@RequestParam(value="licenseName",  required=false) String[] licenseName,
 			@RequestParam(value="licenseInstitution", required=false) String[] licenseInstitution,
 			@RequestParam(value="licenseDate", required=false) String[] licenseDate,

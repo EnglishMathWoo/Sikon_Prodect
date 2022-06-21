@@ -272,13 +272,19 @@ html input[type=button]:hover{
 <script type="text/javascript">
 	
 	
-		function fncAddUser() {
+		$(function() {
+			
+			$( ".join" ).on("click" , function() {
 			
 			var id=$("input[name='userId']").val();
 			var pw=$("input[name='password']").val();
 			var pw_confirm=$("input[name='password2']").val();
 			var name=$("input[name='userName']").val();
 			var nickname=$("input[name='userNickname']").val();
+			var sm_email2=$("input[name='sm_email2']").val();
+			var addPossible = $("#addPossible").val();
+			var emailChk2 = $("#emailChk2").val();
+			var checked = $("#checked").val();
 			
 			if(id == null || id.length <1){
 				alert("아이디는 반드시 입력하셔야 합니다.");
@@ -311,17 +317,29 @@ html input[type=button]:hover{
 				return;
 			}
 			
+			if(sm_email2 == null || sm_email2 <1){
+				alert("인증번호를 입력해 주세요");
+				return;
+			}
+								
+			if(addPossible == 'impossible'){
+				alert("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
+				return;
+			}
+						
+			if(checked == 0){
+				alert("인증하기를 눌러주세요");
+				return;
+			}
+			
+			
 			
 			$("form").attr("method" , "POST").attr("action" , "/user/addUser").attr("enctype","multipart/form-data").submit();
-		}
-	
-	
-		//============= "가입"  Event 연결 =============
-		 $(function() {
-			$( ".join" ).on("click" , function() {
-				fncAddUser();
+		
 			});
+		
 		});	
+	
 		
 		//============= "취소"  Event 처리 및  연결 =============
 		$(function() {
@@ -382,7 +400,7 @@ html input[type=button]:hover{
 		        				alert("인증번호 발송이 완료되었습니다.\n입력한 이메일에서 인증번호 확인을 해주십시오.");
 		                		$("#sm_email2").attr("disabled",false);
 		                		$("#emailChk2").css("display","inline-block");
-		                		$(".successEmailChk").text("인증번호를 입력한 뒤 이메일 인증을 눌러주십시오.");
+		                		$(".successEmailChk").text("인증번호를 입력한 뒤 인증하기를 눌러주십시오.");
 		                		$(".successEmailChk").css("color","green");
 		                		code = data;
 		                	}
@@ -396,17 +414,24 @@ html input[type=button]:hover{
 		   
 		   //이메일 인증번호 대조
 		     $("#emailChk2").click(function(){
+		    	 
+		    	 
+		    	 
 		     	if($("#sm_email2").val() == code){
 		     		$(".successEmailChk").text("인증번호가 일치합니다.");
 		     		$(".successEmailChk").css("color","green");
 		     		$("#emailDoubleChk").val("true");
 		     		$("#sm_email2").attr("disabled",true);
+		     		$("#addPossible").val("possible");
 		     	}else{
 		     		$(".successEmailChk").text("인증번호가 일치하지 않습니다. 확인해주시기 바랍니다.");
 		     		$(".successEmailChk").css("color","red");
 		     		$("#emailDoubleChk").val("false");
 		     		$("#sm_email2").attr("autofocus",true);
+		     		$("#addPossible").val("impossible");
 		     	}
+		     	
+		     	$("#checked").val(1);
 		     });
 		        
 		});	
@@ -529,6 +554,19 @@ html input[type=button]:hover{
 					});
 			});
 	        
+			
+			// 파일 미리보기
+			 function readURL(input) {
+				  if (input.files && input.files[0]) {
+				    var reader = new FileReader();
+				    reader.onload = function(e) {
+				      document.getElementById('preview').src = e.target.result;
+				    };
+				    reader.readAsDataURL(input.files[0]);
+				  } else {
+				    document.getElementById('preview').src = "";
+				  }
+				}
 </script>
 
 	
@@ -554,29 +592,14 @@ html input[type=button]:hover{
 				  <div class="subtitle">
 				  <p>프로필</p>
 				  </div><br>
-				  	  
-				  	  
-				  <div class="form-group">
-						<input multiple="multiple" class="form-control" type="file" id ="uploadFile"  name="uploadFile">
-				  </div>
-				  	  
+				  	<input type="hidden" id="addPossible" value="">  
 				  	  
 				  <div class="form-group">
-					<label for="userNick">닉네임</label>
-						<table style="width: 652px;">
-							<tr>
-								<td style="width: 46%;">
-								<input type="text" class="form-control" id="userNickname" name="userNickname"  oninput="checkNickname()">
-								</td>
-								
-								<td  style="text-align: left;">&ensp;
-								<span id="helpBlock" class="id_ok2">사용 가능한 닉네임입니다.</span>
-					 			<span id="helpBlock" class="id_already2">이미 사용중인 닉네임입니다.</span>
-					 			</td>
-				 			</tr>
-			 			</table>
+						<input multiple="multiple" class="form-control" type="file" id ="uploadFile"  name="uploadFile" onchange="readURL(this);">
+				  	
+						<img id="preview"/>
 				  </div>
-				  
+				  	  
 				  <div class="form-group">
 				    <label for="userid">아이디</label>
 				      <table style="width: 652px;">
@@ -596,8 +619,8 @@ html input[type=button]:hover{
 			    		  </tr>
 				      </table>
 				  </div>
-
-				   <div class="form-group">
+				  
+				  <div class="form-group">
 				      <table style="width: 652px;">
 				    	<tr>
 				    		<td style="width: 30%;">
@@ -614,13 +637,31 @@ html input[type=button]:hover{
 			    		  </tr>
 				      </table>
 				  </div>
+				  	  
+				  <div class="form-group">
+					<label for="userNick">닉네임</label>
+						<table style="width: 652px;">
+							<tr>
+								<td style="width: 46%;">
+								<input type="text" class="form-control" id="userNickname" name="userNickname"  oninput="checkNickname()">
+								</td>
+								
+								<td  style="text-align: left;">&ensp;
+								<span id="helpBlock" class="id_ok2">사용 가능한 닉네임입니다.</span>
+					 			<span id="helpBlock" class="id_already2">이미 사용중인 닉네임입니다.</span>
+					 			</td>
+				 			</tr>
+			 			</table>
+				  </div>
+				  
+				  				   
 				  <div class="form-group">
 				    <label for="password">비밀번호</label>
-				      <input type="text" class="form-control" id="password" name="password" >
+				      <input type="password" class="form-control" id="password" name="password" >
 				  </div>
 				  <div class="form-group">
 				    <label for="passwordcheck">비밀번호 확인</label>
-				      <input type="text" class="form-control" id="password2" name="password2" >
+				      <input type="password" class="form-control" id="password2" name="password2" >
 				  </div>
 				  
 			</div>
@@ -781,7 +822,9 @@ html input[type=button]:hover{
 			
 			</form>
 			
-	
+			
+			<input type="hidden" id="checked" value="0">
+			
 			<br><br>
 			<div class="text-center  buttons">
 				<button type="button" class="join">가입하기</button>	
