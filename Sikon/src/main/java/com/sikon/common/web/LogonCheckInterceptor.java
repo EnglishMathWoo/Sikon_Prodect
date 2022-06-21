@@ -34,7 +34,7 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 														HttpServletResponse response, 
 														Object handler) throws Exception {
 		
-		System.out.println("\n[ LogonCheckInterceptor start........]");
+//		System.out.println("\n[ LogonCheckInterceptor start........]");
 		
 		//==> 로그인 유무확인
 		HttpSession session = request.getSession(true);
@@ -48,8 +48,8 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 					uri.indexOf("loginView") != -1 			||	uri.indexOf("login") != -1 		|| 
 					uri.indexOf("checkDuplication") != -1 ){
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
-				System.out.println("[ 로그인 상태.. 로그인 후 불필요 한 요구.... ]");
-				System.out.println("[ LogonCheckInterceptor end........]\n");
+//				System.out.println("[ 로그인 상태.. 로그인 후 불필요 한 요구.... ]");
+//				System.out.println("[ LogonCheckInterceptor end........]\n");
 				return false;
 			}
 			
@@ -63,14 +63,14 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 					uri.indexOf("loginView") != -1 			||	uri.indexOf("login") != -1 		|| 
 					uri.indexOf("checkDuplication") != -1 || uri.indexOf("listRecipe") != -1  
 					||uri.indexOf("listProduct") != -1 || uri.indexOf("getProduct") != -1   ){
-				System.out.println("[ 로그 시도 상태 .... ]");
-				System.out.println("[ LogonCheckInterceptor end........]\n");
+//				System.out.println("[ 로그 시도 상태 .... ]");
+//				System.out.println("[ LogonCheckInterceptor end........]\n");
 				return true;
 			}
 			
 			request.getRequestDispatcher("/user/loginView.jsp").forward(request, response);
-			System.out.println("[ 로그인 이전 ... ]");
-			System.out.println("[ LogonCheckInterceptor end........]\n");
+//			System.out.println("[ 로그인 이전 ... ]");
+//			System.out.println("[ LogonCheckInterceptor end........]\n");
 			return false;
 		}
 	}
