@@ -18,7 +18,7 @@
     <script src="https://cdn.jsdelivr.net/combine/npm/pickerjs@1.2.1/dist/picker.min.js,npm/easytimer.js@4.3.0/dist/easytimer.min.js"></script>
     <style>
       .time-picker, .values {
-        background-color: #2962ff;
+        background-color: #937062;
         color: #ffffff;
         text-align: center;
         font-size: 5rem;
@@ -36,14 +36,14 @@
       .btn-light {
         width: 120px;
         margin-right: 10px;
-        color: #2962ff !important;
+        color: #937062  !important;
       }
       .picker-opened > .picker-dialog {
         top: 13rem;
       }
     </style>
   </head>
-  <body style="background-color: #448aff; padding-top: 6.5rem">
+  <body style="background-color: #f7f7f7; padding-top: 6.5rem">
     <main role="main">
       <!-- 설정한 카운트다운 시간 표시 -->
       <input type="text" class="form-control time-picker vw-100" value="00:01:00">

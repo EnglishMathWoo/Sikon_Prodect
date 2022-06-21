@@ -41,12 +41,7 @@
 		
 		   	<mvc:interceptors>
    				<mvc:interceptor>
-			<mvc:mapping path="/user/**"/>
-			<mvc:mapping path="/product/**"/>
-			<mvc:mapping path="/recipe/**"/>
-			<mvc:mapping path="/cook/**"/>
-			<mvc:mapping path="/purchase/**"/>
-			<mvc:mapping path="/review/**"/>
+			<mvc:mapping path="/**"/>
 			<bean class="com.sikon.common.web.LogonCheckInterceptor" />
    		</mvc:interceptor>
 
@@ -90,13 +85,11 @@
 				class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		
 		
-				<!-- 
-				<prop key="java.lang.NullPointerException">/common/nullError.jsp</prop>
-				<prop key="java.lang.NumberFormatException">/common/numberFormatError.jsp</prop>
-				 -->
+				
 		<property name="exceptionMappings">
 			<props>
-				<prop key="java.lang.Exception">/common/error.jsp</prop>
+				<prop key="java.lang.NullPointerException">/common/nullError.jsp</prop>
+				<prop key="java.lang.NumberFormatException">/common/numberFormatError.jsp</prop>
 			</props>
 		</property>
 		
