@@ -599,7 +599,9 @@ div.image{
 					<input type="hidden" name="cookNo" id="cookNo" value="${cook.cookNo}"/>
 						<input type="hidden" name="userId" id="userId" value="${user.userId}"/>
 						<input type="hidden" name="userNickname" id="userNickname" value="${user.userNickname}"/>
-					
+					<input type="hidden" name="image" id="image" value="${cook.cookFilename}"/>
+					<input type="hidden" name="cookName" id="cookName" value="${cook.cookName}"/>
+					<input type="hidden" name="cookBrief" id="cookBrief" value="${cook.cookBrief}"/>
 				</div>
 				
 				<hr/>

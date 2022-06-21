@@ -223,8 +223,8 @@ label{
 				  </div><br>
 				  	  
 				  <div class="form-group">
-				    <label for="userName">신청자 아이디</label>
-				     ${apply.applier.userId}
+				   <strong> <p >신청자 아이디 :${apply.applier.userId} </p></strong>
+				   
 				  </div>
 				  
 			<br>

@@ -44,6 +44,8 @@ public class RecipeRestController {
 	int pageUnit;
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+	@Value("#{commonProperties['summerNote']}")
+	String summerNote;
 
 	public RecipeRestController() {
 		System.out.println(this.getClass());
@@ -95,7 +97,7 @@ public class RecipeRestController {
 
 		Map map = new HashMap();
 
-		String fileRoot = "C:\\summernote_image\\"; // 저장될 외부 파일 경로
+		String fileRoot = summerNote;	//저장될 파일 경로
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 
@@ -163,7 +165,6 @@ public class RecipeRestController {
 		System.out.println(bookmarkStatus);
 		
 		if (bookmarkStatus == 0) {
-
 			bookmarkService.addBookmark(recipeNo, userId); 
 			bookmarkService.checkDuplicate(recipeNo, userId);
 		} else {
@@ -172,6 +173,8 @@ public class RecipeRestController {
 			bookmarkService.checkDuplicate(recipeNo, userId);
 
 		}
+		System.out.println("뭐야?????????????????????????????");
+		System.out.println(bookmarkStatus);
 		return bookmarkStatus;
 
 	}

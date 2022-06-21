@@ -167,12 +167,13 @@ public class RecipeController {
 		
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute("user");
-		
-		int bookmarkStatus = bookmarkService.checkDuplicate(recipeNo, user.getUserId());
-		list.get(0).setBookmarkStatus(bookmarkStatus);
-		
 		//레시피 조회수 +1
-		Recipe recipe = recipeService.getRecipeName(recipeNo);
+				Recipe recipe = recipeService.getRecipeName(recipeNo);
+				
+		int bookmarkStatus = bookmarkService.checkDuplicate(recipeNo, user.getUserId());
+		recipe.setBookmarkStatus(bookmarkStatus);
+		
+		
 		
 		if(user.getUserId() != recipe.getWriter().getUserId()) {
 			recipe.setRecipeViews(recipe.getRecipeViews()+1);
