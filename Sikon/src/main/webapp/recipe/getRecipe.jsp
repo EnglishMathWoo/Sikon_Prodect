@@ -798,9 +798,10 @@ $(document).on('click','.uptrev',function() {
 		            success : function(bookmarkStatus) {
 		             
 		              
-		                    if(bookmarkStatus == 0){
+		            	  if(bookmarkStatus == 0){
+		                    //	alert("북마크 성공");
 		                    	
-		                    	const Toast = Swal.fire({
+		                    const Toast = Swal.fire({
 		                    	    toast: true,
 		                    	    icon: 'success',
 		                    	    title: '책갈피에 등록되었습니다.',
@@ -814,22 +815,24 @@ $(document).on('click','.uptrev',function() {
 		                    	    }
 		                    	    
 		                    	}).then((result) => {
-		                    		location.reload();
+		                    		
+		                    							           
+		                    $("#bookmarkBtn").removeClass('bi-bookmark-plus');
+					        $("#bookmarkBtn").addClass('bi-bookmark-plus-fill');
+					           
+		                    location.reload();
 		                    	});
-		                    	
-		                    	 
 		    					
 		                    }
 		                    else if (bookmarkStatus == 1){
-		                     //alert("북마크 취소");
+		                    // alert("북마크 취소");
 		                     
-		                     	$("#bookmarkBtn").removeClass('bi-bookmark-plus');
-					            $("#bookmarkBtn").addClass('bi-bookmark');
+		                     	$("#bookmarkBtn").removeClass('bi-bookmark-plus-fill');
+					            $("#bookmarkBtn").addClass('bi-bookmark-plus');
 					         
 		                  
 		                    	location.reload();
 		                }
-		                    
 		                    
 		            }
 		        })

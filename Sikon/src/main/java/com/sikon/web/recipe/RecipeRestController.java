@@ -163,7 +163,6 @@ public class RecipeRestController {
 		System.out.println(bookmarkStatus);
 		
 		if (bookmarkStatus == 0) {
-
 			bookmarkService.addBookmark(recipeNo, userId); 
 			bookmarkService.checkDuplicate(recipeNo, userId);
 		} else {
@@ -172,6 +171,8 @@ public class RecipeRestController {
 			bookmarkService.checkDuplicate(recipeNo, userId);
 
 		}
+		System.out.println("¹¹¾ß?????????????????????????????");
+		System.out.println(bookmarkStatus);
 		return bookmarkStatus;
 
 	}

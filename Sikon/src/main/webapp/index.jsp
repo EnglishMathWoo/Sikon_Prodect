@@ -299,7 +299,7 @@ padding:10px;
 
 /* weekly best*/
 .one>:nth-child(3)>:first-child{
-   background: url('https://i.pinimg.com/564x/15/7a/c9/157ac9b07a978273f362f876cf3dfc35.jpg') no-repeat;
+   background: url('https://i.pinimg.com/564x/f6/5b/72/f65b72b79c5f3e9057e05d5d978cdfa5.jpg') no-repeat;
   background-size: cover;
   background-position: center center;
   position: relative;
