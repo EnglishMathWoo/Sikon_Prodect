@@ -576,8 +576,8 @@ footer img:hover{
     <article class="top">▲</article>
     
     <article class="one">
-        <h2>WEEKLY BEST</h2>
-        <p>지금 가장 사랑받는 레시피</p>
+        <h2>오늘의 추천 레시피</h2>
+        <p></p>
       
       <div>
         <section>

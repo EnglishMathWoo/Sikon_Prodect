@@ -182,17 +182,16 @@
 	       
 			<tbody>
 				<c:if test="${!empty list}">
-			  	<c:set var="i" value="0" />
-			  	<c:forEach var="coupon" items="${list}">
-				<c:set var="i" value="${ i+1 }" />
-					<tr>
-						<td align="left"><input type="checkbox" name="deleteCheck" id="${coupon.couponNo}"></td>
-					  	<td align="left">${coupon.couponNo}</td> 
-						<td align="left">${coupon.couponName}</td>
-						<td align="left">${coupon.discountRate}</td>
-						<td align="left">${coupon.discountValue}</td>
-					</tr>
-	          	</c:forEach>
+				  	<c:forEach var="coupon" items="${list}">
+					<c:set var="i" value="${ i+1 }" />
+						<tr>
+							<td align="left"><input type="checkbox" name="deleteCheck" id="${coupon.couponNo}"></td>
+						  	<td align="left">${coupon.couponNo}</td> 
+							<td align="left">${coupon.couponName}</td>
+							<td align="left">${coupon.discountRate}</td>
+							<td align="left">${coupon.discountValue}</td>
+						</tr>
+		          	</c:forEach>
 	        	</c:if>
 	        </tbody>
 	                 

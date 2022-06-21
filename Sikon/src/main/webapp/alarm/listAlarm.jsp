@@ -85,7 +85,6 @@
 			<h3 style="color:#bc8f8f">알람 리스트</h3>
 	    </div>
 	    
-	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row">
 		    	<p class="text-primary" style="color:gray">
 		    		&nbsp;&nbsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
@@ -100,7 +99,6 @@
 		<input type="hidden" id="currentPage" name="currentPage" value=""/>
 		</form>
 		
-		<!--  table Start /////////////////////////////////////-->
 		<table class="table table-hover table-striped" >
       
         <thead>
@@ -130,7 +128,6 @@
         </tbody>
       
         </table>
-	    <!--  table End /////////////////////////////////////-->
 	  
 	  </div>
  	
