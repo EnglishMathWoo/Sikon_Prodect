@@ -521,7 +521,7 @@ body {
 			</div>
 			<hr />
 
-			<h3 class="iEJcKGheader">리뷰</h3>
+			<h3 class="iEJcKGheader">한줄평(${recipe.reviewNum })</h3>
 				<div class="panel">
 					<div class="panel-body">
 						<textarea class="form-control" name="reviewContent"
@@ -703,7 +703,6 @@ $(document).on('click','.uptrev',function() {
             },
             success : function(request) {
                 
-					alert("삭제 성공~");				           
                     location.reload();
                     	
                     }
