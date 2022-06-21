@@ -225,12 +225,14 @@ public class PurchaseController {
 		
 		String serial = serialNo;
 		int price = purchase.getPurchaseProd().getProdDisPrice();
+		int prodquantity = purchase.getPurchaseQuantity();
 		int divyfee = 3000;
 		int couponvalue = coupon.getDiscountValue();
 		double couponRate = coupon.getDiscountRate();
 		int pointpay = purchase.getUsedPoint();
 
 		map.put("prodprice", price);
+		map.put("prodquantity", prodquantity);
 		map.put("divyfee", divyfee);
 		map.put("couponvalue", couponvalue);
 		map.put("couponRate", couponRate);
@@ -345,7 +347,16 @@ public class PurchaseController {
 			Cart cart = cartService.getCart(cartNo[i]);
 			
 			Product product = productService.getProduct(cart.getCartProd().getProdNo());
-			productPrice += product.getProdDisPrice();
+			productPrice += (product.getProdDisPrice()*cart.getQuantity());
+			System.out.println("----------------------------------------------------");
+			
+			System.out.println("상품가: "+product.getProdDisPrice());
+			System.out.println("수량: "+cart.getQuantity());
+			System.out.println("상품가*수량: "+(product.getProdDisPrice()*cart.getQuantity()));
+			
+			System.out.println("productPrice: "+productPrice);
+
+			System.out.println("----------------------------------------------------");
 			num ++;
 			
 			Purchase purchaseByCart = new Purchase();
@@ -505,7 +516,8 @@ public class PurchaseController {
 		String serial = "";
 		int totalprice = 0;
 		int divyfee = 0;
-		int couponpay = 0;
+		int couponvalue = 0;
+		double couponRate = 0;
 		int pointpay = 0;
 		
 		for(int i=0; i<list.size();i++) {
@@ -515,28 +527,33 @@ public class PurchaseController {
 			Product product = productService.getProduct(((Purchase)list.get(i)).getPurchaseProd().getProdNo());			
 			purchase.setBuyer(user);
 			purchase.setPurchaseProd(product);
-			
 			purchaselist.add(purchase);
 			
-			totalprice += product.getProdDisPrice();
+			Coupon coupon = couponService.getIssuedCoupon(Integer.parseInt(purchase.getUsedCoupon()));  
+			System.out.println("-------------------------------------------------------------------");
+			System.out.println("coupon: "+coupon);
+			System.out.println("-------------------------------------------------------------------");
+			totalprice += (product.getProdDisPrice()*purchase.getPurchaseQuantity());
 			divyfee += purchase.getDivyFee();
-			pointpay += purchase.getUsedPoint();
-			
+			pointpay = purchase.getUsedPoint();
 			serial = purchase.getSerialNo();
-			
-			System.out.println(list.get(i));
+			couponvalue = coupon.getDiscountValue();
+			couponRate = coupon.getDiscountRate();
 		}	
+		
 		
 		map.put("totalprice", totalprice);
 		map.put("divyfee", divyfee);
-		map.put("couponpay", couponpay);
+		map.put("couponvalue", couponvalue);
+		map.put("couponRate", couponRate);
 		map.put("pointpay", pointpay);
 		map.put("serial", serial);
 
 		System.out.println("================================================================================");
 		System.out.println("totalprice: "+totalprice);
 		System.out.println("divyfee: "+divyfee);
-		System.out.println("couponpay: "+couponpay);
+		System.out.println("couponvalue: "+couponvalue);
+		System.out.println("couponRate: "+couponRate);
 		System.out.println("pointpay: "+pointpay);
 		System.out.println("serial: "+serial);
 		System.out.println("map: "+map);

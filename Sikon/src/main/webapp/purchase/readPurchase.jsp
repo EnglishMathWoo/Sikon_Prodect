@@ -238,6 +238,10 @@ label{
 			var why = "${purchaseInfo.couponRate}";
 			
 			var prodprice = Number("${purchaseInfo.prodprice}");
+			var quantity = Number("${purchaseInfo.prodquantity}");
+			
+			prodprice = prodprice*quantity;
+			
 			var divyfee = Number("${purchaseInfo.divyfee}");
 			var couponvalue = Number("${purchaseInfo.couponvalue}");
 			var couponRate = prodprice*("${purchaseInfo.couponRate}");
@@ -250,12 +254,15 @@ label{
 			console.log("==========");
 			
 			console.log("prodprice: "+prodprice);
+			console.log("quantity: "+quantity);
 			console.log("divyfee: "+divyfee);
 			console.log("couponvalue: "+couponvalue);
 			console.log("couponRate: "+couponRate);
 			console.log("pointpay: "+pointpay);
 			console.log("serial: "+serial);
 			console.log("couponpay: "+couponpay);
+			
+			
 			
 			$("#totalProdPrice").val(prodprice);
 			$("#couponuse").val("- "+couponpay);
@@ -340,8 +347,8 @@ label{
 						<td class="content">
 							<p style="font-weight: bold;font-size: 15px">${purchase.purchaseProd.prodName}</p>
 							<p>${purchase.purchaseProd.prodDisPrice} 원</p>
-							<p>배송비: 3000 원</p><input type="hidden" class="form-control" id="divyFee" name="divyFee" value="3000">
-							<p>구매수량: ${purchase.purchaseQuantity} 개</p><input type="hidden" min="0" class="form-control" name="purchaseQuantity" />
+							<p>배송비: 3000 원</p>
+							<p>구매수량: ${purchase.purchaseQuantity} 개</p><input type="hidden" id="purchaseQuantity" value="${purchase.purchaseQuantity}">
 							<c:if test="${purchase.purchaseProd.couponApply == 'N' }">
 								<p style="color:#F0445C">*쿠폰 적용이 불가능한 상품입니다.</p>
 							</c:if>

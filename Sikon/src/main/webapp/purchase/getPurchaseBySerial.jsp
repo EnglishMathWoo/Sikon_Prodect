@@ -228,7 +228,37 @@ label{
 			
 		});	
 
-
+		$(function() {
+			
+			var totalprice = Number("${purchaseinfo.totalprice}");
+			var divyfee = Number("${purchaseinfo.divyfee}");
+			var couponvalue = Number("${purchaseinfo.couponvalue}");
+			var couponRate = Number("${purchaseinfo.couponRate}");
+			var pointpay = Number("${purchaseinfo.pointpay}");
+			var serial = "${purchaseinfo.serial}";
+			
+			var couponpay = couponvalue+(totalprice*couponRate);
+			
+			console.log("총 상품금액: "+totalprice);
+			console.log("배송비: "+divyfee);
+			console.log("쿠폰사용 값: "+couponvalue);
+			console.log("쿠폰사용 률: "+couponRate);
+			console.log("포인트사용: "+pointpay);
+			console.log("serial: "+serial);
+			console.log("쿠폰사용: "+couponpay);
+			console.log("총 결제금액: "+(totalprice-couponpay-pointpay+divyfee));
+			console.log("적립포인트: "+(totalprice*0.05));
+			
+			
+			
+			$("#totalProdPrice").val(totalprice);
+			$("#couponuse").val("- "+couponpay);
+			$("#usingpoint").val("- "+pointpay);
+			$("#divyfee").val("+ "+divyfee);
+			$("#totalpayment").val(totalprice-couponpay-pointpay+divyfee);
+			$("#earnPoint").val(totalprice*0.05);
+			
+		});	 
 		 
 	</script>		
 	
@@ -329,36 +359,36 @@ label{
 				  
 				  <div class="sectd">
 				  	<h5>총 상품금액</h5>
-				  	<div class="payment">${purchaseinfo.totalprice}원</div>
+				  	<div class="payment"><input type="text" id="totalProdPrice" value="" size="" style="border:none;text-align:right">원</div>
 				  </div>
 				  
 				  <div class="sectd">
 				  	<h5>쿠폰 사용</h5>
-				  	<div class="payment">- ${purchaseinfo.couponpay}원</div>
+				  	<div class="payment"><input type="text" id="couponuse" value="" size=""  style="border:none;text-align:right">원</div>
 				  </div>
 				  
 				  <div class="sectd">
 				  	<h5>포인트 사용</h5>
-				  	<div class="payment">- ${purchaseinfo.pointpay}P</div>
+				  	<div class="payment"><input type="text" id="usingpoint" value="" size=""  style="border:none;text-align:right">P</div>
 				  </div>
 				  
 				  <div class="sectd">
 				  	<h5>배송비</h5>
-				  	<div class="payment">+ ${purchaseinfo.divyfee}원</div>
+				  	<div class="payment"><input type="text" id="divyfee" value="" size=""  style="border:none;text-align:right">원</div>
 				  </div>
 				  
 				  <br>
 				  
 				  <div class="sectd">
 				  	<h5>총 결제금액</h5>
-				  	<div class="payment totals"><strong class="totalpay">${purchaseinfo.totalprice - purchaseinfo.couponpay - purchaseinfo.pointpay + purchaseinfo.divyfee }</strong>원</div>
+				  	<div class="payment totals"><strong class="totalpay"><input type="text" id="totalpayment" value="" size=""  style="border:none;text-align:right"></strong>원</div>
 				  </div>
 				  
 			  <c:forEach var="purchase" items="${purchaselist}" begin="0" end="0">	
 				  
 				  <div class="sectd">
 				  	<h6>적립 포인트</h6>
-				  	<div class="payment totals">+ ${purchase.earnPoint} P</div>
+				  	<div class="payment totals"><input type="text" id="earnPoint" name="earnPoint" value="" size=""  style="border:none;text-align:right"> P</div>
 				  </div>
 				  
 				  
