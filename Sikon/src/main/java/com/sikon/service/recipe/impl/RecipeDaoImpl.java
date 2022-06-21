@@ -80,8 +80,10 @@ public class RecipeDaoImpl implements RecipeDao {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", ingredient.get("list"));
 		map.put("recipeNo", recipe.getRecipeNo());
-
+		
+		System.out.println("Àç·áµµ ¾÷µ«ÇØÁà..");
 		sqlSession.update("IngredientMapper.updateIngredient", map);
+		System.out.println("³¡");
 	}
 	
 	public void updateRecipeOnly(Recipe recipe) throws Exception {
