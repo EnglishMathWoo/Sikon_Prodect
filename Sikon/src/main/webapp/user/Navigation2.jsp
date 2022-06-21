@@ -73,7 +73,7 @@
 
 <div class="container">
     
-        <h1 class="bg-white text-center">승인이 완료되었습니다.</h1>
+        <h1 class="bg-white text-center">거절이 완료되었습니다.</h1>
         
         <!-- <div class="col-2"></div> -->
        
