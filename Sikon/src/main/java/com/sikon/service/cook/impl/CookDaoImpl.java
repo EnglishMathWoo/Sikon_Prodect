@@ -17,7 +17,7 @@ import com.sikon.service.cook.CookDao;
 import com.sikon.service.domain.User;
 
 
-//==> 회원관리 DAO CRUD 구현
+
 @Repository("cookDaoImpl")
 public class CookDaoImpl implements CookDao{
 	

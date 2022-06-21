@@ -84,7 +84,7 @@ public class UserController {
 		if(dbUser.getQuitStatus().equals("Y")) {
 		System.out.println("quitStatus="+dbUser.getQuitStatus());
 		model.addAttribute("msg","탈퇴 회원 입니다.");
-		model.addAttribute("url","/");
+		model.addAttribute("url","loginView.jsp");
 
 		return "/user/loginFail.jsp";
 		}
@@ -96,7 +96,7 @@ public class UserController {
 			return "redirect:/index.jsp";
 		} else {
 			model.addAttribute("msg","비밀번호가 일치하지 않습니다.");
-			model.addAttribute("url","/");
+			model.addAttribute("url","loginView.jsp");
 			return "/user/loginFail.jsp";
 		}		
 		
