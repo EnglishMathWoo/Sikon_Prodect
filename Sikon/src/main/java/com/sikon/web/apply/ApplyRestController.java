@@ -51,6 +51,7 @@ import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.User;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import com.sikon.service.domain.Apply;
@@ -147,5 +148,17 @@ public class ApplyRestController {
 			return api.paymentByImpUid(imp_uid);
 			
 	}
+	
+	@RequestMapping("json/cancleIamport")
+	public IamportResponse<Payment> cancelPaymentByImpUid(@RequestParam("imp_uid") String imp_uid) throws IamportResponseException, IOException {
+		
+		System.out.println("cancleIamport Start");
+		System.out.println("imp_uid:"+ imp_uid);
+		
+		
+		CancelData cancelData = new CancelData(imp_uid, true);
+
+		return api.cancelPaymentByImpUid(cancelData);
+	}	
 
 }
