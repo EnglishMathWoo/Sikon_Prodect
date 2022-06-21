@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.sikon.common.Search;
 import com.sikon.service.domain.Apply;
+import com.sikon.service.domain.User;
 
 
 public interface ApplyService {
@@ -13,7 +14,7 @@ public interface ApplyService {
 
 	public Map<String, Object> getApplyList(Search search,String applierId) throws Exception;
 	
-	public Map<String , Object > getSaleList(Search search) throws Exception;
+	public Map<String , Object > getSaleList(Search search,User user) throws Exception;
 
 	public Apply getApply(int applyNo) throws Exception;
 

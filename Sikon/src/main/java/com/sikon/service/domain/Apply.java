@@ -9,7 +9,7 @@ public class Apply {
 	private Cook classCook; //cook 객체
 	private User applier; 	//user 객체
 	private String paymentOption;
-	private String applyStatus; //tranCode 같은친구
+	private String applyStatus; 
 	private int cookStatus;		//cookStock(재고)-cookStatus(신청인원)
 	private Date checkDate;
 	private String receiverPhone;
@@ -17,7 +17,7 @@ public class Apply {
 	private int total;
 	
 	public Apply() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
 	public int getApplyNo() {
