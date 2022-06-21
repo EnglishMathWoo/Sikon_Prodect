@@ -638,14 +638,14 @@ footer img:hover{
         
     <div class="swiper-slide">            
                 <img src="/resources/images/uploadFiles/index/KakaoTalk_20220616_104729158_01.jpg" data-deferred="1" class="rg_i Q4LuWd" jsname="Q4LuWd" width="271" height="180" alt="마켓컬리 :: 내일의 장보기, 마켓컬리" data-atf="true" data-iml="919.9000000953674">
-		  <div class="word" >
+		  <div class="word" id="ham">
             <h5>프리미엄 함박카츠</h5>
         </div>
 		</div>
 		
 		<div class="swiper-slide">            
                 <img src="/resources/images/uploadFiles/index/KakaoTalk_20220616_104729158_02.jpg" data-deferred="1" class="rg_i Q4LuWd" jsname="Q4LuWd" width="271" height="180" alt="마켓컬리 :: 내일의 장보기, 마켓컬리" data-atf="true" data-iml="919.9000000953674">
-		  <div class="word" >
+		  <div class="word" id="canvas">
             <h5>더캔버스 밀키트 3종</h5>
         </div>
 		</div>
@@ -795,6 +795,12 @@ footer img:hover{
 		});
 		$(document).on("click" ,"#zzuggu", function(){
 			self.location = "/product/getProduct?prodNo=10000&menu=search";
+		});
+		$(document).on("click" ,"#ham", function(){
+			self.location = "/product/getProduct?prodNo=10008&menu=search";
+		});
+		$(document).on("click" ,"#canvas", function(){
+			self.location = "/product/getProduct?prodNo=10007&menu=search";
 		});
 	});
   
