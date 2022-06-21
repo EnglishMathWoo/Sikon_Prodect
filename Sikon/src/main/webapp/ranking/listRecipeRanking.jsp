@@ -426,7 +426,7 @@ font-size: 13px;
 		self.location = "/ranking/listRecipe";
 	});
 
-	//레시피 일강 랭킹
+	//레시피 일간 랭킹
 	$(document).on('click', '#daily', function() {
 		var orderCondition = $(this).attr('value');
 		self.location = "/ranking/listRecipe?orderCondition=" + orderCondition;

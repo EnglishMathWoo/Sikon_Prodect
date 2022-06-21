@@ -704,7 +704,6 @@ footer a, footer h6 {
 
 
 
-
 			<div class="form-group">
 				<label for="ingredient"
 					class="col-sm-offset-1 col-sm-3 control-label">Àç·á</label>
@@ -718,7 +717,8 @@ footer a, footer h6 {
 						<c:set var="i" value="0" />
 					<c:forEach var="ingredient" items="${ingredient}">
 						<tr>
-						<td><input type="text" name="ingredientName" value="${ingredient. ingredientName}" >		<input type="hidden" name="ingredientNo" value="${ingredient.ingredientNo }"></td>
+						<td><input type="text" name="ingredientName" value="${ingredient. ingredientName}" >		
+						<input type="hidden" name="ingredientNo" value="${ingredient.ingredientNo }"></td>
 						<td><input type="text" name="ingredientAmount" value="${ingredient. ingredientAmount} "></td>
 				
 						</tr>

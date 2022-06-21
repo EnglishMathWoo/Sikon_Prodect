@@ -132,7 +132,7 @@ CREATE TABLE recipe(
 	writer_nickname  VARCHAR2(50) REFERENCES  users(user_nickname),
 	recipe_name  VARCHAR2(100) NOT NULL,
 	recipe_detail  VARCHAR2(200)  NOT NULL,
-	detail  VARCHAR2(1000) NOT NULL,
+	detail  VARCHAR2(2000) NOT NULL,
 	recipe_img VARCHAR2(200) NOT NULL,
 	recipe_video VARCHAR2(200),
 	recipe_difficulty VARCHAR2(20) NOT NULL,
@@ -209,7 +209,8 @@ CREATE TABLE cart (
 	quantity 			NUMBER, 
 	prod_name 		VARCHAR2(100),
 	prod_image 		VARCHAR2(500),
-	prod_price 		NUMBER,
+	prod_price 		NUMBER, 
+	prod_stock 		NUMBER, 
 	PRIMARY KEY(cart_no)
 );
 
@@ -246,7 +247,8 @@ CREATE TABLE apply (
 	cook_status         			 NUMBER  not null,
 	check_date 		 	DATE,
 	review_status 		VARCHAR2(20) 	NOT NULL,
-	cook_price 		NUMBER(10)  NOT NULL ,	
+	cook_price 		NUMBER(10)  NOT NULL ,
+	imp_number		VARCHAR2(100),  	
 	PRIMARY KEY(apply_no)
 );
 
