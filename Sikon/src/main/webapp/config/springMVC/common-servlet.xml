@@ -38,6 +38,15 @@
 		<websocket:sockjs websocket-enabled="true"/>
 	</websocket:handlers>
 		
+		
+		   	<mvc:interceptors>
+   				<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.sikon.common.web.LogonCheckInterceptor" />
+   		</mvc:interceptor>
+
+   	</mvc:interceptors>
+   	
 	<!--  :: ViewResolver 선언 -->	
     <bean id="viewResolver"
 				class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
@@ -75,6 +84,8 @@
 	<bean id="exceptionResolver"
 				class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		
+		
+				
 		<property name="exceptionMappings">
 			<props>
 				<prop key="java.lang.NullPointerException">/common/nullError.jsp</prop>

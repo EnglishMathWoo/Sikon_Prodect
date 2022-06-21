@@ -61,7 +61,20 @@ color:crimson;
     </style>
     <!--  ´ñ±Û -->
 <style>
-
+.btn_gotop {
+	display:none;
+	position:fixed;
+	bottom:30px;
+	right:30px;
+	z-index:999;
+	outline:none;
+	background-color:#937062;
+	color:#f7f7f7;
+	padding:15px 20px;
+}
+.btn_gotop:hover{
+	color: #f7f7f7;
+}
 .shape {
 
   width: 40%;
@@ -282,6 +295,9 @@ margin-left: 60px;
 .container {
 	padding-top: 150px;
 } 
+
+
+
 </style> 
 
 <style>
@@ -296,7 +312,7 @@ div.page-header{
 	font-family: 'Nanum Myeongjo', serif;
 }
 div.image{
-	padding-top : 30px;
+	padding-top : 70px;
 }
 </style>
  <!-- //////////////////////////////////°øÀ¯ÇÏ±â////////////////////////////// -->
@@ -547,7 +563,7 @@ div.image{
 		<div class="row">
 		
 	
-				<div class="col-xs-6 col-md-6 text-center image">				
+				<div class="images col-xs-6 col-md-6 text-center image">				
    	<c:choose>
 		    	<c:when test="${cook.cookFilename.contains('/')}">
 						<c:choose>
@@ -608,10 +624,13 @@ div.image{
 					 		</c:otherwise>
 					 		</c:choose>
 						</td>
+						<td>
+						
+						</td>
 					
 					</tr>
 				</table>	
-						<a id="kakao-link-btn" href="javascript:kakaoShare()">
+						<a class ="kakao" id="kakao-link-btn" href="javascript:kakaoShare()">
 					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
 					    </a>
 					    
@@ -798,7 +817,10 @@ geocoder.addressSearch(cookLocation, function(result, status) {
     } 
 });    
 </script>	
-				
+					<a href="#" class="btn_gotop">
+		  <span class="glyphicon glyphicon-chevron-up">
+		  </span>
+		</a>		
 			<h4 class="reviewHeader">¸®ºä(${reviewNum})</h4>
 			
 			<c:forEach var="review" items="${review}">
@@ -829,10 +851,7 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 			
 			
 		</div>
-		<a href="#" class="btn_gotop">
-		  <span class="glyphicon glyphicon-chevron-up">
-		  </span>
-		</a>	
+
 		
 			
  	<div id="wish_modal">

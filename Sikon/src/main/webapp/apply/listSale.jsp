@@ -136,7 +136,12 @@ h3{
 		});
 		
 
-	
+		$("td.apply").on("click", function() {
+
+			var applyNo = $(this).attr("value");
+
+			self.location = "/apply/getApply?applyNo=" + applyNo;
+		});	
 		
 		
 		
@@ -265,10 +270,8 @@ h3{
         <thead>
           <tr class="subtitle">
              <th align="center">No</th>
-            <th align="center">가격</th>
-            <th align="center">수량</th>
-            <th align="center">결제날짜</th>
-            <th align="center">상품번호</th>
+            <th align="center">신청날짜</th>
+            <th align="center">신청번호</th>
             <th align="center">수강현황</th>           
             <th align="center">구매회원</th>
           </tr>
@@ -280,14 +283,14 @@ h3{
 		  <c:forEach var="apply" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
-			  <td align="center">${ i }</td>
-			  <td align="center" value="${apply.classCook.cookPrice }" name="cookPrice" id="cookPrice">${apply.classCook.cookPrice}</td>
-			   <td align="center"value="${apply.cookStatus}" id="cookStatus">${apply.cookStatus}</td>
+			  <td align="center" class="apply" value="${apply.applyNo}">${ i }</td>
+		
+			 
 			    <td align="center"value="${apply.checkDate}" name="checkDate" id="checkDate">${apply.checkDate}</td>
 			  <td align="center" class="prodNum" value1="${apply.classCook.cookNo }" value2="${param.menu}" >
 				${apply.classCook.cookNo }
 			  
-			  	<input type="hidden" value="${apply.classCook.cookNo}">
+			  	<input type="hidden" value="${apply.applyNo}">
 			 	 </td>
 
 			  

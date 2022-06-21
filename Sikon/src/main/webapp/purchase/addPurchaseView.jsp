@@ -271,10 +271,13 @@ html input[type=button]:hover{
 			var express=3000;
 			
 			
-			var quantity = 0;
+			var quantity = Number("${quantity}");
 			var price = Number("${product.prodDisPrice}");
 			
+			price = price*quantity;
+			
 			console.log("총 상품금액: "+price);
+			console.log("총 결제금액: "+price+express);
 			
 			
 			var earnpoint = Math.round(price*0.05);
@@ -422,6 +425,12 @@ html input[type=button]:hover{
 				$("input[name=paymentOpt]").val("KA");
 				paymentKA();
 				
+			}
+			
+			
+			if($("#totalpayment").val()<100){
+				alert('최소결제금액은 100원입니다.');
+				return null;
 			}
 				
 		});

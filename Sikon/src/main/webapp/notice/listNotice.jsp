@@ -4,15 +4,13 @@
 <!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 
 <html lang="ko">
 	
 <head>
 	<meta charset="EUC-KR">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
@@ -21,159 +19,132 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 		
-	
 	<!-- Bootstrap Dropdown Hover CSS -->
     <link href="/css/animate.min.css" rel="stylesheet">
     <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
     <!-- Bootstrap Dropdown Hover JS -->
     <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
    
-   
     <!-- jQuery UI toolTip 사용 CSS-->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- jQuery UI toolTip 사용 JS-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		
 	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-	  body {
-			font-family: 'Nanum Myeongjo', serif;
-            padding-top : 50px;
-        }
-        
-        table {
-        	margin-top:20px;
-        }
-        	
-		h1.text-center {
-			font-family: 'Nanum Myeongjo', serif;
-		}
-		
-		div.form-group{
-			font-family: 'Nanum Myeongjo', serif;
-		}  
-		
-		
-		.btn-b {
-			cursor: pointer;
-		    background-color: #937062;
-		    border: none;
-		    color: #fff;
-		    padding: 12px 0;
-		    width:6%;
-		    height: 34px;
-		    justify-content: center;
-	        display: flex;
-	        align-items: center;
-		    font-size: 17px;
-		    border-radius: 5px;
-		    border: 1px solid #d7d7d7
-		}
-		
-		.soo{
-			padding-top : 170px;
-		}
-    </style>
-    
-    
-	<script type="text/javascript">
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style>
+	body {
+	font-family: 'Nanum Myeongjo', serif;
+           padding-top : 50px;
+    }
+       
+    table {
+     	margin-top:20px;
+    }
+       	
+	h1.text-center {
+		font-family: 'Nanum Myeongjo', serif;
+	}
+	
+	div.form-group {
+		font-family: 'Nanum Myeongjo', serif;
+	}  
 
+	.btn-b {
+		cursor: pointer;
+	    background-color: #937062;
+	    border: none;
+	    color: #fff;
+	    padding: 12px 0;
+	    width:6%;
+	    height: 34px;
+	    justify-content: center;
+        display: flex;
+        align-items: center;
+	    font-size: 17px;
+	    border-radius: 5px;
+	    border: 1px solid #d7d7d7
+	}
+	
+	.soo {
+		padding-top : 170px;
+	}
+</style>
+    
+    
+<script type="text/javascript">
+	
+	//검색 & 페이지
 	function fncGetList(currentPage) {
-		
 		$("#currentPage").val(currentPage);
 	  	$("form").attr("method" , "POST").attr("action", "/notice/listNotice?menu=${menu}").submit();
 	}
 
-	
-	//===== 기존Code 주석 처리 후  jQuery 변경 ======//
 	 $(function() {
 		$( "button.btn.btn-default" ).on("click" , function() {
 			fncGetList(1); 
 		});
 	 });
-	
-	
-	 $(function() {
-			
-			$("#addNotice").on("click" , function() {
-						
-				self.location = "/notice/addNotice.jsp";
-			});
+	 
+	 //공지사항 등록화면 이동
+	$(function() {
+		$("#addNotice").on("click" , function() {			
+			self.location = "/notice/addNotice.jsp";
 		});
+	});
 	 
-	 
-	 $(document).ready(function() {
-			
-		 $("#checkall").click(function(){
-				
-				if($("#checkall").prop("checked")){
-					
-					$("input[name=noticeCheck]").prop("checked",true);
-					
-				}else{
-					
-					$("input[name=noticeCheck]").prop("checked",false);
-					
-				}
-				
-			})
-			 
-			 
-			$("input[name=noticeCheck]").click(function(){
-				
-				if($("#checkall").prop("checked")){
-					
-					$("#checkall").prop("checked",false);
-					
-				}
-				
-			})
+	//체크박스 전체선택
+	$(document).ready(function() {	
 		
+		$("#checkall").click(function(){	
+			if($("#checkall").prop("checked")){
+				$("input[name=noticeCheck]").prop("checked",true);
+			} else {		
+				$("input[name=noticeCheck]").prop("checked",false);
+			}		
+		})
+			 
+		$("input[name=noticeCheck]").click(function(){
+			if($("#checkall").prop("checked")){			
+				$("#checkall").prop("checked",false);
+			}	
+		})
 	 });	
 	
+	 //공지사항 삭제		
+	$(function() {
+		$("button.delete").on("click" , function() {
 			
-	 $(function() {
+			var checkCount = $("input[name='noticeCheck']:checked").length;
+		    var array = new Array();
+				
+		    $("input[name='noticeCheck']:checked").each(function() {
+				array.push($(this).attr('id'));
+		    });
 			
-			$("button.delete").on("click" , function() {
-				
-				var checkCount = $("input[name='noticeCheck']:checked").length;
-			    var array = new Array();
-				$("input[name='noticeCheck']:checked").each(function() {
-					array.push($(this).attr('id'));
-			    });
-				
-				if(checkCount != 0) {
-					alert("게시물을 삭제하시겠습니까?")
-					self.location = "/notice/deleteNotice?checkCount="+checkCount+"&checkList="+array;
-				} else {
-					alert("선택된 게시물이 없습니다.")	
-				}
-			});
+			if(checkCount != 0) {
+				alert("게시물을 삭제하시겠습니까?")
+				self.location = "/notice/deleteNotice?checkCount="+checkCount+"&checkList="+array;
+			} else {
+				alert("선택된 게시물이 없습니다.")	
+			}
 		});
-	
+	});
 
+	//공지사항 수정화면 이동 
 	$(function() {
 	
 		$("td[name='manageNoticeTitle']").on("click", function() {
-			
-			//Debug..
-			console.log($(this).find("[name='noticeNo']").val());
 			self.location = "/notice/updateNotice?noticeNo="+$(this).find("[name='noticeNo']").val();
 		});
-		
 	});	
-		
+	
+	//공지사항 상세화면 이동
 	$(function() {
 		$("td[name='searchNoticeTitle']").on("click", function() {
-			
-			console.log($(this).find("[name='noticeNo']").val());
-		
 			self.location = "/notice/getNotice?noticeNo="+$(this).find("[name='noticeNo']").val();
 		});
 
 	});	
-		
 
 </script>
 
@@ -181,13 +152,9 @@
 
 <body>
 	
-<!-- ToolBar Start /////////////////////////////////////-->
+
 	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
-	
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	
-	
+
 	<div class="container soo">
 	
 		<div class="page-header text-info">
@@ -199,7 +166,6 @@
 			</c:if>
 	    </div>
 	    
-	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row">
 	    	<form class="form-inline" name="detailForm">
 		    	<p class="text-primary" style="color:gray">
@@ -208,30 +174,27 @@
 			<c:if test = "${menu == 'manage'}">
 				<button type="button" class="btn-b delete" value="${notice.noticeNo}" style="float: right; margin-right: 10px;">삭&nbsp;제</button>
 				<button type="button" class="btn-b" id="addNotice" style="float: right;  margin-right: 10px;" >등&nbsp;록</button>
-			</c:if>
-			
+			</c:if>	
 		</div>
 		
 		<input type="hidden" id="currentPage" name="currentPage" value=""/>
 		
-		<!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped" >
+    	<table class="table table-hover table-striped" >
       
-        <thead>
-          <tr>
-          	<c:if test = "${menu == 'manage'}">
-          	<th align="center" style="text-align:center;"><input type="checkbox" id="checkall" /></th>
-          	</c:if>
-            <th align="center"  style="text-align:center">공지번호</th>
-            <th align="left"  style="text-align:center">공지제목</th>
-            <th align="left" style="text-align:center">공지시간</th>
-          </tr>
-         </thead>
+		<thead>
+			<tr>
+	          	<c:if test = "${menu == 'manage'}">
+	          	<th align="center" style="text-align:center;"><input type="checkbox" id="checkall" /></th>
+	          	</c:if>
+	            <th align="center"  style="text-align:center">공지번호</th>
+	            <th align="left"  style="text-align:center">공지제목</th>
+	            <th align="left" style="text-align:center">공지시간</th>
+			</tr>
+		</thead>
        
 		<tbody>
 		
-		<c:set var="i" value="0" />
-	<c:forEach var="notice" items="${list}">
+		<c:forEach var="notice" items="${list}">
 		<c:set var="i" value="${ i+1 }" />
 		<tr class="ct_list_pop">
 			<c:if test = "${menu == 'manage'}">
@@ -253,21 +216,16 @@
 				<td align="left"> ${notice.noticeDate} </td>
 			</c:if>
 		</tr>
-	</c:forEach>
+		</c:forEach>
         
         </tbody>
-      
       </table>
-	  <!--  table End /////////////////////////////////////-->
 	  
- 	</div>
- 	<!--  화면구성 div End /////////////////////////////////////-->
+	  </form>
+	</div>
 
- 	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
-
-	</form>
+	<jsp:include page="../common/pageNavigator_new.jsp"/>->
+	
 </body>
 
 </html>

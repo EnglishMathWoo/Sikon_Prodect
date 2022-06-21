@@ -521,7 +521,7 @@ body {
 			</div>
 			<hr />
 
-			<h3 class="iEJcKGheader">리뷰</h3>
+			<h3 class="iEJcKGheader">한줄평(${recipe.reviewNum })</h3>
 				<div class="panel">
 					<div class="panel-body">
 						<textarea class="form-control" name="reviewContent"
@@ -558,6 +558,7 @@ body {
 								<br /> <br />
 								<p id="acontent${review.reviewNo }">${review.reviewContent }</p>
 								<div id="abt${review.reviewNo }">
+							<c:if test="${!empty user}">
 									<c:if test="${user.userNickname !=null }">
 										<c:if test="${review.writerNickname == user.userNickname }">
 											<input type="button" class="deleteReview" value="&#xf2ed"
@@ -567,6 +568,7 @@ body {
 												id="${review.reviewContent }" value="&#xf304" value2=${review.reviewNo } 
 												style="float: right; margin-right: 5px">
 										</c:if>
+									</c:if>
 									</c:if>
 								</div>
 							</div>
@@ -701,7 +703,6 @@ $(document).on('click','.uptrev',function() {
             },
             success : function(request) {
                 
-					alert("삭제 성공~");				           
                     location.reload();
                     	
                     }
