@@ -519,7 +519,6 @@ div.emptyProd{
 			      <button class="theme themeMk" value="mk">밀키트</button>
 			    </nav>
 	    
-          		<button type="button" class="updateuser">회원정보수정 진행중</button>
           
       			<div class="center btmspace-50">
       
