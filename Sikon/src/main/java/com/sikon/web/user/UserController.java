@@ -374,7 +374,7 @@ public class UserController {
 	
 	@RequestMapping( value="updateUser", method=RequestMethod.POST )
 	public String updateUser( @ModelAttribute("user") User user ,
-			@RequestParam(value="licenseNo", defaultValue="0") int[] licenseNo,
+			@RequestParam(value="licenseNo", required=false) int[] licenseNo,
 			@RequestParam(value="licenseName",  required=false) String[] licenseName,
 			@RequestParam(value="licenseInstitution", required=false) String[] licenseInstitution,
 			@RequestParam(value="licenseDate", required=false) String[] licenseDate,
@@ -389,6 +389,8 @@ public class UserController {
 		
 		System.out.println(user.getAddr());
 		
+		
+		System.out.println("======================");
 		System.out.println("======================");
 		for(int no : licenseNo) {
 			System.out.println("licenseNo: "+no);
@@ -425,9 +427,11 @@ public class UserController {
 			License license = new License();
 			license.setLicenseName(licenseName[j]);
 			license.setLicenseInstitution(licenseInstitution[j]);
-			System.out.println("아아아"+licenseDate[j].substring(0,10));
-			license.setLicenseDate(licenseDate[j].substring(0,10));
+			System.out.println("아아아"+licenseDate[j]);
+			license.setLicenseDate(licenseDate[j]);
+			System.out.println("===== 여기는 되고 =====");
 			license.setLicenseNo(licenseNo[j]);
+			System.out.println("===== 여기는 안될듯 =====");
 			license.setUserId(user.getUserId());
 			list.add(license);
 			System.out.println("license="+license);
@@ -438,10 +442,11 @@ public class UserController {
 			Career career = new Career();
 			career.setCompany(company[m]);
 			career.setCareerExperience(careerExperience[m]);
-			career.setStartDate(startDate[m].substring(0,10));
-			career.setEndDate(endDate[m].substring(0,10));
+			career.setStartDate(startDate[m]);
+			career.setEndDate(endDate[m]);
 			career.setCareerNo(careerNo[m]);
 			career.setUserId(user.getUserId());
+			System.out.println("career");
 			list2.add(career);
 			System.out.println("career="+career);
 		}
@@ -553,7 +558,7 @@ public class UserController {
 		userService.backUserRole(userId, mentorApply);
 		
 		
-		return "redirect:/user/Navigation.jsp";
+		return "redirect:/user/Navigation2.jsp";
 	}
 	
 	@RequestMapping( value="listUser" )
