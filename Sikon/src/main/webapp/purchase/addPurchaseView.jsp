@@ -271,7 +271,7 @@ html input[type=button]:hover{
 			var express=3000;
 			
 			
-			var quantity = 0;
+			var quantity = Number("${quantity}");
 			var price = Number("${product.prodDisPrice}");
 			
 			console.log("ÃÑ »óÇ°±Ý¾×: "+price);
@@ -283,7 +283,7 @@ html input[type=button]:hover{
 			$( "#earnPoint" ).val(earnpoint);
 			$("#totalProdPrice").val(price);
 			$("#totalDivyFee").val(express);
-			$("#totalpayment").val(price+express);
+			$("#totalpayment").val((price*quantity)+express);
 			
 			$("#usingpoint").val(applypoint);
 			$("#couponuse").val(applycoupon);
@@ -336,7 +336,7 @@ html input[type=button]:hover{
 				allpoint = $(this).val();
 				var ttpay = $("#totalpayment").val();
 				
-					if(allpoint-(price+express) >= 0){
+					if(allpoint-((price*quantity)+express) >= 0){
 						
 						$( "#usedPoint" ).val(ttpay);
 						$("#usingpoint").val(ttpay);
