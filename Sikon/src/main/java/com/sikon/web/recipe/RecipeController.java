@@ -259,12 +259,11 @@ public class RecipeController {
 	}
 
 	@RequestMapping(value = "listRecipe")
-	public String listRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
-			throws Exception {
+	public String listRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request) throws Exception {
 		System.out.println("ahsi¸ð³Ä°í!!!!!!!!!!!!!!"+search);
 
 		System.out.println("/recipe/listRecipe :  POST/get");
-		System.out.println("search"+search);
+		System.out.println("search"+search.getOrderCondition());
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
