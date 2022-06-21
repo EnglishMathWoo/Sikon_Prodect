@@ -148,23 +148,29 @@
         </thead>
        
 		<tbody>
-		
-		  <c:set var="i" value="0" />
-		  <c:forEach var="user" items="${list}">
-			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="left">${ i }</td>
-			  <td align="left" value1="${user.role}"
-			  				   value2="${user.mentorApply}"
-			  		title="Click : 회원정보 확인">${user.userId}</td>
-			  <td align="left">${user.userName}</td>
-			  <td align="left">${user.userNickname}</td>
-			</tr>
-          </c:forEach>
-        
+			<c:if test="${!empty list}">
+			  <c:set var="i" value="0" />
+			  <c:forEach var="user" items="${list}">
+				<c:set var="i" value="${ i+1 }" />
+				<tr>
+				  <td align="left">${ i }</td>
+				  <td align="left" value1="${user.role}"
+				  				   value2="${user.mentorApply}"
+				  		title="Click : 회원정보 확인">${user.userId}</td>
+				  <td align="left">${user.userName}</td>
+				  <td align="left">${user.userNickname}</td>
+				</tr>
+	          </c:forEach>
+        	</c:if>
         </tbody>
       
       </table>
+      
+       <c:if test="${empty list}">
+       		<br>
+	      	<h3 style="text-align: center;">회원 정보가 없습니다.</h3>
+	      	<br>
+	   </c:if>
 	  
 	 </div>
  	
