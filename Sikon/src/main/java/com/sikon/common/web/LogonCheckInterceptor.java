@@ -60,9 +60,10 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 			//==> 로그인 시도 중.....
 			String uri = request.getRequestURI();
 			if(		uri.indexOf("addUserView") != -1 	|| 	uri.indexOf("addUser") != -1 || 
-					uri.indexOf("loginView") != -1 			||	uri.indexOf("login") != -1 		|| 
-					uri.indexOf("checkDuplication") != -1 || uri.indexOf("listRecipe") != -1  
-					||uri.indexOf("listProduct") != -1 || uri.indexOf("getProduct") != -1   ){
+					uri.indexOf("loginView") != -1 			||	uri.indexOf("login") != -1 		|| uri.indexOf("mailCheck") != -1 		|| 
+					uri.indexOf("checkId") != -1 ||uri.indexOf("checkNickname") != -1 || uri.indexOf("listRecipe") != -1  
+					||uri.indexOf("listProduct") != -1 || uri.indexOf("getProduct") != -1
+					|| uri.indexOf("kakaoLogin") != -1 ){
 //				System.out.println("[ 로그 시도 상태 .... ]");
 //				System.out.println("[ LogonCheckInterceptor end........]\n");
 				return true;

@@ -242,9 +242,12 @@ margin-bottom: 10px;
 		
 		  $("form").attr("method", "POST").attr("action","/review/updateReview").submit();
 		  setTimeout(function() {   
-	             window.close();
-
-	          }, 3);
+				opener.parent.location.reload();
+	         }, 5);
+			
+			setTimeout(function() {   
+	            window.close();
+	         }, 3);
 	      }
 	
 	// 이미지 미리보기

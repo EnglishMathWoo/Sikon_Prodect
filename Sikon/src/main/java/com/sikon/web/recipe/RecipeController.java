@@ -161,6 +161,7 @@ public class RecipeController {
 
 		// 레시피+재료를 list로 한 번에 받음
 		List<Recipe> list = recipeService.getRecipe(recipeNo);
+		
 		String category="REC";
 		Map map=reviewService.getReviewList(search, category, recipeNo);
 		
@@ -179,7 +180,7 @@ public class RecipeController {
 			rankingService.addRecipeView(recipeNo);
 		}
 		
-		model.addAttribute("recipe", list.get(0));
+		model.addAttribute("recipe", recipe);
 		model.addAttribute("recipeViews", recipe.getRecipeViews());
 		model.addAttribute("list", list);
 		model.addAttribute("review", map.get("list"));
@@ -250,6 +251,9 @@ public class RecipeController {
 		map.put("list", list);
 
 		recipeService.updateRecipe(recipe, map);
+		
+		model.addAttribute("recipe",recipe);
+		model.addAttribute("list",list);
 
 		return "forward:/recipe/getRecipe.jsp";
 	}
@@ -260,7 +264,7 @@ public class RecipeController {
 		System.out.println("ahsi모냐고!!!!!!!!!!!!!!"+search);
 
 		System.out.println("/recipe/listRecipe :  POST/get");
-		System.out.println("왜0임"+search.getCurrentPage());
+		System.out.println("search"+search);
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -270,6 +274,47 @@ public class RecipeController {
 			search.setSearchCondition("0");
 		}
 
+		if(search.getThemeCondition() == "all") {
+			search.setThemeCondition(null);
+		}
+		
+		search.setPageSize(pageSize);
+
+
+		// Business logic 수행
+		Map<String, Object> map = recipeService.getRecipeList(search);
+
+		
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+
+		// Model 과 View 연결
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+
+		return "forward:/recipe/listRecipe.jsp";
+	}
+	
+	@RequestMapping(value = "manageRecipe")
+	public String manageRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
+			throws Exception {
+
+		System.out.println("/recipe/listRecipe :  POST/get");
+
+
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		
+		if(search.getSearchCondition()==null) {
+			search.setSearchCondition("0");
+		}
+
+		if (search.getOrderCondition() == null) {
+			search.setOrderCondition("0");
+		}
+		
 		if(search.getThemeCondition() == "all") {
 			search.setThemeCondition(null);
 		}
@@ -290,50 +335,8 @@ public class RecipeController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 
-		return "forward:/recipe/listRecipe.jsp";
+		return "forward:/recipe/manageRecipe.jsp";
 	}
-	
-//	@RequestMapping(value = "manageRecipe")
-//	public String manageRecipe(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
-//			throws Exception {
-//
-//		System.out.println("/recipe/listRecipe :  POST/get");
-//
-//
-//		if (search.getCurrentPage() == 0) {
-//			search.setCurrentPage(1);
-//		}
-//		
-//		if(search.getSearchCondition()==null) {
-//			search.setSearchCondition("0");
-//		}
-//
-//		if (search.getOrderCondition() == null) {
-//			search.setOrderCondition("0");
-//		}
-//		
-//		if(search.getThemeCondition() == "all") {
-//			search.setThemeCondition(null);
-//		}
-//		
-//
-//		search.setPageSize(pageSize);
-//
-//
-//		// Business logic 수행
-//		Map<String, Object> map = recipeService.getRecipeList(search);
-//
-//		
-//		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
-//				pageSize);
-//
-//		// Model 과 View 연결
-//		model.addAttribute("list", map.get("list"));
-//		model.addAttribute("resultPage", resultPage);
-//		model.addAttribute("search", search);
-//
-//		return "forward:/recipe/manageRecipe.jsp";
-//	}
 
 	// 내가 쓴 레시피(마이페이지)
 	@RequestMapping(value = "listMyRecipe")
