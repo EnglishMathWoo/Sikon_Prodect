@@ -15,6 +15,7 @@ public class Apply {
 	private String receiverPhone;
 	private String reviewStatus;
 	private int total;
+	private String impNumber;
 	
 	public Apply() {
 	
@@ -100,13 +101,22 @@ public class Apply {
 		this.total = total;
 	}
 
+	public String getImpNumber() {
+		return impNumber;
+	}
+
+	public void setImpNumber(String impNumber) {
+		this.impNumber = impNumber;
+	}
+
 	@Override
 	public String toString() {
 		return "Apply [applyNo=" + applyNo + ", classCook=" + classCook + ", applier=" + applier + ", paymentOption="
 				+ paymentOption + ", applyStatus=" + applyStatus + ", cookStatus=" + cookStatus + ", checkDate="
 				+ checkDate + ", receiverPhone=" + receiverPhone + ", reviewStatus=" + reviewStatus + ", total=" + total
-				+ "]";
+				+ ", impNumber=" + impNumber + "]";
 	}
+
 
 
 
