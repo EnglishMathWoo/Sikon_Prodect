@@ -46,393 +46,74 @@
 
 
 <style>
-
 div.container {
 	padding-top: 200px;
 	
 }
 
-#usik{
-width:38px;
-height:38px;
+.btn-w {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+  width:100px;
+  font-size: small;
 }
 
-body {
-  padding: 0;
-  margin: 0; }
-
-a {
-  transition: .3s; }
-  a:hover {
-    text-decoration: none; }
-
-select {
-  cursor: pointer; }
-
-.btn {
-  font-weight: 700;
-  -webkit-font-smoothing: antialiased; }
-
-.btn-primary {
-  background-color: #ff8a3d;
-  border-color: #ff8a3d; }
-  .btn-primary:hover, .btn-primary:active {
-    background-color: #DF732D !important;
-    border-color: #DF732D !important; }
-  .btn-primary:focus, .btn-primary:active {
-    box-shadow: 0 0 0 0.2rem #FFC13D !important; }
-
-.btn-light {
-  color: #ff8a3d;
-  background-color: #F7F7FB; }
-  .btn-light:hover, .btn-light:active {
-    color: #DF732D;
-    background-color: #FFEADD !important;
-    border-color: #FFEADD !important; }
-  .btn-light:focus, .btn-light:active {
-    color: #DF732D !important;
-    background-color: #FFEADD !important;
-    border-color: #FFEADD !important;
-    box-shadow: none !important; }
-
-.text-muted {
-  color: #98A8B9 !important; }
-
-.form-group {
-  margin-bottom: 24px; }
-  .form-group > label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 4px; }
-
-.form-control::-webkit-input-placeholder {
-  /* Edge */
-  color: #CDD7E0; }
-.form-control:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #CDD7E0; }
-.form-control::placeholder {
-  color: #CDD7E0; }
-
-.form-check-inline {
-  margin-right: 24px; }
-
-.form-check-label {
+.btn-b {
   cursor: pointer;
-  line-height: 1; }
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+  width:100px;
+  font-size: small;
+}
+    </style>
+    
+ <style>
 
-.modal .modal-header,
-.modal .modal-body,
-.modal .modal-footer {
-  padding: 24px;
-  border: 0; }
-.modal .modal-title {
-  font-weight: 700; }
+.pltitle{
+	text-align: center;
+	color: #937062;
+	padding-top: 35px;
+}
 
-.container-sm {
-  max-width: 680px; }
-
-.form-control {
-  border-color: #E9ECF3; }
-
-.fixed-top + .container {
-  padding-top: 120px; }
-
-footer {
-  margin-top: 80px;
-  padding: 80px 0;
-  border-top: 1px solid #E9ECF3;
-  background-color: #FBFBFD;
-  color: #98A8B9; }
-  footer a {
-    color: #263747;
-    font-weight: 700; }
-    footer a:hover {
-      color: #ff8a3d; }
-  footer a, footer h6 {
-    font-size: 14px;
-    line-height: 1.6; }
-
-@media (min-width: 576px) {
-  .container-sm ~ footer .container {
-    max-width: 680px; } }
-
-.nav-global {
-  background-color: white;
-  box-shadow: 0 3px 5px rgba(20, 20, 50, 0.12);
-  padding-top: 12px;
-  padding-bottom: 12px;
-  height: 71px; }
-  .nav-global .navbar-brand {
-    display: inline-flex;
-    font-size: 20px;
-    line-height: 1;
-    color: #ff8a3d;
-    font-weight: 700; }
-    .nav-global .navbar-brand i {
-      font-size: 20px; }
-  .nav-global .img-brand {
-    transform: translateY(-3px); }
-  .nav-global .navbar-nav {
-    flex-direction: row; }
-    .nav-global .navbar-nav .nav-item + .nav-item {
-      margin-left: 16px; }
-    .nav-global .navbar-nav .nav-item a, .nav-global .navbar-nav .nav-item button {
-      transition: .3s;
-      display: inline-flex;
-      vertical-align: middle;
-      color: white;
-      padding: 4px 16px;
-      border-radius: 3px;
-      background-color: #ff8a3d;
-      border: 0; }
-      .nav-global .navbar-nav .nav-item a:hover, .nav-global .navbar-nav .nav-item button:hover {
-        background-color: #DF732D; }
-      .nav-global .navbar-nav .nav-item a:focus, .nav-global .navbar-nav .nav-item button:focus {
-        outline: none; }
-      .nav-global .navbar-nav .nav-item a i, .nav-global .navbar-nav .nav-item button i {
-        font-size: 20px; }
-
-.nav-global-sign {
-  box-shadow: none; }
-
-.container-headline {
-  font-size: 32px;
-  text-align: center;
-  margin: 0; }
-  .container-headline::after {
-    content: '';
-    width: 80px;
-    height: 2px;
-    background-color: #ff8a3d;
-    display: block;
-    margin: 40px auto; }
-
-.categories-group {
-  text-align: center; }
-  .categories-group .btn-category {
-    padding: 4px 20px;
-    border-radius: 100px;
-    border: 1px solid #E9ECF3;
-    margin-bottom: 8px; }
-    @media (max-width: 767px) {
-      .categories-group .btn-category {
-        padding: 2px 16px;
-        font-size: 14px; } }
-    .categories-group .btn-category:hover {
-      color: #ff8a3d;
-      background-color: #FBFBFD; }
-    .categories-group .btn-category:focus {
-      box-shadow: none; }
-
-.list-products {
-  list-style: none;
-  padding: 0;
-  margin-top: 40px; }
-  .list-products .list-products-item {
-    padding-bottom: 30px; }
-    @media (max-width: 767px) {
-      .list-products .list-products-item {
-        padding-bottom: 16px; }
-        .list-products .list-products-item + .list-products-item {
-          border-top: 1px solid #E9ECF3;
-          padding-top: 16px; } }
-  .list-products a {
-    transition: .3s;
-    display: block;
-    color: #263747; }
-    @media (min-width: 768px) {
-      .list-products a:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 16px -8px rgba(20, 20, 50, 0.12); } }
-  .list-products .card {
-    border: 0;
-    box-shadow: inset 0 0 0 1px #E9ECF3; }
-    .list-products .card .card-img-top {
-      box-shadow: inset 0 0 0 1px rgba(20, 20, 50, 0.12); }
-    .list-products .card .title {
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1.4;
-      min-height: 72px; }
-    .list-products .card .category {
-      font-size: 14px;
-      margin-bottom: 0;
-      display: inline-block;
-      color: #98A8B9; }
-    .list-products .card time {
-      float: right; }
-    .list-products .card .price {
-      color: #ff8a3d;
-      font-weight: 700; }
-    .list-products .card .text-muted {
-      font-size: 14px;
-      background-color: transparent;
-      border-top: 0;
-      padding-top: 0; }
-    @media (max-width: 767px) {
-      .list-products .card {
-        flex-direction: row;
-        box-shadow: none; }
-        .list-products .card .card-img-top {
-          min-width: 80px;
-          max-width: 80px;
-          min-height: 80px;
-          max-height: 80px; }
-        .list-products .card .card-body {
-          padding-top: 0;
-          padding-bottom: 0; }
-        .list-products .card .title {
-          min-height: unset; }
-        .list-products .card .text-muted {
-          padding-bottom: 0; } }
-
-.container-detail img {
-  border-radius: 3px; }
-.container-detail .product-title {
-  margin-top: 40px;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.4; }
-.container-detail .product-price {
-  margin-top: 12px;
-  font-size: 20px;
-  font-weight: 700;
-  color: #ff8a3d; }
-.container-detail .list-product-information {
-  list-style: none;
-  margin-top: 24px;
-  padding: 0;
-  border-top: 1px solid #E9ECF3;
-  font-size: 0; }
-  .container-detail .list-product-information .list-item {
-    display: inline-block;
-    width: 50%;
-    font-size: 12px;
-    color: #98A8B9;
-    padding: 8px 0;
-    border-bottom: 1px solid #E9ECF3; }
-    .container-detail .list-product-information .list-item span {
-      display: block;
-      color: #263747;
-      font-weight: 700;
-      font-size: 16px; }
-.container-detail .description {
-  margin-top: 40px; }
-  .container-detail .description p {
-    font-size: 16px;
-    line-height: 1.8; }
-
-.btn-filter {
-  position: relative; }
-  .btn-filter.active::after {
-    content: '';
-    position: absolute;
-    right: -2px;
-    top: -2px;
-    width: 8px;
-    height: 8px;
-    border-radius: 10px;
-    border: 2px solid white;
-    background-color: #ff8a3d;
-    box-shadow: 0 0 0 2px #ff8a3d; }
-
-.modal-filter .slider {
-  display: block;
-  width: calc(100% - 16px);
-  margin: 0 8px; }
-  .modal-filter .slider .slider-track-low,
-  .modal-filter .slider .slider-track-high,
-  .modal-filter .slider .slider-handle,
-  .modal-filter .slider .slider-selection {
-    background-image: none;
-    box-shadow: none; }
-  .modal-filter .slider .slider-track-low, .modal-filter .slider .slider-track-high {
-    background-color: #E9ECF3; }
-  .modal-filter .slider .slider-handle {
-    background-color: #ff8a3d;
-    cursor: pointer;
-    background-image: none; }
-    .modal-filter .slider .slider-handle:hover {
-      background-color: #DF732D;
-      box-shadow: 0 0 0 3px #DF732D; }
-    .modal-filter .slider .slider-handle:focus {
-      outline: none; }
-  .modal-filter .slider .slider-selection {
-    background-color: #FFC13D;
-    box-shadow: none; }
-
-.file-box input[type="file"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0; }
-
-.file-box label {
-  margin-bottom: 0;
-  cursor: pointer; }
-
-.file-box .upload-name {
-  margin-right: 12px;
-  display: inline-block;
-  padding: 9px 12px;
-  font-size: inherit;
-  font-family: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #FBFBFD;
-  border: 1px solid #E9ECF3;
-  border-radius: 3px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; }
-
-.form-car-smoking > label {
-  color: #98A8B9;
-  margin-bottom: 12px; }
-
-.form-item-create .btn-submit {
-  display: block;
-  margin: 80px auto 0; }
-
-.container-sign {
-  max-width: 400px; }
-
-.form-sign {
-  margin: 80px 0;
-  padding: 16px;
-  border-radius: 16px; }
-
-.form-headline {
-  text-align: center;
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 24px; }
-
-.txt-terms {
-  margin-top: 56px;
-  text-align: center;
-  font-size: 14px;
-  color: #98A8B9; }
-  .txt-terms a {
-    color: #263747; }
-    .txt-terms a:hover {
-      color: #ff8a3d; }
 
 /*# sourceMappingURL=style.css.map */
-    </style>
+    </style>   
 	<script type="text/javascript">
 
 
 
 function fncUpdateCook(){
 
+	var startDate = $("input[name='aplstarTime']").val();
+	var endDate = $("input[name='aplendTime']").val();
+	var cookStock = $("input[name='cookStock']").val();
+	var cookRecruit = $("input[name='cookRecruit']").val();
 	
-		
+	if (cookStock != cookRecruit) {
+		alert("신청가능인원과 모집인원은 같아야합니다");
+		return;
+	}	
+	
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = ('0' + (today.getMonth() + 1)).slice(-2);
+	var day = ('0' + today.getDate()).slice(-2);
+	var dateString = year + '-' + month  + '-' + day;
+
+	if(dateString <= startDate && dateString+1 <= endDate && startDate <= endDate) {
+		$("form").attr("method", "POST").attr("enctype","multipart/form-data").attr("action", "/cook/addCook").submit();	
+	} else if(dateString > startDate) {
+		alert("모집시작기간은 금일 이후로 설정하셔야 합니다.")
+	} else if(dateString+1 > endDate) {
+		alert("모집종료기간은 익일 이후로 설정하셔야 합니다.")
+	} else if (startDate > endDate ) {
+		alert("모집시작기간은 모집종료기간 이후로 설정하셔야 합니다.")
+	}		
 
 
 	//$("form").attr("method" , "POST").attr("action" , "/cook/updatecook").submit();	
@@ -444,7 +125,7 @@ function fncUpdateCook(){
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
-	$( "button.btn.btn-primary" ).on("click" , function() {
+	$( ".btn-b" ).on("click" , function() {
 		//Debug..
 		//alert(  $( "td.ct_btn01:contains('수정')" ).html() );
 		fncUpdateCook();
@@ -549,7 +230,8 @@ $(document).ready(function() {
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
- <h5 class="container-headline">식탁의 온도</h5>
+  <h3 class="pltitle">| 쿠킹클래스 수정 |</h3>
+   <br><br>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" enctype="multipart/form-data">
@@ -733,24 +415,26 @@ $(document).ready(function() {
 		    </div>
 		  </div>
 
-    <div class="container">
- 		 <textarea class="summernote" id ="summernote" name="cookContent" value="${cook.cookContent}"></textarea>    
+   <div class="form-group">
+ 		 <textarea class="summernote" id ="summernote" name="cookContent">${cook.cookContent}</textarea>    
 		</div>		  
 	
 		  
-		
-		  
-		  <div class="form-group">
+				  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >수&nbsp;정</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+		    
+			
+			  	<button type="button" class="btn-b">수정</button>
+	
 		    </div>
 		  </div>
+		  
+
 		</form>
-		<!-- form Start /////////////////////////////////////-->
+
 		
  	</div>
-	<!--  화면구성 div end /////////////////////////////////////-->
+
 	
 </body>
 

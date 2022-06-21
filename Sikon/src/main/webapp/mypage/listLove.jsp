@@ -203,13 +203,10 @@ padding-top:0px;
 	 $(function() {
 			
 			$( ".imgover" ).on("click" , function() {
-				
-			var mentorId = $("input[name='mentorId']").val();
-			
-			alert(mentorId);
+		
 				
 			console.log($(this).attr("value"));
-			 self.location = "/cook/mentor?mentorId="+mentorId;
+			 self.location = "/cook/mentor?mentorId="+$(this).attr("value");
 			});
 			
 				
@@ -285,7 +282,7 @@ padding-top:0px;
     <div id="latest" class="group">
  
       <article class="one_third first">
-      <a class="imgover"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" id="mentor" style="border: 1px solid #d7d7d7"></a>
+      <a class="imgover"  value="${love.user.userId}"  href="#"><img src="/resources/images/uploadFiles/${love.user.userImage }" id="mentor" style="border: 1px solid #d7d7d7"></a>
         <div class="excerpt">
           <h4 class="heading" >${love.user.userName }</h4>
           

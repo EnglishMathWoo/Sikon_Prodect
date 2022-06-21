@@ -520,7 +520,7 @@ p {
 
 	<form class="form-inline" name="detailForm">
 
-        <div class="card "> <img class="card-img-top" src="/resources/images/homedeco/main06.jpg" alt="Card image cap" width="100%">
+        <div class="card "> <img class="card-img-top" src="/resources/images/uploadFiles/965.png" alt="Card image cap" width="80%">
             <div class="card-body little-profile text-center">
                 <div class="pro-img"><img src="/resources/images/uploadFiles/${mentor.userImage}" alt="user"></div>
                 <h3 class="m-b-0">${mentor.userNickname}의 쿠킹클래스</h3>             

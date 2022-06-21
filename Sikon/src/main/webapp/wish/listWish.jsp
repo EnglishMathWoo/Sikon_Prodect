@@ -314,7 +314,7 @@ div{
 		
 			  
 			  <div class="col-md-1 text-center boxselect">
-			  	<input type="checkbox" class="checkbuy"  name="wishNo" value="${wish.wishNo}"/>	
+			 
 			  	
 			  </div>
 			  
@@ -346,7 +346,7 @@ div{
 				</c:otherwise>
 		    	</c:choose>	    
 
-						co
+						
 				&emsp;&emsp;${wish.wishCook.cookName}&emsp;&emsp;
 				
 				<button class="delete deletebtn" value="${wish.wishNo}">X</button>

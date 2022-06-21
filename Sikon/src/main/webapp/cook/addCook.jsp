@@ -142,15 +142,19 @@ div.container {
 		
 		var cookName = $("input[name='cookName']").val();
 		var cookBrief = $("input[name='cookBrief']").val();
-		var aplstarTime = $("input[name='aplstarTime']").val();
-		var aplendTime = $("input[name='aplendTime']").val();
+		var startDate = $("input[name='aplstarTime']").val();
+		var endDate = $("input[name='aplendTime']").val();
 		var startTime = $("input[name='startTime']").val();
 		var endTime = $("input[name='endTime']").val();
 		var cookRegdate = $("input[name='cookRegdate']").val();
 		
 		var cookStock = $("input[name='cookStock']").val();
+		var cookRecruit = $("input[name='cookRecruit']").val();
 	
-	
+		if (cookStock != cookRecruit) {
+			alert("신청가능인원과 모집인원은 같아야합니다");
+			return;
+		}
 		
 		
 
@@ -168,11 +172,22 @@ div.container {
 			alert("재고는 반드시 입력하셔야 합니다.");
 			return;
 		}
-		
-		
 
-		$("form").attr("method", "POST").attr("enctype","multipart/form-data").attr("action", "/cook/addCook").submit();	
-		
+		var today = new Date();
+		var year = today.getFullYear();
+		var month = ('0' + (today.getMonth() + 1)).slice(-2);
+		var day = ('0' + today.getDate()).slice(-2);
+		var dateString = year + '-' + month  + '-' + day;
+
+		if(dateString <= startDate && dateString+1 <= endDate && startDate <= endDate) {
+			$("form").attr("method", "POST").attr("enctype","multipart/form-data").attr("action", "/cook/addCook").submit();	
+		} else if(dateString > startDate) {
+			alert("모집시작기간은 금일 이후로 설정하셔야 합니다.")
+		} else if(dateString+1 > endDate) {
+			alert("모집종료기간은 익일 이후로 설정하셔야 합니다.")
+		} else if (startDate > endDate ) {
+			alert("모집시작기간은 모집종료기간 이후로 설정하셔야 합니다.")
+		}		
 	}
 	
 
