@@ -604,12 +604,12 @@ $(document).ready(function() {
 		    <label for="aplstarTime" class="col-sm-offset-1 col-sm-3 control-label">모집기간</label>
 		    <div class="col-sm-2">
 		    
-		      <input type="DATE" class="form-control" id="aplstarTime" name="aplstarTime"value="${cook.aplstarTime}" placeholder="모집시작기간">
+		      <input type="DATE" class="form-control" id="aplstarTime" name="aplstarTime" value="${cook.aplstarTime}" placeholder="모집시작기간">
 		 
 		  </div>		  
 
 		    <div class="col-sm-2">
-		      <input type="DATE" class="form-control" id="aplendTime" name="aplendTime"value="${cook.aplendTime}" placeholder="모집종료기간">
+		      <input type="DATE" class="form-control" id="aplendTime" name="aplendTime" value="${cook.aplendTime}" placeholder="모집종료기간">
 		    </div>
 		  </div>
 		  

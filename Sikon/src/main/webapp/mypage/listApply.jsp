@@ -372,7 +372,27 @@ a.payback:hover{
 			  	<tr>
 						
 					<td align="left" class="image" value="${apply.classCook.cookNo }">	
-						<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename.split('/')[0]}" width="85" height="85" align="absmiddle"/>
+									 	<c:choose>
+		    	<c:when test="${apply.classCook.cookFilename.contains('/')}">
+						<c:choose>
+						<c:when test="${apply.classCook.cookFilename.contains('mp4')}">
+							<c:forEach var="name" items="${apply.classCook.cookFilename.split('/')}">
+								<video width="100" height="100" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+							</c:forEach>
+						</c:when>
+						
+						<c:otherwise>
+							<c:forEach var="name" items="${apply.classCook.cookFilename.split('/')}">
+								<img src="/resources/images/uploadFiles/${name}" width="100" height="100" align="absmiddle"/>
+								<input type="hidden" name="image" value="${name }"/>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
+				</c:when>
+				<c:otherwise>
+					<img src="/resources/images/uploadFiles/${apply.classCook.cookFilename}" width="100" height="100" align="absmiddle" class="image" value="${prodThumbnail}"/>
+				</c:otherwise>
+		    	</c:choose>	    
 					</td>
 					<td align="left" class="cookcontent">
 						<p class="cookName">${ apply.classCook.cookName }</p>
@@ -453,7 +473,7 @@ a.payback:hover{
 							<td align="left"  class="cookcontent">
 								<p class="cookName">${ cook.cookName }</p>
 								<p>${ apply.classCook.cookPrice }원</p>
-								<p>신청인원 ${ apply.cookStatus }명</p>
+								<p>신청인원 : ${ apply.cookStatus }명</p>
 							</td>
 	
 							 
@@ -520,7 +540,7 @@ a.payback:hover{
 							<td align="left"  class="cookcontent">
 								<p class="cookName">${ apply.classCook.cookName }</p>
 								<p>${ apply.classCook.cookPrice }원</p>
-								<p>구매수량 ${ apply.cookStatus }개</p>
+								<p>신청인원 :  ${ apply.cookStatus }명</p>
 							</td>
 						<c:choose>
 							<c:when test="${apply.applyStatus.equals('200')}">

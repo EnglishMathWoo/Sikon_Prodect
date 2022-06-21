@@ -213,21 +213,25 @@ label{
 	
 	<div class="layout">
 			<br>
-				<h1 class="bg-defualt text-center">신청내역</h1><br>
+				<h1 class="bg-defualt text-center">| 신청내역 | </h1><br>
 				
 				<!-- form Start /////////////////////////////////////-->
 				<div>
-				  
+			<c:forEach var="apply" items="${applylist}" begin="0" end="0">				  
 				  <div class="subtitle">
 				  <p>신청정보</p>
 				  </div><br>
 				  	  
 				  <div class="form-group">
-				    <label for="userName">신청자 아이디</label>
-				     ${apply.applier.userId}
+				신청자 아이디 :  ${apply.applier.userId}
+				    
 				  </div>
+				  	</c:forEach>	
+			</div>
 				  
-			<br>
+				  
+			<div><br>
+				<c:forEach var="apply" items="${applylist}">		
 				  <div class="subtitle">
 				  <p>신청상품</p>
 				  </div><br>
@@ -270,11 +274,9 @@ label{
 					  </tr>
 				 </table>		 
 				</div>
-			</div>	  
-
-			<br>
-				  
-			<section class="paycontent">	    
+						<input type="hidden" class="cookStatus" value="${apply.cookStatus}" />
+				
+							<section class="paycontent">	    
 				  
 				  <div class="sectd">
 				  	<h5>총 상품금액</h5>
@@ -302,6 +304,12 @@ label{
 				  
 				  
 			</section>
+			</c:forEach>	
+			</div>	  
+			
+			<br>
+				  
+
 
 			<br><br>
 			<div class="text-center">

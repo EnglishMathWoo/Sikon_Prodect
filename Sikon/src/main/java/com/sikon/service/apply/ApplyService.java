@@ -12,23 +12,18 @@ public interface ApplyService {
 
 	public void addApply(Apply apply) throws Exception;
 
-	public Map<String, Object> getApplyList(Search search,String applierId) throws Exception;
-	
-	public Map<String , Object > getSaleList(Search search,User user) throws Exception;
+	public Map<String, Object> getApplyList(Search search, String applierId) throws Exception;
+
+	public Map<String, Object> getSaleList(Search search, User user) throws Exception;
 
 	public Apply getApply(int applyNo) throws Exception;
 
-	//public Map<String, Object> getApply(Search search,String applierId) throws Exception;
-	
 	public void updateApplyStatus(Apply apply) throws Exception;
-	
-	
-	
-	public void buyCook (int cookStatus, int applyNo ) throws Exception ;
-	
-	public void  cancel (int cookStatus, int applyNo ) throws Exception ;
-	
+
+	public void buyCook(int cookStatus, int applyNo) throws Exception;
+
+	public void cancel(int cookStatus, int applyNo) throws Exception;
+
 	public List<Apply> saleCount(Apply apply) throws Exception;
-	
-	
+
 }
