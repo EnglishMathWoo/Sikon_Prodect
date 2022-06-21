@@ -34,7 +34,6 @@
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 	body {
-		font-family: 'Nanum Myeongjo', serif;
         padding-top : 100px;
     }
        
@@ -52,6 +51,10 @@
 		
 	.soo {
 		padding-top : 170px;
+	}
+	
+	.container {
+		font-family: 'Nanum Myeongjo', serif;
 	}
 </style>
     

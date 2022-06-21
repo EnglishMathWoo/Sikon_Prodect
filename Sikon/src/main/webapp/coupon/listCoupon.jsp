@@ -54,7 +54,7 @@
 		background-color: #937062d4;
 	}
 	
-	body {
+	.container {
 		font-family: 'Nanum Myeongjo', serif;
 	}
 	        
@@ -161,7 +161,6 @@
 		</form>
 		
 		<p class="text-primary" align="left" style="color:gray">
-		<br>
 			전체  ${resultPage.totalCount} 건수, 현재 ${resultPage.currentPage} 페이지
 		</p>
 			

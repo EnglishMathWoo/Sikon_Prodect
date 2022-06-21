@@ -32,7 +32,7 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-	body {
+	.container {
 		font-family: 'Nanum Myeongjo', serif;
 	}
 	         
@@ -108,7 +108,6 @@
 				}
 			})
 			 
-			 
 		$("input[name=retrieveCheck]").click(function(){
 				
 			if($("#checkall").prop("checked")){
@@ -119,7 +118,6 @@
 		
 	 });	
 	 
-	
 	 //쿠폰 회수
 	 $(function() {
 			
@@ -159,10 +157,10 @@
 	    <form class="form-inline" id="detailForm">
 	                
 		<p class="text-primary" align="left" style="color:gray">
-		<br>
 			전체  ${resultPage.totalCount} 건수, 현재 ${resultPage.currentPage}  페이지
 		</p>
-			
+		
+		<br>
 		<select name="orderCondition" class="form-control" style="width:125px">
 			<option value="0"  ${ ! empty search.orderCondition && search.orderCondition==0 ? "selected" : "" }>-정렬하기-</option>
 			<option value="1"  ${ ! empty search.orderCondition && search.orderCondition==1 ? "selected" : "" }>사용가능</option>
