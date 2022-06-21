@@ -412,6 +412,7 @@ body {
 			type="hidden" name="userNickname" value="${user.userNickname}">
 
 
+		<c:if test="${user.userId == recipe.writer.userId}">
 		<div class="col-xs-12 col-md-12  col-lg-12" style="text-align: right">
 			<button type="button" class="update">수정</button>
 			<button type="button" class="submit">삭제</button>
@@ -420,7 +421,9 @@ body {
 		</div>
 
 		<hr />
-
+		</c:if>
+		
+		
 		<div class="col-xs-12 col-md-12  col-lg-12" style="text-align: center">
 		 <c:choose>
       <c:when test="${recipe.recipeImg.contains('mp4')}">
@@ -558,7 +561,7 @@ body {
 								<br /> <br />
 								<p id="acontent${review.reviewNo }">${review.reviewContent }</p>
 								<div id="abt${review.reviewNo }">
-							<c:if test="${!empty user}">
+
 									<c:if test="${user.userNickname !=null }">
 										<c:if test="${review.writerNickname == user.userNickname }">
 											<input type="button" class="deleteReview" value="&#xf2ed"
@@ -568,7 +571,6 @@ body {
 												id="${review.reviewContent }" value="&#xf304" value2=${review.reviewNo } 
 												style="float: right; margin-right: 5px">
 										</c:if>
-									</c:if>
 									</c:if>
 								</div>
 							</div>
@@ -798,9 +800,6 @@ $(document).on('click','.uptrev',function() {
 		              
 		                    if(bookmarkStatus == 0){
 		                    	
-		                  
-		                    	 
-		                    	 
 		                    	const Toast = Swal.fire({
 		                    	    toast: true,
 		                    	    icon: 'success',

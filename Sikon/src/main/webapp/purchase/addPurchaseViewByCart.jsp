@@ -736,7 +736,7 @@ function paymentCA(data) {
 				  
 				  <div class="sectd">
 				  	<h5 class="info">배송비</h5>
-				  	<div class="payment">+<input type="text" id="divyfee" value="" size=""  style="border:none;text-align:right">원</div>
+				  	<div class="payment">+<input type="text" id="divyfee" value="" size="" name="divyFee"" style="border:none;text-align:right">원</div>
 				  </div>
 				  
 				  <br>

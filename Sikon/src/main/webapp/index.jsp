@@ -299,14 +299,14 @@ padding:10px;
 
 /* weekly best*/
 .one>:nth-child(3)>:first-child{
-   background: url('https://lh3.googleusercontent.com/2mIHDvOzt17y9xXEEHzQQD3U-FD7JRtapZjLl007mvWLoIxLLbu4ewzvDh2sDWRQ3V-fYUx5OoMP66r35xrFrTIizy1cBvbyKzZ9Gy_ZLBmWoHuAyaxJRno=s0') no-repeat;
+   background: url('https://i.pinimg.com/564x/15/7a/c9/157ac9b07a978273f362f876cf3dfc35.jpg') no-repeat;
   background-size: cover;
   background-position: center center;
   position: relative;
 }
 
 .one>:nth-child(3)>:last-child{
-   background: url('https://lh3.googleusercontent.com/bypbEJb2H2lZG0H4VD1gn18tdThA0eqp1bfnJP1MzLDE4kwGGCpWC39Z9bnpGX98tIFDZH_1ro-fNIRoBfHOgElAWdcIuUyFvJT0bbR8wv5eyq-UCMA-=s0') no-repeat;
+   background: url('https://i.pinimg.com/564x/c8/6d/12/c86d12d78aa8eac81cfef42eae303053.jpg') no-repeat;
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -576,7 +576,7 @@ footer img:hover{
     <article class="top">▲</article>
     
     <article class="one">
-        <h2>오늘의 추천 레시피</h2>
+        <h2>RECIPES FOR YOU</h2>
         <p></p>
       
       <div>

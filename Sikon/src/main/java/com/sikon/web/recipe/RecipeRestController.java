@@ -55,11 +55,10 @@ public class RecipeRestController {
 
 		System.out.println("/recipe/json/listRecipe : POST");
 		// Business Logic
-		System.out.println("¤·±â¿¡¤Ë!!!!!!!!!!!!!!"+search);
+		System.out.println("search"+search);
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
-		System.out.println("orderCondition=" + search.getOrderCondition());
 
 		if (search.getSearchCondition() == null) {
 			search.setSearchCondition("0");
@@ -68,6 +67,8 @@ public class RecipeRestController {
 		if (search.getThemeCondition() == "all") {
 			search.setThemeCondition(null);
 		}
+		//search.setOrderCondition(search.getOrderCondition().replace(",", ""));
+
 		System.out.println("orderCondition=" + search.getOrderCondition());
 
 		search.setPageSize(pageSize);

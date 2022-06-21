@@ -76,6 +76,14 @@
 		}
 		
 		$("form").attr("method" , "POST").attr("action" , "/user/updateUserpw").submit();
+		setTimeout(function() {   
+			opener.parent.location.reload();
+         }, 5);
+		
+		setTimeout(function() {   
+			alert("수정완료");
+            window.close();
+         }, 3);
 	}
 	
 /*	
