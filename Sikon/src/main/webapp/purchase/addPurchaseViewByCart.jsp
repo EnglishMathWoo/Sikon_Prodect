@@ -396,18 +396,22 @@ html input[type=button]:hover{
 			
 				if($("#paybyca").prop("checked")){
 					
-					alert('card');
 					$("input[name=paymentOpt]").val("CA");
-					alert($("input[name=paymentOpt]").val());
 					paymentCA();
 					
 				}else{
-					alert('kakao');
+
 					$("input[name=paymentOpt]").val("KA");
-					alert($("input[name=paymentOpt]").val());
 					paymentKA();
 					
 				}
+				
+				
+				if($("#totalpayment").val()<100){
+					alert('최소결제금액은 100원입니다.');
+					return null;
+				}
+				
 		});
 	});	
 	
