@@ -390,27 +390,10 @@ $(function() {
 				  <table style="width: 100%">
 					  <tr>
 						<td class="imagetd">
-								<c:choose>
-		    	<c:when test="${wish.wishCook.cookFilename.contains('/')}">
-						<c:choose>
-						<c:when test="${wish.wishCook.cookFilename.contains('mp4')}">
-							<c:forEach var="name" items="${wish.wishCook.cookFilename.split('/')}">
-								<video width="300" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
-							</c:forEach>
-						</c:when>
-						
-						<c:otherwise>
-							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
-								<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
-								<input type="hidden" name="image" value="${name }"/>
-							</c:forEach>
-						</c:otherwise>
-						</c:choose>
-				</c:when>
-				<c:otherwise>
-					<img src="/resources/images/uploadFiles/${wish.wishCook.cookFilename}" width="300" height="300" align="absmiddle" class="image" value="${prodThumbnail}"/>
-				</c:otherwise>
-		    	</c:choose>	    
+			
+						    <c:forEach var="name" items="${wish.wishCook.cookFilename.split('/')[0]}">
+							<img src="/resources/images/uploadFiles/${name}" class="image" width="100" height="100">
+							</c:forEach>  
 						</td>
 						<td class="content">
 							<p style="font-weight: bold;font-size: 15px">${wish.wishCook.cookName}</p>
@@ -480,10 +463,7 @@ $(function() {
 				  </div><br>
 				  
 				 
-				 <div class="form-group">
-				    <label for="usedCoupon">결제 날짜</label>
-<input type="date" class="form-control" id="checkDate" name="checkDate" placeholder="결제날짜" value="${apply.checkDate}" >
-				  </div>
+
 		  		  				  			
 
 	  

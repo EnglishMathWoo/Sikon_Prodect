@@ -71,7 +71,7 @@ $(function() {
 	 $( "button:contains('확인')" ).on("click" , function() {
 		 
 		 
-		 self.location = "/cook/listCook.jsp?menu=search"
+		 self.location = "/cook/listCook.jsp"
 	});
 	
 	 $( "button:contains('추가등록')" ).on("click" , function() {

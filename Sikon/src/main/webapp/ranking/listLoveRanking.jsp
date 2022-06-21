@@ -36,194 +36,376 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-	body {
-		padding-top: 50px;
-	}
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+body {
+	padding-top: 50px;
+}
+
+.shape1 {
+	border-width: 1px;
+	background-color: white;
+	border-color: #C0C0C0;
+	border-style: solid;
+	width: 40px;
+	height: 25px;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 5px;
+	margin-left: 20px;
+}
+
+.orderCondition {
+	width: 90%;
+	margin: 10px auto;
+	float: right;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
+}
+
+.order {
+	border: 1px solid #937062;
+	color: #8B4513;
+	float: right;
+	height: 40px;
+	width: 6%;
+	box-sizing: border-box;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
+	cursor: pointer;
+}
+
+.page-header.text-info {
+	font-family: 'Gowun Batang', serif;
+	font-weight: bold;
+	color: #75574B;
+	border-bottom: none;
+}
+
+.text-info {
+	font-family: 'Gowun Batang', serif;
+	font-weight: bold;
+	color: #75574B
+}
+
+.row {
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
+}
+
+.table.table-hover.table-striped {
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
+}
+
+
+.ref-sort {
+	display: block;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+.ref-sort ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size:medium;
+	font-family: 'Gowun Batang', serif;
+	  cursor: pointer;
+}
+
+.ref-sort li {
+	display: inline-block;
+	position: relative;
+	margin: 0 10px 0 0;
+	padding: 0 20px 0 0;
+}
+
+.ref-sort li::after {
+	position: absolute;
+	top: 0;
+	right: 0;
+	content: "|";
+}
+
+.ref-sort li:last-child {
+	margin: 0;
+	padding: 0;
+}
+
+.ref-sort li:last-child::after {
+	display: none;
+}
+
+.ref-sort li a {
 	
-	.shape1 {
-	  border-width: 1px;
-	  background-color: white;
-	  border-color:	#C0C0C0;
-	  border-style: solid;
-	  width: 40px;
-	  height: 25px;
-	  text-align: center;
-	  font-weight:bold;
-	  border-radius: 5px;
-	  margin-left: 20px;
-	}
+}
+/* References */
+.ref-sort li a {
+	color: inherit;
+}
+
+.ref-sort li a:hover, #references .ref-sort li.current a {
+	color: #937062;
+	text-decoration-line: none;
+}
+
+.sectiontitle, #introblocks ul, #references .ref-sort {
+	text-align: left;
+}
+
+.sectiontitle {
+	display: block;
+	max-width: 55%;
+	margin: 0 auto 80px;
+	text-align: center;
+}
+
+.sectiontitle .heading {
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+}
+
+.sectiontitle {
+	max-width: none;
+	margin-bottom: 50px;
+}
+
+.sectiontitle, #introblocks ul, #references .ref-sort {
+	text-align: left;
+}
+
+.imgover:hover::before {
+	background: rgba(130, 157, 162, .5); /* #829DA2 */
+}
+
+.imgover, .imgover:hover::after {
+	color: #333333;
+}
+/* Latest */
+.excerpt time {
+	border-color: #D7D7D7;
+}
+
+#latest article {
+	max-width: 348px;
+}
+
+#footer {
+	padding-bottom: 50px;
+} /* Not required, just looks a little better */
+.latestimg>li {
+	display: inline-block;
+	float: none;
+	width: auto;
+	margin: 0 5% 5% 0;
+}
+
+.latestimg>li img {
+	width: auto;
+}
+
+* Latest
+	--------------------------------------------------------------------------------------------------------------- *
+	/
+	#latest {
 	
-	.orderCondition {
-	    width: 90%;
-	    margin: 10px auto;
-	    float:right;
-	}
+}
+
+#latest>li:last-child {
+	margin-bottom: 0;
+} /* Used when elements stack in small viewports */
+article {
 	
-	.order {
-	    border: 1px solid #937062;
-	    color: #8B4513;
-	    float: right;
-	    height:40px;
-	    width:6%;
-	    box-sizing: border-box;
-	    justify-content: center;
-	    display: flex;
-	    align-items: center;
-	}
+}
+
+article img {
+	width: 100%;
+} /* Force the image to have the full width of parent at all times */
+.excerpt {
+	padding: 30px 0 0;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
+}
+.excerpt time {
+	display: block;
+	margin: 0 0 30px 0;
+	padding: 0 0 15px 0;
+	font-style: normal;
+	font-size: .8rem;
+	line-height: 1;
+	border-bottom: 1px solid;
+}
+
+.excerpt time i {
+	margin-right: 5px;
+}
+
+.excerpt .heading {
+	margin: 0 0 10px 0;
+	font-size: 17px;
+font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
+		
+		}
+
+.excerpt .meta {
+	margin: 0 0 30px 0;
+	padding: 0;
+	list-style: none;
+	text-align: left;
+}
+
+.excerpt .meta li {
+	display: inline-block;
+	font-size: .8rem;
+}
+
+.excerpt .meta li::after {
+	margin-left: 5px;
+	content: "|";
+}
+
+.excerpt .meta li:last-child::after {
+	margin: 0;
+	content: "";
+}
+
+.excerpt p {
 	
-	.page-header.text-info {
-		font-family: 'Gowun Batang', serif;
-		font-weight: bold;
-		color: #75574B;
-		border-bottom: none;
-	}
-	.text-info {
-		font-family: 'Gowun Batang', serif;
-		font-weight: bold;
-		color: #75574B
-	}
-	.row {
-		font-family: 'Gowun Batang', serif;
-	}
-	.table.table-hover.table-striped {
-		font-family: 'Gowun Batang', serif;
-	}
-	.ref-sort{display:block; margin-bottom:50px; text-align:center;}
-	.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; font-weight:bold; font-family: 'Gowun Batang', serif;
-	}
-	.ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
-	.ref-sort li::after{position:absolute; top:0; right:0; content:"|";}
-	.ref-sort li:last-child{margin:0; padding:0;}
-	.ref-sort li:last-child::after{display:none;}
-	.ref-sort li a{}
-	/* References */
-	.ref-sort li a{color:inherit;}
-	.ref-sort li a:hover, #references .ref-sort li.current a{color:#937062;text-decoration-line: none;}
+}
+p {
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+    margin: 0 0 0px;
+        font-size: 13px;
+}
+.excerpt footer {
+	margin-top: 30px;
+}
+
+.latestimg {
 	
-	
-	.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-	.sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
-	.sectiontitle .heading{margin:0; padding:0; line-height:1;}
-	.sectiontitle{max-width:none; margin-bottom:50px;}
-	.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-	.imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
-	.imgover, .imgover:hover::after{color:#333333;} 
-	/* Latest */
-	.excerpt time{border-color:#D7D7D7;}
-	#latest article{max-width:348px;}
-	#footer{padding-bottom:50px;}/* Not required, just looks a little better */
-	.latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
-	.latestimg > li img{width:auto;}
-	* Latest
-	--------------------------------------------------------------------------------------------------------------- */
-	#latest{}
-	#latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
-	article{}
-	article img{width:100%;}/* Force the image to have the full width of parent at all times */
-	.excerpt{padding:30px 0 0;}
-	.excerpt time{display:block; margin:0 0 30px 0; padding:0 0 15px 0; font-style:normal; font-size:.8rem; line-height:1; border-bottom:1px solid;}
-	.excerpt time i{margin-right:5px;}
-	.excerpt .heading{margin:0 0 10px 0; font-size:1.3rem;}
-	.excerpt .meta{margin:0 0 30px 0; padding:0; list-style:none; text-align:left;}
-	.excerpt .meta li{display:inline-block; font-size:.8rem;}
-	.excerpt .meta li::after{margin-left:5px; content:"|";}
-	.excerpt .meta li:last-child::after{margin:0; content:"";}
-	.excerpt p{}
-	.excerpt footer{margin-top:30px;}
-	.latestimg{}
-	.latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
-	.latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
-	.latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
-	.latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
-	.latestimg > li a.imgover{display:block;}
-	.carousel-inner > .item > img {
-	  top: 0;
-	  left: 0;
-	  min-width: 100%;
-	  max-height: 500px;
-	} 
-	/* [RECIPE LIST] 폰트 적용 */
-	.wrapper{
+}
+
+.latestimg>li {
+	display: inline-block;
+	float: left;
+	width: 30%;
+	margin: 0 0 5% 5%;
+}
+
+.latestimg>li:nth-last-child(-n+3) {
+	margin-bottom: 0;
+}
+	/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
+.latestimg>li:nth-child(3n+1) {
+	margin-left: 0;
+	clear: left;
+} /* Removes the need to add class="first" */
+.latestimg>li img {
+	width: 100%;
+}
+	/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
+.latestimg>li a.imgover {
+	display: block;
+}
+
+.carousel-inner>.item>img {
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	max-height: 500px;
+}
+/* [RECIPE LIST] 폰트 적용 */
+.wrapper {
 	font-family: 'Tiro Devanagari Sanskrit', serif;
-	}
-	/* 검색, 정렬조건 css */
-	.condition{
+}
+/* 검색, 정렬조건 css */
+.condition {
 	font-family: 'Gowun Batang', serif;
 	width: 100px;
-	float:right;
-	border-color:#D7D7D7;
-	}
-	
-	.container {
-	    padding-right: 15px;
-	    padding-left: 15px;
-	    margin-right: auto;
-	    margin-left: auto;
-	    padding-top:120px;
-	}
-	
-	img {
-	    border-radius: 50%;
-	}
-	
-	.hoc{
-	padding-top:0px;
-	}
-	
-	
-	/* 폰트어썸 search */
-	.search{
-	font-family:FontAwesome;
+	float: right;
+	border-color: #D7D7D7;
+}
+
+.container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 120px;
+}
+
+img {
+	border-radius: 50%;
+}
+
+.hoc {
+	padding-top: 0px;
+}
+
+/* 폰트어썸 search */
+.search {
+	font-family: FontAwesome;
 	border: none;
 	background-color: #f7f7f7;
-	}
-	
-	.act{
-		background-color: #937062;
-		color: #f7f7f7;
-	}
-	
-	article img {
-	    width: 200px;
-	    height: 190px;
-	    margin-left: 35px;
-	}
-	
-	.fa-arrow-up:before {
-	    content: "\f062";
-	    margin-right: 7px;
-	    font-size: 19px;
-	    color: #a93f0d94;
-	    margin-top: 3px;
-	}
-	
-	#increase {
-	    font-weight: bold;
-	    margin-right: 25px;
-	    font-size: 19px;
-	    color: #a93f0d94;
-	}
-	
-	.best_label {
-	    position: absolute;
-	    transform: translate(14px, 43px);
-	    display: flex;
-	    -webkit-box-align: center;
-	    align-items: center;
-	    -webkit-box-pack: center;
-	    justify-content: center;
-	    top: 1px;
-	    left: 1px;
-	    width: 32px;
-	    height: 40px;
-	    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
-	    font-style: normal;
-	    font-weight: normal;
-	    font-size: 15px;
-	    letter-spacing: -0.5px;
-	    color: rgb(255, 255, 255);
-	    background: url(https://storage.wcuisine.net/web-assets/icons/best_label.svg) 0% 0% / 32px 40px no-repeat;
-	}
+}
+
+.act {
+	background-color: #937062;
+	color: #f7f7f7;
+}
+
+article img {
+	width: 200px;
+	height: 190px;
+	margin-left: 35px;
+}
+
+.fa-arrow-up:before {
+	content: "\f062";
+	margin-right: 7px;
+	font-size: 19px;
+	color: #a93f0d94;
+	margin-top: 3px;
+}
+
+#increase {
+	font-weight: bold;
+	margin-right: 25px;
+	font-size: 19px;
+	color: #a93f0d94;
+}
+
+.best_label {
+	position: absolute;
+	transform: translate(14px, 43px);
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	top: 1px;
+	left: 1px;
+	width: 32px;
+	height: 40px;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
+	font-style: normal;
+	font-weight: normal;
+	font-size: 15px;
+	letter-spacing: -0.5px;
+	color: rgb(255, 255, 255);
+	background:
+		url(https://storage.wcuisine.net/web-assets/icons/best_label.svg) 0%
+		0%/32px 40px no-repeat;
+}
 </style>
 
 
@@ -352,7 +534,7 @@
 		    <br/><br/>
 		  
 		    <div id="latest" class="group">
-		    <article class="one_third first"><a class="imgover" value="${love.user.userId}" href="#">
+		    <article class="one_third first"><a class="imgover" value="${love.user.userId}">
 		    <div class="best_label"><span style="margin-bottom: 8px;">${i}</span></div>
 		    <c:if test= "${search.orderCondition != null}" >
 				<div style="float:right;" id="increase">${love.loveIncrease}</div> 

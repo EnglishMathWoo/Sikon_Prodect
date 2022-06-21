@@ -159,7 +159,7 @@ function fncAddApply() {
 	
 	console.log(cookStock);
 	console.log(cookStatus);
-	if (cookStock < cookStatus) {
+	if (cookStock == '0') {
 		alert("모집인원이 마감되었습니다");
 		return;
 	}
@@ -315,17 +315,7 @@ $(function() {
 				  </div><br>
 				  
 				 
-				 <div class="form-group">
-				    <label for="usedCoupon">결제 날짜</label>
-<input type="date" class="form-control" id="checkDate" name="checkDate" placeholder="결제날짜" value="${apply.checkDate}" >
-				  </div>
-		  		  				  			
 
-	  
-		  
-
-		  
-		  	  
 		  <div class="form-group">
 		    <label for="userId" >신청자아이디 :  ${user.userId} </label>
 		   
@@ -334,20 +324,12 @@ $(function() {
 		  </div>
 		  
 		  	  
-		  <div class="form-group">
-		    <label for="paymentOption" >결제방법</label>
-		   
-		      <select 	name="paymentOption"		class="form-control" >
-				<option value="1" selected="selected">카카오페이구매</option>
-				<option value="2">신용카드구매</option>
-			</select>
-		   
-		  </div>
+
 		  
 		    <div class="form-group">
 		    <label for="text">수업시간 :&emsp;</label>
 		    
-		   ${cook.startTime}&emsp;~&emsp; ${cook.endTime}
+		 <strong>  ${cook.startTime}&emsp;~&emsp; ${cook.endTime}</strong>
 		   
 		    
 		      
@@ -400,7 +382,7 @@ $(function() {
 			
 			<div class="text-center  buttons">
 				 <input type="hidden" id="cookNo" value="${cook.cookNo }"/> 	
-			 	<button type="button" class="btn.btn-primary" id="buyjust">그냥결제하기</button>
+
 				<button type="button" class="buy" id="iamportPayment" value="">결제하기</button>					
 				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
 			</div>			

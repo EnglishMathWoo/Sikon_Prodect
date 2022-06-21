@@ -34,7 +34,10 @@
 <style>
 	body {
 		padding-top : 50px;
-    	font-family: 'Nanum Myeongjo', serif;
+	}
+	
+	.container {
+		font-family: 'Nanum Myeongjo', serif;
 	}
         
 	.form-control {

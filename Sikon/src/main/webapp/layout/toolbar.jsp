@@ -205,8 +205,13 @@ nav ul, nav ol {
 	border-width: 0 0 1px 0;
 }
 
+#mainav a{
+	padding-left:10px
+
+}
+
 #mainav .drop {
-	padding-left: 15px;
+	padding-left: 0px;
 }
 
 #mainav li li a, #mainav li li .drop {
@@ -478,17 +483,34 @@ hr{display:block; width:100%; height:1px; border:solid; border-width:1px 0 0 0 "
 .user-td{
 	width: 25%;
 	text-align: left;
+	font-size: 12px;
+	    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+	
 }
 
 .login-td{
 	width: 70px;
+	font-size: 12px;
+	    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+	
 }
 .logout-td{
 	width: 70px;
+	font-size: 12px;
+	    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+	
+}
+#logout{
+font-size: 12px;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+
 }
 .mypage-td{
 	position:relative;
 	width: 70px;
+	font-size: 12px;
+	    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+	
 }
 .alarm-td{
 	width: 40px;
@@ -674,7 +696,7 @@ border-spacing:0px
 
 	<div class="addbar">
 		<a href="/user/addUser" id="addbar">
-			<img src="/resources/images/logo/logo.png" width="24px" height="24px" id="logo"> 
+			<img src="/resources/images/logo/logo.png" width="24px" height="24px" id="logo" > 
 			 &nbsp;회원가입 시 5000원 할인쿠폰 증정!
 		 </a>
 	</div> 
@@ -689,8 +711,8 @@ border-spacing:0px
 		
 		<c:if test="${!empty sessionScope.user.role}">
 			
-					<td>
-					<img src="/resources/images/168939.jpg" width="25px" height="25px" style="border-radius: 100%"> 
+					<td class="cute">
+					<img src="/resources/images/168939.jpg" width="25px" height="25px" style="border-radius: 100%;float: right"> 
 					</td>
 					
 					<td class="user-td">
@@ -814,17 +836,9 @@ border-spacing:0px
 	  <ul class="clear">
 		<li class="active"><a href="#">레시피</a></li>
 		<li class="active"><a href="#">스토어</a></li>
-		<li><a class="drop" href="#">쿠킹클래스</a>
-					<c:if test="${! empty sessionScope.user.role}">
-					<ul>
-				
-						              
-						
-					  </ul>
-					  </c:if>
-		</li>
-		<li><a class="drop" href="#">랭킹</a>      
-		<li><a class="drop" href="#">공지사항</a>
+		<li class="active"><a href="#">쿠킹클래스</a></li>
+		<li class="active"><a href="#">랭킹</a></li>
+		<li class="active"><a href="#">공지사항</a></li>
 				
 		<c:if test="${sessionScope.user.role == 'admin'}">
 		<li><a class="drop" href="#">관리</a>
@@ -988,7 +1002,7 @@ border-spacing:0px
 			});
 			 
 			 $( "a:contains('쿠킹클래스')" ).on("click" , function() {
-			$(self.location).attr("href","/cook/listCook?menu=search");
+			$(self.location).attr("href","/cook/listCook");
 			});
 			 
 			 $( "a:contains('랭킹')" ).on("click" , function() {
@@ -1012,7 +1026,7 @@ border-spacing:0px
 			});
 			 
 			 $( "a:contains('쿠킹클래스관리')" ).on("click" , function() {
-			$(self.location).attr("href","/cook/listCook?menu=manage");
+			$(self.location).attr("href","/cook/listCook");
 			});
 
 			 $( "a:contains('공지사항관리')" ).on("click" , function() {

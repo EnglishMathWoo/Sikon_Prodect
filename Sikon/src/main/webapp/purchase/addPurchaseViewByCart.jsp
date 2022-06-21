@@ -394,6 +394,14 @@ html input[type=button]:hover{
 		$("#iamportPayment").on("click" , function() {
 			console.log("아임포트");		
 			
+			var soldout = $("#soldout").val();
+			console.log("stock: "+soldout);
+			
+			if(soldout == 'none'){
+				alert('재고없음');
+				return null;
+			}
+			
 				if($("#paybyca").prop("checked")){
 					
 					$("input[name=paymentOpt]").val("CA");
@@ -652,7 +660,19 @@ function paymentCA(data) {
 							<p style="font-weight: bold;font-size: 15px">${cart.cartProd.prodName}</p>
 							<p>${cart.cartProd.prodDisPrice} 원</p>
 							<p>배송비: 3000 원</p>
-							<p>구매수량: ${cart.quantity} 개</p>
+							
+							<c:if test="${cart.cartProd.prodStock == 0}">
+								<p style="color:#ff4800">*품절된 상품입니다.</p>
+								<script>
+									$(function() {
+										$("#soldout").val("none");
+									});
+								</script>
+							</c:if>
+							<c:if test="${cart.cartProd.prodStock > 0}">
+								<p>구매수량: ${cart.quantity} 개</p>
+							</c:if>
+							
 							<c:if test="${cart.cartProd.couponApply == 'N' }">
 								<p style="color:#F0445C">*쿠폰 적용이 불가능한 상품입니다.</p>
 							</c:if>
@@ -783,6 +803,8 @@ function paymentCA(data) {
 			<input type="hidden" id="buyeremail" value="${user.userId }"/>
 			<input type="hidden" id="buyername" value="${user.userName }"/>
 			<input type="hidden" id="buyerphone" value="${user.phone }"/>
+			
+			<input type="hidden" id="soldout" value=""/>
 			
 	
 			<br>

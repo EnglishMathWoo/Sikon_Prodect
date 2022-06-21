@@ -34,9 +34,6 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-	body {
-		font-family: 'Nanum Myeongjo', serif;
-	}
 	
 	body>div.container {
 		padding-top : 250px;

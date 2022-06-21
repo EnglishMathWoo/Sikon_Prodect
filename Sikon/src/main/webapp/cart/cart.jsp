@@ -31,16 +31,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
 .cartlayout{
-	 padding-top : 170px;
-	font-family: 'Nanum Myeongjo', serif;
+	 padding-top : 200px;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	padding-bottom: 200px;
 }
 
 div{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 .subtitle{
 	font-weight: bold;
@@ -303,7 +304,7 @@ div{
 
 	<div class="container cartlayout">
 
-		<h3 class="carttitle">| SHOPPING BAG |</h3><br>
+		<h3 class="carttitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| SHOPPING BAG |</h3><br>
       
 	       <div class="row">
 	        <div class="subtitle">
@@ -325,7 +326,13 @@ div{
 				<c:set var="i" value="${ i+1 }" />
 				  
 				  <div class="col-md-1 text-center boxselect">
-				  	<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}"/>		  	
+				  	<c:if test="${cart.cartProd.prodStock == 0}">
+				  		<input type="checkbox" disabled/> 	
+				  	</c:if>
+				  	<c:if test="${cart.cartProd.prodStock > 0}">
+				  		<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}"/> 	
+				  	</c:if>
+				  	
 				  </div>
 				  
 				  <div class="col-md-6 text-left">
@@ -337,7 +344,7 @@ div{
 							</c:forEach>
 						</td>
 					    <td>
-					    <p style="font-weight: bold;font-size:15px;">&emsp;&emsp;${cart.cartProd.prodName }</p>
+					    <p style="font-size:15px;">&emsp;&emsp;${cart.cartProd.prodName }</p>
 					    </td>
 					    
 					</tr>
@@ -345,7 +352,7 @@ div{
 				  </div>	 
 				    	  
 				  <div class="col-md-1 text-center">
-				  	<button class="delete deletebtn" value="${cart.cartNo}">X</button>
+				  	<button class="delete deletebtn" value="${cart.cartNo}"><i class="bi bi-x-lg"></i></button>
 				  </div>
 				  
 				  <div class="col-md-1 text-center"></div>
@@ -354,15 +361,15 @@ div{
 				  
 				  	<c:choose>
 				  		<c:when test="${cart.quantity == 1 }">
-				  			<button type="button" class="calculation nope" role="button" value="${cart.cartNo}">-</button>
+				  			<button type="button" class="calculation nope" role="button" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
 				  		</c:when>
 				  		<c:otherwise>
-				  			<button class="calculation minus" value="${cart.cartNo}">-</button>
+				  			<button class="calculation minus" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
 				  		</c:otherwise>
 				  	</c:choose>
 				  	
 				  	<input type="text" name="quantity" class="result" value=" ${cart.quantity }" style="width:30px;text-align: center" readonly/>
-				  	<button class="calculation plus" value="${cart.cartNo}">+</button>
+				  	<button class="calculation plus" value="${cart.cartNo}"><i class="bi bi-plus-lg"></i></button>
 				  	
 				  </div>
 				  

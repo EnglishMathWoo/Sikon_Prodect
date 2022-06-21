@@ -292,16 +292,19 @@
 											 <if test="orderCondition != null ">
 											 
 											 <choose>
-											  <when test="orderCondition == 0 ">
+											 <when test="orderCondition == 0 ">
+											   		ORDER BY user_id DESC
+											  </when>
+											  <when test="orderCondition == 1 ">
 											  		WHERE role LIKE 'user'
 											  		AND mentor_apply LIKE UPPER ('N')
 											   		ORDER BY user_id DESC
 											  </when>
-											  <when test="orderCondition == 1 ">
+											  <when test="orderCondition == 2 ">
 											  		WHERE mentor_apply LIKE UPPER ('Y')
 											  		AND role LIKE 'user'
 											  </when>
-											  <when test="orderCondition == 2 ">
+											  <when test="orderCondition == 3 ">
 											      	where role LIKE 'mentor'
 											  </when>
 											  
@@ -337,16 +340,19 @@
 											<if test="orderCondition != null ">
 											 
 											 <choose>
-											  <when test="orderCondition == 0 ">
+											 <when test="orderCondition == 0 ">
+											   		ORDER BY user_id DESC
+											  </when>
+											  <when test="orderCondition == 1 ">
 											  		WHERE role LIKE 'user'
 											  		AND mentor_apply LIKE UPPER ('N')
 											   		ORDER BY user_id DESC
 											  </when>
-											  <when test="orderCondition == 1 ">
+											  <when test="orderCondition == 2 ">
 											  		where mentor_apply LIKE UPPER ('Y')
 											  		AND role LIKE 'user'
 											  </when>
-											  <when test="orderCondition == 2 ">
+											  <when test="orderCondition == 3 ">
 											      	where role LIKE 'mentor'
 											  </when>
 											  <otherwise>

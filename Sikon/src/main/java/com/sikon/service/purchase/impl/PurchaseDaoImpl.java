@@ -70,6 +70,7 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		map.put("prodNo",  prodNumber );
 		
 		sqlSession.update("PurchaseMapper.updateStock", map);
+		sqlSession.update("PurchaseMapper.updateStockCart", map);
 	}
 	
 	public void cancelOrder(int purchaseQuantity, int prodNo) throws Exception {
@@ -82,6 +83,7 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		map.put("prodNo",  prodNumber );
 		
 		sqlSession.update("PurchaseMapper.cancelOrder", map);
+		sqlSession.update("PurchaseMapper.cancelOrderCart", map);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

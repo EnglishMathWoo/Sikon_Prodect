@@ -192,7 +192,7 @@ label{
 			
 			
 			 $( ".golist" ).on("click" , function() {
-					self.location = "/cook/listCook?menu=search"
+					self.location = "/cook/listCook"
 				});
 			
 		});
