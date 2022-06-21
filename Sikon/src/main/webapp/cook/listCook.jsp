@@ -567,7 +567,6 @@ div.emptyProd{
 						                		}
 						                		
 						                		
-						                		
 						                		if(JSONData.list[i].cookTheme == 'KO'){
 					                				
 						                			cookTheme = "<h5><strong>테마 : 한식</strong></h5>";               				

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="ko">
@@ -9,33 +9,53 @@
 <head>
 	<meta charset="EUC-KR">
 	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/css/animate.min.css" rel="stylesheet">
-   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-   
-    <!-- Bootstrap Dropdown Hover JS -->
-   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
- 		body {
-            padding-top : 30px;
-        }
-        
-        div.container {
-	padding-top: 200px;
-	
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- jQuery UI toolTip 사용 CSS-->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- jQuery UI toolTip 사용 JS-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+ <!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+
+<style>
+
+
+div.container {
+	padding-top: 220px;
+	font-family: 'Nanum Myeongjo', serif;
+	width: 652px;
+	padding-bottom: 150px;
 }
-.btn-b {
+html input[type=text]{
+	background-color: #f7f7f7;
+}
+
+.update {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  font-size: large;
+  padding: 12px 0;
+  width: 49.3%;
+}
+
+.golist {
   cursor: pointer;
   background-color: #937062;
   border: none;
@@ -44,156 +64,137 @@
   width:100px;
   font-size: small;
 }
-body {
-	padding-top: 50px;
-	
+.update:hover {
+  background-color: #937062d4;
 }
 
-.page-header.text-info {
-	font-family: 'Gowun Batang', serif;
-	font-weight: bold;
-	color: #75574B
-}
-
-.text-info {
-	font-family: 'Gowun Batang', serif;
-	font-weight: bold;
-	color: #75574B
-}
-
-.row {
-	font-family: 'Gowun Batang', serif;
-}
-
-.table.table-hover.table-striped {
-	font-family: 'Gowun Batang', serif;
-}
-
-.ref-sort{display:block; margin-bottom:50px; text-align:center;}
-.ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
-}
-.ref-sort li{display:inline-block; position:relative; margin:0 10px 0 0; padding:0 20px 0 0;}
-.ref-sort li::after{position:absolute; top:0; right:0; content:"/";}
-.ref-sort li:last-child{margin:0; padding:0;}
-.ref-sort li:last-child::after{display:none;}
-.ref-sort li a{}
-
-/* References */
-.ref-sort li a{color:inherit;}
-.ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
-
-.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
-.sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
-.sectiontitle .heading{margin:0; padding:0; line-height:1;}
-
-.sectiontitle{max-width:none; margin-bottom:50px;}
-
-.sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
-.imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
-.imgover, .imgover:hover::after{color:#333333;} 
-
-/* Latest */
-.excerpt time{border-color:#D7D7D7;}
-
-#latest article{max-width:348px;}
-
-#footer{padding-bottom:50px;}/* Not required, just looks a little better */
-.latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
-.latestimg > li img{width:auto;}
-
-* Latest
---------------------------------------------------------------------------------------------------------------- */
-#latest{}
-
-#latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
-article{}
-article img{width:100%;}/* Force the image to have the full width of parent at all times */
-.excerpt{padding:30px 0 0;}
-.excerpt time{display:block; margin:0 0 30px 0; padding:0 0 15px 0; font-style:normal; font-size:.8rem; line-height:1; border-bottom:1px solid;}
-.excerpt time i{margin-right:5px;}
-.excerpt .heading{margin:0 0 10px 0; font-size:1.3rem;}
-.excerpt .meta{margin:0 0 30px 0; padding:0; list-style:none; text-align:left;}
-.excerpt .meta li{display:inline-block; font-size:.8rem;}
-.excerpt .meta li::after{margin-left:5px; content:"|";}
-.excerpt .meta li:last-child::after{margin:0; content:"";}
-.excerpt p{}
-.excerpt footer{margin-top:30px;}
-
-.latestimg{}
-.latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
-.latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
-.latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
-.latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
-.latestimg > li a.imgover{display:block;}
-
-.carousel-inner > .item > img {
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  max-height: 500px;
-} 
-
-/* [cook LIST] 폰트 적용 */
-.wrapper{
-font-family: 'Tiro Devanagari Sanskrit', serif;
-}
-
-/* 검색, 정렬조건 css */
-.condition{
-font-family: 'Gowun Batang', serif;
-width: 100px;
-float:right;
-border-color:#D7D7D7;
-}
-
-
-/* 레시피 등록 버튼 css */
-.submit
- {
-  display: block;
-  border: none;
-  width: 150px;
-  height: 36px;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 15px;
+.check {
   cursor: pointer;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: #d4af7a;
-  float: right;
-  	font-family: 'Gowun Batang', serif;
-  
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  font-size: large;
+  padding: 11px 0;
+  width: 49.3%;
+}
+.check:hover {
+  background-color: #e7e2e2;
 }
 
-/* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
-hr {
-    margin-top: 60px;
-    margin-bottom: 20px;
-    border: 0;
-    border-top: 1px solid #eee;
+html input[type=button]{
+	background-color: #937062;
+	border: none;
+	color: #fff;
 }
 
-/* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
-p {
-    margin: 0 0 0px;
+html input[type=button]:hover{
+	background-color: #937062d4;
 }
-     </style>
+
+
+.point{
+	background-color: #f7f7f7;
+	border: 1px solid #937062;
+	color: #937062;
+}
+
+.point:hover{
+	background-color: #e7e2e2;
+}
+
+.search{
+	display: flex;
+	padding: 5px;
+}
+
+.form-divy{
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.addr{
+	padding-top : 5px;
+}
+
+
+.subtitle{
+	border-top: 2px solid #937062;
+	border-bottom: 1px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+    height: 50px;
+	padding: 15px;
+	font-weight: bold;
+	font-size: 18px;
+}
+.imagetd{
+	width:20%;
+}
+.content{
+	text-align: left;
+	padding-left: 20px
+}
+
+h5,h6{
+	width: 15%;
+	font-weight: bold;
+}
+
+label{
+	width: 15%;
+}
+
+.sectd{
+	display: flex;
+}
+.paycontent{
+	border-top: 2px solid #937062;
+	width: 652px;
+	margin-left: -15px;
+	padding-top: 20px;
+}
+.payment{
+	width:84%;
+	text-align: right;
+}
+
+.totalpay{
+	font-size: 20px;
+}
+.totals{
+	color: #FF4800;
+}
+
+</style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-	$(function() {	
-	
+	$(function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$(".check").on("click" , function() {
+			history.go(-1);
+		});
+		
+		$(".golist").on("click" , function() {
+			self.location = "/apply/listApply"
+		});
+		
 
-	 
-		 $( "button:contains('확인')"  ).on("click" , function() {
-
-			 self.location = "/cook/listCook?menu=search"
-			});
-	 
-});
+		
+	});	
 	
 	</script>
 </head>
@@ -207,120 +208,114 @@ p {
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-	<div class="page-header">
-	        <h3 class="font-x2 nospace" align="center"><br>| 신청내역확인 | </h3>
-	      
-	    </div>
-	
-	
-
-		<div class="row">
-				<div class="col-xs-12 col-md-12" align="center">
-    	
-			<c:choose>
+	<div class="layout">
+			<br>
+				<h1 class="bg-defualt text-center">신청내역</h1><br>
+				
+				<!-- form Start /////////////////////////////////////-->
+				<div>
+				  
+				  <div class="subtitle">
+				  <p>신청정보</p>
+				  </div><br>
+				  	  
+				  <div class="form-group">
+				    <label for="userName">신청자 아이디</label>
+				     ${apply.applier.userId}
+				  </div>
+				  
+			<br>
+				  <div class="subtitle">
+				  <p>신청상품</p>
+				  </div><br>
+				  
+				  <div class="form-group">
+				  <table style="width: 100%">
+					  <tr>
+						<td class="imagetd">
+		<c:choose>
 		    	<c:when test="${cook.cookFilename.contains('/')}">
 						<c:choose>
 						<c:when test="${cook.cookFilename.contains('mp4')}">
 							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
-								<video width="400" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
+								<video width="120" height="120" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"  value="${name}"></video>
 							</c:forEach>
 						</c:when>
 						
 						<c:otherwise>
 							<c:forEach var="name" items="${cook.cookFilename.split('/')}">
-								<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
+								<img src="/resources/images/uploadFiles/${name}" width="120" height="120" align="absmiddle"/>
 								<input type="hidden" name="image" value="${name }"/>
 							</c:forEach>
 						</c:otherwise>
 						</c:choose>
 				</c:when>
 				<c:otherwise>
-					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle" class="image" value="${prodThumbnail}"/>
+					<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="120" height="120" align="absmiddle" class="image" value="${prodThumbnail}"/>
 				</c:otherwise>
-		    	</c:choose></div>
-		</div>
+		    	</c:choose>
+						</td>
+						<td class="content">
+							<p style="font-weight: bold;font-size: 15px">${apply.classCook.cookName}${apply.classCook.mentor.userNickname}</p>
+							<p>${apply.classCook.cookPrice} 원</p>
+							
+							<p>신청인원: ${apply.cookStatus} 명</p><input type="hidden" min="0" class="form-control" id="cookStatus" name="cookStatus" />
 
-		<hr/>
-		
-		<div class="row">
-			<div class="col-xs-4 col-md-2">
-				<strong>쿠킹클래스번호</strong>
-			</div>
-			<div class="col-xs-8 col-md-4"><strong>${apply.classCook.cookNo}</strong></div>
-		</div>
+						  	
+					  	
+					  	</td>
+					  </tr>
+				 </table>		 
+				</div>
+			</div>	  
 
-		<hr/>
-		
-		<div class="row">
-			<div class="col-xs-4 col-md-2">
-				<strong>쿠킹클래스가격</strong>
-			</div>
-			<div class="col-xs-8 col-md-4"><strong>${apply.classCook.cookPrice}원</strong></div>
-		</div>
+			<br>
+				  
+			<section class="paycontent">	    
+				  
+				  <div class="sectd">
+				  	<h5>총 상품금액</h5>
+				  	<div class="payment totals"><strong class="totalpay">${apply.classCook.cookPrice * apply.cookStatus}원</strong></div>
+				  </div>
+				  
+				  <div class="sectd">
+				  	<h5>수업 시간</h5>
+				  <div class="payment">	${cook.startTime}~ ${cook.endTime}  </div>
+				  </div>
 
-		<hr/>
-		
+
+				  
+				  
+				  <hr>
+				  
+				  
+				  <div class="sectd">
+				  	<h5>결제수단</h5>
+				  	<div class="payment">
+				  		<c:if test="${apply.paymentOption == '1'}">카카오 간편결제</c:if>
+				
+				  	</div>
+				  </div>
+				  
+				  
+			</section>
+
+			<br><br>
+			<div class="text-center">
 			
 
-		<div class="row">
-			<div class="col-xs-4 col-md-2">
-				<strong>수업시간</strong>
+				<c:if test="${user.role == 'admin' }">	
+				<button type="button" class="check" >확&emsp;인</button>
+				</c:if>
+				<c:if test="${user.role != 'admin' }">	
+				<button type="button" class="golist" >확&emsp;인</button>
+				</c:if>
 			</div>
-			 <div class="col-sm-2 col-md-2">
-		    <strong> ${cook.startTime}~ ${cook.endTime}</strong>
-		    </div>
-
-		</div>
-
-		<hr/>		
-				<div class="row">
-			<div class="col-xs-4 col-md-2">
-				<strong>신청자아이디</strong>
-			</div>
-			<div class="col-xs-8 col-md-4"><strong>${apply.applier.userId}</strong></div>
-		</div>
-
-		<hr/>
-		
-
-	
-	
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>구매자연락처</strong></div>
-			<div class="col-xs-8 col-md-4"><strong>${user.phone}</strong></div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>구매자주소</strong></div>
-			<div class="col-xs-8 col-md-4"><strong>${user.addr}</strong></div>
-		</div>
-		
-		<hr/>
-
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>신청자수</strong></div>
-			<div class="col-xs-8 col-md-4"><strong>${apply.cookStatus }명</strong></div>
-		</div>
-		
-		<hr/>
-
-		
-		<div class="row">
-	  		<div class="col-md-12 text-center ">
-	  	
-	  			<button type="button" class="btn-b">확인</button>
-	  		
-		
-	  		</div>
-		</div>
-		
-		<br/>
-		</form>	
+				
+			<br>
  	</div>
- 	<!--  화면구성 div Start /////////////////////////////////////-->
+</div>	
 
 </body>
+
 </html>

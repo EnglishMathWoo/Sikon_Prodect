@@ -13,6 +13,7 @@ import com.sikon.service.domain.Apply;
 import com.sikon.service.domain.Cook;
 import com.sikon.service.domain.Heart;
 import com.sikon.service.domain.Purchase;
+import com.sikon.service.domain.User;
 import com.sikon.service.domain.Wish;
 import com.sikon.service.apply.ApplyDao;
 import com.sikon.service.apply.ApplyService;
@@ -55,9 +56,9 @@ public class ApplyServiceImpl implements ApplyService{
 		
 		return map;
 	}
-	public Map<String , Object > getSaleList(Search search) throws Exception {
-		List<Apply> list= applyDao.getSaleList(search);
-		int totalCount = applyDao.getTotalCount2(search);
+	public Map<String , Object > getSaleList(Search search,User user) throws Exception {
+		List<Apply> list= applyDao.getSaleList(search, user);
+		int totalCount = applyDao.getTotalCount2(search,user);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );

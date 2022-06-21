@@ -10,6 +10,7 @@
 	<resultMap id="applySelectMap" type="apply">
 		<result property="applyNo" 			column="apply_no" 			jdbcType="NUMERIC"/>
 		<!--<result property="classCook.cookNo" 				column="cook_no" 					jdbcType="NUMERIC" />-->
+		
 		<result property="applier.userId" 		column="applier_id"		jdbcType="VARCHAR"/>
 		<result property="paymentOption" 		column="PAYMENT_OPTION" 					jdbcType="VARCHAR" />
 		<result property="applyStatus" 				column="apply_status" 					jdbcType="VARCHAR" />
@@ -156,48 +157,58 @@
 											
 	 </select>
 	 
-	<select  id="getSaleList"  parameterType="search"	statementType="CALLABLE" resultMap="applySelectMap">
+	<select  id="getSaleList"  parameterType="map"	statementType="CALLABLE" resultMap="applySelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM (SELECT c.cook_name, a.* 
 											FROM cook c, apply a
 											WHERE c.cook_no=a.cook_no(+) 
 												AND a.apply_no IS NOT NULL 
-											<if test="applyCondition != null">
+											<if test="search.applyCondition != null">
 												<choose>
-												<when test="applyCondition == 5 ">
+												<when test="search.applyCondition == 5 ">
 													where apply_status = '100' 
 													</when>
-												<when test="applyCondition == 6  ">
+												<when test="search.applyCondition == 6  ">
 													where apply_status = '200'  
 														</when>
 														</choose>
 											</if>
 											and apply_status !=  '000' 
+											<if test="user.role != 'admin'">
+											
+											and c.mentor_id=#{user.userId}
+											
+											</if>
 											ORDER BY apply_no DESC) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
 	 </select>
 	 
 
 
-	 <select  id="getTotalCount2"  parameterType="search"	 resultType="int">
+	 <select  id="getTotalCount2"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT c.cook_name, a.* 
 		FROM cook c, apply a
 		WHERE c.cook_no=a.cook_no(+) 
 			AND a.apply_no IS NOT NULL 
-											<if test="applyCondition != null">
+											<if test="search.applyCondition != null">
 												<choose>
-												<when test="applyCondition == 5 ">
+												<when test="search.applyCondition == 5 ">
 													where apply_status = '100' 
 													</when>
-												<when test="applyCondition == 6  ">
+												<when test="search.applyCondition == 6  ">
 													where apply_status = '200'  
 														</when>
 														</choose>
 											</if>
 											and apply_status !=  '000' 
+											<if test="user.role != 'admin'">
+											
+											and c.mentor_id=#{user.userId}
+											
+											</if>											
 											ORDER BY apply_no DESC) countTable
 	 </select>
 	 
