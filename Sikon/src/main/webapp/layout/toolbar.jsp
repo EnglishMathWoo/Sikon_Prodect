@@ -37,10 +37,11 @@ hr, .borderedbox {
 
 /* 우리의식탁 로고 이미지 비율 */
 #usik {
-float:left;
-margin-top:10px;
-	width: 150px;
-	height: 37px;
+	float: left; 
+    width: 13%;
+    height: auto;
+    margin-top: -60px;
+    margin-left: 18%
 }
 
 /* toolbar css (from layout.css) */
@@ -98,15 +99,6 @@ margin-top:10px;
 	#services .table-cell {
 		padding: 5%;
 	}
-}
-
-/* Header */
-#header #logo h1 a {
-	color: inherit;
-	background-color: inherit;
-	text-decoration-line: none;
-	float:left;
-	padding-left: 375px;
 }
 
 
@@ -465,6 +457,8 @@ div.addbar{
 #addbar{
 	text-decoration-line: none;
 	color:#f7f7f7;
+	display: flex;
+	justify-content: center;
 }
 
 header{
@@ -473,7 +467,7 @@ position:absolute;
 width:100%;
 z-index: 10;
 border-bottom: 1px solid #dbd4d459;
-height : 180px;
+height: 20%;
 }
 
 /*  주석 풀면 위에 있는 hr css랑 충돌
@@ -514,6 +508,9 @@ font-size: 12px;
 }
 .alarm-td{
 	width: 40px;
+}
+header{
+	position: fixed;
 }
 </style> 
 <style>
@@ -683,7 +680,29 @@ font-weight: normal;
 .table{
 border-spacing:0px
 }
+.nospace{
+	right: 20%;
+}
+.menus{
+	right: 20%;
+	float: right;
+}
 
+.sikonlogo{
+	width:250px;
+	heigth: 80px;
+}
+.click{
+	color: #937062;
+}
+.active{
+	font-size: 15px;
+}
+.divlink{
+	border-bottom: 1px solid #E2E5EA;
+	width: 196px;
+	left: 16px;
+}
 </style>
 
 <!-- /////////////////////// ToolBar Start ////////////////////////////-->
@@ -697,7 +716,7 @@ border-spacing:0px
 	<div class="addbar">
 		<a href="/user/addUser" id="addbar">
 			<img src="/resources/images/logo/logo.png" width="24px" height="24px" id="logo" > 
-			 &nbsp;회원가입 시 5000원 할인쿠폰 증정!
+			 &ensp;회원가입 시 5000원 할인쿠폰 증정!
 		 </a>
 	</div> 
 
@@ -754,7 +773,7 @@ border-spacing:0px
 							<div class="member">
 							<div class="dropLayer">
 									<div class="userInfo">
-										<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb KAlRDb" alt="File:Unknown person.jpg - Wikimedia Commons" data-noaft="1" style="border-radius: 50%;width: 50px; height: 50px; margin: 0px;">
+										<img src="/resources/images/168939.jpg" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb KAlRDb" alt="File:Unknown person.jpg - Wikimedia Commons" data-noaft="1" style="border-radius: 50%;width: 50px; height: 50px; margin: 0px;">
 										<div>
 											<span class="label">${user.userNickname }</span>
 											<p class="name"><strong class="mall">
@@ -780,16 +799,16 @@ border-spacing:0px
 									
 								<div class="divide">
 									<ul class="link">                                              
-											<li><a>내정보보기</a></li>
-											<li><a>마이레시피</a></li>                                                
-											<li><a>마이리뷰</a></li>
-											<li><a>쿠킹클래스신청조회</a></li>
-											<li><a>상품주문배송조회</a></li>
-											<li><a>책갈피조회</a></li>
-											<li><a>즐겨찾는멘토</a></li>
-											<li><a>포인트조회</a></li>
-											<li><a>쿠폰조회</a></li>
-											<li><a>좋아요한쿠킹클래스</a></li>	 
+											<li><a class="divlink">내정보보기</a></li>
+											<li><a class="divlink">마이레시피</a></li>                                                
+											<li><a class="divlink">마이리뷰</a></li>
+											<li><a class="divlink">쿠킹클래스신청조회</a></li>
+											<li><a class="divlink">상품주문배송조회</a></li>
+											<li><a class="divlink">책갈피조회</a></li>
+											<li><a class="divlink">즐겨찾는멘토</a></li>
+											<li><a class="divlink">포인트조회</a></li>
+											<li><a class="divlink">쿠폰조회</a></li>
+											<li><a class="divlink">좋아요한쿠킹클래스</a></li>	 
 									</ul>
 								</div>
 									</div>
@@ -826,19 +845,19 @@ border-spacing:0px
 
 	<!-- ################################################################################################ -->
 
-	<div id="logo" class="fl_left">
+	<div id="logo" >
 	  
-	  <h1><a href="#"><img src="/resources/images/logo/usik.png" id="usik"></a></h1>
+	  <h1><a class="sikonlogo"><img src="/resources/images/logo/sikon_logo.png" id="usik"></a></h1>
 	</div>
 
 	<!-- ################################################################################################ -->
-	<nav id="mainav" class="fl_right">
-	  <ul class="clear">
-		<li class="active"><a href="#">레시피</a></li>
-		<li class="active"><a href="#">스토어</a></li>
-		<li class="active"><a href="#">쿠킹클래스</a></li>
-		<li class="active"><a href="#">랭킹</a></li>
-		<li class="active"><a href="#">공지사항</a></li>
+	<nav id="mainav" class="fl_menus">
+	  <ul class="menus">
+		<li class="active recipe"><a href="#">레시피</a></li>
+		<li class="active store"><a href="#">스토어</a></li>
+		<li class="active cook"><a href="#">쿠킹클래스</a></li>
+		<li class="active rank"><a href="#">랭킹</a></li>
+		<li class="active notice"><a href="#">공지사항</a></li>
 				
 		<c:if test="${sessionScope.user.role == 'admin'}">
 		<li><a class="drop" href="#">관리</a>
@@ -997,11 +1016,11 @@ border-spacing:0px
 			$(self.location).attr("href","/recipe/listRecipe");
 			});
 			 
-			 $( "a:contains('스토어')" ).on("click" , function() {
+			 $( ".store" ).on("click" , function() {
 			$(self.location).attr("href","/product/listProduct?menu=search");
 			});
 			 
-			 $( "a:contains('쿠킹클래스')" ).on("click" , function() {
+			 $( ".cook" ).on("click" , function() {
 			$(self.location).attr("href","/cook/listCook");
 			});
 			 
@@ -1022,11 +1041,11 @@ border-spacing:0px
 			});
 			 
 			 $( "a:contains('스토어관리')" ).on("click" , function() {
-			$(self.location).attr("href","/product/listProduct?menu=manage");
+				 $(self.location).attr("href","/product/manageProduct");
 			});
 			 
 			 $( "a:contains('쿠킹클래스관리')" ).on("click" , function() {
-			$(self.location).attr("href","/cook/listCook");
+				 $(self.location).attr("href","/cook/manageCook");
 			});
 
 			 $( "a:contains('공지사항관리')" ).on("click" , function() {
@@ -1201,6 +1220,9 @@ border-spacing:0px
 			});	
 		 
 			 
+		
+		 
+		 
 		//web socket 시작
 		var socket = null;
 		

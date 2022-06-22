@@ -117,26 +117,17 @@ $(function() {
 		
 			<td class="ct_write01">
 		
-				<c:choose>
-				<c:when test="${cook.cookFilename.contains('mp4')}">
-					<c:forEach var="name" items="${cook.cookFilename.split('/')}">
-						<video width="400" height="300" controls autoplay src="/resources/images/uploadFiles/${name}" type="video/mp4"></video>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
+
 					<c:forEach var="name" items="${cook.cookFilename.split('/')}">
 						<img src="/resources/images/uploadFiles/${name}" width="300" height="300" align="absmiddle"/>
 					</c:forEach>
-				</c:otherwise>
-				</c:choose>		
+
 		
 			</td>
 		
 		</c:when>
 		
-		<c:otherwise>
-			<img src="/resources/images/uploadFiles/${cook.cookFilename}" width="300" height="300" align="absmiddle"/>
-		</c:otherwise>
+
 		</c:choose>
 		
 		</div>

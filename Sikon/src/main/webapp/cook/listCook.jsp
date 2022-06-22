@@ -1,3 +1,5 @@
+
+
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 
@@ -49,23 +51,19 @@
 
   
       <style>
-
         .bi-heart{
             font-size: 20px;
             line-height: 20px;
             color:#000;
         }
-
         .bi-heart-fill{
             font-size: 20px;
             line-height: 20px;
             color:#000;
         }
-
 .bi-heart-fill::before{
 color:crimson;
 }
-
 .bi-heart::before{
 color:crimson;
 }
@@ -73,36 +71,29 @@ color:crimson;
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-
 div.container {
 	padding-top: 180px;
 	
 }
-
 div.channel {
 	padding-top: 10px;
 } 
-
 .page-header.text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
 	color: #75574B
 }
-
 .text-info {
 	font-family: 'Gowun Batang', serif;
 	font-weight: bold;
 	color: #75574B
 }
-
 .row {
-	font-family: 'Gowun Batang', serif;
+	 font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
-
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
 }
-
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
 .ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
 }
@@ -111,35 +102,23 @@ div.channel {
 .ref-sort li:last-child{margin:0; padding:0;}
 .ref-sort li:last-child::after{display:none;}
 .ref-sort li a{}
-
 /* References */
 .ref-sort li a{color:#333;font-weight: bold;}
 .ref-sort li a:hover, #references .ref-sort li.current a{color:#937062;text-decoration-line: none;}
-
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 .sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
 .sectiontitle .heading{margin:0; padding:0; line-height:1;}
-
 .sectiontitle{max-width:none; margin-bottom:50px;}
-
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
-
-
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
-
 #latest article{max-width:348px;}
-
 #footer{padding-bottom:50px;}/* Not required, just looks a little better */
 .latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
 .latestimg > li img{width:auto;}
-
 * Latest
 --------------------------------------------------------------------------------------------------------------- */
 #latest{}
-
 #latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
 article{}
 article img{width:100%;}/* Force the image to have the full width of parent at all times */
@@ -153,26 +132,22 @@ article img{width:100%;}/* Force the image to have the full width of parent at a
 .excerpt .meta li:last-child::after{margin:0; content:"";}
 .excerpt p{}
 .excerpt footer{margin-top:30px;}
-
 .latestimg{}
 .latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
 .latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
 .latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
 .latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
 .latestimg > li a.imgover{display:block;}
-
 .carousel-inner > .item > img {
   top: 0;
   left: 0;
   min-width: 100%;
   max-height: 500px;
 } 
-
 /* [PRODUCT LIST] 폰트 적용 */
 .wrapper{
 font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-
 /* 검색, 정렬조건 css */
 .condition{
 font-family: 'Gowun Batang', serif;
@@ -180,8 +155,6 @@ width: 100px;
 float:right;
 border-color:#D7D7D7;
 }
-
-
 /* 등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
 hr {
     margin-top: 60px;
@@ -189,22 +162,17 @@ hr {
     border: 0;
     border-top: 1px solid #eee;
 }
-
 /* 전체 건수 표기시 등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
     margin: 0 0 0px;
 }
-
 #image {
 	width: 300px;
 	height:300px;
 } 
-
-
 .image:hover{
 	opacity: 0.8;
 }
-
 div.emptyProd{
 	padding : 20px;
 	height: 100px;
@@ -212,7 +180,6 @@ div.emptyProd{
 	font-weight: bold;
 	color: #333;
 }
-
 .btn_gotop {
 	display:none;
 	position:fixed;
@@ -227,13 +194,10 @@ div.emptyProd{
 .btn_gotop:hover{
 	color: #f7f7f7;
 }
-
 .likes{
 	font-weight: bold;
 	font-size: large;
 }
-
-
 .theme:hover {
   border: none;
   width: 100px;
@@ -241,10 +205,9 @@ div.emptyProd{
   color: #fff;
   font-size: 15px;
   background: #937062;
-  font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   
 }
-
 .theme{
   width: 100px;
   height: 36px;
@@ -252,9 +215,8 @@ div.emptyProd{
   border: 1px solid #937062;
   font-size: 15px;
   background: #f7f7f7;
-  font-family: 'Gowun Batang', serif;
+     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
-
 .act{
   border: none;
   width: 100px;
@@ -262,10 +224,8 @@ div.emptyProd{
   color: #fff;
   font-size: 15px;
   background: #937062;
-  font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
-
-
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -376,7 +336,6 @@ div.emptyProd{
 		});
 		*/
 		
-
 		//좋아요 push 알림
 		 function pushAlarm(userId, userNickname, cookNo){
 												
@@ -408,17 +367,14 @@ div.emptyProd{
 		 $( document ).ready(function() {
 			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			
-
 		
 			$(document).on("click" ,"p.like_btn", function(){
-
 				var userId = $("input[name='userId']").val();
 				var userNickname = $("input[name='userNickname']").val();
 				var cookNo = $(this).attr("value");
 			
 				console.log(cookNo);
 				console.log(userId);
-
 			     $.ajax({
 			            type : "POST",  
 			            url : "/heart/json/updateHeart",       
@@ -434,7 +390,6 @@ div.emptyProd{
 			                    	                    	
 			                    	
 			                    	var userNickname = $("input[name='userNickname']").val();
-
 			                    	console.log(userId);
 			                    	console.log(cookNo);
 			                    	console.log(userNickname);
@@ -496,9 +451,7 @@ div.emptyProd{
 				 
 				 
 				 
-
 			
-
 			   		
 				   	//====================================================================
 					 
@@ -595,16 +548,15 @@ div.emptyProd{
 						                		
 						                		if(JSONData.list[i].cookStock == '0'){
 						                		
-						                		recruit ="<div><h5 style='color:#e90f30'><strong>신청종료된 쿠킹클래스입니다</strong></h5></div>"
+						                		recruit ="<div><h6 style='color:#e90f30'><strong>신청종료된 쿠킹클래스입니다</strong></h6></div>"
 						                			
 						                			
 						                		}else{ 
 						                		
-						                			recruit="<div><h5><strong>모집인원"+JSONData.list[i].cookRecruit+"명</strong></h5></div>"
+						                			recruit="<div></div>"
 						                			
 						                		}
 						                			
-
 						                
 						                			
 						                			
@@ -614,7 +566,7 @@ div.emptyProd{
 							                    	 				+"<div class='row' id='target'>"
 							                    	 				+"<td align='left'></td>"
 							                    	 				+"<div class='row'>"
-							                     					+"<div class='col-xs-4 col-md-6 text-lefr image' align='center'  value='"+JSONData.list[i].cookNo+"'>"
+							                     					+"<div class='col-xs-4 col-md-6 text-lefr image' align='center'  value='"+JSONData.list[i].cookNo+"'><br>"
 							                     					+image
 							                     					+"<br/><br/>"
 							                     					+"<table><tr class='liketable'>"
@@ -622,14 +574,16 @@ div.emptyProd{
 							                     					+"</td><td class='likes'></td></tr>	</table></div>"
 							                     					+"<div class='col-xs-4 col-md-4'>"
 						                     						+"<div class='row'>"
-						                     						+"<div><h4><strong>"+JSONData.list[i].cookName+"</strong></h4></div><br>"   
-						                     						+"<div><strong>"+JSONData.list[i].cookBrief+"</strong></div>"
-						                     						+"</div>"
-						                     						+"<br/><br/>"
-						                     						+"<div class='row'>"
-						                     						+"<div><h6><strong>"+JSONData.list[i].cookPrice+" 원</strong></h6></div>"
+						                     						+"<div><h3><strong>"+JSONData.list[i].cookName+"</strong></h3>"
 						                     						+recruit
-						                     						+"</div><br/>"
+						                     						+"</div><br><div><strong>"+JSONData.list[i].cookBrief+"</strong></div>"
+						                     						+"</div><br>"
+						                     						+"<div class='row'>"
+						                     						+"<div><h5><strong>모집인원 : "+JSONData.list[i].cookRecruit+" 명</strong></h5></div>"
+						                     						+"</div>"
+						                     						+"<div class='row'>"
+						                     						+"<div><h5><strong>"+JSONData.list[i].cookPrice+" 원</strong></h5></div>"						                     						
+						                     						+"</div>"
 						                     						+"<div class='row'>"
 						                     						+"<h5><strong> "+cookTheme+"</strong></h5></div>"
 						                     						+"<div class='row'>"
@@ -723,7 +677,7 @@ div.emptyProd{
 
 		
 		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">COOKING&nbsp;CLASS</span></h3>
-		        <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
+		      
 		
 		      </div>		  	
 	
@@ -750,7 +704,7 @@ div.emptyProd{
 		<table width="100%">
 			<tr>
 				<td class="col-md-6 text-right">
-					<input type="hidden" name="searchCondition" id="searchCondition" value="">
+					
 					<div class="form-group">
 					    <label class="sr-only" for="searchKeyword">검색</label>
 					    <input type="text" style="display: none;">
@@ -808,7 +762,7 @@ div.emptyProd{
 	<div class="row" >
 		
 
-				<div class="col-xs-4 col-md-6 text-lefr image" align="center"  value="${cook.cookNo }">				
+				<div class="col-xs-4 col-md-6 text-lefr image" align="center"  value="${cook.cookNo }"><br>				
 <c:choose>
 		    	<c:when test="${cook.cookFilename.contains('/')}">
 						<c:choose>
@@ -850,8 +804,20 @@ div.emptyProd{
 				
 				
 					
-					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
-					<div><strong>${cook.cookBrief }</strong></div>
+					<div><h3><strong>${cook.cookName}</strong></h3>
+										<c:choose>
+					
+				<c:when test = "${cook.cookStock == '0'}">
+				<div><h6 style="color:#e90f30"><strong>신청종료된 쿠킹클래스입니다</strong></h6>					
+				</div>
+			</c:when> 
+			<c:otherwise>
+			
+				</c:otherwise>
+			
+				</c:choose>
+					</div><br>
+					<div><strong>${cook.cookBrief }</strong></div><br>
 					
 					
 					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>
@@ -860,28 +826,17 @@ div.emptyProd{
 					
 					
 				</div>
+				<div class="row">
 				
-				<br/><br/>
-				
-				
-				
+				<div><h5><strong>모집인원 : ${cook.cookRecruit}명</strong></h5></div>
+					</div>
 				
 				<div class="row">
-					<div> <h6> <strong>${cook.cookPrice } 원 </strong></h6></div>
-					<c:choose>
-					
-				<c:when test = "${cook.cookStock == '0'}">
-				<div><h5 style="color:#e90f30"><strong>신청종료된 쿠킹클래스입니다</strong></h5>					
-				</div>
-			</c:when> 
-			<c:otherwise>
-			<div><h5><strong>모집인원${cook.cookRecruit}명</strong></h5></div>
-				</c:otherwise>
-			
-				</c:choose>
+					<div> <h5> <strong>가격 : ${cook.cookPrice } 원 </strong></h5></div>
+
 				</div>
 				
-				<br/>
+			
 				
 				<div class="row">
 			<c:if test = "${cook.cookTheme =='KO'}">

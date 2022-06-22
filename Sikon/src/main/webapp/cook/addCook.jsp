@@ -15,8 +15,252 @@
   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+ <!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
+
 
 <style>
+
+html {
+  line-height: 1;
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+  
+  
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* Colors */
+/* ---------------------------------------- */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+.info-text {
+  text-align: left;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+h2.heading {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: left;
+  color: #937062;
+  border-bottom: 1px solid #937062;
+  padding-bottom: 3px;
+  margin-bottom: 20px;
+}
+
+.controls {
+  text-align: left;
+  position: relative;
+}
+.controls input[type=text],
+.controls input[type=email],
+.controls input[type=number],
+.controls input[type=date],
+.controls input[type=tel],
+.controls textarea,
+.controls button,
+.controls select {
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #c6c6c6;
+  width: 100%;
+  margin-bottom: 18px;
+  color: #888;
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+  font-size: 16px;
+  font-weight: 300;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.controls input[type=text]:focus, .controls input[type=text]:hover,
+.controls input[type=email]:focus,
+.controls input[type=email]:hover,
+.controls input[type=number]:focus,
+.controls input[type=number]:hover,
+.controls input[type=date]:focus,
+.controls input[type=date]:hover,
+.controls input[type=tel]:focus,
+.controls input[type=tel]:hover,
+.controls textarea:focus,
+.controls textarea:hover,
+.controls button:focus,
+.controls button:hover,
+.controls select:focus,
+.controls select:hover {
+  outline: none;
+  border-color: #937062;
+}
+
+.controls .fa-sort {
+  position: absolute;
+  right: 10px;
+  top: 17px;
+  color: #999;
+}
+.controls select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.controls textarea {
+  resize: none;
+  height: 200px;
+}
+
+input:-webkit-autofill {
+   -webkit-box-shadow: 0 0 0 1000px #fff inset;
+}
+
+.submit {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  padding: 12px 0;
+}
+.submit:hover {
+  background-color: #937062d4;
+}
+
+.cancel {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  border: 1px solid #937062;
+  color: #937062;
+  padding: 11px 0;
+}
+.cancel:hover {
+  background-color: #e7e2e2;
+}
+.clear:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.grid {
+  background: #f7f7f7;
+}
+.grid:after {
+  /* Or @extend clearfix */
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.grid [class*=col-]:last-of-type {
+  padding-right: 0;
+}
+
+.col-2-3 {
+  width: 66.66%;
+}
+
+.col-1-3 {
+  width: 33.33%;
+}
+
+.col-1-2 {
+  width: 50%;
+}
+
+.size {
+  width: 25%;
+}
+
+[class*=col-] {
+  float: left;
+  padding-right: 10px;
+}
+
+@media (max-width: 760px) {
+  .col-1-4-sm,
+.col-1-3,
+.col-2-3 {
+    width: 100%;
+  }
+
+  [class*=col-] {
+    padding-right: 0px;
+  }
+}
+.col-1-8 {
+  width: 12.5%;
+}
+
+.formall{
+	padding:220px;
+}
+.pltitle{
+
+	text-align: center;
+	color: #333;
+	padding-top: 30px;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+}
 div.container {
 	padding-top: 150px;
 	
@@ -147,6 +391,11 @@ div.container {
 		var startTime = $("input[name='startTime']").val();
 		var endTime = $("input[name='endTime']").val();
 		var cookRegdate = $("input[name='cookRegdate']").val();
+		var aplstarTime = $("input[name='aplstarTime']").val();
+		var aplstarTime = $("input[name='aplendTime']").val();
+
+		
+		
 		
 		var cookStock = $("input[name='cookStock']").val();
 		var cookRecruit = $("input[name='cookRecruit']").val();
@@ -155,21 +404,20 @@ div.container {
 			alert("신청가능인원과 모집인원은 같아야합니다");
 			return;
 		}
-		
-		
+
 
 		if (cookName == null || cookName.length < 1) {
-			alert("상품명은 반드시 입력하여야 합니다.");
+			alert("쿠킹클래스명은 반드시 입력하여야 합니다.");
 			return;
 		}
 		if (cookBrief == null || cookBrief.length < 1) {
-			alert("상품상세정보는 반드시 입력하여야 합니다.");
+			alert("쿠킹클래스간략설며은 반드시 입력하여야 합니다.");
 			return;
 		}
 	
 	
 		if (cookStock == null || cookStock.length < 1) {
-			alert("재고는 반드시 입력하셔야 합니다.");
+			alert("모집인원가능인원은 반드시 입력하셔야 합니다.");
 			return;
 		}
 
@@ -411,13 +659,7 @@ div.container {
 		    </div>
 		  </div>
 		  
-		   	  <div class="form-group">
-		    <label for="uploadfile2" class="col-sm-offset-1 col-sm-3 control-label">1분영상</label>
-		    <div class="col-sm-4">
-		     <input multiple="multiple" type="file" id="uploadfile2" name="uploadfile2"  >
-		    
-		    </div>
-		  </div>
+
 		  
 		   <input type="hidden" id="userId"  value="${user.userId }" />
     <div class="form-group">

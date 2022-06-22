@@ -20,6 +20,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
+
+
 <style>
 
 html {
@@ -307,7 +309,7 @@ input:-webkit-autofill {
 			<form action="">
 			  
 			  
-				<h3 class="pltitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| ADD PRODUCT |</h3><br><br>
+				<h3 class="pltitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| R E G I S T R A T I O N |</h3><br><br>
 				
 				
 				<!-- 상품 기본정보 입력 -->			  

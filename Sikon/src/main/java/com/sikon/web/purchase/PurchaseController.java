@@ -204,11 +204,13 @@ public class PurchaseController {
 		// 쿠폰 사용하기
 		
 		Coupon coupon = new Coupon();
-		
+		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+		System.out.println("////////////////////////////////////////"+purchase.getUsedCoupon()+"////////////////////////////////////////");
+		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 		if(purchase.getUsedCoupon().equals("")) {
 			purchase.setUsedCoupon(null);			
 		}
-		
+
 		if(purchase.getUsedCoupon() != null) {
 			int issueNo = Integer.parseInt(purchase.getUsedCoupon());
 			System.out.println("issueNo: "+issueNo);
@@ -866,7 +868,7 @@ public class PurchaseController {
 		Map<String , Object> map=purchaseService.getPurchaseList(search, buyerId);
 		
 		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, 8);
 		System.out.println(resultPage);
 		
 		// Model 과 View 연결
@@ -896,7 +898,7 @@ public class PurchaseController {
 		// Business logic 수행
 		Map<String , Object> map=purchaseService.getSalesList(search);
 		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, 10);
 		System.out.println(resultPage);
 		
 		ModelAndView modelAndView = new ModelAndView();

@@ -98,7 +98,7 @@ div.row{
 	<div class="container checkprod">
 	
 		<div style="text-align: center;">
-	       <h3 class=" text-info" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| CHECK |</h3><br>
+	       <h3 class=" text-info" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| C H E C K |</h3><br>
 	    </div>
 	    
 	    <div class="row">

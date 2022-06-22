@@ -40,17 +40,17 @@
 
 body{
 	 padding-top : 50px;
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 div.row{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
  div.page-header{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }  
 table {
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 th{
 	font-weight: lighter;
@@ -79,11 +79,15 @@ div.list{
 
 .prodname{
 	font-size: 15px;
-	font-weight: bold;
+	font-weight:bold;
+	color: #333;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 .prodcontent{
 	text-align: left;
+	color: #666;
+	font-size: 14px;
 }
 
 .image{
@@ -107,7 +111,7 @@ div.list{
   margin-bottom: 20px;
   background: #937062;
   float: right;
-  font-family: 'Gowun Batang', serif;
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   
 }
 .review {
@@ -122,7 +126,7 @@ div.list{
   margin-bottom: 20px;
   background: #f7f7f7;
   float: right;
-  font-family: 'Gowun Batang', serif;
+  font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   
 }
 
@@ -137,7 +141,7 @@ div.emptyProd{
 .orderlist{
 	padding: 35px;
 	text-align: center;
-		font-family: 'Tiro Devanagari Sanskrit', serif;
+	font-family: 'Tiro Devanagari Sanskrit', serif;
 	
 }
 .getpurchase{
@@ -202,8 +206,8 @@ a.payback:hover{
 		
 		
 
-		 $(function() {
-			 
+		$(function() {
+			
 			 $(".getpurchase").on("click" , function() {
 				 
 				var serialNo = $(this).attr('value');
@@ -269,12 +273,12 @@ a.payback:hover{
 			});
 			
 			
-			
-			
 			$( ".review" ).on("click" , function() {
 				var textNo=$(this).attr("value");
 				var textNo2=$(this).attr("value2");
 				var category='PRD';
+				console.log(textNo);
+				console.log(textNo2);
 				window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo+'&textNo2='+textNo2, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
 			});
 			

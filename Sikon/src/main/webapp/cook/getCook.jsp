@@ -85,7 +85,7 @@ color:crimson;
   font-size:0.5px;
   border-radius: 5px;
   position: absolute;
-   top: 55px;
+   top: 12px;
    left: 2px;
    width: 15px;
 }
@@ -268,12 +268,14 @@ margin-left: 60px;
   background-color: #f7f7f7;
   border: 1px solid #937062;
   color: #937062;
-  padding: 11px 0;
-  width:100px;
+  padding: 3px 0;
+  width:82px;
   font-size: small;
+  margin-right: 7px;
 }
 .btn-u:hover {
   background-color: #e7e2e2;
+  
 }
 
 
@@ -296,6 +298,13 @@ margin-left: 60px;
 	padding-top: 150px;
 } 
 
+.displayFlex{
+	    width: 130px;
+    position: absolute;
+    top: 0;
+    right: 30px;
+}
+
 
 
 </style> 
@@ -303,13 +312,14 @@ margin-left: 60px;
 <style>
 body>div.container{
 	padding-top : 200px;
-	font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 div.row{
-	font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+		position:relative;
 }
 div.page-header{
-	font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 div.image{
 	padding-top : 70px;
@@ -402,7 +412,17 @@ div.image{
 			 			 
 			console.log("좀되라");
 			 
-		});			 
+		});	
+		 
+		 
+			//======= 리뷰보기 이동 ================================
+		 $( ".goreview" ).on("click" , function() {
+			 
+			 var offset = $(".reviewHeader").offset();
+			 
+			 $("html").animate({scrollTop : offset.top},400);
+			 
+		 });		 
 		 
 	});
 //=========================================좋아요=========================================//	
@@ -473,12 +493,14 @@ div.image{
 				        success : function(data){
 				        	
 				        	alert("알람 전송 완료!!");
-				        	      	          
+				        	    
+				        	if (data.userId != data.mentorId) {
 				           		if(socket){
 				        			let socketMsg = "heart,"+data.userId+","+data.userNickname+","+data.mentorId+","+data.cookName;
 				        			console.log(socketMsg);
 				        			socket.send(socketMsg);
 				           		}
+				        	}
 				        }
 				    
 				    })
@@ -615,9 +637,8 @@ div.image{
 				
 				<div class="row">
 				
-					<div class="text-right">		    	
 		    	
-		    	
+		    	<div class="row">
 		    	
 		    	<table >
 		    		<tr class="liketable" align="left">
@@ -641,22 +662,25 @@ div.image{
 				</table>	
 				
 		
-					</div>
-						<div class="text-left">
+					
+					
+					<div class="displayFlex">
 								<a class ="kakao" id="kakao-link-btn" href="javascript:kakaoShare()">
-					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
+					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30" style="float: right;"/>
 					    </a>
-					    
-					    
-					    	<c:if test="${sessionScope.user.role == 'mentor'}">
+					       	<c:if test="${sessionScope.user.role == 'mentor'}">
 			  				<button type="button" class="btn-u updateCook"  >수정하기</button>
 			  			  </c:if>	
 			  			
 				  			<c:if test="${sessionScope.user.role == 'admin'}">
 			  				<button type="button" class="btn-u updateCook"  >수정하기</button>
 			  			  </c:if>	
-				
-						</div>
+					 </div>
+					    
+					 
+								
+</div>
+						<br>
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
 				
 					<div><strong>${cook.cookBrief }</strong></div>
@@ -673,8 +697,8 @@ div.image{
 				<br/>
 				
 						<div class="row">
-					신청인원: &emsp;
-				      <input type="number" min="0" id="cookStatus" name="cookStatus" value="1" style="width:40px" readonly/> 명
+				
+				  <input type="hidden" id="cookStatus"  name="cookStatus"  value="1"/>	
 				</div>
 				
 				
@@ -766,8 +790,16 @@ div.image{
 		 	</div>
 		 	
 		 	<hr/>
+		 	
+			<div class="tabs">
+			 	
+			 	<a href="#" class="goreview" style="text-decoration: none;color: #937062;font-size:15px"> 리뷰보기(${reviewNum })</a>
+			</div>		 	
 
 		<div class="col-xs-10 col-md-10 text-center">
+		
+		
+		
 
 			<div><h4><strong>클래스 정보</strong></h4> 
 			
@@ -881,7 +913,7 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 		
 			
  	<div id="wish_modal">
- 		<a class="modal_close_btn"><i class="bi bi-x"></i></a>
+ 		<a class="modal_close_btn"><i class="bi bi-x" style="font-size : 30px"></i></a>
  		<br>
  		<div class="message">
 	    클래스가 담겼습니다.

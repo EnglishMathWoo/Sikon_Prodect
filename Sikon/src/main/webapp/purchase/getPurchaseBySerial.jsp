@@ -31,13 +31,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 <style>
 
 
 div.container {
 	padding-top: 220px;
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	width: 652px;
 	padding-bottom: 150px;
 }
@@ -274,7 +274,7 @@ label{
 <div class="container">
 	<div class="layout">
 			<br>
-				<h1 class="bg-defualt text-center">| PAYMENT |</h1><br><br>
+				<h1 class="bg-defualt text-center" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| P A Y M E N T |</h1><br><br>
 				
 				<!-- form Start /////////////////////////////////////-->
 
@@ -414,15 +414,10 @@ label{
 			
 			<div class="text-center">
 			
-				<c:if test="${purchase.divyStatus.equals('001') && user.role != 'admin'}">	
+				<c:if test="${purchase.divyStatus.equals('001')}">	
 				<button type="button" class="update" >수정하기</button>	
 				</c:if>
-				<c:if test="${user.role == 'admin' }">	
-				<button type="button" class="check" >확&emsp;인</button>
-				</c:if>
-				<c:if test="${user.role != 'admin' }">	
 				<button type="button" class="golist" >확&emsp;인</button>
-				</c:if>
 			</div>
 			
 			</c:forEach>	

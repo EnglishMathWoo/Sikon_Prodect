@@ -76,36 +76,37 @@ public class ReviewController {
 	String filePath;
 
 	@RequestMapping(value = "addReview", method = RequestMethod.POST)
-	public ModelAndView addReview(@RequestParam("fileArray") MultipartFile[] fileArray,
+	public String addReview(@RequestParam("fileArray") MultipartFile[] fileArray,
 			@ModelAttribute("review") Review review, @RequestParam("category") String category,
-			@RequestParam("textNo") int textNo, @RequestParam("textNo2") int textNo2, Model model,
-			HttpServletRequest request) throws Exception {
+			@RequestParam("textNo") int textNo,@RequestParam("textNo2") int textNo2, Model model, HttpServletRequest request) throws Exception {
 
 		System.out.println("/review/addReview : POST");
-//		System.out.println("review=" + review);
+		System.out.println("으으으ㅡㅁ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("review=" + review);
 //		System.out.println("category=" + category);
-//		System.out.println("textNo=" + textNo);
-//		System.out.println("textNo2=" + textNo2);
+		System.out.println("textNo=" + textNo);
+		System.out.println("textNo2=" + textNo2);
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-
+		
 		// 리뷰 작성시 일반리뷰: 100원, 포토리뷰: 500원 적립금
-		Point point = new Point();
-		point.setUserId(user.getUserId());
-		point.setPointType("EARN");
-		point.setPointCategory("RE");
-
-		int pointt = 0;
-		if (category.equals("COOK") || category.equals("PRD")) {
-			if (review.getReviewImg() == null || review.getReviewImg() == "") {
-				point.setPointScore(100);
-				pointt = 100;
-			} else {
-				point.setPointScore(500);
-				pointt = 500;
-			}
-		}
+				Point point = new Point();
+				point.setUserId(user.getUserId());
+				point.setPointType("EARN");
+				point.setPointCategory("RE");
+	
+				int pointt=0;
+				if (category.equals("COOK") || category.equals("PRD")) {
+					if (fileArray.length==0 ) {
+						point.setPointScore(100);
+						pointt=100;
+					} else {
+						point.setPointScore(500);
+						pointt=500;
+					}
+				}
+				System.out.println("얼마?"+point.getPointScore());
 		String FILE_SERVER_PATH = filePath;
 		String newFileName = "";
 
@@ -113,8 +114,10 @@ public class ReviewController {
 
 			if (!fileArray[i].getOriginalFilename().isEmpty()) {
 				fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
+				model.addAttribute("msg", "File uploaded successfully.");
 
 			} else {
+				model.addAttribute("msg", "Please select a valid mediaFile..");
 			}
 
 			newFileName += fileArray[i].getOriginalFilename();
@@ -122,6 +125,7 @@ public class ReviewController {
 		}
 
 		review.setReviewImg(newFileName);
+		
 
 		if (category.equals("COOK")) {
 			Cook cook = cookService.getCook(textNo);
@@ -137,20 +141,23 @@ public class ReviewController {
 		review.setWriterNickname(user.getUserNickname());
 		review.setReviewCategory(category);
 
+		System.out.println("리뷰:" + review);
 		reviewService.addReview(review);
+
+		System.out.println("가나");
 		reviewService.updateStatus(textNo2, category);
 		pointService.addPoint(point);
 		reviewService.givePoint(pointt, user.getUserId());
-		System.out.println("리뷰끝");
-
+		System.out.println("가나");
+		
 		session.setAttribute("user", user);
-
+		
 		ModelAndView modelAndView = new ModelAndView();
 		if (category.equals("REC")) {
 			modelAndView.addObject(review);
 			modelAndView.setViewName("forward:/recipe/getRecipe?recipeNo=" + textNo);
 		}
-		return modelAndView;
+		return "forward:/review/closepage.jsp";
 	}
 
 	@RequestMapping(value = "updateReview", method = RequestMethod.GET)

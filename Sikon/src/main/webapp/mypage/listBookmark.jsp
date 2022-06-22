@@ -456,19 +456,13 @@ p {
     animation: draw-checkbox ease-in-out 0.2s forwards;
   }
   
-
-/* 하투 */
-  
-  #image{
-    position: relative;
-
-}
-
-.menu-content{
-	   display: flex;
-    position: absolute;
-    top: 0;
-    right: 0;
+div.emptyBookmark{
+	border: 1px solid #937062;
+	padding : 90px;
+	height: 200px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
 }
 
 .imgover:hover{
@@ -539,6 +533,14 @@ p {
 
 
 		<div class="row">
+		<c:if test="${empty list}">
+				<br><br>
+				<div class="emptyBookmark">
+					책갈피 내역이 없습니다.
+				</div>
+				<br>
+			</c:if>
+			
 			<c:set var="i" value="0" />
 			<c:forEach var="list" items="${list}">
 				<div class="col-sm-6 col-md-3 col-lg-3">
@@ -553,10 +555,6 @@ p {
 							<a class="imgover" value="${list.recipe.recipeNo }" href="#"><img
 								src="/resources/images/uploadFiles/${list.recipe.recipeImg }"
 								width="320" height="300" id="image">
-								<ul class="menu-content">
-							          <li><a href="#" class="fa fa-eye"><span>${list.recipe.recipeViews }</span></a></li>
-							          <li><a href="#" class="fa fa-comment-o"><span>${list.recipe.reviewNum }</span></a></li>
-							  </ul>
 								</a>
 							<div class="excerpt">
 							
@@ -596,6 +594,7 @@ p {
 										</c:choose></li>
 									<li>${list.recipe.cookingTime}분</li>
 									<li>${list.recipe.writer.userNickname }</li>
+            						<li style="float:right">조회수: ${list.recipe.recipeViews }</li>
 								</ul>
 							</div>
 						</article>
@@ -605,10 +604,7 @@ p {
 			</c:forEach>
 		</div>
 
-		<c:if test="${empty list}">
-			<h3 align="center">책갈피 내역이 없습니다.</h3>
-			<br>
-		</c:if>
+		
 	</div>
 
 </body>

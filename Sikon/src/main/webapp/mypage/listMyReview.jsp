@@ -101,8 +101,8 @@ width:1140px;
 	color: #fff;
 	font-size: 15px;
 	cursor: pointer;
-	margin-top: 0px;
-	margin-bottom: 20px;
+	margin-top: -30px;
+	margin-bottom: 40px;
 	background: #d4af7a;
 	float: right;
 	font-family: 'Gowun Batang', serif;
@@ -118,6 +118,10 @@ text-align: center
 	text-align: center;
 	font-weight: bold;
 	color: #808080;
+}
+
+body > div.container.mt-5.px-2 > div.container.text-center{
+padding-top: 0;
 }
 </style>
     
@@ -201,6 +205,8 @@ text-align: center
 		<button type="button" class="submit" style="float: right;  margin-right: 10px;" >»è&nbsp;Á¦</button>
 		</div>
 		
+		<form>
+						  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
 	
         
         <div class="table-responsive"  style="width: 1140px">
@@ -248,7 +254,7 @@ text-align: center
         </tbody>
                  
       </table>
-      
+     
     <c:if test="${empty list}">
 		<br><br>
 		<div class="emptyReview">
@@ -258,9 +264,12 @@ text-align: center
 	</c:if>
                          
      </div>
+      </form>
+      
+      <!-- PageNavigation Start... -->
+	<jsp:include page="../common/pageNavigator_new.jsp"/>
+	<!-- PageNavigation End... -->
      </div>
-                
-      <jsp:include page="../common/pageNavigator_new.jsp"/>
      
 </body>
 

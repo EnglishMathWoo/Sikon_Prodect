@@ -314,7 +314,7 @@ font-size: 13px;
 								  cancelButtonText: 'Ãë¼Ò'
 								}).then((result) => {
 								  if (result.isConfirmed) {
-										self.location = "/recipe/deleteRecipe?recipeList="+array;
+										self.location = "/recipe/deleteRecipe?menu=search&recipeList="+array;
 								  }
 								})
 

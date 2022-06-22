@@ -40,23 +40,24 @@
 
 body{
 	 padding-top : 50px;
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 }
 
 div.row{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 }
  div.page-header{
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 }  
 table {
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 	margin-top: 20px;
 }
 th{
 	font-weight: lighter;
 	font-size: 15px;
 	cursor: pointer;
+	
 }
 .table>tbody>tr>td{
 	vertical-align: middle;
@@ -188,6 +189,11 @@ a.payback:hover{
 .bi-x::before {
     font-size: xx-large;
     color: black;
+}
+
+.tran{
+text-align: left;
+font-size: 15px
 }
 
 </style>
@@ -569,7 +575,7 @@ a.payback:hover{
 						</c:choose>
 							 <c:choose>
 							 	<c:when test="${apply.applyStatus.equals('300') && apply.reviewStatus.equals('001')}">
-							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo }">¸®ºä¾²±â</button></td>
+							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo}" value2="${apply.applyNo }">¸®ºä¾²±â</button></td>
 							 	</c:when>
 							 	<c:otherwise>
 							 		
