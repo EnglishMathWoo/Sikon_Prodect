@@ -556,7 +556,7 @@ body {
 								<div class="mar-btm">
 									<a class="btn-link text-semibold media-heading box-inline">${review.writerNickname }</a>
 									<p class="text-muted text-sm">
-										<fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+										<fmt:formatDate pattern="yyyy-MM-dd"
 											value="${review.reviewRegdate}" />
 
 									</p>

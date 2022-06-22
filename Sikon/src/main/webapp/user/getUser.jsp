@@ -397,6 +397,40 @@ padding-bottom: 20px;
 td{
 padding-top: 10px;
 }
+
+.swal2-title {
+    position: relative;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.8em 1em 0;
+    color: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    word-wrap: break-word;
+}
+.swal2-icon .swal2-icon-content {
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+}
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #937062;
+    color: #fff;
+    font-size: 1em;
+}
+.swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    color: #937062;
+    font-size: 1em;
+    background-color: #f7f7f7;
+}
 </style>
 
 </head>
@@ -619,23 +653,28 @@ padding-top: 10px;
 				 $( "#changeUserInfo" ).on("click" , function() {
 					 var userId = $('#userId').val(); 
 			    	 console.log( "user id + 콘솔 ^_^ " + userId) ; 
-			    	 
-			    	
-			    
 			    	 var role = $('#role').val(); 
 			    	 console.log( "role + 콘솔 ^_^ " + role) ;
 			    	 
-					//	self.location = "/user/changeUserRole?userId=${user.userId}"
-							
-			    	 popWin = window.open("/user/changeUserRole?userId="+userId+"&&role="+role, "popWin",
-								"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
-								"scrollbars=no,scrolling=no,menubar=no,resizable=no");	
-					
-			    	 
-				});
+			    	 if (confirm("승인하시겠습니까?")) {
+									 $.ajax({
+								            type : "POST",  
+								            url : "/user/json/changeUserRole",       
+								            data : {'role' : role, 'userId' : userId },
+								            error : function(request,status,error){
+								               console.log(request);
+								               console.log(status);
+								               console.log(error);
+								            },
+								            success : function(request) {
+								            	alert("멘토 승인이 완료되었습니다.");
+								            	document.location.href="/user/listUser";
+								}
+			    	 });	 
+				};
 			});
 		
-		
+		 });
 		// 거절
 		 $(function() {
 				//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
