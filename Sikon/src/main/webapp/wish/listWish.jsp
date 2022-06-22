@@ -270,7 +270,67 @@ div{
 							
 				
 				<!-- ------------------------------------ -->		
-			 
+				<!-- ------------------------------------ -->
+				
+				$(".checkbuy").on( "change", function() { 
+					
+					if($(this).prop("checked")){
+						
+						console.log('체크');
+						
+						var before = $("#totalprice").val();
+						
+						var thisprice = $(this).attr('price');
+						
+						var after = Number(before)+Number(thisprice);
+						
+						$("#totalprice").val(after);
+						
+					}else{
+						
+						console.log('해제');
+						
+						var before = $("#totalprice").val();
+						
+						var thisprice = $(this).attr('price');
+						
+						var after = Number(before)-Number(thisprice);
+						
+						$("#totalprice").val(after);
+						
+					}
+					
+			      	
+				});
+				
+				$("#checkall").on( "change", function() { 
+					
+					if($(this).prop("checked")){
+						
+						 var totalprice = 0;
+						 var cookPrice = $("div.cookPrice").attr("value");
+						 var cookStatus = $("div.cookStatus").attr("value");
+						 console.log(cookPrice);
+						 console.log(cookStatus);
+					
+						 
+						 var list = [];
+					   		<c:forEach var="cartprod" items="${Cart}" >
+					   		totalprice += (Number(${wish.wishCook.cookPrice})*Number(${wish.cookStatus}));
+					   		</c:forEach>
+					   		
+						 console.log(totalprice);
+						
+						 $("#totalprice").val(totalprice);
+						
+					}else{
+						
+						console.log('전체해제');
+						$("#totalprice").val(0);
+						
+					}
+					
+				});			 
 				
 		
 			 
@@ -298,7 +358,7 @@ div{
 		
       
         <div class="row">
-        	 <div class="col-md-1 text-center"><input type="checkbox" id="checkall" checked/></div>
+        	 <div class="col-md-1 text-center"><input type="checkbox" id="checkall" /></div>
         	<div class="col-md-6 text-center">쿠킹클래스정보</div>  
             <div class="col-md-2 text-center">추가신청</div>
             <div class="col-md-2 text-center">소 계</div>
@@ -314,7 +374,7 @@ div{
 		
 			  
 			  <div class="col-md-1 text-center boxselect">
-			  	<input type="checkbox" class="checkbuy"  name="wishNo" value="${wish.wishNo}"/>	
+			  	<input type="checkbox" class="checkbuy"  name="wishNo" value="${wish.wishNo}" price="${wish.wishCook.cookPrice*wish.cookStatus }"/>	
 			  	
 			  </div>
 			  
@@ -366,7 +426,7 @@ div{
 		      <table style="width:100%;">
 			      <tr>
 			      	  <td style="text-align: left"><button class="selectdelete">선택상품 삭제</button></td>
-				      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="" min="0" readonly/> 원</td>
+				      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="0" min="0" readonly/> 원</td>
 			       </tr>
 		       </table>
 	      </div>    

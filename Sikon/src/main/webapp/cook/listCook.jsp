@@ -89,7 +89,7 @@ div.channel {
 	color: #75574B
 }
 .row {
-	font-family: 'Gowun Batang', serif;
+	 font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 .table.table-hover.table-striped {
 	font-family: 'Gowun Batang', serif;
@@ -205,7 +205,7 @@ div.emptyProd{
   color: #fff;
   font-size: 15px;
   background: #937062;
-  font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   
 }
 .theme{
@@ -215,7 +215,7 @@ div.emptyProd{
   border: 1px solid #937062;
   font-size: 15px;
   background: #f7f7f7;
-  font-family: 'Gowun Batang', serif;
+     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 .act{
   border: none;
@@ -224,7 +224,7 @@ div.emptyProd{
   color: #fff;
   font-size: 15px;
   background: #937062;
-  font-family: 'Gowun Batang', serif;
+    font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 </style>
 
@@ -548,12 +548,12 @@ div.emptyProd{
 						                		
 						                		if(JSONData.list[i].cookStock == '0'){
 						                		
-						                		recruit ="<div><h5 style='color:#e90f30'><strong>신청종료된 쿠킹클래스입니다</strong></h5></div>"
+						                		recruit ="<div><h6 style='color:#e90f30'><strong>신청종료된 쿠킹클래스입니다</strong></h6></div>"
 						                			
 						                			
 						                		}else{ 
 						                		
-						                			recruit="<div><h5><strong>모집인원"+JSONData.list[i].cookRecruit+"명</strong></h5></div>"
+						                			recruit="<div></div>"
 						                			
 						                		}
 						                			
@@ -566,7 +566,7 @@ div.emptyProd{
 							                    	 				+"<div class='row' id='target'>"
 							                    	 				+"<td align='left'></td>"
 							                    	 				+"<div class='row'>"
-							                     					+"<div class='col-xs-4 col-md-6 text-lefr image' align='center'  value='"+JSONData.list[i].cookNo+"'>"
+							                     					+"<div class='col-xs-4 col-md-6 text-lefr image' align='center'  value='"+JSONData.list[i].cookNo+"'><br>"
 							                     					+image
 							                     					+"<br/><br/>"
 							                     					+"<table><tr class='liketable'>"
@@ -574,14 +574,16 @@ div.emptyProd{
 							                     					+"</td><td class='likes'></td></tr>	</table></div>"
 							                     					+"<div class='col-xs-4 col-md-4'>"
 						                     						+"<div class='row'>"
-						                     						+"<div><h4><strong>"+JSONData.list[i].cookName+"</strong></h4></div><br>"   
-						                     						+"<div><strong>"+JSONData.list[i].cookBrief+"</strong></div>"
-						                     						+"</div>"
-						                     						+"<br/><br/>"
-						                     						+"<div class='row'>"
-						                     						+"<div><h6><strong>"+JSONData.list[i].cookPrice+" 원</strong></h6></div>"
+						                     						+"<div><h3><strong>"+JSONData.list[i].cookName+"</strong></h3>"
 						                     						+recruit
-						                     						+"</div><br/>"
+						                     						+"</div><br><div><strong>"+JSONData.list[i].cookBrief+"</strong></div>"
+						                     						+"</div><br>"
+						                     						+"<div class='row'>"
+						                     						+"<div><h5><strong>모집인원 : "+JSONData.list[i].cookRecruit+" 명</strong></h5></div>"
+						                     						+"</div>"
+						                     						+"<div class='row'>"
+						                     						+"<div><h5><strong>"+JSONData.list[i].cookPrice+" 원</strong></h5></div>"						                     						
+						                     						+"</div>"
 						                     						+"<div class='row'>"
 						                     						+"<h5><strong> "+cookTheme+"</strong></h5></div>"
 						                     						+"<div class='row'>"
@@ -675,7 +677,7 @@ div.emptyProd{
 
 		
 		      <h3 class="font-x2 nospace" align="center"><br><span style="color:#937062">COOKING&nbsp;CLASS</span></h3>
-		        <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
+		      
 		
 		      </div>		  	
 	
@@ -760,7 +762,7 @@ div.emptyProd{
 	<div class="row" >
 		
 
-				<div class="col-xs-4 col-md-6 text-lefr image" align="center"  value="${cook.cookNo }">				
+				<div class="col-xs-4 col-md-6 text-lefr image" align="center"  value="${cook.cookNo }"><br>				
 <c:choose>
 		    	<c:when test="${cook.cookFilename.contains('/')}">
 						<c:choose>
@@ -802,8 +804,20 @@ div.emptyProd{
 				
 				
 					
-					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
-					<div><strong>${cook.cookBrief }</strong></div>
+					<div><h3><strong>${cook.cookName}</strong></h3>
+										<c:choose>
+					
+				<c:when test = "${cook.cookStock == '0'}">
+				<div><h6 style="color:#e90f30"><strong>신청종료된 쿠킹클래스입니다</strong></h6>					
+				</div>
+			</c:when> 
+			<c:otherwise>
+			
+				</c:otherwise>
+			
+				</c:choose>
+					</div><br>
+					<div><strong>${cook.cookBrief }</strong></div><br>
 					
 					
 					<input type="hidden" name="cookBrief" value="${cook.cookBrief }"/>
@@ -812,28 +826,17 @@ div.emptyProd{
 					
 					
 				</div>
+				<div class="row">
 				
-				<br/><br/>
-				
-				
-				
+				<div><h5><strong>모집인원 : ${cook.cookRecruit}명</strong></h5></div>
+					</div>
 				
 				<div class="row">
-					<div> <h6> <strong>${cook.cookPrice } 원 </strong></h6></div>
-					<c:choose>
-					
-				<c:when test = "${cook.cookStock == '0'}">
-				<div><h5 style="color:#e90f30"><strong>신청종료된 쿠킹클래스입니다</strong></h5>					
-				</div>
-			</c:when> 
-			<c:otherwise>
-			<div><h5><strong>모집인원${cook.cookRecruit}명</strong></h5></div>
-				</c:otherwise>
-			
-				</c:choose>
+					<div> <h5> <strong>가격 : ${cook.cookPrice } 원 </strong></h5></div>
+
 				</div>
 				
-				<br/>
+			
 				
 				<div class="row">
 			<c:if test = "${cook.cookTheme =='KO'}">

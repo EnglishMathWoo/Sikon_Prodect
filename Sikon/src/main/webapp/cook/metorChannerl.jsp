@@ -14,23 +14,12 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
-	
-	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/resources/css/animate.min.css" rel="stylesheet">
-   <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    
+
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -38,13 +27,20 @@
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
+ <!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
+	
 <style>
 body {
     background-color: #F7F7F7;
 }
 
 #logo a{
-	font-family: 'Gowun Batang', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 
 }
 
@@ -164,8 +160,8 @@ h3,
 h4,
 h5,
 h6 {
-    color: #455a64;
-    font-family: "Poppins", sans-serif;
+    color: #000;
+    	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
     font-weight: 400
 }
 
@@ -199,23 +195,23 @@ body {
 }
 
 .page-header.text-info {
-	font-family: 'Gowun Batang', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
 	color: #75574B
 }
 
 .text-info {
-	font-family: 'Gowun Batang', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
 	color: #75574B
 }
 
 .row {
-	font-family: 'Gowun Batang', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 .table.table-hover.table-striped {
-	font-family: 'Gowun Batang', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
@@ -286,10 +282,14 @@ article img{width:100%;}/* Force the image to have the full width of parent at a
 
 /* [cook LIST] 폰트 적용 */
 .wrapper{
-font-family: 'Gowun Batang', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
-
+.orderlist{
+	padding: 35px;
+	font-family: 'Tiro Devanagari Sanskrit', serif;
+	text-align: center;
+}
 
 /* 레시피 등록 버튼 css */
 .submit
@@ -306,7 +306,7 @@ font-family: 'Gowun Batang', serif;
   margin-bottom: 20px;
   background: #d4af7a;
   float: right;
-  	font-family: 'Gowun Batang', serif;
+ 	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
   
 }
 
@@ -525,7 +525,7 @@ p {
         <div class="card "> <img class="card-img-top" src="/resources/images/uploadFiles/index/KakaoTalk_20210116_134002939.jpg" alt="Card image cap" width="80%">
             <div class="card-body little-profile text-center">
                 <div class="pro-img"><img src="/resources/images/uploadFiles/${mentor.userImage}" alt="user"></div>
-                <h3 class="m-b-0">${mentor.userNickname}의 쿠킹클래스</h3>             
+              	<h3 class="orderlist">| M E N T O R C H A N N E L|</h3>             
 
             </div>
         </div>
@@ -577,9 +577,9 @@ p {
   
     <div id="latest" class="group">
       <article class="one_third first"><a class="imgover" value="${cook.cookNo }" href="#"> 
-      <ul>
-  <li>
-  <img src="/resources/images/uploadFiles/${cook.cookFilename }" width="320" height="300"></li></ul></a>
+     
+
+  <img src="/resources/images/uploadFiles/${cook.cookFilename }" width="320" height="300"></a>
         <div class="excerpt">
           <h4 class="heading" >${cook.cookName }</h4>
            <h6 >${cook.cookBrief }</h6>
