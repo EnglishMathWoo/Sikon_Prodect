@@ -457,6 +457,8 @@ div.addbar{
 #addbar{
 	text-decoration-line: none;
 	color:#f7f7f7;
+	display: flex;
+	justify-content: center;
 }
 
 header{
@@ -690,6 +692,12 @@ border-spacing:0px
 	width:250px;
 	heigth: 80px;
 }
+.click{
+	color: #937062;
+}
+.active{
+	font-size: 15px;
+}
 </style>
 
 <!-- /////////////////////// ToolBar Start ////////////////////////////-->
@@ -703,7 +711,7 @@ border-spacing:0px
 	<div class="addbar">
 		<a href="/user/addUser" id="addbar">
 			<img src="/resources/images/logo/logo.png" width="24px" height="24px" id="logo" > 
-			 &nbsp;회원가입 시 5000원 할인쿠폰 증정!
+			 &ensp;회원가입 시 5000원 할인쿠폰 증정!
 		 </a>
 	</div> 
 
@@ -840,11 +848,11 @@ border-spacing:0px
 	<!-- ################################################################################################ -->
 	<nav id="mainav" class="fl_menus">
 	  <ul class="menus">
-		<li class="active"><a href="#">레시피</a></li>
-		<li class="active"><a href="#">스토어</a></li>
-		<li class="active"><a href="#">쿠킹클래스</a></li>
-		<li class="active"><a href="#">랭킹</a></li>
-		<li class="active"><a href="#">공지사항</a></li>
+		<li class="active recipe"><a href="#">레시피</a></li>
+		<li class="active store"><a href="#">스토어</a></li>
+		<li class="active cook"><a href="#">쿠킹클래스</a></li>
+		<li class="active rank"><a href="#">랭킹</a></li>
+		<li class="active notice"><a href="#">공지사항</a></li>
 				
 		<c:if test="${sessionScope.user.role == 'admin'}">
 		<li><a class="drop" href="#">관리</a>
@@ -1207,6 +1215,9 @@ border-spacing:0px
 			});	
 		 
 			 
+		
+		 
+		 
 		//web socket 시작
 		var socket = null;
 		

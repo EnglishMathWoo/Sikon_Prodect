@@ -262,15 +262,18 @@ main p{
 }
 
 
-  .top {
-  position: fixed;
-  right: 3%;
-  bottom: 8%;
-  cursor:pointer;
-  z-index:20;
-    color:#fff;
-padding:10px;
+.top {
+	position: fixed;
+	right: 3%;
+	bottom: 8%;
+	cursor:pointer;
+	z-index:20;
+	color:#fff;
+	padding:10px;
     background:#444;
+    width: 35px;
+    height: 35px;
+    display: none;
     
 }
 
@@ -324,6 +327,9 @@ padding:10px;
 .one section div:hover{
   opacity:0.9;
   background:rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .one h3{
@@ -352,6 +358,7 @@ padding:10px;
     left: 50%;
     transform: translate(-50%,-50%);
     position: absolute;
+    width: 200px;
 }
 
 .two>:first-child{
@@ -412,7 +419,6 @@ padding:10px;
     height: 280px;
     top: 0;
 opacity:0;
-transition:all 0.3s ease-in;
 }
 .word:hover{  
   position:absolute;
@@ -426,6 +432,7 @@ transition:all 0.3s ease-in;
     height: 280px;
     top: 0;
 opacity:1;
+
 }
 
 
