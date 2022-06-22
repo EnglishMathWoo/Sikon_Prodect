@@ -256,7 +256,7 @@ label{
 		    	</c:choose>
 						</td>
 						<td class="content">
-							<p style="font-weight: bold;font-size: 15px">${apply.classCook.cookName}${apply.classCook.mentor.userNickname}</p>
+							<p style="font-weight: bold;font-size: 15px">${apply.classCook.cookName}</p>
 							<p>${apply.classCook.cookPrice} 원</p>
 							
 							<p>신청인원: ${apply.cookStatus} 명</p><input type="hidden" min="0" class="form-control" id="cookStatus" name="cookStatus" />
@@ -292,7 +292,7 @@ label{
 				  <div class="sectd">
 				  	<h5>결제수단</h5>
 				  	<div class="payment">
-				  		<c:if test="${apply.paymentOption == '1'}">카카오 간편결제</c:if>
+				  		카카오 간편결제
 				
 				  	</div>
 				  </div>

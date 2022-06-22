@@ -321,7 +321,7 @@ div.emptyProd{
 			  
 			  <td align="center" class="view">
 			  	<c:if test="${cook.cookStock == 0 }">
-			  		<span style="color:#ffb6c1">${cook.cookStock } Έν</span>
+			  		<span style="color:#e90f30">${cook.cookStock } Έν</span>
 			  	</c:if>
 			  	<c:if test="${cook.cookStock != 0 }">
 			  		${cook.cookStock } Έν
