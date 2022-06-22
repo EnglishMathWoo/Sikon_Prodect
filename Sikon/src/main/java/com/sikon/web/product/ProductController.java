@@ -261,7 +261,7 @@ public class ProductController {
 		
 		String names = "";
 		
-		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, 10);
 		System.out.println(resultPage);
 		
 		model.addAttribute("list", map.get("list"));
