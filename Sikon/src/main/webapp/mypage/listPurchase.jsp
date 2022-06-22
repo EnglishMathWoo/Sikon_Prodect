@@ -206,8 +206,8 @@ a.payback:hover{
 		
 		
 
-		 $(function() {
-			 
+		$(function() {
+			
 			 $(".getpurchase").on("click" , function() {
 				 
 				var serialNo = $(this).attr('value');
@@ -273,12 +273,12 @@ a.payback:hover{
 			});
 			
 			
-			
-			
 			$( ".review" ).on("click" , function() {
 				var textNo=$(this).attr("value");
 				var textNo2=$(this).attr("value2");
 				var category='PRD';
+				console.log(textNo);
+				console.log(textNo2);
 				window.open('/review/addReview.jsp?category='+category+'&textNo='+textNo+'&textNo2='+textNo2, 'review', 'width=430, height=525, location=no, status=no, scrollbars=yes');
 			});
 			
