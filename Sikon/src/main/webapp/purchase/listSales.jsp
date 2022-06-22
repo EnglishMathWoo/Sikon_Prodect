@@ -164,7 +164,7 @@ h3{
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container listsale">
 	<br>
-		<h3 class="pltitle"  style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| SALES LIST |</h3>
+		<h3 class="pltitle"  style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| S A L E S &nbsp; L I S T |</h3>
 	    
 	    <div>
 

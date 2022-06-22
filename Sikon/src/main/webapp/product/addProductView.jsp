@@ -309,7 +309,7 @@ input:-webkit-autofill {
 			<form action="">
 			  
 			  
-				<h3 class="pltitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| ADD PRODUCT |</h3><br><br>
+				<h3 class="pltitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| R E G I S T R A T I O N |</h3><br><br>
 				
 				
 				<!-- 상품 기본정보 입력 -->			  

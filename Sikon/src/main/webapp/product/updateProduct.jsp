@@ -89,6 +89,7 @@ div.form-group{
 
 <script type="text/javascript">
 
+
 	function fncUpdateProduct() {
 
 		$("form").attr("method", "POST").attr("enctype","multipart/form-data").attr("action", "/product/updateProduct").submit();
@@ -119,7 +120,7 @@ div.form-group{
 
 	<div class="container">
 
-		<h1 class="bg-default text-center" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| UPDATE PRODUCT |</h1>
+		<h1 class="bg-default text-center" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| E D I T &nbsp; P R O D U C T |</h1><br><br>
 
 		<form class="form-horizontal" enctype="multipart/form-data">
 		

@@ -94,6 +94,8 @@ div{
   color: #fff;
   padding: 12px 0;
   width: 18%;
+  font-size: 18px;
+  letter-spacing:5px
 }
 .buybtn:hover {
   background-color: #937062d4;
@@ -138,7 +140,7 @@ div{
 			 
 			///* 
 			<!-- ------------- 총 결제금액 초기값 --------------- -->
-			 
+			 //*
 			 var totalprice = 0;
 			 var price = $("div.price").attr("value");
 			 var quantity = $("div.quantity").attr("value");
@@ -154,7 +156,7 @@ div{
 			 console.log(totalprice);
 			
 			 $("#totalprice").val(totalprice);
-			 
+			 //*/
 			 
 			 <!-- ------------- 장바구니 삭제 --------------- -->
 			 
@@ -288,6 +290,67 @@ div{
 				
 			})
 						
+			<!-- ------------------------------------ -->
+			
+			$(".checkbuy").on( "change", function() { 
+				
+				if($(this).prop("checked")){
+					
+					console.log('체크');
+					
+					var before = $("#totalprice").val();
+					
+					var thisprice = $(this).attr('price');
+					
+					var after = Number(before)+Number(thisprice);
+					
+					$("#totalprice").val(after);
+					
+				}else{
+					
+					console.log('해제');
+					
+					var before = $("#totalprice").val();
+					
+					var thisprice = $(this).attr('price');
+					
+					var after = Number(before)-Number(thisprice);
+					
+					$("#totalprice").val(after);
+					
+				}
+				
+		      	
+			});
+			
+			$("#checkall").on( "change", function() { 
+				
+				if($(this).prop("checked")){
+					
+					 var totalprice = 0;
+					 var price = $("div.price").attr("value");
+					 var quantity = $("div.quantity").attr("value");
+					 console.log(price);
+					 console.log(quantity);
+				
+					 
+					 var list = [];
+				   		<c:forEach var="cartprod" items="${Cart}" >
+				   		totalprice += (Number(${cartprod.cartProd.prodDisPrice})*Number(${cartprod.quantity}));
+				   		</c:forEach>
+				   		
+					 console.log(totalprice);
+					
+					 $("#totalprice").val(totalprice);
+					
+				}else{
+					
+					console.log('전체해제');
+					$("#totalprice").val(0);
+					
+				}
+				
+			});
 			
 			<!-- ------------------------------------ -->
 			 
@@ -315,11 +378,11 @@ div{
 
 	<div class="container cartlayout">
 
-		<h3 class="carttitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| SHOPPING BAG |</h3><br>
+		<h3 class="carttitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| S H O P P I N G &nbsp; B A G |</h3><br>
       
 	       <div class="row">
 	        <div class="subtitle">
-	            <div class="col-md-1 text-left">&ensp;&nbsp;<input type="checkbox" id="checkall" /></div>
+	            <div class="col-md-1 text-left">&ensp;&nbsp;<input type="checkbox" id="checkall" checked="checked"/></div>
 	            <div class="col-md-6 text-center">상품정보</div>
 	            <div class="col-md-1 text-center"></div>
 	            <div class="col-md-1 text-center"></div>
@@ -335,13 +398,12 @@ div{
 			  <c:forEach var="cart" items="${Cart}">
 			  <div class="row">
 				<c:set var="i" value="${ i+1 }" />
-				  
 				  <div class="col-md-1 text-center boxselect">
 				  	<c:if test="${cart.cartProd.prodStock == 0}">
 				  		<input type="checkbox" disabled/> 	
 				  	</c:if>
 				  	<c:if test="${cart.cartProd.prodStock > 0}">
-				  		<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}"/> 	
+				  		<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}" price="${cart.cartProd.prodDisPrice*cart.quantity }" checked="checked"/> 	
 				  	</c:if>
 				  	
 				  </div>
@@ -402,10 +464,10 @@ div{
 		      <table style="width:100%;">
 			      <tr>
 			      	  <td style="text-align: left"><button class="selectdelete">선택상품 삭제</button></td>
-				      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="" min="0" readonly/> 원</td>
+				      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="0" min="0" readonly/> 원</td>
 			       </tr>
 		       </table>
-	      </div><br>
+	      </div><hr>
 		      
 		      
 		  <div align="right">

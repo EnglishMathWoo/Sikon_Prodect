@@ -182,7 +182,7 @@ div.emptyProd{
 	
 	<div class="container list">
 	
-		<h3 class="pltitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| MANAGEMENT |</h3>
+		<h3 class="pltitle" style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| P R O D U C T &nbsp; L I S T |</h3>
 	    <br><br><br>
 	    
 		<form class="form-inline" name="detailForm">

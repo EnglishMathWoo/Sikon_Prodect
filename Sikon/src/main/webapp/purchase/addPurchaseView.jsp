@@ -726,7 +726,8 @@ function paymentCA(data) {
 				      		
 				      </c:if>
 				      <c:if test="${product.couponApply == 'N' }">
-				      	<input type="text" class="form-control" id="usedCoupon"  placeholder="쿠폰적용이 불가한 상품입니다." readonly >
+				      	<input type="text" class="form-control" id="usedCoupon" placeholder="쿠폰적용이 불가한 상품입니다." readonly >
+				      	<input type="hidden" name="usedCoupon" value="" >
 				      </c:if>
 				  </div>
 				  

@@ -414,15 +414,10 @@ label{
 			
 			<div class="text-center">
 			
-				<c:if test="${purchase.divyStatus.equals('001') && user.role != 'admin'}">	
+				<c:if test="${purchase.divyStatus.equals('001')}">	
 				<button type="button" class="update" >수정하기</button>	
 				</c:if>
-				<c:if test="${user.role == 'admin' }">	
-				<button type="button" class="check" >확&emsp;인</button>
-				</c:if>
-				<c:if test="${user.role != 'admin' }">	
 				<button type="button" class="golist" >확&emsp;인</button>
-				</c:if>
 			</div>
 			
 			</c:forEach>	

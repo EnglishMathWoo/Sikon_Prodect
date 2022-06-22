@@ -204,11 +204,13 @@ public class PurchaseController {
 		// 쿠폰 사용하기
 		
 		Coupon coupon = new Coupon();
-		
+		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+		System.out.println("////////////////////////////////////////"+purchase.getUsedCoupon()+"////////////////////////////////////////");
+		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 		if(purchase.getUsedCoupon().equals("")) {
 			purchase.setUsedCoupon(null);			
 		}
-		
+
 		if(purchase.getUsedCoupon() != null) {
 			int issueNo = Integer.parseInt(purchase.getUsedCoupon());
 			System.out.println("issueNo: "+issueNo);

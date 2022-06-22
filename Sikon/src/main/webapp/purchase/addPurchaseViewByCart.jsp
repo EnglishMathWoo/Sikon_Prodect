@@ -254,6 +254,7 @@ html input[type=button]:hover{
 		   	
 	   		
 			console.log("상품종류 수: "+num);
+			$("#num").val(num);
 			console.log("총 상품금액: "+totalProdPrice);
 			
 			
@@ -433,6 +434,20 @@ function paymentKA(data) {
 	var prodname = $("#prodname").val();
 	console.log("prodname: "+prodname);
 	
+	var num = Number($("#num").val());
+	console.log("num: "+num);
+	
+	var payprodname =""
+	
+	if(num>1){
+		payprodname = prodname+" 외 "+(num-1);
+		console.log("payprodname: "+payprodname);
+	}else{
+		payprodname = prodname;
+		console.log("payprodname: "+payprodname);
+	}
+	
+	
 	var prodprice = $("#totalpayment").val();
 	console.log("prodprice: "+prodprice);
 
@@ -496,6 +511,18 @@ function paymentCA(data) {
 	
 	var prodname = $("#prodname").val();
 	console.log("prodname: "+prodname);
+	var num = Number($("#num").val());
+	console.log("num: "+num);
+
+	var payprodname =""
+		
+	if(num>1){
+		payprodname = prodname+" 외 "+(num-1);
+		console.log("payprodname: "+payprodname);
+	}else{
+		payprodname = prodname;
+		console.log("payprodname: "+payprodname);
+	}
 	
 	var prodprice = $("#totalpayment").val();
 	console.log("prodprice: "+prodprice);
@@ -711,6 +738,7 @@ function paymentCA(data) {
 				      </c:if>
 				      <c:if test="${cart.cartProd.couponApply == 'N' }">
 				      	<input type="text" class="form-control" id="usedCoupon"  placeholder="쿠폰적용이 불가한 상품입니다." readonly >
+				      	<input type="hidden" name="usedCoupon"  value="none" >
 				      </c:if>
 				      <input type="hidden" id="prodname" value="${cart.cartProd.prodName}">
 				     </c:forEach> 
@@ -807,6 +835,7 @@ function paymentCA(data) {
 			<input type="hidden" id="buyerphone" value="${user.phone }"/>
 			
 			<input type="hidden" id="soldout" value=""/>
+			<input type="hidden" id="num" value=""/>
 			
 	
 			<br>
