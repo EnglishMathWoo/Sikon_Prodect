@@ -119,6 +119,17 @@ div{
 .price{
 	font-size: 16px;
 }
+
+.emptyCart{
+	padding : 50px; 
+	height: 150px;
+	text-align: center;
+	font-weight: bold;
+	font-size: large;
+	color: #333;
+	border-bottom: 1px solid #d7d7d7;
+}
+
 </style>
 	<script type="text/javascript">
 
@@ -378,6 +389,12 @@ div{
 	           </div>
 	           <hr>
 	          </c:forEach>
+	          <c:if test="${empty Cart}">
+					<div class="emptyCart">
+						담긴 상품이 없습니다.
+					</div>
+					<br>
+				</c:if>
 	        
 		 </form>
 		      
