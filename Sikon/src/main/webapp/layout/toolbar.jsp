@@ -37,10 +37,11 @@ hr, .borderedbox {
 
 /* 우리의식탁 로고 이미지 비율 */
 #usik {
-float:left;
-margin-top:10px;
-	width: 150px;
-	height: 37px;
+	float: left; 
+    width: 13%;
+    height: auto;
+    margin-top: -60px;
+    margin-left: 18%
 }
 
 /* toolbar css (from layout.css) */
@@ -98,15 +99,6 @@ margin-top:10px;
 	#services .table-cell {
 		padding: 5%;
 	}
-}
-
-/* Header */
-#header #logo h1 a {
-	color: inherit;
-	background-color: inherit;
-	text-decoration-line: none;
-	float:left;
-	padding-left: 375px;
 }
 
 
@@ -473,7 +465,7 @@ position:absolute;
 width:100%;
 z-index: 10;
 border-bottom: 1px solid #dbd4d459;
-height : 180px;
+height: 20%;
 }
 
 /*  주석 풀면 위에 있는 hr css랑 충돌
@@ -514,6 +506,9 @@ font-size: 12px;
 }
 .alarm-td{
 	width: 40px;
+}
+header{
+	position: fixed;
 }
 </style> 
 <style>
@@ -683,7 +678,18 @@ font-weight: normal;
 .table{
 border-spacing:0px
 }
+.nospace{
+	right: 20%;
+}
+.menus{
+	right: 20%;
+	float: right;
+}
 
+.sikonlogo{
+	width:250px;
+	heigth: 80px;
+}
 </style>
 
 <!-- /////////////////////// ToolBar Start ////////////////////////////-->
@@ -826,14 +832,14 @@ border-spacing:0px
 
 	<!-- ################################################################################################ -->
 
-	<div id="logo" class="fl_left">
+	<div id="logo" >
 	  
-	  <h1><a href="#"><img src="/resources/images/logo/usik.png" id="usik"></a></h1>
+	  <h1><a class="sikonlogo"><img src="/resources/images/logo/sikon_logo.png" id="usik"></a></h1>
 	</div>
 
 	<!-- ################################################################################################ -->
-	<nav id="mainav" class="fl_right">
-	  <ul class="clear">
+	<nav id="mainav" class="fl_menus">
+	  <ul class="menus">
 		<li class="active"><a href="#">레시피</a></li>
 		<li class="active"><a href="#">스토어</a></li>
 		<li class="active"><a href="#">쿠킹클래스</a></li>
