@@ -313,6 +313,21 @@ padding: 3px 9px !important;
 .gsc-search-button-v2 svg{
 vertical-align: middle;
 }
+
+.btn_gotop {
+	display:none;
+	position:fixed;
+	bottom:30px;
+	right:30px;
+	z-index:999;
+	outline:none;
+	background-color:#937062;
+	color:#f7f7f7;
+	padding:15px 20px;
+}
+.btn_gotop:hover{
+	color: #f7f7f7;
+}
 </style>
 
 
@@ -485,6 +500,30 @@ vertical-align: middle;
 		                }//if
 		            });//function
 			 });
+			   	
+			//==== 검색창 입력 후 enter시 검색 이벤트 ===========================================================
+				
+				function enterkey() { 
+					if(window.event.keyCode == 13){
+						fncGetList(1);
+					}
+				} 
+				
+			//===================== 상단으로 이동 ============================================================
+				
+				$(window).scroll(function(){
+					if ($(this).scrollTop() > 300){
+						$('.btn_gotop').show();
+					} else{
+						$('.btn_gotop').hide();
+					}
+				});
+				
+				$('.btn_gotop').click(function(){
+					$('html, body').animate({scrollTop:0},400);
+					return false;
+				});
+					
 		           
 	</script>
 	
@@ -697,5 +736,11 @@ vertical-align: middle;
 </div>
 	  </div>
 	
+	
+		<!-- 상단으로 이동하기 버튼 -->
+		<a href="#" class="btn_gotop">
+		  <span class="glyphicon glyphicon-chevron-up"></span>
+		</a>
+		
 </body>
 </html>
