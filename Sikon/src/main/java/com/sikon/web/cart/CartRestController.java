@@ -68,7 +68,7 @@ public class CartRestController {
 	}
 	
 	@RequestMapping( value="json/updateCart")
-	public String updateCart( @RequestParam("cartNo") int cartNo, @RequestParam("quantity") int quantity) throws Exception{
+	public int updateCart( @RequestParam("cartNo") int cartNo, @RequestParam("quantity") int quantity) throws Exception{
 		
 		System.out.println("json/updateCart");
 		
@@ -78,7 +78,7 @@ public class CartRestController {
 		cartService.updateCart(cart);
 		
 		
-		return "redirect:/cart/getCartList";
+		return quantity;
 	}
 	
 	

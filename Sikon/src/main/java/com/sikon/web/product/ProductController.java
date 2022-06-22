@@ -188,15 +188,22 @@ public class ProductController {
 				fileArray[i].transferTo(new File(temDir, fileArray[i].getOriginalFilename()));
 				System.out.println("파일명 :: "+fileArray[i].getOriginalFilename());
 				
+				fileName+=fileArray[i].getOriginalFilename()+"&";
+				
+				System.out.println("저장될 파일이름 : "+fileName);
+				
 			}else {
 				System.out.println("파일업로드 실패...?");
+				
+				Product prodEx = productService.getProduct(product.getProdNo());
+				fileName = prodEx.getProdThumbnail();
+				
+				System.out.println("파일이름 :"+fileName);
+				
 			}
 		
-			fileName+=fileArray[i].getOriginalFilename()+"&";
-			
-			System.out.println("저장될 파일이름 : "+fileName);
 		}
-				
+
 		
 		product.setProdThumbnail(fileName);
 		productService.updateProduct(product);

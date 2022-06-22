@@ -14,7 +14,7 @@
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
+
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
@@ -27,7 +27,8 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!-- jQuery UI toolTip 사용 JS-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>		
 	<!--  ///////////////////////// CSS ////////////////////////// -->
  <!-- font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -160,8 +161,8 @@ h3{
 			
 			 $("#totalprice").val(totalprice); 
 		});	
-/*
- 
+
+ /*
 	    $(document).ready(function(){ 
 	  		getGraph();
 	  		
@@ -175,14 +176,14 @@ h3{
 		    	  $.ajax({
 		    		  url : "/apply/json/saleCount",
 		    		  type:"get",
-		    		  data:{ total : "${apply.total}", check_date : "${apply.checkDate}"},
-		    		  dataType:"json",
+		    		  data:{ applier_id : "${user.userId}",  apply_status : "100" },
+		    		 dataType : "json", 
 		    		  success:function(data){
 		    			   console.log(data[0].cook_price);
 		    			  // 그래프로 나타낼 자료 리스트에 담기
 		    			  for (let i = 0; i<data.length;i++){    				  
 								timeList.push(data[i].check_date);    				  
-								posList.push(data[i].total);    				  
+								posList.push(data[i].sum(cook_price));    				  
 		    			  }
 		    			  console.log(timeList);
 		    			   console.log(posList);  	
@@ -193,7 +194,7 @@ h3{
 		    		    	    labels: timeList, // X축 
 		    		    	    datasets: [{ 
 		    		    	        data: posList, // 값
-		    		    	        label: "${apply.checkDate}",
+		    		    	        label: "100",
 		    		    	        borderColor: "#3e95cd",
 		    		    	        fill: false
 		    		    	      }
@@ -213,7 +214,9 @@ h3{
 			     		  
 		    	  }) // ajax	  
 		      } // getGraph
- 	  */
+		      
+		      */
+ 	
 			 
 </script>	
 	

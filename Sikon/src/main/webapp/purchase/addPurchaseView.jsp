@@ -42,7 +42,15 @@ div.container {
 	width: 652px;
 	padding-bottom: 200px;
 }
-
+.buynone {
+  cursor: pointer;
+  background-color: #937062;
+  border: none;
+  color: #fff;
+  font-size: large;
+  padding: 12px 0;
+  width: 49.3%;
+}
 
 .buy {
   cursor: pointer;
@@ -423,6 +431,7 @@ html input[type=button]:hover{
 				alert('재고없음');
 				return null;
 			}
+			
 			
 			if($("#paybyca").prop("checked")){
 				
@@ -821,11 +830,19 @@ function paymentCA(data) {
 			<input type="hidden" id="buyername" value="${user.userName }"/>
 			<input type="hidden" id="buyerphone" value="${user.phone }"/>
 			
+			<input type="hidden" id="prodStatus" value="${product.prodStatus }"/>
+			
 	
 			<br>
 			<div class="text-center  buttons">
-				<button type="button" class="buy" id="iamportPayment" value="">결제하기</button>	
-				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
+				<c:if test="${product.prodStatus == 'N' || product.prodStock == 0}">
+					<button type="button" class="buynone">구매불가</button>	
+					<button type="button" class="cancel" href="#" role="button">확&emsp;인</button>
+				</c:if>
+				<c:if test="${product.prodStatus == 'Y'}">
+					<button type="button" class="buy" id="iamportPayment" value="">결제하기</button>	
+					<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
+				</c:if>
 			</div>
 				
 			<br>

@@ -33,6 +33,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
+<!-- sweetalert -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
 <style>
 .cartlayout{
 	 padding-top : 200px;
@@ -132,6 +136,38 @@ div{
 	border-bottom: 1px solid #d7d7d7;
 }
 
+
+.swal2-title {
+    position: relative;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.8em 1em 0;
+    color: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    word-wrap: break-word;
+}
+.swal2-icon .swal2-icon-content {
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+}
+.swal2-icon.swal2-warning {
+    border-color: #facea8;
+    color: #f8bb86;
+    width: 50px;
+    height: 50px;
+}
+.swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    color: #937062;
+    font-size: 1em;
+}
+
 </style>
 	<script type="text/javascript">
 
@@ -170,7 +206,7 @@ div{
 		            } 
 										
 			  });
-			 
+			 /*
 			 $( ".selectdelete" ).on("click" , function() {
 				
 					console.log('deleteSelect');
@@ -180,8 +216,27 @@ div{
 		            } 
 					
 			  });
-
+				*/
 	
+			 $(".selectdelete").on("click" , function() {
+					
+						Swal.fire({
+							  title:'선택한 상품을 장바구니에서 삭제하시겠습니까?',
+							  text: "삭제한 상품은 되돌릴 수 없습니다.",
+							  icon: 'warning',
+							  showCancelButton: true,
+							  confirmButtonColor: '#937062',
+							  cancelButtonColor: '#f7f7f7',
+							  confirmButtonText: '삭제',
+							  cancelButtonText: '취소'
+							}).then((result) => {
+							  if (result.isConfirmed) {
+								  $("form").attr("method" , "POST").attr("action" , "/cart/deleteSelect").submit();
+							  }
+							})
+
+				});
+			 
 			 <!-- ------------- 상품수량 수정 --------------- -->
 
 			 //*
@@ -206,16 +261,20 @@ div{
 		                  },
 		                  success : function(JSONData , status) {
 
-		                	 //$('input[name=quantity]').val(JSONData)
+		                	  quantity = JSONData;
 		                	 
 		                  }
 		            });
+		         
+		         $(this).parent().children().eq(1).val(quantity);
+		         
 	  			 });
 			 
 			 $( "button.minus" ).on("click" , function() {
 		         
 				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
+				 
 				 quantity = Number(quantity)-1;
 					console.log('minus');
 					console.log(cartNo);
@@ -232,12 +291,24 @@ div{
 		                  },
 		                  success : function(JSONData , status) {
 		                	  
-		                	  //$('input[name=quantity]').val(JSONData)
+		                	  quantity = JSONData;
 		                	 
 		                  }
 		            });
+		         
+		         
+		         if(quantity == 0){
+		        	 $(this).parent().children().eq(1).val(1);
+		         }else{
+		        	 $(this).parent().children().eq(1).val(quantity);
+		         }
+		         
+		         
 	  			 });
-
+			 
+			 
+			 <!-- ---------------------------- -->
+			 
 			 
 			$( ".buybtn" ).on("click" , function() {
 				 console.log('구매');
@@ -425,7 +496,7 @@ div{
 				  </div>	 
 				    	  
 				  <div class="col-md-1 text-center">
-				  	<button class="delete deletebtn" value="${cart.cartNo}"><i class="bi bi-x-lg"></i></button>
+				  	<button type="button" class="delete deletebtn" value="${cart.cartNo}"><i class="bi bi-x-lg"></i></button>
 				  </div>
 				  
 				  <div class="col-md-1 text-center"></div>
@@ -437,12 +508,12 @@ div{
 				  			<button type="button" class="calculation nope" role="button" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
 				  		</c:when>
 				  		<c:otherwise>
-				  			<button class="calculation minus" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
+				  			<button  type="button" class="calculation minus" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
 				  		</c:otherwise>
 				  	</c:choose>
 				  	
 				  	<input type="text" name="quantity" class="result" value=" ${cart.quantity }" style="width:30px;text-align: center" readonly/>
-				  	<button class="calculation plus" value="${cart.cartNo}"><i class="bi bi-plus-lg"></i></button>
+				  	<button  type="button" class="calculation plus" value="${cart.cartNo}"><i class="bi bi-plus-lg"></i></button>
 				  	
 				  </div>
 				  
@@ -463,7 +534,7 @@ div{
 	      <div>
 		      <table style="width:100%;">
 			      <tr>
-			      	  <td style="text-align: left"><button class="selectdelete">선택상품 삭제</button></td>
+			      	  <td style="text-align: left"><button  type="button" class="selectdelete">선택상품 삭제</button></td>
 				      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="0" min="0" readonly/> 원</td>
 			       </tr>
 		       </table>
@@ -471,7 +542,7 @@ div{
 		      
 		      
 		  <div align="right">
-		  	<button class="buybtn">구매하기</button>
+		  	<button  type="button" class="buybtn">구매하기</button>
 		  </div>
 	  
  	</div>

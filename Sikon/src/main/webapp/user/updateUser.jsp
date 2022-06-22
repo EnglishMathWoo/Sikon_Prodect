@@ -468,74 +468,7 @@ html input[type=button]:hover{
 		        });
 	        };
         
-	        /*
-		     // 생년월일
-			 $(function() {
-					$('#userBirth').datepicker({
-						changeMonth: true,
-						changeYear: true, 
-						language: 'kr',
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무시작날짜
-			 $(function() {
-					$('#startDate1').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무시작날짜2
-			 $(function() {
-					$('#startDate2').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-						
-			// 근무종료날짜
-			 $(function() {
-					$('#endDate1').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무종료날짜2
-			 $(function() {
-					$('#endDate2').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 취득일자
-			 $(function() {
-					$('#licenseDate').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-		   
-			// 취득일자2
-			 $(function() {
-					$('#licenseDate2').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 취득일자
-			 $(function() {
-					$('#licenseDate3').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-		   
-			// 취득일자2
-			 $(function() {
-					$('#licenseDate4').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});	 
-	        */
+	       
 			
 			// 파일 미리보기
 			 function readURL(input) {
@@ -667,7 +600,7 @@ html input[type=button]:hover{
 			<br>
 			<div>
 				<div class="subtitle">
-				  <p>쿠킹멘토 <i class="bi bi-chevron-down"></i></p>
+				  <p>쿠킹멘토 정보</p>
 				  </div><br>		
 
 				  <div class="form-group">
@@ -679,22 +612,16 @@ html input[type=button]:hover{
 					    <li> 
 					    	<input type="radio" name="mentorApply" value="N" checked="checked"/> <span style="font-size:16px; font-weight: bold;">신청안함</span>
 					  	</li>
+					  	<br>
 					  </ul>
 				  </c:if>
-				  <c:if test="${user.mentorApply == 'Y'}">
-				  	<ul class="payul">
-					 	<li>
-					 		<input type="radio" name="mentorApply" value="Y" checked="checked"/> <span style="font-size:16px; font-weight: bold;">멘토신청</span>
-					    </li>
-					    <li> 
-					    	<input type="radio" name="mentorApply" value="N"/> <span style="font-size:16px; font-weight: bold;">신청안함</span>
-					  	</li>
-					  </ul>
+				  <c:if test="${user.role == 'mentor'}">
+					    <input type="hidden" name="mentorApply" value="Y"/>
 				  </c:if>	
 				  </div>
-				  <br>
+				
 	<!-- //////////////////////////// 경력사항 //////////////////////////////////////////////////////////////////			   -->
-				  <h4 class="semititle">경력사항</h4>
+				<h4 class="semititle">경력사항</h4>
 				  
 				<table style="width:652px">
 					<tr>

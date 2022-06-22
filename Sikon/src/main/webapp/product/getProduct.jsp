@@ -145,7 +145,8 @@ a.tocart{
 	border-top: 1px solid #d7d7d7;
 	border-bottom: 1px solid #d7d7d7;
 	height: 80px;
-	padding:27px;
+	padding-top:27px;
+	padding-left: 10px;
 }
 
 <!--  댓글 -->
@@ -293,6 +294,12 @@ margin-left: 140px;
 	text-align: center;
 	font-weight: bold;
 	padding: 50px;
+}
+.getcontent{
+	padding-left: 10px;
+}
+.tumb{
+	margin-right: -10px;
 }
 </style>
  <!-- //////////////////////////////////공유하기////////////////////////////// -->
@@ -519,7 +526,7 @@ margin-left: 140px;
 	
 				<div class="col-xs-6 col-md-6 text-center image">				
 					<c:forEach var="name" items="${product.prodThumbnail.split('&')[0]}">
-							<img src="/resources/images/uploadFiles/${name}" width="400" height="400"/>
+							<img src="/resources/images/uploadFiles/${name}" width="450" height="450" class="tumb"/>
 					</c:forEach>
 				</div>	
 			
@@ -530,9 +537,9 @@ margin-left: 140px;
 						<input type="hidden" name="prodNo" id="prodNo" value="${product.prodNo }"/>
 					</div>
 				
-					<hr/>
+					<br/>
 				
-					<div class="row">
+					<div class="row getcontent">
 						<div class="text-right">
 							<a id="kakao-link-btn" href="javascript:kakaoShare()">
 						    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
@@ -547,7 +554,7 @@ margin-left: 140px;
 				
 					<br/>
 				
-					<div class="row">
+					<div class="row getcontent">
 						<p style="color:#aba6a6"><del>${product.prodPrice}</del></p>
 						<p style="font-size:17px;font-weight: bold"><span style="color:#d9534f"><fmt:formatNumber value="${product.prodDisRate}" type="percent"/>&nbsp;</span>
 						${product.prodDisPrice}<span style="font-size:14px;font-weight:600">원</span></p>
@@ -555,7 +562,7 @@ margin-left: 140px;
 				
 					<br/>
 				
-					<div class="row">
+					<div class="row getcontent">
 						구매수량: &emsp;
 						<c:if test="${product.prodStock>0}">
 				      	<input type="number" min="0" id="quantity" name="quantity" value="1" style="width:40px"/> 개&emsp;
@@ -577,7 +584,7 @@ margin-left: 140px;
 				
 					<div class="row">
 				  		<div class="text-center">	
-			  			<c:if test="${product.prodStock>0}">
+			  			<c:if test="${product.prodStock>0 && product.prodStatus == 'Y'}">
 				  			<c:if test="${menu == 'search' }">
 				  				<button type="button" class="btn-w addcart" id="popup_open_btn">장바구니</button>&emsp;
 							</c:if>
@@ -593,7 +600,15 @@ margin-left: 140px;
 			  					<button type="button" class="btn-w updateProd">수정하기</button>&emsp;
 			  				</c:if>	
 			  				<button type="button" class="btn-s soldout">품&emsp;절</button>&emsp;
-				  		</c:if>		
+				  		</c:if>	
+				  		
+				  		<c:if test="${product.prodStatus=='N'}">
+				  			<c:if test="${menu == 'manage' }">
+			  					<button type="button" class="btn-w updateProd">수정하기</button>&emsp;
+			  				</c:if>	
+			  				<button type="button" class="btn-s soldout">구매불가</button>&emsp;
+				  		</c:if>	
+				  			
 				  		</div>
 					</div>	
 				

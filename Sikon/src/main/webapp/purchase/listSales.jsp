@@ -68,8 +68,10 @@ th{
 }
 .status{
 	font-weight: bold;
+	cursor: pointer;
 }
 .cancel{
+	font-weight: bold;
 	color: #898989;
 }
 h3{
@@ -79,6 +81,9 @@ h3{
 .pltitle{
 	padding-top: 35PX;
 	text-align: center;
+}
+.getpurchase{
+	cursor: pointer;
 }
 </style>
 	<script type="text/javascript">
@@ -131,12 +136,6 @@ h3{
 				self.location ="/user/getUser?userId="+message;
 			});
 
-			$( ".tran" ).on("click" , function() {
-				var tranNo = $(this).attr("value");
-				console.log(tranNo);
-				
-				self.location ="/purchase/getPurchase?tranNo="+tranNo;
-			});
 			
 			$(".getpurchase").on("click" , function() {
 				 
@@ -208,7 +207,6 @@ h3{
 		            <th align="center">No</th>
 		            <th align="center">주문일자</th>
 		            <th align="center">주문일련번호</th>
-		            <th align="center">주문번호</th>
 		            <th align="center">배송현황</th>
 		            <th align="center">구매회원</th>
 		          </tr>
@@ -225,11 +223,10 @@ h3{
 					  
 					  <td align="center">${purchase.orderDate}</td>
 					  <td align="center" class="getpurchase" value="${purchase.serialNo}">${purchase.serialNo}</td>
-					  <td align="center" class="tran" value="${purchase.tranNo}">${purchase.tranNo}</td>
 					 	 
 					  <c:choose>
 					  		<c:when test="${purchase.divyStatus.equals('000') }">
-								<td align="center" class="status cancel"> 구매취소</td>	
+								<td align="center" class="cancel"> 구매취소</td>	
 							</c:when>
 							<c:when test="${purchase.divyStatus.equals('001') }">
 								<td align="center" class="divy status" value1="${purchase.tranNo }" value2="${purchase.divyStatus}">배송하기</td>			
