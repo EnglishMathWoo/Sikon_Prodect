@@ -418,7 +418,6 @@ address {
 
 .bi-bell {
 	 font-size: 20px;
-	 cursor: pointer;
 }
 
 .shape2 {
@@ -427,7 +426,7 @@ address {
   border-color:	#C0C0C0;
   border-style: solid;
   width: 40%;
-  height: 15px;
+  height: 17px;
   text-align: center;
   font-weight:bold;
   color:white;
@@ -819,16 +818,17 @@ border-spacing:0px
 			</td>
 			
 			<td class="alarm-td">
-			<c:if test="${sessionScope.alarm == 0}">
+			<c:choose>
+			<c:when test="${sessionScope.alarm == 0}">
 			<li><i class="bi bi-bell" id="vacantAlarm"></i></li>
-			</c:if>
-			<c:if test="${sessionScope.alarm != 0}">
+			</c:when>
+			<c:otherwise>
 			<li>
 				<i class="bi bi-bell" id="vacantAlarm"></i>
 				<div class="shape2">${sessionScope.alarm}</div>
 			</li>
-		
-			</c:if>
+			</c:otherwise>
+			</c:choose>
 			</td>
 			
 			</c:if>
