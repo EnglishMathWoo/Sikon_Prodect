@@ -292,35 +292,23 @@ div.emptyProd{
 		
 		<form class="form-inline" name="detailForm">
 	   			
-	   			<input type="hidden" id=themeCondition name=themeCondition value="${search.themeCondition }">
+	   			<input type="hidden" id=themeCondition name=themeCondition value="all">
 	   			
 	<div class="row">
-		<table width="100%">
+				<table width="100%">
 			<tr>
-			
-
+				<td class="col-md-6 text-right">
+					
+					<div class="form-group">
+					    <label class="sr-only" for="searchKeyword">검색</label>
+					    <input type="text" style="display: none;">
+					    <input type="text" class="form-control" id="cookname" name="searchKeyword"  placeholder="검색어를 입력하세요"
+					    		onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+					</div>
 				  
-	   			<td class="col-md-12 text-right">
-				  <div class="form-group">
-						<select name="searchCondition" id="searchCondition" class="form-control" style="width:150px">
-						 	<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>쿠킹클래스번호</option>
-							<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>쿠킹클래스명</option>
-							<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>쿠킹클래스가격</option>
-						</select>
-				  </div>
-				  
-				  <div class="form-group">
-				    <input type="text" style="display: none;">
-				    <input type="text" class="form-control" id="cookName" name="searchKeyword"  placeholder="검색"
-				    		onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-				  </div>
-				  
-				  <button type="button" class="btn btn-default" id="search">검색</button>
-				  
+					<button type="button" class="btn btn-default" id="search">검색</button>
 				</td>
-				
-				
-			</tr>
+		</tr>
 		</table>
 	</div>				  
 					<div class="row">

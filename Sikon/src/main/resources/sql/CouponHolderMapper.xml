@@ -86,13 +86,20 @@
 						  	ORDER BY h.issue_no DESC 
 						  </when>
 						  <when test="orderCondition == 1">
-						  	AND NVL(h.issue_status,'000')='001'	ORDER BY h.issue_no DESC 
+						  	AND NVL(h.issue_status,'000')='001'	
+						  	ORDER BY h.issue_no DESC 
 						  </when>
 					      <when test="orderCondition == 2">
-							AND NVL(h.issue_status,'000')='002'	ORDER BY h.issue_no DESC 
+							AND NVL(h.issue_status,'000')='002'	
+							ORDER BY h.issue_no DESC 
+						  </when>
+						  <when test="orderCondition == 3">
+							AND NVL(h.issue_status,'000')='003' 
+							ORDER BY h.issue_no DESC 
 						  </when>
 						  <otherwise>
-							AND NVL(h.issue_status,'000')='003' ORDER BY h.issue_no DESC 
+						    AND NVL(h.issue_status,'000')='004' 
+						    ORDER BY h.issue_no DESC 
 						  </otherwise>
 						  </choose>
 					  </if>
@@ -122,8 +129,12 @@
 				AND NVL(h.issue_status,'000')='002' 
 				ORDER BY h.issue_no DESC 
 				</when>
-				<otherwise>
+				<when test="orderCondition == 3">
 				AND NVL(h.issue_status,'000')='003' 
+				ORDER BY h.issue_no DESC 
+				</when>
+				<otherwise>
+				AND NVL(h.issue_status,'000')='004' 
 				ORDER BY h.issue_no DESC 
 				</otherwise>
 				</choose>

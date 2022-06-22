@@ -457,19 +457,6 @@ p {
   }
   
 
-/* 하투 */
-  
-  #image{
-    position: relative;
-
-}
-
-.menu-content{
-	   display: flex;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
 
 .imgover:hover{
 	opacity: 0.8;
@@ -553,10 +540,6 @@ p {
 							<a class="imgover" value="${list.recipe.recipeNo }" href="#"><img
 								src="/resources/images/uploadFiles/${list.recipe.recipeImg }"
 								width="320" height="300" id="image">
-								<ul class="menu-content">
-							          <li><a href="#" class="fa fa-eye"><span>${list.recipe.recipeViews }</span></a></li>
-							          <li><a href="#" class="fa fa-comment-o"><span>${list.recipe.reviewNum }</span></a></li>
-							  </ul>
 								</a>
 							<div class="excerpt">
 							
@@ -596,6 +579,7 @@ p {
 										</c:choose></li>
 									<li>${list.recipe.cookingTime}분</li>
 									<li>${list.recipe.writer.userNickname }</li>
+            						<li style="float:right">조회수: ${list.recipe.recipeViews }</li>
 								</ul>
 							</div>
 						</article>

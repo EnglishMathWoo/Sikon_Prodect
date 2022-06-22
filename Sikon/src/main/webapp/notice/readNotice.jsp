@@ -28,17 +28,21 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 	body {
         padding-top : 50px;
     }
         
     .container {
-       	font-family: 'Nanum Myeongjo', serif;
+       font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 		padding-top : 170px;
 	}
 		
 	h2 {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
     	margin-top: 50px;
 	}
 		
@@ -85,7 +89,7 @@
 	<div class="container">
 	
 		<div class="row">
-			<div style="float:left"><h2>${notice.noticeTitle}</h2></div>
+			<div style="float:left; color:#937062;"><h2 style= "font-weight: bold; font-family: 'Gowun Batang', serif;">${notice.noticeTitle}</h2></div>
 		</div>
 		<hr/>
 		<div class="row">

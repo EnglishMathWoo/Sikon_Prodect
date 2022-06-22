@@ -32,12 +32,15 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 	body {
 		padding-top : 50px;
 	}
 	
 	.container {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
         
 	.form-control {
@@ -68,7 +71,7 @@
     }
       
     .soo {
-	padding-top : 170px;
+		padding-top : 170px;
 		}
 	  
 	.btn-b {
@@ -186,7 +189,7 @@
 	<div class="container soo">
 	
 		<div class="page-header text-info">
-	       <h3 style="color:#bc8f8f">ÄíÆù¹ß±Þ</h3>
+	       <h3 style="color:#937062; font-family: 'Gowun Batang', serif; font-weight:bold;">ÄíÆù¹ß±Þ</h3>
 	    </div>
 	    
 	    <div class="row">

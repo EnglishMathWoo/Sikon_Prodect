@@ -34,6 +34,8 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 	.btn-b {
 		cursor: pointer;
 		background-color: #937062;
@@ -55,7 +57,8 @@
 	}
 	
 	.container {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 	        
     .table {
@@ -153,7 +156,7 @@
 	<div class="container soo">
 	
 		<div class="page-header text-info">
-			<h3 style="color:#bc8f8f">ÄíÆù¸ñ·Ï</h3>
+			<h3 style="color:#937062; font-family: 'Gowun Batang', serif; font-weight:bold;">ÄíÆù¸ñ·Ï</h3>
 		</div>
 			
 		<form class="form-inline" name="detailForm">

@@ -809,10 +809,10 @@ div.addbar{
 			self.location = "/product/getProduct?prodNo=10007&menu=search";
 		});
 		$(document).on("click" ,".pin", function(){
-			self.location = "/recipe/getRecipe?recipeNo=10007";
+			self.location = "/recipe/getRecipe?recipeNo=10001";
 		});
 		$(document).on("click" ,".shrimp", function(){
-			self.location = "/recipe/getRecipe?recipeNo=10007";
+			self.location = "/recipe/getRecipe?recipeNo=10000";
 		});
 	});
   
