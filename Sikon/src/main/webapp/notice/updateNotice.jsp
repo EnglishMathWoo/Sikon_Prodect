@@ -37,20 +37,25 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 	body {
         padding-top : 50px;
     }
         	
 	h1.text-center {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 		
 	div.form-group {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 		
 	.container {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 		padding-top : 180px;
 	}
 		
@@ -153,7 +158,7 @@
 	<div class="container">
 	
 		<div class="page-header text-info">
-	       <h3 style="color:#bc8f8f">공지사항수정</h3>
+	       <h3 style="color:#937062; font-family: 'Gowun Batang', serif; font-weight: bold;">공지사항수정</h3>
 	    </div>
 	    
 	    <form class="form-horizontal" name="detailForm"  enctype="multipart/form-data" >

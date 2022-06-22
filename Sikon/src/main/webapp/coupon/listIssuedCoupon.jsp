@@ -32,8 +32,11 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 	.container {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 	         
     .table {
@@ -151,7 +154,7 @@
 	<div class="container soo">
 	
 		<div class="page-header text-info">
-			<h3 style="color:#bc8f8f">쿠폰발급목록</h3>
+			<h3 style="color:#937062; font-family: 'Gowun Batang', serif; font-weight:bold;">쿠폰발급목록</h3>
 		</div>
 			
 	    <form class="form-inline" id="detailForm">
@@ -166,6 +169,7 @@
 			<option value="1"  ${ ! empty search.orderCondition && search.orderCondition==1 ? "selected" : "" }>사용가능</option>
 			<option value="2"  ${ ! empty search.orderCondition && search.orderCondition==2 ? "selected" : "" }>사용완료</option>
 			<option value="3"  ${ ! empty search.orderCondition && search.orderCondition==3 ? "selected" : "" }>회수</option>
+			<option value="4"  ${ ! empty search.orderCondition && search.orderCondition==4 ? "selected" : "" }>만료</option>
 		</select>
 		
 		<button type="button" class="btn btn-default" id="sorting">조회</button>

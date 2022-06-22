@@ -34,10 +34,12 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-	
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 	body>div.container {
 		padding-top : 250px;
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 	
 	.soo {
@@ -46,11 +48,13 @@
 		
 	h1.text-center {
 		margin-top: 20px;
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 	
 	div.form-group {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 		
 	#button {
@@ -142,7 +146,7 @@
 	<!--  拳搁备己 div Start /////////////////////////////////////-->
 	<div class="container">
 	<div class="soo">
-		<h1 class="text-center" style="color:#bc8f8f">捻 迄 积 己</h1>
+		<h1 class="text-center" style="color:#937062; font-family: 'Gowun Batang', serif; font-weight:bold;">捻 迄 积 己</h1>
 		
 		<form class="form-horizontal" name="detailForm"  enctype="multipart/form-data" >
 		<input type="hidden" name="userId" value="${user.userId}">

@@ -33,6 +33,8 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 	body {
         padding-top : 100px;
     }
@@ -42,11 +44,13 @@
     }
        	
 	h1.text-center {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 		
 	div.form-group {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	} 
 		
 	.soo {
@@ -54,7 +58,8 @@
 	}
 	
 	.container {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 </style>
     
@@ -85,7 +90,7 @@
 	<div class="container soo">
 	
 		<div class="page-header text-info">
-			<h3 style="color:#bc8f8f">알람 리스트</h3>
+			<h3 style="color:#937062; font-family: 'Gowun Batang', serif; font-weight: bold;">알람 리스트</h3>
 	    </div>
 	    
 	    <div class="row">
@@ -121,7 +126,7 @@
 		<c:set var="i" value="${ i+1 }" />
 		<tr class="ct_list_pop">
 				<td></td>
-				<td align="center" style="text-align:left"> ${alarm.alarmNo}</td>
+				<td align="center" style="text-align:center"> ${alarm.alarmNo}</td>
 				<td align="left" style="text-align:center">${alarm.alarmContent}</td>
 				<td></td>
 				<td align="left"> ${alarm.alarmDate} </td>

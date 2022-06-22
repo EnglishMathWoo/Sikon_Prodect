@@ -28,16 +28,20 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
  	body {
         padding-top : 50px;
     }
         	
 	h1.text-center {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 		
 	div.form-group {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 	}
 				  
    .buttonDiv {
@@ -60,7 +64,8 @@
 	}
 	
 	.container {
-		font-family: 'Nanum Myeongjo', serif;
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
 		padding-top : 170px;
 	}
 	
@@ -106,7 +111,7 @@
 	<div class="container">
 	
 		<div class="row">
-			<div style="float:left"><h2>${notice.noticeTitle}</h2></div>
+			<div style="float:left; color:#937062; font-family: 'Gowun Batang', serif;"><h2 style= "font-weight: bold;">${notice.noticeTitle}</h2></div>
 			<div id="noticeDate" style="float:right">등록일자: ${notice.noticeDate}</div>
 		</div>
 		<hr/>

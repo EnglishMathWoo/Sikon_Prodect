@@ -32,12 +32,15 @@
 	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	
 	body {
-           padding-top : 50px;
+    	padding-top : 50px;
     }
     
     .container {
-    	font-family: 'Nanum Myeongjo', serif;
+    	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+		"sans-serif";
     }
        
     table {
@@ -162,10 +165,10 @@
 	
 		<div class="page-header text-info">
 			<c:if test = "${menu == 'manage'}">
-				<h3 style="color:#bc8f8f">공지사항관리</h3>
+				<h3 style="color:#937062; font-family: 'Gowun Batang', serif; font-weight:bold;">공지사항관리</h3>
 			</c:if>
 			<c:if test = "${menu == 'search'}">
-				<h3 style="color:#bc8f8f">공지사항목록</h3>
+				<h3 style="color:#937062; font-family: 'Gowun Batang', serif; font-weight:bold;">공지사항목록</h3>
 			</c:if>
 	    </div>
 	    
@@ -205,7 +208,7 @@
 			
 				<td align="left"> ${notice.noticeNo}</td>
 	
-				<td align="left" name="manageNoticeTitle" id="manageNoticeTitle">
+				<td align="left" name="manageNoticeTitle" id="manageNoticeTitle" style="cursor: pointer;">
 				${notice.noticeTitle}
 				<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
 				</td>
@@ -214,7 +217,7 @@
 			</c:if>
 			<c:if test = "${menu == 'search'}">
 				<td align="left"> ${notice.noticeNo}</td>
-				<td align="left" name="searchNoticeTitle" id="searchNoticeTitle">${notice.noticeTitle}
+				<td align="left" name="searchNoticeTitle" id="searchNoticeTitle" style="cursor: pointer;">${notice.noticeTitle}
 				<input type="hidden" name="noticeNo" value="${notice.noticeNo}"></td>
 				<td align="left"> ${notice.noticeDate} </td>
 			</c:if>
