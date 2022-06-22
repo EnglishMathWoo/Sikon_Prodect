@@ -317,11 +317,13 @@ public class UserController {
 		if(!file.getOriginalFilename().isEmpty()) {
 			file.transferTo(new File(FILE_SERVER_PATH, file.getOriginalFilename()));
 			model.addAttribute("msg", "File uploaded successfully.");
+			user.setUserImage(file.getOriginalFilename());
 		}else {
 			model.addAttribute("msg", "Please select a valid mediaFile..");
+			user.setUserImage("168939.jpg");
 		}
 		
-		user.setUserImage(file.getOriginalFilename());
+		
 		user.setUserBirth(user.getUserBirth().replace("-",""));
 		userService.addUser(user, map);
 	//	userService.addLicense(license);

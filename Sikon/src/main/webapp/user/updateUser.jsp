@@ -686,13 +686,14 @@ html input[type=button]:hover{
 				  </c:if>	
 				  </div>
 				  <br>
-				  
+	<!-- //////////////////////////// 경력사항 //////////////////////////////////////////////////////////////////			   -->
 				  <h4 class="semititle">경력사항</h4>
 				  
 				<table style="width:652px">
 					<tr>
 					
-					<c:if test="${user.role == 'user'}">
+					
+					<c:if test="${empty career}">
 						<td>
 						  <div class="form-group">
 						    <label for="">소속</label>
@@ -737,7 +738,7 @@ html input[type=button]:hover{
 		 				</td>
 					</c:if>
 					
-					<c:if test="${(user.role == 'mentor' || user.mentorApply == 'Y') &&  !empty career }">
+					<c:if test="${!empty career}">
 						<c:forEach var="career" items="${career}">
 								<input type="hidden" name="careerNo" value="${career.CAREER_NO}">
 								<td>
@@ -764,15 +765,17 @@ html input[type=button]:hover{
 			 			</c:forEach> 	
 		 			</c:if>
 		 			
+		 			
+		 			
 		 			</tr>
 		 		</table>		
  			
- 			
+ <!-- //////////////////////////// 자격증 //////////////////////////////////////////////////////////////////			   -->			
  			<h4 class="semititle">자격증</h4>
 			
 				<table style="width:652px">
 					<tr>
-					<c:if test="${user.mentorApply == 'N'}">
+					<c:if test="${empty license}">
 						<td>
 						  <div class="form-group">
 						    <label for="">자격증명</label>
@@ -807,7 +810,7 @@ html input[type=button]:hover{
 		 				</td>
 					</c:if>
 					
-					<c:if test="${user.mentorApply == 'Y'}">
+					<c:if test="${!empty license}">
 						<c:forEach var="license" items="${license}">	  
 						
 							
