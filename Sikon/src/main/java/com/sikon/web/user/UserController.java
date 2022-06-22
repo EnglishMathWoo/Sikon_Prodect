@@ -89,6 +89,15 @@ public class UserController {
 		return "/user/loginFail.jsp";
 		}
 		
+		//탈퇴 회원 로그인 못하게
+		if(dbUser.getQuitStatus().equals("Y") && dbUser.getLoginPath().equals("K")) {
+		System.out.println("quitStatus="+dbUser.getQuitStatus());
+		model.addAttribute("msg","탈퇴 회원 입니다.");
+		model.addAttribute("url","loginView.jsp");
+
+		return "/user/loginFail.jsp";
+		}
+		
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
@@ -103,7 +112,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
-	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session) throws Exception {
+	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session, Model model) throws Exception {
 		
 			System.out.println("#########" + code);
 			String access_Token = userService.getAccessToken(code);
@@ -120,6 +129,7 @@ public class UserController {
 				
 			if(userService.checkDuplication(userE)==true) {  // id가 존재하지 않을때
 				User user = new User();
+							
 				user.setUserId(userE);
 				user.setUserName(userN);
 				user.setPassword("1234");
@@ -158,6 +168,13 @@ public class UserController {
 				userService.addKakaoUser(user, map);
 				System.out.println("end");
 							
+			}else if(userService.getUser(userE).getQuitStatus().equals("Y")){
+				
+				model.addAttribute("msg","탈퇴 회원 입니다.");
+				model.addAttribute("url","loginView.jsp");
+
+				return "/user/loginFail.jsp";
+				
 			}else {
 				
 				User user1 = userService.getUser(userE);
