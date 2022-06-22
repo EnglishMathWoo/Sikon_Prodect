@@ -188,6 +188,13 @@ padding-top:0px;
   height: 150px;
 }
 
+div.emptyProd{
+	padding : 20px;
+	height: 100px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
+}
 </style>
 
 
@@ -249,10 +256,11 @@ padding-top:0px;
 						<table width="100%">
 						<tr>
 							
+							<!-- 
 							<td class="col-md-6 text-left">
 						    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지
 							</td>
-							
+							 -->
 
 							
 						</tr>
@@ -297,11 +305,14 @@ padding-top:0px;
   </div>
   </c:forEach>
     </div>
-          <c:if test="${empty list}">
-      	<h3 align="center" ><br/><br/><br/><br/>즐겨찾기 내역이 없습니다.</h3>
-      	<br>
-     </c:if>
-</div>
+   <c:if test="${empty list}">
+		<br><br>
+		<div class="emptyProd">
+			즐겨찾기 내역이 없습니다.
+		</div>
+		<br>
+	</c:if>
+ 	</div>
 
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
 </body>

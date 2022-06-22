@@ -46,6 +46,7 @@
 	<!--  ///////////////////////// CSS ////////////////////////// -->
   
   <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
         .bi-heart{
             font-size: 15px;
@@ -80,7 +81,7 @@ body {
 }
 
 .page-header.text-info {
-	font-family: 'Gowun Batang', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
 	color: #75574B
 }
@@ -93,17 +94,17 @@ body {
 }
 
 .text-info {
-	font-family: 'Gowun Batang', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
 	color: #75574B
 }
 
 .row {
-	font-family: 'Gowun Batang', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 .table.table-hover.table-striped {
-	font-family: 'Gowun Batang', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
@@ -310,14 +311,14 @@ p {
 		  <section class="hoc container clear"> 
 		    <div class="center btmspace-50">
 		    <br/>
-		      <h3 class="font-x2 nospace" align="center"><br>| MY COOKINGCLASS | </h3>
-		      <p align="right">전체 ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage} 페이지</p>
+		      <h3 class="font-x2 nospace" align="center"><br>| W I S H C L A S S | </h3>
+		      
 		    </div>
 		    		  
 		    
 		  
 		    
-		    <br/><hr/><br/>
+		    <br/><br/>
     </section>
   	</div>
  

@@ -110,7 +110,6 @@ text-align: center;
 			</h3>
 		</div>
 		
-				<i class="fa fa-tasks"></i>&nbsp;º¸À¯ ÄíÆù<br />
 		 <form>
 		 
     <div class="table-responsive">

@@ -181,6 +181,52 @@ INSERT
 INTO notice(notice_no, notice_title, notice_content, notice_image, notice_date) 
 VALUES (seq_notice_notice_no.NEXTVAL, '식탁의 온도 코스닥 상장 안내', '<p><img src="/summernoteImage/a75e48e3-03d6-4712-9c5f-181e35560bf9.jpg" style="width: 800px;"><br></p>', NULL, SYSDATE);
 
+
+INSERT
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor2', '새우두부찜', '건강한 중국식 가정요리','담백한 두부 안에 새우를 쏘~옥 넣어 만든 건강한 중국식 가정요리! 새우두부찜이에요. 네모모양으로 자른 두부의 속을 파내 동글동글 굴린 새우를 넣어 찜통에 쪄냈어요. 소스도 과하지 않게 굴소스, 간장 등으로만 맛을 내어 건강하고 담백하게 요리를 즐기실 수 있어요. 완성된 요리도 근사해서 홈파티, 초대요리로도 너무 좋답니다.', '새우두부찜.jpg', null, '중급', 'CH', 35, '내용' , SYSDATE, 0, 0);
+
+insert 
+into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
+select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
+from(
+SELECT '두부' AS ingredientName , '1모(550g)' AS ingredientAmount FROM DUAL
+union all
+SELECT '새우살' AS ingredientName , '1컵(150g)' AS ingredientAmount FROM DUAL
+union all
+SELECT '양송이버섯' AS ingredientName , '4개' AS ingredientAmount FROM DUAL
+union all
+SELECT '팽이버섯' AS ingredientName , '½봉' AS ingredientAmount FROM DUAL
+union all
+SELECT '실파' AS ingredientName , '3줄기' AS ingredientAmount FROM DUAL
+union all
+SELECT '전분가루' AS ingredientName , '1큰술' AS ingredientAmount FROM DUAL
+union all
+SELECT '참기름' AS ingredientName , '½큰술' AS ingredientAmount FROM DUAL
+union all
+SELECT '소금' AS ingredientName , '약간' AS ingredientAmount FROM DUAL
+  ) A;
+
+
+INSERT
+INTO recipe VALUES (seq_recipe_no.nextval ,'user', '크로핀','크림이 꽉 찬', '크로와상과 머핀이 만나 탄생한 크로핀! 먹기 아쉬울 정도로 예쁜 비주얼과 뛰어난 맛으로 SNS에서 많은 인기를 끌었죠. 크로와상 냉동 생지를 활용해 집에서도 간단하게 만들 수 있다는 사실 다들 알고 계셨나요? 게다가 필링을 가득 넣어 더욱 부드럽고 맛있답니다. 딸기 필링과 얼그레이 필링 뿐만 아니라 커스터드 또는 초코크림, 잼 등 기호에 따라 다양하게 넣어서 즐길 수 있어요. 크로와상 생지의 무궁무진한 변신! 함께 따라해 보아요.', 'Step 7.jpg', null, '중급', 'DES', 50, '내용' , SYSDATE, 0, 0);
+
+insert 
+into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
+select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
+from(
+SELECT '크루아상 생지' AS ingredientName , '6개' AS ingredientAmount FROM DUAL
+union all
+SELECT '생크림' AS ingredientName , '300ml' AS ingredientAmount FROM DUAL
+union all
+SELECT '설탕' AS ingredientName , '20g' AS ingredientAmount FROM DUAL
+union all
+SELECT '높은종이컵' AS ingredientName , '3개' AS ingredientAmount FROM DUAL
+  ) A;
+
+
+
+
+
 INSERT
 INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '수원왕갈비통닭', '극한직업의 바로 그 맛','불금에는 치킨 한마리 뚝딱!!' ,'수원왕갈비통닭.jpg', null, '중급', 'FR', 10, 'd' , SYSDATE, 0, 0);
 
