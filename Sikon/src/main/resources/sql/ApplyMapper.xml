@@ -215,8 +215,11 @@
 	 
 	 <select id="saleCount" parameterType="apply" resultMap="applySelectMap">
 
-select  cook_price, cook_status ,check_date , applier_id, apply_no, cook_price*cook_status as "total"
-from apply 
-where applier_id= #{applier.userId} ;
+SELECT SUM(cook_price) 
+FROM apply 
+WHERE applier_id= #{applier.userId}
+		and apply_status= #{applyStatus}
+        and check_date >= TO_CHAR(SYSDATE-7,'YY/MM/DD')
+        order by check_date;
 </select>
 </mapper>

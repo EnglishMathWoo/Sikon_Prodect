@@ -514,50 +514,61 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping( value="changeUserRole", method=RequestMethod.GET )
-	public String changeUserRole( @RequestParam(value = "userId", required = false) String userId ,
-						@RequestParam(value = "role", required = false) String role, Model model ) throws Exception{
-
-		System.out.println("/user/changeUserRole : GET");
-		System.out.println("/user/changeUserRole : GET"+userId);
-		System.out.println("/user/changeUserRole : GET"+role);
-		//Business Logic
-		
-		
-		
-		// Model °ú View ¿¬°á
-		model.addAttribute("userId", userId);
-		model.addAttribute("role", role);
-		
-		return "forward:/user/changeUserRole.jsp";
-	}
+//	@RequestMapping( value="changeUserRole" )
+//	public String changeUserRole( @RequestParam(value = "userId", required = false) String userId ,
+//						@RequestParam(value = "role", required = false) String role, Model model ) throws Exception{
+//
+//		System.out.println("/user/changeUserRole : GET");
+//		System.out.println("/user/changeUserRole : GET"+userId);
+//		System.out.println("/user/changeUserRole : GET"+role);
+//		//Business Logic
+//		
+//		System.out.println("1 userId="+userId);
+//		System.out.println("1 mentorApply="+role);
+//		
+//		User user = userService.getUser(userId);
+//		
+//		
+//		
+//		role = user.setRole("mentor");
+//		
+//	//	user = userService.getUser(role);
+//	
+//		System.out.println("2 userId="+userId);
+//		System.out.println("2 mentorApply="+role);
+//		
+//		userService.changeUserRole(userId, role);
+//		
+//		return "forward:/user/getUser?userId="+userId;
+//
+//	}
 		
 	
-	@RequestMapping( value="changeUserRole", method=RequestMethod.POST )
-	public String changeUserRole(HttpServletRequest request,@RequestParam("userId") String userId,
-											@RequestParam("role") String role) throws Exception {
-		
-		System.out.println("/user/changeUserRole : POST");
-		
-		System.out.println("1 userId="+userId);
-		System.out.println("1 mentorApply="+role);
-		
-		User user = userService.getUser(userId);
-		
-		
-		
-		role = user.setRole("mentor");
-		
-	//	user = userService.getUser(role);
-	
-		System.out.println("2 userId="+userId);
-		System.out.println("2 mentorApply="+role);
-		
-		userService.changeUserRole(userId, role);
-		
-		
-		return "redirect:/user/Navigation.jsp";
-	}
+//	@RequestMapping( value="changeUserRole", method=RequestMethod.POST )
+//	public String changeUserRole(HttpServletRequest request,@RequestParam("userId") String userId,
+//											@RequestParam("role") String role) throws Exception {
+//		
+//		System.out.println("/user/changeUserRole : POST");
+//		
+//		System.out.println("1 userId="+userId);
+//		System.out.println("1 mentorApply="+role);
+//		
+//		User user = userService.getUser(userId);
+//		
+//		
+//		
+//		role = user.setRole("mentor");
+//		
+//	//	user = userService.getUser(role);
+//	
+//		System.out.println("2 userId="+userId);
+//		System.out.println("2 mentorApply="+role);
+//		
+//		userService.changeUserRole(userId, role);
+//		
+//		
+//		return "redirect:/user/Navigation.jsp";
+//	}
 	
 	
 	@RequestMapping( value="backUserRole", method=RequestMethod.GET )

@@ -270,6 +270,35 @@ public class UserRestController {
 		return map;
 	}
 	
+	
+	@RequestMapping( value="/json/changeUserRole" )
+	public void changeUserRole( @RequestParam(value = "userId", required = false) String userId ,
+						@RequestParam(value = "role", required = false) String role, Model model ) throws Exception{
+
+		System.out.println("/user/changeUserRole : GET");
+		System.out.println("/user/changeUserRole : GET"+userId);
+		System.out.println("/user/changeUserRole : GET"+role);
+		//Business Logic
+		
+		System.out.println("1 userId="+userId);
+		System.out.println("1 mentorApply="+role);
+		
+		User user = userService.getUser(userId);
+		
+		
+		
+		role = user.setRole("mentor");
+		
+	//	user = userService.getUser(role);
+	
+		System.out.println("2 userId="+userId);
+		System.out.println("2 mentorApply="+role);
+		
+		userService.changeUserRole(userId, role);
+		
+
+	}
+	
 //	@RequestMapping( value="json/checkDuplication/{userId}", method=RequestMethod.GET )
 //	public Map<String, Object> checkDuplication( @PathVariable String userId ) throws Exception{
 //		
