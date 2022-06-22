@@ -273,55 +273,51 @@ margin-bottom: 10px;
 
 </body>
 <script type="text/javascript">
-	$(function() {
+$(function() {
 	
-		$("button:contains('¸®ºäµî·Ï')").on("click", function() {
-			fncAddReview();
+	$("button:contains('¸®ºäµî·Ï')").on("click", function() {
+		fncAddReview();
+	});
+});
+function fncAddReview() {
+	console.log('¿Ö¾È´ï');
+	$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("accept-charset", "euc-kr").attr("action","/review/addReview").submit();
 
-		});
+//	setTimeout(function() {   
+	//opener.parent.location.reload();
+ //    }, 5);
+	
+//	setTimeout(function() {   
+//        window.close();
+//     }, 3);
+	
+	//Window.opener.location.href="/purchase/listPurchase";
+      }
 
+function readURL(input, imgControlName) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      $(imgControlName).attr('src', e.target.result);
+	    }
+	    reader.readAsDataURL(input.files[0]);
+	  }
+	}
+	$("#reviewImg").change(function() {
+	  // add your logic to decide which image control you'll use
+	  var imgControlName = "#ImgPreview";
+	  readURL(this, imgControlName);
+	  $('.preview1').addClass('it');
+	  $('.btn-rmv1').addClass('rmv');
 	});
 
-
-	function fncAddReview() {
-		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("accept-charset", "euc-kr").attr("action","/review/addReview").submit();
-		setTimeout(function() {   
-			opener.parent.location.reload();
-         }, 5);
-		
-		setTimeout(function() {   
-            window.close();
-         }, 3);
-		
-		
-		//Window.opener.location.href="/purchase/listPurchase";
-	      }
-	
-	function readURL(input, imgControlName) {
-		  if (input.files && input.files[0]) {
-		    var reader = new FileReader();
-		    reader.onload = function(e) {
-		      $(imgControlName).attr('src', e.target.result);
-		    }
-		    reader.readAsDataURL(input.files[0]);
-		  }
-		}
-
-		$("#reviewImg").change(function() {
-		  // add your logic to decide which image control you'll use
-		  var imgControlName = "#ImgPreview";
-		  readURL(this, imgControlName);
-		  $('.preview1').addClass('it');
-		  $('.btn-rmv1').addClass('rmv');
+	$("#removeImage1").click(function(e) {
+		  e.preventDefault();
+		  $("#imag").val("");
+		  $("#ImgPreview").attr("src", "");
+		  $('.preview1').removeClass('it');
+		  $('.btn-rmv1').removeClass('rmv');
 		});
-	
-		$("#removeImage1").click(function(e) {
-			  e.preventDefault();
-			  $("#imag").val("");
-			  $("#ImgPreview").attr("src", "");
-			  $('.preview1').removeClass('it');
-			  $('.btn-rmv1').removeClass('rmv');
-			});
 </script>
 
 </html>

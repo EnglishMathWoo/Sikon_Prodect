@@ -48,9 +48,10 @@
 <!--  -->
 
 <style>
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 div.container {
 	padding-top: 225px;
-	font-family: 'Gowun Batang', serif;
 }
 
 table.type09 {
@@ -606,6 +607,32 @@ footer a, footer h6 {
 	color: #ff8a3d;
 }
 
+.add,.addRecipe {
+	cursor: pointer;
+	background-color: #937062;
+	border: none;
+	color: #fff;
+	padding: 5px 0;
+	width: 90px;
+}
+
+.add:hover,.addRecipe:hover {
+	background-color: #937062d4;
+}
+
+.delete , .cancel{
+	cursor: pointer;
+	background-color: #f7f7f7;
+	border: 1px solid #937062;
+	color: #937062;
+	padding: 4px 0;
+	width: 90px;
+}
+
+.delete:hover ,.cancel:hover{
+	background-color: #e7e2e2;
+}
+
 
 /*# sourceMappingURL=style.css.map */
 </style>
@@ -619,7 +646,7 @@ footer a, footer h6 {
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 
-		<h5 class="container-headline">레시피 등록</h5>
+		<h5 class="container-headline" style="font-family: 'Gowun Batang', serif;">레시피 등록</h5>
 
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal" enctype="multipart/form-data">
@@ -702,10 +729,8 @@ footer a, footer h6 {
 			</div>
 			
 
-
-			<button type="button" style="float: right;">재료추가</button>
-			<button type="button" style="float: right;">재료빼기</button>
-
+			<button type="button" style="float: right;" class="delete">재료빼기</button>
+			<button type="button" style="float: right;" class="add">재료추가</button>
 
 
 			<div class="form-group">
@@ -735,8 +760,8 @@ footer a, footer h6 {
 
 			<div class="form-group">
 				<div class="col-sm-offset-4  col-sm-4 text-center">
-							<button type="button">레시피등록</button>
-					<button type="button">취소</button>
+							<button type="button"  class="addRecipe">레시피등록</button>
+					<button type="button"  class="cancel">취소</button>
 				</div>
 			</div>
 		</form>

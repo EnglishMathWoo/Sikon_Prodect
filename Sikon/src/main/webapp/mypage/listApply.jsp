@@ -575,7 +575,7 @@ font-size: 15px
 						</c:choose>
 							 <c:choose>
 							 	<c:when test="${apply.applyStatus.equals('300') && apply.reviewStatus.equals('001')}">
-							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo }">¸®ºä¾²±â</button></td>
+							 		<td class="rev"><button class="review" value="${apply.classCook.cookNo}" value2="${apply.applyNo }">¸®ºä¾²±â</button></td>
 							 	</c:when>
 							 	<c:otherwise>
 							 		
