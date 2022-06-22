@@ -28,11 +28,7 @@
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-   <link href="/resources/css/animate.min.css" rel="stylesheet">
-   <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-    
+
    
    
    <!-- jQuery UI toolTip 사용 CSS-->
@@ -48,7 +44,7 @@
 
 
 div.container {
-	padding-top: 200px;
+	padding-top: 194px;
 	
 }
 
@@ -352,7 +348,6 @@ div.emptyProd{
 				                	for(var i=0; i<JSONData.list.length; i++){
 				                		
 				                		var status="";
-				                		var stock="";
 				                		var rate = parseInt(Number(JSONData.list[i].prodDisRate)*100);
 				                		
 				                		if(JSONData.list[i].prodStatus == 'N'){
@@ -606,7 +601,6 @@ div.emptyProd{
 								<c:if test="${product.prodStatus == 'N'}">
 									<p style="text-align:right;color:#d9534f">*판매중지된 상품입니다.</p>
 								</c:if>
-								
 					        </div><br>
 					        
 				      </article>

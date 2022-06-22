@@ -33,6 +33,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
+<!-- sweetalert -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
 <style>
 .cartlayout{
 	 padding-top : 200px;
@@ -132,6 +136,38 @@ div{
 	border-bottom: 1px solid #d7d7d7;
 }
 
+
+.swal2-title {
+    position: relative;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.8em 1em 0;
+    color: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    word-wrap: break-word;
+}
+.swal2-icon .swal2-icon-content {
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+}
+.swal2-icon.swal2-warning {
+    border-color: #facea8;
+    color: #f8bb86;
+    width: 50px;
+    height: 50px;
+}
+.swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    color: #937062;
+    font-size: 1em;
+}
+
 </style>
 	<script type="text/javascript">
 
@@ -170,7 +206,7 @@ div{
 		            } 
 										
 			  });
-			 
+			 /*
 			 $( ".selectdelete" ).on("click" , function() {
 				
 					console.log('deleteSelect');
@@ -180,8 +216,27 @@ div{
 		            } 
 					
 			  });
-
+				*/
 	
+			 $(".selectdelete").on("click" , function() {
+					
+						Swal.fire({
+							  title:'선택한 상품을 장바구니에서 삭제하시겠습니까?',
+							  text: "삭제한 상품은 되돌릴 수 없습니다.",
+							  icon: 'warning',
+							  showCancelButton: true,
+							  confirmButtonColor: '#937062',
+							  cancelButtonColor: '#f7f7f7',
+							  confirmButtonText: '삭제',
+							  cancelButtonText: '취소'
+							}).then((result) => {
+							  if (result.isConfirmed) {
+								  $("form").attr("method" , "POST").attr("action" , "/cart/deleteSelect").submit();
+							  }
+							})
+
+				});
+			 
 			 <!-- ------------- 상품수량 수정 --------------- -->
 
 			 //*
