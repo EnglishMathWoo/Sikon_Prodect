@@ -30,6 +30,12 @@
     <!-- jQuery UI toolTip 사용 JS-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+	 <!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
+	
+	
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -38,41 +44,54 @@
     	padding-top : 50px;
     }
     
-    .container {
-    	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+   
+.container {
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 		"sans-serif";
-    }
-       
+	padding-top: 170px;
+	padding-bottom: 200px;
+}
+
+      .row{
+      padding-top: 50px;
+      } 
     table {
-     	margin-top:20px;
+     	margin-top:15px;
     }
        	
-	h1.text-center {
-		font-family: 'Nanum Myeongjo', serif;
-	}
-	
 	div.form-group {
-		font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 	}  
 
 	.btn-b {
-		cursor: pointer;
-	    background-color: #937062;
-	    border: none;
-	    color: #fff;
-	    padding: 12px 0;
-	    width:6%;
-	    height: 34px;
-	    justify-content: center;
-        display: flex;
-        align-items: center;
-	    font-size: 17px;
-	    border-radius: 5px;
-	    border: 1px solid #d7d7d7
+	cursor: pointer;
+	background-color: #937062;
+	border: none;
+	color: #fff;
+	padding: 5px 0;
+	width: 90px;
 	}
 	
-	.soo {
-		padding-top : 170px;
+	.btn-b:hover {
+		background-color: #937062d4;
+	}
+
+	.delete {
+		cursor: pointer;
+		background-color: #f7f7f7;
+		border: 1px solid #937062;
+		color: #937062;
+		padding: 4px 0;
+		width: 90px;
+	}
+	
+	.delete:hover {
+		background-color: #e7e2e2;
+	}
+	
+	.pltitle {
+		padding-top: 35PX;
+		text-align: center;
 	}
 </style>
     
@@ -161,19 +180,14 @@
 
 	<jsp:include page="/layout/toolbar.jsp" />
 
-	<div class="container soo">
+	<div class="container">
 	
-		<div class="page-header text-info">
-			<c:if test = "${menu == 'manage'}">
-				<h3 style="color:#937062; font-family: 'Gowun Batang', serif; font-weight:bold;">공지사항관리</h3>
-			</c:if>
-			<c:if test = "${menu == 'search'}">
-				<h3 style="color:#937062; font-family: 'Gowun Batang', serif; font-weight:bold;">공지사항목록</h3>
-			</c:if>
-	    </div>
+	<br>
+		<h3 class="pltitle"  style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| NOTICE LIST |</h3>
+	    
+	    <form class="form-inline" name="detailForm">
 	    
 	    <div class="row">
-	    	<form class="form-inline" name="detailForm">
 		    	<p class="text-primary" style="color:gray">
 		    		&nbsp;&nbsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
@@ -229,7 +243,9 @@
 	  
 	  </form>
 	</div>
-
+	</div>
+	
+	
 	<jsp:include page="../common/pageNavigator_new.jsp"/>->
 	
 </body>
