@@ -418,6 +418,7 @@ address {
 
 .bi-bell {
 	 font-size: 20px;
+	 cursor: pointer;
 }
 
 .shape2 {
@@ -426,7 +427,7 @@ address {
   border-color:	#C0C0C0;
   border-style: solid;
   width: 40%;
-  height: 17px;
+  height: 15px;
   text-align: center;
   font-weight:bold;
   color:white;
