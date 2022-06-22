@@ -397,7 +397,11 @@ body {
 	width: 7%;
 	font-size: small;
 }
-
+.bi-alarm{
+	color: #cd8a2b;
+	font-size: large;
+	font-weight: bold;
+}
 </style>
 
 </head>
@@ -491,8 +495,8 @@ body {
 				</c:choose>
 
 
-				&nbsp;소요시간 ${recipe.cookingTime }분 <input type="button" class="timer" value="타이머"
-					onclick="window.open('/recipe/timer.jsp', '_blank', 'width=500, height=400')">
+				<span>&nbsp;소요시간 ${recipe.cookingTime }분&ensp;</span>
+				<i class="bi bi-alarm" onclick="window.open('/recipe/timer.jsp', '_blank', 'width=500, height=400')"></i>
 				<div style="float: right">조회수: ${recipeViews}</div>
 			</h5>
 			<hr />

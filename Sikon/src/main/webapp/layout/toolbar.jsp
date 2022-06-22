@@ -698,6 +698,11 @@ border-spacing:0px
 .active{
 	font-size: 15px;
 }
+.divlink{
+	border-bottom: 1px solid #E2E5EA;
+	width: 196px;
+	left: 16px;
+}
 </style>
 
 <!-- /////////////////////// ToolBar Start ////////////////////////////-->
@@ -768,7 +773,7 @@ border-spacing:0px
 							<div class="member">
 							<div class="dropLayer">
 									<div class="userInfo">
-										<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb KAlRDb" alt="File:Unknown person.jpg - Wikimedia Commons" data-noaft="1" style="border-radius: 50%;width: 50px; height: 50px; margin: 0px;">
+										<img src="/resources/images/168939.jpg" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb KAlRDb" alt="File:Unknown person.jpg - Wikimedia Commons" data-noaft="1" style="border-radius: 50%;width: 50px; height: 50px; margin: 0px;">
 										<div>
 											<span class="label">${user.userNickname }</span>
 											<p class="name"><strong class="mall">
@@ -794,16 +799,16 @@ border-spacing:0px
 									
 								<div class="divide">
 									<ul class="link">                                              
-											<li><a>내정보보기</a></li>
-											<li><a>마이레시피</a></li>                                                
-											<li><a>마이리뷰</a></li>
-											<li><a>쿠킹클래스신청조회</a></li>
-											<li><a>상품주문배송조회</a></li>
-											<li><a>책갈피조회</a></li>
-											<li><a>즐겨찾는멘토</a></li>
-											<li><a>포인트조회</a></li>
-											<li><a>쿠폰조회</a></li>
-											<li><a>좋아요한쿠킹클래스</a></li>	 
+											<li><a class="divlink">내정보보기</a></li>
+											<li><a class="divlink">마이레시피</a></li>                                                
+											<li><a class="divlink">마이리뷰</a></li>
+											<li><a class="divlink">쿠킹클래스신청조회</a></li>
+											<li><a class="divlink">상품주문배송조회</a></li>
+											<li><a class="divlink">책갈피조회</a></li>
+											<li><a class="divlink">즐겨찾는멘토</a></li>
+											<li><a class="divlink">포인트조회</a></li>
+											<li><a class="divlink">쿠폰조회</a></li>
+											<li><a class="divlink">좋아요한쿠킹클래스</a></li>	 
 									</ul>
 								</div>
 									</div>
@@ -1011,11 +1016,11 @@ border-spacing:0px
 			$(self.location).attr("href","/recipe/listRecipe");
 			});
 			 
-			 $( "a:contains('스토어')" ).on("click" , function() {
+			 $( ".store" ).on("click" , function() {
 			$(self.location).attr("href","/product/listProduct?menu=search");
 			});
 			 
-			 $( "a:contains('쿠킹클래스')" ).on("click" , function() {
+			 $( ".cook" ).on("click" , function() {
 			$(self.location).attr("href","/cook/listCook");
 			});
 			 
@@ -1036,11 +1041,11 @@ border-spacing:0px
 			});
 			 
 			 $( "a:contains('스토어관리')" ).on("click" , function() {
-			$(self.location).attr("href","/product/listProduct?menu=manage");
+				 $(self.location).attr("href","/product/manageProduct");
 			});
 			 
 			 $( "a:contains('쿠킹클래스관리')" ).on("click" , function() {
-			$(self.location).attr("href","/cook/listCook");
+				 $(self.location).attr("href","/cook/manageCook");
 			});
 
 			 $( "a:contains('공지사항관리')" ).on("click" , function() {
