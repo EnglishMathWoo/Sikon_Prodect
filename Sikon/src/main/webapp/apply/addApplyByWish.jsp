@@ -479,16 +479,7 @@ $(function() {
 		  </div>
 		  
 		  	  
-		  <div class="form-group">
-		    <label for="paymentOption" >결제방법</label>
-		   
-		      <select 	name="paymentOption"		class="form-control" >
-				<option value="1" selected="selected">카카오페이구매</option>
-				<option value="2">네이버페이구매</option>
-			</select>
-		   
-		  </div>
-		  
+
 	  
 		  
 
@@ -532,7 +523,7 @@ $(function() {
 			
 			<div class="text-center  buttons">
 			
-			 	<button type="button" class="btn.btn-primary" id="buyjust">그냥결제하기</button>
+		
 				<button type="button" class="buy" id="iamportPayment" value="">결제하기</button>					
 				<button type="button" class="cancel" href="#" role="button">취&emsp;소</button>
 			</div>			

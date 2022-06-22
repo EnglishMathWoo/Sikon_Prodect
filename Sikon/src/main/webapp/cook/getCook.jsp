@@ -681,11 +681,11 @@ div.image{
 				
 				<div class="row">
 					<div><h6>${cook.cookPrice } 원</h6></div>
-					<div><h5><strong>모집인원${cook.cookRecruit}명</strong></h5></div>
+					<div><h5><strong>모집인원 : ${cook.cookRecruit}명</strong></h5></div>
 				</div>
 				<div class="row">
 				
-					<div><h5><strong>남은신청인원${cook.cookStock}명</strong></h5></div>
+					<div><h5><strong>남은신청인원: ${cook.cookStock}명</strong></h5></div>
 				</div>
 				
 				<br/>
@@ -741,7 +741,7 @@ div.image{
 				
 				
 				<div class="form-group">
-			  		<div class="text-right">	
+			  		<div class="text-left">	
 			  								<c:choose>
 					 		<c:when test = "${cook.cookStock != '0'}">
 						<button type="button" class="btn-b addPurchase" id="buy" >신청하기</button>
@@ -750,7 +750,7 @@ div.image{
 			  				<button type="button" class="btn-w addWish" id="popup_open_btn">장바구니</button>&emsp;
 							</c:when>    
 					 		<c:otherwise>
-					 	<h5><strong>신청종료된 쿠킹클래스입니다</strong></h5>		
+					 	<h5 style="color:#e90f30"><strong>신청종료된 쿠킹클래스입니다</strong></h5>		
 					 		</c:otherwise>
 					 		</c:choose>
 
