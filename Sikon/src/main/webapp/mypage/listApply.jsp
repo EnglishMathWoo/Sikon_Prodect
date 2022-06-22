@@ -56,6 +56,7 @@ table {
 th{
 	font-weight: lighter;
 	font-size: 15px;
+	cursor: pointer;
 }
 .table>tbody>tr>td{
 	vertical-align: middle;
@@ -67,6 +68,11 @@ th{
 }
 div.list{
 	padding-top : 240px;
+}
+
+.get{
+	font-size: 14px;
+	text-decoration: underline;
 }
 
 .cancel{
@@ -366,7 +372,7 @@ a.payback:hover{
 			
 			  <c:if test="${status.index eq 0 }">
 			  	<tr>
-			  		<th colspan="4" value="${apply.applyNo }"class="tran">신청일자: <span style="font-weight: bold;">${apply.checkDate }</span> &emsp;신청번호: <span style="font-weight: bold;">${apply.applyNo }</span></th>
+			  		<th colspan="4" value="${apply.applyNo }"class="tran">신청일자: <span style="font-weight: bold;">${apply.checkDate }</span> &emsp;신청번호: <span class="get" style="font-weight: bold;">${apply.applyNo }</span></th>
 			  		
 			  	</tr>
 			  	<tr>
@@ -509,7 +515,7 @@ a.payback:hover{
 			  		
 					<c:if test="${ before ne after }">
 			  			<tr>
-					  		<th colspan="4" value="${apply.applyNo }"class="tran">신청일자: <span style="font-weight: bold;">${apply.checkDate }</span> &emsp;신청번호: <span style="font-weight: bold;">${apply.applyNo }</span></th>
+					  		<th colspan="4" value="${apply.applyNo }"class="tran">신청일자: <span style="font-weight: bold;">${apply.checkDate }</span> &emsp;신청번호: <span class="get" style="font-weight: bold;">${apply.applyNo }</span></th>
 			  		
 					  	</tr>
 					  	<tr>

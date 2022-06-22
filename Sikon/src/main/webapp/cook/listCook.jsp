@@ -592,6 +592,19 @@ div.emptyProd{
 						                			
 						                			
 						                		}
+						                		
+						                		if(JSONData.list[i].cookStock == '0'){
+						                		
+						                		recruit ="<div><h5 style='color:#e90f30'><strong>신청종료된 쿠킹클래스입니다</strong></h5></div>"
+						                			
+						                			
+						                		}else{ 
+						                		
+						                			recruit="<div><h5><strong>모집인원"+JSONData.list[i].cookRecruit+"명</strong></h5></div>"
+						                			
+						                		}
+						                			
+
 						                
 						                			
 						                			
@@ -610,12 +623,12 @@ div.emptyProd{
 							                     					+"<div class='col-xs-4 col-md-4'>"
 						                     						+"<div class='row'>"
 						                     						+"<div><h4><strong>"+JSONData.list[i].cookName+"</strong></h4></div><br>"   
-						                     						+"<div>"+JSONData.list[i].cookBrief+"</div>"
+						                     						+"<div><strong>"+JSONData.list[i].cookBrief+"</strong></div>"
 						                     						+"</div>"
 						                     						+"<br/><br/>"
 						                     						+"<div class='row'>"
-						                     						+"<div><h6>"+JSONData.list[i].cookPrice+" 원</h6></div>"
-						                     						+"<div><h5><strong>모집인원"+JSONData.list[i].cookRecruit+" 명</strong></h5></div>"
+						                     						+"<div><h6><strong>"+JSONData.list[i].cookPrice+" 원</strong></h6></div>"
+						                     						+recruit
 						                     						+"</div><br/>"
 						                     						+"<div class='row'>"
 						                     						+"<h5><strong> "+cookTheme+"</strong></h5></div>"
@@ -854,8 +867,18 @@ div.emptyProd{
 				
 				
 				<div class="row">
-					<div><h6>${cook.cookPrice } 원</h6></div>
-					<div><h5><strong>모집인원${cook.cookRecruit}명</strong></h5></div>
+					<div> <h6> <strong>${cook.cookPrice } 원 </strong></h6></div>
+					<c:choose>
+					
+				<c:when test = "${cook.cookStock == '0'}">
+				<div><h5 style="color:#e90f30"><strong>신청종료된 쿠킹클래스입니다</strong></h5>					
+				</div>
+			</c:when> 
+			<c:otherwise>
+			<div><h5><strong>모집인원${cook.cookRecruit}명</strong></h5></div>
+				</c:otherwise>
+			
+				</c:choose>
 				</div>
 				
 				<br/>
@@ -891,7 +914,9 @@ div.emptyProd{
 				</div>
 				
 				<div class="row">
-				<div><h5><strong>수업시간 : ${cook.startTime}&emsp;~&emsp;${cook.endTime}</strong></h5></div>				
+				<div><h5><strong>수업시간 : ${cook.startTime}&emsp;~&emsp;${cook.endTime}</strong></h5></div>		
+				
+		
 				</div>
 		
 
