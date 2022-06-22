@@ -297,7 +297,7 @@ label{
 				  <div class="sectd">
 				  	<h5>결제수단</h5>
 				  	<div class="payment">
-				  		<c:if test="${apply.paymentOption == '1'}">카카오 간편결제</c:if>
+				  		카카오 간편결제
 				
 				  	</div>
 				  </div>
