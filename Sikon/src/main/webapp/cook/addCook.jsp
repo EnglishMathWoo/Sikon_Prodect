@@ -147,6 +147,10 @@ div.container {
 		var startTime = $("input[name='startTime']").val();
 		var endTime = $("input[name='endTime']").val();
 		var cookRegdate = $("input[name='cookRegdate']").val();
+		var aplstarTime = $("input[name='aplstarTime']").val();
+		var aplstarTime = $("input[name='aplstarTime']").val();
+		
+		
 		
 		var cookStock = $("input[name='cookStock']").val();
 		var cookRecruit = $("input[name='cookRecruit']").val();
