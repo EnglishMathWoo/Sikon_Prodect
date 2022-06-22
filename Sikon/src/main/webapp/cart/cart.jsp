@@ -261,16 +261,20 @@ div{
 		                  },
 		                  success : function(JSONData , status) {
 
-		                	 //$('input[name=quantity]').val(JSONData)
+		                	  quantity = JSONData;
 		                	 
 		                  }
 		            });
+		         
+		         $(this).parent().children().eq(1).val(quantity);
+		         
 	  			 });
 			 
 			 $( "button.minus" ).on("click" , function() {
 		         
 				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
+				 
 				 quantity = Number(quantity)-1;
 					console.log('minus');
 					console.log(cartNo);
@@ -287,12 +291,24 @@ div{
 		                  },
 		                  success : function(JSONData , status) {
 		                	  
-		                	  //$('input[name=quantity]').val(JSONData)
+		                	  quantity = JSONData;
 		                	 
 		                  }
 		            });
+		         
+		         
+		         if(quantity == 0){
+		        	 $(this).parent().children().eq(1).val(1);
+		         }else{
+		        	 $(this).parent().children().eq(1).val(quantity);
+		         }
+		         
+		         
 	  			 });
-
+			 
+			 
+			 <!-- ---------------------------- -->
+			 
 			 
 			$( ".buybtn" ).on("click" , function() {
 				 console.log('구매');
@@ -480,7 +496,7 @@ div{
 				  </div>	 
 				    	  
 				  <div class="col-md-1 text-center">
-				  	<button class="delete deletebtn" value="${cart.cartNo}"><i class="bi bi-x-lg"></i></button>
+				  	<button type="button" class="delete deletebtn" value="${cart.cartNo}"><i class="bi bi-x-lg"></i></button>
 				  </div>
 				  
 				  <div class="col-md-1 text-center"></div>
@@ -492,12 +508,12 @@ div{
 				  			<button type="button" class="calculation nope" role="button" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
 				  		</c:when>
 				  		<c:otherwise>
-				  			<button class="calculation minus" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
+				  			<button  type="button" class="calculation minus" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
 				  		</c:otherwise>
 				  	</c:choose>
 				  	
 				  	<input type="text" name="quantity" class="result" value=" ${cart.quantity }" style="width:30px;text-align: center" readonly/>
-				  	<button class="calculation plus" value="${cart.cartNo}"><i class="bi bi-plus-lg"></i></button>
+				  	<button  type="button" class="calculation plus" value="${cart.cartNo}"><i class="bi bi-plus-lg"></i></button>
 				  	
 				  </div>
 				  
@@ -518,7 +534,7 @@ div{
 	      <div>
 		      <table style="width:100%;">
 			      <tr>
-			      	  <td style="text-align: left"><button class="selectdelete">선택상품 삭제</button></td>
+			      	  <td style="text-align: left"><button  type="button" class="selectdelete">선택상품 삭제</button></td>
 				      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="0" min="0" readonly/> 원</td>
 			       </tr>
 		       </table>
@@ -526,7 +542,7 @@ div{
 		      
 		      
 		  <div align="right">
-		  	<button class="buybtn">구매하기</button>
+		  	<button  type="button" class="buybtn">구매하기</button>
 		  </div>
 	  
  	</div>
