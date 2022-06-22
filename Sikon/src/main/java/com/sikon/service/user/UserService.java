@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
+import com.sikon.service.domain.Career;
+import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 
 
@@ -14,7 +16,7 @@ public interface UserService {
 	
 	// 회원가입
 	public void addUser(User user, Map map) throws Exception;
-	public void addKakaoUser(User user) throws Exception;
+	public void addKakaoUser(User user, Map map) throws Exception;
 //	public void addLicense(License license) throws Exception;
 //	public void addCareer(Career career) throws Exception;
 	

@@ -20,14 +20,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- date picker -->
-<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-
-<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
-<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
-
-<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-
 <!-- jQuery UI toolTip 사용 CSS-->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -285,7 +277,11 @@ html input[type=button]:hover{
 			var addPossible = $("#addPossible").val();
 			var emailChk2 = $("#emailChk2").val();
 			var checked = $("#checked").val();
+			var num = pw.search(/[0-9]/g);
+			var eng = pw.search(/[a-z]/ig);
 			
+			
+				  
 			if(id == null || id.length <1){
 				alert("아이디는 반드시 입력하셔야 합니다.");
 				return;
@@ -332,7 +328,18 @@ html input[type=button]:hover{
 				return;
 			}
 			
+			if(pw.length < 6 || pw.length > 20){
+				alert("비밀번호는 6자리 ~ 20자리 이내로 입력해주세요.");
+				return false;
+			}else if(pw.search(/\s/) != -1){
+				alert("비밀번호는 공백 없이 입력해주세요.");
+				return false;
+			}else {
+				 console.log("통과"); 
+			}
 			
+			
+			alert("회원가입이 완료되었습니다");
 			
 			$("form").attr("method" , "POST").attr("action" , "/user/addUser").attr("enctype","multipart/form-data").submit();
 		
@@ -452,12 +459,13 @@ html input[type=button]:hover{
 	                if(cnt == 0){ 
 	                    $('.id_ok').css("display","inline-block"); 
 	                    $('.id_already').css("display", "none");
-
+	                    $('#emailChk').attr('disabled', false);
+	                    
 	                } else { 
 	                    $('.id_already').css("display","inline-block");
 	                    $('.id_ok').css("display", "none");
 	                    $('#emailChk').attr('disabled', true);
-	                    $('#emailChk').css("cursor",default);
+	                    
 						
 	                }
 	            },
@@ -505,7 +513,7 @@ html input[type=button]:hover{
 		        });
 	        };
         
-	        
+	        /*
 		     // 생년월일
 			 $(function() {
 					$('#userBirth').datepicker({
@@ -558,7 +566,7 @@ html input[type=button]:hover{
 					});
 			});
 	        
-			
+			*/
 			// 파일 미리보기
 			 function readURL(input) {
 				  if (input.files && input.files[0]) {
@@ -688,7 +696,7 @@ html input[type=button]:hover{
 				  
 				  <div class="form-group">
 				    <label for="userBirth">생년월일</label>
-				      <input type="text" class="form-control" id="userBirth" name="userBirth" >
+				      <input type="DATE" class="form-control" id="userBirth" name="userBirth" >
 				  </div>
 				  
 				  <div class="form-group divyAddr">
@@ -745,12 +753,12 @@ html input[type=button]:hover{
 						  
 						  <div class="form-group">
 						    <label for="">근무시작 날짜</label>
-						      <input type="text" class="form-table" id="startDate" name="startDate" >
+						      <input type="DATE" class="form-table" id="startDate" name="startDate" >
 						  </div>
 						  
 						  <div class="form-group">
 						    <label for="">근무종료 날짜</label>
-						      <input type="text" class="form-table" id="endDate" name="endDate" >
+						      <input type="DATE" class="form-table" id="endDate" name="endDate" >
 						  </div>
 						  
 						  <div class="form-group">
@@ -766,12 +774,12 @@ html input[type=button]:hover{
 						  
 						  <div class="form-group">
 						    <label for="">근무시작 날짜</label>
-						      <input type="text" class="form-table" id="startDate2" name="startDate" >
+						      <input type="DATE" class="form-table" id="startDate2" name="startDate" >
 						  </div>
 						  
 						  <div class="form-group">
 						    <label for="">근무종료 날짜</label>
-						      <input type="text" class="form-table" id="endDate2" name="endDate" >
+						      <input type="DATE" class="form-table" id="endDate2" name="endDate" >
 						  </div>
 						  
 						  <div class="form-group">
@@ -800,7 +808,7 @@ html input[type=button]:hover{
 						  
 						  <div class="form-group">
 						    <label for="">취득일자</label>
-						      <input type="text" class="form-table" id="licenseDate" name="licenseDate" >
+						      <input type="DATE" class="form-table" id="licenseDate" name="licenseDate" >
 						  </div>
 		 				</td>
 		 				<td>
@@ -816,7 +824,7 @@ html input[type=button]:hover{
 						  
 						  <div class="form-group">
 						    <label for="">취득일자</label>
-						      <input type="text" class="form-table" id="licenseDate2" name="licenseDate" >
+						      <input type="DATE" class="form-table" id="licenseDate2" name="licenseDate" >
 						  </div>
 		 				</td>
 		 			</tr>

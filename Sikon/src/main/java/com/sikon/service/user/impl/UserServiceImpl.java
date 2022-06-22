@@ -24,6 +24,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sikon.common.Search;
+import com.sikon.service.domain.Career;
 import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserDao;
@@ -55,9 +56,10 @@ public class UserServiceImpl implements UserService{
 		System.out.println("map="+map);
 		userDao.addUser(user, map);
 	}
-	public void addKakaoUser(User user) throws Exception {
+	public void addKakaoUser(User user, Map map) throws Exception {
 		System.out.println("user="+user);
-		userDao.addKakaoUser(user);
+		System.out.println("map="+map);
+		userDao.addKakaoUser(user, map);
 	}
 //	public void addLicense(License license) throws Exception {
 //		System.out.println("license="+license);

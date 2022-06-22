@@ -126,11 +126,36 @@ public class UserController {
 				user.setUserNickname(userE);
 				user.setMentorApply("N");
 				user.setLoginPath("K");
+				user.setUserImage("168939.jpg");
 				System.out.println(user);
 				
-			//	Map map = new HashMap();
+				List list = new ArrayList();
+				License license = new License();
+				license.setLicenseNo(0);
+				license.setUserId(user.getUserId());
+				License license2 = new License();
+				license2.setLicenseNo(0);
+				license2.setUserId(user.getUserId());
+				list.add(license);
+				list.add(license2);
+				System.out.println("list="+list);
 				
-				userService.addKakaoUser(user);
+				List list2 = new ArrayList();
+				Career career = new Career();
+				career.setCareerNo(0);
+				career.setUserId(user.getUserId());
+				Career career2 = new Career();
+				career2.setCareerNo(0);
+				career2.setUserId(user.getUserId());
+				list2.add(career);
+				list2.add(career2);
+				System.out.println("list2="+list2);
+				
+				Map map = new HashMap();
+				map.put("list", list);
+				map.put("list2", list2);
+				
+				userService.addKakaoUser(user, map);
 				System.out.println("end");
 							
 			}else {
@@ -324,7 +349,7 @@ public class UserController {
 		}
 		
 		
-		user.setUserBirth(user.getUserBirth().replace("-",""));
+		//user.setUserBirth(user.getUserBirth().replace("-",""));
 		userService.addUser(user, map);
 	//	userService.addLicense(license);
 	//	userService.addCareer(career);

@@ -85,15 +85,15 @@ CREATE TABLE license (
 	license_no 	NUMBER(38)  	PRIMARY KEY,
 	license_name 	VARCHAR2(30) 	,
 	license_institution 	VARCHAR2(40) 	,
-	license_date 	DATE 		,
+	license_date 	VARCHAR2(200),
 	user_id 		VARCHAR2(50)  	REFERENCES users(user_id) ON DELETE CASCADE	
 );
 
 CREATE TABLE career ( 
 	career_no 	NUMBER(38)	,
 	company 	VARCHAR2(30) 	,
-	start_date 		DATE 		,
-	end_date 		DATE 		,
+	start_date 		VARCHAR2(200),
+	end_date 		VARCHAR2(200),
 	career_experience 	VARCHAR2(1000) 	,
 	user_id 		VARCHAR2(50) 	REFERENCES users(user_id) ON DELETE CASCADE,
 	PRIMARY KEY(career_no)	

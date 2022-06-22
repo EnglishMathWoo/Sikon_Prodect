@@ -26,6 +26,24 @@
 		
 </resultMap>
 
+<resultMap id="careerSelectMap" type="career">
+		<result property="careerNo" 	column="career_no" 		jdbcType="NUMERIC"/>
+		<result property="company"	column="company" 		jdbcType="VARCHAR" />
+		<result property="careerExperience" 	 column="career_experience" 		jdbcType="VARCHAR" />
+		<result property="startDate"	column="start_date" 		jdbcType="DATE" />
+		<result property="endDate"	column="end_date" 		jdbcType="DATE" />
+		<result property="userId"	column="user_id" 		jdbcType="VARCHAR" />
+</resultMap>
+
+
+<resultMap id="licenseSelectMap" type="license">
+		<result property="licenseNo" 	column="license_no" 		jdbcType="NUMERIC"/>
+		<result property="licenseName"	column="license_name" 		jdbcType="VARCHAR" />
+		<result property="licenseInstitution" 	 column="license_institution" 		jdbcType="VARCHAR" />
+		<result property="licenseDate"	column="license_date" 		jdbcType="DATE" />
+		<result property="userId"	column="user_id" 		jdbcType="VARCHAR" />
+</resultMap>
+
 
 	<insert  id="addKakaoUser"		parameterType="user" >
 		 INSERT
@@ -34,6 +52,25 @@
 						#{mentorApply}, #{loginPath}, SYSDATE , #{quitDate:DATE} )
 	</insert>
 
+
+	<insert  id="addKakaoLicense"		parameterType="map" >
+		 INSERT ALL
+ 		 INTO license
+ 		 VALUES ( seq_license_license_no.nextval , #{licenseName} , #{licenseInstitution} , #{licenseDate:DATE} , #{userId})
+ 		 INTO license
+ 		 VALUES ( seq_license_license_no.nextval , #{licenseName} , #{licenseInstitution} , #{licenseDate:DATE} , #{userId})
+ 		 select * from dual
+	</insert>
+	
+	
+	<insert  id="addKakaoCareer"		parameterType="career" >
+		 INSERT ALL
+		 INTO career
+		 VALUES ( seq_career_career_no.nextval , #{company} , #{careerExperience} , #{startDate:DATE} , #{endDate:DATE} , #{userId} )
+		 INTO career
+		 VALUES ( seq_career_career_no.nextval , #{company} , #{careerExperience} , #{startDate:DATE} , #{endDate:DATE} , #{userId} )
+		 select * from dual
+	</insert>
 
 
 

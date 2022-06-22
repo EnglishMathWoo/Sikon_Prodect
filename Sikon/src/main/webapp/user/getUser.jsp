@@ -515,15 +515,15 @@ padding-top: 10px;
 					<th width="40%">경력기간</th>
 					<th width="30%">업무내용</th>
 						<c:set var="i" value="0" />
-						<c:forEach var="career" items="${career}" begin="0" end="1">
+						<c:forEach var="career" items="${career}">
 							<tr>
-								<td class="company">${career.COMPANY}</td>
+								<td class="company">${career.company}</td>
 								<td class="careerDate">
-								<fmt:formatDate pattern="yyyy-MM-dd" value="${career.START_DATE}" />
-								~ 
-								<fmt:formatDate pattern="yyyy-MM-dd" value="${career.END_DATE}" />
+								${career.startDate}
+								<c:if test="${career.startDate != null}">~ </c:if>
+								${career.endDate}
 								</td>
-								<td class="experience">${career.CAREER_EXPERIENCE}</td>
+								<td class="experience">${career.careerExperience}</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -542,9 +542,9 @@ padding-top: 10px;
 					<c:set var="i" value="0" />
 		 	 		<c:forEach var="license" items="${license}" >
 		 	 		<tr>
-								<td class="company">${license.LICENSE_NAME}</td>
-								<td class="company"><fmt:formatDate pattern="yyyy-MM-dd" value="${license.LICENSE_DATE}" /></td>
-								<td class="company">${license.LICENSE_INSTITUTION}</td>
+								<td class="company">${license.licenseName}</td>
+								<td class="company">${license.licenseDate}</td>
+								<td class="company">${license.licenseInstitution}</td>
 					</tr>
 						</c:forEach>
 					</table>
