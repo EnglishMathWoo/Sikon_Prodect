@@ -473,12 +473,14 @@ div.image{
 				        success : function(data){
 				        	
 				        	alert("알람 전송 완료!!");
-				        	      	          
+				        	    
+				        	if (data.userId != data.mentorId) {
 				           		if(socket){
 				        			let socketMsg = "heart,"+data.userId+","+data.userNickname+","+data.mentorId+","+data.cookName;
 				        			console.log(socketMsg);
 				        			socket.send(socketMsg);
 				           		}
+				        	}
 				        }
 				    
 				    })

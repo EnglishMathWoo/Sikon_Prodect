@@ -431,12 +431,14 @@ p {
 						        success : function(data){
 						        	
 						        	alert("알람 전송 완료!!");
-						        	      	          
+						        	
+						        	if (data.userId != data.mentorId) {   	          
 						           		if(socket){
 						        			let socketMsg = "love,"+data.userId+","+data.userNickname+","+data.mentorId;
 						        			console.log(socketMsg);
 						        			socket.send(socketMsg);
 						           		}
+						        	}
 						        }
 						    
 						    })
