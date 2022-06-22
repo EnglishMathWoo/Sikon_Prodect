@@ -346,6 +346,8 @@ margin-bottom: 15px;
 		
 		var pw=$("input[name='password']").val();
 		var pw_confirm=$("input[name='password2']").val();
+		var num = pw.search(/[0-9]/g);
+		var eng = pw.search(/[a-z]/ig);
 		
 		
 		if(pw == null || pw.length <1){
@@ -355,6 +357,22 @@ margin-bottom: 15px;
 		if(pw_confirm == null || pw_confirm.length <1){
 			alert("패스워드 확인은  반드시 입력하셔야 합니다.");
 			return;
+		}
+		
+		if( pw != pw_confirm ) {				
+			alert("비밀번호 확인이 일치하지 않습니다.");
+			$("input:text[name='password2']").focus();
+			return;
+		}
+		
+		if(pw.length < 6 || pw.length > 20){
+			alert("비밀번호는 6자리 ~ 20자리 이내로 입력해주세요.");
+			return false;
+		}else if(pw.search(/\s/) != -1){
+			alert("비밀번호는 공백 없이 입력해주세요.");
+			return false;
+		}else {
+			 console.log("통과"); 
 		}
 		
 		$("form").attr("method" , "POST").attr("action" , "/user/updateUserpw").submit();

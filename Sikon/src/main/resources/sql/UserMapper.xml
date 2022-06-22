@@ -31,8 +31,8 @@
 		<result property="careerNo" 	column="career_no" 		jdbcType="NUMERIC"/>
 		<result property="company"	column="company" 		jdbcType="VARCHAR" />
 		<result property="careerExperience" 	 column="career_experience" 		jdbcType="VARCHAR" />
-		<result property="startDate"	column="start_date" 		jdbcType="DATE" />
-		<result property="endDate"	column="end_date" 		jdbcType="DATE" />
+		<result property="startDate"	column="start_date" 		jdbcType="VARCHAR" />
+		<result property="endDate"	column="end_date" 		jdbcType="VARCHAR" />
 		<result property="userId"	column="user_id" 		jdbcType="VARCHAR" />
 </resultMap>
 
@@ -41,7 +41,7 @@
 		<result property="licenseNo" 	column="license_no" 		jdbcType="NUMERIC"/>
 		<result property="licenseName"	column="license_name" 		jdbcType="VARCHAR" />
 		<result property="licenseInstitution" 	 column="license_institution" 		jdbcType="VARCHAR" />
-		<result property="licenseDate"	column="license_date" 		jdbcType="DATE" />
+		<result property="licenseDate"	column="license_date" 		jdbcType="VARCHAR" />
 		<result property="userId"	column="user_id" 		jdbcType="VARCHAR" />
 </resultMap>
 
@@ -83,7 +83,7 @@
         select seq_license_license_no.nextval AS licenseNo, A.*
         FROM (
         <foreach collection="list" item="item" separator="UNION ALL ">
-        SELECT #{item.licenseName}, #{item.licenseInstitution}, #{item.licenseDate:DATE}, #{item.userId} FROM DUAL
+        SELECT #{item.licenseName}, #{item.licenseInstitution}, #{item.licenseDate:VARCHAR}, #{item.userId} FROM DUAL
         </foreach>
         ) A
 	 </insert>
@@ -95,7 +95,7 @@
         select seq_career_career_no.nextval AS careerNo, A.*
         FROM (
         <foreach collection="list" item="item" separator="UNION ALL ">
-        SELECT #{item.company}, #{item.careerExperience}, #{item.startDate:DATE}, #{item.endDate:DATE}, #{item.userId} FROM DUAL
+        SELECT #{item.company}, #{item.careerExperience}, #{item.startDate:VARCHAR}, #{item.endDate:VARCHAR}, #{item.userId} FROM DUAL
         </foreach>
         ) A
 	 </insert>
@@ -124,14 +124,14 @@
         </select>
 
 	<!-- 자격증 조회 -->
-	<select  id="getLicense"	parameterType="string"	resultType="map">
+	<select  id="getLicense"	parameterType="string"	resultMap="licenseSelectMap">
 		SELECT *
 		FROM license
 		WHERE user_id = #{userId}
 	</select>
 	
 	<!-- 경력사항 조회 -->
-	<select  id="getCareer"		parameterType="string"	resultType="map">
+	<select  id="getCareer"		parameterType="string"	resultMap="careerSelectMap">
 		SELECT *
 		FROM career
 		WHERE user_id = #{userId}
@@ -234,7 +234,7 @@
 		license_date=case
 	 	license_no
 		<foreach collection="list" item="item" separator=" ">
-		when #{item.licenseNo} then #{item.licenseDate:DATE}
+		when #{item.licenseNo} then #{item.licenseDate:VARCHAR}
 		</foreach>
 		else TO_CHAR(SYSDATE, 'yyyy-mm-dd') end
 		WHERE user_id = #{userId}
@@ -260,14 +260,14 @@
 		start_date=case
 		career_no
 		<foreach collection="list" item="item" separator=" ">
-		when #{item.careerNo} then #{item.startDate:DATE}
+		when #{item.careerNo} then #{item.startDate:VARCHAR}
 		</foreach>
 		else TO_CHAR(SYSDATE, 'yyyy-mm-dd') end
 		,
 		end_date=case
 		career_no
 		<foreach collection="list" item="item" separator=" ">
-		when #{item.careerNo} then #{item.endDate:DATE}
+		when #{item.careerNo} then #{item.endDate:VARCHAR}
 		</foreach>
 		else TO_CHAR(SYSDATE, 'yyyy-mm-dd') end
 		WHERE user_id = #{userId}
