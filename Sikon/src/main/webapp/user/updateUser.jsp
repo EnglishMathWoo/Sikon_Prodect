@@ -20,14 +20,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- date picker -->
-<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-
-<script src="resources/js/plugin/datepicker/bootstrap-datepicker.js"></script>
-<script src="resources/js/plugin/datepicker/bootstrap-datepicker.ko.min.js"></script>
-
-<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-
 <!-- jQuery UI toolTip 사용 CSS-->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -476,59 +468,7 @@ html input[type=button]:hover{
 		        });
 	        };
         
-	        
-		     // 생년월일
-			 $(function() {
-					$('#userBirth').datepicker({
-						changeMonth: true,
-						changeYear: true, 
-						language: 'kr',
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무시작날짜
-			 $(function() {
-					$('#startDate').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무시작날짜2
-			 $(function() {
-					$('#startDate2').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무종료날짜
-			 $(function() {
-					$('#endDate').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무종료날짜2
-			 $(function() {
-					$('#endDate2').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 취득일자
-			 $(function() {
-					$('#licenseDate').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-		   
-			// 취득일자2
-			 $(function() {
-					$('#licenseDate2').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-	        
+	       
 			
 			// 파일 미리보기
 			 function readURL(input) {
@@ -630,7 +570,7 @@ html input[type=button]:hover{
 				  
 				  <div class="form-group">
 				    <label for="userBirth">생년월일</label>
-				      <input type="text" class="form-control" id="userBirth" name="userBirth"  value="${user.userBirth}">
+				      <input type="DATE" class="form-control" id="userBirth" name="userBirth"  value="${user.userBirth}">
 				  </div>
 				  
 				  <div class="form-group divyAddr">
@@ -660,11 +600,11 @@ html input[type=button]:hover{
 			<br>
 			<div>
 				<div class="subtitle">
-				  <p>쿠킹멘토 <i class="bi bi-chevron-down"></i></p>
+				  <p>쿠킹멘토 정보</p>
 				  </div><br>		
 
 				  <div class="form-group">
-				  <c:if test="${user.mentorApply == 'N'}">
+				  <c:if test="${user.role == 'user'}">
 				  	<ul class="payul">
 					 	<li>
 					 		<input type="radio" name="mentorApply" value="Y"/> <span style="font-size:16px; font-weight: bold;">멘토신청</span>
@@ -672,27 +612,22 @@ html input[type=button]:hover{
 					    <li> 
 					    	<input type="radio" name="mentorApply" value="N" checked="checked"/> <span style="font-size:16px; font-weight: bold;">신청안함</span>
 					  	</li>
+					  	<br>
 					  </ul>
 				  </c:if>
-				  <c:if test="${user.mentorApply == 'Y'}">
-				  	<ul class="payul">
-					 	<li>
-					 		<input type="radio" name="mentorApply" value="Y" checked="checked"/> <span style="font-size:16px; font-weight: bold;">멘토신청</span>
-					    </li>
-					    <li> 
-					    	<input type="radio" name="mentorApply" value="N"/> <span style="font-size:16px; font-weight: bold;">신청안함</span>
-					  	</li>
-					  </ul>
+				  <c:if test="${user.role == 'mentor'}">
+					    <input type="hidden" name="mentorApply" value="Y"/>
 				  </c:if>	
 				  </div>
-				  <br>
-				  
-				  <h4 class="semititle">경력사항</h4>
+				
+	<!-- //////////////////////////// 경력사항 //////////////////////////////////////////////////////////////////			   -->
+				<h4 class="semititle">경력사항</h4>
 				  
 				<table style="width:652px">
 					<tr>
 					
-					<c:if test="${user.role == 'user'}">
+					
+					<c:if test="${empty career}">
 						<td>
 						  <div class="form-group">
 						    <label for="">소속</label>
@@ -701,12 +636,12 @@ html input[type=button]:hover{
 						  
 						  <div class="form-group">
 						    <label for="">근무시작 날짜</label>
-						      <input type="text" class="form-table" id="startDate" name="startDate" >
+						      <input type="DATE" class="form-table" id="startDate" name="startDate" >
 						  </div>
 						  
 						  <div class="form-group">
 						    <label for="">근무종료 날짜</label>
-						      <input type="text" class="form-table" id="endDate" name="endDate" >
+						      <input type="DATE" class="form-table" id="endDate" name="endDate" >
 						  </div>
 						  
 						  <div class="form-group">
@@ -737,42 +672,45 @@ html input[type=button]:hover{
 		 				</td>
 					</c:if>
 					
-					<c:if test="${(user.role == 'mentor' || user.mentorApply == 'Y') &&  !empty career }">
+					<c:if test="${!empty career}">
 						<c:forEach var="career" items="${career}">
-								<input type="hidden" name="careerNo" value="${career.CAREER_NO}">
+						<c:set var="i" value="${i+1}" />
+								<input type="hidden" name="careerNo" value="${career.careerNo}">
 								<td>
 								  <div class="form-group">
 								    <label for="">소속</label>
-								      <input type="text" class="form-table" id="company" name="company" value="${career.COMPANY}">
+								      <input type="text" class="form-table" id="company" name="company" value="${career.company}">
 								  </div>
 								  
 								  <div class="form-group">
 								    <label for="">근무시작 날짜</label>
-								      <input type="text" class="form-table" id="startDate" name="startDate" value="${career.START_DATE}" >
+								      <input type="DATE" class="form-table" id="startDate${i}" name="startDate" value="${career.startDate}" >
 								  </div>
 								  
 								  <div class="form-group">
 								    <label for="">근무종료 날짜</label>
-								      <input type="text" class="form-table" id="endDate" name="endDate" value="${career.END_DATE}" >
+								      <input type="DATE" class="form-table" id="endDate${i}" name="endDate" value="${career.endDate}" >
 								  </div>
 								  
 								  <div class="form-group">
 								    <label for="">업무내용</label>
-								      <input type="text" class="form-area" id="careerExperience" name="careerExperience" value="${career.CAREER_EXPERIENCE}"/>
+								      <input type="text" class="form-area" id="careerExperience" name="careerExperience" value="${career.careerExperience}"/>
 								  </div>
 				 				</td>
 			 			</c:forEach> 	
 		 			</c:if>
 		 			
+		 			
+		 			
 		 			</tr>
 		 		</table>		
  			
- 			
+ <!-- //////////////////////////// 자격증 //////////////////////////////////////////////////////////////////			   -->			
  			<h4 class="semititle">자격증</h4>
 			
 				<table style="width:652px">
 					<tr>
-					<c:if test="${user.mentorApply == 'N'}">
+					<c:if test="${empty license}">
 						<td>
 						  <div class="form-group">
 						    <label for="">자격증명</label>
@@ -786,7 +724,7 @@ html input[type=button]:hover{
 						  
 						  <div class="form-group">
 						    <label for="">취득일자</label>
-						      <input type="text" class="form-table" id="licenseDate" name="licenseDate" >
+						      <input type="DATE" class="form-table" id="licenseDate" name="licenseDate" >
 						  </div>
 		 				</td>
 		 				<td>
@@ -802,30 +740,30 @@ html input[type=button]:hover{
 						  
 						  <div class="form-group">
 						    <label for="">취득일자</label>
-						      <input type="text" class="form-table" id="licenseDate2" name="licenseDate" >
+						      <input type="DATE" class="form-table" id="licenseDate2" name="licenseDate" >
 						  </div>
 		 				</td>
 					</c:if>
 					
-					<c:if test="${user.mentorApply == 'Y'}">
+					<c:if test="${!empty license}">
 						<c:forEach var="license" items="${license}">	  
-						
+						<c:set var="i" value="${i+1}" />
 							
-							 	<input type="hidden" name="licenseNo" value="${license.LICENSE_NO}">
+							 	<input type="hidden" name="licenseNo" value="${license.licenseNo}">
 								<td>
 								  <div class="form-group">
 								    <label for="">자격증명</label>
-								      <input type="text" class="form-table" id="licenseName" name="licenseName" value="${license.LICENSE_NAME}">
+								      <input type="text" class="form-table" id="licenseName" name="licenseName" value="${license.licenseName}">
 								  </div>
 								  
 								  <div class="form-group">
 								    <label for="">발급기관</label>
-								      <input type="text" class="form-table" id="licenseInstitution" name="licenseInstitution" value="${license.LICENSE_INSTITUTION}">
+								      <input type="text" class="form-table" id="licenseInstitution" name="licenseInstitution" value="${license.licenseInstitution}">
 								  </div>
 								  
 								  <div class="form-group">
 								    <label for="">취득일자</label>
-								      <input type="text" class="form-table" id="licenseDate" name="licenseDate" value="${license.LICENSE_DATE}">
+								      <input type="DATE" class="form-table" id="licenseDate${i}" name="licenseDate" value="${license.licenseDate}">
 								  </div>
 				 				</td>
 			 				

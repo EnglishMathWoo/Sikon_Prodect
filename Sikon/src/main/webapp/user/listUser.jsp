@@ -184,7 +184,7 @@ h3{
 					<tr class="pur">
 					  <td align="center">${ i }</td>
 					  <td align="center" value1="${user.role}"
-				  				   value2="${user.mentorApply}" title="Click : 회원정보 확인">${user.userId}</td>
+				  				   value2="${user.mentorApply}" title="Click : 회원정보 확인" style="cursor:pointer;">${user.userId}</td>
 					  <td align="center">${user.userName}</td>
 					  <td align="center">${user.userNickname}</td>
 						</tr>

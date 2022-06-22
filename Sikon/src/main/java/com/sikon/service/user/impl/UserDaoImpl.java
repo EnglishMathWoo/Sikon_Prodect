@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
+import com.sikon.service.domain.Career;
+import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserDao;
 
@@ -39,9 +41,12 @@ public class UserDaoImpl implements UserDao{
 		sqlSession.insert("UserMapper.addLicense", map.get("list"));
 		sqlSession.insert("UserMapper.addCareer", map.get("list2"));
 	}
-	public void addKakaoUser(User user) throws Exception {
+	public void addKakaoUser(User user, Map map) throws Exception {
 		System.out.println("user="+user);
+		System.out.println("map="+map);
 		sqlSession.insert("KakaoMapper.addKakaoUser", user);
+		sqlSession.insert("UserMapper.addLicense", map.get("list"));
+		sqlSession.insert("UserMapper.addCareer", map.get("list2"));
 	}
 //	public void addLicense(License license) throws Exception {
 //		System.out.println("license="+license);

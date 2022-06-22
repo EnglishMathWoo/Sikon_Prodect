@@ -818,16 +818,17 @@ border-spacing:0px
 			</td>
 			
 			<td class="alarm-td">
-			<c:if test="${sessionScope.alarm == 0}">
+			<c:choose>
+			<c:when test="${sessionScope.alarm == 0}">
 			<li><i class="bi bi-bell" id="vacantAlarm"></i></li>
-			</c:if>
-			<c:if test="${sessionScope.alarm != 0}">
+			</c:when>
+			<c:otherwise>
 			<li>
 				<i class="bi bi-bell" id="vacantAlarm"></i>
 				<div class="shape2">${sessionScope.alarm}</div>
 			</li>
-		
-			</c:if>
+			</c:otherwise>
+			</c:choose>
 			</td>
 			
 			</c:if>
