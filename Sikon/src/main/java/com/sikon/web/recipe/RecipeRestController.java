@@ -56,8 +56,8 @@ public class RecipeRestController {
 	public Map listRecipe(@RequestBody Search search) throws Exception {
 
 		System.out.println("/recipe/json/listRecipe : POST");
-		// Business Logic
 		System.out.println("search"+search);
+
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
@@ -69,7 +69,6 @@ public class RecipeRestController {
 		if (search.getThemeCondition() == "all") {
 			search.setThemeCondition(null);
 		}
-		//search.setOrderCondition(search.getOrderCondition().replace(",", ""));
 
 		System.out.println("orderCondition=" + search.getOrderCondition());
 
@@ -113,14 +112,11 @@ public class RecipeRestController {
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile); // 颇老 历厘
-			// jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
 			map.put("url", "/summernoteImage/" + savedFileName);
-			// jsonObject.addProperty("responseCode", "success");
 			map.put("responseCode", "success");
 
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile); // 角菩矫 历厘等 颇老 昏力
-			// jsonObject.addProperty("responseCode", "error");
 			map.put("responseCode", "error");
 			e.printStackTrace();
 		}
@@ -158,6 +154,8 @@ public class RecipeRestController {
 	public int updateHeart(@RequestParam("recipeNo") int recipeNo, @RequestParam("userId") String userId)
 			throws Exception {
 
+		System.out.println("/recipe/json/updateBookmark");
+
 		System.out.println(recipeNo);
 		System.out.println(userId);
 		
@@ -173,8 +171,7 @@ public class RecipeRestController {
 			bookmarkService.checkDuplicate(recipeNo, userId);
 
 		}
-		System.out.println("构具?????????????????????????????");
-		System.out.println(bookmarkStatus);
+
 		return bookmarkStatus;
 
 	}

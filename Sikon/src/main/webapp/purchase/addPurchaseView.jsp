@@ -31,13 +31,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
 
 <style>
 
 
 div.container {
 	padding-top: 200px;
-	font-family: 'Nanum Myeongjo', serif;
+	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	width: 652px;
 	padding-bottom: 200px;
 }
@@ -126,7 +127,7 @@ html input[type=button]:hover{
 	width: 652px;
 	margin-left: -15px;
     height: 50px;
-	padding: 15px;
+	padding: 12px;
 	font-weight: bold;
 	font-size: 18px;
 }
@@ -154,6 +155,7 @@ html input[type=button]:hover{
 .payment{
 	width:84%;
 	text-align: right;
+	font-family: 'Apple SD Gothic Neo',NanumBarunGothic;
 }
 
 .totalpay{
@@ -164,7 +166,7 @@ html input[type=button]:hover{
 }
 .info{
 	width: 15%;
-	font-weight: bold;
+	font-family: 'Apple SD Gothic Neo',NanumBarunGothic;
 }
 .payul{
 	display: grid;
@@ -294,7 +296,6 @@ html input[type=button]:hover{
 			$("#usingpoint").attr('size', $("#usingpoint").val().length);
 			$("#couponuse").attr('size', $("#couponuse").val().length);
 			$("#divyfee").attr('size', $("#divyfee").val().length);
-			
 			//==============================================
 			
 			$("#usedPoint").on( "change", function() { 
@@ -590,7 +591,7 @@ function paymentCA(data) {
 <div class="container">
 	<div class="layout">
 			<br>
-				<h1 class="bg-defualt text-center">| PURCHASE |</h1><br>
+				<h1 class="bg-defualt text-center"  style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| P U R C H A S E |</h1><br>
 				
 				<!-- form Start /////////////////////////////////////-->
 				<form class="form-horizontal">
@@ -740,7 +741,7 @@ function paymentCA(data) {
 				      		</td>
 				     		 <td class="search">
 				     			 <button type="button" class="point" id="point" value="${user.holdpoint }">모두 사용</button>
-				      			<h5>&emsp;보유 포인트 ${user.holdpoint } P</h5>
+				      			<h5 style="font-weight:normal ;color: #7c7a7a">&emsp;보유 포인트 ${user.holdpoint } P</h5>
 				     		 </td>
 			    		  </tr>
 				      </table>
@@ -774,7 +775,7 @@ function paymentCA(data) {
 				  	<div class="payment">+<input type="text" id="divyfee" value="" size=""  style="border:none;text-align:right">원</div>
 				  </div>
 				  
-				  <br>
+				  <br> 
 				  
 				  <div class="sectd">
 				  	<h5 class="info">총 결제금액</h5>

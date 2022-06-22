@@ -452,9 +452,13 @@ html input[type=button]:hover{
 	                if(cnt == 0){ 
 	                    $('.id_ok').css("display","inline-block"); 
 	                    $('.id_already').css("display", "none");
+
 	                } else { 
 	                    $('.id_already').css("display","inline-block");
 	                    $('.id_ok').css("display", "none");
+	                    $('#emailChk').attr('disabled', true);
+	                    $('#emailChk').css("cursor",default);
+						
 	                }
 	            },
 	            error:function(){
