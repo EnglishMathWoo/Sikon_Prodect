@@ -228,8 +228,24 @@ div.emptyProd{
     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
 
-
-
+.form-control{
+	border-radius: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #999;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+}
+.search{
+	font-family:FontAwesome;
+	border: none;
+	background-color: #f7f7f7;
+}
 </style>
 
 
@@ -247,11 +263,6 @@ div.emptyProd{
 		
 		 
 		 $(function() {
-			 
-			 $( ".updateuser" ).on("click" , function() {
-				 self.location = "/user/getUser?userId=${sessionScope.user.userId}"
-				 });
-			 
 			 
 			 
 			//=============  테마버튼 유지  ==============================================
@@ -313,7 +324,7 @@ div.emptyProd{
 		        	   		
 				            $.ajax({
 				                
-				                  url : "/product/json/listProduct?&menu=${param.menu }" ,
+				                  url : "/product/json/listProduct" ,
 				                  method : "POST" ,
 				                  data : JSON.stringify({
 				                	  currentPage : cpage,
@@ -391,7 +402,7 @@ div.emptyProd{
 				fncGetList(1);
 			 });
 			
-			$( "button.btn.btn-default:contains('검색')" ).on("click" , function() {
+			$( ".search" ).on("click" , function() {
 				fncGetList(1);
 			 });
 			
@@ -410,7 +421,7 @@ div.emptyProd{
 		 console.log('prodNo: '+prodNo);
 		 var menu = $("#menu").val();
 		 console.log(menu);
-		 self.location = "/product/getProduct?prodNo="+prodNo+"&menu="+menu;
+		 self.location = "/product/getProduct?menu=search&prodNo="+prodNo;
 	});
 
 	 
@@ -511,7 +522,7 @@ div.emptyProd{
 		    
 		    
 		    
-		   		 <br/><hr id="hr"/><br/>
+		   		 <br/><hr/><br/>
     
 		    	<nav class="ref-sort" >
 			      <button class="theme themeAll" id="themeAll" value="all">모두보기</button>
@@ -549,8 +560,7 @@ div.emptyProd{
 							    				onkeyup="enterkey()"  value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
 										</div>
 										
-										<button type="button" class="btn btn-default" id="search">검색</button>
-										
+										<input type="submit" class="search" id="search" value="&#xf002">
 									</td>
 								</tr>
 							</table>

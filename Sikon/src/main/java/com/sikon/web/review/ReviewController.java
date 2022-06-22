@@ -78,34 +78,34 @@ public class ReviewController {
 	@RequestMapping(value = "addReview", method = RequestMethod.POST)
 	public ModelAndView addReview(@RequestParam("fileArray") MultipartFile[] fileArray,
 			@ModelAttribute("review") Review review, @RequestParam("category") String category,
-			@RequestParam("textNo") int textNo,@RequestParam("textNo2") int textNo2, Model model, HttpServletRequest request) throws Exception {
+			@RequestParam("textNo") int textNo, @RequestParam("textNo2") int textNo2, Model model,
+			HttpServletRequest request) throws Exception {
 
 		System.out.println("/review/addReview : POST");
-		System.out.println("으으으ㅡㅁ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 //		System.out.println("review=" + review);
 //		System.out.println("category=" + category);
-		System.out.println("textNo=" + textNo);
-		System.out.println("textNo2=" + textNo2);
+//		System.out.println("textNo=" + textNo);
+//		System.out.println("textNo2=" + textNo2);
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		
+
 		// 리뷰 작성시 일반리뷰: 100원, 포토리뷰: 500원 적립금
-				Point point = new Point();
-				point.setUserId(user.getUserId());
-				point.setPointType("EARN");
-				point.setPointCategory("RE");
-	
-				int pointt=0;
-				if (category.equals("COOK") || category.equals("PRD")) {
-					if (review.getReviewImg() == null ||review.getReviewImg()=="") {
-						point.setPointScore(100);
-						pointt=100;
-					} else {
-						point.setPointScore(500);
-						pointt=500;
-					}
-				}
+		Point point = new Point();
+		point.setUserId(user.getUserId());
+		point.setPointType("EARN");
+		point.setPointCategory("RE");
+
+		int pointt = 0;
+		if (category.equals("COOK") || category.equals("PRD")) {
+			if (review.getReviewImg() == null || review.getReviewImg() == "") {
+				point.setPointScore(100);
+				pointt = 100;
+			} else {
+				point.setPointScore(500);
+				pointt = 500;
+			}
+		}
 		String FILE_SERVER_PATH = filePath;
 		String newFileName = "";
 
@@ -113,10 +113,8 @@ public class ReviewController {
 
 			if (!fileArray[i].getOriginalFilename().isEmpty()) {
 				fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
-				model.addAttribute("msg", "File uploaded successfully.");
 
 			} else {
-				model.addAttribute("msg", "Please select a valid mediaFile..");
 			}
 
 			newFileName += fileArray[i].getOriginalFilename();
@@ -124,7 +122,6 @@ public class ReviewController {
 		}
 
 		review.setReviewImg(newFileName);
-		
 
 		if (category.equals("COOK")) {
 			Cook cook = cookService.getCook(textNo);
@@ -140,17 +137,14 @@ public class ReviewController {
 		review.setWriterNickname(user.getUserNickname());
 		review.setReviewCategory(category);
 
-		System.out.println("리뷰:" + review);
 		reviewService.addReview(review);
-
-		System.out.println("가나");
 		reviewService.updateStatus(textNo2, category);
 		pointService.addPoint(point);
 		reviewService.givePoint(pointt, user.getUserId());
-		System.out.println("가나");
-		
+		System.out.println("리뷰끝");
+
 		session.setAttribute("user", user);
-		
+
 		ModelAndView modelAndView = new ModelAndView();
 		if (category.equals("REC")) {
 			modelAndView.addObject(review);
@@ -160,18 +154,16 @@ public class ReviewController {
 	}
 
 	@RequestMapping(value = "updateReview", method = RequestMethod.GET)
-	public ModelAndView updateReview(@RequestParam("reviewNo") int reviewNo, HttpServletRequest request)
+	public String updateReview(@RequestParam("reviewNo") int reviewNo, Model model, HttpServletRequest request)
 			throws Exception {
 		System.out.println("/review/updateReview : GET");
 //		System.out.println("reviewNo=" + reviewNo);
 
 		Review review = reviewService.getReview(reviewNo);
 
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject(review);
-		modelAndView.setViewName("forward:/review/updateReview.jsp");
+		model.addAttribute(review);
 
-		return modelAndView;
+		return "forward:/review/updateReview.jsp";
 	}
 
 	@RequestMapping(value = "updateReview", method = RequestMethod.POST)
@@ -208,12 +200,9 @@ public class ReviewController {
 
 		Map<String, Object> map = reviewService.getMyReviewList(search, user.getUserNickname());
 
+		// 한 페이지에 리뷰 10개씩 나오도록 pageSize:10
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit, 10);
 
-//		System.out.println("list=" + map.get("list"));
-//		System.out.println("resultPage=" + resultPage);
-
-		// Model 과 View 연결
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", map.get("list"));
 		modelAndView.addObject("resultPage", resultPage);
@@ -229,9 +218,9 @@ public class ReviewController {
 
 		System.out.println("/review/deleteReview : POST");
 
-		for (int i = 0; i < reviewList.length; i++) {
-			System.out.println(reviewList[i]);
-		}
+//		for (int i = 0; i < reviewList.length; i++) {
+//			System.out.println(reviewList[i]);
+//		}
 
 		for (int i = 0; i < reviewList.length; i++) {
 			reviewService.deleteReview(reviewList[i]);
