@@ -456,7 +456,14 @@ p {
     animation: draw-checkbox ease-in-out 0.2s forwards;
   }
   
-
+div.emptyBookmark{
+	border: 1px solid #937062;
+	padding : 90px;
+	height: 200px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
+}
 
 .imgover:hover{
 	opacity: 0.8;
@@ -526,6 +533,14 @@ p {
 
 
 		<div class="row">
+		<c:if test="${empty list}">
+				<br><br>
+				<div class="emptyBookmark">
+					책갈피 내역이 없습니다.
+				</div>
+				<br>
+			</c:if>
+			
 			<c:set var="i" value="0" />
 			<c:forEach var="list" items="${list}">
 				<div class="col-sm-6 col-md-3 col-lg-3">
@@ -589,10 +604,7 @@ p {
 			</c:forEach>
 		</div>
 
-		<c:if test="${empty list}">
-			<h3 align="center">책갈피 내역이 없습니다.</h3>
-			<br>
-		</c:if>
+		
 	</div>
 
 </body>

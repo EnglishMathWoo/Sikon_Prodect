@@ -219,9 +219,14 @@
 	 </select>
 	 
 	  <select  id="getMyReviewList"  parameterType="map"	resultMap="reviewSelectMap">
-	  	select *
+	  	SELECT *
+	  	FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+	  		   FROM	( select *
 	  					from review
 	  					WHERE writer_nickname = #{writerNickname}
+	  					) inner_table
+					  WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 				 
 	 </select>
 	 

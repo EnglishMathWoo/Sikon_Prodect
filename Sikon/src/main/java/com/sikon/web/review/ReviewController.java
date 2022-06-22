@@ -82,7 +82,7 @@ public class ReviewController {
 
 		System.out.println("/review/addReview : POST");
 		System.out.println("으으으ㅡㅁ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//		System.out.println("review=" + review);
+		System.out.println("review=" + review);
 //		System.out.println("category=" + category);
 		System.out.println("textNo=" + textNo);
 		System.out.println("textNo2=" + textNo2);
@@ -98,7 +98,7 @@ public class ReviewController {
 	
 				int pointt=0;
 				if (category.equals("COOK") || category.equals("PRD")) {
-					if (review.getReviewImg() == null ||review.getReviewImg()=="") {
+					if (fileArray.length==0 ) {
 						point.setPointScore(100);
 						pointt=100;
 					} else {
@@ -106,6 +106,7 @@ public class ReviewController {
 						pointt=500;
 					}
 				}
+				System.out.println("얼마?"+point.getPointScore());
 		String FILE_SERVER_PATH = filePath;
 		String newFileName = "";
 
