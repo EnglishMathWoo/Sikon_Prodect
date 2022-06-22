@@ -644,9 +644,9 @@ div.image{
 					</div>
 						<div class="text-left">
 								<a class ="kakao" id="kakao-link-btn" href="javascript:kakaoShare()">
-					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30"/>
+					    	<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="30" height="30" style="float: right;"/>
 					    </a>
-					    
+					 
 					    
 					    	<c:if test="${sessionScope.user.role == 'mentor'}">
 			  				<button type="button" class="btn-u updateCook"  >수정하기</button>
@@ -657,6 +657,7 @@ div.image{
 			  			  </c:if>	
 				
 						</div>
+						<br>
 					<div><h4><strong>${cook.cookName}</strong></h4></div><br>
 				
 					<div><strong>${cook.cookBrief }</strong></div>

@@ -88,17 +88,13 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT *
 											FROM cook
-												<if test="searchCondition != null">
+												<if test="searchKeyword != null">
 												
-													<if test="searchCondition == 0 ">
-										 				WHERE cook_no like '%' || #{searchKeyword} || '%'
-													</if>
-													<if test="searchCondition == 1 ">
+										
+												
 										 				WHERE cook_name like '%' || #{searchKeyword} || '%'
-													</if>
-													<if test="searchCondition == 2 ">
-										 				 WHERE cook_price like '%' || #{searchKeyword} || '%'
-													</if>
+											
+							
 											</if>		
 											
 											<if test="themeCondition != null">
@@ -131,17 +127,12 @@
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT cook_no , cook_name ,cook_price
 						FROM cook	
-						<if test="searchCondition != null">
-							
-								<if test="searchCondition == 0  ">
-						 			WHERE cook_no LIKE '%'||#{searchKeyword}||'%'
-								</if>
-								<if test="searchCondition == 1 ">
+						<if test="searchKeyword != null">
+
+					
 						 		WHERE cook_name LIKE '%'||#{searchKeyword}||'%'
-								</if>
-								<if test="searchCondition == 2  ">
-						 		WHERE cook_price LIKE '%'||#{searchKeyword}||'%'
-								</if>
+					
+			
 						
 							
 						</if>  
@@ -179,16 +170,13 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT * FROM cook
 											WHERE mentor_nickname=#{userNickname}
-												<if test="search.searchCondition != null">
-													<if test="search.searchCondition == 0 ">
-										 				AND cook_no LIKE '%'||#{search.searchKeyword}||'%'
-													</if>
-													<if test="search.searchCondition == 1 ">
+												<if test="search.searchKeyword != null">
+												
+										
+												
 										 				AND cook_name LIKE '%'||#{search.searchKeyword}||'%'
-													</if>
-													<if test="search.searchCondition == 2 ">
-										 				 AND cook_price LIKE '%'||#{search.searchKeyword}||'%'
-													</if>
+											
+							
 											</if>	
 					 )  inner_table
 						WHERE ROWNUM &lt;= #{search.endRowNum} )
@@ -199,16 +187,13 @@
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT cook_no 	FROM cook
 						WHERE mentor_nickname=#{userNickname}
-												<if test="search.searchCondition != null">
-													<if test="search.searchCondition == 0 ">
-										 				and cook_no LIKE '%'||#{search.searchKeyword}||'%'
-													</if>
-													<if test="search.searchCondition == 1 ">
-										 				and cook_name LIKE '%'||#{search.searchKeyword}||'%'
-													</if>
-													<if test="search.searchCondition == 2 ">
-										 				 and cook_price LIKE '%'||#{search.searchKeyword}||'%'
-													</if>
+											<if test="search.searchKeyword != null">
+												
+										
+												
+										 				AND cook_name LIKE '%'||#{search.searchKeyword}||'%'
+											
+							
 											</if>	
 						 ) countTable						
 	 </select> 
