@@ -192,6 +192,8 @@ div{
 			 console.log(totalprice);
 			
 			 $("#totalprice").val(totalprice);
+			 $("#calpay").val(totalprice);
+			 
 			 //*/
 			 
 			 <!-- ------------- 장바구니 삭제 --------------- -->
@@ -245,11 +247,14 @@ div{
 		         
 				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
+				 var cartprice = Number($(this).attr('value2'));
+				 var totals = Number($("#totalprice").val());
 				 
 				quantity = Number(quantity)+1;
 				console.log('plus');
 				console.log(cartNo);
 				console.log(quantity);
+				console.log("cartprice: "+cartprice);
 				
 		         $.ajax( 
 		               {
@@ -268,7 +273,9 @@ div{
 		            });
 		         
 		         $(this).parent().children().eq(1).val(quantity);
-		         
+		         $(this).parent().next().children().val(quantity*cartprice);
+		         $("#totalprice").val(totals+cartprice);
+		         $("#calpay").val(totals+cartprice);
 	  			 });
 			 
 			 
@@ -278,17 +285,21 @@ div{
 		         
 				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
-				  
+				 var cartprice1 = Number($(this).attr('value2'));
+				 var cartprice2 = Number($(this).attr('value2'));
+				 var totals = Number($("#totalprice").val());
+				 
+				 
 				 if(quantity > 1){
 					 quantity = Number(quantity)-1;
 				 }else{
 					 quantity = Number(quantity);
+					 cartprice2 = Number(0);
 				 }
 				 
 					console.log('minus');
 					console.log(cartNo);
 					console.log(quantity);
-				
 				
 		         $.ajax( 
 		               {
@@ -310,8 +321,9 @@ div{
 		         
 				
 			         $(this).parent().children().eq(1).val(quantity);
-		         
-		         
+			         $(this).parent().next().children().val(quantity*cartprice1);
+			         $("#totalprice").val(totals-cartprice2);
+			         $("#calpay").val(totals-cartprice2);
 	  			 });
 			 
 
@@ -407,21 +419,10 @@ div{
 				
 				if($(this).prop("checked")){
 					
-					 var totalprice = 0;
-					 var price = $("div.price").attr("value");
-					 var quantity = $("div.quantity").attr("value");
-					 console.log(price);
-					 console.log(quantity);
-				
+		
+					 var price = Number($("#calpay").val());
+					 $("#totalprice").val(price);
 					 
-					 var list = [];
-				   		<c:forEach var="cartprod" items="${Cart}" >
-				   		totalprice += (Number(${cartprod.cartProd.prodDisPrice})*Number(${cartprod.quantity}));
-				   		</c:forEach>
-				   		
-					 console.log(totalprice);
-					
-					 $("#totalprice").val(totalprice);
 					
 				}else{
 					
@@ -480,10 +481,10 @@ div{
 				<c:set var="i" value="${ i+1 }" />
 				  <div class="col-md-1 text-center boxselect">
 				  	<c:if test="${cart.cartProd.prodStock == 0}">
-				  		<input type="checkbox" disabled/> 	
+				  		<input type="checkbox" price="" disabled/> 	
 				  	</c:if>
 				  	<c:if test="${cart.cartProd.prodStock > 0}">
-				  		<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}" price="${cart.cartProd.prodDisPrice*cart.quantity }" checked="checked"/> 	
+				  		<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}" price="" checked="checked"/> 	
 				  	</c:if>
 				  	
 				  </div>
@@ -512,13 +513,15 @@ div{
 				    	  
 				  <div align="center" class="col-md-2 text-center quantity" value="${cart.quantity }">
 				  
-				  	<button  type="button" class="calculation minus" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
+				  	<button  type="button" class="calculation minus" value="${cart.cartNo}" value2="${cart.cartProd.prodDisPrice}"><i class="bi bi-dash-lg"></i></button>
 				  	<input type="text" name="quantity" class="result" value=" ${cart.quantity }" style="width:30px;text-align: center" readonly/>
-				  	<button  type="button" class="calculation plus" value="${cart.cartNo}"><i class="bi bi-plus-lg"></i></button>
+				  	<button  type="button" class="calculation plus" value="${cart.cartNo}" value2="${cart.cartProd.prodDisPrice}"><i class="bi bi-plus-lg"></i></button>
 				  	
 				  </div>
 				  
-				  <div align="center" class="col-md-2 text-center price" value="${cart.cartProd.prodDisPrice*cart.quantity }" >${cart.cartProd.prodDisPrice*cart.quantity } 원</div>
+				  <div align="center" class="col-md-2 text-center price">
+				  	<input type="text" class="semipay" style="width: 60%; text-align: right;border:none; background-color: #f7f7f7;" value="${cart.cartProd.prodDisPrice*cart.quantity }">원
+				  </div>
 				  
 	           </div>
 	           <hr>
@@ -540,6 +543,8 @@ div{
 			       </tr>
 		       </table>
 	      </div><hr>
+		      
+		      <input type="hidden" id="calpay" value=""/>
 		      
 		      
 		  <div align="right">
