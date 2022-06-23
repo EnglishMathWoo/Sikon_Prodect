@@ -123,7 +123,6 @@ CREATE TABLE notice (
 	notice_title  VARCHAR2(100) NOT NULL,
 	notice_content VARCHAR2(2000) NOT NULL,
 	notice_date DATE NOT NULL,
-	notice_image VARCHAR2(100),
 	PRIMARY KEY(notice_no) 
 );
 
@@ -295,8 +294,8 @@ CREATE TABLE review(
 
 CREATE TABLE alarm ( 
 	alarm_no 	NUMBER(38) 	NOT NULL, 
-	alarm_target 	VARCHAR2(100),
-	alarm_content 	VARCHAR2(4000), 
+	alarm_target 	VARCHAR2(50),
+	alarm_content 	VARCHAR2(500), 
 	alarm_status 	VARCHAR2(20), 
 	alarm_date 	DATE 		NOT NULL,	
 	PRIMARY KEY(alarm_no)
@@ -306,7 +305,7 @@ CREATE TABLE ranking (
 	ranking_no NUMBER NOT NULL,
 	recipe_no NUMBER, 
 	view_date DATE, 
-	user_nickname VARCHAR2(200), 
+	user_nickname VARCHAR2(40), 
 	user_id VARCHAR2(50), 
 	love_date DATE, 
 	love_increase NUMBER, 

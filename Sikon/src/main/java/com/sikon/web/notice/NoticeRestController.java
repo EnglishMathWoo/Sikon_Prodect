@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,29 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sikon.service.notice.NoticeService;
-import com.sikon.service.user.UserService;
-
 
 @Controller
 @RequestMapping("/notice/*")
 public class NoticeRestController {
 	
 	///Field
-	@Autowired
-	@Qualifier("noticeServiceImpl")
-	private NoticeService noticeService;
-	
-	@Autowired
-	@Qualifier("userServiceImpl")
-	private UserService userSerivce;
-		
-	@Value("#{commonProperties['pageUnit']}")
-	int pageUnit;
-	
-	@Value("#{commonProperties['pageSize']}")
-	int pageSize;
-	
 	@Value("#{commonProperties['summerNote']}")
 	String summerNote;
 	

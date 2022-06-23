@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sikon.common.Search;
-import com.sikon.service.cook.CookService;
 import com.sikon.service.ranking.RankingService;
-import com.sikon.service.recipe.RecipeService;
 
 
 @Controller
@@ -24,14 +22,6 @@ public class RankingController {
 	@Autowired
 	@Qualifier("rankingServiceImpl")
 	private RankingService rankingService;
-	
-	@Autowired
-	@Qualifier("recipeServiceImpl")
-	private RecipeService recipeService;
-	
-	@Autowired
-	@Qualifier("cookServiceImpl")
-	private CookService cookService;
 
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
