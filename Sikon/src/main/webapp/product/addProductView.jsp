@@ -440,7 +440,6 @@ input:-webkit-autofill {
 	   	    	width: 860, 
 				minHeight : null, 
 				maxHeight : null,
-				focus : true, 
 	   	  		callbacks: {	
 	   	               onImageUpload : function(files) {
 	   	                    uploadSummernoteImageFile(files[0],this);
