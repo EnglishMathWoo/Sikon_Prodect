@@ -21,10 +21,10 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 		
 	<!-- Bootstrap Dropdown Hover CSS -->
-    <link href="/css/animate.min.css" rel="stylesheet">
-    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+    <link href="/resources/css/animate.min.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
     <!-- Bootstrap Dropdown Hover JS -->
-    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+    <script src="/resources/javascript/bootstrap-dropdownhover.min.js"></script>
    
     <!-- jQuery UI toolTip 사용 CSS-->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -48,7 +48,6 @@ body {
 	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 		"sans-serif";
 	padding-top: 170px;
-	padding-bottom: 200px;
 }
 
 table {
@@ -85,6 +84,17 @@ table {
 	padding-top: 35PX;
 	text-align: center;
 }
+
+.row{
+    margin-left: -350px;
+    margin-right:0
+}
+/* 폰트어썸 search */
+.search{
+font-family:FontAwesome;
+border: none;
+background-color: #f7f7f7;
+}
 </style>
     
     
@@ -102,6 +112,12 @@ function fncGetList(currentPage) {
 
 	
  $(function() {
+	 
+	 $(".search").on("click", function() {
+			fncGetList(1);
+
+		});
+	 
 	 
 	 $(document).on('click', '.delete', function(){
 	 var checkCount = $("input[name='ckBookmark']:checked").length;
@@ -130,6 +146,11 @@ function fncGetList(currentPage) {
 	$(document).on('click', '.getUser', function(){
 		console.log($(this).attr("value"));
 		self.location ="/user/getUser?userId="+$(this).attr("value")
+		});
+	
+	$(document).on('click', '.updateRecipe', function(){
+		console.log($(this).attr("value"));
+		self.location ="/recipe/updateRecipe?recipeNo="+$(this).attr("value")
 		});
 	
 	$(document).on('click', '.add', function(){
@@ -163,6 +184,37 @@ function fncGetList(currentPage) {
 		<input type="hidden" id="currentPage" name="currentPage" value=""/>
 		<br/>
 		<p style="float: left;padding-top: 30px;color: #424242">&emsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지</p>
+    	
+    	
+    	 <table style="width: 100%;">
+        <tr>
+        	<td style="text-align: right;">
+             <div class="row height">
+              <div class="col-md-6">
+					<div class="form-group">
+					 
+						<select class="form-control" name="searchCondition" id="searchCondition">
+						<option value="3"
+								${!empty search.searchCondition && search.searchCondition==3 ? "selected" : ""}>레시피번호</option>
+							<option value="1"
+								${!empty search.searchCondition && search.searchCondition==1 ? "selected" : ""}>레시피명</option>
+							<option value="2"
+								${!empty search.searchCondition && search.searchCondition==2 ? "selected" : ""}>작성자명</option>
+						</select>
+
+					</div>
+
+                  <input type="text" class="form-control form-input" id="searchKeyword" name="searchKeyword" placeholder="검색어를 입력하세요." value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >&nbsp;
+                  <input type="submit" class="search"  value="&#xf002">
+                </div>
+					</div>
+            
+            
+          </td>
+          
+	     	</tr>
+	     </table>
+    	
     	<table class="table table-hover table-striped" >
       
 		<thead>
@@ -182,7 +234,7 @@ function fncGetList(currentPage) {
 		<tr class="ct_list_pop">
 				<td align="left"><input type="checkbox" name="ckBookmark" id="${recipe.recipeNo}"/></td>
 			
-				<td align="left" class="getRecipe" value="${recipe.recipeNo }"> ${recipe.recipeNo}</td>
+				<td align="left" class="updateRecipe" value="${recipe.recipeNo }"> ${recipe.recipeNo}</td>
 	
 				<td align="left" class="getRecipe" value="${recipe.recipeNo }">${recipe.recipeName}</td>
 				<td align="left"><fmt:formatDate pattern="yyyy-MM-dd"

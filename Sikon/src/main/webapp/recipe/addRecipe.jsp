@@ -785,6 +785,7 @@ footer a, footer h6 {
 			tableCreate();
 		});
 		$("button:contains('Àç·á»©±â')").on("click", function() {
+			console.log('¾Æ');
 			tableDelete();
 		});
 		
@@ -809,7 +810,7 @@ footer a, footer h6 {
 		}
 
 		function tableDelete() {
-			$('#dynamicTable tbody tr:last').remove();
+			$('#dynamicTable tr:last').remove();
 		}
 	});
 	

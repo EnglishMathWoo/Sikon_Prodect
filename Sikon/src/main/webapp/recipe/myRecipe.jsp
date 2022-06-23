@@ -364,7 +364,7 @@ font-size: 13px;
 <div class="center btmspace-50">
 			<br />
 			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
-				<br> | R E C I P E | <br>
+				<br> | M Y R E C I P E | <br>
 			</h3>
 		</div>
 		

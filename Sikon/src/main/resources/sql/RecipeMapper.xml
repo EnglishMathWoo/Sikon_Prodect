@@ -117,6 +117,9 @@
 													<if test="searchCondition == 2">
 										 				and  r.writer_nickname LIKE '%'||#{searchKeyword}||'%'
 													</if>
+													<if test="searchCondition == 3 and searchKeyword !='' ">
+										 				and  r.recipe_NO LIKE '%'||#{searchKeyword}||'%'
+													</if>
 											</if>
 											<if test="themeCondition != null">
 													<if test='themeCondition == "ko"'>
@@ -178,6 +181,9 @@
 													</if>
 													<if test="searchCondition == 2 and searchKeyword !='' ">
 										 				and  r.writer_nickname LIKE '%'||#{searchKeyword}||'%'
+													</if>
+													<if test="searchCondition == 3 and searchKeyword !='' ">
+										 				and  r.recipe_NO LIKE '%'||#{searchKeyword}||'%'
 													</if>
 											</if>
 											<if test="themeCondition != null">
