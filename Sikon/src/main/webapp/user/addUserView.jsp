@@ -263,8 +263,6 @@ html input[type=button]:hover{
 
 
 
-
-
 .avatar-upload {
   position: relative;
   max-width: 170px;
