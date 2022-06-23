@@ -353,9 +353,34 @@ font-size: 15px
 		| M Y A P P L Y |</h3>
 	    <br>
 	    
-		<form>
-			<input type="hidden" id="currentPage" name="currentPage" value=""/>
-		</form>
+  <div class="row">
+			    
+				    <div class="col-md-6 text-left">
+				    	<p class="text-primary" style="color:gray">
+				    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+				    	</p>
+				    </div>
+				  </div>  
+				     <div class="row">
+					    <form class="form-inline " id="form"> 
+						 <div class="col-md-6 text-left"> 
+						  <div class="form-group" align="left">
+								<select name="applyCondition" class="form-control" style="width:125px">
+								 	<option value="0"  ${ ! empty search.applyCondition && search.applyCondition==0 ? "selected" : "" }>--정렬하기--</option>
+									<option value="5"  ${ ! empty search.applyCondition && search.applyCondition==5 ? "selected" : "" }>신청완료</option>
+									<option value="6"  ${ ! empty search.applyCondition && search.applyCondition==6 ? "selected" : "" }>수강완료</option>									
+								</select>
+						  </div>
+						  <button type="button" class="btn btn-default" id="sorting">조회</button>
+						  </div>
+					<input type="hidden" id="currentPage" name="currentPage" value="" />
+					
+						</form>
+					
+  </div>
+  
+  <br>
+  
       <!--  table Start /////////////////////////////////////-->
       <table class="table table-hover table-striped">
 					
