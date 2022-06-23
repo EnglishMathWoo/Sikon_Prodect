@@ -10,7 +10,6 @@
 		<result property="noticeNo" 			column="notice_no" 			jdbcType="INTEGER"/>
 		<result property="noticeTitle" 			column="notice_title" 			jdbcType="VARCHAR"/>
 		<result property="noticeContent"		column="notice_content" 		jdbcType="VARCHAR" />
-		<result property="noticeFileName"		column="notice_image" 		jdbcType="VARCHAR" />
 		<result property="noticeDate"		column="notice_date" 		jdbcType="DATE" />
 	</resultMap>
 	
@@ -18,8 +17,8 @@
 	<!-- 공지사항 등록 -->
 	<insert 	id="addNotice"		parameterType="notice">
 		INSERT
-		INTO notice (notice_no, notice_title, notice_content, notice_image, notice_date) 
-		VALUES (seq_notice_notice_no.NEXTVAL, #{noticeTitle:VARCHAR}, #{noticeContent:VARCHAR}, #{noticeFileName:VARCHAR}, SYSDATE)
+		INTO notice (notice_no, notice_title, notice_content, notice_date) 
+		VALUES (seq_notice_notice_no.NEXTVAL, #{noticeTitle:VARCHAR}, #{noticeContent:VARCHAR}, SYSDATE)
 	 </insert>
 	 
 	 <!-- 공지사항 조회 -->
@@ -47,7 +46,7 @@
 	 <!-- 공지사항 수정 -->
 	<update 	id="updateNotice"		parameterType="notice">
 		UPDATE notice
-		SET notice_title = #{noticeTitle}, notice_content = #{noticeContent}, notice_image = #{noticeFileName:VARCHAR}
+		SET notice_title = #{noticeTitle}, notice_content = #{noticeContent} 
 		WHERE notice_no = #{noticeNo}
 	</update>
 	

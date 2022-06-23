@@ -89,8 +89,6 @@ public class CouponServiceImpl implements CouponService{
 		
 		List<Coupon> couponList = couponDao.findCoupon();
 		
-		System.out.println(couponList);
-		
 		return couponList;
 	}
 	
@@ -99,8 +97,6 @@ public class CouponServiceImpl implements CouponService{
 		
 		Coupon issuedCoupon = couponDao.findIssuedCoupon(issueNo);
 		
-		System.out.println(issuedCoupon);
-		
 		return issuedCoupon;
 	}
 	
@@ -108,9 +104,7 @@ public class CouponServiceImpl implements CouponService{
 	public List<Coupon> getMyCoupon( String userId ) throws Exception {
 		
 		List<Coupon> couponList = couponDao.findMyCoupon(userId);
-		
-		System.out.println(couponList);
-		
+	
 		return couponList;
 	}
 		

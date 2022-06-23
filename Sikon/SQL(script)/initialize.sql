@@ -123,13 +123,12 @@ CREATE TABLE notice (
 	notice_title  VARCHAR2(100) NOT NULL,
 	notice_content VARCHAR2(2000) NOT NULL,
 	notice_date DATE NOT NULL,
-	notice_image VARCHAR2(100),
 	PRIMARY KEY(notice_no) 
 );
 
 CREATE TABLE recipe(
 	recipe_no NUMBER 	NOT NULL,
-	writer_nickname  VARCHAR2(50) REFERENCES  users(user_nickname),
+	writer_nickname  VARCHAR2(50) REFERENCES  users(user_nickname) ON DELETE CASCADE,
 	recipe_name  VARCHAR2(100) NOT NULL,
 	recipe_detail  VARCHAR2(200)  NOT NULL,
 	detail  VARCHAR2(2000) NOT NULL,
@@ -181,7 +180,7 @@ CREATE TABLE product (
 CREATE TABLE purchase ( 
 	tran_no 			NUMBER 		NOT NULL, 
 	prod_no 			NUMBER  	NOT NULL 	REFERENCES 	product(prod_no), 
-	user_id 	 		VARCHAR2(50)  	NOT NULL 	REFERENCES 	users(user_id), 
+	user_id 	 		VARCHAR2(50)  	NOT NULL 	REFERENCES 	users(user_id) ON DELETE CASCADE, 
 	serial_no 			VARCHAR2(50) 	NOT NULL, 
 	receiver_name 		VARCHAR2(20)  	NOT NULL,  
 	receiver_phone 		VARCHAR2(20)  	NOT NULL, 
@@ -205,7 +204,7 @@ CREATE TABLE purchase (
 CREATE TABLE cart ( 
 	cart_no 			NUMBER 		NOT NULL, 
 	prod_no 			NUMBER  	NOT NULL 	REFERENCES 	product(prod_no), 
-	user_id 	 		VARCHAR2(50)  	NOT NULL 	REFERENCES 	users(user_id), 
+	user_id 	 		VARCHAR2(50)  	NOT NULL 	REFERENCES 	users(user_id) ON DELETE CASCADE, 
 	quantity 			NUMBER, 
 	prod_name 		VARCHAR2(100),
 	prod_image 		VARCHAR2(500),
@@ -282,7 +281,7 @@ PRIMARY KEY(love_no)
 CREATE TABLE review(
 	review_no  NUMBER 		 		NOT NULL,
            review_category        VARCHAR2(20)  NOT NULL,
-	writer_nickname   VARCHAR2(50)   	REFERENCES  users(user_nickname) ,
+	writer_nickname   VARCHAR2(50)   	REFERENCES  users(user_nickname) ON DELETE CASCADE,
 	review_content         VARCHAR2(400)   NOT NULL,
 	review_img    VARCHAR2(100),	
 	review_regdate        DATE NOT NULL,
@@ -295,8 +294,8 @@ CREATE TABLE review(
 
 CREATE TABLE alarm ( 
 	alarm_no 	NUMBER(38) 	NOT NULL, 
-	alarm_target 	VARCHAR2(100),
-	alarm_content 	VARCHAR2(4000), 
+	alarm_target 	VARCHAR2(50),
+	alarm_content 	VARCHAR2(500), 
 	alarm_status 	VARCHAR2(20), 
 	alarm_date 	DATE 		NOT NULL,	
 	PRIMARY KEY(alarm_no)
@@ -306,7 +305,7 @@ CREATE TABLE ranking (
 	ranking_no NUMBER NOT NULL,
 	recipe_no NUMBER, 
 	view_date DATE, 
-	user_nickname VARCHAR2(200), 
+	user_nickname VARCHAR2(40), 
 	user_id VARCHAR2(50), 
 	love_date DATE, 
 	love_increase NUMBER, 
@@ -318,7 +317,7 @@ CREATE TABLE ranking (
 
 CREATE TABLE point ( 
 	point_no 		NUMBER,  
-	user_id 		VARCHAR2(30) 	REFERENCES users(user_id), 
+	user_id 		VARCHAR2(30) 	REFERENCES users(user_id) ON DELETE CASCADE, 
 	point_category 	VARCHAR2(10), 	
 	point_type 	VARCHAR2(10), 
 	total_point 	NUMBER, 
