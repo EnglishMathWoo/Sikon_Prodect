@@ -588,7 +588,10 @@ vertical-align: middle;
 		    <br/>
 		      <h3 class="font-x2 nospace" align="center" style="color:#937062"><br> RECIPE LIST </h3>
 		    </div>
+		    
+		    <c:if test="${user.userId != null }">
 		    <button type="button" class="submit">레시피 등록</button>
+		    </c:if>
 		 <%-- <div class="gcse-search" style="background-color: #f7f7f7;width:350px "></div>  --%>	
 		    
 		  

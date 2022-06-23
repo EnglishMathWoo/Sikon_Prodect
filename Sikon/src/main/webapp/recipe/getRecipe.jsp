@@ -531,17 +531,22 @@ body {
 			<h3 class="iEJcKGheader">한줄평(${recipe.reviewNum })</h3>
 				<div class="panel">
 					<div class="panel-body">
+					<c:if test="${user.userId !=null }">
 						<textarea class="form-control" name="reviewContent"
 							id="reviewContent" rows="2" placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
+					</c:if>
+					<c:if test="${user.userId ==null }">
+						<textarea class="form-control" name="reviewContent"
+							id="reviewContent" rows="2" placeholder="댓글을 작성하려면 로그인 해주세요."></textarea>
+					</c:if>		
+					
+					<c:if test="${user.userId !=null }">
 						<div class="mar-top clearfix">
 							<button class="btn btn-sm  pull-right" type="submit" class="reviewButton">등록
 							</button>
 							<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
-
-
-
-
 						</div>
+					</c:if>
 					</div>
 				</div>
 
