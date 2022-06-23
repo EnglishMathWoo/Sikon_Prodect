@@ -881,10 +881,10 @@ $(document).on('click','.uptrev',function() {
 					content : {
 						title : name,
 						description : detail,
-						imageUrl : 'http://192.168.0.31:8080/resources/images/uploadFiles/'
+						imageUrl : 'http://192.168.0.11:8080/resources/images/uploadFiles/'
 								+ image,
 						link : {
-							mobileWebUrl : 'http://192.168.0.31:8080/recipe/getRecipe?recipeNo='
+							mobileWebUrl : 'http://192.168.0.11:8080/recipe/getRecipe?recipeNo='
 									+ recipeNo,
 							webUrl : 'http://192.168.0.31:8080/recipe/getRecipe?recipeNo='
 									+ recipeNo,
@@ -894,9 +894,9 @@ $(document).on('click','.uptrev',function() {
 							{
 								title : '웹으로 보기',
 								link : {
-									mobileWebUrl : 'http://192.168.0.31:8080/recipe/getRecipe?recipeNo='
+									mobileWebUrl : 'http://192.168.0.11:8080/recipe/getRecipe?recipeNo='
 											+ recipeNo,
-									webUrl : 'http://192.168.0.31:8080/recipe/getRecipe?recipeNo='
+									webUrl : 'http://192.168.0.11:8080/recipe/getRecipe?recipeNo='
 											+ recipeNo,
 								},
 							}, ],
