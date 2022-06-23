@@ -226,6 +226,11 @@ div.emptyProd{
   background: #937062;
     font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
+
+.col-md-6 text-right{
+
+ font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
+}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -694,6 +699,7 @@ div.emptyProd{
 	      <button type="button" class="theme themeam" id="themeam" value="am">양식</button>
 	      <button type="button" class="theme themech" id="themech" value="ch">중식</button>
 	      <button type="button" class="theme themede" id="themede" value="de">간식</button>
+	      <button type="button" class="theme themede" id="themede" value="no">신청가능</button>
 	    </nav>
     	 	<form class="form-inline" name="detailForm">
 

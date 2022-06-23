@@ -203,7 +203,9 @@ public class CookRestController {
 		
 		HttpSession session=request.getSession();
 		User user=(User)session.getAttribute("user");
-		// Business logic ผ๖วเ
+
+
+		
 		Map<String , Object> map=cookService.getCookList(search);
 		
 		List<Cook> cookList = (List<Cook>) map.get("list");
