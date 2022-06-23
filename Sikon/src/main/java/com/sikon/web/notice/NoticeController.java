@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sikon.common.Page;
 import com.sikon.common.Search;
-import com.sikon.service.alarm.AlarmService;
 import com.sikon.service.domain.Notice;
 import com.sikon.service.notice.NoticeService;
 
@@ -27,10 +26,6 @@ public class NoticeController {
 	@Autowired
 	@Qualifier("noticeServiceImpl")
 	private NoticeService noticeService;
-	
-	@Autowired
-	@Qualifier("alarmServiceImpl")
-	private AlarmService alarmService;
 		
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;

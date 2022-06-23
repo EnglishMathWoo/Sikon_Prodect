@@ -113,61 +113,6 @@ form{
     max-height: 250px;
     margin-bottom: 30px;
 }
-.drop-zone{
-width:837px;
-height:200px;
-margin-top:0px;
-margin-bottom: 10px;
-}
-
-
-.drop-zone {
-  max-width: 620px;
-    height: 200px;
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: "Quicksand", sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    cursor: pointer;
-    color: #cccccc;
-    border: 2px dashed #eee;
-    border-radius: 10px;
-}
-
-.drop-zone--over {
-  border-style: solid;
-}
-
-.drop-zone__input {
-  display: none;
-}
-
-.drop-zone__thumb {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #cccccc;
-  background-size: cover;
-  position: relative;
-}
-
-.drop-zone__thumb::after {
-  content: attr(data-label);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 5px 0;
-  color: #ffffff;
-  background: rgba(0, 0, 0, 0.75);
-  font-size: 14px;
-  text-align: center;
-}
 
 .yes {
 	display: flex;
@@ -246,7 +191,7 @@ margin-bottom: 10px;
 							     <span class="btn_upload">
 							      <input  multiple="multiple" type="file"   id="reviewImg"  name="fileArray" class="input-img"/>
 							     <i class="fa-solid fa-camera"> 이미지첨부</i><br/>
-							      </span>
+							      </span><br/>
 							    <img id="ImgPreview" src="" class="preview1" />
 							    <input type="button" id="removeImage1" value="x" class="btn-rmv1" />
                     </div>
@@ -281,6 +226,16 @@ $(function() {
 });
 function fncAddReview() {
 	console.log('왜안댐');
+	
+	//FORM 유효성 검증
+	var reviewContent = $("input[name='reviewContent']").val();
+	
+	if (reviewContent == null || reviewContent.length < 15) {
+		alert("리뷰 내용은 최소 15글자 이상 입력해주세요.");
+		return;
+	}
+
+	
 	$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("accept-charset", "euc-kr").attr("action","/review/addReview").submit();
 
 //	setTimeout(function() {   

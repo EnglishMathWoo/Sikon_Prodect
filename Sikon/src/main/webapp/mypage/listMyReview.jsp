@@ -200,7 +200,7 @@ padding-top: 0;
      <div class="center btmspace-50">
 			<br />
 			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
-				<br> | R E V I E W | <br><br><br><br>
+				<br> | M Y R E V I E W | <br><br><br><br>
 			</h3>
 		<button type="button" class="submit" style="float: right;  margin-right: 10px;" >삭&nbsp;제</button>
 		</div>
@@ -219,7 +219,7 @@ padding-top: 0;
         <tr class="bg-light">
           <th scope="col" width="10%">#</th>
           <th scope="col" width="30%">리뷰구분</th>
-          <th scope="col" width="30%" >리뷰항목</th>
+          <th scope="col" width="30%" >리뷰내용</th>
           <th scope="col" width="30%">작성날짜</th>
         </tr>
       </thead>

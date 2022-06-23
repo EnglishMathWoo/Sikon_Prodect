@@ -685,6 +685,12 @@ $(document).on('click','.uptrev',function() {
 		var userId = $("input:hidden[name='userId']").val();
 		var userNickname = $("input:hidden[name='userNickname']").val();
 		
+
+		if (reviewContent == null || reviewContent.length < 1) {
+			alert("내용은 반드시 입력하셔야 합니다.");
+			return;
+		}
+		
 		$.ajax({
 	            type : "POST",  
 	            url : "/review/json/addReview", 

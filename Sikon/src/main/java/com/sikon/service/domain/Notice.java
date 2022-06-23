@@ -7,7 +7,6 @@ public class Notice {
 	private int noticeNo;
 	private String noticeTitle;
     private String noticeContent;
-    private String noticeFileName;
 	private Date noticeDate;
 
 	
@@ -35,14 +34,6 @@ public class Notice {
 		this.noticeContent = noticeContent;
 	}
 
-	public String getNoticeFileName() {
-		return noticeFileName;
-	}
-
-	public void setNoticeFileName(String noticeFileName) {
-		this.noticeFileName = noticeFileName;
-	}
-
 	public Date getNoticeDate() {
 		return noticeDate;
 	}
@@ -53,7 +44,7 @@ public class Notice {
 
 	public String toString() {
 		return "notice : [noticeNo]" + noticeNo + " [noticeTitle]" + noticeTitle + " [noticeContent]" + noticeContent + 
-				" [noticeFileName]" + noticeFileName + " [noticeDate]" + noticeDate;
+				" [noticeFileName]" + " [noticeDate]" + noticeDate;
 	}
     
 }
