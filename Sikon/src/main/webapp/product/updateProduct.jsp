@@ -265,7 +265,6 @@ div.form-group{
 	   	     	width: 860, 
 	   	        lang : 'ko-KR',
 	   	        maximumImageFileSize : 20 * 1024 * 1024,
-	   	  	  	focus : true,
 	   	  		callbacks: { 
 	   	               onImageUpload : function(files) {
 	   	                    uploadSummernoteImageFile(files[0],this);
