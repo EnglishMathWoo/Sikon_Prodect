@@ -75,7 +75,7 @@
 			return;
 		}
 		
-		$("form").attr("method" , "POST").attr("action" , "/user/findUserpw").submit();
+		$("form").attr("method" , "POST").attr("action" , "/user/findUserPw").submit();
 	}
 	
 	
@@ -142,7 +142,7 @@
 		     	
 		       	$.ajax({
 		                type:"GET",
-		                url:"./json/mailCheckPw?userId=" +userId,
+		                url:"./json/checkEmailPw?userId=" +userId,
 		                cache : false,
 		                success:function(data){ console.log(data);
 		                	if(data == "error"){

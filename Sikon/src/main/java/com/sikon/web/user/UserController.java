@@ -191,7 +191,7 @@ public class UserController {
 		return "redirect:/index.jsp";
 	}
 	
-	@RequestMapping( value="findUser", method=RequestMethod.GET )
+	@RequestMapping( value="findUserId", method=RequestMethod.GET )
 	public String findUserId() throws Exception {
 
 		System.out.println("/user/findUserId : GET");
@@ -199,13 +199,13 @@ public class UserController {
 		return "redirect:/user/findUserId.jsp";
 	}
 	
-	@RequestMapping( value="findUserpw", method=RequestMethod.GET )
-	public String findUserpw() throws Exception {
+	@RequestMapping( value="findUserPw", method=RequestMethod.GET )
+	public String findUserPw() throws Exception {
 
-		System.out.println("/user/findUserpw : GET");
+		System.out.println("/user/findUserPw : GET");
 		
 		
-		return "redirect:/user/findUserpw.jsp";
+		return "redirect:/user/findUserPw.jsp";
 	}
 	
 	//Å¸°Ù
@@ -247,7 +247,7 @@ public class UserController {
 	}
 	
 	
-//	@RequestMapping( value="findUserpw", method=RequestMethod.POST )
+//	@RequestMapping( value="findUserPw", method=RequestMethod.POST )
 //	public String findUserPw(HttpServletRequest request,@RequestParam("userId") String userId, @RequestParam("password") String password) throws Exception {
 //		
 //		System.out.println("/user/findUserId : POST");

@@ -88,12 +88,12 @@ public class UserRestController {
 		return userService.getUser(user.getUserId());
 	}
 	
-	@RequestMapping( value= "json/findUser", method=RequestMethod.POST )
+	@RequestMapping( value= "json/findUserId", method=RequestMethod.POST )
 	@ResponseBody
 	public String findUserId(@RequestParam("userName") String userName, @RequestParam("phone") String phone,
 			Model model, HttpServletRequest request) throws Exception {
 		
-		System.out.println("/user/json/findUser : POST");
+		System.out.println("/user/json/findUserId : POST");
 		
 	//	model.addAttribute("userId", "아이디 찾음");
 	//	model.addAttribute("url", "/user/findUserId.jsp");
@@ -132,10 +132,10 @@ public class UserRestController {
 	}
 	
 	// 비밀번호 이메일 인증
-	@RequestMapping(value = "json/mailCheckPw", method = RequestMethod.GET)
-	public String mailCheckPw(@RequestParam("userId") String userId) throws Exception{
+	@RequestMapping(value = "json/checkEmailPw", method = RequestMethod.GET)
+	public String checkEmailPw(@RequestParam("userId") String userId) throws Exception{
 		
-		System.out.println("json/mailCheckPw: GET");
+		System.out.println("json/checkEmailPw: GET");
 		
 		int rendom = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
 		
@@ -193,10 +193,10 @@ public class UserRestController {
 	}
 	
 	// 이메일 인증
-	@RequestMapping(value = "json/mailCheck", method = RequestMethod.GET)
-	public String mailCheck(@RequestParam("userId") String userId) throws Exception{
+	@RequestMapping(value = "json/checkEmail", method = RequestMethod.GET)
+	public String checkEmail(@RequestParam("userId") String userId) throws Exception{
 		
-		System.out.println("json/mailCheck: GET");
+		System.out.println("json/checkEmail: GET");
 		
 	    int serti = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
 	    

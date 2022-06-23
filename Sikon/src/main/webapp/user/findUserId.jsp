@@ -309,7 +309,7 @@ cursor: pointer;
      
       <div>
         <h4>
-          <a href="/user/findUserId.jsp">아이디찾기</a><a href="/user/findUserpw.jsp">비밀번호 찾기</a>
+          <a href="/user/findUserId.jsp">아이디찾기</a><a href="/user/findUserPw.jsp">비밀번호 찾기</a>
         </h4>
       </div>
       
@@ -342,7 +342,7 @@ cursor: pointer;
 			
   		 $.ajax({
              type:'POST',
-             url:'./json/findUser',
+             url:'./json/findUserId',
              data:{'userName':name, 'phone':phone},
              success:function(data){  console.log(data);
                if(data == 0){

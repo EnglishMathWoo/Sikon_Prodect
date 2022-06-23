@@ -144,7 +144,7 @@
 		     	
 		       	$.ajax({
 		                type:"GET",
-		                url:"./json/mailCheckPw?userId=" +userId,
+		                url:"./json/checkEmailPw?userId=" +userId,
 		                cache : false,
 		                success:function(data){ console.log(data);
 		                	if(data == "error"){

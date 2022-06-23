@@ -318,7 +318,7 @@ body{
 		$( function() {
 			//==> DOM Object GET 3啊瘤 规过 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#1' ]").on("click" , function() {
-				window.open('/user/findUser', 'finduser', 'width=500px, height=590px, location=no, status=no, scrollbars=yes');
+				window.open('/user/findUserId', 'finduserId', 'width=500px, height=590px, location=no, status=no, scrollbars=yes');
 
 				//self.location = "/user/findUser"
 			});
@@ -329,9 +329,9 @@ body{
 		$( function() {
 			//==> DOM Object GET 3啊瘤 规过 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
-				window.open('/user/findUserpw', 'findUserpw', 'width=500px, height=590px, location=no, status=no, scrollbars=yes');
+				window.open('/user/findUserPw', 'findUserPw', 'width=500px, height=590px, location=no, status=no, scrollbars=yes');
 
-				//self.location = "/user/findUserpw"
+				//self.location = "/user/findUserPw"
 			});
 		});
 		

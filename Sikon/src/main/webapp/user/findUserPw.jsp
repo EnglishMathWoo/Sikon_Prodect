@@ -308,7 +308,7 @@ cursor: pointer;
      
       <div>
         <h4>
-          <a href="/user/findUserId.jsp">아이디찾기</a><a href="/user/findUserpw.jsp">비밀번호 찾기</a>
+          <a href="/user/findUserId.jsp">아이디찾기</a><a href="/user/findUserPw.jsp">비밀번호 찾기</a>
         </h4>
       </div>
       
@@ -367,7 +367,7 @@ cursor: pointer;
 			return;
 		}
 		
-		$("form").attr("method" , "POST").attr("action" , "/user/findUserpw").submit();
+		$("form").attr("method" , "POST").attr("action" , "/user/findUserPw").submit();
 	}
 	
 	
@@ -434,7 +434,7 @@ cursor: pointer;
 		     	
 		       	$.ajax({
 		                type:"GET",
-		                url:"./json/mailCheckPw?userId=" +userId,
+		                url:"./json/checkEmailPw?userId=" +userId,
 		                cache : false,
 		                success:function(data){ console.log(data);
 		                	if(data == "error"){

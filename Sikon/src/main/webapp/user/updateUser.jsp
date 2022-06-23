@@ -430,7 +430,7 @@ html input[type=button]:hover{
 		     	
 		       	$.ajax({
 		                type:"GET",
-		                url:"./json/mailCheck?userId=" +userId,
+		                url:"./json/checkEmail?userId=" +userId,
 		                cache : false,
 		                success:function(data){ console.log(data);
 		                	if(data == "error"){
