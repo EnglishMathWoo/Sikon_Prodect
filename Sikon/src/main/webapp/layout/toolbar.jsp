@@ -731,7 +731,7 @@ border-spacing:0px
 		<c:if test="${!empty sessionScope.user.role}">
 			
 					<td class="cute">
-					<img src="/resources/images/168939.jpg" width="25px" height="25px" style="border-radius: 100%;float: right"> 
+					<img src="/resources/images/uploadFiles/${sessionScope.user.userImage}" width="25px" height="25px" style="border-radius: 100%;float: right"> 
 					</td>
 					
 					<td class="user-td">
@@ -773,7 +773,7 @@ border-spacing:0px
 							<div class="member">
 							<div class="dropLayer">
 									<div class="userInfo">
-										<img src="/resources/images/168939.jpg" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb KAlRDb" alt="File:Unknown person.jpg - Wikimedia Commons" data-noaft="1" style="border-radius: 50%;width: 50px; height: 50px; margin: 0px;">
+										<img src="/resources/images/uploadFiles/${sessionScope.user.userImage}" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb KAlRDb" alt="File:Unknown person.jpg - Wikimedia Commons" data-noaft="1" style="border-radius: 50%;width: 50px; height: 50px; margin: 0px;">
 										<div>
 											<span class="label">${user.userNickname }</span>
 											<p class="name"><strong class="mall">
@@ -819,7 +819,7 @@ border-spacing:0px
 			
 			<td class="alarm-td">
 			<c:choose>
-			<c:when test="${sessionScope.alarm == 0}">
+			<c:when test="${sessionScope.alarm == 0 || sessionScope.alarm == null}">
 			<li><i class="bi bi-bell" id="vacantAlarm"></i></li>
 			</c:when>
 			<c:otherwise>
@@ -832,10 +832,7 @@ border-spacing:0px
 			</td>
 			
 			</c:if>
-
-			 
 			
-		 
 		  </tr>
 			</table>
 		   </ul>

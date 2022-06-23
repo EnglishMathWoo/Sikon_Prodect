@@ -30,7 +30,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
- 
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Sanskrit:ital@1&display=swap" rel="stylesheet">
+
 <!-- 주소록 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
@@ -39,7 +40,7 @@
 
 
 div.container {
-	padding-top: 200px;
+	padding-top: 250px;
 	font-family: 'Nanum Myeongjo', serif;
 	width: 652px;
 	padding-bottom: 200px;
@@ -256,6 +257,70 @@ html input[type=button]:hover{
 .id_already2{
 	color:#d9534f; 
 	display: none;
+}
+
+
+
+
+
+
+
+.avatar-upload {
+  position: relative;
+  max-width: 170px;
+}
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 10px;
+}
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+.avatar-upload .avatar-edit input + label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+.avatar-upload .avatar-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+.avatar-upload .avatar-edit input + label:after {
+  content: "\f040";
+  font-family: 'FontAwesome';
+  color: #937062;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+.avatar-upload .avatar-preview {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  border-radius: 100%;
+  border: 4px solid #937062;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.avatar-upload .avatar-preview > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 </style>
@@ -567,18 +632,25 @@ html input[type=button]:hover{
 			});
 	        
 			*/
-			// 파일 미리보기
-			 function readURL(input) {
-				  if (input.files && input.files[0]) {
-				    var reader = new FileReader();
-				    reader.onload = function(e) {
-				      document.getElementById('preview').src = e.target.result;
-				    };
-				    reader.readAsDataURL(input.files[0]);
-				  } else {
-				    document.getElementById('preview').src = "";
-				  }
+		
+			$(function() {	
+				function readURL(input) {
+				    if (input.files && input.files[0]) {
+				        var reader = new FileReader();
+				        reader.onload = function(e) {
+				            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+				            $('#imagePreview').hide();
+				            $('#imagePreview').fadeIn(650);
+				        }
+				        reader.readAsDataURL(input.files[0]);
+				    }
 				}
+				
+				$("#imageUpload").change(function() {
+				    readURL(this);
+				});
+			});
+			
 </script>
 
 	
@@ -593,8 +665,8 @@ html input[type=button]:hover{
 
 <div class="container">
 	<div class="layout">
-			<br>
-				<h1 class="bg-defualt text-center">| ADD PROFILE |</h1><br>
+			
+				<h1 class="bg-defualt text-center"  style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| A D D &nbsp; P R OF I L E |</h1><br>
 				
 				<!-- form Start /////////////////////////////////////-->
 				<form class="form-horizontal">
@@ -606,12 +678,22 @@ html input[type=button]:hover{
 				  </div><br>
 				  	<input type="hidden" id="addPossible" value="">  
 				  	  
+
 				  <div class="form-group">
-						<input multiple="multiple" class="form-control" type="file" id ="uploadFile"  name="uploadFile" onchange="readURL(this);">
-				  	
-						<img id="preview"/>
+				    <div class="avatar-upload">
+				        <div class="avatar-edit">
+				            <input type='file' id="imageUpload" multiple="multiple" name="uploadFile" accept=".png, .jpg, .jpeg" />
+				            <label for="imageUpload"></label>
+				        </div>
+				        <div class="avatar-preview">
+				            <div id="imagePreview" style="background-image: url(/resources/images/logo/default_profile02.png);">
+				            </div>
+				          
+				        </div>
+				    </div>
 				  </div>
 				  	  
+				  	  <br>
 				  <div class="form-group">
 				    <label for="userid">아이디</label>
 				      <table style="width: 652px;">

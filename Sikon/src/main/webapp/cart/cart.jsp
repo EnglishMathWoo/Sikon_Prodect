@@ -245,7 +245,8 @@ div{
 		         
 				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
-				 quantity = Number(quantity)+1;
+				 
+				quantity = Number(quantity)+1;
 				console.log('plus');
 				console.log(cartNo);
 				console.log(quantity);
@@ -270,15 +271,24 @@ div{
 		         
 	  			 });
 			 
+			 
+			 
+			 
 			 $( "button.minus" ).on("click" , function() {
 		         
 				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
+				  
+				 if(quantity > 1){
+					 quantity = Number(quantity)-1;
+				 }else{
+					 quantity = Number(quantity);
+				 }
 				 
-				 quantity = Number(quantity)-1;
 					console.log('minus');
 					console.log(cartNo);
 					console.log(quantity);
+				
 				
 		         $.ajax( 
 		               {
@@ -294,18 +304,17 @@ div{
 		                	  quantity = JSONData;
 		                	 
 		                  }
+		                  
+		                   
 		            });
 		         
-		         
-		         if(quantity == 0){
-		        	 $(this).parent().children().eq(1).val(1);
-		         }else{
-		        	 $(this).parent().children().eq(1).val(quantity);
-		         }
+				
+			         $(this).parent().children().eq(1).val(quantity);
 		         
 		         
 	  			 });
 			 
+
 			 
 			 <!-- ---------------------------- -->
 			 
@@ -503,15 +512,7 @@ div{
 				    	  
 				  <div align="center" class="col-md-2 text-center quantity" value="${cart.quantity }">
 				  
-				  	<c:choose>
-				  		<c:when test="${cart.quantity == 1 }">
-				  			<button type="button" class="calculation nope" role="button" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
-				  		</c:when>
-				  		<c:otherwise>
-				  			<button  type="button" class="calculation minus" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
-				  		</c:otherwise>
-				  	</c:choose>
-				  	
+				  	<button  type="button" class="calculation minus" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
 				  	<input type="text" name="quantity" class="result" value=" ${cart.quantity }" style="width:30px;text-align: center" readonly/>
 				  	<button  type="button" class="calculation plus" value="${cart.cartNo}"><i class="bi bi-plus-lg"></i></button>
 				  	
