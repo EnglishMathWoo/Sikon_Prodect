@@ -65,15 +65,15 @@ VALUES (seq_coupon_coupon_no.NEXTVAL, '50% 할인쿠폰', 0.5, 0, SYSDATE);
 
 INSERT 
 INTO coupon(coupon_no, coupon_name, discount_rate, discount_value, coupon_regdate)
-VALUES (seq_coupon_coupon_no.NEXTVAL, '5000 할인쿠폰', 0, 5000, SYSDATE);
+VALUES (seq_coupon_coupon_no.NEXTVAL, '8000원 할인 쿠폰', 0, 8000, SYSDATE);
 
 INSERT 
 INTO coupon(coupon_no, coupon_name, discount_rate, discount_value, coupon_regdate)
-VALUES (seq_coupon_coupon_no.NEXTVAL, '여름 특가 개꿀 할인쿠폰', 0.8, 0, SYSDATE);
+VALUES (seq_coupon_coupon_no.NEXTVAL, '여름 특가 할인쿠폰', 0.8, 0, SYSDATE);
 
 INSERT 
 INTO coupon(coupon_no, coupon_name, discount_rate, discount_value, coupon_regdate)
-VALUES (seq_coupon_coupon_no.NEXTVAL, '신규회원 가입 축하 쿠폰', 0, 10000, SYSDATE);
+VALUES (seq_coupon_coupon_no.NEXTVAL, '신규회원 5000원 할인쿠폰', 0, 5000, SYSDATE);
 
 INSERT 
 INTO couponholder(issue_no, coupon_no, holder_id, start_date, end_date, issue_status) 

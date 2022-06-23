@@ -24,7 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.sikon.common.Page;
 import com.sikon.common.Search;
 import com.sikon.service.alarm.AlarmService;
+import com.sikon.service.coupon.CouponService;
 import com.sikon.service.domain.Career;
+import com.sikon.service.domain.Coupon;
 import com.sikon.service.domain.License;
 import com.sikon.service.domain.User;
 import com.sikon.service.user.UserService;
@@ -39,27 +41,26 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
-	//setter Method 구현 않음
 	
 	@Autowired
 	@Qualifier("alarmServiceImpl")
 	private AlarmService alarmService;
+	
+	@Autowired
+	@Qualifier("couponServiceImpl")
+	private CouponService couponService;
 		
 	public UserController(){
 		System.out.println(this.getClass());
 	}
-	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
-	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
+
 	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 	
 	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
-	private  String FILE_SERVER_PATH= "C:\\Users\\bitcamp\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles";
+	private String FILE_SERVER_PATH= "C:\\Users\\bitcamp\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles";
 	
 	@RequestMapping( value="login", method=RequestMethod.GET )
 	public String login() throws Exception{
@@ -114,26 +115,22 @@ public class UserController {
 	@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
 	public String kakaoLogin(@RequestParam(value = "code", required = false) String code, HttpSession session, Model model) throws Exception {
 		
-			System.out.println("#########" + code);
 			String access_Token = userService.getAccessToken(code);
 			
 			HashMap<String, Object> userInfo = userService.getUserInfo(access_Token);
-			System.out.println("###access_Token#### : " + access_Token);
-			System.out.println("###nickname#### : " + userInfo.get("nickname"));
-			System.out.println("###email#### : " + userInfo.get("email"));
 			
-			String userE = (String)userInfo.get("email") ;
-			String userN = (String)userInfo.get("nickname") ;
+			String userId = (String)userInfo.get("email") ;
+			String userNickname = (String)userInfo.get("nickname") ;
 
 			System.out.println("/user/checkDuplication : POST");
 				
-			if(userService.checkDuplication(userE)==true) {  // id가 존재하지 않을때
+			if(userService.checkDuplication(userId)==true) {  // id가 존재하지 않을때
 				User user = new User();
 							
-				user.setUserId(userE);
-				user.setUserName(userN);
+				user.setUserId(userId);
+				user.setUserName(userNickname);
 				user.setPassword("1234");
-				user.setUserNickname(userE);
+				user.setUserNickname(userId);
 				user.setMentorApply("N");
 				user.setLoginPath("K");
 				user.setUserImage("168939.jpg");
@@ -166,9 +163,8 @@ public class UserController {
 				map.put("list2", list2);
 				
 				userService.addKakaoUser(user, map);
-				System.out.println("end");
 							
-			}else if(userService.getUser(userE).getQuitStatus().equals("Y")){
+			}else if(userService.getUser(userId).getQuitStatus().equals("Y")){
 				
 				model.addAttribute("msg","탈퇴 회원 입니다.");
 				model.addAttribute("url","loginView.jsp");
@@ -177,8 +173,8 @@ public class UserController {
 				
 			}else {
 				
-				User user1 = userService.getUser(userE);
-				System.out.println(userE);
+				User user1 = userService.getUser(userId);
+				System.out.println(userId);
 				session.setAttribute("user", user1);
 			}
 			
@@ -310,22 +306,6 @@ public class UserController {
 
 		System.out.println("/user/addUser : POST");
 		
-		for(int i=0 ; i<licenseName.length ; i++) {
-			System.out.println(licenseName[i]);
-			System.out.println(licenseInstitution[i]);
-			System.out.println(licenseDate[i]);
-			System.out.println(user.getUserId());
-		}
-		
-		for(int k=0 ; k<company.length ; k++) {
-			System.out.println(company[k]);
-			System.out.println(careerExperience[k]);
-			System.out.println(startDate[k]);
-			System.out.println(endDate[k]);
-			System.out.println(user.getUserId());
-		}
-		
-		
 		List list = new ArrayList();
 		for ( int j=0 ; j<licenseName.length ; j++) {
 			License license = new License();
@@ -335,9 +315,9 @@ public class UserController {
 			license.setUserId(user.getUserId());
 			list.add(license);
 		}
-		
+				
 		List list2 = new ArrayList();
-		for ( int m=0 ; m<company.length ; m++) {
+			for ( int m=0 ; m<company.length ; m++) {
 			Career career = new Career();
 			career.setCompany(company[m]);
 			career.setCareerExperience(careerExperience[m]);
@@ -346,15 +326,11 @@ public class UserController {
 			career.setUserId(user.getUserId());
 			list2.add(career);
 		}
-
-		System.out.println("list=" + list);
-		System.out.println("list2=" + list2);
-		
+				
 		Map map = new HashMap();
 		map.put("list", list);
 		map.put("list2", list2);
 		
-//		System.out.println("map.list="+map);
 		
 		if(!file.getOriginalFilename().isEmpty()) {
 			file.transferTo(new File(FILE_SERVER_PATH, file.getOriginalFilename()));
@@ -366,7 +342,6 @@ public class UserController {
 		}
 		
 		
-		//user.setUserBirth(user.getUserBirth().replace("-",""));
 		userService.addUser(user, map);
 	//	userService.addLicense(license);
 	//	userService.addCareer(career);
@@ -385,17 +360,12 @@ public class UserController {
 		System.out.println("user가져오기="+user);
 		System.out.println("list가져오기="+list);
 		System.out.println("list2가져오기="+list2);
-	//	List list = userService.getUCL(userId);
-		
-//		HttpSession session=request.getSession();
-//		session.getAttribute("user");
 		
 		// Model 과 View 연결
 		model.addAttribute("user", user);
 		model.addAttribute("license", list);
 		model.addAttribute("career", list2);
-	//	model.addAttribute("ucl", list);
-		
+
 		return "forward:/user/getUser.jsp";
 	}
 	
@@ -593,13 +563,7 @@ public class UserController {
 			
 			quitDate = user.setQuitDate(dbUser.getRegDate());
 			
-			System.out.println("user="+user);
-			System.out.println("quitDate="+quitDate);
-			System.out.println("quitStatus="+quitStatus);
-			
 			userService.deleteUser(user, quitDate, quitStatus);
-			
-			
 		}
 		
 			

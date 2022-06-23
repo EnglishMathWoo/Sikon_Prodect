@@ -63,7 +63,7 @@ public class CouponDaoImpl implements CouponDao {
 		
 		return sqlSession.selectList("CouponMapper.findCoupon");
 	}
-	
+			
 	//발급쿠폰 리스트
 	public List<Coupon> getIssuedCouponList(Search search) throws Exception {
 		
