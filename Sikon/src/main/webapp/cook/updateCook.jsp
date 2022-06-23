@@ -316,18 +316,14 @@ function fncUpdateCook(){
 	var endDate = $("input[name='aplendTime']").val();
 	var cookStock = $("input[name='cookStock']").val();
 	var cookRecruit = $("input[name='cookRecruit']").val();
-	var cookFilename = $("input[name='cookFilename']").val();
-	var cookContent = $("input[name='cookContent']").val();
+
 
 	if (cookStock != cookRecruit) {
 		alert("신청가능인원과 모집인원은 같아야합니다");
 		return;
 	}
 	
-	if (cookContent == null ) {
-		alert("콘텐츠는 반드시 입력하여야 합니다.");
-		return;
-	}
+
 	
 
 	if (cookName == null || cookName.length < 1) {
@@ -344,11 +340,7 @@ function fncUpdateCook(){
 		alert("모집인원가능인원은 반드시 입력하셔야 합니다.");
 		return;
 	}	
-	
-	if (cookFilename == null || cookFilename.length < 1) {
-		alert("이미지는 반드시 입력하셔야 합니다.");
-		return;
-	}		
+
 	
 	var today = new Date();
 	var year = today.getFullYear();

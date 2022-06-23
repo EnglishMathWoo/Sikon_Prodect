@@ -291,6 +291,12 @@ margin-left: 60px;
 .btn-b:hover {
   background-color: #937062d4;
 }
+
+#get{
+	font-size: 14px;
+	text-decoration: underline;
+	cursor : pointer
+}
 </style>
 <style>
 
@@ -686,7 +692,7 @@ div.image{
 					<div><strong>${cook.cookBrief }</strong></div>
 						<br/>
 
-					<div  id="listMyCook"><h5><strong>ƒÌ≈∑∏‡≈‰ ${cook.mentor.userNickname }</strong></h5></div>
+					<div  id="listMyCook"><h5 id="get"><strong>ƒÌ≈∑∏‡≈‰ ${cook.mentor.userNickname }</strong></h5></div>
 					
 					
 
@@ -761,7 +767,7 @@ div.image{
 				</div>
 		
 				
-		
+				<br>
 				
 				
 				<div class="form-group">

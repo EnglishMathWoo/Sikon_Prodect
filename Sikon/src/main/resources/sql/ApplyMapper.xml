@@ -125,7 +125,7 @@
 													and a.apply_status = '100' 
 													</when>
 												<when test="search.applyCondition == 6  ">
-													and a.apply_status = '200'  
+													and a.apply_status = '300'  
 														</when>
 														</choose>
 											</if>
@@ -148,7 +148,7 @@
 													and a.apply_status = '100' 
 													</when>
 												<when test="search.applyCondition == 6  ">
-													and a.apply_status = '200'  
+													and a.apply_status = '300'  
 														</when>
 														</choose>
 											</if>												
@@ -171,7 +171,7 @@
 													where apply_status = '100' 
 													</when>
 												<when test="search.applyCondition == 6  ">
-													where apply_status = '200'  
+													where apply_status = '300'  
 														</when>
 														</choose>
 											</if>
@@ -200,7 +200,7 @@
 													where apply_status = '100' 
 													</when>
 												<when test="search.applyCondition == 6  ">
-													where apply_status = '200'  
+													where apply_status = '300'  
 														</when>
 														</choose>
 											</if>
