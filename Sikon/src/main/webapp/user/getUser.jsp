@@ -545,9 +545,9 @@ padding-top: 10px;
 					<h3 class="iEJcKGheader">경력사항</h3>	
 					<div class="table">
 					<table class="type09" style="width: 740px">
-					<th  width="30%">회사명</th>
-					<th width="40%">경력기간</th>
-					<th width="30%">업무내용</th>
+					<th  width="30%" style="font-size: 14px;font-family: 'NanumBarunGothic', sans-serif;    font-weight: 700;">회사명</th>
+					<th width="40%" style="font-size: 14px;font-family: 'NanumBarunGothic', sans-serif;    font-weight: 700;">경력기간</th>
+					<th width="30%" style="font-size: 14px;font-family: 'NanumBarunGothic', sans-serif;    font-weight: 700;">업무내용</th>
 						<c:set var="i" value="0" />
 						<c:forEach var="career" items="${career}">
 							<tr>
@@ -570,9 +570,9 @@ padding-top: 10px;
 					<h3 class="iEJcKGheader">자격사항</h3>	
 					<div class="table">
 					<table class="type09" style="width: 740px">
-					<th width="30%" >자격증명</th>
-					<th width="40%">취득날짜</th>
-					<th width="30%">발급기관</th>
+					<th width="30%" style="font-size: 14px;font-family: 'NanumBarunGothic', sans-serif;    font-weight: 700;" >자격증명</th>
+					<th width="40%" style="font-size: 14px;font-family: 'NanumBarunGothic', sans-serif;    font-weight: 700;">취득날짜</th>
+					<th width="30%" style="font-size: 14px;font-family: 'NanumBarunGothic', sans-serif;    font-weight: 700;">발급기관</th>
 					<c:set var="i" value="0" />
 		 	 		<c:forEach var="license" items="${license}" >
 		 	 		<tr>
@@ -687,14 +687,29 @@ padding-top: 10px;
 			    	 
 					//	self.location = "/user/backUserRole?userId=${user.userId}"
 							
-			    	 popWin = window.open("/user/backUserRole?userId="+userId+"&&mentorApply="+mentorApply, "popWin",
-								"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
-								"scrollbars=no,scrolling=no,menubar=no,resizable=no");	
+			    	// popWin = window.open("/user/backUserRole?userId="+userId+"&&mentorApply="+mentorApply, "popWin",
+					//			"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
+					//			"scrollbars=no,scrolling=no,menubar=no,resizable=no");	
 					
-			    	 
-				});
+			    	 if (confirm("거절하시겠습니까?")) {
+						 $.ajax({
+					            type : "POST",  
+					            url : "/user/json/backUserRole",       
+					            data : {'mentorApply' : mentorApply, 'userId' : userId },
+					            error : function(request,status,error){
+					               console.log(request);
+					               console.log(status);
+					               console.log(error);
+					            },
+					            success : function(request) {
+					            	alert("멘토 거절이 완료되었습니다.");
+					            	document.location.href="/user/listUser";
+					}
+    	 });	 
+				}
 			});
 		 
+		 });
 		 
 	
 	function readURL(input, imgControlName) {

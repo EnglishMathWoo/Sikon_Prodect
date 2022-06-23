@@ -315,7 +315,7 @@ div{
 					
 						 
 						 var list = [];
-					   		<c:forEach var="cartprod" items="${Cart}" >
+					   		<c:forEach var="wish" items="${wish}" >
 					   		totalprice += (Number(${wish.wishCook.cookPrice})*Number(${wish.cookStatus}));
 					   		</c:forEach>
 					   		
@@ -358,9 +358,9 @@ div{
 		
       
         <div class="row">
-        	 <div class="col-md-1 text-center"><input type="checkbox" id="checkall" /></div>
+        	 <div class="col-md-1 text-center"><input type="checkbox" id="checkall" checked="checked" /></div>
         	<div class="col-md-6 text-center">쿠킹클래스정보</div>  
-            <div class="col-md-2 text-center">추가신청</div>
+            <div class="col-md-2 text-center">신청인원</div>
             <div class="col-md-2 text-center">소 계</div>
             <div class="col-md-1 text-center"></div>
            
@@ -374,7 +374,7 @@ div{
 		
 			  
 			  <div class="col-md-1 text-center boxselect">
-			  	<input type="checkbox" class="checkbuy"  name="wishNo" value="${wish.wishNo}" price="${wish.wishCook.cookPrice*wish.cookStatus }"/>	
+			  	<input type="checkbox" class="checkbuy"  name="wishNo" value="${wish.wishNo}" price="${wish.wishCook.cookPrice*wish.cookStatus }" checked="checked"/>	
 			  	
 			  </div>
 			  

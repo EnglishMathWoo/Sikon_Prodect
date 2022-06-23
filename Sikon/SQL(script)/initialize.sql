@@ -68,7 +68,7 @@ CREATE TABLE users (
 	password 	VARCHAR2(30)	NOT NULL,
 	user_birth 	VARCHAR2(20),
 	user_nickname 	VARCHAR2(40)	UNIQUE  NOT NULL,
-	user_image 	VARCHAR2(100)	DEFAULT '??.jpg',
+	user_image 	VARCHAR2(100)	DEFAULT '168939.jpg',
 	user_addr 	VARCHAR2(500),
 	role 		VARCHAR2(20) 	DEFAULT 'user'	NOT NULL,
 	user_phone 	VARCHAR2(20)	UNIQUE,

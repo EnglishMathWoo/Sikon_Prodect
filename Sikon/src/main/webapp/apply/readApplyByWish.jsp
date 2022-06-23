@@ -223,7 +223,7 @@ label{
 				  </div><br>
 				  	  
 				  <div class="form-group">
-				신청자 아이디 :  ${apply.applier.userId}
+				<strong>신청자 아이디 :  ${apply.applier.userId}</strong>
 				    
 				  </div>
 				  	</c:forEach>	
@@ -284,8 +284,8 @@ label{
 				  </div>
 				  
 				  <div class="sectd">
-				  	<h5>수업 시간</h5>
-				  <div class="payment">	${apply.classCook.startTime}~ ${apply.classCook.endTime}  </div>
+				  	<h5>수업 장소</h5>
+				  <div class="payment">	${apply.classCook.cookLocation}  </div>
 				  </div>
 
 

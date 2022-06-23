@@ -403,7 +403,8 @@ $(document).ready(function() {
 	        lang : 'ko-KR',
 	        maximumImageFileSize : 20 * 1024 * 1024,
 	  	  // 에디터에 커서 이동 (input창의 autofocus라고 생각하시면 됩니다.)
-	  	  focus : true,
+
+
 	  	  ///*
 	  	  toolbar: [
 	  		    // 글꼴 설정
