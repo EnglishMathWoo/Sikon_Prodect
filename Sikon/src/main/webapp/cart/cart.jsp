@@ -245,11 +245,14 @@ div{
 		         
 				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
+				 var cartprice = Number($(this).attr('value2'));
+				 var totals = Number($("#totalprice").val());
 				 
 				quantity = Number(quantity)+1;
 				console.log('plus');
 				console.log(cartNo);
 				console.log(quantity);
+				console.log("cartprice: "+cartprice);
 				
 		         $.ajax( 
 		               {
@@ -268,7 +271,8 @@ div{
 		            });
 		         
 		         $(this).parent().children().eq(1).val(quantity);
-		         
+		         $(this).parent().next().children().val(quantity*cartprice);
+		         $("#totalprice").val(totals+cartprice);
 	  			 });
 			 
 			 
@@ -278,17 +282,21 @@ div{
 		         
 				 var cartNo = $(this).val();
 				 var quantity = $(this).parent().children().eq(1).val();
-				  
+				 var cartprice1 = Number($(this).attr('value2'));
+				 var cartprice2 = Number($(this).attr('value2'));
+				 var totals = Number($("#totalprice").val());
+				 
+				 
 				 if(quantity > 1){
 					 quantity = Number(quantity)-1;
 				 }else{
 					 quantity = Number(quantity);
+					 cartprice2 = Number(0);
 				 }
 				 
 					console.log('minus');
 					console.log(cartNo);
 					console.log(quantity);
-				
 				
 		         $.ajax( 
 		               {
@@ -310,8 +318,8 @@ div{
 		         
 				
 			         $(this).parent().children().eq(1).val(quantity);
-		         
-		         
+			         $(this).parent().next().children().val(quantity*cartprice1);
+			         $("#totalprice").val(totals-cartprice2);
 	  			 });
 			 
 
@@ -512,13 +520,15 @@ div{
 				    	  
 				  <div align="center" class="col-md-2 text-center quantity" value="${cart.quantity }">
 				  
-				  	<button  type="button" class="calculation minus" value="${cart.cartNo}"><i class="bi bi-dash-lg"></i></button>
+				  	<button  type="button" class="calculation minus" value="${cart.cartNo}" value2="${cart.cartProd.prodDisPrice}"><i class="bi bi-dash-lg"></i></button>
 				  	<input type="text" name="quantity" class="result" value=" ${cart.quantity }" style="width:30px;text-align: center" readonly/>
-				  	<button  type="button" class="calculation plus" value="${cart.cartNo}"><i class="bi bi-plus-lg"></i></button>
+				  	<button  type="button" class="calculation plus" value="${cart.cartNo}" value2="${cart.cartProd.prodDisPrice}"><i class="bi bi-plus-lg"></i></button>
 				  	
 				  </div>
 				  
-				  <div align="center" class="col-md-2 text-center price" value="${cart.cartProd.prodDisPrice*cart.quantity }" >${cart.cartProd.prodDisPrice*cart.quantity } ¿ø</div>
+				  <div align="center" class="col-md-2 text-center price">
+				  	<input type="text" class="semipay" style="width: 60%; text-align: right;border:none; background-color: #f7f7f7;" value="${cart.cartProd.prodDisPrice*cart.quantity }">¿ø
+				  </div>
 				  
 	           </div>
 	           <hr>
