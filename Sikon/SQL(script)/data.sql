@@ -1,38 +1,38 @@
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'user@naver.com', 'user', '1234', '19941111', 'user', '168939.jpg', '서울시 서초구', default, '01022249988', 100000, 'N', default, SYSDATE, 'N');
+VALUES ( 'user@naver.com', 'user', '1234', '1994-11-11', 'user', '168939.jpg', '서울시 서초구', default, '01022249988', 100000, 'N', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'test@naver.com', 'test', '1234', '19941111', 'test', default, '서울시 서초구', default, '01022247777', 100000, 'N', default, SYSDATE, 'N');
+VALUES ( 'test@naver.com', 'test', '1234', '1994-11-11', 'test', default, '서울시 서초구', default, '01022247777', 100000, 'N', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'abc@naver.com', 'abc', '1234', '19941111', 'abc', default, '서울시 서초구', default, '01044447777', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'abc@naver.com', 'abc', '1234', '1994-11-11', 'abc', default, '서울시 서초구', default, '01044447777', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor1@naver.com', 'mentor1', '1234', '19941111', 'mentor1', '고든램지.jpg', '서울시 서초구', 'mentor', '01033337777', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor1@naver.com', 'mentor1', '1234', '1994-11-11', 'mentor1', '고든램지.jpg', '서울시 서초구', 'mentor', '01033337777', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor2@naver.com', 'mentor2', '1234', '19941111', 'mentor2', '168939.jpg', '서울시 서초구', 'mentor', '01033331111', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor2@naver.com', 'mentor2', '1234', '1994-11-11', 'mentor2', '168939.jpg', '서울시 서초구', 'mentor', '01033331111', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor3@naver.com', 'mentor3', '1234', '19941111', 'mentor3', '호빵맨.png', '서울시 서초구', 'mentor', '01033338888', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor3@naver.com', 'mentor3', '1234', '1994-11-11', 'mentor3', '호빵맨.png', '서울시 서초구', 'mentor', '01033338888', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor4@naver.com', 'mentor4', '1234', '19941111', 'mentor4', '백종원.jpg', '서울시 서초구', 'mentor', '01032125777', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor4@naver.com', 'mentor4', '1234', '1994-11-11', 'mentor4', '백종원.jpg', '서울시 서초구', 'mentor', '01032125777', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT all
 INTO users
 VALUES ( 'admin@naver.com', 'admin', '1234', '1994-11-11', 'admin', '60a81c75-c604-4abf-a119-364aa1dd7f1f.jpg', '서울시 서초구', 'admin', '01023341200', 100000, 'Y', default, SYSDATE, NULL, 'N')
 INTO license
-VALUES ( seq_license_license_no.nextval, '2종보통', '강남구청', to_date('2017-05-24', 'YYYY-MM-DD'), 'admin@naver.com' )
+VALUES ( seq_license_license_no.nextval, '2종보통', '강남구청', '2017-05-24', 'admin@naver.com' )
 INTO career
-VALUES (  seq_career_career_no.nextval, '회사', to_date('2011-05-24', 'YYYY-MM-DD'), to_date('2012-05-24', 'YYYY-MM-DD'), '싸이', 'admin@naver.com')
+VALUES (  seq_career_career_no.nextval, '회사', '2011-05-24','2012-05-24', '싸이', 'admin@naver.com')
 select *from dual;
 
 INSERT all
@@ -47,16 +47,16 @@ INSERT all
 INTO users
 VALUES ( 'mentor@naver.com', 'mentor', '1234', '1994-11-11', 'mentor', '마동석요리.jpg', '서울시 서초구', 'mentor', '01023341000', 100000, 'Y', default, SYSDATE, NULL, 'N')
 INTO license
-VALUES ( seq_license_license_no.nextval, '1종보통', '강동구청', to_date('2018-05-24', 'YYYY-MM-DD'), 'mentor@naver.com' )
+VALUES ( seq_license_license_no.nextval, '1종보통', '강동구청','2018-08-24', 'mentor@naver.com' )
 INTO career
-VALUES (  seq_career_career_no.nextval, '삼성', to_date('2013-05-24', 'YYYY-MM-DD'), to_date('2015-05-24', 'YYYY-MM-DD'), '1년근무', 'mentor@naver.com')
+VALUES (  seq_career_career_no.nextval, '삼성', '2013-05-24', '2015-05-24','1년근무', 'mentor@naver.com')
 select*from dual;
 
 INSERT all
 INTO license
-VALUES ( seq_license_license_no.nextval, '2종보통', '강서구청', to_date('2019-06-24', 'YYYY-MM-DD'), 'mentor@naver.com' )
+VALUES ( seq_license_license_no.nextval, '2종보통', '강서구청','2019-06-24', 'mentor@naver.com' )
 INTO career
-VALUES (  seq_career_career_no.nextval, '현대', to_date('2014-05-24', 'YYYY-MM-DD'), to_date('2017-05-24', 'YYYY-MM-DD'), '2년근무', 'mentor@naver.com')
+VALUES (  seq_career_career_no.nextval, '현대', '2014-05-24', '2017-05-24','2년근무', 'mentor@naver.com')
 select *from dual;
 
 INSERT 
