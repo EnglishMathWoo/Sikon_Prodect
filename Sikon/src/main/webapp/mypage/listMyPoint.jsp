@@ -178,10 +178,10 @@ function fncGetList(currentPage) {
 								<td>
 								<c:if test="${point.pointCategory=='str'}">
 									<c:choose>
-										<c:when test="${point.pointType=='CANCELEUSE'}">
-										포인트 사용 취소
+										<c:when test="${point.pointType=='CANCELUSE'}">
+										구매 취소-포인트 사용 취소
 										</c:when>
-										<c:when test="${point.pointType=='CANCELEEARN'}">
+										<c:when test="${point.pointType=='CANCELEARN'}">
 										구매 취소-포인트 회수
 										</c:when>
 										<c:otherwise>
