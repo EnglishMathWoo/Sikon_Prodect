@@ -510,7 +510,7 @@ public class UserController {
 		}
 		
 		
-		session.setAttribute("user", user.getUserId());
+	//	session.setAttribute("user", user.getUserId());
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	
