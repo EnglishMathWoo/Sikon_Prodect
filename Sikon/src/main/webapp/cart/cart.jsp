@@ -192,6 +192,8 @@ div{
 			 console.log(totalprice);
 			
 			 $("#totalprice").val(totalprice);
+			 $("#calpay").val(totalprice);
+			 
 			 //*/
 			 
 			 <!-- ------------- 장바구니 삭제 --------------- -->
@@ -273,6 +275,7 @@ div{
 		         $(this).parent().children().eq(1).val(quantity);
 		         $(this).parent().next().children().val(quantity*cartprice);
 		         $("#totalprice").val(totals+cartprice);
+		         $("#calpay").val(totals+cartprice);
 	  			 });
 			 
 			 
@@ -320,6 +323,7 @@ div{
 			         $(this).parent().children().eq(1).val(quantity);
 			         $(this).parent().next().children().val(quantity*cartprice1);
 			         $("#totalprice").val(totals-cartprice2);
+			         $("#calpay").val(totals-cartprice2);
 	  			 });
 			 
 
@@ -415,21 +419,10 @@ div{
 				
 				if($(this).prop("checked")){
 					
-					 var totalprice = 0;
-					 var price = $("div.price").attr("value");
-					 var quantity = $("div.quantity").attr("value");
-					 console.log(price);
-					 console.log(quantity);
-				
+		
+					 var price = Number($("#calpay").val());
+					 $("#totalprice").val(price);
 					 
-					 var list = [];
-				   		<c:forEach var="cartprod" items="${Cart}" >
-				   		totalprice += (Number(${cartprod.cartProd.prodDisPrice})*Number(${cartprod.quantity}));
-				   		</c:forEach>
-				   		
-					 console.log(totalprice);
-					
-					 $("#totalprice").val(totalprice);
 					
 				}else{
 					
@@ -488,10 +481,10 @@ div{
 				<c:set var="i" value="${ i+1 }" />
 				  <div class="col-md-1 text-center boxselect">
 				  	<c:if test="${cart.cartProd.prodStock == 0}">
-				  		<input type="checkbox" disabled/> 	
+				  		<input type="checkbox" price="" disabled/> 	
 				  	</c:if>
 				  	<c:if test="${cart.cartProd.prodStock > 0}">
-				  		<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}" price="${cart.cartProd.prodDisPrice*cart.quantity }" checked="checked"/> 	
+				  		<input type="checkbox" class="checkbuy"  name="cartNo" value="${cart.cartNo}" price="" checked="checked"/> 	
 				  	</c:if>
 				  	
 				  </div>
@@ -550,6 +543,8 @@ div{
 			       </tr>
 		       </table>
 	      </div><hr>
+		      
+		      <input type="hidden" id="calpay" value=""/>
 		      
 		      
 		  <div align="right">
