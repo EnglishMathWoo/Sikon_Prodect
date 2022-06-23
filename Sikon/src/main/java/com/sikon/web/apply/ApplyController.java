@@ -282,10 +282,10 @@ public class ApplyController {
 			
 			apply.setClassCook(cook);
 			
-			HttpSession session=request.getSession();
-			User user = (User)session.getAttribute("user");
-			apply.setApplier(user);		
-			apply.setClassCook(cook);
+
+			
+			
+	
 			
 			String category="COOK";
 			
@@ -294,9 +294,8 @@ public class ApplyController {
 			modelAndView.setViewName("forward:/apply/getApply.jsp");
 			modelAndView.addObject("apply", apply);
 			modelAndView.addObject("cook", cook);
-			modelAndView.addObject("user", user);
+		
 
-			// 여기서는 value값만 넣어줬다
 			
 			
 			

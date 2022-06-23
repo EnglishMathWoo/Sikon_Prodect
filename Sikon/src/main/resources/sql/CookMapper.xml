@@ -95,7 +95,9 @@
 										 				WHERE cook_name like '%' || #{searchKeyword} || '%'
 											
 							
-											</if>		
+											</if>	
+											
+									
 											
 											<if test="themeCondition != null">
 													<if test='themeCondition == "ko"'>
@@ -113,9 +115,13 @@
 													<if test='themeCondition == "de"'>
 										 				AND cook_theme LIKE UPPER('DE')
 													</if>
+													
+													<if test='themeCondition == "no"'>
+										 				AND cook_stock > 0
+													</if>													
 											</if>		
 											
-											) inner_table
+					order by cook_no DESC	) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
