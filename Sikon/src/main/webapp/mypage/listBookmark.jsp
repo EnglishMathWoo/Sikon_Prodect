@@ -43,6 +43,8 @@
 <link href="/resources/css/bootstrap-dropdownhover.min.css"
 	rel="stylesheet">
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
 
 <!-- jQuery UI toolTip 사용 CSS-->
@@ -468,6 +470,34 @@ div.emptyBookmark{
 .imgover:hover{
 	opacity: 0.8;
 }
+.swal2-title {
+    position: relative;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.8em 1em 0;
+    color: inherit;
+    font-size: 18px !important;
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    word-wrap: break-word;
+}
+
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background-color: #937062 !important;
+    color: #fff;
+    font-size: 1em;
+}
+.swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: 0.25em;
+    color: #937062;
+    background-color: #f7f7f7 !important;
+    font-size: 1em;
+}
+
 </style>
 
 
@@ -493,15 +523,41 @@ div.emptyBookmark{
 				array.push($(this).attr('id'));
 			});
 
-			if (checkCount != 0) {
-				if (window.confirm(checkCount + '개의 책갈피를 삭제하시겠습니까?'))
-        		{	
-				self.location = "/bookmark/deleteBookmark?recipeList=" + array;
-				}
-			}
+	
+	if(checkCount != 0) {
+		Swal.fire({
+			  title: checkCount+'개의 책갈피를 삭제하시겠습니까?',
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '삭제',
+			  cancelButtonText: '취소'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  self.location = "/bookmark/deleteBookmark?recipeList=" + array;
+			  }
+			})
+	//	alert(checkCount+"개의 리뷰를 삭제하시겠습니까?")
+	//	self.location = "/review/deleteReview?checkList="+array;
+	} else {
 
-		});
-	});
+
+		Swal.fire({
+			  icon: 'error',
+			  text: '선택된 리뷰가 없습니다.',
+			  confirmButtonText: '확인'
+			})
+		
+		
+		
+		
+		
+		
+		
+	}
+});
+});
 </script>
 
 </head>

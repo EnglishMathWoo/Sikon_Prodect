@@ -163,23 +163,25 @@ public class RecipeController {
 
 		String category = "REC";
 		Map map = reviewService.getReviewList(search, category, recipeNo);
+		
+		Recipe recipe = recipeService.getRecipeName(recipeNo);
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		// 레시피 조회수 +1
-		Recipe recipe = recipeService.getRecipeName(recipeNo);
-
-		int bookmarkStatus = bookmarkService.checkDuplicate(recipeNo, user.getUserId());
-		recipe.setBookmarkStatus(bookmarkStatus);
-
-		if (user.getUserId() != recipe.getWriter().getUserId()) {
-			recipe.setRecipeViews(recipe.getRecipeViews() + 1);
-			recipeService.updateRecipeOnly(recipe);
-			rankingService.addRecipeView(recipeNo);
+		
+		if(user != null) {
+			int bookmarkStatus = bookmarkService.checkDuplicate(recipeNo, user.getUserId());
+			recipe.setBookmarkStatus(bookmarkStatus);
+			
+			// 레시피 조회수 +1(레시피 작성자 or 미로그인 회원은 조회수 산정시 제외) 
+			if (user.getUserId() != recipe.getWriter().getUserId()) {
+				recipe.setRecipeViews(recipe.getRecipeViews() + 1); 
+				recipeService.updateRecipeOnly(recipe);
+				rankingService.addRecipeView(recipeNo); 
+			}
 		}
 
 		model.addAttribute("recipe", recipe);
-		model.addAttribute("recipeViews", recipe.getRecipeViews());
 		model.addAttribute("list", list);
 		model.addAttribute("review", map.get("list"));
 

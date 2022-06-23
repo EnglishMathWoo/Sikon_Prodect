@@ -252,12 +252,12 @@ public class CookController {
 
 		List<Cook> cookList = (List<Cook>) map.get("list");
 		
-		
-
-		for (int i = 0; i < cookList.size(); i++) {
-			int heartCount = heartService.heartCheck(cookList.get(i).getCookNo(), user.getUserId());
-			cookList.get(i).setHeartCount(heartCount);
-			cookList.set(i, cookList.get(i));
+		if(user != null) {
+			for (int i = 0; i < cookList.size(); i++) {
+				int heartCount = heartService.heartCheck(cookList.get(i).getCookNo(), user.getUserId());
+				cookList.get(i).setHeartCount(heartCount);
+				cookList.set(i, cookList.get(i));
+			}
 		}
 
 		System.out.println(cookList);

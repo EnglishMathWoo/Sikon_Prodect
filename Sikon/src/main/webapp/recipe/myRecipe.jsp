@@ -270,6 +270,25 @@ font-size: 13px;
 	opacity: 0.8;
 }
 
+
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #937062 !important;
+    color: #fff;
+    
+    font-size: 1em;
+}
+.swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    color: #937062;
+    background-color: #f7f7f7 !important;
+    font-size: 1em;
+}
+
 </style>
 
 
@@ -304,7 +323,7 @@ font-size: 13px;
 						
 						if(checkCount != 0) {
 							Swal.fire({
-								  title: checkCount+'개의 레시피를 삭제하시겠습니까?',
+								  title: '레시피를 삭제하시겠습니까?',
 								  text: "삭제한 레시피는 되돌릴 수 없습니다.",
 								  icon: 'warning',
 								  showCancelButton: true,

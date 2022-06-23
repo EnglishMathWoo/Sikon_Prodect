@@ -497,7 +497,7 @@ body {
 
 				<span>&nbsp;소요시간 ${recipe.cookingTime }분&ensp;</span>
 				<i class="bi bi-alarm" onclick="window.open('/recipe/timer.jsp', '_blank', 'width=500, height=400')"></i>
-				<div style="float: right">조회수: ${recipeViews}</div>
+				<div style="float: right">조회수: ${recipe.recipeViews}</div>
 			</h5>
 			<hr />
 			${recipe.detail } <br />
@@ -531,17 +531,22 @@ body {
 			<h3 class="iEJcKGheader">한줄평(${recipe.reviewNum })</h3>
 				<div class="panel">
 					<div class="panel-body">
+					<c:if test="${user.userId !=null }">
 						<textarea class="form-control" name="reviewContent"
 							id="reviewContent" rows="2" placeholder="레시피에 대한 후기를 작성해주세요!"></textarea>
+					</c:if>
+					<c:if test="${user.userId ==null }">
+						<textarea class="form-control" name="reviewContent"
+							id="reviewContent" rows="2" placeholder="댓글을 작성하려면 로그인 해주세요."></textarea>
+					</c:if>		
+					
+					<c:if test="${user.userId !=null }">
 						<div class="mar-top clearfix">
 							<button class="btn btn-sm  pull-right" type="submit" class="reviewButton">등록
 							</button>
 							<input type="hidden" name="recipeNo" value="${recipe.recipeNo }">
-
-
-
-
 						</div>
+					</c:if>
 					</div>
 				</div>
 
@@ -643,7 +648,11 @@ $(document).on('click','.uptrev',function() {
 		
 
 		$("button:contains('등록')").on("click", function() {
-			fncAddReview();
+			if( ${sessionScope.user != null } ) {
+				fncAddReview();
+			} else {
+				$(self.location).attr("href","/user/loginView.jsp");
+			}
 
 		});
 		

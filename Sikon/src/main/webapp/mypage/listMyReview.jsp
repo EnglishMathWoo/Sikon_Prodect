@@ -217,7 +217,7 @@ padding-top: 0;
         
       <thead>
         <tr class="bg-light">
-          <th scope="col" width="10%"></th>
+          <th scope="col" width="10%">#</th>
           <th scope="col" width="30%">리뷰구분</th>
           <th scope="col" width="30%" >리뷰항목</th>
           <th scope="col" width="30%">작성날짜</th>
