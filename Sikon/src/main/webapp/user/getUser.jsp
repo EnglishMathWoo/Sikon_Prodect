@@ -687,14 +687,29 @@ padding-top: 10px;
 			    	 
 					//	self.location = "/user/backUserRole?userId=${user.userId}"
 							
-			    	 popWin = window.open("/user/backUserRole?userId="+userId+"&&mentorApply="+mentorApply, "popWin",
-								"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
-								"scrollbars=no,scrolling=no,menubar=no,resizable=no");	
+			    	// popWin = window.open("/user/backUserRole?userId="+userId+"&&mentorApply="+mentorApply, "popWin",
+					//			"top=200,left=200,width=780,height=650,marginwidth=0,marginheight=0,"+
+					//			"scrollbars=no,scrolling=no,menubar=no,resizable=no");	
 					
-			    	 
-				});
+			    	 if (confirm("거절하시겠습니까?")) {
+						 $.ajax({
+					            type : "POST",  
+					            url : "/user/json/backUserRole",       
+					            data : {'mentorApply' : mentorApply, 'userId' : userId },
+					            error : function(request,status,error){
+					               console.log(request);
+					               console.log(status);
+					               console.log(error);
+					            },
+					            success : function(request) {
+					            	alert("멘토 거절이 완료되었습니다.");
+					            	document.location.href="/user/listUser";
+					}
+    	 });	 
+				}
 			});
 		 
+		 });
 		 
 	
 	function readURL(input, imgControlName) {
