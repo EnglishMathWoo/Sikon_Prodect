@@ -221,7 +221,7 @@ label{
 				  	  
 				  <div class="form-group">
 				    <label for="userName">신청자 아이디</label>
-				     ${apply.applier.userId}
+				     : ${apply.applier.userId}
 				  </div>
 				  
 			<br>
@@ -280,7 +280,7 @@ label{
 				  
 				  <div class="sectd">
 				  	<h5>수업 시간</h5>
-				  <div class="payment">	${cook.startTime}~ ${cook.endTime}  </div>
+				  <div class="payment">	${cook.startTime} ~ ${cook.endTime}  </div>
 				  </div>
 
 
