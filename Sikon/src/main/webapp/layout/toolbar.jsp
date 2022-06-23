@@ -819,7 +819,7 @@ border-spacing:0px
 			
 			<td class="alarm-td">
 			<c:choose>
-			<c:when test="${sessionScope.alarm == 0}">
+			<c:when test="${sessionScope.alarm == 0 || sessionScope.alarm == null}">
 			<li><i class="bi bi-bell" id="vacantAlarm"></i></li>
 			</c:when>
 			<c:otherwise>
@@ -832,10 +832,7 @@ border-spacing:0px
 			</td>
 			
 			</c:if>
-
-			 
 			
-		 
 		  </tr>
 			</table>
 		   </ul>

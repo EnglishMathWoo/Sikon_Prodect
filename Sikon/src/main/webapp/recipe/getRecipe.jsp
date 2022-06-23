@@ -497,7 +497,7 @@ body {
 
 				<span>&nbsp;소요시간 ${recipe.cookingTime }분&ensp;</span>
 				<i class="bi bi-alarm" onclick="window.open('/recipe/timer.jsp', '_blank', 'width=500, height=400')"></i>
-				<div style="float: right">조회수: ${recipeViews}</div>
+				<div style="float: right">조회수: ${recipe.recipeViews}</div>
 			</h5>
 			<hr />
 			${recipe.detail } <br />
@@ -643,7 +643,11 @@ $(document).on('click','.uptrev',function() {
 		
 
 		$("button:contains('등록')").on("click", function() {
-			fncAddReview();
+			if( ${sessionScope.user != null } ) {
+				fncAddReview();
+			} else {
+				$(self.location).attr("href","/user/loginView.jsp");
+			}
 
 		});
 		
