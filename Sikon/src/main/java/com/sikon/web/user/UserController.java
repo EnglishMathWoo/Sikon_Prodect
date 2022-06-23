@@ -456,7 +456,7 @@ public class UserController {
 		}
 		
 		user.setUserImage(file.getOriginalFilename());
-		user.setUserBirth(user.getUserBirth().replace("-",""));
+	//	user.setUserBirth(user.getUserBirth().replace("-",""));
 		
 		userService.updateUser(user);
 		
@@ -510,6 +510,7 @@ public class UserController {
 		}
 		
 		
+		session.setAttribute("user", user.getUserId());
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	
