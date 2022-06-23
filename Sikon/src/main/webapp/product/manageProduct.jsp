@@ -333,7 +333,7 @@ div.emptyProd{
 	 	<c:if test="${empty list}">
 			<br><br>
 			<div class="emptyProd">
-				판매중인 상품이 없습니다.
+				관련 상품이 없습니다.
 			</div>
 			<br>
 		</c:if>

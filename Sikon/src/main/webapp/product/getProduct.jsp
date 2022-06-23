@@ -332,18 +332,18 @@ margin-left: 140px;
 		      content: {
 		        title: name,
 		        description: detail,
-		        imageUrl: 'http://192.168.0.65:8080/resources/images/uploadFiles/'+image ,
+		        imageUrl: 'http://192.168.0.11:8080/resources/images/uploadFiles/'+image ,
 		        link: {
-		          mobileWebUrl: 'http://192.168.0.65:8080/product/getProduct?menu=search&prodNo='+prodNo,
-		          webUrl: 'http://192.168.0.65:8080/product/getProduct?menu=search&prodNo='+prodNo, 
+		          mobileWebUrl: 'http://192.168.0.11:8080/product/getProduct?menu=search&prodNo='+prodNo,
+		          webUrl: 'http://192.168.0.11:8080/product/getProduct?menu=search&prodNo='+prodNo, 
 		        },
 		      },
 		      buttons: [
 		        {
 		          title: '해당상품 보러가기',
 		          link: {
-		            mobileWebUrl: 'http://192.168.0.65:8080/product/getProduct?menu=search&prodNo='+prodNo,
-		            webUrl: 'http://192.168.0.65:8080/product/getProduct?menu=search&prodNo='+prodNo,
+		            mobileWebUrl: 'http://192.168.0.11:8080/product/getProduct?menu=search&prodNo='+prodNo,
+		            webUrl: 'http://192.168.0.11:8080/product/getProduct?menu=search&prodNo='+prodNo,
 		          },
 		        },
 		      ],
