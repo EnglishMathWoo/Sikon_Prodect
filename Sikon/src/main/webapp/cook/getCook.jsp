@@ -953,18 +953,18 @@ geocoder.addressSearch(cookLocation, function(result, status) {
 	      content: {
 	        title: cookName,
 	        description: cookBrief,
-	        imageUrl: 'http://192.168.0.50:8080/resources/images/uploadFiles/'+image ,
+	        imageUrl: 'http://192.168.0.11:8080/resources/images/uploadFiles/'+image ,
 	        link: {
-	          mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
-	          webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	          mobileWebUrl: 'http://192.168.0.11:8080/cook/getCook?cookNo='+cookNo,
+	          webUrl: 'http://192.168.0.11:8080/cook/getCook?cookNo='+cookNo,
 	        },
 	      },
 	      buttons: [
 	        {
 	          title: '웹으로 보기',
 	          link: {
-	            mobileWebUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
-	            webUrl: 'http://192.168.0.50:8080/cook/getCook?cookNo='+cookNo,
+	            mobileWebUrl: 'http://192.168.0.11:8080/cook/getCook?cookNo='+cookNo,
+	            webUrl: 'http://192.168.0.11:8080/cook/getCook?cookNo='+cookNo,
 	          },
 	        },
 	      ],
