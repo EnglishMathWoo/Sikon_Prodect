@@ -340,11 +340,11 @@ html input[type=button]:hover{
 			var addPossible = $("#addPossible").val();
 			var emailChk2 = $("#emailChk2").val();
 			var checked = $("#checked").val();
+			var mentorApply = $("input[name='mentorApply']").val();
 			var num = pw.search(/[0-9]/g);
 			var eng = pw.search(/[a-z]/ig);
 			
-			
-				  
+							  
 			if(id == null || id.length <1){
 				alert("아이디는 반드시 입력하셔야 합니다.");
 				return;
@@ -400,8 +400,7 @@ html input[type=button]:hover{
 			}else {
 				 console.log("통과"); 
 			}
-			
-			
+					
 			alert("회원가입이 완료되었습니다");
 			
 			$("form").attr("method" , "POST").attr("action" , "/user/addUser").attr("enctype","multipart/form-data").submit();
@@ -576,61 +575,7 @@ html input[type=button]:hover{
 		        });
 	        };
         
-	        /*
-		     // 생년월일
-			 $(function() {
-					$('#userBirth').datepicker({
-						changeMonth: true,
-						changeYear: true, 
-						language: 'kr',
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무시작날짜
-			 $(function() {
-					$('#startDate').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무시작날짜2
-			 $(function() {
-					$('#startDate2').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무종료날짜
-			 $(function() {
-					$('#endDate').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 근무종료날짜2
-			 $(function() {
-					$('#endDate2').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-			
-			// 취득일자
-			 $(function() {
-					$('#licenseDate').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-		   
-			// 취득일자2
-			 $(function() {
-					$('#licenseDate2').datepicker({
-						dateFormat: "yy-mm-dd"
-					});
-			});
-	        
-			*/
-		
+	      		
 			$(function() {	
 				function readURL(input) {
 				    if (input.files && input.files[0]) {

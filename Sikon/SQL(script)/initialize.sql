@@ -129,7 +129,7 @@ CREATE TABLE notice (
 
 CREATE TABLE recipe(
 	recipe_no NUMBER 	NOT NULL,
-	writer_nickname  VARCHAR2(50) REFERENCES  users(user_nickname),
+	writer_nickname  VARCHAR2(50) REFERENCES  users(user_nickname) ON DELETE CASCADE,
 	recipe_name  VARCHAR2(100) NOT NULL,
 	recipe_detail  VARCHAR2(200)  NOT NULL,
 	detail  VARCHAR2(2000) NOT NULL,
@@ -181,7 +181,7 @@ CREATE TABLE product (
 CREATE TABLE purchase ( 
 	tran_no 			NUMBER 		NOT NULL, 
 	prod_no 			NUMBER  	NOT NULL 	REFERENCES 	product(prod_no), 
-	user_id 	 		VARCHAR2(50)  	NOT NULL 	REFERENCES 	users(user_id), 
+	user_id 	 		VARCHAR2(50)  	NOT NULL 	REFERENCES 	users(user_id) ON DELETE CASCADE, 
 	serial_no 			VARCHAR2(50) 	NOT NULL, 
 	receiver_name 		VARCHAR2(20)  	NOT NULL,  
 	receiver_phone 		VARCHAR2(20)  	NOT NULL, 
@@ -205,7 +205,7 @@ CREATE TABLE purchase (
 CREATE TABLE cart ( 
 	cart_no 			NUMBER 		NOT NULL, 
 	prod_no 			NUMBER  	NOT NULL 	REFERENCES 	product(prod_no), 
-	user_id 	 		VARCHAR2(50)  	NOT NULL 	REFERENCES 	users(user_id), 
+	user_id 	 		VARCHAR2(50)  	NOT NULL 	REFERENCES 	users(user_id) ON DELETE CASCADE, 
 	quantity 			NUMBER, 
 	prod_name 		VARCHAR2(100),
 	prod_image 		VARCHAR2(500),
@@ -282,7 +282,7 @@ PRIMARY KEY(love_no)
 CREATE TABLE review(
 	review_no  NUMBER 		 		NOT NULL,
            review_category        VARCHAR2(20)  NOT NULL,
-	writer_nickname   VARCHAR2(50)   	REFERENCES  users(user_nickname) ,
+	writer_nickname   VARCHAR2(50)   	REFERENCES  users(user_nickname) ON DELETE CASCADE,
 	review_content         VARCHAR2(400)   NOT NULL,
 	review_img    VARCHAR2(100),	
 	review_regdate        DATE NOT NULL,
@@ -318,7 +318,7 @@ CREATE TABLE ranking (
 
 CREATE TABLE point ( 
 	point_no 		NUMBER,  
-	user_id 		VARCHAR2(30) 	REFERENCES users(user_id), 
+	user_id 		VARCHAR2(30) 	REFERENCES users(user_id) ON DELETE CASCADE, 
 	point_category 	VARCHAR2(10), 	
 	point_type 	VARCHAR2(10), 
 	total_point 	NUMBER, 

@@ -1,38 +1,38 @@
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'user@naver.com', 'user', '1234', '19941111', 'user', '168939.jpg', '서울시 서초구', default, '01022249988', 100000, 'N', default, SYSDATE, 'N');
+VALUES ( 'user@naver.com', 'user', '1234', '1994-11-11', 'user', '168939.jpg', '서울시 서초구', default, '01022249988', 100000, 'N', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'test@naver.com', 'test', '1234', '19941111', 'test', default, '서울시 서초구', default, '01022247777', 100000, 'N', default, SYSDATE, 'N');
+VALUES ( 'test@naver.com', 'test', '1234', '1994-11-11', 'test', default, '서울시 서초구', default, '01022247777', 100000, 'N', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'abc@naver.com', 'abc', '1234', '19941111', 'abc', default, '서울시 서초구', default, '01044447777', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'abc@naver.com', 'abc', '1234', '1994-11-11', 'abc', default, '서울시 서초구', default, '01044447777', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor1@naver.com', 'mentor1', '1234', '19941111', 'mentor1', '고든램지.jpg', '서울시 서초구', 'mentor', '01033337777', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor1@naver.com', 'mentor1', '1234', '1994-11-11', 'mentor1', '고든램지.jpg', '서울시 서초구', 'mentor', '01033337777', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor2@naver.com', 'mentor2', '1234', '19941111', 'mentor2', '168939.jpg', '서울시 서초구', 'mentor', '01033331111', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor2@naver.com', 'mentor2', '1234', '1994-11-11', 'mentor2', '168939.jpg', '서울시 서초구', 'mentor', '01033331111', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor3@naver.com', 'mentor3', '1234', '19941111', 'mentor3', '호빵맨.png', '서울시 서초구', 'mentor', '01033338888', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor3@naver.com', 'mentor3', '1234', '1994-11-11', 'mentor3', '호빵맨.png', '서울시 서초구', 'mentor', '01033338888', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'mentor4@naver.com', 'mentor4', '1234', '19941111', 'mentor4', '백종원.jpg', '서울시 서초구', 'mentor', '01032125777', 100000, 'Y', default, SYSDATE, 'N');
+VALUES ( 'mentor4@naver.com', 'mentor4', '1234', '1994-11-11', 'mentor4', '백종원.jpg', '서울시 서초구', 'mentor', '01032125777', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT all
 INTO users
 VALUES ( 'admin@naver.com', 'admin', '1234', '1994-11-11', 'admin', '60a81c75-c604-4abf-a119-364aa1dd7f1f.jpg', '서울시 서초구', 'admin', '01023341200', 100000, 'Y', default, SYSDATE, NULL, 'N')
 INTO license
-VALUES ( seq_license_license_no.nextval, '2종보통', '강남구청', to_date('2017-05-24', 'YYYY-MM-DD'), 'admin@naver.com' )
+VALUES ( seq_license_license_no.nextval, '2종보통', '강남구청', '2017-05-24', 'admin@naver.com' )
 INTO career
-VALUES (  seq_career_career_no.nextval, '회사', to_date('2011-05-24', 'YYYY-MM-DD'), to_date('2012-05-24', 'YYYY-MM-DD'), '싸이', 'admin@naver.com')
+VALUES (  seq_career_career_no.nextval, '회사', '2011-05-24','2012-05-24', '싸이', 'admin@naver.com')
 select *from dual;
 
 INSERT all
@@ -47,16 +47,16 @@ INSERT all
 INTO users
 VALUES ( 'mentor@naver.com', 'mentor', '1234', '1994-11-11', 'mentor', '마동석요리.jpg', '서울시 서초구', 'mentor', '01023341000', 100000, 'Y', default, SYSDATE, NULL, 'N')
 INTO license
-VALUES ( seq_license_license_no.nextval, '1종보통', '강동구청', to_date('2018-05-24', 'YYYY-MM-DD'), 'mentor@naver.com' )
+VALUES ( seq_license_license_no.nextval, '1종보통', '강동구청','2018-08-24', 'mentor@naver.com' )
 INTO career
-VALUES (  seq_career_career_no.nextval, '삼성', to_date('2013-05-24', 'YYYY-MM-DD'), to_date('2015-05-24', 'YYYY-MM-DD'), '1년근무', 'mentor@naver.com')
+VALUES (  seq_career_career_no.nextval, '삼성', '2013-05-24', '2015-05-24','1년근무', 'mentor@naver.com')
 select*from dual;
 
 INSERT all
 INTO license
-VALUES ( seq_license_license_no.nextval, '2종보통', '강서구청', to_date('2019-06-24', 'YYYY-MM-DD'), 'mentor@naver.com' )
+VALUES ( seq_license_license_no.nextval, '2종보통', '강서구청','2019-06-24', 'mentor@naver.com' )
 INTO career
-VALUES (  seq_career_career_no.nextval, '현대', to_date('2014-05-24', 'YYYY-MM-DD'), to_date('2017-05-24', 'YYYY-MM-DD'), '2년근무', 'mentor@naver.com')
+VALUES (  seq_career_career_no.nextval, '현대', '2014-05-24', '2017-05-24','2년근무', 'mentor@naver.com')
 select *from dual;
 
 INSERT 
@@ -65,15 +65,15 @@ VALUES (seq_coupon_coupon_no.NEXTVAL, '50% 할인쿠폰', 0.5, 0, SYSDATE);
 
 INSERT 
 INTO coupon(coupon_no, coupon_name, discount_rate, discount_value, coupon_regdate)
-VALUES (seq_coupon_coupon_no.NEXTVAL, '5000 할인쿠폰', 0, 5000, SYSDATE);
+VALUES (seq_coupon_coupon_no.NEXTVAL, '8000원 할인 쿠폰', 0, 8000, SYSDATE);
 
 INSERT 
 INTO coupon(coupon_no, coupon_name, discount_rate, discount_value, coupon_regdate)
-VALUES (seq_coupon_coupon_no.NEXTVAL, '여름 특가 개꿀 할인쿠폰', 0.8, 0, SYSDATE);
+VALUES (seq_coupon_coupon_no.NEXTVAL, '여름 특가 할인쿠폰', 0.8, 0, SYSDATE);
 
 INSERT 
 INTO coupon(coupon_no, coupon_name, discount_rate, discount_value, coupon_regdate)
-VALUES (seq_coupon_coupon_no.NEXTVAL, '신규회원 가입 축하 쿠폰', 0, 10000, SYSDATE);
+VALUES (seq_coupon_coupon_no.NEXTVAL, '신규회원 5000원 할인쿠폰', 0, 5000, SYSDATE);
 
 INSERT 
 INTO couponholder(issue_no, coupon_no, holder_id, start_date, end_date, issue_status) 
@@ -137,47 +137,44 @@ VALUES (seq_product_prod_no.NEXTVAL , '야옹이 식기 7종', 3900, '귀엽고 
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
-VALUES (seq_cook_cook_no.nextval, '예다의 케익 쿠킹클래스', '0a2bb178-ac96-4c04-85e9-bd424f4d849b.jpg', '진짜 쉬워요', '1', 14000, 'KO', '22/06/10',  '22/06/10', 1, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/back (2).jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor1', 'mentor1@naver.com' );
+VALUES (seq_cook_cook_no.nextval, '다예의 아이스크림 쿠킹클래스', '712d44b4-775f-4002-b473-a737762fb445.jpg', '아 시원해', '1', 14000, 'KO', '22/06/10',  '22/06/10', 1, '10:00' , '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/1.JPG" style=""><img src="/summernoteImage/2JPG.JPG" style=""><img src="/summernoteImage/3.JPG" style=""><img src="/summernoteImage/4.JPG" style=""><img src="/summernoteImage/5.JPG" style=""><br></p>','mentor1', 'mentor1@naver.com' );
 
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
-VALUES (seq_cook_cook_no.nextval, '예다의 화이트초코케익 쿠킹클래스', '0a2bb178-ac96-4c04-85e9-bd424f4d849b.jpg', '진짜 쉬워요', '1', 14000, 'JA', '22/06/10',  '22/06/10', 1, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor4', 'mentor4@naver.com' );
+VALUES (seq_cook_cook_no.nextval, '예다의 시원한 레몬에이드 쿠킹크래스', '229918cb-c0c2-496f-8796-003121985a6d.jpg', '아 시원해~~', '1', 14000, 'JA', '22/06/10',  '22/06/10', 1, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/6.JPG" style=""><img src="/summernoteImage/7.JPG" style=""><img src="/summernoteImage/8.JPG" style=""><img src="/summernoteImage/9.JPG" style=""><br></p>','mentor4', 'mentor4@naver.com' );
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
-VALUES (seq_cook_cook_no.nextval, '예다의 초코무스 쿠킹클래스', '0a30d45f-d131-4bb6-b0bf-b52fc32065e5.jpg', '진짜 쉬워요', '1', 14000, 'CH', '22/06/10',  '22/06/10', 1, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor2','mentor2@naver.com' );
+VALUES (seq_cook_cook_no.nextval, '예다의 시원한 식혜 쿠킹클래스', 'a4f12c95-b2d9-406f-927c-005e7a8802a9.jpg', '진짜 쉬워요', '1', 14000, 'CH', '22/06/10',  '22/06/10', 1, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor2','mentor2@naver.com' );
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname , mentor_id )
-VALUES (seq_cook_cook_no.nextval, '예다의 햄버거 쿠킹클래스', '0ad40938-1b31-4aa2-a3e3-2dcb1cf15655.jpg', '진짜 쉬워요', '1', 14000, 'AM', '22/06/10',  '22/06/10', 1, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor3' , 'mentor3@naver.com'  );
+VALUES (seq_cook_cook_no.nextval, '예다의 햄버거 쿠킹클래스', 'd8db5dd2-5a5c-480f-819b-aedb710aa0e8.jpg', '진짜 쉬워요', '1', 14000, 'AM', '22/06/10',  '22/06/10', 1, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor3' , 'mentor3@naver.com'  );
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname , mentor_id )
-VALUES (seq_cook_cook_no.nextval, '예다의 파전 쿠킹클래스', '0b4bcd47-b6a6-4abf-9bc5-f7ddd134a5de.jpg', '진짜 쉬워요', '1', 30000, 'DE', '22/06/10',  '22/06/10', 3, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 3, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor' , 'mentor@naver.com' );
+VALUES (seq_cook_cook_no.nextval, '예다의 파전 쿠킹클래스', '0b4bcd47-b6a6-4abf-9bc5-f7ddd134a5de.jpg', '진짜 쉬워요', '1', 30000, 'DE', '22/06/10',  '22/06/10', 3, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 3, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor' , 'mentor@naver.com' );
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname , mentor_id )
-VALUES (seq_cook_cook_no.nextval, '예다의 파스타 쿠킹클래스', '0a5f5cc5-0533-4856-8e6d-1f659739627c.jpg', '진짜 쉬워요', '1', 20000, 'KO', '22/06/10',  '22/06/10', 3, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 3, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor1','mentor1@naver.com'  );
+VALUES (seq_cook_cook_no.nextval, '예다의 파스타 쿠킹클래스', '0a5f5cc5-0533-4856-8e6d-1f659739627c.jpg', '진짜 쉬워요', '1', 20000, 'KO', '22/06/10',  '22/06/10', 3, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 3, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor1','mentor1@naver.com'  );
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname , mentor_id )
-VALUES (seq_cook_cook_no.nextval, '예다의 에그타르트 쿠킹클래스', '0f7dd448-0562-4a33-be97-c5db4a7a2e25.jpg', '진짜 쉬워요', '1', 14000, 'JA', '22/06/10',  '22/06/10', 2, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 2, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor2',  'mentor2@naver.com'  );
+VALUES (seq_cook_cook_no.nextval, '예다의 에그타르트 쿠킹클래스', '0f7dd448-0562-4a33-be97-c5db4a7a2e25.jpg', '진짜 쉬워요', '1', 14000, 'JA', '22/06/10',  '22/06/10', 2, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 2, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor2',  'mentor2@naver.com'  );
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname , mentor_id )
-VALUES (seq_cook_cook_no.nextval, '예다의 김밥 쿠킹클래스', '0f4ee459-9c66-4d5a-9770-69c5af9f4d4c.jpg', '진짜 쉬워요', '1', 14000, 'CH', '22/06/10',  '22/06/10', 2, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 2, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor' , 'mentor@naver.com');
+VALUES (seq_cook_cook_no.nextval, '예다의 김밥 쿠킹클래스', '0f4ee459-9c66-4d5a-9770-69c5af9f4d4c.jpg', '진짜 쉬워요', '1', 14000, 'CH', '22/06/10',  '22/06/10', 2, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 2, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor' , 'mentor@naver.com');
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
-VALUES (seq_cook_cook_no.nextval, '예다의 샌드위치 쿠킹클래스', '0e4a0a46-67a0-4dbf-b7a9-c21c9543b154.jpg', '진짜 쉬워요', '1', 14000, 'DE', '22/06/10',  '22/06/10', 2, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 2, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor1' , 'mentor1@naver.com' );
+VALUES (seq_cook_cook_no.nextval, '예다의 샌드위치 쿠킹클래스', '0e4a0a46-67a0-4dbf-b7a9-c21c9543b154.jpg', '진짜 쉬워요', '1', 14000, 'DE', '22/06/10',  '22/06/10', 2, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 2, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor1' , 'mentor1@naver.com' );
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
-VALUES (seq_cook_cook_no.nextval, '예다의 제육 쿠킹클래스', '0b1a8266-732c-48e6-82f1-25e64f7a2778.jpg', '진짜 쉬워요', '1', 18000, 'AM', '22/06/10',  '22/06/10', 2, '10:06', '10:06', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 2, 0, '<p><img src="/summernoteImage/1.JPG" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor2' , 'mentor2@naver.com' );
-
-
-
+VALUES (seq_cook_cook_no.nextval, '예다의 제육 쿠킹클래스', '0b1a8266-732c-48e6-82f1-25e64f7a2778.jpg', '진짜 쉬워요', '1', 18000, 'AM', '22/06/10',  '22/06/10', 2, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 2, 0, '<p><img src="/summernoteImage/1.JPG" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor2' , 'mentor2@naver.com' );
 
 
 INSERT 

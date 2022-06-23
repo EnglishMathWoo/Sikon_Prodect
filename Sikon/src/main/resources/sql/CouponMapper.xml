@@ -47,9 +47,9 @@
 	 
 	 <!-- 쿠폰검색 -->
  	<select 	id="findCoupon"		parameterType="string"		resultMap="couponSelectMap">
-		SELECT * from coupon
+		SELECT * FROM coupon
   	</select>
-	   	
+  	  		   	
 	<!-- 쿠폰 삭제 -->	
 	<select  id="deleteCoupon"		parameterType="int">
 	 	DELETE

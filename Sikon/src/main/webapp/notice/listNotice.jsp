@@ -44,17 +44,16 @@
     	padding-top : 50px;
     }
     
-   
-.container {
-	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
-		"sans-serif";
-	padding-top: 170px;
-	padding-bottom: 200px;
-}
+	.soo {
+		font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
+			"sans-serif";
+		padding-top: 170px;
+	}
 
-      .row{
-      padding-top: 50px;
-      } 
+    .row{
+    	padding-top: 50px;
+    } 
+    
     table {
      	margin-top:15px;
     }
@@ -180,7 +179,7 @@
 
 	<jsp:include page="/layout/toolbar.jsp" />
 
-	<div class="container">
+	<div class="container soo">
 	
 	<br>
 		<h3 class="pltitle"  style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| NOTICE LIST |</h3>

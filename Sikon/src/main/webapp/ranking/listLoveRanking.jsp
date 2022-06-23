@@ -42,19 +42,6 @@ body {
 	padding-top: 50px;
 }
 
-.shape1 {
-	border-width: 1px;
-	background-color: white;
-	border-color: #C0C0C0;
-	border-style: solid;
-	width: 40px;
-	height: 25px;
-	text-align: center;
-	font-weight: bold;
-	border-radius: 5px;
-	margin-left: 20px;
-}
-
 .orderCondition {
 	width: 90%;
 	margin: 10px auto;
@@ -342,10 +329,6 @@ p {
 	padding-top: 120px;
 }
 
-img {
-	border-radius: 50%;
-}
-
 .hoc {
 	padding-top: 0px;
 }
@@ -540,7 +523,7 @@ article img {
 				<div style="float:right;" id="increase">${love.loveIncrease}</div> 
 				<i class="fa-solid fa-arrow-up" style="float:right;"></i>
 			</c:if>
-		    <img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300" style="border: 1px solid #d7d7d7"></a>
+		    <img src="/resources/images/uploadFiles/${love.user.userImage }" width="320" height="300" style="border: 1px solid #d7d7d7; border-radius: 50%;"></a>
 		    <input type="hidden" id="mentorId" name="mentorId" value="${love.user.userId }"/>
 		    
 		    <div class="excerpt">

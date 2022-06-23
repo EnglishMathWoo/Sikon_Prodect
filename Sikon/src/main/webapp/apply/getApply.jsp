@@ -221,7 +221,7 @@ label{
 				  	  
 				  <div class="form-group">
 				    <label for="userName">신청자 아이디</label>
-				     : ${apply.applier.userId}
+			 	<strong>  : ${apply.applier.userId} </strong>
 				  </div>
 				  
 			<br>
@@ -280,7 +280,7 @@ label{
 				  
 				  <div class="sectd">
 				  	<h5>수업 시간</h5>
-				  <div class="payment">	${cook.startTime} ~ ${cook.endTime}  </div>
+				<div class="payment"> 	<strong> 	${cook.startTime} ~ ${cook.endTime}  </strong> </div>
 				  </div>
 
 
@@ -292,7 +292,7 @@ label{
 				  <div class="sectd">
 				  	<h5>결제수단</h5>
 				  	<div class="payment">
-				  		카카오 간편결제
+				  		<strong>카카오 간편결제 </strong>
 				
 				  	</div>
 				  </div>

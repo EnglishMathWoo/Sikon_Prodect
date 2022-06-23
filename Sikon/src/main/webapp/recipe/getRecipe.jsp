@@ -460,12 +460,14 @@ body {
 			<div style="font-family: 'YeolrinMyeongjo-Medium'; font-size: 17px">${recipe.recipeDetail }</div>
 			<div>
 				<div class="kgiNry" style="text-align: right;" align="right">
+				<c:if test="${sessionScope.user != null}">
 					<c:if test="${recipe.bookmarkStatus =='0'}">
 						<i id="bookmarkBtn" class="bi bi-bookmark-plus"></i>
 					</c:if>
 					<c:if test="${recipe.bookmarkStatus =='1'}">
 						<i id="bookmarkBtn" class="bi bi-bookmark-plus-fill"></i>
 					</c:if>
+				</c:if>
 					<a id="kakao-link-btn" href="javascript:kakaoShare()"> <img
 						src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
 						width="30" height="30" />
@@ -881,10 +883,10 @@ $(document).on('click','.uptrev',function() {
 					content : {
 						title : name,
 						description : detail,
-						imageUrl : 'http://192.168.0.31:8080/resources/images/uploadFiles/'
+						imageUrl : 'http://192.168.0.11:8080/resources/images/uploadFiles/'
 								+ image,
 						link : {
-							mobileWebUrl : 'http://192.168.0.31:8080/recipe/getRecipe?recipeNo='
+							mobileWebUrl : 'http://192.168.0.11:8080/recipe/getRecipe?recipeNo='
 									+ recipeNo,
 							webUrl : 'http://192.168.0.31:8080/recipe/getRecipe?recipeNo='
 									+ recipeNo,
@@ -894,9 +896,9 @@ $(document).on('click','.uptrev',function() {
 							{
 								title : '웹으로 보기',
 								link : {
-									mobileWebUrl : 'http://192.168.0.31:8080/recipe/getRecipe?recipeNo='
+									mobileWebUrl : 'http://192.168.0.11:8080/recipe/getRecipe?recipeNo='
 											+ recipeNo,
-									webUrl : 'http://192.168.0.31:8080/recipe/getRecipe?recipeNo='
+									webUrl : 'http://192.168.0.11:8080/recipe/getRecipe?recipeNo='
 											+ recipeNo,
 								},
 							}, ],

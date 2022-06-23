@@ -299,6 +299,31 @@ public class UserRestController {
 
 	}
 	
+	@RequestMapping( value="/json/backUserRole" )
+	public void backUserRole(HttpServletRequest request, @RequestParam("userId") String userId,
+											@RequestParam("mentorApply") String mentorApply) throws Exception {
+		
+		System.out.println("/user/backUserRole : POST");
+		
+		System.out.println("1 userId="+userId);
+		System.out.println("1 mentorApply="+mentorApply);
+		
+		User user = userService.getUser(userId);
+		
+		
+		
+		mentorApply = user.setRole("N");
+		
+	//	user = userService.getUser(role);
+	
+		System.out.println("2 userId="+userId);
+		System.out.println("2 mentorApply="+mentorApply);
+		
+		userService.backUserRole(userId, mentorApply);
+		
+	}
+	
+	
 //	@RequestMapping( value="json/checkDuplication/{userId}", method=RequestMethod.GET )
 //	public Map<String, Object> checkDuplication( @PathVariable String userId ) throws Exception{
 //		
