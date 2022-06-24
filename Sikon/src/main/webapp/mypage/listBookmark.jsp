@@ -503,6 +503,10 @@ div.emptyBookmark{
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
+function fncGetList(currentPage) {
+	$("#currentPage").val(currentPage);
+	$("form").attr("method" , "POST").attr("action" , "/bookmark/listBookmark").submit();
+}
 	$(function() {
 
 		$(".imgover").on(
@@ -585,10 +589,9 @@ div.emptyBookmark{
 		</div>
 		<button type="button" class="submit">∫œ∏∂≈©ªË¡¶</button>
 
-		<input type="hidden" id="currentPage" name="currentPage" value="1" />
-
 
 		<div class="row">
+<form>
 		<c:if test="${empty list}">
 				<br><br>
 				<div class="emptyBookmark">
@@ -658,10 +661,14 @@ div.emptyBookmark{
 					<!-- ################################################################################################ -->
 				</div>
 			</c:forEach>
+					<input type="hidden" id="currentPage" name="currentPage" value="1" />
+			
+		</form>
 		</div>
 
 		
 	</div>
+	  <jsp:include page="../common/pageNavigator_new.jsp"/>->
 
 </body>
 </html>

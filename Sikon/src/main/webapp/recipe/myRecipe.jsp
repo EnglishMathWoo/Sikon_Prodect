@@ -296,9 +296,14 @@ font-size: 13px;
 	<script type="text/javascript">
 	
 	//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
-
+function fncGetList(currentPage) {
+		$("#currentPage").val(currentPage);
+		$("form").attr("method" , "POST").attr("action" , "/recipe/listMyRecipe").submit();
+	}
+	
 		 $(function() {
 			
+			 
 			
 			
 					$( ".imgover" ).on("click" , function() {
@@ -360,7 +365,7 @@ font-size: 13px;
 	
 <div class="container mt-5 px-2">
 <br>
-
+ <form>
 <div class="center btmspace-50">
 			<br />
 			<h3 class="font-x2 nospace" align="center" style="font-family: 'Tiro Devanagari Sanskrit', serif;">
@@ -373,7 +378,7 @@ font-size: 13px;
 		    
  
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
- 
+
 <div class="row">
 	<c:set var="i" value="0" />
 	<c:forEach var="recipe" items="${list}">
@@ -433,10 +438,8 @@ font-size: 13px;
     <!-- ################################################################################################ -->
   </div>
   </c:forEach>
-  
      
 </div>
-
    <c:if test="${empty list}">
 		<br><br>
 		<div class="emptyRecipe">
@@ -445,8 +448,8 @@ font-size: 13px;
 		<br>
 	</c:if>
      
+	  </form>
 	  </div>
-	  
 	  <jsp:include page="../common/pageNavigator_new.jsp"/>->
 </body>
 
