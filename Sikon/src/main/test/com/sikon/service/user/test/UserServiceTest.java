@@ -129,13 +129,7 @@ public class UserServiceTest {
 		System.out.println("user="+user);
 		
 	}
-	// User, license, career Á¤º¸ °¡Á®¿È
-	//@Test
-	public void testGetUCL() throws Exception {
-		
-		List list = (List)userService.getUCL("test@naver.com");
-		System.out.println("list="+list);
-	}
+	
 	
 	//@Test
 	public void testFindUserId() throws Exception{

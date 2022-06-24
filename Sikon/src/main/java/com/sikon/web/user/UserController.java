@@ -32,7 +32,6 @@ import com.sikon.service.domain.User;
 import com.sikon.service.user.UserService;
 
 
-//==> 회원관리 Controller
 @Controller
 @RequestMapping("/user/*")
 public class UserController {
@@ -60,6 +59,7 @@ public class UserController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	// 파일 업로드 저장경로
 	private String FILE_SERVER_PATH= "C:\\Users\\bitcamp\\git\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles";
 	
 	@RequestMapping( value="login", method=RequestMethod.GET )
@@ -74,32 +74,21 @@ public class UserController {
 	public String login(@ModelAttribute("user") User user , HttpSession session, Model model ) throws Exception{
 		
 		System.out.println("/user/login : POST");
-		//Business Logic
-		System.out.println("getuserid="+user.getUserId());
+		
 		User dbUser=userService.getUser(user.getUserId());
 		
 		int statusCount = alarmService.getUncheckedAlarm(user.getUserId());
-		System.out.println("statusCount="+statusCount);
-		
-		//탈퇴 회원 로그인 못하게
+				
+		//탈퇴 회원 로그인 방지
 		if(dbUser.getQuitStatus().equals("Y")) {
-		System.out.println("quitStatus="+dbUser.getQuitStatus());
 		model.addAttribute("msg","탈퇴 회원 입니다.");
 		model.addAttribute("url","loginView.jsp");
 
 		return "/user/loginFail.jsp";
 		}
 		
-		//탈퇴 회원 로그인 못하게
-		if(dbUser.getQuitStatus().equals("Y") && dbUser.getLoginPath().equals("K")) {
-		System.out.println("quitStatus="+dbUser.getQuitStatus());
-		model.addAttribute("msg","탈퇴 회원 입니다.");
-		model.addAttribute("url","loginView.jsp");
-
-		return "/user/loginFail.jsp";
-		}
-		
-		
+				
+		// 입력한 비밀번호와 서버에 저장된 비밀번호를 확인
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 			session.setAttribute("alarm", statusCount );
@@ -124,9 +113,8 @@ public class UserController {
 
 			System.out.println("/user/checkDuplication : POST");
 				
-			if(userService.checkDuplication(userId)==true) {  // id가 존재하지 않을때
+			if(userService.checkDuplication(userId)==true) {  // 서버에 ID가 존재하지 않을때 새로 회원가입
 				User user = new User();
-							
 				user.setUserId(userId);
 				user.setUserName(userNickname);
 				user.setPassword("1234");
@@ -134,8 +122,7 @@ public class UserController {
 				user.setMentorApply("N");
 				user.setLoginPath("K");
 				user.setUserImage("168939.jpg");
-				System.out.println(user);
-				
+								
 				List list = new ArrayList();
 				License license = new License();
 				license.setLicenseNo(0);
@@ -145,8 +132,7 @@ public class UserController {
 				license2.setUserId(user.getUserId());
 				list.add(license);
 				list.add(license2);
-				System.out.println("list="+list);
-				
+								
 				List list2 = new ArrayList();
 				Career career = new Career();
 				career.setCareerNo(0);
@@ -156,15 +142,14 @@ public class UserController {
 				career2.setUserId(user.getUserId());
 				list2.add(career);
 				list2.add(career2);
-				System.out.println("list2="+list2);
-				
+								
 				Map map = new HashMap();
 				map.put("list", list);
 				map.put("list2", list2);
 				
 				userService.addKakaoUser(user, map);
 							
-			}else if(userService.getUser(userId).getQuitStatus().equals("Y")){
+			}else if(userService.getUser(userId).getQuitStatus().equals("Y")){	// 서버에 저장된 ID가 탈퇴회원일때 로그인 방지
 				
 				model.addAttribute("msg","탈퇴 회원 입니다.");
 				model.addAttribute("url","loginView.jsp");
@@ -174,7 +159,6 @@ public class UserController {
 			}else {
 				
 				User user1 = userService.getUser(userId);
-				System.out.println(userId);
 				session.setAttribute("user", user1);
 			}
 			
@@ -208,7 +192,7 @@ public class UserController {
 		return "redirect:/user/findUserPw.jsp";
 	}
 	
-	//타겟
+	
 	@RequestMapping( value="updateUserpw", method=RequestMethod.GET )
 	public String updateUserpw(@RequestParam( value = "userId", required = false ) String userId, Model model) throws Exception {
 
@@ -224,21 +208,8 @@ public class UserController {
 	public String findUserPw(HttpServletRequest request,@RequestParam("userId") String userId, @RequestParam("password") String password) throws Exception {
 		
 		System.out.println("/user/findUserId : POST");
-		
-		System.out.println("userId="+userId);
-		System.out.println("password="+password);
-		
+				
 		User user = userService.getUser(userId);
-		
-		
-		
-//		if(userId.equals(user) ) {
-//			System.out.println("userId="+userId);
-//			System.out.println("password="+password);
-//			userService.updateUserPw(userId, password);
-//		}else {
-//			System.out.println("바뀌엇나?");
-//		}
 		
 		userService.updateUserPw(userId, password);
 		System.out.println("userId="+userId);
@@ -246,45 +217,7 @@ public class UserController {
 		return "redirect:/user/loginView.jsp";
 	}
 	
-	
-//	@RequestMapping( value="findUserPw", method=RequestMethod.POST )
-//	public String findUserPw(HttpServletRequest request,@RequestParam("userId") String userId, @RequestParam("password") String password) throws Exception {
-//		
-//		System.out.println("/user/findUserId : POST");
-//		
-//		User user = userService.getUser(userId);
-//		
-//		
-//		
-////		if(userId.equals(user) ) {
-////			System.out.println("userId="+userId);
-////			System.out.println("password="+password);
-////			userService.updateUserPw(userId, password);
-////		}else {
-////			System.out.println("바뀌엇나?");
-////		}
-//		
-//		userService.updateUserPw(userId, password);
-//		System.out.println("userId="+userId);
-//		System.out.println("password="+password);
-//		return "redirect:/user/loginView.jsp";
-//	}
-	
-	
-	
-//	@RequestMapping( value="findUser", method=RequestMethod.POST )
-//	public String findUserId(@RequestParam("userName") String userName,
-//			@RequestParam("phone") String phone, Model model, HttpServletRequest request ) throws Exception {
-//		
-//		System.out.println("/user/findUserId : POST");
-//		
-//		model.addAttribute("userId", "아이디 찾음");
-//		model.addAttribute("url", "/user/findUserId.jsp");
-//		
-//		
-//		return "redirect:/user/findUserId.jsp";
-//	}
-	
+		
 	@RequestMapping( value="addUser", method=RequestMethod.GET )
 	public String addUserView() throws Exception {
 
@@ -343,9 +276,7 @@ public class UserController {
 		
 		
 		userService.addUser(user, map);
-	//	userService.addLicense(license);
-	//	userService.addCareer(career);
-		
+			
 		return "redirect:/user/loginView.jsp";
 	}
 	
@@ -353,15 +284,11 @@ public class UserController {
 	public String getUser( @RequestParam("userId") String userId , Model model, HttpServletRequest request ) throws Exception {
 		
 		System.out.println("/user/getUser : GET");
-		//Business Logic
+		
 		User user = userService.getUser(userId);
 		List list = userService.getLicense(userId);
 		List list2 = userService.getCareer(userId);
-		System.out.println("user가져오기="+user);
-		System.out.println("list가져오기="+list);
-		System.out.println("list2가져오기="+list2);
-		
-		// Model 과 View 연결
+				
 		model.addAttribute("user", user);
 		model.addAttribute("license", list);
 		model.addAttribute("career", list2);
@@ -373,7 +300,7 @@ public class UserController {
 	public String updateUser( @RequestParam("userId") String userId , Model model ) throws Exception{
 
 		System.out.println("/user/updateUser : GET");
-		//Business Logic
+		
 		User user = userService.getUser(userId);
 		List license = userService.getLicense(userId);
 		List career = userService.getCareer(userId);
@@ -403,21 +330,6 @@ public class UserController {
 		
 		System.out.println(user.getAddr());
 		
-		
-		System.out.println("======================");
-		System.out.println("======================");
-		for(int no : licenseNo) {
-			System.out.println("licenseNo: "+no);
-		}
-		
-		System.out.println("======================");
-		
-		for(int co : careerNo) {
-			System.out.println("careerNo: "+co);
-		}
-		System.out.println("======================");
-	//	session.setAttribute("user", userService.getUser(user.getUserId()));
-		
 		if(!file.getOriginalFilename().isEmpty()) {
 			file.transferTo(new File(FILE_SERVER_PATH, file.getOriginalFilename()));
 			model.addAttribute("msg", "File uploaded successfully.");
@@ -426,13 +338,10 @@ public class UserController {
 		}
 		
 		user.setUserImage(file.getOriginalFilename());
-	//	user.setUserBirth(user.getUserBirth().replace("-",""));
-		
+			
 		userService.updateUser(user);
 		
-		System.out.println("user2="+user);
-		
-		
+			
 		
 		if(user.getRole().equals("mentor") || user.getMentorApply().equals("Y") ) {
 			
@@ -448,7 +357,7 @@ public class UserController {
 			System.out.println("===== 여기는 안될듯 =====");
 			license.setUserId(user.getUserId());
 			list.add(license);
-			System.out.println("license="+license);
+			
 		}
 		
 		List list2 = new ArrayList();
@@ -460,9 +369,8 @@ public class UserController {
 			career.setEndDate(endDate[m]);
 			career.setCareerNo(careerNo[m]);
 			career.setUserId(user.getUserId());
-			System.out.println("career");
 			list2.add(career);
-			System.out.println("career="+career);
+			
 		}
 
 		System.out.println("list=" + list);
@@ -472,15 +380,11 @@ public class UserController {
 		map.put("list", list);
 		map.put("list2", list2);
 		
-		
-		
 		userService.updateLicense(map, user);
 		userService.updateCareer(map, user);
 		
 		}
 		
-		
-	//	session.setAttribute("user", user.getUserId());
 		return "redirect:/user/getUser?userId="+user.getUserId();
 	}
 	
@@ -495,7 +399,7 @@ public class UserController {
 		}
 		search.setPageSize(pageSize);
 		
-		// Business logic 수행
+		
 		Map<String , Object> map=userService.getUserList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
@@ -515,20 +419,13 @@ public class UserController {
 			@RequestParam(value = "quitDate", required = false) Date quitDate, 
 			@RequestParam(value = "quitStatus", required = false) String quitStatus, Model model ) throws Exception{
 
-		System.out.println("/user/deleteUser : GET");
-		System.out.println("/user/deleteUser : GET"+userId);
-		System.out.println("/user/deleteUser : GET"+quitDate);
-		System.out.println("/user/deleteUser : GET"+quitStatus);
-		//Business Logic
+		
 		User user = userService.getUser(userId);
-		
-		
-		// Model 과 View 연결
+				
 		model.addAttribute("user", user);
 		model.addAttribute("quitDate", quitDate);
 		model.addAttribute("quitStatus", quitStatus);
-		
-		
+				
 		return "forward:/user/deleteUser.jsp";
 	}
 	
@@ -537,7 +434,7 @@ public class UserController {
 									@RequestParam("quitStatus") String quitStatus) throws Exception{
 		
 		System.out.println("/user/deleteUser : POST");
-		//Business Logic
+		
 		System.out.println("user="+user);
 	
 		System.out.println("quitStatus="+quitStatus);
@@ -545,13 +442,7 @@ public class UserController {
 		User dbUser=userService.getUser(user.getUserId());
 		
 		Date quitDate = user.getQuitDate();
-		System.out.println("quitDate="+quitDate);
-		
-//		session = request.getSession();
-//		session.getAttribute("user");
-		
-		
-		
+				
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 			
@@ -565,25 +456,10 @@ public class UserController {
 			
 			userService.deleteUser(user, quitDate, quitStatus);
 		}
-		
-			
-		
+				
 		session.invalidate();
 		
 		return "redirect:/index.jsp";
 	}
-	
-//	@RequestMapping( value="checkDuplication", method=RequestMethod.POST )
-//	public String checkDuplication( @RequestParam("userId") String userId , Model model ) throws Exception{
-//		
-//		System.out.println("/user/checkDuplication : POST");
-//		//Business Logic
-//		boolean result=userService.checkDuplication(userId);
-//		// Model 과 View 연결
-//		model.addAttribute("result", new Boolean(result));
-//		model.addAttribute("userId", userId);
-//
-//		return "forward:/user/checkDuplication.jsp";
-//	}
 	
 }

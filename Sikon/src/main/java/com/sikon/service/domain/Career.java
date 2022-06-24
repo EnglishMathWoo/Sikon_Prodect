@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Career {
 
-	//Field
+	
 	private int careerNo;
 	private String company;
 	private String careerExperience;

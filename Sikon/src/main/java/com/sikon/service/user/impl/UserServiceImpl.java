@@ -31,7 +31,7 @@ import com.sikon.service.user.UserDao;
 import com.sikon.service.user.UserService;;
 
 
-//==> 회원관리 서비스 구현
+
 @Service("userServiceImpl")
 public class UserServiceImpl implements UserService{
 	
@@ -43,33 +43,38 @@ public class UserServiceImpl implements UserService{
 		this.userDao = userDao;
 	}
 	
-//	@Autowired
-//	private JavaMailSender mailSender;
 	
 	///Constructor
 	public UserServiceImpl() {
 		System.out.println(this.getClass());
 	}
 
+	
 	///Method
+	
+	// 일반 회원가입
 	public void addUser(User user, Map map) throws Exception {
-		System.out.println("map="+map);
 		userDao.addUser(user, map);
 	}
+	// 카카오 회원가입
 	public void addKakaoUser(User user, Map map) throws Exception {
-		System.out.println("user="+user);
-		System.out.println("map="+map);
 		userDao.addKakaoUser(user, map);
 	}
-//	public void addLicense(License license) throws Exception {
-//		System.out.println("license="+license);
-//		userDao.addLicense(license);
-//	}
-//	public void addCareer(Career career) throws Exception {
-//		System.out.println("career="+career);
-//		userDao.addCareer(career);
-//	}
+
+	// id 중복체크
+	public int checkId(String userId) throws Exception {
+		int cnt = userDao.checkId(userId);
+		System.out.println("cnt: " + cnt);
+		return cnt;
+	}
+	// 닉네임 중복체크
+	public int checkNickname(String userNickname) throws Exception {
+		int cnt = userDao.checkNickname(userNickname);
+		System.out.println("cnt: " + cnt);
+		return cnt;
+	}
 	
+	// 카카오 로그인할때 받아오는 토큰
 	public String getAccessToken (String authorize_code) throws Exception{
 		String access_Token = "";
 		String refresh_Token = "";
@@ -79,11 +84,11 @@ public class UserServiceImpl implements UserService{
 			URL url = new URL(reqURL);
             
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			// POST 요청을 위해 기본값이 false인 setDoOutput을 true로
+			
             
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
-			// POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+			// POST 요청을 위해 기본값이 false인 setDoOutput을 true로
             
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
@@ -91,7 +96,7 @@ public class UserServiceImpl implements UserService{
             
 			sb.append("&client_id=07cd433423b8401d52fda5136624e099"); //본인이 발급받은 key
 			sb.append("&redirect_uri=http://localhost:8080/user/kakaoLogin"); // 본인이 설정한 주소
-		//	sb.append("&redirect_uri=http://192.168.0.11:8080/user/kakaoLogin"); // 본인이 설정한 주소
+		//	sb.append("&redirect_uri=http://192.168.0.11:8080/user/kakaoLogin"); // ip 11 주소
 			
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
@@ -129,6 +134,7 @@ public class UserServiceImpl implements UserService{
 		return access_Token;
 	}
 	
+	// 얻은 토큰으로 카카오회원정보 가져오기
 	public HashMap<String, Object> getUserInfo(String access_Token) throws Exception{
 
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
@@ -149,8 +155,7 @@ public class UserServiceImpl implements UserService{
 
 			String line = "";
 			String result = "";
-	//		String password = "";
-			
+					
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
@@ -168,44 +173,38 @@ public class UserServiceImpl implements UserService{
 			System.out.println(email);
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
-	//		userInfo.put("password", 1111);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 		return userInfo;
 	}
 	
-	// id 중복체크
-	public int checkId(String userId) throws Exception {
-		int cnt = userDao.checkId(userId);
-		System.out.println("cnt: " + cnt);
-		return cnt;
+	// 카카오 로그인할때 회원ID 중복체크
+	public boolean checkDuplication(String userId) throws Exception {
+		boolean result=true;
+		User user=userDao.getUser(userId);
+		if(user != null) {
+			result=false;
+		}
+		return result;
 	}
-	// id 중복체크
-	public int checkNickname(String userNickname) throws Exception {
-		int cnt = userDao.checkNickname(userNickname);
-		System.out.println("cnt: " + cnt);
-		return cnt;
-	}
-
+	
+	
+	// 회원정보 가져오기
 	public User getUser(String userId) throws Exception {
 		return userDao.getUser(userId);
 	}
+	// 자격증정보 가져오기
 	public List getLicense(String userId) throws Exception {
 		return userDao.getLicense(userId);
 	}
+	// 경력사항정보 가져오기
 	public List getCareer(String userId) throws Exception {
 		return userDao.getCareer(userId);
 	}
-	public List getUCL(String userId) throws Exception {
-		return userDao.getUCL(userId);
-	}
 	
+	// ID찾기
 	public String findUserId(String userName, String phone) throws Exception {
-		System.out.println("userName="+userName);
-		 System.out.println("phone="+phone);
 		String result = "";
 		
 		try {
@@ -213,40 +212,21 @@ public class UserServiceImpl implements UserService{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("userName="+userName);
-		 System.out.println("phone="+phone);
-		
+				
 		return result;
 	}
 	
-//	// Pw찾기 유효성 검사
-//	public int findUserPwCheck(User user)throws Exception {
-//		return userDao.findUserPwCheck(user);
-//	}
-		
-	// Pw찾기
-	public void updateUserPw(String userId,String password)throws Exception {
-		
-		userDao.updateUserPw(userId, password);
-	}	
 	// 쿠킹멘토 승인
 	public void changeUserRole(String userId, String role) throws Exception {
-		System.out.println("userId="+userId);
-		System.out.println("role="+role);
 		userDao.changeUserRole(userId, role);
 	}
 	// 쿠킹멘토 거절
 	public void backUserRole(String userId, String mentorApply) throws Exception {
-		System.out.println("userId="+userId);
-		System.out.println("mentorApply="+mentorApply);
 		userDao.backUserRole(userId, mentorApply);
-		
 	}
-
-	public void updateUser(User user) throws Exception {
-		System.out.println("user="+user);
-	//	System.out.println("map="+map);
 		
+	// 회원정보수정
+	public void updateUser(User user) throws Exception {
 		userDao.updateUser(user);
 	}
 	public void updateLicense(Map license, User user) throws Exception {
@@ -255,6 +235,13 @@ public class UserServiceImpl implements UserService{
 	public void updateCareer(Map career, User user) throws Exception {
 		userDao.updateCareer(career, user);
 	}
+	
+	// 패스워드 변경
+	public void updateUserPw(String userId,String password)throws Exception {
+		userDao.updateUserPw(userId, password);
+	}
+	
+	// 회원정보리스트
 	public Map<String , Object > getUserList(Search search) throws Exception {
 		List<User> list= userDao.getUserList(search);
 		int totalCount = userDao.getTotalCount(search);
@@ -266,16 +253,10 @@ public class UserServiceImpl implements UserService{
 		return map;
 	}
 
+	// 회원탈퇴
 	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception {
 		userDao.deleteUser(user, quitDate, quitStatus);
 	}
 
-	public boolean checkDuplication(String userId) throws Exception {
-		boolean result=true;
-		User user=userDao.getUser(userId);
-		if(user != null) {
-			result=false;
-		}
-		return result;
-	}
+	
 }

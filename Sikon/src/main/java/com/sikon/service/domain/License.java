@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class License {
 
-	//Field
+	
 	private int licenseNo;
 	private String licenseName;
 	private String licenseInstitution;
@@ -12,13 +12,13 @@ public class License {
 	private String userId;
 	
 	
-	//Constructor
+	
 	public License() {
 		
 	}
 
 	
-	//Method
+	
 	public int getLicenseNo() {
 		return licenseNo;
 	}

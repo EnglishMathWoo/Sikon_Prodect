@@ -27,7 +27,6 @@ import com.sikon.service.domain.User;
 import com.sikon.service.user.UserService;
 
 
-//==> 회원관리 RestController
 @RestController
 @RequestMapping("/user/*")
 public class UserRestController {
@@ -56,7 +55,6 @@ public class UserRestController {
 		
 		System.out.println("/user/json/getUser : GET");
 		
-		//Business Logic
 		return userService.getUser(userId);
 	}
 	
@@ -65,7 +63,7 @@ public class UserRestController {
 									HttpSession session ) throws Exception{
 	
 		System.out.println("/user/json/login : POST");
-		//Business Logic
+		
 		System.out.println("::"+user);
 		User dbUser=userService.getUser(user.getUserId());
 		
@@ -76,15 +74,14 @@ public class UserRestController {
 		return dbUser;
 	}
 	
-	
-			
+				
 	@RequestMapping( value= "json/addUser", method=RequestMethod.POST )
 	public User addUser( @RequestBody User user, Map map ) throws Exception {
 
 		System.out.println("/user/json/addUser : POST");
 		//Business Logic
 		userService.addUser(user, map);
-	//	User user = new User();
+	
 		return userService.getUser(user.getUserId());
 	}
 	
@@ -94,27 +91,12 @@ public class UserRestController {
 			Model model, HttpServletRequest request) throws Exception {
 		
 		System.out.println("/user/json/findUserId : POST");
+					
+		userService.findUserId(userName, phone);
 		
-	//	model.addAttribute("userId", "아이디 찾음");
-	//	model.addAttribute("url", "/user/findUserId.jsp");
-		
-		 userService.findUserId(userName, phone);
-		
-	//	 return "redirect:/user/Modal.jsp";
-		 return userService.findUserId(userName, phone);
+		return userService.findUserId(userName, phone);
 	}
 	
-//	@RequestMapping( value= "json/findPw", method=RequestMethod.POST )
-//	public String findPw(@ModelAttribute("user") User user, Model model ,  HttpSession session , HttpServletRequest request)throws Exception {
-//		
-//			user.getUserId()
-//			
-//			
-//			if( userService.findUserId(userName, phone)) {
-//				
-//			}
-//		
-//	}
 	
 	// id 중복체크
 	@RequestMapping( value="json/checkId", method=RequestMethod.POST )

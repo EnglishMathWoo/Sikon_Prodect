@@ -17,7 +17,7 @@ import com.sikon.service.domain.User;
 import com.sikon.service.user.UserDao;
 
 
-//==> 회원관리 DAO CRUD 구현
+
 @Repository("userDaoImpl")
 public class UserDaoImpl implements UserDao{
 	
@@ -35,141 +35,102 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	///Method
+	
+	// 일반회원가입
 	public void addUser(User user, Map map) throws Exception {
-		System.out.println("map="+map);
 		sqlSession.insert("UserMapper.addUser", user);
 		sqlSession.insert("UserMapper.addLicense", map.get("list"));
 		sqlSession.insert("UserMapper.addCareer", map.get("list2"));
 	}
+	// 카카오 회원가입
 	public void addKakaoUser(User user, Map map) throws Exception {
-		System.out.println("user="+user);
-		System.out.println("map="+map);
 		sqlSession.insert("KakaoMapper.addKakaoUser", user);
 		sqlSession.insert("UserMapper.addLicense", map.get("list"));
 		sqlSession.insert("UserMapper.addCareer", map.get("list2"));
 	}
-//	public void addLicense(License license) throws Exception {
-//		System.out.println("license="+license);
-//		List list = new ArrayList();
-//		list.add(license);
-//		sqlSession.insert("UserMapper.addLicense", list);
-//	}
-//	public void addCareer(Career career) throws Exception {
-//		System.out.println("career="+career);
-//		List list = new ArrayList();
-//		list.add(career);
-//		sqlSession.insert("UserMapper.addCareer", list);
-//	}
 	
 	// id 중복체크
 	public int checkId(String userId) throws Exception {
 		return sqlSession.selectOne("UserMapper.checkId", userId);
 	}
-	// id 중복체크
+	// 닉네임 중복체크
 	public int checkNickname(String userNickname) throws Exception {
 		return sqlSession.selectOne("UserMapper.checkNickname", userNickname);
 	}
-//	// Pw찾기 유효성 검사
-//	public int findUserPwCheck(User user)throws Exception {
-//		return sqlSession.selectOne("UserMapper.findUserPwCheck", user);
-//	}
-	// Pw 변경
-	public int updateUserPw(String userId, String password)throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userId", userId);
-	//	map.put("userName", userName);
-		map.put("password", password);
-		
-		return sqlSession.update("UserMapper.updateUserPw", map);	
-	}
-	// 쿠킹멘토 승인
-	public void changeUserRole(String userId, String role) throws Exception {
-		System.out.println("userId="+userId);
-		System.out.println("role="+role);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userId", userId);
-		map.put("role", role);
-		
-		 sqlSession.update("UserMapper.changeUserRole", map);
-	}
-	// 쿠킹멘토 거절
-	public void backUserRole(String userId, String mentorApply) throws Exception {
-		System.out.println("userId="+userId);
-		System.out.println("mentorApply="+mentorApply);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userId", userId);
-		map.put("mentorApply", mentorApply);
-		
-		 sqlSession.update("UserMapper.backUserRole", map);
-	}
 	
+	// 회원정보 가져오기
 	public User getUser(String userId) throws Exception {
-		System.out.println("userId="+userId);
 		return sqlSession.selectOne("UserMapper.getUser", userId);
 	}
+	// 자격증정보 가져오기
 	public List getLicense(String userId) throws Exception {
-		System.out.println("userId="+userId);
 		return sqlSession.selectList("UserMapper.getLicense", userId);
 	}
+	// 경력사항정보 가져오기
 	public List getCareer(String userId) throws Exception {
-		System.out.println("userId="+userId);
 		return sqlSession.selectList("UserMapper.getCareer", userId);
 	}
 	
-	
-	public List getUCL(String userId) throws Exception {
-		System.out.println("userId="+userId);
-		return sqlSession.selectList("UserMapper.getUCL", userId);
-	}
-	
+	// ID찾기
 	public String findUserId(String userName, String phone) throws Exception {
-		System.out.println("userName="+userName);
-		System.out.println("phone="+phone);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userName", userName);
 		map.put("phone", phone);
 		return sqlSession.selectOne("UserMapper.findUserId", map);
 	}
 	
+	
+	// 쿠킹멘토 승인
+	public void changeUserRole(String userId, String role) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("role", role);
+		
+		sqlSession.update("UserMapper.changeUserRole", map);
+	}
+	
+	// 쿠킹멘토 거절
+	public void backUserRole(String userId, String mentorApply) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("mentorApply", mentorApply);
+		
+		sqlSession.update("UserMapper.backUserRole", map);
+	}
+	
+	// 회원정보수정
 	public void updateUser(User user) throws Exception {
-	//	Career career = new Career();
-	//	License license = new License();
-	//	System.out.println("map="+map);
 		sqlSession.update("UserMapper.updateUser", user);
-		
-		
 	}	
 	public void updateLicense(Map license, User user) throws Exception {
-		System.out.println("license="+license);
-		System.out.println("user="+user);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", license.get("list"));
 		map.put("userId", user.getUserId());
 		sqlSession.update("UserMapper.updateLicense", map);
-		}
+	}
 	public void updateCareer(Map career, User user) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", career.get("list2"));
 		map.put("userId", user.getUserId());
 		sqlSession.update("UserMapper.updateCareer", map);
 	}
-	//	Map map = new HashMap();
-//		map.put("license", license);
-//		map.put("career", career);
-//		map.put("user", user);
-		
 
+	// 패스워드 변경
+	public int updateUserPw(String userId, String password)throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("password", password);
+			
+		return sqlSession.update("UserMapper.updateUserPw", map);	
+	}	
+		
+	// 회원정보리스트 
 	public List<User> getUserList(Search search) throws Exception {
 		return sqlSession.selectList("UserMapper.getUserList", search);
 	}
 	
+	// 회원탈퇴
 	public void deleteUser(User user, Date quitDate, String quitStatus) throws Exception {
-		System.out.println("dbUser="+user);
-		System.out.println("quitDate="+quitDate);
-		System.out.println("quitStatus="+quitStatus);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", user.getUserId());
 		map.put("quitDate", quitDate);
@@ -177,7 +138,7 @@ public class UserDaoImpl implements UserDao{
 		sqlSession.delete("UserMapper.deleteUser", map);
 	}
 
-	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
+	// 게시판 Page 처리
 	public int getTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("UserMapper.getTotalCount", search);
 	}
