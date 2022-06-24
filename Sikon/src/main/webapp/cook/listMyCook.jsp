@@ -396,7 +396,7 @@ font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 			  
 			  	<td align="left" class="toget" value="${cook.cookNo }">
 			  	
-			  		<p style="font-weight:bold">${cook.cookName }</p> <br>
+			  		<p style="font-weight:bold; cursor:pointer;">${cook.cookName }</p> <br>
 			  		
 	
 			  </td>	
