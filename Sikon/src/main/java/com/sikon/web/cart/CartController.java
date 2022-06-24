@@ -26,7 +26,7 @@ import com.sikon.service.user.UserService;
 import com.sikon.service.cart.CartService;
 
 
-//==> 회원관리 Controller
+
 @Controller
 @RequestMapping("/cart/*")
 public class CartController {
@@ -45,29 +45,7 @@ public class CartController {
 	}
 	
 	
-	/*
-	@RequestMapping("addCart")
-	public String addCart(@RequestParam("quantity") int quantity, @RequestParam("prodNo") int prodNo, HttpSession session) throws Exception {
-
-		System.out.println("/addCart");
-		
-		User user = (User) session.getAttribute("user");
-		Product product = productService.getProduct(prodNo);
-		
-		
-		Cart cart = new Cart();
-		cart.setUserId(user.getUserId());
-		cart.setCartProd(product);
-		cart.setQuantity(quantity);
-		
-		System.out.println(cart);
-	
-		cartService.addCart(cart);
-		
-		return "redirect:/product/getProduct?menu=search&prodNo="+prodNo;
-	}
-	
-	*/
+	//장바구니 목록 가져오기
 	@RequestMapping("getCartList")
 	public String getCartList( HttpSession session, Model model) throws Exception{
 		
@@ -75,7 +53,6 @@ public class CartController {
 		
 		User user = (User) session.getAttribute("user");
 		String userId = user.getUserId();
-		System.out.println(userId);
 		
 		List<Cart> list = cartService.getCartList(userId);
 		List prodlist = new ArrayList();
@@ -88,29 +65,15 @@ public class CartController {
 			prodlist.add(product);
 		}
 		
-		System.out.println("Cart: "+list);
-		System.out.println("prodlist: "+prodlist);
-		
 		model.addAttribute("Cart", list);
 		model.addAttribute("prodlist", prodlist);
 		
 		return "forward:/cart/cart.jsp";
 	}
 
-	@RequestMapping("updatecart")
-	public String updateCart( @RequestParam("cartNo") int cartNo, @RequestParam("quantity") int quantity) throws Exception{
-		
-		System.out.println("/updateCart");
-		
-		Cart cart = cartService.getCart(cartNo);
-		cart.setQuantity(quantity);
-		
-		cartService.updateCart(cart);
-		
-		
-		return "redirect:/cart/getCartList";
-	}
-
+	
+	
+	//장바구니에서 단일삭제
 	@RequestMapping("deleteCart")
 	public String deleteCart( @RequestParam("cartNo") int cartNo, Model model, HttpSession session) throws Exception{
 		
@@ -123,6 +86,8 @@ public class CartController {
 		return "redirect:/cart/getCartList";
 	}
 	
+	
+	//장바구니에서 선택상품 삭제하기
 	@RequestMapping("deleteSelect")
 	public String deleteSelect( @RequestParam("cartNo") int[] cartNo) throws Exception{
 		

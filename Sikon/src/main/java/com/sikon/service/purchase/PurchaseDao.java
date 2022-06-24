@@ -6,35 +6,39 @@ import com.sikon.common.Search;
 import com.sikon.service.domain.Purchase;
 
 
-//==> 회원관리에서 CRUD 추상화/캡슐화한 DAO Interface Definition
 public interface PurchaseDao {
 	
-	// INSERT
+	//상품 구매
 	public void addPurchase(Purchase purchase) throws Exception ;
 
-	// SELECT ONE
+	//상품 구매내역 가져오기
 	public Purchase getPurchase(int tranNo) throws Exception ;
 
-	// SELECT LIST 
+	//상품 일괄구매 내역 가져오기 
 	public List<Purchase> getPurchaseBySerial(String serialNo) throws Exception ;
 
-	// SELECT LIST
+	//상품 구매목록 가져오기
 	public List<Purchase> getPurchaseList(Search search, String buyerId) throws Exception ;
 	
+	//상품 판매목록 가져오기
 	public List<Purchase> getSalesList(Search search) throws Exception ;
 
-	// UPDATE
+	//상품 구매내역 수정하기
 	public void updatePurchase(Purchase purchase) throws Exception ;
 	
+	//상품 배송상태 수정하기
 	public void updateDivyStatus(Purchase purchase) throws Exception ;
 	
+	//상품 구매시 재고량 수정하기
 	public void updateStock(int purchaseQuantity, int prodNo) throws Exception ;
 	
+	//상품 구매취소시 재고량 수정하기
 	public void cancelOrder(int purchaseQuantity, int prodNo) throws Exception ;
 	
-	// 게시판 Page 처리를 위한 전체Row(totalCount)  return
+	//상품 구매목록수 가져오기
 	public int getTotalCount(Search search, String buyerId) throws Exception ;
-	
+
+	//상품 판매목록수 가져오기
 	public int getTotalCount2(Search search) throws Exception ;
 	
 }

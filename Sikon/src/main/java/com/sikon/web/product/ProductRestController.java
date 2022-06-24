@@ -35,7 +35,6 @@ import com.sikon.service.domain.User;
 import com.sikon.service.product.ProductService;
 
 
-//==> 회원관리 RestController
 @RestController
 @RequestMapping("/product/*")
 public class ProductRestController {
@@ -44,7 +43,7 @@ public class ProductRestController {
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
-	//setter Method 구현 않음
+
 		
 	public ProductRestController(){
 		System.out.println(this.getClass());
@@ -58,6 +57,7 @@ public class ProductRestController {
 	String summerNote;
 	
 	
+	//상품 목록 무한스크롤
 	@RequestMapping(value="json/listProduct")
 	public Map listProduct( @RequestBody Search search) throws Exception{
 		
@@ -88,48 +88,33 @@ public class ProductRestController {
 		return map2;
 	}
 	
+	
+	//썸머노트
 	@RequestMapping(value = "json/uploadSummernoteImageFile")
     public Map uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
 
-		System.out.println("썸머노트");
-		System.out.println("1: "+multipartFile);
-		
-		
-        //JsonObject jsonObject = new JsonObject();
         Map map = new HashMap();
 		
-		
-        String fileRoot = summerNote;	//저장될 파일 경로
-        String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
+        String fileRoot = summerNote;	
+        String originalFileName = multipartFile.getOriginalFilename();	
+        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	
 
-        // 랜덤 UUID+확장자로 저장될 savedFileName
         String savedFileName = UUID.randomUUID() + extension;	
-        
-        System.out.println("2: "+savedFileName);
         
         File targetFile = new File(fileRoot + savedFileName);
         
-        System.out.println("3: "+targetFile);
-
         try {
             InputStream fileStream = multipartFile.getInputStream();
-            FileUtils.copyInputStreamToFile(fileStream,targetFile);	//파일 저장
-            //jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
+            FileUtils.copyInputStreamToFile(fileStream,targetFile);	
             map.put("url", "/summernoteImage/"+savedFileName);
-            //jsonObject.addProperty("responseCode", "success");
             map.put("responseCode", "success");
 
         } catch (IOException e) {
-            FileUtils.deleteQuietly(targetFile);	// 실패시 저장된 파일 삭제
-            //jsonObject.addProperty("responseCode", "error");
+            FileUtils.deleteQuietly(targetFile);
             map.put("responseCode", "error");
             e.printStackTrace();
         }
 
-        
-        
-        System.out.println("4: "+map);
         
         return map;
     }

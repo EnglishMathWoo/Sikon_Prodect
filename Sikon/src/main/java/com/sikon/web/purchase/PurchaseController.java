@@ -40,7 +40,7 @@ import com.sikon.service.cart.CartService;
 import com.sikon.service.coupon.CouponService;
 
 
-//==> 회원관리 Controller
+
 @Controller
 @RequestMapping("/purchase/*")
 public class PurchaseController {
@@ -73,17 +73,17 @@ public class PurchaseController {
 		System.out.println(this.getClass());
 	}
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
-	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
+
 	@Value("#{commonProperties['pageUnit']}")
-	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
 	
 	@Value("#{commonProperties['pageSize']}")
-	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
 	
+	
+	
+	//상품 단일구매 GET
 	@RequestMapping(value="addPurchase", method=RequestMethod.GET)
 	public ModelAndView addPurchase(@RequestParam("prodNo") int prodNo, @RequestParam("quantity") int quantity, HttpServletRequest request) throws Exception {
 
@@ -127,7 +127,7 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
-
+	//상품 단일구매 POST
 	@RequestMapping(value="addPurchase", method=RequestMethod.POST)
 	public ModelAndView addPurchase( @ModelAttribute("purchase") Purchase purchase, @RequestParam("prodNo") int prodNo, @RequestParam("userId") String userId ) throws Exception {
 
@@ -204,9 +204,6 @@ public class PurchaseController {
 		// 쿠폰 사용하기
 		
 		Coupon coupon = new Coupon();
-		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-		System.out.println("////////////////////////////////////////"+purchase.getUsedCoupon()+"////////////////////////////////////////");
-		System.out.println("////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 		if(purchase.getUsedCoupon().equals("")) {
 			purchase.setUsedCoupon(null);			
 		}
@@ -260,9 +257,7 @@ public class PurchaseController {
 	}
 
 
-//=== 장바구니 구매 ==============================================================================================
-//=============================================================================================================	
-	
+	//장바구니 일괄구매 GET
 	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.GET)
 	public String addPurchaseByCart(@RequestParam("cartNo") int[] cartNo,  Model model, HttpServletRequest request) throws Exception {
 
@@ -312,14 +307,12 @@ public class PurchaseController {
 		return "forward:/purchase/addPurchaseViewByCart.jsp";
 	}	
 	
-
+	//장바구니 일괄구매 POST
 	@RequestMapping(value="addPurchaseByCart", method=RequestMethod.POST)
 	public ModelAndView addPurchaseByCart(@ModelAttribute("purchase") Purchase purchase, @RequestParam("cartNo") int[] cartNo, @RequestParam("userId") String userId ) throws Exception {
 
-		System.out.println("========================================================================");
 		System.out.println("/purchase/addPurchaseByCart : POST");
 		
-		///*
 		
 		User user = userService.getUser(userId);
 		
@@ -343,22 +336,13 @@ public class PurchaseController {
 		
 		int productPrice = 0;
 		int num = 0;
-		//for문
+
 		for(int i=0; i<cartNo.length; i++) {
 			
 			Cart cart = cartService.getCart(cartNo[i]);
 			
 			Product product = productService.getProduct(cart.getCartProd().getProdNo());
 			productPrice += (product.getProdDisPrice()*cart.getQuantity());
-			System.out.println("----------------------------------------------------");
-			
-			System.out.println("상품가: "+product.getProdDisPrice());
-			System.out.println("수량: "+cart.getQuantity());
-			System.out.println("상품가*수량: "+(product.getProdDisPrice()*cart.getQuantity()));
-			
-			System.out.println("productPrice: "+productPrice);
-
-			System.out.println("----------------------------------------------------");
 			num ++;
 			
 			Purchase purchaseByCart = new Purchase();
@@ -396,9 +380,6 @@ public class PurchaseController {
 			
 		
 		}
-		
-		System.out.println("========================================================================");
-//*
 
 		//==================================================================================
 		//포인트 적용
@@ -470,7 +451,7 @@ public class PurchaseController {
 		map.put("serial", serial);
 
 		//==================================================================================	
-		System.out.println("장바구니 구매완료");
+
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/readPurchaseByCart.jsp");
@@ -480,10 +461,9 @@ public class PurchaseController {
 		return modelAndView;
 	}
 
-//=============================================================================================================	
-//=============================================================================================================	
 
-		
+/*
+	// 구매내역 가져오기	
 	@RequestMapping( value="getPurchase", method=RequestMethod.GET)
 	public ModelAndView getPurchase( @RequestParam("tranNo") int tranNo) throws Exception {
 		
@@ -503,8 +483,9 @@ public class PurchaseController {
 		
 		return modelAndView;
 	}
+*/
 	
-	
+	//주문일련번호로 내역 가져오기
 	@RequestMapping( value="getPurchaseBySerial", method=RequestMethod.GET)
 	public ModelAndView getPurchaseBySerial( @RequestParam("serialNo") String serialNo) throws Exception {
 		
@@ -534,16 +515,11 @@ public class PurchaseController {
 			
 			if(purchase.getUsedCoupon()==null || purchase.getUsedCoupon().equals("none")) {
 				
-				System.out.println("purchase.getUsedCoupon(): 들어옴1");
 				purchase.setUsedCoupon(null);
 				
 			}else if(purchase.getUsedCoupon() != null) {
 				
-				System.out.println("purchase.getUsedCoupon(): 들어옴2");
-				Coupon coupon = couponService.getIssuedCoupon(Integer.parseInt(purchase.getUsedCoupon()));  
-				System.out.println("-------------------------------------------------------------------");
-				System.out.println("coupon: "+coupon);
-				System.out.println("-------------------------------------------------------------------");
+				Coupon coupon = couponService.getIssuedCoupon(Integer.parseInt(purchase.getUsedCoupon())); 
 				couponvalue = coupon.getDiscountValue();
 				couponRate = coupon.getDiscountRate();
 				
@@ -563,16 +539,6 @@ public class PurchaseController {
 		map.put("pointpay", pointpay);
 		map.put("serial", serial);
 
-		System.out.println("================================================================================");
-		System.out.println("totalprice: "+totalprice);
-		System.out.println("divyfee: "+divyfee);
-		System.out.println("couponvalue: "+couponvalue);
-		System.out.println("couponRate: "+couponRate);
-		System.out.println("pointpay: "+pointpay);
-		System.out.println("serial: "+serial);
-		System.out.println("map: "+map);
-		System.out.println("================================================================================");
-
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/getPurchaseBySerial.jsp");
 		modelAndView.addObject("purchaselist", purchaselist);
@@ -580,33 +546,9 @@ public class PurchaseController {
 		
 		return modelAndView;
 	}
-	
 
-	@RequestMapping(value="updatePurchase", method=RequestMethod.GET)
-	public ModelAndView updatePurchase( @RequestParam("tranNo") int tranNo) throws Exception{
-
-		System.out.println("/purchase/updatePurchase : GET ");
-		//Business Logic
 	
-		Purchase purchase = purchaseService.getPurchase(tranNo);
-		
-		int prodNo = purchase.getPurchaseProd().getProdNo();
-		Product product = productService.getProduct(prodNo);
-				
-		String userId = purchase.getBuyer().getUserId(); 
-		User user = userService.getUser(userId);
-		
-		purchase.setBuyer(user);
-		purchase.setPurchaseProd(product);
-		
-		// Model 과 View 연결
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/updatePurchase.jsp");
-		modelAndView.addObject("purchase", purchase);
-		
-		return modelAndView;
-	}
-	
+	//주문일련번호로 구매내역 수정 GET
 	@RequestMapping(value="updatePurchaseBySerial", method=RequestMethod.GET)
 	public ModelAndView updatePurchaseBySerial( @RequestParam("serialNo") String serialNo) throws Exception{
 
@@ -647,16 +589,7 @@ public class PurchaseController {
 		map.put("couponpay", couponpay);
 		map.put("pointpay", pointpay);
 		map.put("serial", serial);
-
-		System.out.println("================================================================================");
-		System.out.println("totalprice: "+totalprice);
-		System.out.println("divyfee: "+divyfee);
-		System.out.println("couponpay: "+couponpay);
-		System.out.println("pointpay: "+pointpay);
-		System.out.println("serial: "+serial);
-		System.out.println("map: "+map);
-		System.out.println("================================================================================");
-
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/purchase/updatePurchaseBySerial.jsp");
 		modelAndView.addObject("purchaselist", purchaselist);
@@ -666,27 +599,13 @@ public class PurchaseController {
 				
 	}
 	
-	@RequestMapping(value="updatePurchase", method=RequestMethod.POST)
-	public ModelAndView updatePurchase( @ModelAttribute("purchase") Purchase purchase, @RequestParam("tranNo") int tranNo) throws Exception{
-
-		System.out.println("/purchase/updatePurchase : POST ");
-		
-		purchase.setTranNo(tranNo);
-		purchaseService.updatePurchase(purchase);
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("redirect:/purchase/getPurchase?tranNo="+tranNo);		
-		
-		return modelAndView;
-	}
 	
+	//주문일련번호로 구매내역 수정 POST
 	@RequestMapping(value="updatePurchaseBySerial", method=RequestMethod.POST)
 	public ModelAndView updatePurchaseBySerial( @ModelAttribute("purchase") Purchase purchase, @RequestParam("tranlist") int[] tranlist) throws Exception{
 
 		System.out.println("/purchase/updatePurchaseBySerial : POST ");
 		
-		System.out.println("1번 Purchase: "+purchase);
-		System.out.println("-----------------------------------------------------------------------------");
 		
 		for(int i=0; i<tranlist.length; i++) {
 			
@@ -701,11 +620,12 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
+	
+	//배송상태 변경(업데이트)
 	@RequestMapping(value="updatedivyStatus", method=RequestMethod.GET)
 	public ModelAndView updatedivyStatus( @ModelAttribute("purchase") Purchase purchase, HttpServletRequest request) throws Exception{
 
 		System.out.println("/purchase/updatedivyStatus : GET");
-		//Business Logic
 		
 		int tranNo = Integer.parseInt(request.getParameter("tranNo")); 
 		String divyStatus = request.getParameter("divyStatus");
@@ -754,34 +674,8 @@ public class PurchaseController {
 		return modelAndView;
 	}
 
-/*	
-	@RequestMapping(value="cancelOrder", method=RequestMethod.GET)
-	public ModelAndView cancelOrder(@RequestParam("tranNo") int tranNo) throws Exception{
 
-		System.out.println("/purchase/cancelOrder : GET");
-		//Business Logic
-		
-		Purchase purchase = purchaseService.getPurchase(tranNo);
-		
-		int quantity = purchase.getPurchaseQuantity();
-		int prodNo = purchase.getPurchaseProd().getProdNo();
-		
-		purchaseService.cancelOrder(quantity, prodNo);
-		
-		System.out.println("구매취소완료");
-		
-		purchase.setDivyStatus("000");
-		purchaseService.updateDivyStatus(purchase);
-		
-		System.out.println("코드변경완료");
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/purchase/listPurchase");		
-		
-		return modelAndView;
-	}
-//*/
-	
+	//구매취소
 	@RequestMapping(value="cancelOrder", method=RequestMethod.GET)
 	public ModelAndView cancelOrder(@RequestParam("serialNo") String serialNo, HttpServletRequest request) throws Exception{
 
@@ -846,6 +740,8 @@ public class PurchaseController {
 		return modelAndView;
 	}
 
+	
+	// 내가 구매한 목록 가져오기
 	@RequestMapping(value="listPurchase" )
 	public ModelAndView listPurchase( @ModelAttribute("search") Search search ,  HttpServletRequest request) throws Exception{
 		
@@ -862,16 +758,12 @@ public class PurchaseController {
 		
 		String buyerId = user.getUserId();
 		
-		
-		
-		// Business logic 수행
+
 		Map<String , Object> map=purchaseService.getPurchaseList(search, buyerId);
 		
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, 8);
 		System.out.println(resultPage);
-		
-		// Model 과 View 연결
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/mypage/listPurchase.jsp");
@@ -880,11 +772,11 @@ public class PurchaseController {
 		modelAndView.addObject("search", search);
 		modelAndView.addObject("user", user);
 		
-		
-		//return "forward:/purchase/listPurchase.jsp";
 		return modelAndView;
 	}
 	
+	
+	// 판매목록 가져오기(관리자)
 	@RequestMapping(value="listSales")
 	public ModelAndView listSales( @ModelAttribute("search") Search search) throws Exception{
 		
@@ -895,7 +787,6 @@ public class PurchaseController {
 		}
 		search.setPageSize(10);
 		
-		// Business logic 수행
 		Map<String , Object> map=purchaseService.getSalesList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, 10);

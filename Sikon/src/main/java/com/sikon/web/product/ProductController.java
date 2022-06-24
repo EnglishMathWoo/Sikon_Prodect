@@ -36,7 +36,7 @@ import com.sikon.service.product.impl.ProductServiceImpl;
 import com.sikon.service.review.ReviewService;
 
 
-//==> 회원관리 Controller
+
 @Controller
 @RequestMapping("/product/*")
 public class ProductController {
@@ -67,6 +67,8 @@ public class ProductController {
 	String filePath;
 	
 
+	
+	//상품등록
 	@RequestMapping(value="addProduct", method=RequestMethod.POST )
 	public String addProduct( @ModelAttribute("product") Product product, @RequestParam("uploadfiles[]") MultipartFile[] fileArray, Model model ) throws Exception {
 		
@@ -94,7 +96,6 @@ public class ProductController {
 		
 		product.setProdThumbnail(fileName);
 		
-		System.out.println("product: "+product);
 		productService.addProduct(product);
 		
 		model.addAttribute(product);
@@ -103,6 +104,7 @@ public class ProductController {
 	}
 
 	
+	//상품상세정보 가져오기
 	@RequestMapping(value="getProduct", method=RequestMethod.GET)
 	public String getProduct(@ModelAttribute("search") Search search, @RequestParam("prodNo") int prodNo , @RequestParam("menu") String menu, @CookieValue(value="history", required=false) Cookie cookie,  
 										HttpServletResponse response, Model model ) throws Exception {
@@ -151,7 +153,6 @@ public class ProductController {
 			prodCookie02.setPath("/");
 			response.addCookie(prodCookie02);
 			
-			System.out.println("Not NULL일 때 저장된 prod쿠키값"+cookie.getValue());
 			System.out.println("Not NULL일 때 저장될 prod쿠키값"+str1);
 		}
 		
@@ -159,7 +160,7 @@ public class ProductController {
 	}
 	
 
-
+	//상품정보 수정하기 GET
 	@RequestMapping(value="updateProduct", method=RequestMethod.GET )
 	public String updateProduct( @ModelAttribute("product") Product product , Model model) throws Exception{
 
@@ -172,6 +173,8 @@ public class ProductController {
 		return "forward:/product/updateProduct.jsp";
 	}
 	
+	
+	//상품정보 수정하기 POST
 	@RequestMapping(value="updateProduct", method=RequestMethod.POST)
 	public String updateProduct( @ModelAttribute("product") Product product , @RequestParam("uploadfiles[]") MultipartFile[] fileArray) throws Exception{
 
@@ -212,6 +215,7 @@ public class ProductController {
 	}
 	
 	
+	//상품목록 가져오기
 	@RequestMapping( value="listProduct" )
 	public String listProduct( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
 		
@@ -237,26 +241,22 @@ public class ProductController {
 		String names = "";
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		System.out.println(resultPage);
 		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		model.addAttribute("prodNames",mapName.get("list"));
 		
-		System.out.println("1:"+mapName);
-		System.out.println("2:"+mapName.get("list"));
-		
-		
 		return "forward:/product/listProduct.jsp";
 	}
 	
+	
+	//상품목록 관리자
 	@RequestMapping( value="manageProduct" )
 	public String manageProduct( @ModelAttribute("search") Search search , Model model) throws Exception{
 		
 		System.out.println("/product/manageProduct :  GET / POST ");
 		
-		System.out.println("productlist search: "+search);
 
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
@@ -275,11 +275,7 @@ public class ProductController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		model.addAttribute("prodNames",mapName.get("list"));
-		
-		System.out.println("1:"+mapName);
-		System.out.println("2:"+mapName.get("list"));
-		
-		
+				
 		return "forward:/product/manageProduct.jsp";
 	}
 

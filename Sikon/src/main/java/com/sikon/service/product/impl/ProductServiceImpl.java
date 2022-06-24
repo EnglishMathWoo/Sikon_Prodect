@@ -43,9 +43,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	
 	public void updateProduct(Product product) throws Exception {
-		System.out.println("업데이트 시작: " + product);
 		productDao.updateProduct(product);
-		System.out.println("업데이트 완료");
 	}
 	
 
