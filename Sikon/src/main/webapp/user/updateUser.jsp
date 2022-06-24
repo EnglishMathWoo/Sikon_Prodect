@@ -339,6 +339,7 @@ html input[type=button]:hover{
 			var pw_confirm=$("input[name='password2']").val();
 			var name=$("input[name='userName']").val();
 			var nickname=$("input[name='userNickname']").val();
+			var mentorApply=$("input[name='mentorApply']").val();
 			
 			if(id == null || id.length <1){
 				alert("아이디는 반드시 입력하셔야 합니다.");
@@ -369,6 +370,10 @@ html input[type=button]:hover{
 			if ($("#phone").val() == "" || $("#phone").val().length != 11 || isNaN($("#phone").val())) {
 				alert("휴대폰번호를 정확히 입력해 주세요");
 				return;
+			}
+			
+			if(mentorApply == 'Y') {
+				alert("멘토신청이 완료되었습니다.");
 			}
 			
 			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").attr("enctype","multipart/form-data").submit();

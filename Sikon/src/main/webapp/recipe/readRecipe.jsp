@@ -432,7 +432,10 @@ body {
 
 
 			<h5>
-				난이도
+			   테마 : ${recipe.recipeTheme}
+				
+			
+				/ 난이도 : 
 				<c:choose>
 					<c:when test="${recipe.recipeDifficulty.equals('100') }">
 					초급
@@ -446,7 +449,7 @@ body {
 				</c:choose>
 
 
-				&nbsp;소요시간 ${recipe.cookingTime }분
+				<span>/소요시간 ${recipe.cookingTime }분&ensp;</span>
 			</h5>
 			<hr />
 			${recipe.detail }

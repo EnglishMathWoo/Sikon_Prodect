@@ -374,7 +374,7 @@ public class CookController {
 		modelAndView.addObject("resultPage", resultPage);
 		modelAndView.addObject("search", search);
 
-		modelAndView.setViewName("forward:/cook/metorChannerl.jsp");
+		modelAndView.setViewName("forward:/cook/mentorChannel.jsp");
 
 		return modelAndView;
 	}

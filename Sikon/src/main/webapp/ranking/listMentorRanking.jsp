@@ -414,31 +414,31 @@ article img {
 	
 	//ÄíÅ·¸àÅä ·©Å·
 	$(document).on('click', '#mentor', function(){
-		 self.location = "/ranking/listLove";
+		 self.location = "/ranking/listMentor";
 	});
 	
 	//ÄíÅ·¸àÅä ÀüÃ¼ ·©Å·
 	$(document).on('click', '#all', function(){
 		 var orderCondition = $(this).attr('value');
-		 self.location = "/ranking/listLove";
+		 self.location = "/ranking/listMentor";
 	});
 	
 	//ÄíÅ·¸àÅä ÀÏ°£ ·©Å·
 	$(document).on('click', '#daily', function(){
 		 var orderCondition = $(this).attr('value');
-		 self.location = "/ranking/listLove?orderCondition="+orderCondition;
+		 self.location = "/ranking/listMentor?orderCondition="+orderCondition;
 	});
 	
 	//ÄíÅ·¸àÅä ÁÖ°£ ·©Å·
 	$(document).on('click', '#weekly', function(){
 		 var orderCondition = $(this).attr('value');
-		 self.location = "/ranking/listLove?orderCondition="+orderCondition;
+		 self.location = "/ranking/listMentor?orderCondition="+orderCondition;
 	});
 	
 	//ÄíÅ·¸àÅä ¿ù°£ ·©Å·
 	$(document).on('click', '#monthly', function(){
 		 var orderCondition = $(this).attr('value');
-		self.location = "/ranking/listLove?orderCondition="+orderCondition;
+		self.location = "/ranking/listMentor?orderCondition="+orderCondition;
 	});	
 			
 	//¹öÆ° Å¬¸¯½Ã »óÅÂ À¯Áö

@@ -1,144 +1,30 @@
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'user@naver.com', 'user', '1234', '1994-11-11', 'user', default, '서울시 서초구', default, '01022249988', 100000, 'N', default, SYSDATE, 'N');
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, NULL, NULL, NULL, 'user@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, NULL, NULL, NULL, NULL, 'user@naver.com')
-select *from dual;
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, NULL, NULL, NULL, 'user@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, NULL, NULL, NULL, NULL, 'user@naver.com')
-select *from dual;
+VALUES ( 'user@naver.com', 'user', '1234', '1994-11-11', 'user', '168939.jpg', '서울시 서초구', default, '01022249988', 100000, 'N', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'user2@naver.com', 'user2', '1234', '1994-11-11', 'user2', default, '서울시 서초구', default, '01022247777', 100000, 'N', default, SYSDATE, 'N');
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, NULL, NULL, NULL, 'user2@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, NULL, NULL, NULL, NULL, 'user2@naver.com')
-select *from dual;
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, NULL, NULL, NULL, 'user2@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, NULL, NULL, NULL, NULL, 'user2@naver.com')
-select *from dual;
+VALUES ( 'test@naver.com', 'test', '1234', '1994-11-11', 'test', default, '서울시 서초구', default, '01022247777', 100000, 'N', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
-VALUES ( 'user3@naver.com', 'user3', '1234', '1994-11-11', 'user3', default, '서울시 서초구', default, '01044447777', 100000, 'Y', default, SYSDATE, 'N');
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '3종보통', '구청2', '2018-05-24', 'user3@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, '삼성', '2018-05-24', '2018-05-24', '1년근무', 'user3@naver.com')
-select *from dual;
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '3종보통', '구청3', '2019-05-24', 'user3@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, '현대', '2018-05-24', '2018-05-24', '2년근무', 'user3@naver.com')
-select *from dual;
-
-INSERT all
-INTO users
-VALUES ( 'mentor@naver.com', 'mentor', '1234', '1994-11-11', 'mentor', '마동석요리.jpg', '서울시 서초구', 'mentor', '01023341000', 100000, 'Y', default, SYSDATE, NULL, 'N')
-INTO license
-VALUES ( seq_license_license_no.nextval, '1종보통', '강동구청', '2018-05-24', 'mentor@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, '삼성', '2013-05-24', '2015-05-24', '1년근무', 'mentor@naver.com')
-select*from dual;
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '2종보통', '강서구청', '2019-06-24', 'mentor@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, '현대', '2014-05-24', '2017-05-24', '2년근무', 'mentor@naver.com')
-select *from dual;
+VALUES ( 'abc@naver.com', 'abc', '1234', '1994-11-11', 'abc', default, '서울시 서초구', default, '01044447777', 100000, 'Y', default, SYSDATE, 'N');
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
 VALUES ( 'mentor1@naver.com', 'mentor1', '1234', '1994-11-11', 'mentor1', '고든램지.jpg', '서울시 서초구', 'mentor', '01033337777', 100000, 'Y', default, SYSDATE, 'N');
 
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '자격증1', '구청1', '2015-05-24', 'mentor1@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, 'LG', '2013-05-24', '2014-05-24', '1년근무', 'mentor1@naver.com')
-select *from dual;
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '자격증2', '구청2', '2016-05-24', 'mentor1@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, 'LG1', '2014-04-24', '2015-05-24', '2년근무', 'mentor1@naver.com')
-select *from dual;
-
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
 VALUES ( 'mentor2@naver.com', 'mentor2', '1234', '1994-11-11', 'mentor2', '168939.jpg', '서울시 서초구', 'mentor', '01033331111', 100000, 'Y', default, SYSDATE, 'N');
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '자격증3', '구청3', '2016-05-24', 'mentor2@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, 'LG2', '2015-05-24', '2016-05-24', '3년근무', 'mentor2@naver.com')
-select *from dual;
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '자격증4', '구청4', '2017-05-24', 'mentor2@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, 'LG3', '2016-04-24', '2017-05-24', '4년근무', 'mentor2@naver.com')
-select *from dual;
 
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
 VALUES ( 'mentor3@naver.com', 'mentor3', '1234', '1994-11-11', 'mentor3', '호빵맨.png', '서울시 서초구', 'mentor', '01033338888', 100000, 'Y', default, SYSDATE, 'N');
 
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '자격증4', '구청4', '2017-05-24', 'mentor3@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, 'LG3', '2017-05-24', '2018-05-24', '5년근무', 'mentor3@naver.com')
-select *from dual;
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '자격증5', '구청5', '2018-05-24', 'mentor3@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, 'LG4', '2018-04-24', '2019-05-24', '6년근무', 'mentor3@naver.com')
-select *from dual;
-
 INSERT 
 INTO users ( user_id, user_name, password, user_birth, user_nickname, user_image, user_addr, role, user_phone, holdpoint, mentor_apply, login_path, user_regdate, quit_status  )
 VALUES ( 'mentor4@naver.com', 'mentor4', '1234', '1994-11-11', 'mentor4', '백종원.jpg', '서울시 서초구', 'mentor', '01032125777', 100000, 'Y', default, SYSDATE, 'N');
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '자격증6', '구청6', '2020-05-24', 'mentor4@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, 'LG5', '2019-05-24', '2020-05-24', '7년근무', 'mentor4@naver.com')
-select *from dual;
-
-INSERT all
-INTO license
-VALUES ( seq_license_license_no.nextval, '자격증7', '구청7', '2021-05-24', 'mentor4@naver.com' )
-INTO career
-VALUES (  seq_career_career_no.nextval, 'LG6', '2020-04-24', '2021-05-24', '8년근무', 'mentor4@naver.com')
-select *from dual;
 
 INSERT all
 INTO users
@@ -146,14 +32,31 @@ VALUES ( 'admin@naver.com', 'admin', '1234', '1994-11-11', 'admin', '60a81c75-c6
 INTO license
 VALUES ( seq_license_license_no.nextval, '2종보통', '강남구청', '2017-05-24', 'admin@naver.com' )
 INTO career
-VALUES (  seq_career_career_no.nextval, '회사', '2011-05-24', '2012-05-24', '9년근무', 'admin@naver.com')
+VALUES (  seq_career_career_no.nextval, '회사', '2011-05-24','2012-05-24', '싸이', 'admin@naver.com')
 select *from dual;
 
 INSERT all
 INTO license
-VALUES ( seq_license_license_no.nextval, '1종보통', '강서구청', '2014-05-24', 'admin@naver.com' )
+VALUES ( seq_license_license_no.nextval, NULL, NULL, NULL, 'admin@naver.com' )
 INTO career
-VALUES (  seq_career_career_no.nextval, '회사1', '2012-05-24', '2013-05-24', '10년근무', 'admin@naver.com')
+VALUES (  seq_career_career_no.nextval, NULL, NULL, NULL, NULL, 'admin@naver.com')
+select *from dual;
+
+
+INSERT all
+INTO users
+VALUES ( 'mentor@naver.com', 'mentor', '1234', '1994-11-11', 'mentor', '마동석요리.jpg', '서울시 서초구', 'mentor', '01023341000', 100000, 'Y', default, SYSDATE, NULL, 'N')
+INTO license
+VALUES ( seq_license_license_no.nextval, '1종보통', '강동구청','2018-08-24', 'mentor@naver.com' )
+INTO career
+VALUES (  seq_career_career_no.nextval, '삼성', '2013-05-24', '2015-05-24','1년근무', 'mentor@naver.com')
+select*from dual;
+
+INSERT all
+INTO license
+VALUES ( seq_license_license_no.nextval, '2종보통', '강서구청','2019-06-24', 'mentor@naver.com' )
+INTO career
+VALUES (  seq_career_career_no.nextval, '현대', '2014-05-24', '2017-05-24','2년근무', 'mentor@naver.com')
 select *from dual;
 
 INSERT 
@@ -170,7 +73,7 @@ VALUES (seq_coupon_coupon_no.NEXTVAL, '여름 특가 할인쿠폰', 0.8, 0, SYSD
 
 INSERT 
 INTO coupon(coupon_no, coupon_name, discount_rate, discount_value, coupon_regdate)
-VALUES (seq_coupon_coupon_no.NEXTVAL, '신규회원 5000원 할인쿠폰', 0, 5000, SYSDATE);
+VALUES (seq_coupon_coupon_no.NEXTVAL, '신규회원 5000원 할인 쿠폰', 0, 5000, SYSDATE);
 
 INSERT 
 INTO couponholder(issue_no, coupon_no, holder_id, start_date, end_date, issue_status) 
@@ -243,6 +146,10 @@ VALUES (seq_cook_cook_no.nextval, '예다의 시원한 레몬에이드 쿠킹크
 
 INSERT
 INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
+VALUES (seq_cook_cook_no.nextval, '예다의 시원한 레몬에이드 쿠킹크래스', '229918cb-c0c2-496f-8796-003121985a6d.jpg', '아 시원해~~', '1', 14000, 'JA', '22/06/10',  '22/06/10', 1, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/6.JPG" style=""><img src="/summernoteImage/7.JPG" style=""><img src="/summernoteImage/8.JPG" style=""><img src="/summernoteImage/9.JPG" style=""><br></p>','mentor2', 'mentor2@naver.com' );
+
+INSERT
+INTO cook(cook_no, cook_name , cook_filename, cook_brief , cook_difficuty, cook_price, cook_theme, apl_startime ,apl_endtime, cook_recruit, start_time,  end_time , cook_location , cook_regdate, cook_video,cook_stock,heart_hit, cook_content,  mentor_nickname, mentor_id  )
 VALUES (seq_cook_cook_no.nextval, '예다의 시원한 식혜 쿠킹클래스', 'a4f12c95-b2d9-406f-927c-005e7a8802a9.jpg', '진짜 쉬워요', '1', 14000, 'CH', '22/06/10',  '22/06/10', 1, '10:00', '11:00', '경기 성남시 분당구 대왕판교로 477', SYSDATE, '0e4890a2-0cd5-488b-89a4-51cbac38c8a6.jpg', 1, 0, '<p><img src="/summernoteImage/cc16d31e-8006-4ab9-ab01-daee04df234b.jpg" style=""><img src="/summernoteImage/83a44db9-37cf-4eed-a051-b9f4e69ad6c7.jpg" style=""><img src="/summernoteImage/0af0b749-b6a1-4347-8126-c0ddce239a08.jpg" style=""><img src="/summernoteImage/0e1bcd8f-2a01-49a4-bff3-6c35b5a98d86.jpg" style=""><img src="/summernoteImage/52d9bcbf-89da-4bc6-af8f-e2d546f201f3.jpg" style=""><br></p>','mentor2','mentor2@naver.com' );
 
 INSERT
@@ -292,7 +199,7 @@ VALUES (seq_notice_notice_no.NEXTVAL, '식탁의 온도 코스닥 상장 안내'
 
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor2', '새우두부찜', '건강한 중국식 가정요리','담백한 두부 안에 새우를 쏘~옥 넣어 만든 건강한 중국식 가정요리! 새우두부찜이에요. 네모모양으로 자른 두부의 속을 파내 동글동글 굴린 새우를 넣어 찜통에 쪄냈어요. 소스도 과하지 않게 굴소스, 간장 등으로만 맛을 내어 건강하고 담백하게 요리를 즐기실 수 있어요. 완성된 요리도 근사해서 홈파티, 초대요리로도 너무 좋답니다.', '새우두부찜.jpg', null, '중급', 'CH', 35, '내용' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor2', '새우두부찜', '건강한 중국식 가정요리','담백한 두부 안에 새우를 쏘~옥 넣어 만든 건강한 중국식 가정요리! 새우두부찜이에요. 네모모양으로 자른 두부의 속을 파내 동글동글 굴린 새우를 넣어 찜통에 쪄냈어요. 소스도 과하지 않게 굴소스, 간장 등으로만 맛을 내어 건강하고 담백하게 요리를 즐기실 수 있어요. 완성된 요리도 근사해서 홈파티, 초대요리로도 너무 좋답니다.', '새우두부찜.jpg', null, '중급', '중식', 35, '내용' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -317,7 +224,7 @@ SELECT '소금' AS ingredientName , '약간' AS ingredientAmount FROM DUAL
 
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'user', '크로핀','크림이 꽉 찬', '크로와상과 머핀이 만나 탄생한 크로핀! 먹기 아쉬울 정도로 예쁜 비주얼과 뛰어난 맛으로 SNS에서 많은 인기를 끌었죠. 크로와상 냉동 생지를 활용해 집에서도 간단하게 만들 수 있다는 사실 다들 알고 계셨나요? 게다가 필링을 가득 넣어 더욱 부드럽고 맛있답니다. 딸기 필링과 얼그레이 필링 뿐만 아니라 커스터드 또는 초코크림, 잼 등 기호에 따라 다양하게 넣어서 즐길 수 있어요. 크로와상 생지의 무궁무진한 변신! 함께 따라해 보아요.', 'Step 7.jpg', null, '중급', 'DES', 50, '내용' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'user', '크로핀','크림이 꽉 찬', '크로와상과 머핀이 만나 탄생한 크로핀! 먹기 아쉬울 정도로 예쁜 비주얼과 뛰어난 맛으로 SNS에서 많은 인기를 끌었죠. 크로와상 냉동 생지를 활용해 집에서도 간단하게 만들 수 있다는 사실 다들 알고 계셨나요? 게다가 필링을 가득 넣어 더욱 부드럽고 맛있답니다. 딸기 필링과 얼그레이 필링 뿐만 아니라 커스터드 또는 초코크림, 잼 등 기호에 따라 다양하게 넣어서 즐길 수 있어요. 크로와상 생지의 무궁무진한 변신! 함께 따라해 보아요.', 'Step 7.jpg', null, '중급', '간식', 50, '내용' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -337,7 +244,7 @@ SELECT '높은종이컵' AS ingredientName , '3개' AS ingredientAmount FROM DUA
 
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '수원왕갈비통닭', '극한직업의 바로 그 맛','불금에는 치킨 한마리 뚝딱!!' ,'수원왕갈비통닭.jpg', null, '중급', 'FR', 10, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor', '수원왕갈비통닭', '극한직업의 바로 그 맛','불금에는 치킨 한마리 뚝딱!!' ,'수원왕갈비통닭.jpg', null, '중급', '양식', 10, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -348,7 +255,7 @@ SELECT '생닭' AS ingredientName , '700g' AS ingredientAmount FROM DUAL
 
   
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'user', '김치비빔국수', '새콤달콤 비빔국수','여름철 별미로 최고에요!' ,'김치비빔국수.jpg', null, '중급', 'KO', 10, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'user', '김치비빔국수', '새콤달콤 비빔국수','여름철 별미로 최고에요!' ,'김치비빔국수.jpg', null, '중급', '한식', 10, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -358,19 +265,30 @@ SELECT '김치' AS ingredientName , '500g' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor2', '냉이 차돌박이 솥밥', '냉이는 별로예요','냉이냉이냉이냉이별로별로별로별로', '987eb588939a8cb12033994139c0018e.jpg', null, '고급', 'CH', 50, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor1', '연어초밥', '알래스카산 연어를 올린','알래스카산 연어초밥' , '연어초밥.jpg', null, '고급', '일식', 85, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
 select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
 from(
-SELECT '차돌박이' AS ingredientName , '1g' AS ingredientAmount FROM DUAL
+SELECT '연어' AS ingredientName , '100g' AS ingredientAmount FROM DUAL
+  ) A;
+  
+  
+INSERT
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor2', '초코 크러플', '달콤한 디저트','당이 떨어졌을 때 최고의 선택', '987eb588939a8cb12033994139c0018e.jpg', null, '고급', '간식', 50, 'd' , SYSDATE, 0, 0);
+
+insert 
+into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
+select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
+from(
+SELECT '초코' AS ingredientName , '100g' AS ingredientAmount FROM DUAL
 union all
-SELECT '냉이' AS ingredientName , '1개' AS ingredientAmount FROM DUAL
+SELECT '크러플' AS ingredientName , '1개' AS ingredientAmount FROM DUAL
   ) A;
 
 INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor3', '달걀 만두', '만두에 달걀을', '노맛노맛노맛' ,'6605dfaa474f5fb72d3ba125efe14db7.jpg', null, '초급', 'DES', 40, 'd' , SYSDATE, 0, 0);
+INTO recipe VALUES (seq_recipe_no.nextval ,'mentor3', '달걀 만두', '만두에 달걀을', '노맛노맛노맛' ,'6605dfaa474f5fb72d3ba125efe14db7.jpg', null, '중급', '한식', 40, 'd' , SYSDATE, 0, 0);
 
 insert 
 into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
@@ -378,17 +296,6 @@ select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select n
 from(
 SELECT '달걀' AS ingredientName , '3개' AS ingredientAmount FROM DUAL
   ) A;
-
-INSERT
-INTO recipe VALUES (seq_recipe_no.nextval ,'mentor1', '대패삼겹살된장찌개', '삼겹살+된장찌개 이즈 굿','노맛노맛노맛' , '7.PNG', null, '고급', 'JP', 85, 'd' , SYSDATE, 0, 0);
-
-insert 
-into ingredient(ingredient_no,ingredient_name, ingredient_amount, recipe_no)
-select seq_ingredient_no.nextval, a.ingredientName,a.ingredientAmount, (select nvl(max(recipe_no),0) from recipe )
-from(
-SELECT '삼겹살' AS ingredientName , '1인분' AS ingredientAmount FROM DUAL
-  ) A;
-
 
 INSERT
 INTO bookmark

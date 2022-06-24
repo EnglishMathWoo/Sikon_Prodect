@@ -417,7 +417,7 @@ font-size: 13px;
 
 	//쿠킹멘토 랭킹
 	$(document).on('click', '#mentor', function() {
-		self.location = "/ranking/listLove";
+		self.location = "/ranking/listMentor";
 	});
 
 	//레시피 전체 랭킹
@@ -551,34 +551,7 @@ font-size: 13px;
 										<b>${recipe.recipeName }</b>
 									</p>
 									<ul class="meta">
-										<li><c:choose>
-												<c:when test="${recipe.recipeTheme=='KO'}">
-            한식
-            </c:when>
-												<c:when test="${recipe.recipeTheme=='CH'}">
-            중식
-            </c:when>
-												<c:when test="${recipe.recipeTheme=='FR'}">
-            양식
-            </c:when>
-												<c:when test="${recipe.recipeTheme=='JP'}">
-            일식
-            </c:when>
-												<c:otherwise>
-            간식
-            </c:otherwise>
-											</c:choose></li>
-										<li><c:choose>
-												<c:when test="${recipe.recipeDifficulty =='100'}"> 
-           초급
-           </c:when>
-												<c:when test="${recipe.recipeDifficulty =='200'}"> 
-           중급
-           </c:when>
-												<c:otherwise> 
-           고급
-           </c:otherwise>
-											</c:choose></li>
+										<li>${recipe.recipeTheme }</li>
 										<li>${recipe.cookingTime }분</li>
 										<li>${recipe.writer.userNickname}</li>
 										<li style="float: right">조회수: ${recipe.recipeViews }</li>

@@ -97,10 +97,6 @@
 		    	<p class="text-primary" style="color:gray">
 		    		&nbsp;&nbsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
 		    	</p>
-			<c:if test = "${menu == 'manage'}">
-		    	<button type="button" class="btn btn-primary delete" value="${notice.noticeNo}" style="float: right;  margin-right: 10px;">삭&nbsp;제</button>
-				<button type="button" class="btn btn-primary" id="addNotice" style="float: right;  margin-right: 10px;">등&nbsp;록</button>
-			</c:if>
 		</div>
 		
 		<form class="form-inline" name="detailForm">
@@ -121,21 +117,28 @@
        
 		<tbody>
 		
-		<c:set var="i" value="0" />
-		<c:forEach var="alarm" items="${list}">
-		<c:set var="i" value="${ i+1 }" />
-		<tr class="ct_list_pop">
-				<td></td>
-				<td align="center" style="text-align:center"> ${alarm.alarmNo}</td>
-				<td align="left" style="text-align:center">${alarm.alarmContent}</td>
-				<td></td>
-				<td align="left"> ${alarm.alarmDate} </td>
-		</tr>
-		</c:forEach>
-        
+		<c:if test="${!empty list}">
+			<c:set var="i" value="0" />
+			<c:forEach var="alarm" items="${list}">
+			<c:set var="i" value="${ i+1 }" />
+			<tr class="ct_list_pop">
+					<td></td>
+					<td align="center" style="text-align:center"> ${alarm.alarmNo}</td>
+					<td align="left" style="text-align:center">${alarm.alarmContent}</td>
+					<td></td>
+					<td align="left"> ${alarm.alarmDate} </td>
+			</tr>
+			</c:forEach>
+        </c:if>
+              
         </tbody>
       
         </table>
+        
+        <c:if test="${empty list}">
+		  	<h2 id="noAlarm" style="text-align:center; font-weight:bold;">알람이 없습니다.</h2>
+		    <br>
+		</c:if>
 	  
 	  </div>
  	

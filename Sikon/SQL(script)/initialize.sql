@@ -293,10 +293,10 @@ CREATE TABLE review(
 );
 
 CREATE TABLE alarm ( 
-	alarm_no 	NUMBER(38) 	NOT NULL, 
-	alarm_target 	VARCHAR2(50),
-	alarm_content 	VARCHAR2(500), 
-	alarm_status 	VARCHAR2(20), 
+	alarm_no 	NUMBER 		NOT NULL, 
+	alarm_target 	VARCHAR2(50)	NOT NULL,
+	alarm_content 	VARCHAR2(500)	NOT NULL, 
+	alarm_status 	VARCHAR2(20)	NOT NULL, 
 	alarm_date 	DATE 		NOT NULL,	
 	PRIMARY KEY(alarm_no)
 );
