@@ -10,24 +10,27 @@
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
-	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+<meta charset="EUC-KR">
 
-   <!-- jQuery UI toolTip 사용 CSS-->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- jQuery UI toolTip 사용 JS-->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
- <!-- font -->
+
+<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+
+<!-- jQuery UI toolTip 사용 CSS-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- jQuery UI toolTip 사용 JS-->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<!-- font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
@@ -169,7 +172,7 @@ div{
 }
 
 </style>
-	<script type="text/javascript">
+<script type="text/javascript">
 
 
 	$(document).ready(function() {
@@ -208,17 +211,7 @@ div{
 		            } 
 										
 			  });
-			 /*
-			 $( ".selectdelete" ).on("click" , function() {
-				
-					console.log('deleteSelect');
-					
-					if (confirm("선택한 상품을 장바구니에서 삭제하시겠습니까?")) {
-						$("form").attr("method" , "POST").attr("action" , "/cart/deleteSelect").submit();
-		            } 
-					
-			  });
-				*/
+
 	
 			 $(".selectdelete").on("click" , function() {
 					
@@ -241,7 +234,6 @@ div{
 			 
 			 <!-- ------------- 상품수량 수정 --------------- -->
 
-			 //*
 			 
 			 $( "button.plus" ).on("click" , function() {
 		         
@@ -535,21 +527,21 @@ div{
 	        
 		 </form>
 		      
-	      <div>
-		      <table style="width:100%;">
-			      <tr>
-			      	  <td style="text-align: left"><button  type="button" class="selectdelete">선택상품 삭제</button></td>
-				      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="0" min="0" readonly/> 원</td>
-			       </tr>
-		       </table>
-	      </div><hr>
-		      
-		      <input type="hidden" id="calpay" value=""/>
-		      
-		      
-		  <div align="right">
-		  	<button  type="button" class="buybtn">구매하기</button>
-		  </div>
+		      <div>
+			      <table style="width:100%;">
+				      <tr>
+				      	  <td style="text-align: left"><button  type="button" class="selectdelete">선택상품 삭제</button></td>
+					      <td style="text-align: right">총 상품금액 : <input type="text" id="totalprice" value="0" min="0" readonly/> 원</td>
+				       </tr>
+			       </table>
+		      </div><hr>
+			      
+			      <input type="hidden" id="calpay" value=""/>
+			      
+			      
+			  <div align="right">
+			  	<button  type="button" class="buybtn">구매하기</button>
+			  </div>
 	  
  	</div>
  	

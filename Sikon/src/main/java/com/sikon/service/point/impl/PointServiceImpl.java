@@ -16,7 +16,6 @@ import com.sikon.service.point.PointDao;
 import com.sikon.service.point.PointService;
 
 
-//==> 회원관리 서비스 구현
 @Service("pointServiceImpl")
 public class PointServiceImpl implements PointService{
 	
@@ -51,21 +50,21 @@ public class PointServiceImpl implements PointService{
 		pointDao.updateHoldPoint(totalpoint, userId);
 	}
 
-	//포인트 이동
-		public Map<String, Object> getPointList(Search search, String userId) throws Exception {
-			System.out.println("search=" + search);
-			System.out.println("userId=" + userId);
 
-			List<Recipe> list = pointDao.getPointList(search, userId);
-			int totalCount = pointDao.pointTotalCount(search, userId);
+	public Map<String, Object> getPointList(Search search, String userId) throws Exception {
+		System.out.println("search=" + search);
+		System.out.println("userId=" + userId);
 
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("list", list);
-			map.put("totalCount", new Integer(totalCount));
-			System.out.println(list);
+		List<Recipe> list = pointDao.getPointList(search, userId);
+		int totalCount = pointDao.pointTotalCount(search, userId);
 
-			return map;
-		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+		System.out.println(list);
+
+		return map;
+	}
 
 }
 

@@ -43,13 +43,10 @@ public class pointDaoImpl implements PointDao{
 		return sqlSession.selectOne("PointMapper.getPoint", pointNo);
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////////////////////
 		
 	public void updateHoldPoint(int totalpoint, String userId) throws Exception {
 	
 	String totalPoint = totalpoint+"";
-	
-	System.out.println("///////totalPoint: "+totalPoint);
 	
 	Map<String, String> map = new HashMap<String, String>();
 	map.put("totalpoint", totalPoint);
@@ -58,21 +55,22 @@ public class pointDaoImpl implements PointDao{
 	sqlSession.update("PointMapper.updateHoldPoint", map);
 	}
 
-	//포인트 이동
-		public List getPointList(Search search, String userId) throws Exception {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("search", search);
-			map.put("userId",userId);
-			return sqlSession.selectList("PointMapper.getPointList",map);
-		}
-		//포인트 이동
-		@Override
-		public int pointTotalCount(Search search, String userId) throws Exception {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("search", search);
-			map.put("userId",userId);
-			return sqlSession.selectOne("PointMapper.getTotalCount", map);
-		}
+	//포인트 목록
+	public List getPointList(Search search, String userId) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("userId",userId);
+		return sqlSession.selectList("PointMapper.getPointList",map);
+	}
 
-	////////////////////////////////////////////////////////////////////////////////////////////////
+	//포인트 목록 수
+	@Override
+	public int pointTotalCount(Search search, String userId) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("userId",userId);
+		return sqlSession.selectOne("PointMapper.getTotalCount", map);
+	}
+
+
 }

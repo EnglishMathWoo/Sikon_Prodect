@@ -14,7 +14,7 @@ import com.sikon.service.purchase.PurchaseService;
 import com.sikon.service.purchase.PurchaseDao;;
 
 
-//==> 회원관리 서비스 구현
+
 @Service("purchaseServiceImpl")
 public class PurchaseServiceImpl implements PurchaseService{
 	

@@ -21,7 +21,7 @@ import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
 
-//==> 회원관리 RestController
+
 @RestController
 @RequestMapping("/purchase/*")
 public class PurchaseRestController {
@@ -34,12 +34,12 @@ public class PurchaseRestController {
 	
 	private IamportClient api;
 	
-	
+	//아임포트 키
 	public PurchaseRestController(){
 		this.api = new IamportClient("4668929381650236","e848ead2dbda804f8abf3d4ea329e8a3017b9c2c47a690b805418cae52fade5c59608e28e4230dc3");
 	}
 	
-	
+	//아임포트 결제
 	@RequestMapping(value="json/verifyIamport")
 	public IamportResponse<Payment> paymentByImpUid(Model model, Locale locale, HttpSession session, @RequestParam("imp_uid") String imp_uid) throws IamportResponseException, IOException{	
 		
@@ -47,6 +47,7 @@ public class PurchaseRestController {
 			
 	}
 	
+	//아임포트 환불
 	@RequestMapping("json/cancleIamport")
 	public IamportResponse<Payment> cancelPaymentByImpUid(@RequestParam("imp_uid") String imp_uid) throws IamportResponseException, IOException {
 		

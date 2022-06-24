@@ -12,7 +12,6 @@ import com.sikon.service.domain.Product;
 import com.sikon.service.product.ProductDao;
 
 
-//==> 회원관리 DAO CRUD 구현
 @Repository("productDaoImpl")
 public class ProductDaoImpl implements ProductDao{
 	

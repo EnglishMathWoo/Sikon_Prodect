@@ -14,7 +14,7 @@ import com.sikon.service.domain.Purchase;
 import com.sikon.service.purchase.PurchaseDao;
 
 
-//==> 회원관리 DAO CRUD 구현
+
 @Repository("purchaseDaoImpl")
 public class PurchaseDaoImpl implements PurchaseDao{
 	
@@ -33,8 +33,6 @@ public class PurchaseDaoImpl implements PurchaseDao{
 
 	///Method
 	public void addPurchase(Purchase purchase) throws Exception {
-		
-		System.out.println("////////////////////// impNumber: "+purchase.getImpNumber()+" ///////////////////////////");
 		
 		sqlSession.insert("PurchaseMapper.addPurchase", purchase);
 	}
@@ -55,16 +53,11 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		sqlSession.update("PurchaseMapper.updateDivyStatus", purchase);
 	}
 
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	
 	public void updateStock(int purchaseQuantity, int prodNo) throws Exception {
 		
 		String quantity = purchaseQuantity+"";
 		String prodNumber = prodNo+"";
 		
-		System.out.println("buyNumber : "+quantity);
-		System.out.println("prodNumber : "+prodNumber);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("purchaseQuantity", quantity);
 		map.put("prodNo",  prodNumber );
@@ -86,8 +79,7 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		sqlSession.update("PurchaseMapper.cancelOrderCart", map);
 	}
 	
-	///////////////////////////////////////////////////////////////////////////////////////////////
-	
+
 	public List<Purchase> getPurchaseList(Search search, String buyerId) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchCondition", search.getSearchCondition() );
@@ -100,7 +92,7 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		return sqlSession.selectList("PurchaseMapper.getPurchaseList", map);
 	}
 
-	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
+
 	public int getTotalCount(Search search, String buyerId) throws Exception {		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchCondition", search.getSearchCondition() );
@@ -112,14 +104,13 @@ public class PurchaseDaoImpl implements PurchaseDao{
 		return sqlSession.selectOne("PurchaseMapper.getTotalCount", map);
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////////////
 	
 	public List<Purchase> getSalesList(Search search) throws Exception {
 		
 		return sqlSession.selectList("PurchaseMapper.getSalesList", search);
 	}
 
-	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
+
 	public int getTotalCount2(Search search) throws Exception {		
 		
 		return sqlSession.selectOne("PurchaseMapper.getTotalCount2", search);

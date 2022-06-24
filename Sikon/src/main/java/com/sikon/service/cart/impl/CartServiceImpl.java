@@ -12,7 +12,6 @@ import com.sikon.service.cart.CartDao;
 import com.sikon.service.cart.CartService;
 
 
-//==> 회원관리 서비스 구현
 @Service("cartServiceImpl")
 public class CartServiceImpl implements CartService{
 	

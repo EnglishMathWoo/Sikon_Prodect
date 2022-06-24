@@ -37,12 +37,8 @@ public class CartRestController {
 		System.out.println(this.getClass());
 	}
 	
-	@Value("#{commonProperties['pageUnit']}")
-	int pageUnit;
-	@Value("#{commonProperties['pageSize']}")
-	int pageSize;
 	
-	
+	//장바구니에 상품추가하기
 	@RequestMapping("json/addCart")
 	public Map addCart(@RequestParam("quantity") int quantity, @RequestParam("prodNo") int prodNo, HttpSession session) throws Exception {
 
@@ -51,13 +47,11 @@ public class CartRestController {
 		User user = (User) session.getAttribute("user");
 		Product product = productService.getProduct(prodNo);
 		
-		
 		Cart cart = new Cart();
 		cart.setUserId(user.getUserId());
 		cart.setCartProd(product);
 		cart.setQuantity(quantity);
 		
-		System.out.println(cart);
 	
 		cartService.addCart(cart);
 		
@@ -67,6 +61,7 @@ public class CartRestController {
 		return map;
 	}
 	
+	//장바구니 상품수량 수정
 	@RequestMapping( value="json/updateCart")
 	public int updateCart( @RequestParam("cartNo") int cartNo, @RequestParam("quantity") int quantity) throws Exception{
 		
