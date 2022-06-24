@@ -691,6 +691,7 @@ vertical-align: middle;
           <p class="detailhead" ><b>${recipe.recipeName }</b></p>
           <ul class="meta">
             <li>${recipe.recipeTheme }</li>
+            <li>${recipe.recipeDifficulty}</li>
             <li>${recipe.cookingTime }분</li>
             <li> ${recipe.writer.userNickname}</li>
             <li style="float:right">조회수: ${recipe.recipeViews }</li>

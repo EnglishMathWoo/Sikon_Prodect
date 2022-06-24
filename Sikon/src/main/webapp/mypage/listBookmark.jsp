@@ -623,33 +623,17 @@ function fncGetList(currentPage) {
 								</p>
 								
 								<ul class="meta">
-									<li><c:choose>
-											<c:when test="${list.recipe.recipeTheme=='KO'} ">
-								            한식
-								            </c:when>
-											<c:when test="${list.recipe.recipeTheme=='CH'}">
-								            중식
-								            </c:when>
-											<c:when test="${list.recipe.recipeTheme=='FR'}">
-								            양식
-								            </c:when>
-											<c:when test="${list.recipe.recipeTheme=='JP'}">
-								            일식
-								            </c:when>
-											<c:otherwise>
-								            간식
-								            </c:otherwise>
-										</c:choose></li>
+									<li>${list.recipe.recipeTheme}</li>
 									<li><c:choose>
 											<c:when test="${list.recipe.recipeDifficulty =='100'}"> 
-									           초급
-									          </c:when>
+									        초급
+									        </c:when>
 											<c:when test="${list.recipe.recipeDifficulty =='200'}"> 
-									           중급
-									           </c:when>
+									        중급
+									        </c:when>
 											<c:otherwise> 
-									           고급
-									           </c:otherwise>
+									        고급
+									        </c:otherwise>
 										</c:choose></li>
 									<li>${list.recipe.cookingTime}분</li>
 									<li>${list.recipe.writer.userNickname }</li>

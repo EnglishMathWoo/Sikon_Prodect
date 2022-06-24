@@ -178,12 +178,12 @@ p {
         font-size: 13px;
 }
 
-.container {
+.yeda {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-padding-top: 200px;	}
+	padding-top: 200px;	}
 
 .hoc{
 padding-top:0px;
@@ -363,7 +363,7 @@ function fncGetList(currentPage) {
    	<!-- ToolBar End /////////////////////////////////////-->
 	
 	
-<div class="container mt-5 px-2">
+<div class="container yeda">
 <br>
  <form>
 <div class="center btmspace-50">
@@ -374,12 +374,14 @@ function fncGetList(currentPage) {
 		</div>
 		
 		  		    <button type="button" class="submit">삭제</button>
-		  
-		    
- 
+	 
  <input type="hidden" id="currentPage" name="currentPage" value="1"/>
 
 <div class="row">
+
+<p class="text-primary" style="color:gray">
+		    		&nbsp;&nbsp;전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+
 	<c:set var="i" value="0" />
 	<c:forEach var="recipe" items="${list}">
   <div class="col-sm-6 col-md-3">
@@ -393,26 +395,7 @@ function fncGetList(currentPage) {
            <p class="namehead">${recipe.recipeDetail }</p>
           <p class="detailhead" ><b>${recipe.recipeName }</b></p>
           <ul class="meta">
-            <li >
-            <c:choose>
-            <c:when test="${recipe.recipeTheme=='KO'} ">
-            한식
-            </c:when>
-            <c:when test="${recipe.recipeTheme=='CH'}">
-            중식
-            </c:when>
-            <c:when test="${recipe.recipeTheme=='FR'}">
-            양식
-            </c:when>
-            <c:when test="${recipe.recipeTheme=='JP'}">
-            일식
-            </c:when>
-            <c:otherwise>
-            간식
-            </c:otherwise>
-            </c:choose>
-            </li>
-            <li>
+            <li>${recipe.recipeTheme}</li>
             <c:choose>
            	<c:when test="${recipe.recipeDifficulty =='100'}"> 
            초급
@@ -450,6 +433,7 @@ function fncGetList(currentPage) {
      
 	  </form>
 	  </div>
+	  <br>
 	  <jsp:include page="../common/pageNavigator_new.jsp"/>->
 </body>
 
