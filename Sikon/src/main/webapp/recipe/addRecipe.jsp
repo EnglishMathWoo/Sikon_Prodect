@@ -706,11 +706,11 @@ footer a, footer h6 {
 				<div class="col-sm-4">
 					<select name="recipeTheme" class="form-control" id="recipeTheme" required>
 						<option value="">카테고리</option>
-						<option value="KO">한식</option>
-						<option value="CH">중식</option>
-						<option value="FR">양식</option>
-						<option value="JP">일식</option>
-						<option value="DES">간식</option>
+						<option value="한식">한식</option>
+						<option value="중식">중식</option>
+						<option value="양식">양식</option>
+						<option value="일식">일식</option>
+						<option value="간식">간식</option>
 					</select>
 				</div>
 			</div>

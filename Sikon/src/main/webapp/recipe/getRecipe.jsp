@@ -483,7 +483,10 @@ body {
 
 
 			<h5>
-				난이도
+			   테마 : ${recipe.recipeTheme}
+				
+			
+				/ 난이도 : 
 				<c:choose>
 					<c:when test="${recipe.recipeDifficulty.equals('100') }">
 					초급
@@ -497,7 +500,7 @@ body {
 				</c:choose>
 
 
-				<span>&nbsp;소요시간 ${recipe.cookingTime }분&ensp;</span>
+				<span>/소요시간 ${recipe.cookingTime }분&ensp;</span>
 				<i class="bi bi-alarm" onclick="window.open('/recipe/timer.jsp', '_blank', 'width=500, height=400')"></i>
 				<div style="float: right">조회수: ${recipe.recipeViews}</div>
 			</h5>
@@ -671,7 +674,7 @@ $(document).on('click','.uptrev',function() {
 			
 			if (window.confirm('레시피를 삭제하시겠습니까?'))
         	{
-				self.location = "/recipe/deleteRecipe?recipeList="+array;
+				self.location = "/recipe/deleteRecipe?menu=search&recipeList="+array;
         	}
 			
 		});

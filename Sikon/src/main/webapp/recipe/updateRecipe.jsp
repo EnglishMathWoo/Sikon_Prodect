@@ -679,11 +679,11 @@ footer a, footer h6 {
 				<div class="col-sm-4">
 					<select name="recipeTheme" class="form-control" id="recipeTheme" required>
 						<option value="0" ${!empty recipe.recipeTheme && recipe.recipeTheme=="" ? "selected" : ""}>카테고리</option>
-						<option value="KO"  ${!empty recipe.recipeTheme && recipe.recipeTheme=="KO" ? "selected" : ""}>한식</option>
-						<option value="CH"  ${!empty recipe.recipeTheme && recipe.recipeTheme=="CH" ? "selected" : ""}>중식</option>
-						<option value="FR"  ${!empty recipe.recipeTheme && recipe.recipeTheme=="FR" ? "selected" : ""}>양식</option>
-						<option value="JP"  ${!empty recipe.recipeTheme && recipe.recipeTheme=="JP" ? "selected" : ""}>일식</option>
-						<option value="DES" >간식</option>
+						<option value="한식"  ${!empty recipe.recipeTheme && recipe.recipeTheme=="KO" ? "selected" : ""}>한식</option>
+						<option value="중식"  ${!empty recipe.recipeTheme && recipe.recipeTheme=="CH" ? "selected" : ""}>중식</option>
+						<option value="양식"  ${!empty recipe.recipeTheme && recipe.recipeTheme=="FR" ? "selected" : ""}>양식</option>
+						<option value="일식"  ${!empty recipe.recipeTheme && recipe.recipeTheme=="JP" ? "selected" : ""}>일식</option>
+						<option value="간식" >간식</option>
 					</select>
 				</div>
 			</div>

@@ -350,27 +350,27 @@ vertical-align: middle;
 			var themeCondition = $("#themeCondition").val();
 			 console.log(themeCondition);
 			 ///* 
-			 if(themeCondition == 'des'){
+			 if(themeCondition == '간식'){
 				 
 				 $(".theme").removeClass('act');
 				 $(".themedes").addClass('act');
 				 
-			 }else if(themeCondition == 'ko'){
+			 }else if(themeCondition == '한식'){
 				 
 				 $(".theme").removeClass('act');
 				 $(".themeko").addClass('act');
 				 
-			 }else if(themeCondition == 'ch'){
+			 }else if(themeCondition == '중식'){
 				 
 				 $(".theme").removeClass('act');
 				 $(".themech").addClass('act');
 				 
-			 }else if(themeCondition == 'fr'){
+			 }else if(themeCondition == '양식'){
 				 
 				 $(".theme").removeClass('act');
 				 $(".themefr").addClass('act');
 				 
-			 }else if(themeCondition == 'jp'){
+			 }else if(themeCondition == '일식'){
 				 
 				 $(".theme").removeClass('act');
 				 $(".themejp").addClass('act');
@@ -466,8 +466,7 @@ vertical-align: middle;
 					                success : function(JSONData , status) {
 					                	 
 					                	$("#currentPage").val(cpage)
-					                	console.log(JSONData.list[0].recipeName);
-					                	console.log(JSONData.list[0].recipeImg);
+					        					 
 						                	 
 					                	for(var i=0; i<JSONData.list.length; i++){
 					                	      
@@ -601,11 +600,11 @@ vertical-align: middle;
     
     	<nav class="ref-sort" >
 	      <button class="theme themeAll" id="themeAll" value="all">모두보기</button>
-	      <button class="theme themeko" value="ko">한식</button>
-	      <button class="theme themech" value="ch">중식</button>
-	      <button class="theme themefr" value="fr">양식</button>
-	      <button class="theme themejp" value="jp">일식</button>
-	      <button class="theme themedes" value="des">간식</button>
+	      <button class="theme themeko" value="한식">한식</button>
+	      <button class="theme themech" value="중식">중식</button>
+	      <button class="theme themefr" value="양식">양식</button>
+	      <button class="theme themejp" value="일식">일식</button>
+	      <button class="theme themedes" value="간식">간식</button>
 	    </nav>
     
 
@@ -691,38 +690,7 @@ vertical-align: middle;
            <p class="namehead">${recipe.recipeDetail }</p>
           <p class="detailhead" ><b>${recipe.recipeName }</b></p>
           <ul class="meta">
-            <li >
-            <c:choose>
-            <c:when test="${recipe.recipeTheme=='KO'}">
-            한식
-            </c:when>
-            <c:when test="${recipe.recipeTheme=='CH'}">
-            중식
-            </c:when>
-            <c:when test="${recipe.recipeTheme=='FR'}">
-            양식
-            </c:when>
-            <c:when test="${recipe.recipeTheme=='JP'}">
-            일식
-            </c:when>
-            <c:otherwise>
-            간식
-            </c:otherwise>
-            </c:choose>
-            </li>
-            <li>
-            <c:choose>
-           	<c:when test="${recipe.recipeDifficulty =='100'}"> 
-           초급
-           </c:when>
-           <c:when test="${recipe.recipeDifficulty =='200'}"> 
-           중급
-           </c:when>
-           <c:otherwise> 
-           고급
-           </c:otherwise>
-           </c:choose>
-           </li>
+            <li>${recipe.recipeTheme }</li>
             <li>${recipe.cookingTime }분</li>
             <li> ${recipe.writer.userNickname}</li>
             <li style="float:right">조회수: ${recipe.recipeViews }</li>

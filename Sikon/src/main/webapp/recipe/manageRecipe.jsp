@@ -236,7 +236,7 @@ function fncGetList(currentPage) {
 			
 				<td align="left" class="updateRecipe" value="${recipe.recipeNo }"> ${recipe.recipeNo}</td>
 	
-				<td align="left" class="getRecipe" value="${recipe.recipeNo }">${recipe.recipeName}</td>
+				<td align="left" class="getRecipe" value="${recipe.recipeNo }" style="cursor:pointer;">${recipe.recipeName}</td>
 				<td align="left"><fmt:formatDate pattern="yyyy-MM-dd"
 											value="${recipe.recipeRegDate}" /> </td>
 				<td align="left" class="getUser" value="${user.userId }" style="color: #708090"> ${recipe.writer.userNickname} </td>

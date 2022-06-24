@@ -419,7 +419,7 @@ article img {
 	
 	//ÄíÅ·¸àÅä ·©Å·
 	$(document).on('click', '#mentor', function(){
-		 self.location = "/ranking/listLove";
+		 self.location = "/ranking/listMentor";
 	});
 	
 	//½ºÅä¾î ÀüÃ¼ ·©Å·

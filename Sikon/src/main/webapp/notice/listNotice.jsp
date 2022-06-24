@@ -213,32 +213,40 @@
        
 		<tbody>
 		
-		<c:forEach var="notice" items="${list}">
-		<c:set var="i" value="${ i+1 }" />
-		<tr class="ct_list_pop">
-			<c:if test = "${menu == 'manage'}">
-				<td align="left"><input type="checkbox" name="noticeCheck" id="${notice.noticeNo}"/></td>
-			
-				<td align="left"> ${notice.noticeNo}</td>
-	
-				<td align="left" name="manageNoticeTitle" id="manageNoticeTitle" style="cursor: pointer;">
-				${notice.noticeTitle}
-				<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
-				</td>
+		<c:if test="${!empty list}">
+			<c:forEach var="notice" items="${list}">
+			<c:set var="i" value="${ i+1 }" />
+			<tr class="ct_list_pop">
+				<c:if test = "${menu == 'manage'}">
+					<td align="left"><input type="checkbox" name="noticeCheck" id="${notice.noticeNo}"/></td>
 				
-				<td align="left"> ${notice.noticeDate} </td>
-			</c:if>
-			<c:if test = "${menu == 'search'}">
-				<td align="left"> ${notice.noticeNo}</td>
-				<td align="left" name="searchNoticeTitle" id="searchNoticeTitle" style="cursor: pointer;">${notice.noticeTitle}
-				<input type="hidden" name="noticeNo" value="${notice.noticeNo}"></td>
-				<td align="left"> ${notice.noticeDate} </td>
-			</c:if>
-		</tr>
-		</c:forEach>
-        
+					<td align="left"> ${notice.noticeNo}</td>
+		
+					<td align="left" name="manageNoticeTitle" id="manageNoticeTitle" style="cursor: pointer;">
+					${notice.noticeTitle}
+					<input type="hidden" name="noticeNo" value="${notice.noticeNo }">
+					</td>
+					
+					<td align="left"> ${notice.noticeDate} </td>
+				</c:if>
+				<c:if test = "${menu == 'search'}">
+					<td align="left"> ${notice.noticeNo}</td>
+					<td align="left" name="searchNoticeTitle" id="searchNoticeTitle" style="cursor: pointer;">${notice.noticeTitle}
+					<input type="hidden" name="noticeNo" value="${notice.noticeNo}"></td>
+					<td align="left"> ${notice.noticeDate} </td>
+				</c:if>
+			</tr>
+			</c:forEach>
+		</c:if>
+			
         </tbody>
       </table>
+	  
+	  <c:if test="${empty list}">
+			<br>
+		  	<h2 id="noNotice" style="text-align:center; font-weight:bold;">등록된 공지사항이 없습니다.</h2>
+		    <br>
+		</c:if>
 	  
 	  </form>
 	</div>

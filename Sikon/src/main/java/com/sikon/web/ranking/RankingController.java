@@ -67,10 +67,10 @@ public class RankingController {
 		return "forward:/ranking/listProductRanking.jsp";
 	}
 	
-	@RequestMapping(value = "listLove")
-	public String listLove( @ModelAttribute("search") Search search, Model model ) throws Exception {
+	@RequestMapping(value = "listMentor")
+	public String listMentor( @ModelAttribute("search") Search search, Model model ) throws Exception {
 
-		System.out.println("/ranking/listLove");
+		System.out.println("/ranking/listMentor");
 			
 		search.setPageSize(pageSize);
 			
@@ -79,7 +79,7 @@ public class RankingController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("search", search);
 
-		return "forward:/ranking/listLoveRanking.jsp";
+		return "forward:/ranking/listMentorRanking.jsp";
 	}
 
 }

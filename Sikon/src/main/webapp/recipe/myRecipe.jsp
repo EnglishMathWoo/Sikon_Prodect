@@ -446,6 +446,8 @@ font-size: 13px;
 	</c:if>
      
 	  </div>
+	  
+	  <jsp:include page="../common/pageNavigator_new.jsp"/>->
 </body>
 
 </html>

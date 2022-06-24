@@ -122,20 +122,20 @@
 													</if>
 											</if>
 											<if test="themeCondition != null">
-													<if test='themeCondition == "ko"'>
-										 				and r.recipe_theme LIKE UPPER('KO')
+													<if test='themeCondition == "한식"'>
+										 				and r.recipe_theme LIKE '한식'
 													</if>
-													<if test='themeCondition == "ch"'>
-										 				AND r.recipe_theme LIKE UPPER('CH')
+													<if test='themeCondition == "중식"'>
+										 				AND r.recipe_theme LIKE '중식'
 													</if>
-													<if test='themeCondition == "fr"'>
-										 				AND r.recipe_theme LIKE UPPER('FR')
+													<if test='themeCondition == "양식"'>
+										 				AND r.recipe_theme LIKE '양식'
 													</if>
-													<if test='themeCondition == "jp"'>
-										 				AND r.recipe_theme LIKE UPPER('JP')
+													<if test='themeCondition == "일식"'>
+										 				AND r.recipe_theme LIKE '일식'
 													</if>
-													<if test='themeCondition == "des"'>
-										 				AND r.recipe_theme LIKE UPPER('DES')
+													<if test='themeCondition == "간식"'>
+										 				AND r.recipe_theme LIKE '간식'
 													</if>
 											</if>				
 											<if test="orderCondition == null">
@@ -187,20 +187,20 @@
 													</if>
 											</if>
 											<if test="themeCondition != null">
-													<if test='themeCondition == "ko"'>
-										 				and r.recipe_theme LIKE UPPER('KO')
+													<if test='themeCondition == "한식"'>
+										 				and r.recipe_theme LIKE '한식'
 													</if>
-													<if test='themeCondition == "ch"'>
-										 				AND r.recipe_theme LIKE UPPER('CH')
+													<if test='themeCondition == "중식"'>
+										 				AND r.recipe_theme LIKE '중식'
 													</if>
-													<if test='themeCondition == "fr"'>
-										 				AND r.recipe_theme LIKE UPPER('FR')
+													<if test='themeCondition == "양식"'>
+										 				AND r.recipe_theme LIKE '양식'
 													</if>
-													<if test='themeCondition == "jp"'>
-										 				AND r.recipe_theme LIKE UPPER('JP')
+													<if test='themeCondition == "일식"'>
+										 				AND r.recipe_theme LIKE '일식'
 													</if>
-													<if test='themeCondition == "des"'>
-										 				AND r.recipe_theme LIKE UPPER('DES')
+													<if test='themeCondition == "간식"'>
+										 				AND r.recipe_theme LIKE '간식'
 													</if>
 											</if>
 													
