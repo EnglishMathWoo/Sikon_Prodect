@@ -106,6 +106,16 @@ text-align: center
 .fa-minus-circle{
 color:#a94442
 }
+
+div.emptyPoint{
+	border: 1px solid #937062;
+	padding : 90px;
+	height: 200px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
+}
+
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -159,7 +169,13 @@ function fncGetList(currentPage) {
 				</thead>
 
 				<tbody>
-
+					<c:if test="${empty list}">
+				<br><br>
+				<div class="emptyPoint">
+					포인트 내역이 없습니다.
+				</div>
+				<br>
+			</c:if>
 					<c:if test="${!empty list}">
 						<c:set var="i" value="0" />
 						<c:forEach var="point" items="${list}">
