@@ -120,6 +120,24 @@ text-align: center
 	color: #808080;
 }
 
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #937062 !important;
+    color: #fff;
+    
+    font-size: 1em;
+}
+.swal2-styled.swal2-cancel {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    color: #937062;
+    background-color: #f7f7f7 !important;
+    font-size: 1em;
+}
+
 body > div.container.mt-5.px-2 > div.container.text-center{
 padding-top: 0;
 }
