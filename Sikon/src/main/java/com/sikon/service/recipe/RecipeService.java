@@ -15,7 +15,7 @@ public interface RecipeService {
 	// 레시피 상세 조회(레시피+재료)
 	public List getRecipe(int recipeNo) throws Exception;
 	
-	// 레시피만 조회(마이페이지-리뷰-레시피명)
+	// 레시피만 조회
 	public Recipe getRecipeName(int recipeNo) throws Exception;
 
 	// 레시피 리스트 조회
@@ -33,7 +33,5 @@ public interface RecipeService {
 	// 레시피 삭제
 	public void deleteRecipe(int recipeNo) throws Exception;
 
-	public Map<String, Object> bestRecipeList() throws Exception;
-	
 	
 }

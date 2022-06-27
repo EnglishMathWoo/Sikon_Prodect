@@ -33,8 +33,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	/// Method
 	public void addRecipe(Recipe recipe, Map ingredient) throws Exception {
-		System.out.println("recipe=" + recipe);
-		System.out.println("ingredient=" + ingredient);
+
 		recipeDao.addRecipe(recipe, ingredient);
 	}
 
@@ -44,7 +43,7 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	public Map<String, Object> getRecipeList(Search search) throws Exception {
-		System.out.println("search=" + search);
+
 		List<Recipe> list = recipeDao.getRecipeList(search);
 		int totalCount = recipeDao.getTotalCount(search);
 
@@ -57,8 +56,6 @@ public class RecipeServiceImpl implements RecipeService {
 	}
 
 	public Map<String, Object> getMyRecipeList(Search search, String writerNickname) throws Exception {
-		System.out.println("search=" + search);
-		System.out.println("writerNickname=" + writerNickname);
 
 		List<Recipe> list = recipeDao.getMyRecipeList(search, writerNickname);
 		int totalCount = recipeDao.getTotalMyCount(search, writerNickname);
@@ -66,39 +63,29 @@ public class RecipeServiceImpl implements RecipeService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("totalCount", new Integer(totalCount));
-		System.out.println(list);
 
 		return map;
 	}
 
 	public void updateRecipe(Recipe recipe, Map ingredient) throws Exception {
-		System.out.println("¶ì¿ë");
-		System.out.println("recipe=" + recipe);
-		recipeDao.updateRecipe(recipe,ingredient);
-	}
-	
-	public void updateRecipeOnly(Recipe recipe) throws Exception {
-		System.out.println("recipe=" + recipe);
-		recipeDao.updateRecipeOnly(recipe);
-	
+		recipeDao.updateRecipe(recipe, ingredient);
 	}
 
-	public void deleteRecipe(int recipeNo) throws Exception{
-		System.out.println("recipe=" + recipeNo);
+	public void updateRecipeOnly(Recipe recipe) throws Exception {
+
+		recipeDao.updateRecipeOnly(recipe);
+
+	}
+
+	public void deleteRecipe(int recipeNo) throws Exception {
+
 		recipeDao.deleteRecipe(recipeNo);
 	}
 
-	public Map<String, Object> bestRecipeList() throws Exception {
-		List<Recipe> list = recipeDao.bestRecipeList();
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list);
-		return map;
-	}
-
 	public Recipe getRecipeName(int recipeNo) throws Exception {
+
 		return recipeDao.getRecipeName(recipeNo);
 
 	}
-
 
 }

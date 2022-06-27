@@ -37,6 +37,5 @@ public interface RecipeDao {
 	// SELECT ROW Count
 	public int getTotalMyCount(Search search, String userId) throws Exception;
 
-	public List<Recipe> bestRecipeList() throws Exception;
 
 }

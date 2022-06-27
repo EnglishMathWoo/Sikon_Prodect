@@ -31,17 +31,13 @@ import com.sikon.service.point.PointService;
 import com.sikon.service.product.ProductService;
 import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.review.ReviewService;
-import com.sikon.service.user.UserService;
 
+//리뷰 Controller
 @Controller
 @RequestMapping("/review/*")
 public class ReviewController {
 
 	/// Field
-	@Autowired
-	@Qualifier("userServiceImpl")
-	private UserService userService;
-
 	@Autowired
 	@Qualifier("pointServiceImpl")
 	private PointService pointService;
@@ -75,58 +71,54 @@ public class ReviewController {
 	@Value("#{commonProperties['filepath']}")
 	String filePath;
 
+	/// Method
 	@RequestMapping(value = "addReview", method = RequestMethod.POST)
 	public String addReview(@RequestParam("fileArray") MultipartFile[] fileArray,
 			@ModelAttribute("review") Review review, @RequestParam("category") String category,
-			@RequestParam("textNo") int textNo,@RequestParam("textNo2") int textNo2, Model model, HttpServletRequest request) throws Exception {
+			@RequestParam("textNo") int textNo, @RequestParam("textNo2") int textNo2, Model model,
+			HttpServletRequest request) throws Exception {
 
 		System.out.println("/review/addReview : POST");
-		System.out.println("으으으ㅡㅁ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("review=" + review);
-//		System.out.println("category=" + category);
-		System.out.println("textNo=" + textNo);
-		System.out.println("textNo2=" + textNo2);
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		
-		// 리뷰 작성시 일반리뷰: 100원, 포토리뷰: 500원 적립금
-				Point point = new Point();
-				point.setUserId(user.getUserId());
-				point.setPointType("EARN");
-				point.setPointCategory("RE");
-	
-				int pointt=0;
-				if (category.equals("COOK") || category.equals("PRD")) {
-					if (fileArray.length==0 ) {
-						point.setPointScore(100);
-						pointt=100;
-					} else {
-						point.setPointScore(500);
-						pointt=500;
-					}
-				}
-				System.out.println("얼마?"+point.getPointScore());
-		String FILE_SERVER_PATH = filePath;
+
+		// 리뷰 작성시 일반리뷰: 100, 포토리뷰: 500 포인트 적립
+		Point point = new Point();
+
+		int totalpoint = 0;
+
+		point.setUserId(user.getUserId());
+		point.setPointType("EARN");
+		point.setPointCategory("REV");
+
+		int pointt = 0;
+		if (category.equals("COOK") || category.equals("PRD")) {
+			if (fileArray.length == 0) {
+				point.setPointScore(100);
+				totalpoint = user.getHoldpoint() + 100;
+			} else {
+				point.setPointScore(500);
+				totalpoint = user.getHoldpoint() + 500;
+			}
+		}
+
+		// 다중파일 업로드
+		// String FILE_SERVER_PATH = filePath;
+		String FILE_SERVER_PATH = "C:\\sikon\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+
 		String newFileName = "";
 
 		for (int i = 0; i < fileArray.length; i++) {
 
 			if (!fileArray[i].getOriginalFilename().isEmpty()) {
 				fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
-				model.addAttribute("msg", "File uploaded successfully.");
-
-			} else {
-				model.addAttribute("msg", "Please select a valid mediaFile..");
 			}
-
 			newFileName += fileArray[i].getOriginalFilename();
-
 		}
-
 		review.setReviewImg(newFileName);
-		
 
+		// 카테고리 구분 textNo = prodNo / cookNo / recipeNo, textNo2 = tranNo / applyNo
 		if (category.equals("COOK")) {
 			Cook cook = cookService.getCook(textNo);
 			review.setCook(cook);
@@ -141,30 +133,24 @@ public class ReviewController {
 		review.setWriterNickname(user.getUserNickname());
 		review.setReviewCategory(category);
 
-		System.out.println("리뷰:" + review);
+		// 리뷰등록
 		reviewService.addReview(review);
 
-		System.out.println("가나");
+		// 주문 상품(purchase), 완료 쿠킹클래스(apply)에 대한 리뷰 상태 업데이트
 		reviewService.updateStatus(textNo2, category);
+
+		// 리뷰 작성 포인트 적립
 		pointService.addPoint(point);
-		reviewService.givePoint(pointt, user.getUserId());
-		System.out.println("가나");
-		
-		session.setAttribute("user", user);
-		
-		ModelAndView modelAndView = new ModelAndView();
-		if (category.equals("REC")) {
-			modelAndView.addObject(review);
-			modelAndView.setViewName("forward:/recipe/getRecipe?recipeNo=" + textNo);
-		}
+		pointService.updateHoldPoint(totalpoint, user.getUserId());
+
+		model.addAttribute("user", user);
+
 		return "forward:/review/closepage.jsp";
 	}
 
 	@RequestMapping(value = "updateReview", method = RequestMethod.GET)
-	public String updateReview(@RequestParam("reviewNo") int reviewNo, Model model, HttpServletRequest request)
-			throws Exception {
+	public String updateReview(@RequestParam("reviewNo") int reviewNo, Model model) throws Exception {
 		System.out.println("/review/updateReview : GET");
-//		System.out.println("reviewNo=" + reviewNo);
 
 		Review review = reviewService.getReview(reviewNo);
 
@@ -177,10 +163,6 @@ public class ReviewController {
 	public String updateReview(@ModelAttribute("review") Review review, Model model, HttpServletRequest request)
 			throws Exception {
 		System.out.println("/review/updateReview : POST");
-//		System.out.println("review=" + review);
-
-		model.addAttribute("msg", "리뷰 수정이 완료되었습니다.");
-		model.addAttribute("url", "/review/updateReview.jsp");
 
 		reviewService.updateReview(review);
 
@@ -193,8 +175,6 @@ public class ReviewController {
 			throws Exception {
 
 		System.out.println("/review/listMyReview :  POST/get");
-
-//		System.out.println("search:" + search);
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -224,10 +204,6 @@ public class ReviewController {
 	public String deleteReview(@RequestParam("checkList") int[] reviewList) throws Exception {
 
 		System.out.println("/review/deleteReview : POST");
-
-//		for (int i = 0; i < reviewList.length; i++) {
-//			System.out.println(reviewList[i]);
-//		}
 
 		for (int i = 0; i < reviewList.length; i++) {
 			reviewService.deleteReview(reviewList[i]);

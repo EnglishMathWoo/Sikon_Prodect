@@ -63,8 +63,9 @@ public class PointController {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		
-
+		
 		Map<String , Object> resultMap = pointService.getPointList(search, user.getUserId());
+		User user2=userService.getUser(user.getUserId());
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)resultMap.get("totalCount")).intValue(), pageUnit, 10);
 		
@@ -72,6 +73,7 @@ public class PointController {
 		model.addAttribute("list", resultMap.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
+		model.addAttribute("point",user2.getHoldpoint());
 				
 		return "forward:/mypage/listMyPoint.jsp";
 	}

@@ -649,8 +649,7 @@ footer a, footer h6 {
 		<h5 class="container-headline" style="font-family: 'Gowun Batang', serif;">레시피 등록</h5>
 
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal" enctype="multipart/form-data">
-
+		<form id="frm" name="frm" class="form-horizontal" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="recipeName"
 					class="col-sm-offset-1 col-sm-3 control-label">레시피명</label>
@@ -753,7 +752,7 @@ footer a, footer h6 {
 
 
 			<div class="summer">
-				<textarea id="summernote" class="form-control" name="recipeOrder"></textarea>
+				<textarea id="summernote" class="form-control" id="recipeOrder" name="recipeOrder"></textarea>
 			</div>
 
 
@@ -777,6 +776,7 @@ footer a, footer h6 {
 
 </body>
 <script type="text/javascript">
+
 	$(function() {
 		$("button:contains('취소')").on("click", function() {
 			self.location = "/recipe/listRecipe"
@@ -824,7 +824,6 @@ footer a, footer h6 {
 		var recipeDifficulty = $("input[name='recipeDifficulty']").val();
 		var recipeTheme = $("[name='recipeTheme']").val();
 		var recipeImg = $("input[name='multiImg']").val();
-		var recipeOrder = $("input[name='recipeOrder']").val();
 		var ingredientName = $("input[name='ingredientName']").val();
 		var ingredientAmount =  $("input[name='ingredientAmount']").val();
 		
@@ -852,14 +851,22 @@ footer a, footer h6 {
 			alert("대표이미지는 반드시 입력하셔야 합니다.");
 			return;
 		}
-	if (ingredientName == null || ingredientName.length < 1) {
-		alert("재료명은 최소 1가지 입력하셔야 합니다.");
-		return;
-	}
-	if (ingredientAmount == null || ingredientAmount.length < 1) {
-		alert("재료양은 최소 1가지 입력하셔야 합니다.");
-		return;
-	}
+		if (ingredientName == null || ingredientName.length < 1) {
+			alert("재료명은 최소 1가지 입력하셔야 합니다.");
+			return;
+		}
+		if (ingredientAmount == null || ingredientAmount.length < 1) {
+			alert("재료양은 최소 1가지 입력하셔야 합니다.");
+			return;
+		}
+		
+		if ($('#summernote').summernote('isEmpty'))
+		{
+		  alert("조리순서는 반드시 입력하셔야 합니다.");
+		  return;
+		}
+
+		
 		$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("action", "/recipe/addRecipe").submit();
 	});
 </script>
@@ -892,7 +899,10 @@ footer a, footer h6 {
 												}
 											}
 										});
+						
 					});
+	
+
 	function uploadSummernoteImageFile(file, editor) {
 		data = new FormData();
 		data.append("file", file);
@@ -909,6 +919,7 @@ footer a, footer h6 {
 			}
 		});
 	}
+	
 </script>
 
 </html>
