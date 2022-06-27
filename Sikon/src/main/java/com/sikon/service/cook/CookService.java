@@ -1,12 +1,9 @@
 package com.sikon.service.cook;
 
-import java.util.List;
 import java.util.Map;
 
 import com.sikon.common.Search;
 import com.sikon.service.domain.Cook;
-import com.sikon.service.domain.Wish;
-import com.sikon.service.domain.User;
 
 
 public interface CookService {

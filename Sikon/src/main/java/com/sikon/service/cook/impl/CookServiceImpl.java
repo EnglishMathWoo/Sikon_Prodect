@@ -9,16 +9,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.Apply;
-import com.sikon.service.domain.Cook;
-import com.sikon.service.domain.Recipe;
-import com.sikon.service.domain.Wish;
 import com.sikon.service.cook.CookDao;
 import com.sikon.service.cook.CookService;
-import com.sikon.service.domain.User;
-import com.sikon.service.domain.Recipe;
-import com.sikon.service.recipe.RecipeDao;
-import com.sikon.service.recipe.RecipeService;;
+import com.sikon.service.domain.Cook;
+import com.sikon.service.recipe.RecipeDao;;
 
 
 
@@ -68,7 +62,7 @@ public class CookServiceImpl implements CookService{
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );
-		System.out.println(list);
+		
 		map.put("totalCount", new Integer(totalCount));
 		
 		return map;
@@ -84,8 +78,7 @@ public class CookServiceImpl implements CookService{
 	
 
 	public Map<String, Object> listMyCook(Search search, String userNickname) throws Exception {
-		System.out.println("search=" + search);
-		System.out.println("userNickname=" + userNickname);
+	
 
 		List<Cook> list = cookDao.listMyCook(search, userNickname);
 		int totalCount = cookDao.getTotalMyCount(search, userNickname);
@@ -93,8 +86,7 @@ public class CookServiceImpl implements CookService{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("totalCount", new Integer(totalCount));
-		System.out.println(list);
-		System.out.println("Á»¿Í¶ó");
+
 
 		return map;
 	}

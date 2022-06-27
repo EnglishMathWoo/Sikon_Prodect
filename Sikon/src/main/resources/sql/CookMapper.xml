@@ -9,33 +9,33 @@
  	
 	<resultMap id="cookSelectMap" type="cook">
 	
-		<result property="cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
-		<result property="cookName"			column="cook_name" 		jdbcType="VARCHAR" />
-		<result property="cookFilename" 	column="cook_filename" 		jdbcType="VARCHAR" />
-		<result property="cookBrief"      column="cook_brief"           jdbcType="VARCHAR"/>
-		<result property="cookDifficuty" 				column="cook_difficuty" 					jdbcType="VARCHAR" />		
-		<result property="cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
-		<result property="cookTheme" 			column="cook_theme" 		jdbcType="VARCHAR" />
+		<result property="cookNo" 			column="cook_no" 				jdbcType="NUMERIC"/>
+		<result property="cookName"			column="cook_name" 				jdbcType="VARCHAR" />
+		<result property="cookFilename" 	column="cook_filename" 			jdbcType="VARCHAR" />
+		<result property="cookBrief"      	column="cook_brief"          	jdbcType="VARCHAR"/>
+		<result property="cookDifficuty" 	column="cook_difficuty" 		jdbcType="VARCHAR" />		
+		<result property="cookPrice" 		column="cook_price" 			jdbcType="NUMERIC" />	
+		<result property="cookTheme" 		column="cook_theme" 			jdbcType="VARCHAR" />
 		<result property="aplstarTime"      column="apl_startime"           jdbcType="VARCHAR"/>
-		<result property="aplendTime"      column="apl_endtime"           jdbcType="VARCHAR"/>	
-		<result property="cookRecruit" 				column="cook_recruit" 					jdbcType="NUMERIC" />
-		<result property="startTime"      column="start_time"           jdbcType="VARCHAR"/>		
-		<result property="endTime"      column="end_time"           jdbcType="VARCHAR"/>		
-		<result property="cookLocation"      column="cook_location"           jdbcType="VARCHAR"/>
+		<result property="aplendTime"      	column="apl_endtime"            jdbcType="VARCHAR"/>	
+		<result property="cookRecruit" 		column="cook_recruit" 			jdbcType="NUMERIC" />
+		<result property="startTime"      	column="start_time"           	jdbcType="VARCHAR"/>		
+		<result property="endTime"      	column="end_time"          	 	jdbcType="VARCHAR"/>		
+		<result property="cookLocation"     column="cook_location"          jdbcType="VARCHAR"/>
 		<result property="cookRegdate"      column="cook_regdate"           jdbcType="DATE"/>
-		<result property="cookVideo"      column="cook_video"           jdbcType="VARCHAR"/>
-		<result property="cookStock"      column="cook_stock"           jdbcType="NUMERIC"/>
-		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
-		<result property="cookContent" 			column="cook_content" 			jdbcType="VARCHAR" />
-		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
-		<result property="mentor.userId" 	column="mentor_id" 		jdbcType="VARCHAR"/>
+		<result property="cookVideo"      	column="cook_video"           	jdbcType="VARCHAR"/>
+		<result property="cookStock"      	column="cook_stock"           	jdbcType="NUMERIC"/>
+		<result property="hearthit"      	column="heart_hit"           	jdbcType="NUMERIC"/>
+		<result property="cookContent" 		column="cook_content" 			jdbcType="VARCHAR" />
+		<result property="mentor.userId" 	column="mentor_id" 				jdbcType="VARCHAR"/>
+		<result property="mentor.userNickname" 		column="mentor_nickname" 	jdbcType="VARCHAR" />
 		
 	</resultMap>
 
 
 
 		
-	<!-- SQL : INSERT -->
+	
 	<insert 	id="addCook"		parameterType="cook" >
 	 	INSERT
 		INTO cook(cook_no , cook_name , cook_filename , cook_brief, cook_difficuty, cook_price,cook_theme,apl_startime,apl_endtime,cook_recruit,start_time,end_time,cook_location,cook_regdate,cook_video, cook_stock,heart_hit,cook_content, mentor_nickname,mentor_id ) 
@@ -44,7 +44,7 @@
 	 </insert>
 	 
 	 
-	 <!-- SQL : SELECT ONE -->
+	
 	 <select 	id="getCook"	parameterType="cook"	resultMap="cookSelectMap">
 		SELECT
 		*
@@ -53,10 +53,11 @@
 		WHERE cook_no=#{cookNo}
 	 </select>
 	 
-	 <!-- SQL : UPDATE -->
- <update	id="updateCook"	parameterType="cook" >
+	
+ 		<update	id="updateCook"	parameterType="cook" >
 	   	UPDATE cook
 	   	<set>
+	   	
 	   		cook_name 	= #{cookName} ,
 			cook_filename	= #{cookFilename},
 			cook_brief 	= #{cookBrief} ,
@@ -75,74 +76,66 @@
 			cook_content	 = #{cookContent}
 			
 			
-	   	</set>
+	 </set>
 	   	WHERE cook_no=#{cookNo}
 	 </update>
 	 
 
 
 		 
-	<!-- SQL : SELECT LIST -->
+	
 	<select  id="getCookList"  parameterType="search"	resultMap="cookSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT *
-											FROM cook
-												<if test="searchKeyword != null">
-												
-										
-												
-										 				WHERE cook_name like '%' || #{searchKeyword} || '%'
-											
-							
-											</if>	
-											
-									
-											
-											<if test="themeCondition != null">
-													<if test='themeCondition == "ko"'>
-										 				AND cook_theme LIKE UPPER('KO')
-													</if>
-													<if test='themeCondition == "ja"'>
-										 				AND cook_theme LIKE UPPER('JA')
-													</if>
-													<if test='themeCondition == "am"'>
-										 				AND cook_theme LIKE UPPER('AM')
-													</if>
-													<if test='themeCondition == "ch"'>
-										 				AND cook_theme LIKE UPPER('CH')
-													</if>
-													<if test='themeCondition == "de"'>
-										 				AND cook_theme LIKE UPPER('DE')
-													</if>
-													
-													<if test='themeCondition == "no"'>
-										 				AND cook_stock > 0
-													</if>													
-											</if>		
-											
-					order by cook_no DESC	) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	  	FROM		(	SELECT *
+		FROM cook
+		<if test="searchKeyword != null">
+		WHERE cook_name like '%' || #{searchKeyword} || '%'
+		</if>
+
+
+
+	<if test="themeCondition != null">
+		<if test='themeCondition == "ko"'>
+			AND cook_theme LIKE UPPER('KO')
+		</if>
+		<if test='themeCondition == "ja"'>
+			AND cook_theme LIKE UPPER('JA')
+		</if>
+		<if test='themeCondition == "am"'>
+			AND cook_theme LIKE UPPER('AM')
+		</if>
+		<if test='themeCondition == "ch"'>
+			AND cook_theme LIKE UPPER('CH')
+		</if>
+		<if test='themeCondition == "de"'>
+			AND cook_theme LIKE UPPER('DE')
+		</if>
+
+		<if test='themeCondition == "no"'>
+			AND cook_stock > 0
+		</if>
+	</if>
+
+	order by cook_no DESC ) inner_table
+	WHERE ROWNUM &lt;= #{endRowNum} )
+	WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum}
+	 
 	 </select>
 
 
 	
-	<!-- SQL : SELECT ROW Count -->	 
+	
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT cook_no , cook_name ,cook_price
-						FROM cook	
-						<if test="searchKeyword != null">
-
-					
-						 		WHERE cook_name LIKE '%'||#{searchKeyword}||'%'
-					
+		FROM cook
 			
-						
-							
-						</if>  
-											<if test="themeCondition != null">
+		<if test="searchKeyword != null">
+			WHERE cook_name LIKE '%'||#{searchKeyword}||'%'						
+		</if>  
+		
+		<if test="themeCondition != null">
 													<if test='themeCondition == "ko"'>
 										 				AND cook_theme LIKE UPPER('KO')
 													</if>
@@ -158,7 +151,7 @@
 													<if test='themeCondition == "de"'>
 										 				AND cook_theme LIKE UPPER('DE')
 													</if>
-											</if>							
+		</if>							
 					
 									) countTable						
 	 </select>
@@ -170,12 +163,12 @@
 	 </delete>
 	 
 
-	 <!-- SQL : 마이페이지(내가 쓴 쿠킹클래스) LIST -->
+	
 	 <select  id="listMyCook"  parameterType="map"	resultMap="cookSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT * FROM cook
-											WHERE mentor_nickname=#{userNickname}
+	  	FROM		(	SELECT * FROM cook
+		WHERE mentor_nickname=#{userNickname}
 												<if test="search.searchKeyword != null">
 												
 										
@@ -189,19 +182,17 @@
 		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>	 
 	 
+	 
+	 
+	 
 	 <select  id="getTotalMyCount"  parameterType="map"	 resultType="int">
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT cook_no 	FROM cook
 						WHERE mentor_nickname=#{userNickname}
-											<if test="search.searchKeyword != null">
-												
-										
-												
-										 				AND cook_name LIKE '%'||#{search.searchKeyword}||'%'
-											
-							
-											</if>	
-						 ) countTable						
+		<if test="search.searchKeyword != null">
+		AND cook_name LIKE '%'||#{search.searchKeyword}||'%'
+		</if>	
+		 ) countTable						
 	 </select> 
 	 
 

@@ -73,8 +73,7 @@ public class CookRestController {
 		System.out.println(this.getClass());
 	}
 
-	// ==> classpath:config/common.properties , classpath:config/commonservice.xml
-	// ÂüÁ¶ ÇÒ°Í
+
 	// ==> ¾Æ·¡ÀÇ µÎ°³¸¦ ÁÖ¼®À» Ç®¾î ÀÇ¹Ì¸¦ È®ÀÎ ÇÒ°Í
 	@Value("#{commonProperties['pageUnit']}")
 	// @Value("#{commonProperties['pageUnit'] ?: 3}")
@@ -86,48 +85,7 @@ public class CookRestController {
 
 	
 
-	@RequestMapping( value="json/addcook", method=RequestMethod.POST )
 
-	public Map addCook(@RequestBody Cook cook 
-			
-	,Model model
-	,@RequestParam("uploadfile") MultipartFile[] fileArray		) throws Exception {
-
-		String fileName = "";
-		//String FILE_SERVER_PATH = "C:/workspace(1)/11.Model2MVCShop/src/main/webapp/images/uploadFiles";
-		String FILE_SERVER_PATH = "C:\\Users\\sweet\\git\\Sikon_Project\\Sikon\\src\\main\\webapp\\images\\uploadFiles";
-			for(int i=0; i<fileArray.length;i++) {
-			
-				if(!fileArray[i].getOriginalFilename().isEmpty()) {
-					fileArray[i].transferTo(new File(FILE_SERVER_PATH, fileArray[i].getOriginalFilename()));
-					model.addAttribute("msg", "File uploaded successfully.");
-					
-				}else {
-					model.addAttribute("msg", "Please select a valid mediaFile..");
-				}
-			
-				fileName+=fileArray[i].getOriginalFilename()+"/";
-				
-				
-			}
-			
-			
-
-			cook.setCookFilename(fileName);
-		System.out.println("/cook/addcook : post");
-		// Business Logic
-
-		
-		cookService.addCook(cook);
-		model.addAttribute(cook);
-		
-		Map map  = new HashMap() ;
-		 
-		 map.put("cook", cook); 
-		 
-		 return  map;
-	
-	}
 	
 	@PostMapping(value="/json/uploadSummernoteImageFile", produces = "application/json")
 	@ResponseBody
@@ -162,34 +120,9 @@ public class CookRestController {
 		
 		return map;
 	}
-	@RequestMapping(value="json/getCook/{cookNo}", method=RequestMethod.GET)
-	public Cook getCook( @RequestParam("cookNo") int cookNo ,
-			@CookieValue(value="history", required=false) Cookie cookie,
-			HttpServletResponse response, Model model,@RequestParam("menu") String menu) throws Exception {
-		
-		Cook cook = cookService.getCook(cookNo);
-		
-		String img = cook.getCookFilename();
-		String co = cook.getCookName().replace(" ", "_");
-		String cn = "/"+cookNo+"&"+img+"&"+co;
-		String first = cookNo+"&"+img+"&"+co;
-		
-		if(cookie != null) {
-			Cookie cookCookie = new Cookie("history",first);
-			cookCookie.setPath("/");
-			response.addCookie(cookCookie);
-		}else {
-			String str1 = cookie.getValue()+ cn;
-			
-			Cookie cookCookie02 = new Cookie("history",str1);
-			cookCookie02.setPath("/");
-			response.addCookie(cookCookie02);
-			
-			System.out.println("Not NULLÀÏ ¶§ ÀúÀåµÈ coÄíÅ°°ª"+cookie.getValue());
-			System.out.println("Not NULLÀÏ ¶§ ÀúÀåµÉ coÄíÅ°°ª"+str1);
-		}
-		return cook;
-	}
+	
+	
+
 	
 
 	@RequestMapping( value="json/listCook", method=RequestMethod.POST )
@@ -206,20 +139,20 @@ public class CookRestController {
 
 
 		
-		Map<String , Object> map=cookService.getCookList(search);
-		
+		Map<String , Object> map=cookService.getCookList(search);		
 		List<Cook> cookList = (List<Cook>) map.get("list");
 		
 		for(int i=0; i<cookList.size(); i++) {
+			
 			 int heartCount = heartService.heartCheck(cookList.get(i).getCookNo(), user.getUserId());
 			 cookList.get(i).setHeartCount(heartCount);
 			 cookList.set(i, cookList.get(i));
 		}
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(),pageUnit , pageSize);
-		System.out.println(resultPage);
 		
-		// Model °ú View ¿¬°á
+		
+		
 		map.put("list", cookList);
 		map.put("resultPage", resultPage);
 		map.put("search", search);
@@ -272,67 +205,41 @@ public class CookRestController {
 	}
 	
 	@RequestMapping(value = "json/mentor")
-	public Map mentor(@RequestParam("mentorId") String mentorId,@RequestBody Search search, Model model, HttpServletRequest request)
-			throws Exception {
-		
-		System.out.println("¿Ö ¾È´ë!!!!!!!!"+search.getCurrentPage());
+	public Map mentor(@RequestParam("mentorId") String mentorId, @RequestBody Search search, Model model,
+			HttpServletRequest request) throws Exception {
 
 		search.setPageSize(pageSize);
-		System.out.println("search:" + search);
+
 		User user = userService.getUser(mentorId);
-		
-		System.out.println("´Ğ³×ÀÓ: "+user.getUserNickname());
-		
-		
-		// Business logic ¼öÇà
+
 		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 
-		System.out.println(resultPage);
-		System.out.println("ÄíÄíÄíÄíÄíÄíÄíÄíÄ¼Ä¼Ä¼Ä¼Ä¼Ä¼Ä¼ÄíÄíÄíÄíÄí");
-		System.out.println(resultPage);
-		System.out.println("////////////////////////////////////////"+map.get("list"));
-		
-		
 		map.put("user", user);
 		map.put("list", map.get("list"));
 		map.put("resultPage", resultPage);
 		map.put("search", search);
 
-		System.out.println("ÄíÄíÄíÄíÄíÄíÄíÄíÄ¼Ä¼Ä¼Ä¼Ä¼Ä¼Ä¼ÄíÄíÄíÄíÄí");
 		return map;
 	}
 	
 	@RequestMapping(value = "json/listMyCook")
-	public Map listMyCook(@RequestBody Search search, Model model, HttpServletRequest request)
-			throws Exception {
-		
-		System.out.println("¿Ö ¾È´ë!!!!!!!!"+search.getCurrentPage());
+	public Map listMyCook(@RequestBody Search search, Model model, HttpServletRequest request) throws Exception {
 
 		search.setPageSize(pageSize);
-		System.out.println("search:" + search);
+
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		
-		System.out.println("´Ğ³×ÀÓ: "+user.getUserNickname());
-		
-		
-		// Business logic ¼öÇà
+
 		Map<String, Object> map = cookService.listMyCook(search, user.getUserNickname());
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
 
-		System.out.println(resultPage);
-		System.out.println("ÄíÄíÄíÄíÄíÄíÄíÄíÄ¼Ä¼Ä¼Ä¼Ä¼Ä¼Ä¼ÄíÄíÄíÄíÄí");
-		System.out.println(resultPage);
-		System.out.println("////////////////////////////////////////"+map.get("list"));
-		
-		
 		map.put("user", user);
-		
+
 		map.put("list", map.get("list"));
 		map.put("resultPage", resultPage);
 		map.put("search", search);
