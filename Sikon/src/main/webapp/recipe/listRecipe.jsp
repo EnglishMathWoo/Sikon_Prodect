@@ -328,6 +328,15 @@ vertical-align: middle;
 .btn_gotop:hover{
 	color: #f7f7f7;
 }
+
+div.emptyRecipe{
+	border: 1px solid #937062;
+	padding : 90px;
+	height: 200px;
+	text-align: center;
+	font-weight: bold;
+	color: #333;
+}
 </style>
 
 
@@ -669,6 +678,16 @@ vertical-align: middle;
  
   
 <div class="row">
+
+
+			<c:if test="${empty list}">
+				<br><br>
+				<div class="emptyRecipe">
+					등록된 레시피가 없습니다.
+				</div>
+				<br>
+			</c:if>
+			
 	<c:set var="i" value="0" />
 	<c:forEach var="recipe" items="${list}">
   <div class="col-sm-6 col-md-3">
