@@ -49,26 +49,21 @@
 	 <insert 	id="addRecipe"		parameterType="recipe" >
 	 	INSERT
 		INTO recipe VALUES	 (	seq_recipe_no.nextval ,#{writer.userNickname} , #{recipeName}, #{recipeDetail},#{detail},#{recipeImg},#{recipeVideo},#{recipeDifficulty},#{recipeTheme},#{cookingTime},#{recipeOrder},SYSDATE,0,0)
-	 	
 	 </insert>
 	 
 	  
 	 <select id="getRecipe" parameterType="int"  resultMap="recipeSelectMap">
 		SELECT r.*,i.*
 		FROM recipe r,ingredient i
-		WHERE
-		r.recipe_no=i.recipe_no
-		and
-		r.recipe_no= #{recipeNo}
+		WHERE r.recipe_no=i.recipe_no
+		AND r.recipe_no= #{recipeNo}
 	</select>
 	
 	<select id="getRecipeName" parameterType="int"  resultMap="recipeSelectMap">
 		SELECT r.*,u.user_id
 		FROM recipe r, users u
-		WHERE
-		r.writer_nickname=u.user_nickname
-		and
-		r.recipe_no= #{recipeNo}
+		WHERE r.writer_nickname = u.user_nickname
+		AND r.recipe_no = #{recipeNo}
 	</select>
 	
 	
@@ -81,11 +76,11 @@
 			recipe_detail	= #{recipeDetail},
 			recipe_img				=	#{recipeImg},
 			recipe_video				=	#{recipeVideo},
-			recipe_difficulty=#{recipeDifficulty},
-			cooking_time=#{cookingTime},
-			recipe_order=#{recipeOrder} ,
-			recipe_theme=#{recipeTheme}, 
-			recipe_views=#{recipeViews}
+			recipe_difficulty = #{recipeDifficulty},
+			cooking_time = #{cookingTime},
+			recipe_order = #{recipeOrder} ,
+			recipe_theme = #{recipeTheme}, 
+			recipe_views = #{recipeViews}
 		</set>
 		WHERE recipe_no = #{recipeNo}
 	</update>
@@ -106,24 +101,24 @@
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT r.*, u.user_nickname
 											FROM recipe r, users u
-											where r.writer_nickname=u.user_nickname
+											WHERE r.writer_nickname = u.user_nickname
 											<if test="searchCondition != null">
 													<if test="searchCondition == 0">
-										 				and r.recipe_NO LIKE '%'||''||'%'
+										 				AND r.recipe_NO LIKE '%'||''||'%'
 													</if>
 													<if test="searchCondition == 1">
-										 				and  r.recipe_Name LIKE '%'||#{searchKeyword}||'%'
+										 				AND  r.recipe_Name LIKE '%'||#{searchKeyword}||'%'
 													</if>
 													<if test="searchCondition == 2">
-										 				and  r.writer_nickname LIKE '%'||#{searchKeyword}||'%'
+										 				AND  r.writer_nickname LIKE '%'||#{searchKeyword}||'%'
 													</if>
 													<if test="searchCondition == 3 and searchKeyword !='' ">
-										 				and  r.recipe_NO LIKE '%'||#{searchKeyword}||'%'
+										 				AND  r.recipe_NO LIKE '%'||#{searchKeyword}||'%'
 													</if>
 											</if>
 											<if test="themeCondition != null">
 													<if test='themeCondition == "한식"'>
-										 				and r.recipe_theme LIKE '한식'
+										 				AND r.recipe_theme LIKE '한식'
 													</if>
 													<if test='themeCondition == "중식"'>
 										 				AND r.recipe_theme LIKE '중식'
@@ -171,24 +166,24 @@
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT r.*, u.user_nickname
 											FROM recipe r, users u
-											where r.writer_nickname=u.user_nickname
+											WHERE r.writer_nickname=u.user_nickname
 											<if test="searchCondition != null">
 													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				and r.recipe_NO LIKE '%'|| ''||'%'
+										 				AND r.recipe_NO LIKE '%'|| ''||'%'
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				and  r.recipe_Name LIKE '%'||#{searchKeyword}||'%'
+										 				AND  r.recipe_Name LIKE '%'||#{searchKeyword}||'%'
 													</if>
 													<if test="searchCondition == 2 and searchKeyword !='' ">
-										 				and  r.writer_nickname LIKE '%'||#{searchKeyword}||'%'
+										 				AND  r.writer_nickname LIKE '%'||#{searchKeyword}||'%'
 													</if>
 													<if test="searchCondition == 3 and searchKeyword !='' ">
-										 				and  r.recipe_NO LIKE '%'||#{searchKeyword}||'%'
+										 				AND  r.recipe_NO LIKE '%'||#{searchKeyword}||'%'
 													</if>
 											</if>
 											<if test="themeCondition != null">
 													<if test='themeCondition == "한식"'>
-										 				and r.recipe_theme LIKE '한식'
+										 				AND r.recipe_theme LIKE '한식'
 													</if>
 													<if test='themeCondition == "중식"'>
 										 				AND r.recipe_theme LIKE '중식'
@@ -241,10 +236,10 @@
 											<if test="searchCondition != null">
 											<choose>
 													<when test="searchCondition == 0 and searchKeyword !='' ">
-										 				and recipe_NO LIKE '%'||#{searchKeyword}||'%'
+										 				AND recipe_NO LIKE '%'||#{searchKeyword}||'%'
 													</when>
 													<when test="searchCondition == 1 and searchKeyword !='' ">
-										 				 and recipe_Name LIKE '%'||#{searchKeyword}||'%'
+										 				 AND recipe_Name LIKE '%'||#{searchKeyword}||'%'
 													</when>
 													<otherwise>
 													  and recipe_NO LIKE '%'|| ''||'%'
@@ -266,7 +261,7 @@
 										 				ORDER BY cooking_time DESC
 													</when>
 													<otherwise>
-														order by recipe_no
+														ORDER BY recipe_no
 													</otherwise>
 													</choose>
 													</if>
@@ -283,13 +278,13 @@
 	  	SELECT COUNT(*)
 	  	FROM(	SELECT recipe_no 
 						FROM recipe
-						WHERE writer_nickname=#{writerNickname}
+						WHERE writer_nickname = #{writerNickname}
 						<if test="searchCondition != null">
 								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			and recipe_no LIKE '%'||#{searchKeyword}||'%'
+						 			AND recipe_no LIKE '%'||#{searchKeyword}||'%'
 								</if>
 								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		and recipe_name LIKE '%'||#{searchKeyword}||'%'
+						 		AND recipe_name LIKE '%'||#{searchKeyword}||'%'
 								</if>
 								
 							
@@ -307,23 +302,18 @@
 										 				ORDER BY cooking_time DESC
 													</when>
 													<otherwise>
-														order by recipe_no
+														ORDER BY recipe_no
 													</otherwise>
 													</choose>
 													</if>
 													) countTable						
 	 </select>
 	 
-	 <select  id="bestRecipeList" 	resultMap="recipeSelectMap">
-	  	SELECT *
-			FROM recipe
-		ORDER BY review_num DESC
-	 </select>
 	 
 	 <select  id="getPointList"  parameterType="map"	resultType="map">
 	  	SELECT p.*,u.*
-											FROM purchase p, users u 
-											WHERE u.user_id=#{userId}
+			FROM purchase p, users u 
+			WHERE u.user_id = #{userId}
  
 	 </select>
 	 

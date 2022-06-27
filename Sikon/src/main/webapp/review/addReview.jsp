@@ -185,6 +185,10 @@ form{
                         <h4>리뷰작성</h4>
                         <label for="message">후기를 남겨주세요!</label>
                         <textarea name="reviewContent" id="reviewContent" cols="30" rows="5" class="form-control" placeholder="최소 15자 이상 입력해주세요." style="background-color: #F7F7F7;"></textarea>
+                    	<div class="textLengthWrap" style="display: flex;float:right;">
+						    <p class="textCount">0자</p>
+						    <p class="textTotal">/200자</p>
+						  </div>
                     </div>
                     
                     <div class="yes">
@@ -218,6 +222,26 @@ form{
 
 </body>
 <script type="text/javascript">
+
+$('#reviewContent').keyup(function (e) {
+	let content = $(this).val();
+    
+    // 글자수 세기
+    if (content.length == 0 || content == '') {
+    	$('.textCount').text('0자');
+    } else {
+    	$('.textCount').text(content.length + '자');
+    }
+    
+    // 글자수 제한
+    if (content.length > 200) {
+   	// 200자 부터는 타이핑 되지 않도록
+    $(this).val($(this).val().substring(0, 200));
+    // 200자 넘으면 알림창 뜨도록
+    alert('글자수는 200자까지 입력 가능합니다.');
+    };
+});
+
 $(function() {
 	
 	$("button:contains('리뷰등록')").on("click", function() {
@@ -225,28 +249,9 @@ $(function() {
 	});
 });
 function fncAddReview() {
-	console.log('왜안댐');
-	
-	//FORM 유효성 검증
-	var reviewContent = $("input[name='reviewContent']").val();
-	
-	if (reviewContent == null || reviewContent.length < 15) {
-		alert("리뷰 내용은 최소 15글자 이상 입력해주세요.");
-		return;
-	}
-
 	
 	$("form").attr("method", "POST").attr("enctype", "multipart/form-data").attr("accept-charset", "euc-kr").attr("action","/review/addReview").submit();
 
-//	setTimeout(function() {   
-	//opener.parent.location.reload();
- //    }, 5);
-	
-//	setTimeout(function() {   
-//        window.close();
-//     }, 3);
-	
-	//Window.opener.location.href="/purchase/listPurchase";
       }
 
 function readURL(input, imgControlName) {

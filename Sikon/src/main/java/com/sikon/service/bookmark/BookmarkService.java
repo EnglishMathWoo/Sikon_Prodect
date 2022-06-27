@@ -18,6 +18,7 @@ public interface BookmarkService {
 	//책갈피 삭제
 	public void deleteBookmark(int recipeNo, String userId) throws Exception;
 
+	//책갈피 중복체크
 	public int checkDuplicate(int recipeNo,String userId) throws Exception;
 
 }

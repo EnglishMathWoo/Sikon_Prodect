@@ -18,6 +18,7 @@ import com.sikon.service.domain.User;
 import com.sikon.service.recipe.RecipeService;
 import com.sikon.service.review.ReviewService;
 
+//¸®ºä RestController
 @RestController
 @RequestMapping("/review/*")
 public class ReviewRestController {
@@ -35,15 +36,15 @@ public class ReviewRestController {
 		System.out.println(this.getClass());
 	}
 
+	/// Method
 	@RequestMapping(value = "/json/addReview", method = RequestMethod.POST)
 	public void addReview(HttpServletRequest request, @ModelAttribute("review") Review review,
 			@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
 
-		System.out.println("/review/addReview : POST");
-//		System.out.println(recipeNo);
-//		System.out.println(review);
+		System.out.println("/review/json/addReview : POST");
 
 		Recipe recipe = recipeService.getRecipeName(recipeNo);
+
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
@@ -52,19 +53,20 @@ public class ReviewRestController {
 		review.setWriterNickname(user.getUserNickname());
 		review.setReviewCategory("REC");
 
-		System.out.println("¸®ºä:" + review);
 		reviewService.addReview(review);
+
+		// ·¹½ÃÇÇÀÇ ¸®ºä¼ö(reviewNum) +1
 		reviewService.updateReviewNum(1, recipeNo);
 	}
 
 	@RequestMapping(value = "/json/updateReview", method = RequestMethod.POST)
 	public void updateReview(HttpServletRequest request, @ModelAttribute("review") Review review,
 			@RequestParam("recipeNo") int recipeNo, Model model) throws Exception {
-		System.out.println("/review/updateReview : POST");
-//		System.out.println("review=" + review);
-//		System.out.println("recipeNo=" + recipeNo);
+
+		System.out.println("/review/json/updateReview : POST");
 
 		Recipe recipe = recipeService.getRecipeName(recipeNo);
+
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
