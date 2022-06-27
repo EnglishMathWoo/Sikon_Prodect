@@ -33,14 +33,11 @@ public class ReviewDaoImpl implements ReviewDao {
 
 	/// Method
 	public void addReview(Review review) throws Exception {
-		System.out.println("review=" + review);
+
 		sqlSession.insert("ReviewMapper.addReview", review);
 	}
 
 	public List<Review> getReviewList(Search search, String category, int textNo) throws Exception {
-		System.out.println("search=" + search);
-		System.out.println("category=" + category);
-		System.out.println("textNo" + textNo);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search", search);
@@ -51,32 +48,29 @@ public class ReviewDaoImpl implements ReviewDao {
 	}
 
 	public void updateReview(Review review) throws Exception {
-		System.out.println("review=" + review);
+
 		sqlSession.update("ReviewMapper.updateReview", review);
 
 	}
 
 	public void deleteReview(int reviewNo) throws Exception {
-		System.out.println("review=" + reviewNo);
 
 		sqlSession.delete("ReviewMapper.deleteReview", reviewNo);
 
 	}
 
 	public int getTotalCount(Search search, String category, int textNo) throws Exception {
-		System.out.println("search=" + search);
-		System.out.println("category=" + category);
-		System.out.println("textNo" + textNo);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search", search);
 		map.put("category", category);
 		map.put("textNo", textNo);
+		
 		return sqlSession.selectOne("ReviewMapper.getTotalCount", map);
 	}
 
-	@Override
 	public void updateStatus(int textNo,String category) throws Exception {
+		
 		if(category.equals("PRD")) {
 			sqlSession.update("ReviewMapper.updatePurchaseStatus", textNo);		
 
@@ -86,10 +80,7 @@ public class ReviewDaoImpl implements ReviewDao {
 		}
 	}
 
-	@Override
 	public List<Review> getMyReviewList(Search search, String writerNickname) throws Exception {
-		System.out.println("search=" + search);
-		System.out.println("writerNickname=" + writerNickname);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search", search);
@@ -98,35 +89,21 @@ public class ReviewDaoImpl implements ReviewDao {
 		return sqlSession.selectList("ReviewMapper.getMyReviewList", map);
 	}
 
-	@Override
 	public int getTotalMyCount(Search search, String writerNickname) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("search=" + search);
-		System.out.println("writerNickname=" + writerNickname);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search", search);
 		map.put("writerNickname", writerNickname);
+		
 		return sqlSession.selectOne("ReviewMapper.getTotalMyCount", map);
 	}
 
-	@Override
-	public void givePoint(int point, String userId) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("point", point);
-		map.put("userId", userId);
-		sqlSession.insert("ReviewMapper.givePoint", map);
 
-		
-	}
-
-	@Override
 	public Review getReview(int reviewNo) throws Exception {
 		return sqlSession.selectOne("ReviewMapper.getReview", reviewNo);
 		
 	}
 
-	@Override
 	public void updateReviewNum(int count, int recipeNo) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("count", count);
@@ -135,11 +112,11 @@ public class ReviewDaoImpl implements ReviewDao {
 		
 	}
 
-	@Override
 	public int countReviewNum(int textNo,String category) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("textNo", textNo);
 		map.put("category", category);
+		
 		return sqlSession.selectOne("ReviewMapper.getReviewCount", map);
 	}
 	

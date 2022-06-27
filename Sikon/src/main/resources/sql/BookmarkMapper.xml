@@ -38,34 +38,35 @@
 	<!-- SQL : INSERT -->
 	<insert 	id="addBookmark"		parameterType="map" >
 	 	INSERT
-		INTO bookmark( bookmark_no , recipe_no,user_id) 
-		VALUES	 (	seq_bookmark_no.nextval  ,  #{recipeNo},#{userId})
+		INTO bookmark( bookmark_no, recipe_no, user_id) 
+		VALUES (seq_bookmark_no.nextval, #{recipeNo}, #{userId})
 	 </insert>
 	 
 	 
 	 <delete id="deleteBookmark" parameterType="map" >
 	 DELETE
 	 FROM bookmark 
-	 WHERE recipe_no= #{recipeNo}
-	 and user_id=#{userId} 
+	 WHERE recipe_no = #{recipeNo}
+	 and user_id = #{userId} 
 	 </delete>
 	 
 	 <!-- 게시글 추천 중복방지 select문 -->
 	<select id="checkDuplicate" resultType="int">
-	select count(*) from bookmark
-	 where recipe_no = #{recipeNo} and user_id = #{userId} 
+	SELECT count(*) 
+	FROM bookmark
+	WHERE recipe_no = #{recipeNo} 
+	AND user_id = #{userId} 
 	</select>
 
-	 
 	<select  id="getBookmarkList"  parameterType="map"	statementType="CALLABLE"  resultMap="bookmarkSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	
 	  	select b.bookmark_No, b.user_Id,b.recipe_no brecipe_no, r.*
 		from bookmark b,  recipe r
-		where 
-		r.recipe_no=b.recipe_no
-		and b.user_id=#{userId}
+		WHERE 
+		r.recipe_no = b.recipe_no
+		AND b.user_id = #{userId}
 		 ) inner_table
 						WHERE ROWNUM &lt;= #{search.endRowNum} ) c
 		WHERE c.row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
@@ -75,9 +76,9 @@
 	  	SELECT COUNT(*)
 	  	FROM(	select b.*,r.*
 		from bookmark b,  recipe r
-		where 
-		r.recipe_no=b.recipe_no
-		and b.user_id=#{userId}
+		WHERE 
+		r.recipe_no = b.recipe_no
+		AND b.user_id = #{userId}
 						) countTable
 	 </select>
 	 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.sikon.service.domain.Cart;
+
 import com.sikon.service.domain.Wish;
 import com.sikon.service.wish.WishDao;
 import com.sikon.service.wish.WishService;
@@ -17,7 +17,7 @@ import com.sikon.service.wish.WishService;
 @Service("wishServiceImpl")
 public class WishServiceImpl implements WishService{
 	
-	///Field
+	
 	@Autowired
 	@Qualifier("wishDaoImpl")
 	private WishDao wishDao;
@@ -25,12 +25,12 @@ public class WishServiceImpl implements WishService{
 		this.wishDao = wishDao;
 	}
 	
-	///Constructor
+	
 	public WishServiceImpl() {
 		System.out.println(this.getClass());
 	}
 	
-	///Method
+	
 	@Override
 	public void addWish(Wish wish) throws Exception {
 		wishDao.addWish(wish);		

@@ -31,11 +31,10 @@ import com.sikon.service.recipe.RecipeService;
 public class RecipeRestController {
 
 	/// Field
-
 	@Autowired
 	@Qualifier("recipeServiceImpl")
 	private RecipeService recipeService;
-	
+
 	@Autowired
 	@Qualifier("bookmarkServiceImpl")
 	private BookmarkService bookmarkService;
@@ -51,12 +50,12 @@ public class RecipeRestController {
 		System.out.println(this.getClass());
 	}
 
+	/// Method
 	// 무한스크롤
 	@RequestMapping(value = "json/listRecipe")
 	public Map listRecipe(@RequestBody Search search) throws Exception {
 
 		System.out.println("/recipe/json/listRecipe : POST");
-		System.out.println("search"+search);
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -69,8 +68,6 @@ public class RecipeRestController {
 		if (search.getThemeCondition() == "all") {
 			search.setThemeCondition(null);
 		}
-
-		System.out.println("orderCondition=" + search.getOrderCondition());
 
 		search.setPageSize(pageSize);
 
@@ -85,18 +82,18 @@ public class RecipeRestController {
 		map2.put("resultPage", map);
 		map2.put("search", search);
 
-//		System.out.println("map=" + map);
 		return map2;
 	}
 
+	// 썸머노트 이미지 업로드
 	@RequestMapping(value = "json/uploadSummernoteImageFile")
 	public Map uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
 
-		System.out.println("썸머노트 json/imageUpload");
+		System.out.println("/recipe/json/uploadSummernoteImageFile : POST");
 
 		Map map = new HashMap();
 
-		String fileRoot = summerNote;	//저장될 파일 경로
+		String fileRoot = summerNote; // 저장될 파일 경로
 		String originalFileName = multipartFile.getOriginalFilename(); // 오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 파일 확장자
 
@@ -150,30 +147,24 @@ public class RecipeRestController {
 		return map;
 	}
 
+	// 책갈피 색 채우기
 	@RequestMapping(value = "json/updateBookmark", method = RequestMethod.POST)
 	public int updateHeart(@RequestParam("recipeNo") int recipeNo, @RequestParam("userId") String userId)
 			throws Exception {
 
 		System.out.println("/recipe/json/updateBookmark");
 
-		System.out.println(recipeNo);
-		System.out.println(userId);
-		
 		int bookmarkStatus = bookmarkService.checkDuplicate(recipeNo, userId);
-		System.out.println(bookmarkStatus);
-		
+
 		if (bookmarkStatus == 0) {
-			bookmarkService.addBookmark(recipeNo, userId); 
+			bookmarkService.addBookmark(recipeNo, userId);
 			bookmarkService.checkDuplicate(recipeNo, userId);
 		} else {
 
 			bookmarkService.deleteBookmark(recipeNo, userId); // 좋아요 삭제
 			bookmarkService.checkDuplicate(recipeNo, userId);
-
 		}
-
 		return bookmarkStatus;
-
 	}
 
 }

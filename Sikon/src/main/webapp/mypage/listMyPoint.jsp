@@ -138,7 +138,7 @@ function fncGetList(currentPage) {
 		<div class="iEJcKG">
 			<h3 class="iEJcKGheader">
 				보유포인트
-				<p style="float: right">${user.holdpoint }P</p>
+				<p style="float: right">${point }P</p>
 			</h3>
 			<hr/>
 			
@@ -164,6 +164,7 @@ function fncGetList(currentPage) {
 						<c:set var="i" value="0" />
 						<c:forEach var="point" items="${list}">
 							<c:set var="i" value="${ i+1 }" />
+							<c:if test="${point.pointScore != '0' }">
 							<tr>
 								<td>${point.pointRegDate}</td>
 								<td>
@@ -178,7 +179,7 @@ function fncGetList(currentPage) {
 								<td>
 								<c:if test="${point.pointCategory=='str'}">
 									<c:choose>
-										<c:when test="${point.pointType=='CANCELUSE'}">
+										<c:when test="${point.pointType=='CANCELUSE' }">
 										구매 취소-포인트 사용 취소
 										</c:when>
 										<c:when test="${point.pointType=='CANCELEARN'}">
@@ -189,10 +190,10 @@ function fncGetList(currentPage) {
 										</c:otherwise>
 									</c:choose>
 								</c:if>
-								<c:if test="${point.pointCategory=='RE'&&point.pointScore=='500'}">
+								<c:if test="${point.pointCategory=='REV'&&point.pointScore=='500'}">
 								포토 리뷰 작성
 								</c:if>
-								<c:if test="${point.pointCategory=='RE'&&point.pointScore=='100'}">
+								<c:if test="${point.pointCategory=='REV'&&point.pointScore=='100'}">
 								일반 리뷰 작성
 								</c:if>
 								<c:if test="${point.pointCategory=='REC'}">
@@ -202,7 +203,7 @@ function fncGetList(currentPage) {
 								</td>
 								<td>${point.pointScore}</td>
 							</tr>
-
+							</c:if>
 						</c:forEach>
 					</c:if>
 

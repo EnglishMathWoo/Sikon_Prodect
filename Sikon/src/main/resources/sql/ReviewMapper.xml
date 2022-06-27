@@ -80,7 +80,7 @@
 	<insert 	id="addReview"		parameterType="review" >
 	 	INSERT
 		INTO review 
-		VALUES	 (	seq_review_no.nextval ,#{reviewCategory} ,#{writerNickname}, #{reviewContent},#{reviewImg},SYSDATE,#{recipe.recipeNo},#{product.prodNo},#{cook.cookNo},'100')		
+		VALUES	 (	seq_review_no.nextval ,#{reviewCategory} ,#{writerNickname}, #{reviewContent},#{reviewImg},SYSDATE,#{recipe.recipeNo},#{product.prodNo},#{cook.cookNo})		
 	 </insert>
 	 
 	  <!-- SQL : SELECT -->
@@ -90,14 +90,6 @@
 		WHERE review_no = #{reviewNo}
 	 </select>
 	 
-	 	  <!-- SQL : UPDATE -->
-	<update id="givePoint" parameterType="map">
-		update users
-		<set>
-			holdpoint = holdpoint + #{point}
-		</set>
-		WHERE user_id = #{userId}
-	</update>
 	
 	<!-- SQL : UPDATE -->
 	<update id="updateReviewNum" parameterType="map">
@@ -143,25 +135,25 @@
 	  					<choose>
 						<when test='category == "PRD"'>
 						p.*
-	  					from review r,product p
-	  					where r.prod_no=p.prod_no
-	  					and p.prod_no=#{textNo}
+	  					FROM review r, product p
+	  					WHERE r.prod_no = p.prod_no
+	  					AND p.prod_no = #{textNo}
 	  					</when>
 						<when test='category == "REC"'>
 						rec.*
-	  					from review r,recipe rec
-	  					where r.recipe_no=rec.recipe_no
-	  					and r.recipe_no=#{textNo}
+	  					FROM review r, recipe rec
+	  					WHERE r.recipe_no = rec.recipe_no
+	  					AND r.recipe_no = #{textNo}
 	  					</when>
 						<when test='category == "COOK"'>
 	  					c.*
-	  					from review r,cook c
-	  					where r.cook_no=c.cook_no
-	  					and c.cook_no=#{textNo}
+	  					FROM review r, cook c
+	  					WHERE r.cook_no = c.cook_no
+	  					AND c.cook_no = #{textNo}
 	  					</when>
 	  					</choose>
 	  					</if>
-	  					order by r.review_regdate desc
+	  					ORDER BY r.review_regdate DESC
 				
 	 </select>
 	 
@@ -173,25 +165,24 @@
 	  					<choose>
 						<when test='category == "PRD"'>
 						p.*
-	  					from review r,product p
-	  					where r.prod_no=p.prod_no
-	  					and p.prod_no=#{textNo}
+	  					FROM review r, product p
+	  					WHERE r.prod_no = p.prod_no
+	  					AND p.prod_no = #{textNo}
 	  					</when>
 						<when test='category == "REC"'>
 						rec.*
-	  					from review r,recipe rec
-	  					where r.recipe_no=rec.recipe_no
-	  					and r.recipe_no=#{textNo}
+	  					FROM review r, recipe rec
+	  					WHERE r.recipe_no = rec.recipe_no
+	  					AND r.recipe_no = #{textNo}
 	  					</when>
 						<when test='category == "COOK"'>
 	  					c.*
-	  					from review r,cook c
-	  					where r.cook_no=c.cook_no
-	  					and c.cook_no=#{textNo}
+	  					FROM review r, cook c
+	  					WHERE r.cook_no = c.cook_no
+	  					AND c.cook_no = #{textNo}
 	  					</when>
 	  					</choose>
 	  					</if>
-				
 	  					 ) countTable
 						
 	 </select>
@@ -204,13 +195,13 @@
 	  					<choose>
 						<when test='category == "PRD"'>
 						product p
-	  					where r.prod_no=p.prod_no
-	  					and p.prod_no=#{textNo}
+	  					WHERE r.prod_no = p.prod_no
+	  					AND p.prod_no = #{textNo}
 	  					</when>
 						<when test='category == "COOK"'>
 	  					cook c
-	  					where r.cook_no=c.cook_no
-	  					and c.cook_no=#{textNo}
+	  					WHERE r.cook_no = c.cook_no
+	  					AND c.cook_no = #{textNo}
 	  					</when>
 	  					</choose>
 	  					</if>
@@ -221,8 +212,8 @@
 	  <select  id="getMyReviewList"  parameterType="map"	resultMap="reviewSelectMap">
 	  	SELECT *
 	  	FROM ( SELECT inner_table.* , ROWNUM AS row_seq
-	  		   FROM	( select *
-	  					from review
+	  		   FROM	( SELECT *
+	  					FROM review
 	  					WHERE writer_nickname = #{writerNickname}
 	  					) inner_table
 					  WHERE ROWNUM &lt;= #{search.endRowNum} )
@@ -233,8 +224,8 @@
 	 
 	 <select  id="getTotalMyCount"  parameterType="map"	 resultType="int">
 	  SELECT COUNT(*)
-	  FROM		(	select *
-	  					from review
+	  FROM		(	SELECT *
+	  					FROM review
 	  					WHERE writer_nickname = #{writerNickname}
 										 ) countTable		
 						

@@ -12,7 +12,6 @@ public interface BookmarkDao {
 	public void addBookmark(int recipeNo, String userId) throws Exception;
 	
 	//SELECT LIST
-//	public List<Bookmark> getBookmarkList(Search search,String userId) throws Exception;
 	public List getBookmarkList(Search search,String userId) throws Exception;
 
 	//DELETE

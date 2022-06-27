@@ -24,7 +24,7 @@ import com.sikon.service.cook.CookService;
 @Service("heartServiceImpl")
 public class HeartServiceImpl implements HeartService{
 	
-	///Field
+
 	@Autowired
 	@Qualifier("heartDaoImpl")
 	private HeartDao heartDao;

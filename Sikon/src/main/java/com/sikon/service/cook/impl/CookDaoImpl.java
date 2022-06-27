@@ -10,18 +10,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.sikon.common.Search;
-import com.sikon.service.domain.Cook;
-import com.sikon.service.domain.Recipe;
-import com.sikon.service.domain.Wish;
 import com.sikon.service.cook.CookDao;
-import com.sikon.service.domain.User;
+import com.sikon.service.domain.Cook;
 
 
 
 @Repository("cookDaoImpl")
 public class CookDaoImpl implements CookDao{
 	
-	///Field
+	
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
@@ -29,7 +26,7 @@ public class CookDaoImpl implements CookDao{
 		this.sqlSession = sqlSession;
 	}
 	
-	///Constructor
+
 	public CookDaoImpl() {
 		System.out.println(this.getClass());
 	}

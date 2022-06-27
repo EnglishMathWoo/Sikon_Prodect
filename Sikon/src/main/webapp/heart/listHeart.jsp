@@ -47,13 +47,11 @@
   
   <style>
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-
         .bi-heart{
             font-size: 15px;
             line-height: 15px;
             color:#000;
         }
-
         .bi-heart-fill{
             font-size: 15px;
             line-height: 15px;
@@ -62,24 +60,20 @@
 .bi-heart-fill::before{
 color:crimson;
 }
-
 .bi-heart::before{
 color:crimson;
 }
 </style>
 
 <style>
-
 div.container {
 	padding-top: 200px;
 	
 }
-
 body {
 	padding-top: 50px;
 	
 }
-
 .page-header.text-info {
 	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
@@ -92,21 +86,17 @@ body {
 	font-weight: bold;
 	color: #808080;
 }
-
 .text-info {
 	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 	font-weight: bold;
 	color: #75574B
 }
-
 .row {
 	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
-
 .table.table-hover.table-striped {
 	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial, "sans-serif";
 }
-
 .ref-sort{display:block; margin-bottom:50px; text-align:center;}
 .ref-sort ul{margin:0; padding:0; list-style:none; text-transform:uppercase; 	font-family: 'Gowun Batang', serif;
 }
@@ -115,36 +105,25 @@ body {
 .ref-sort li:last-child{margin:0; padding:0;}
 .ref-sort li:last-child::after{display:none;}
 .ref-sort li a{}
-
 /* References */
 .ref-sort li a{color:inherit;}
 .ref-sort li a:hover, #references .ref-sort li.current a{color:#829DA2;}
-
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 .sectiontitle{display:block; max-width:55%; margin:0 auto 80px; text-align:center;}
 .sectiontitle .heading{margin:0; padding:0; line-height:1;}
-
 .sectiontitle{max-width:none; margin-bottom:50px;}
-
 .sectiontitle, #introblocks ul, #references .ref-sort{text-align:left;}
-
 .imgover:hover::before{background:rgba(130,157,162,.5);/* #829DA2 */}
 .imgover, .imgover:hover::after{color:#333333;} 
-
 /* Latest */
 .excerpt time{border-color:#D7D7D7;}
-
 #latest article{max-width:348px;}
-
 #footer{padding-bottom:50px;}/* Not required, just looks a little better */
 .latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
 .latestimg > li img{width:auto;}
-
 * Latest
 --------------------------------------------------------------------------------------------------------------- */
 #latest{}
-
 #latest > li:last-child{margin-bottom:0;}/* Used when elements stack in small viewports */
 article{}
 article img{width:100%;}/* Force the image to have the full width of parent at all times */
@@ -158,26 +137,22 @@ article img{width:100%;}/* Force the image to have the full width of parent at a
 .excerpt .meta li:last-child::after{margin:0; content:"";}
 .excerpt p{}
 .excerpt footer{margin-top:30px;}
-
 .latestimg{}
 .latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
 .latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
 .latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
 .latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
 .latestimg > li a.imgover{display:block;}
-
 .carousel-inner > .item > img {
   top: 0;
   left: 0;
   min-width: 100%;
   max-height: 500px;
 } 
-
 /* [cook LIST] 폰트 적용 */
 .wrapper{
 font-family: 'Tiro Devanagari Sanskrit', serif;
 }
-
 /* 검색, 정렬조건 css */
 .condition{
 font-family: 'Gowun Batang', serif;
@@ -185,8 +160,6 @@ width: 100px;
 float:right;
 border-color:#D7D7D7;
 }
-
-
 /* 레시피 등록 버튼 css */
 .submit
  {
@@ -205,7 +178,6 @@ border-color:#D7D7D7;
   	font-family: 'Gowun Batang', serif;
   
 }
-
 /* 레시피등록 버튼이랑 hr이랑 충돌=> margin-top:20px에서 60px로 변경해서 수정*/
 hr {
     margin-top: 60px;
@@ -213,12 +185,10 @@ hr {
     border: 0;
     border-top: 1px solid #eee;
 }
-
 /* 전체 건수 표기시 레시피등록 버튼과 간격 조절 margin: 10px 0 0 에서 0 0 0으로 변경 */
 p {
     margin: 0 0 0px;
 }
-
 </style>
 
 
@@ -237,14 +207,12 @@ p {
 						
 						
 						var checkCount = $("input[name='ckBookmark']:checked").length;
-
 					    var array = new Array();
 					    
 						$("input[name='ckBookmark']:checked").each(function() {
 							array.push($(this).attr('id'));
 					    });
 						
-
 						
 					});
 //=========================좋아요==========================					
@@ -276,7 +244,6 @@ p {
 					                   
 					                  
 					                    	location.reload();
-
 					                    
 					                }
 					            }

@@ -32,83 +32,63 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	/// Method
-
 	public void addReview(Review review) throws Exception {
-		System.out.println("review=" + review);
+
 		reviewDao.addReview(review);
 	}
 
 	public Map<String, Object> getReviewList(Search search, String category, int textNo) throws Exception {
-		System.out.println("search=" + search);
-		System.out.println("category=" + category);
-		System.out.println("textNo" + textNo);
-		
+
 		List<Review> list = reviewDao.getReviewList(search, category, textNo);
 		int totalCount = reviewDao.getTotalCount(search, category, textNo);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("totalCount", new Integer(totalCount));
-		System.out.println("list="+list);
 
 		return map;
 	}
 
 	public void updateReview(Review review) throws Exception {
-		System.out.println("review=" + review);
-		reviewDao.updateReview(review);
 
+		reviewDao.updateReview(review);
 	}
 
 	public void deleteReview(int reviewNo) throws Exception {
-		System.out.println("review=" + reviewNo);
+
 		reviewDao.deleteReview(reviewNo);
 
 	}
 
-	@Override
-	public void updateStatus(int textNo,String category) throws Exception {
-		reviewDao.updateStatus(textNo,category);
-		
+	public void updateStatus(int textNo, String category) throws Exception {
+		reviewDao.updateStatus(textNo, category);
+
 	}
 
-	@Override
 	public Map<String, Object> getMyReviewList(Search search, String writerNickname) throws Exception {
-		System.out.println("search=" + search);
-		System.out.println("writerNickname" + writerNickname);
-		
+
 		List<Review> list = reviewDao.getMyReviewList(search, writerNickname);
 		int totalCount = reviewDao.getTotalMyCount(search, writerNickname);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		map.put("totalCount", new Integer(totalCount));
-		System.out.println("list="+list);
 
 		return map;
 	}
 
-	@Override
-	public void givePoint(int point, String userId) throws Exception {
-		reviewDao.givePoint(point,userId);
-
-	}
-
-	@Override
 	public Review getReview(int reviewNo) throws Exception {
 		return reviewDao.getReview(reviewNo);
-		
+
 	}
 
-	@Override
-	public void updateReviewNum(int count, int recipeNo) throws Exception{
-		reviewDao.updateReviewNum(count,recipeNo);
-		
+	public void updateReviewNum(int count, int recipeNo) throws Exception {
+		reviewDao.updateReviewNum(count, recipeNo);
+
 	}
 
-	@Override
-	public int countReviewNum(int textNo,String category) throws Exception{
-		return reviewDao.countReviewNum(textNo,category);		
+	public int countReviewNum(int textNo, String category) throws Exception {
+		return reviewDao.countReviewNum(textNo, category);
 	}
 
 }

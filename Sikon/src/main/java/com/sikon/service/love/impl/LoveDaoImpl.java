@@ -13,11 +13,11 @@ import com.sikon.common.Search;
 import com.sikon.service.love.LoveDao;
 import com.sikon.service.domain.Love;
 
-//책갈피 DAO CRUD 구현
+
 @Repository("loveDaoImpl")
 public class LoveDaoImpl implements LoveDao {
 
-	/// Field
+	
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
@@ -26,12 +26,12 @@ public class LoveDaoImpl implements LoveDao {
 		this.sqlSession = sqlSession;
 	}
 
-	/// Constructor
+	
 	public LoveDaoImpl() {
 		System.out.println(this.getClass());
 	}
 
-	/// Method
+
 	public void addLove(String userNickname,String userId) throws Exception {
 		System.out.println("userNickname="+userNickname);
 		System.out.println("userId="+userId);

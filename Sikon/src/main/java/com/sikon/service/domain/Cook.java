@@ -5,23 +5,23 @@ import java.sql.Date;
 public class Cook {
 
 	private int cookNo;
-	private String cookName; //쿠킹클래스명
-	private String cookFilename; //쿠킹클래스이미지
-	private String cookBrief;	//쿠킹클래스간략설명
-	private String cookDifficuty; //쿠킹클래스난이도
-	private int cookPrice;			//쿠킹클래스가격
-	private String cookTheme;		//쿠킹클래스테마
-	private String aplstarTime; 	//모집시작기간
-	private String aplendTime;	//모집종료기간
-	private int cookRecruit;	//쿠킹클래스모집인원
-	private String startTime;		//수업시작시간
-	private String endTime;		//수업종료시간
-	private String cookLocation;	//쿠킹클래스장소
-	private Date cookRegdate ; //쿠킹클래스등록날짜
-	private String cookVideo;		//1분영상
-	private int cookStock  ; //모집인원재고 이거를 왜 해주냐! 우리의 cookRecruit는 모집인원 표시일뿐! 사실상 모집인원 재고는 cookStock입니다
-	private int hearthit;		//좋아요
-	private int heartCount;		//좋아요 수
+	private String cookName;
+	private String cookFilename;
+	private String cookBrief;	
+	private String cookDifficuty;
+	private int cookPrice;			
+	private String cookTheme;		
+	private String aplstarTime; 	
+	private String aplendTime;	
+	private int cookRecruit;	
+	private String startTime;		
+	private String endTime;		
+	private String cookLocation;	
+	private Date cookRegdate ; 
+	private String cookVideo;	
+	private int cookStock  ; 
+	private int hearthit;		
+	private int heartCount;		
 	private String cookContent;
 	private User mentor;
 	private String userNickname;

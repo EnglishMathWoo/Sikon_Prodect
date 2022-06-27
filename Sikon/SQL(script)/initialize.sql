@@ -280,7 +280,7 @@ PRIMARY KEY(love_no)
 
 CREATE TABLE review(
 	review_no  NUMBER 		 		NOT NULL,
-           review_category        VARCHAR2(20)  NOT NULL,
+    review_category        VARCHAR2(20)  NOT NULL,
 	writer_nickname   VARCHAR2(50)   	REFERENCES  users(user_nickname) ON DELETE CASCADE,
 	review_content         VARCHAR2(400)   NOT NULL,
 	review_img    VARCHAR2(100),	
@@ -288,7 +288,6 @@ CREATE TABLE review(
 	recipe_no   NUMBER(16)    REFERENCES  recipe(recipe_no) ON DELETE CASCADE,
 	prod_no   NUMBER(16)     REFERENCES  product(prod_no) ON DELETE CASCADE,
 	cook_no   NUMBER(16)     REFERENCES  cook(cook_no) ON DELETE CASCADE,
-	status    NUMBER(16)   ,
 	PRIMARY KEY(review_no)
 );
 

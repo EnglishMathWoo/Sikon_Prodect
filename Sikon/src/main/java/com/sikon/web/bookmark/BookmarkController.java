@@ -20,38 +20,36 @@ import com.sikon.service.bookmark.BookmarkService;
 import com.sikon.service.domain.Recipe;
 import com.sikon.service.domain.User;
 
-@Controller
-@RequestMapping("/bookmark/*")
-public class BookmarkController {
+	// 책갈피 Controller
+	@Controller
+	@RequestMapping("/bookmark/*")
+	public class BookmarkController {
 
 	/// Field
 	@Autowired
 	@Qualifier("bookmarkServiceImpl")
 	private BookmarkService bookmarkService;
 
-
-	public BookmarkController() {
-		System.out.println(this.getClass());
-	}
-
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
 
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
-	
 
+	public BookmarkController() {
+		System.out.println(this.getClass());
+	}
+
+	/// Method
 	@RequestMapping(value = "addBookmark")
-	public String addBookmark(@ModelAttribute("recipe") Recipe recipe,
-			HttpServletRequest request) throws Exception {
+	public String addBookmark(@ModelAttribute("recipe") Recipe recipe, HttpServletRequest request) throws Exception {
 
 		System.out.println("/bookmark/addBookmark : POST");
-//		System.out.println("recipe="+recipe);
-		
+
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		
-		bookmarkService.addBookmark(recipe.getRecipeNo(),user.getUserId());
+
+		bookmarkService.addBookmark(recipe.getRecipeNo(), user.getUserId());
 
 		return "forward:/recipe/getRecipe?recipeNo=" + recipe.getRecipeNo();
 	}
@@ -61,24 +59,20 @@ public class BookmarkController {
 			throws Exception {
 
 		System.out.println("/bookmark/listBookmark :  POST/get");
-		System.out.println("search:" + search);
-		
+
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
 		}
 
 		search.setPageSize(pageSize);
-		
+
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
 		Map<String, Object> map = bookmarkService.getBookmarkList(search, user.getUserId());
-		
+
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
 				pageSize);
-		
-//		System.out.println("resultPage=" + resultPage);
-//		System.out.println("list" + map.get("list"));
 
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
@@ -87,22 +81,18 @@ public class BookmarkController {
 		return "forward:/mypage/listBookmark.jsp";
 	}
 
-	
 	// 책갈피 선택 삭제
 	@RequestMapping(value = "deleteBookmark")
-	public String deleteBookmarkArray(@RequestParam("recipeList") int[] recipeList, HttpServletRequest request) throws Exception {
+	public String deleteBookmarkArray(@RequestParam("recipeList") int[] recipeList, HttpServletRequest request)
+			throws Exception {
 
 		System.out.println("/bookmark/deleteBookmarkArray : POST");
 
-		for (int i = 0; i < recipeList.length; i++) {
-			System.out.println(recipeList[i]);
-		}
-
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		
+
 		for (int i = 0; i < recipeList.length; i++) {
-			bookmarkService.deleteBookmark(recipeList[i],user.getUserId());
+			bookmarkService.deleteBookmark(recipeList[i], user.getUserId());
 		}
 
 		return "redirect:/bookmark/listBookmark";
