@@ -8,20 +8,20 @@
  	
  	
 	<resultMap id="applySelectMap" type="apply">
-		<result property="applyNo" 			column="apply_no" 			jdbcType="NUMERIC"/>
-		<!--<result property="classCook.cookNo" 				column="cook_no" 					jdbcType="NUMERIC" />-->
-		
-		<result property="applier.userId" 		column="applier_id"		jdbcType="VARCHAR"/>
-		<result property="paymentOption" 		column="PAYMENT_OPTION" 					jdbcType="VARCHAR" />
-		<result property="applyStatus" 				column="apply_status" 					jdbcType="VARCHAR" />
-		<result property="cookStatus" 			column="cook_status" 		jdbcType="NUMERIC" />
-		<result property="checkDate" 				column="check_date" 			jdbcType="DATE"/>
-		<result property="reviewStatus" 				column="review_status" 			jdbcType="VARCHAR"/>
-		<result property="classCook.cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
-		<result property="classCook.cookFilename" 				column="cook_filename" 					jdbcType="VARCHAR" />
-		<result property="total" 			column="total" 		jdbcType="NUMERIC" />
-		<result property="impNumber" 				column="imp_number" 			jdbcType="VARCHAR"/>	
-	<collection property="classCook" resultMap="cookSelectMap"/>
+	
+	
+		<result property="applyNo" 					column="apply_no" 			jdbcType="NUMERIC"/>
+		<result property="applier.userId" 			column="applier_id"			jdbcType="VARCHAR"/>
+		<result property="paymentOption" 			column="PAYMENT_OPTION" 	jdbcType="VARCHAR" />
+		<result property="applyStatus" 				column="apply_status" 		jdbcType="VARCHAR" />
+		<result property="cookStatus" 				column="cook_status" 		jdbcType="NUMERIC" />
+		<result property="checkDate" 				column="check_date" 		jdbcType="DATE"/>
+		<result property="reviewStatus" 			column="review_status" 		jdbcType="VARCHAR"/>
+		<result property="classCook.cookPrice" 		column="cook_price" 		jdbcType="NUMERIC" />	
+		<result property="classCook.cookFilename" 	column="cook_filename" 		jdbcType="VARCHAR" />
+		<result property="total" 					column="total" 				jdbcType="NUMERIC" />
+		<result property="impNumber" 				column="imp_number" 		jdbcType="VARCHAR"/>	
+		<collection property="classCook" resultMap="cookSelectMap"/>
 		
 		
 
@@ -29,26 +29,26 @@
 
 	<resultMap id="cookSelectMap" type="cook">
 	
-		<result property="cookNo" 			column="cook_no" 			jdbcType="NUMERIC"/>
-		<result property="cookName"			column="cook_name" 		jdbcType="VARCHAR" />
-		<result property="cookFilename" 	column="cook_filename" 		jdbcType="VARCHAR" />
-		<result property="cookBrief"      column="cook_brief"           jdbcType="VARCHAR"/>
-		<result property="cookDifficuty" 				column="cook_difficuty" 					jdbcType="VARCHAR" />		
-		<result property="cookPrice" 				column="cook_price" 					jdbcType="NUMERIC" />	
+		<result property="cookNo" 				column="cook_no" 			jdbcType="NUMERIC"/>
+		<result property="cookName"				column="cook_name" 			jdbcType="VARCHAR" />
+		<result property="cookFilename" 		column="cook_filename" 		jdbcType="VARCHAR" />
+		<result property="cookBrief"      		column="cook_brief"         jdbcType="VARCHAR"/>
+		<result property="cookDifficuty" 		column="cook_difficuty" 	jdbcType="VARCHAR" />		
+		<result property="cookPrice" 			column="cook_price" 		jdbcType="NUMERIC" />	
 		<result property="cookTheme" 			column="cook_theme" 		jdbcType="VARCHAR" />
-		<result property="aplstarTime"      column="apl_startime"           jdbcType="VARCHAR"/>
-		<result property="aplendTime"      column="apl_endtime"           jdbcType="VARCHAR"/>	
-		<result property="cookRecruit" 				column="cook_recruit" 					jdbcType="NUMERIC" />
-		<result property="startTime"      column="start_time"           jdbcType="VARCHAR"/>		
-		<result property="endTime"      column="end_time"           jdbcType="VARCHAR"/>		
-		<result property="cookLocation"      column="cook_location"           jdbcType="VARCHAR"/>
-		<result property="cookRegdate"      column="cook_regdate"           jdbcType="DATE"/>
-		<result property="cookVideo"      column="cook_video"           jdbcType="VARCHAR"/>
-		<result property="cookStock"      column="cook_stock"           jdbcType="NUMERIC"/>
-		<result property="hearthit"      column="heart_hit"           jdbcType="NUMERIC"/>
-		<result property="cookContent" 			column="cook_content" 			jdbcType="VARCHAR" />
-		<result property="mentor.userNickname" 				column="mentor_nickname" 					jdbcType="VARCHAR" />
-		<result property="mentor.userId" 	column="mentor_id" 		jdbcType="VARCHAR"/>
+		<result property="aplstarTime"      	column="apl_startime"       jdbcType="VARCHAR"/>
+		<result property="aplendTime"      		column="apl_endtime"        jdbcType="VARCHAR"/>	
+		<result property="cookRecruit" 			column="cook_recruit" 		jdbcType="NUMERIC" />
+		<result property="startTime"      		column="start_time"         jdbcType="VARCHAR"/>		
+		<result property="endTime"      		column="end_time"           jdbcType="VARCHAR"/>		
+		<result property="cookLocation"      	column="cook_location"      jdbcType="VARCHAR"/>
+		<result property="cookRegdate"     		column="cook_regdate"       jdbcType="DATE"/>
+		<result property="cookVideo"      		column="cook_video"         jdbcType="VARCHAR"/>
+		<result property="cookStock"      		column="cook_stock"         jdbcType="NUMERIC"/>
+		<result property="hearthit"      		column="heart_hit"          jdbcType="NUMERIC"/>
+		<result property="cookContent" 			column="cook_content" 		jdbcType="VARCHAR" />
+		<result property="mentor.userNickname" 	column="mentor_nickname" 	jdbcType="VARCHAR" />
+		<result property="mentor.userId" 		column="mentor_id" 			jdbcType="VARCHAR"/>
 		
 	</resultMap>
 
@@ -58,20 +58,21 @@
 	
 	 	INSERT
 		into apply(apply_no , cook_no, applier_id  , payment_option, apply_status, cook_status,check_date, review_status,cook_price, imp_number ) 
-		VALUES	 (	seq_apply_apply_no.nextval ,
-		 #{classCook.cookNo},
-		 #{applier.userId},
-		  #{paymentOption} ,
-		   #{applyStatus} ,
-		    #{cookStatus} ,
-		      SYSDATE,
-		       #{reviewStatus},
-		        #{classCook.cookPrice},
-		        #{impNumber}
+		VALUES	 (	
+		seq_apply_apply_no.nextval,
+		#{classCook.cookNo},
+		#{applier.userId},
+		#{paymentOption} ,
+		#{applyStatus} ,
+		#{cookStatus} ,
+		SYSDATE,
+		#{reviewStatus},
+		#{classCook.cookPrice},
+		#{impNumber}
 		       )
 	 </insert>
 	 
-	  <!-- SQL : SELECT ONE -->
+	 
 
 	 <select 	id="getApply"	parameterType="int"	resultMap="applySelectMap">
 		SELECT
@@ -81,7 +82,7 @@
 	 </select>
 
  
-	 	 <!-- SQL : UPDATE -->
+	
 	 <update	id="updateApplyStatus"	parameterType="apply" >
 	   	UPDATE apply
 	   	<set>
@@ -93,133 +94,138 @@
 	
 	 
 	 
-	 <!-- SQL : 물건을 샀을경우 -->
-	 	 <update	id="buyCook"	parameterType="map" >
-	   		UPDATE cook
+	
+	  <update	id="buyCook"	parameterType="map" >
+	   UPDATE cook
 	   	<set>
-	   		cook_stock   = cook_stock  - #{cookStatus}
+	   cook_stock   = cook_stock  - #{cookStatus}
 	   	</set>
-	   			WHERE cook_no=#{cookNo}
+	   WHERE cook_no=#{cookNo}
 	 </update>	
 	 
-	  <!-- SQL : 구매취소를 했을경우 -->
+	  
 	 <update	id="cancel"	parameterType="map" >
-	   	UPDATE cook
-	   	<set>
-	   		cook_stock   = cook_stock  + #{cookStatus}
+	 UPDATE cook
+	 <set>
+	  cook_stock   = cook_stock  + #{cookStatus}
 	   	</set>
-	   		WHERE cook_no=#{cookNo}
+		WHERE cook_no=#{cookNo}
 	 </update>	
 	 
-	 <!-- SQL : SELECT LIST -->
-	<select  id="getApplyList"  parameterType="map" statementType="CALLABLE" resultMap="applySelectMap">
-		  	SELECT *
-		  	FROM (	SELECT A.* , ROWNUM AS row_seq
-		  					FROM (	SELECT c.cook_name, c.cook_filename, c.cook_stock, a.* 
-											FROM apply a, cook c
-												where c.cook_no=a.cook_no(+)
 
-											<if test="search.applyCondition != null">
-												<choose>
-												<when test="search.applyCondition == 5 ">
-													and a.apply_status = '100' 
-													</when>
-												<when test="search.applyCondition == 6  ">
-													and a.apply_status = '300'  
-														</when>
-														</choose>
-											</if>
-												AND a.applier_id=#{applierId} 
-																				
-											ORDER BY a.apply_no DESC ) A
-	WHERE ROWNUM &lt;= #{search.endRowNum} )  C
-	WHERE C.row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+	<select  id="getApplyList"  parameterType="map" statementType="CALLABLE" resultMap="applySelectMap">
+	SELECT *
+	FROM ( SELECT A.* , ROWNUM AS row_seq
+	FROM ( SELECT c.cook_name, c.cook_filename, c.cook_stock, a.*
+	FROM apply a, cook c
+	where c.cook_no=a.cook_no(+)
+
+	<if test="search.applyCondition != null">
+		<choose>
+			<when test="search.applyCondition == 5 ">
+				and a.apply_status = '100'
+			</when>
+			<when test="search.applyCondition == 6  ">
+				and a.apply_status = '300'
+			</when>
+		</choose>
+	</if>
+		AND a.applier_id=#{applierId} 
+		ORDER BY a.apply_no DESC ) A
 		
-	 </select>
+		WHERE ROWNUM &lt;= #{search.endRowNum} )  C
+		
+		WHERE C.row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
+	</select>
 	 
 	 <select  id="getTotalCount"  parameterType="map"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM (	SELECT c.cook_name, c.cook_filename, c.cook_stock, a.* 
-												FROM apply a, cook c
-											where c.cook_no=a.cook_no(+)
-											<if test="search.applyCondition != null">
-												<choose>
-												<when test="search.applyCondition == 5 ">
-													and a.apply_status = '100' 
-													</when>
-												<when test="search.applyCondition == 6  ">
-													and a.apply_status = '300'  
-														</when>
-														</choose>
-											</if>												
-									AND a.applier_id=#{applierId}	
-											ORDER BY a.apply_no DESC 							
-										 ) countTable					
+	 
+	SELECT COUNT(*)
+	FROM ( SELECT c.cook_name, c.cook_filename, c.cook_stock, a.*
+	FROM apply a, cook c
+	where c.cook_no=a.cook_no(+)
+	
+	<if test="search.applyCondition != null">
+		<choose>
+			<when test="search.applyCondition == 5 ">
+				and a.apply_status = '100'
+			</when>
+			<when test="search.applyCondition == 6  ">
+				and a.apply_status = '300'
+			</when>
+		</choose>
+	</if>
+	
+	AND a.applier_id=#{applierId}
+	ORDER BY a.apply_no DESC
+	) countTable					
 											
 	 </select>
 	 
 	<select  id="getSaleList"  parameterType="map"	statementType="CALLABLE" resultMap="applySelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM (SELECT c.cook_name, a.* 
-											FROM cook c, apply a
-											WHERE c.cook_no=a.cook_no(+) 
-												AND a.apply_no IS NOT NULL 
-											<if test="search.applyCondition != null">
-												<choose>
-												<when test="search.applyCondition == 5 ">
-													where apply_status = '100' 
-													</when>
-												<when test="search.applyCondition == 6  ">
-													where apply_status = '300'  
-														</when>
-														</choose>
-											</if>
-											and apply_status !=  '000' 
-											<if test="user.role != 'admin'">
-											
-											and c.mentor_id=#{user.userId}
-											
-											</if>
-											ORDER BY apply_no DESC) inner_table
-						WHERE ROWNUM &lt;= #{search.endRowNum} )
-		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
+	SELECT *
+	FROM ( SELECT inner_table.* , ROWNUM AS row_seq
+	FROM (SELECT c.cook_name, a.*
+	FROM cook c, apply a
+	WHERE c.cook_no=a.cook_no(+)
+	AND a.apply_no IS NOT NULL
+	
+	<if test="search.applyCondition != null">
+		<choose>
+			<when test="search.applyCondition == 5 ">
+				where apply_status = '100'
+			</when>
+			<when test="search.applyCondition == 6  ">
+				where apply_status = '300'
+			</when>
+		</choose>
+	</if>
+	and apply_status != '000'
+	<if test="user.role != 'admin'">
+	and c.mentor_id=#{user.userId}
+	</if>
+	
+	ORDER BY apply_no DESC) inner_table
+	WHERE ROWNUM &lt;= #{search.endRowNum} )
+	WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum}
 	 </select>
 	 
 
 
 	 <select  id="getTotalCount2"  parameterType="map"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(	SELECT c.cook_name, a.* 
-		FROM cook c, apply a
-		WHERE c.cook_no=a.cook_no(+) 
-			AND a.apply_no IS NOT NULL 
-											<if test="search.applyCondition != null">
-												<choose>
-												<when test="search.applyCondition == 5 ">
-													where apply_status = '100' 
-													</when>
-												<when test="search.applyCondition == 6  ">
-													where apply_status = '300'  
-														</when>
-														</choose>
-											</if>
-											and apply_status !=  '000' 
-											<if test="user.role != 'admin'">
-											
-											and c.mentor_id=#{user.userId}
-											
-											</if>											
-											ORDER BY apply_no DESC) countTable
+	SELECT COUNT(*)
+	FROM( SELECT c.cook_name, a.*
+	FROM cook c, apply a
+	WHERE c.cook_no=a.cook_no(+)
+	AND a.apply_no IS NOT NULL
+	<if test="search.applyCondition != null">
+		<choose>
+			<when test="search.applyCondition == 5 ">
+				where apply_status = '100'
+			</when>
+			<when test="search.applyCondition == 6  ">
+				where apply_status = '300'
+			</when>
+		</choose>
+	</if>
+	and apply_status != '000'
+	<if test="user.role != 'admin'">
+
+		and c.mentor_id=#{user.userId}
+
+	</if>
+	ORDER BY apply_no DESC) countTable
 	 </select>
 	 
 	 <select id="saleCount" parameterType="apply" resultMap="applySelectMap">
 
-SELECT SUM(cook_price) 
-FROM apply 
-WHERE applier_id= #{applier.userId}
+	SELECT SUM(cook_price) 
+	FROM apply 
+	WHERE applier_id= #{applier.userId}
 		and apply_status= #{applyStatus}
         and check_date >= TO_CHAR(SYSDATE-7,'YY/MM/DD')
         order by check_date;
-</select>
+	</select>
+
+
 </mapper>

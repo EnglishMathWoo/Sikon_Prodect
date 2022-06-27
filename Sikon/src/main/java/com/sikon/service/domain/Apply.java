@@ -6,11 +6,11 @@ public class Apply {
 	//레쓰고
 
 	private int applyNo;
-	private Cook classCook; //cook 객체
-	private User applier; 	//user 객체
+	private Cook classCook; 
+	private User applier; 	
 	private String paymentOption;
 	private String applyStatus; 
-	private int cookStatus;		//cookStock(재고)-cookStatus(신청인원)
+	private int cookStatus;		
 	private Date checkDate;
 	private String receiverPhone;
 	private String reviewStatus;

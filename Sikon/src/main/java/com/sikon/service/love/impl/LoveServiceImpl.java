@@ -13,11 +13,11 @@ import com.sikon.service.love.LoveDao;
 import com.sikon.service.love.LoveService;
 import com.sikon.service.domain.Love;;
 
-//책갈피 서비스 구현
+
 @Service("loveServiceImpl")
 public class LoveServiceImpl implements LoveService {
 
-	/// Field
+	
 	@Autowired
 	@Qualifier("loveDaoImpl")
 	private LoveDao loveDao;
@@ -26,12 +26,12 @@ public class LoveServiceImpl implements LoveService {
 		this.loveDao = loveDao;
 	}
 
-	/// Constructor
+	
 	public LoveServiceImpl() {
 		System.out.println(this.getClass());
 	}
 
-	/// Method
+	
 	public void addLove(String userNickname,String userId) throws Exception {
 		System.out.println("userNickname=" + userNickname);
 		System.out.println("userId=" + userId);
