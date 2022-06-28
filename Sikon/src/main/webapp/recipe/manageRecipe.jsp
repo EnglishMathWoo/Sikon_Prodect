@@ -44,7 +44,7 @@ body {
 	padding-top: 50px;
 }
 
-.container {
+.manageRecipe {
 	font-family: "Noto Sans KR", Helvetica, "Helvetica Neue", Arial,
 		"sans-serif";
 	padding-top: 170px;
@@ -168,7 +168,7 @@ function fncGetList(currentPage) {
 
 	<jsp:include page="/layout/toolbar.jsp" />
 
-	<div class="container listsale">
+	<div class="container manageRecipe">
 	
 			<br>
 		<h3 class="pltitle"  style="color:#333;font-family: 'Tiro Devanagari Sanskrit', serif;">| RECIPE LIST |</h3>
@@ -234,7 +234,7 @@ function fncGetList(currentPage) {
 		<tr class="ct_list_pop">
 				<td align="left"><input type="checkbox" name="ckBookmark" id="${recipe.recipeNo}"/></td>
 			
-				<td align="left" class="updateRecipe" value="${recipe.recipeNo }"> ${recipe.recipeNo}</td>
+				<td align="left" class="updateRecipe" value="${recipe.recipeNo }" style="cursor: pointer;"> ${recipe.recipeNo}</td>
 	
 				<td align="left" class="getRecipe" value="${recipe.recipeNo }" style="cursor:pointer;">${recipe.recipeName}</td>
 				<td align="left"><fmt:formatDate pattern="yyyy-MM-dd"
@@ -249,7 +249,8 @@ function fncGetList(currentPage) {
 	  </form>
 	</div>
 	</div>
-
+	
+	<br>
 	<jsp:include page="../common/pageNavigator_new.jsp"/>->
 	
 </body>
