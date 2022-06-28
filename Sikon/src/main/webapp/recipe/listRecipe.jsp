@@ -600,7 +600,7 @@ div.emptyRecipe{
 		    <c:if test="${user.userId != null }">
 		    <button type="button" class="submit">레시피 등록</button>
 		    </c:if>
-		 <%-- <div class="gcse-search" style="background-color: #f7f7f7;width:350px "></div>  --%>	
+		  <div class="gcse-search" style="background-color: #f7f7f7;width:350px "></div>  
 		    
 		  
     			    <form class="form-inline" name="detailForm">
