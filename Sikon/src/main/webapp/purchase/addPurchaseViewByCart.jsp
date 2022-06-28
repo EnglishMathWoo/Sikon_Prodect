@@ -425,7 +425,7 @@ function paymentKA(data) {
 	var payprodname =""
 	
 	if(num>1){
-		payprodname = prodname+" 외 "+(num-1);
+		payprodname = prodname+" 외 "+(num-1)+"건";
 		console.log("payprodname: "+payprodname);
 	}else{
 		payprodname = prodname;
@@ -460,7 +460,7 @@ function paymentKA(data) {
     	pg : "kakaopay", 
         pay_method : payment,
         merchant_uid : uid ,
-        name : prodname ,
+        name : payprodname ,
         amount : prodprice ,
         buyer_email : buyeremail ,
         buyer_name : buyername ,
@@ -502,7 +502,7 @@ function paymentCA(data) {
 	var payprodname =""
 		
 	if(num>1){
-		payprodname = prodname+" 외 "+(num-1);
+		payprodname = prodname+" 외 "+(num-1)+"건";
 		console.log("payprodname: "+payprodname);
 	}else{
 		payprodname = prodname;
@@ -536,7 +536,7 @@ function paymentCA(data) {
     	pg : "html5_inicis", 
         pay_method : payment,
         merchant_uid : uid ,
-        name : prodname ,
+        name : payprodname ,
         amount : prodprice ,
         buyer_email : buyeremail ,
         buyer_name : buyername ,
