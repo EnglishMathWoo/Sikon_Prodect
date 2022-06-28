@@ -104,8 +104,8 @@ public class ReviewController {
 		}
 
 		// 다중파일 업로드
-		// String FILE_SERVER_PATH = filePath;
-		String FILE_SERVER_PATH = "C:\\sikon\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
+		 String FILE_SERVER_PATH = filePath;
+		//String FILE_SERVER_PATH = "C:\\sikon\\Sikon_PJT\\Sikon\\src\\main\\webapp\\resources\\images\\uploadFiles\\";
 
 		String newFileName = "";
 

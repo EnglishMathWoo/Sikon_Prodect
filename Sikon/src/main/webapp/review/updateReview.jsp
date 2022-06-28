@@ -292,7 +292,7 @@ margin-bottom: 10px;
 		  $("form").attr("method", "POST").attr("action","/review/updateReview").submit();
 		  setTimeout(function() {   
 				opener.parent.location.reload();
-	         }, 5);
+	         }, 6);
 			
 			setTimeout(function() {   
 	            window.close();
