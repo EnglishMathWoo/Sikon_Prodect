@@ -980,24 +980,7 @@ border-spacing:0px
 			$( "a:contains('Login')" ).on("click" , function() {
 			$(self.location).attr("href","/user/loginView.jsp");
 			});
-			
-			/*
-			$( "a:contains('Logout')" ).on("click" , function() {
-			$(self.location).attr("href","https://kauth.kakao.com/oauth/logout?client_id=07cd433423b8401d52fda5136624e099&logout_redirect_uri=http://localhost:8080/user/logout");
-			});
-
 						
-			$( "a:contains('Logout.')" ).on("click" , function() {
-			$(self.location).attr("href","/user/logout");
-			});
-			*/
-			
-			/*
-			$("#kakaoout").on("click" , function() {
-				$(self.location).attr("href","https://kauth.kakao.com/oauth/logout?client_id=07cd433423b8401d52fda5136624e099&logout_redirect_uri=http://192.168.0.11:8080/user/logout");
-			});
-			*/
-			
 			$("#kakaoout").on("click" , function() {
 				$(self.location).attr("href","https://kauth.kakao.com/oauth/logout?client_id=07cd433423b8401d52fda5136624e099&logout_redirect_uri=http://localhost:8080/user/logout");
 			});
@@ -1007,177 +990,156 @@ border-spacing:0px
 				$(self.location).attr("href","/user/logout");
 			});
 			
-			// $( "a:contains('Mypage')" ).on("click" , function() {
-		//	$(self.location).attr("href","/point/mypage");
-			// });
-			 
-			 $( "a:contains('레시피')" ).on("click" , function() {
-			$(self.location).attr("href","/recipe/listRecipe");
+		
+			$( "a:contains('레시피')" ).on("click" , function() {
+				$(self.location).attr("href","/recipe/listRecipe");
 			});
 			 
-			 $( ".store" ).on("click" , function() {
-			$(self.location).attr("href","/product/listProduct?menu=search");
+			$( ".store" ).on("click" , function() {
+				$(self.location).attr("href","/product/listProduct?menu=search");
 			});
 			 
-			 $( ".cook" ).on("click" , function() {
-			$(self.location).attr("href","/cook/listCook");
+			$( ".cook" ).on("click" , function() {
+				$(self.location).attr("href","/cook/listCook");
 			});
 			 
-			 $( "a:contains('랭킹')" ).on("click" , function() {
+			$( "a:contains('랭킹')" ).on("click" , function() {
 				$(self.location).attr("href","/ranking/listRecipe");
 			});
 
-			 $( "a:contains('공지사항')" ).on("click" , function() {
-			$(self.location).attr("href","/notice/listNotice?menu=search");
+			$( "a:contains('공지사항')" ).on("click" , function() {
+				$(self.location).attr("href","/notice/listNotice?menu=search");
 			});
 			 
 			 $( "a:contains('회원관리')" ).on("click" , function() {
 			$(self.location).attr("href","/user/listUser");
 			});
 		 
-			 $( "a:contains('레시피관리')" ).on("click" , function() {
-			$(self.location).attr("href","/recipe/manageRecipe");
+			$( "a:contains('레시피관리')" ).on("click" , function() {
+				$(self.location).attr("href","/recipe/manageRecipe");
 			});
 			 
-			 $( "a:contains('스토어관리')" ).on("click" , function() {
+			$( "a:contains('스토어관리')" ).on("click" , function() {
 				 $(self.location).attr("href","/product/manageProduct");
 			});
 			 
-			 $( "a:contains('쿠킹클래스관리')" ).on("click" , function() {
+			$( "a:contains('쿠킹클래스관리')" ).on("click" , function() {
 				 $(self.location).attr("href","/cook/manageCook");
 			});
 
-			 $( "a:contains('공지사항관리')" ).on("click" , function() {
-			$(self.location).attr("href","/notice/listNotice?menu=manage");
+			$( "a:contains('공지사항관리')" ).on("click" , function() {
+				$(self.location).attr("href","/notice/listNotice?menu=manage");
 			});
 			 
-			 $( "a:contains('쿠폰관리')" ).on("click" , function() {
-			$(self.location).attr("href","/coupon/listCoupon");
+			$( "a:contains('쿠폰관리')" ).on("click" , function() {
+				$(self.location).attr("href","/coupon/listCoupon");
 			});
 			 
 			 //====================================================
 			 
-			 $( "a:contains('쿠폰목록')" ).on("click" , function() {
-			$(self.location).attr("href","/coupon/listCoupon");
+			$( "a:contains('쿠폰목록')" ).on("click" , function() {
+				$(self.location).attr("href","/coupon/listCoupon");
 			});
 			 
-			 $( "a:contains('쿠폰발급목록')" ).on("click" , function() {
-			$(self.location).attr("href","/coupon/listIssuedCoupon");
+			$( "a:contains('쿠폰발급목록')" ).on("click" , function() {
+				$(self.location).attr("href","/coupon/listIssuedCoupon");
 			});
 				 
 			 //====================================================
 				 
-			 $( "a:contains('구매목록')" ).on("click" , function() {
-			$(self.location).attr("href","/purchase/listPurchase");
+			$( "a:contains('구매목록')" ).on("click" , function() {
+				$(self.location).attr("href","/purchase/listPurchase");
 			});
 			 
-			 /*
-			 $( "a:contains('상품등록')" ).on("click" , function() {
-			$(self.location).attr("href","/product/addProductView.jsp");
-			});
-			 */
-				 
-			 $( "a:contains('상품목록')" ).on("click" , function() {
-			$(self.location).attr("href","/product/manageProduct");
+			
+			$( "a:contains('상품목록')" ).on("click" , function() {
+				$(self.location).attr("href","/product/manageProduct");
 			});
 			 
-			 $( "a:contains('판매목록')" ).on("click" , function() {
-			$(self.location).attr("href","/purchase/listSales");
+			$( "a:contains('판매목록')" ).on("click" , function() {
+				$(self.location).attr("href","/purchase/listSales");
 			});
 			 
-			 $( "th.stcart" ).on("click" , function() {
-			$(self.location).attr("href","/cart/getCartList");
+			$( "th.stcart" ).on("click" , function() {
+				$(self.location).attr("href","/cart/getCartList");
 			});
 				 
 			 //====================================================
 					  
 				 
-			 $( "a:contains('쿠킹클래스신청목록')" ).on("click" , function() {
-			$(self.location).attr("href","/apply/listApply?menu=search");
+			$( "a:contains('쿠킹클래스신청목록')" ).on("click" , function() {
+				$(self.location).attr("href","/apply/listApply?menu=search");
 			});
 			 
-			 $( "a:contains('쿠킹클래스등록')" ).on("click" , function() {
-			$(self.location).attr("href","/cook/addCook.jsp");
+			$( "a:contains('쿠킹클래스등록')" ).on("click" , function() {
+				$(self.location).attr("href","/cook/addCook.jsp");
 			});
 			 
-			 $( "a:contains('쿠킹클래스전체목록')" ).on("click" , function() {
+			$( "a:contains('쿠킹클래스전체목록')" ).on("click" , function() {
 				$(self.location).attr("href","/cook/manageCook");
-				});
-			 
-			 $( "a:contains('쿠킹클래스판매목록')" ).on("click" , function() {
-			$(self.location).attr("href","/apply/listSale?menu=manage");
 			});
 			 
-			 $( "th.ckcart" ).on("click" , function() {
-			$(self.location).attr("href","/wish/getWish?userId=${sessionScope.user.userId}");
+			$( "a:contains('쿠킹클래스판매목록')" ).on("click" , function() {
+				$(self.location).attr("href","/apply/listSale?menu=manage");
 			});
 			 
-			 $( "a:contains('등록한쿠킹클래스')" ).on("click" , function() {
+			$( "th.ckcart" ).on("click" , function() {
+				(self.location).attr("href","/wish/getWish?userId=${sessionScope.user.userId}");
+			});
+			 
+			$( "a:contains('등록한쿠킹클래스')" ).on("click" , function() {
 				$(self.location).attr("href","/cook/listMyCook");
 			}); 
-			 
-
-			 $( "a:contains('쿠킹멘토채널')" ).on("click" , function() {
+			
+			$( "a:contains('쿠킹멘토채널')" ).on("click" , function() {
 				$(self.location).attr("href","/cook/mentor.jsp");
 			}); 
 			 //====================================================
+			
 			//마이페이지	 
-			 $("a:contains('내정보보기')").on("click", function() {
-					self.location = "/user/getUser?userId=${sessionScope.user.userId}"
-					
-				});
-			 $( "a:contains('좋아요한쿠킹클래스')" ).on("click" , function() {
-					self.location ="/heart/getHeart?userId=${sessionScope.user.userId}"
-				});
+			$("a:contains('내정보보기')").on("click", function() {
+				self.location = "/user/getUser?userId=${sessionScope.user.userId}"
+			});
+			
+			$( "a:contains('좋아요한쿠킹클래스')" ).on("click" , function() {
+				self.location ="/heart/getHeart?userId=${sessionScope.user.userId}"
+			});
 				 
+			$("a:contains('마이레시피')").on("click", function() {
+				self.location = "/recipe/listMyRecipe"
+			});
 				
-				$("a:contains('마이레시피')").on("click", function() {
-					self.location = "/recipe/listMyRecipe"
-					
-				});
+			$("a:contains('쿠킹클래스신청조회')").on("click", function() {
+				self.location = "/apply/listApply"
+			});
 				
+			$("a:contains('등록한쿠킹클래스')").on("click", function() {
+				self.location = "/cook/listMyCook"
+			});
 				
-				$("a:contains('쿠킹클래스신청조회')").on("click", function() {
-					self.location = "/apply/listApply"
-					
-				});
+			$("a:contains('마이리뷰')").on("click", function() {
+				self.location = "/review/listMyReview"
+			});
 				
-				$("a:contains('등록한쿠킹클래스')").on("click", function() {
-					self.location = "/cook/listMyCook"
-					
-				});
+			$("a:contains('주문배송조회')").on("click", function() {
+				self.location = "/purchase/listPurchase"
+			});
 				
-				$("a:contains('마이리뷰')").on("click", function() {
-					self.location = "/review/listMyReview"
-					
-				});
+			$("a:contains('책갈피조회')").on("click", function() {
+				self.location = "/bookmark/listBookmark"
+			});
 				
-				$("a:contains('주문배송조회')").on("click", function() {
-					self.location = "/purchase/listPurchase"
-					
-				});
+			$("a:contains('즐겨찾는멘토')").on("click", function() {
+				self.location = "/love/listLove"
+			});
 				
-				$("a:contains('책갈피조회')").on("click", function() {
-					self.location = "/bookmark/listBookmark"
-					
-				});
+			$("a:contains('포인트조회')").on("click", function() {
+				self.location = "/point/listMyPoint"
+			});
 				
-				$("a:contains('즐겨찾는멘토')").on("click", function() {
-					self.location = "/love/listLove"
-					
-				});
-				
-				$("a:contains('포인트조회')").on("click", function() {
-//					self.location = "/user/listMyPoint"
-					self.location = "/point/listMyPoint"
-					
-				});
-				
-				$("a:contains('쿠폰조회')").on("click", function() {
-					
-					self.location = "/coupon/listMyCoupon?userId=${user.userId}"
-					
-				});
+			$("a:contains('쿠폰조회')").on("click", function() {
+				self.location = "/coupon/listMyCoupon?userId=${user.userId}"
+			});
 		 });
 		 
 		 $(function(){
@@ -1226,9 +1188,7 @@ border-spacing:0px
 		var socket = null;
 		
 		$(document).ready(function(){
-			//if(${login != null}){
-				connectWs();
-			//}
+			connectWs();
 		})
 			
 		//소켓
