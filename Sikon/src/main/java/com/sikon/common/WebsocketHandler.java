@@ -19,7 +19,7 @@ import com.sikon.service.domain.Alarm;
 import com.sikon.service.domain.User;
 
 
-public class EchoHandler extends TextWebSocketHandler {
+public class WebsocketHandler extends TextWebSocketHandler {
 	
 	///Field
 	@Autowired

@@ -29,7 +29,7 @@
    	<!-- ■ DefaultAnnotationHandlerMapping 설정 등 기타 Annotation 기반 모든 기능을 사용 할 수 있는 아래의 설정으로 변경 -->
 	<mvc:annotation-driven />
 	
-	<bean id="myHandler" class="com.sikon.common.EchoHandler" />
+	<bean id="myHandler" class="com.sikon.common.WebsocketHandler" />
 	<websocket:handlers>
 		<websocket:mapping handler="myHandler" path="/alarm" />
 		<websocket:handshake-interceptors>
